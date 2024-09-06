@@ -11,7 +11,7 @@
 %global upstream_sublevel   0
 %global devel_release       248
 %global maintenance_release .0.0
-%global pkg_release         .147
+%global pkg_release         .148
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -31,15 +31,13 @@
 %ifarch aarch64
 %define with_64kb  %{?_with_64kb: 1} %{?!_with_64kb: 0}
 %if %{with_64kb}
-%global package64kb -64kb
-%global kv_suffix +64kb
 %define with_kabichk 0
 %endif
 %else
 %define with_64kb  0
 %endif
 
-%global KernelVer %{version}-%{release}.%{_target_cpu}%{?kv_suffix}
+%global KernelVer %{version}-%{release}.%{_target_cpu}
 
 #default is enabled. You can disable it with --without option
 %define with_perf    %{?_without_perf: 0} %{?!_without_perf: 1}
@@ -242,8 +240,8 @@ package or when debugging this package.\
 %{nil}
 
 %if %{with_64kb}
-%debuginfo_template -n kernel-64kb
-%files -n kernel-64kb-debuginfo -f debugfiles.list
+%debuginfo_template -n kernel
+%files -n kernel-debuginfo -f debugfiles.list
 %else
 %debuginfo_template -n kernel
 %files -n kernel-debuginfo -f debugfiles.list
@@ -344,7 +342,7 @@ cp -a tools/perf tools/python3-perf
 %build
 cd linux-%{KernelVer}
 
-perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = -%{release}.%{_target_cpu}%{?kv_suffix}/" Makefile
+perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = -%{release}.%{_target_cpu}/" Makefile
 
 ## make linux
 make mrproper %{_smp_mflags}
@@ -952,6 +950,9 @@ fi
 %endif
 
 %changelog
+* Thu Feb 06 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-248.0.0.148
+- kernel.spec: avoid kernel package name dependency by other software packages for 64KB page size kernel
+
 * Thu Feb 06 2025 Li Nan <linan122@huawei.com> - 5.10.0-248.0.0.147
 - !14995  mm/compaction: fix UBSAN shift-out-of-bounds warning
 - mm/compaction: fix UBSAN shift-out-of-bounds warning
