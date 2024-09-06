@@ -11,7 +11,7 @@
 %global upstream_sublevel   0
 %global devel_release       244
 %global maintenance_release .0.0
-%global pkg_release         .144
+%global pkg_release         .145
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -161,7 +161,6 @@ Requires: perl findutils
 This package provides kernel headers and makefiles sufficient to build modules
 against the %{KernelVer} kernel package.
 
-%if !%{with_64kb}
 %package tools
 Summary: Assortment of tools for the Linux kernel
 Provides: %{name}-tools-libs
@@ -221,7 +220,6 @@ manipulation of eBPF programs and maps.
 Summary: the kernel source
 %description source
 This package contains vaious source files from the kernel.
-%endif
 
 %if 0%{?with_debuginfo}
 %define _debuginfo_template %{nil}
@@ -239,10 +237,6 @@ Debug information is useful when developing applications that use this\
 package or when debugging this package.\
 %{nil}
 
-%if %{with_64kb}
-%debuginfo_template -n kernel
-%files -n kernel-debuginfo -f debugfiles.list
-%else
 %debuginfo_template -n kernel
 %files -n kernel-debuginfo -f debugfiles.list
 
@@ -269,8 +263,6 @@ package or when debugging this package.\
 %files -n python3-perf-debuginfo -f python3-perf-debugfiles.list
 %{expand:%%global _find_debuginfo_opts %{?_find_debuginfo_opts} -p '.*%{python3_sitearch}/perf.*(.debug)?|XXX' -o python3-perf-debugfiles.list}
 #with_perf
-%endif
-#with_64kb
 %endif
 %endif
 
@@ -456,14 +448,12 @@ make BPFTOOL=../../tools/bpf/bpftool/bpftool
 popd
 
 %install
-%if !%{with_64kb}
 %if 0%{?with_source}
     %define _python_bytecompile_errors_terminate_build 0
     mkdir -p $RPM_BUILD_ROOT/usr/src/
     mv linux-%{KernelVer}-source $RPM_BUILD_ROOT/usr/src/linux-%{KernelVer}
     cp linux-%{KernelVer}/.config $RPM_BUILD_ROOT/usr/src/linux-%{KernelVer}/
     cp linux-%{KernelVer}/.scmversion $RPM_BUILD_ROOT/usr/src/linux-%{KernelVer}/
-%endif
 %endif
 
 cd linux-%{KernelVer}
@@ -673,7 +663,6 @@ popd
 
 
 ## install tools
-%if !%{with_64kb}
 %if %{with_perf}
 # perf
 # perf tool binary and supporting scripts/binaries
@@ -755,7 +744,6 @@ popd
 pushd tools/netacc
 make INSTALL_ROOT=%{buildroot} install
 popd
-%endif
 
 %define __spec_install_post\
 %{?__debug_package:%{__debug_install_post}}\
@@ -812,7 +800,6 @@ then
      done)
 fi
 
-%if !%{with_64kb}
 %post -n %{name}-tools
 /sbin/ldconfig
 %systemd_post cpupower.service
@@ -823,7 +810,6 @@ fi
 %postun -n %{name}-tools
 /sbin/ldconfig
 %systemd_postun cpupower.service
-%endif
 
 %files
 %defattr (-, root, root)
@@ -856,7 +842,6 @@ fi
 %defattr (-, root, root)
 /usr/include/*
 
-%if !%{with_64kb}
 %if %{with_perf}
 %files -n perf
 %{_bindir}/perf
@@ -946,10 +931,10 @@ fi
 /usr/src/linux-%{KernelVer}/.scmversion
 %endif
 
-#with_64kb
-%endif
-
 %changelog
+* Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.145
+- kernel.spec: build kernel tools for 64KB version
+
 * Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.144
 - kernel.spec: avoid kernel package name dependency by other software packages
 
