@@ -11,7 +11,7 @@
 %global upstream_sublevel   0
 %global devel_release       244
 %global maintenance_release .0.0
-%global pkg_release         .145
+%global pkg_release         .146
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -492,9 +492,7 @@ popd
 install -m 644 .config $RPM_BUILD_ROOT/boot/config-%{KernelVer}
 install -m 644 System.map $RPM_BUILD_ROOT/boot/System.map-%{KernelVer}
 
-%if 0%{?with_kabichk}
-    gzip -c9 < Module.symvers > $RPM_BUILD_ROOT/boot/symvers-%{KernelVer}.gz
-%endif
+gzip -c9 < Module.symvers > $RPM_BUILD_ROOT/boot/symvers-%{KernelVer}.gz
 
 mkdir -p $RPM_BUILD_ROOT%{_sbindir}
 install -m 755 %{SOURCE200} $RPM_BUILD_ROOT%{_sbindir}/mkgrub-menu-%{devel_release}.sh
@@ -818,9 +816,7 @@ fi
 %ifarch aarch64
 /boot/dtb-*
 %endif
-%if 0%{?with_kabichk}
 /boot/symvers-*
-%endif
 /boot/System.map-*
 /boot/vmlinuz-*
 %ghost /boot/initramfs-%{KernelVer}.img
@@ -932,6 +928,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.146
+- kernel.spec: fix posttrans kernel scriptlet failed
+
 * Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.145
 - kernel.spec: build kernel tools for 64KB version
 
