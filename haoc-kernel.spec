@@ -40,13 +40,13 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       67
+%global devel_release       69
 %global maintenance_release .0.0
-%global pkg_release         .72
+%global pkg_release         .76
 
 %global openeuler_lts       1
 %global openeuler_major     2403
-%global openeuler_minor     0
+%global openeuler_minor     1
 
 #
 # Support input parameter to overwrite the preceding version numbers.
@@ -107,6 +107,10 @@ Source16: sign-modules-openeuler
 Source18: check-kabi
 Source20: Module.kabi_aarch64
 Source21: Module.kabi_x86_64
+Source22: Module.kabi_ext1_aarch64
+Source23: Module.kabi_ext1_x86_64
+Source24: Module.kabi_ext2_aarch64
+Source25: Module.kabi_ext2_x86_64
 %endif
 
 Source200: mkgrub-menu-aarch64.sh
@@ -1092,8 +1096,116 @@ fi
 %endif
 
 %changelog
-* Tue Dec 17 2024 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-67.0.0.72
-- update HAOC to 6.6.0-67.0.0
+* Fri Dec 20 2024 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-69.0.0.76
+- update HAOC to 6.6.0-69.0.0
+* Thu Dec 19 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-69.0.0.75
+- !14221  KABI for cgroup
+- cgroup: add more reserve kabi
+- cgroup/cpuset: Prevent UAF in proc_cpuset_show()
+- cgroup: Move rcu_head up near the top of cgroup_root
+- cgroup: Make operations on the cgroup root_list RCU safe
+- Revert "cgroup: fix uaf when proc_cpuset_show"
+- !14220  fs: Allow fine-grained control of folio sizes
+- fs: Allow fine-grained control of folio sizes
+- !12108  include/msi: modify kabi size of msi_desc
+- include/msi: modify kabi size of msi_desc
+- !14195 [OLK-6.6]Hygon: Enable CONFIG_CMA by default on X86 architecture
+- x86/Kconfig: Select CONFIG_CMA if CONFIG_HYGON_CSV=y
+- x86/config: Enable CONFIG_CMA by default in openeuler_defconfig
+- !14215  iommu: Reserve extra KABI entry for struct iopf_group
+- iommu: Reserve extra KABI entry for struct iopf_group
+- !14223 v2  kabi: net: reserve space for xdp subsystem related structure
+- kabi: net: reserve space for xdp subsystem related structure
+- !14224  net/kabi: Reserve space for net structures
+- net/kabi: Reserve space for net structures
+- !14236 v2  statx: kabi: KABI reservation for kstat
+- statx: kabi: KABI reservation for kstat
+- !14218  seq_file: kabi: KABI reservation for seq_file
+- seq_file: kabi: KABI reservation for seq_file
+- !14203  tcp: Fix use-after-free of nreq in reqsk_timer_handler().
+- tcp: Fix use-after-free of nreq in reqsk_timer_handler().
+- !14191  nfs: fix the loss of superblock's initialized flags
+- nfs: fix the loss of superblock's initialized flags
+
+* Wed Dec 18 2024 Liu Yanze <lyz25354840@gmail.com> - 6.6.0-68.0.0.74
+- kabi: add kabi_ext2 list for checking
+- kernel.spec: fix with_kabichk on non-arm64 platform
+
+* Tue Dec 17 2024 Xie XiuQi <xiexiuqi@huawei.com> - 6.6.0-68.0.0.73
+- kabi: add kabi_ext1 list for checking
+- check-kabi: fix kabi check failed when no namespace
+- kernel.spec: fix with_kabichk on non-arm64 platform
+
+* Tue Dec 17 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-68.0.0.72
+- !14161  drm/rockchip: vop: Fix a dereferenced before check warning
+- drm/rockchip: vop: Fix a dereferenced before check warning
+- !14143 KVM:arm64:Add a kvm parameter to control guest wfi trapping
+- KVM:arm64:Add a kvm parameter to control guest wfi trapping
+- !14177 v2  kabi: restrict the KABI fix to a specific architecture and dist
+- kabi: enable KABI_COMPAT series by default on x86_64 & ARM64
+- kabi: restrict the KABI fix to a specific architecture and dist
+- !14151  CVE-2024-53142
+- initramfs: avoid filename buffer overrun
+- !14183  mm/dynamic_pool: use __GENKSYMS__ to revert the kabi change
+- mm/dynamic_pool: use __GENKSYMS__ to revert the kabi change
+- !13999 add iommu support for loongarch
+- LoongArch: add iommu support
+- LoongArch: Fix cpu hotplug issue
+- !13998 Synchronization with patch for loongarch virtualization
+- LoongArch: Fix AP booting issue in VM mode
+- LoongArch: KVM: Remove unnecessary CSR register saving during enter guest
+- LoongArch: KVM: Remove undefined a6 argument comment for kvm_hypercall()
+- LoongArch: KVM: Add vcpu mapping from physical cpuid
+- LoongArch: KVM: Remove unnecessary definition of KVM_PRIVATE_MEM_SLOTS
+- LoongArch: KVM: Add cpucfg area for kvm hypervisor
+- LoongArch: KVM: Add KVM hypercalls documentation for LoongArch
+- LoongArch: KVM: Implement function kvm_para_has_feature()
+- LoongArch: KVM: Enable paravirt feature control from VMM
+- LoongArch: KVM: Add PMU support for guest
+- LoongArch: KVM: Add vm migration support for LBT registers
+- LoongArch: KVM: Add Binary Translation extension support
+- LoongArch: KVM: Add VM feature detection function
+- LoongArch: Revert qspinlock to test-and-set simple lock on VM
+- LoongArch: KVM: Invalidate guest steal time address on vCPU reset
+- KVM: Discard zero mask with function kvm_dirty_ring_reset
+- perf kvm: Add kvm-stat for loongarch64
+- LoongArch: KVM: Add PV steal time support in guest side
+- LoongArch: KVM: Add PV steal time support in host side
+- LoongArch: KVM: always make pte young in page map's fast path
+- LoongArch: KVM: Mark page accessed and dirty with page ref added
+- LoongArch: KVM: Add dirty bitmap initially all set support
+- LoongArch: KVM: Add memory barrier before update pmd entry
+- LoongArch: KVM: Discard dirty page tracking on readonly memslot
+- LoongArch: KVM: Select huge page only if secondary mmu supports it
+- LoongArch: KVM: Delay secondary mmu tlb flush until guest entry
+- LoongArch: KVM: Sync pending interrupt when getting ESTAT from user mode
+- LoongArch: KVM: Add mmio trace events support
+- LoongArch: KVM: Add software breakpoint support
+- LoongArch: KVM: Add PV IPI support on guest side
+- LoongArch: KVM: Add PV IPI support on host side
+- !14163  LeapIOraid： Remove Unnecessary header file references: version.h
+- LeapIOraid： Remove Unnecessary header file references: version.h
+- !13997 Add interrupt controller emulation in the kernel
+- LoongArch: KVM: Add irqfd support
+- LoongArch: KVM: Add PCHPIC user mode read and write functions
+- LoongArch: KVM: Add PCHPIC read and write functions
+- LoongArch: KVM: Add PCHPIC device support
+- LoongArch: KVM: Add EXTIOI user mode read and write functions
+- LoongArch: KVM: Add EXTIOI read and write functions
+- LoongArch: KVM: Add EXTIOI device support
+- LoongArch: KVM: Add IPI user mode read and write function
+- LoongArch: KVM: Add IPI read and write function
+- LoongArch: KVM: Add IPI device support
+- LoongArch: KVM: Add iocsr and mmio bus simulation in kernel
+- !14111  LeapIOraid： Fix the compilation warnings in LeapIOraid driver in loongarch64
+- LeapIOraid： Fix the compilation warnings in LeapIOraid driver in loongarch64
+- !14162  LeapIOraid： Fix too many invalid interruptes in arm64
+- LeapIOraid： Fix too many invalid interruptes in arm64
+- !11509 [OLK-6.6] Enhanced Hygon processor's processing capabilities for large memory copying
+- mm: Enhanced copy capabilities for Hygon processor
+- !14155  drm/amd/display: Adjust VSDB parser for replay feature
+- drm/amd/display: Adjust VSDB parser for replay feature
+
 * Fri Dec 13 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-67.0.0.71
 - !14144 [6.6] [Feature] : update patches for sw64 architecture
 - sw64: fix compile errors

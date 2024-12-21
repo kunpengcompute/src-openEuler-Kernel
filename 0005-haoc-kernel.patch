@@ -1,10 +1,12 @@
-From a3cc0e70fa60f315c3bfc79c040bd603ed6317f3 Mon Sep 17 00:00:00 2001
+From 9300ee48dcae94da558c5b58205656e6ff8adb80 Mon Sep 17 00:00:00 2001
 From: liuzh <liuzhh@zgclab.edu.cn>
 Date: Thu, 12 Dec 2024 02:23:00 +0000
-Subject: [PATCH] Publish k1 x86 code on 6.6.0-67.0.0
+Subject: [PATCH] Publish k1 x86 and Arm64 code on 6.6.0-69.0.0
 
     internal branch: ptdesc-test4
     internal commit: 1aaccdb
+
+    disable KOI.
 ---
  .gitignore                                    |    4 +
  Makefile                                      |    7 +
@@ -379,7 +381,7 @@ index ee377cec01f3..7b354f051344 100644
  KBUILD_CPPFLAGS := -D__KERNEL__
  KBUILD_RUSTFLAGS := $(rust_common_flags) \
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 9da9d58f1c02..cd15ba85864b 100644
+index 9da9d58f1c02..730fb3c9a889 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
 @@ -1776,6 +1776,41 @@ config UNMAP_KERNEL_AT_EL0
@@ -409,7 +411,7 @@ index 9da9d58f1c02..cd15ba85864b 100644
 +    depends on ARM64
 +    depends on ARM64_VA_BITS_48
 +	depends on ARM64_4K_PAGES
-+    def_bool y
++    def_bool n
 +
 +config IEE_SELINUX_P
 +	depends on IEE
@@ -425,7 +427,7 @@ index 9da9d58f1c02..cd15ba85864b 100644
  	bool "Mitigate Spectre style attacks against branch history" if EXPERT
  	default y
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index b152d1ffb547..5e68208c0a72 100644
+index fc6053a500db..633b5c411662 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
 @@ -89,6 +89,7 @@ CONFIG_BPF_JIT_DEFAULT_ON=y
@@ -436,7 +438,7 @@ index b152d1ffb547..5e68208c0a72 100644
  # end of BPF subsystem
  
  CONFIG_PREEMPT_NONE_BUILD=y
-@@ -1388,7 +1389,7 @@ CONFIG_NETFILTER_NETLINK_ACCT=m
+@@ -1389,7 +1390,7 @@ CONFIG_NETFILTER_NETLINK_ACCT=m
  CONFIG_NETFILTER_NETLINK_QUEUE=m
  CONFIG_NETFILTER_NETLINK_LOG=m
  CONFIG_NETFILTER_NETLINK_OSF=m
@@ -445,7 +447,7 @@ index b152d1ffb547..5e68208c0a72 100644
  CONFIG_NF_LOG_SYSLOG=m
  CONFIG_NETFILTER_CONNCOUNT=m
  CONFIG_NF_CONNTRACK_MARK=y
-@@ -1419,7 +1420,7 @@ CONFIG_NF_CT_NETLINK=m
+@@ -1420,7 +1421,7 @@ CONFIG_NF_CT_NETLINK=m
  CONFIG_NF_CT_NETLINK_TIMEOUT=m
  CONFIG_NF_CT_NETLINK_HELPER=m
  CONFIG_NETFILTER_NETLINK_GLUE_CT=y
@@ -454,7 +456,7 @@ index b152d1ffb547..5e68208c0a72 100644
  CONFIG_NF_NAT_AMANDA=m
  CONFIG_NF_NAT_FTP=m
  CONFIG_NF_NAT_IRC=m
-@@ -1623,7 +1624,7 @@ CONFIG_IP_VS_PE_SIP=m
+@@ -1624,7 +1625,7 @@ CONFIG_IP_VS_PE_SIP=m
  #
  # IP: Netfilter Configuration
  #
@@ -463,7 +465,7 @@ index b152d1ffb547..5e68208c0a72 100644
  CONFIG_NF_SOCKET_IPV4=m
  CONFIG_NF_TPROXY_IPV4=m
  CONFIG_NF_TABLES_IPV4=y
-@@ -1695,7 +1696,7 @@ CONFIG_IP6_NF_TARGET_MASQUERADE=m
+@@ -1696,7 +1697,7 @@ CONFIG_IP6_NF_TARGET_MASQUERADE=m
  CONFIG_IP6_NF_TARGET_NPT=m
  # end of IPv6: Netfilter Configuration
  
@@ -12511,10 +12513,10 @@ index 76ae4a3131ba..b3b962fcc3f8 100644
  	case BPF_STX | BPF_ATOMIC | BPF_W:
  	case BPF_STX | BPF_ATOMIC | BPF_DW:
 diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index df023e1cb5dd..f791ba71b796 100644
+index a6bbe6029121..d307e6ec992a 100644
 --- a/arch/x86/Kconfig
 +++ b/arch/x86/Kconfig
-@@ -1548,6 +1548,25 @@ config AMD_MEM_ENCRYPT
+@@ -1549,6 +1549,25 @@ config AMD_MEM_ENCRYPT
  	  This requires an AMD processor that supports Secure Memory
  	  Encryption (SME).
  
@@ -12540,7 +12542,7 @@ index df023e1cb5dd..f791ba71b796 100644
  # Common NUMA Features
  config NUMA
  	bool "NUMA Memory Allocation and Scheduler Support"
-@@ -2466,6 +2485,12 @@ source "kernel/livepatch/Kconfig"
+@@ -2468,6 +2487,12 @@ source "kernel/livepatch/Kconfig"
  
  endmenu
  
@@ -12548,7 +12550,7 @@ index df023e1cb5dd..f791ba71b796 100644
 +config KOI
 +	bool "Config for Kernel Module Isolation"
 +    depends on X86_64
-+    def_bool y
++    def_bool n
 +
  config CC_HAS_SLS
  	def_bool $(cc-option,-mharden-sls=all)
@@ -14536,7 +14538,7 @@ index dc3576303f1a..d528f34a0541 100644
  	/* Offset for fields in aria_ctx */
  	BLANK();
 diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index b66364429f98..563de5754f3d 100644
+index 26d7a26ef2d2..9519b6ff2530 100644
 --- a/arch/x86/kernel/cpu/common.c
 +++ b/arch/x86/kernel/cpu/common.c
 @@ -68,6 +68,10 @@
@@ -14550,7 +14552,7 @@ index b66364429f98..563de5754f3d 100644
  u32 elf_hwcap2 __read_mostly;
  
  /* Number of siblings per CPU package */
-@@ -403,11 +407,18 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
+@@ -406,11 +410,18 @@ static __always_inline void setup_umip(struct cpuinfo_x86 *c)
  static const unsigned long cr4_pinned_mask =
  	X86_CR4_SMEP | X86_CR4_SMAP | X86_CR4_UMIP |
  	X86_CR4_FSGSBASE | X86_CR4_CET;
@@ -14569,7 +14571,7 @@ index b66364429f98..563de5754f3d 100644
  	unsigned long bits_missing = 0;
  
  set_register:
-@@ -422,6 +433,7 @@ void native_write_cr0(unsigned long val)
+@@ -425,6 +436,7 @@ void native_write_cr0(unsigned long val)
  		/* Warn after we've set the missing bits. */
  		WARN_ONCE(bits_missing, "CR0 WP bit went missing!?\n");
  	}
