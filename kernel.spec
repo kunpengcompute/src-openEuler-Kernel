@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       64
 %global maintenance_release .0.0
-%global pkg_release         .61
+%global pkg_release         .62
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1085,6 +1085,15 @@ fi
 %endif
 
 %changelog
+* Fri Dec 20 2024 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-64.0.0.62
+- riscv kernel patch upgrade to 6.6.0-64.0.0
+- Enable device mapper related configs for RISC-V to fix ISO image booting issue
+- Add more th1520 drivers support:
+  npu-ax3386, vdec, venc, aic8800, g2d, efuse, etnaviv, tdm, spdif, aw87519,
+  hwspinlock, perf vendor events, iopmp.
+- Fixed some compilation errors reported by clang
+- Some bugfix commits
+
 * Wed Dec 11 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-64.0.0.61
 - !14106 uacce: some bugfix and cleanup
 - migration: modify dfx error type without VM driver
