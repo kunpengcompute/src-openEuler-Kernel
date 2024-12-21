@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       69
+%global devel_release       72
 %global maintenance_release .0.0
-%global pkg_release         .75
+%global pkg_release         .76
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1092,6 +1092,20 @@ fi
 %endif
 
 %changelog
+* Sat Dec 21 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.0.0.76
+- !14213 v2  bpf: Add kabi reserve padding for uapi struct bpf_link_info
+- bpf: Add kabi reserve padding for uapi struct bpf_link_info
+- !14225  kabi OLK-6.6 reverve space
+- kabi: reserve space for uprobes.h
+- kabi: reserve space for internal.h
+- kabi: reserve space for perf_event.h
+- !14259 【OLK-6.6】 Hygon  family 18h model 6h~fh L3 PMU config incorrect issue fix
+- perf/x86/uncore: Correct the L3 PMU config for Hygon processors
+- !14251  kabi reserver space for i2c
+- kabi reserver space for i2c
+- !14258 v2  scsi: hisi_sas: Enable force phy when SATA disk directly connected
+- scsi: hisi_sas: Enable force phy when SATA disk directly connected
+
 * Thu Dec 19 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-69.0.0.75
 - !14221  KABI for cgroup
 - cgroup: add more reserve kabi
