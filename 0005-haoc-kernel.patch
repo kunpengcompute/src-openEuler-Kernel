@@ -1,4 +1,4 @@
-From 9300ee48dcae94da558c5b58205656e6ff8adb80 Mon Sep 17 00:00:00 2001
+From 89f8508281edfaa2ab98e49fee6759cf82452dea Mon Sep 17 00:00:00 2001
 From: liuzh <liuzhh@zgclab.edu.cn>
 Date: Thu, 12 Dec 2024 02:23:00 +0000
 Subject: [PATCH] Publish k1 x86 and Arm64 code on 6.6.0-69.0.0
@@ -8,7 +8,6 @@ Subject: [PATCH] Publish k1 x86 and Arm64 code on 6.6.0-69.0.0
 
     disable KOI.
 ---
- .gitignore                                    |    4 +
  Makefile                                      |    7 +
  arch/arm64/Kconfig                            |   35 +
  arch/arm64/configs/openeuler_defconfig        |    9 +-
@@ -282,7 +281,7 @@ Subject: [PATCH] Publish k1 x86 and Arm64 code on 6.6.0-69.0.0
  security/selinux/ss/services.c                |   56 +
  security/selinux/status.c                     |   32 +
  security/smack/smack_lsm.c                    |   12 +
- 274 files changed, 23480 insertions(+), 373 deletions(-)
+ 273 files changed, 23476 insertions(+), 373 deletions(-)
  create mode 100644 arch/arm64/include/asm/iee-access.h
  create mode 100644 arch/arm64/include/asm/iee-cred.h
  create mode 100644 arch/arm64/include/asm/iee-def.h
@@ -336,25 +335,6 @@ Subject: [PATCH] Publish k1 x86 and Arm64 code on 6.6.0-69.0.0
  create mode 100644 include/linux/sfi_bpf.h
  create mode 100644 kernel/bpf/sfi_bpf.c
 
-diff --git a/.gitignore b/.gitignore
-index d1a8ab3f98aa..f87d7b8380ab 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -51,6 +51,7 @@
- *.tar
- *.xz
- *.zst
-+*.log
- Module.symvers
- modules.order
- 
-@@ -169,3 +170,6 @@ sphinx_*/
- 
- # Rust analyzer configuration
- /rust-project.json
-+
-+#command
-+command.txt
 diff --git a/Makefile b/Makefile
 index ee377cec01f3..7b354f051344 100644
 --- a/Makefile
@@ -33603,5 +33583,5 @@ index 4625674f0e95..cbd843db9d41 100644
  
  /**
 -- 
-2.43.0
+2.34.1
 
