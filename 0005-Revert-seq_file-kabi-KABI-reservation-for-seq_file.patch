@@ -1,0 +1,43 @@
+From 1c9156beccdfee62f03dcdad407585927420c0cd Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:27:27 +0800
+Subject: [PATCH 05/23] Revert "seq_file: kabi: KABI reservation for seq_file"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 45a269b6bc9db79ec770ce7c64515d15ee547a3a.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/seq_file.h | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/include/linux/seq_file.h b/include/linux/seq_file.h
+index cf4a2258df85..234bcdb1fba4 100644
+--- a/include/linux/seq_file.h
++++ b/include/linux/seq_file.h
+@@ -27,8 +27,6 @@ struct seq_file {
+ 	int poll_event;
+ 	const struct file *file;
+ 	void *private;
+-
+-	KABI_RESERVE(1)
+ };
+ 
+ struct seq_operations {
+@@ -36,8 +34,6 @@ struct seq_operations {
+ 	void (*stop) (struct seq_file *m, void *v);
+ 	void * (*next) (struct seq_file *m, void *v, loff_t *pos);
+ 	int (*show) (struct seq_file *m, void *v);
+-
+-	KABI_RESERVE(1)
+ };
+ 
+ #define SEQ_SKIP 1
+-- 
+2.25.1
+

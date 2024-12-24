@@ -1,0 +1,45 @@
+From b9f0c11f5f150b271814ec2b59fa85f2396a0b52 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:42:14 +0800
+Subject: [PATCH 06/23] Revert "statx: kabi: KABI reservation for kstat"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 7388fea23fccb98dbed580f41cc0037b7a1d66de.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/stat.h | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/include/linux/stat.h b/include/linux/stat.h
+index 045064370cd8..52150570d37a 100644
+--- a/include/linux/stat.h
++++ b/include/linux/stat.h
+@@ -18,7 +18,6 @@
+ #include <linux/types.h>
+ #include <linux/time.h>
+ #include <linux/uidgid.h>
+-#include <linux/kabi.h>
+ 
+ struct kstat {
+ 	u32		result_mask;	/* What fields the user got */
+@@ -54,11 +53,6 @@ struct kstat {
+ 	u32		dio_mem_align;
+ 	u32		dio_offset_align;
+ 	u64		change_cookie;
+-
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ 
+ /* These definitions are internal to the kernel for now. Mainly used by nfsd. */
+-- 
+2.25.1
+

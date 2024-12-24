@@ -1,0 +1,63 @@
+From 3f3e3cdb66ece50873bd8de6a33d693bad241179 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:51:09 +0800
+Subject: [PATCH 23/23] Revert "bpf: Add kabi reserve padding for uapi struct
+ bpf_link_info"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 51914230fbc72797f3cf7d5b0d9e90b00c995193.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/uapi/linux/bpf.h       | 9 ---------
+ tools/include/uapi/linux/bpf.h | 9 ---------
+ 2 files changed, 18 deletions(-)
+
+diff --git a/include/uapi/linux/bpf.h b/include/uapi/linux/bpf.h
+index a660cb68c853..482647774bf5 100644
+--- a/include/uapi/linux/bpf.h
++++ b/include/uapi/linux/bpf.h
+@@ -6573,15 +6573,6 @@ struct bpf_link_info {
+ 					__u64 config;
+ 					__u32 type;
+ 				} event; /* BPF_PERF_EVENT_EVENT */
+-				struct {
+-					__u64:64;
+-					__u32:32;
+-					__u32:32;
+-					__u64:64;
+-					__u64:64;
+-					__u64:64;
+-					__u64:64;
+-				} kabi_reserve;
+ 			};
+ 		} perf_event;
+ 		struct {
+diff --git a/tools/include/uapi/linux/bpf.h b/tools/include/uapi/linux/bpf.h
+index 9b302242be6c..c112c6f7c766 100644
+--- a/tools/include/uapi/linux/bpf.h
++++ b/tools/include/uapi/linux/bpf.h
+@@ -6576,15 +6576,6 @@ struct bpf_link_info {
+ 					__u64 config;
+ 					__u32 type;
+ 				} event; /* BPF_PERF_EVENT_EVENT */
+-				struct {
+-					__u64:64;
+-					__u32:32;
+-					__u32:32;
+-					__u64:64;
+-					__u64:64;
+-					__u64:64;
+-					__u64:64;
+-				} kabi_reserve;
+ 			};
+ 		} perf_event;
+ 		struct {
+-- 
+2.25.1
+

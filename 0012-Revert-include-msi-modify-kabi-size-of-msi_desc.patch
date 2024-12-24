@@ -1,0 +1,45 @@
+From 1cc8fb49c9e4295511b181e6caca4539368ab3d8 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:45:34 +0800
+Subject: [PATCH 12/23] Revert "include/msi: modify kabi size of msi_desc"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 6504f0172e640d6507dd5d2ce61e0c4d7ba3af56.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/msi.h | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/include/linux/msi.h b/include/linux/msi.h
+index 5fd8a6caae98..7354ffb14856 100644
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -205,12 +205,15 @@ struct msi_desc {
+ 	union {
+ 		struct pci_msi_desc	pci;
+ 		struct msi_desc_data	data;
+-		KABI_EXTEND_WITH_SIZE(KABI_RESERVE(1), 5)
++		KABI_RESERVE(1)
++		KABI_RESERVE(2)
++		KABI_RESERVE(3)
++		KABI_RESERVE(4)
+ 	};
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ 	KABI_RESERVE(5)
++	KABI_RESERVE(6)
++	KABI_RESERVE(7)
++	KABI_RESERVE(8)
+ };
+ 
+ /*
+-- 
+2.25.1
+

@@ -1,0 +1,48 @@
+From 5833acf1bc268d4b1417cea9fb549232d3173b63 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:47:29 +0800
+Subject: [PATCH 16/23] Revert "cgroup: Move rcu_head up near the top of
+ cgroup_root"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit ca7d6bd47172e001b6641e6bfe4e66a530433fe0.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/cgroup-defs.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
+index 8eb518ce87a1..05ece896af7d 100644
+--- a/include/linux/cgroup-defs.h
++++ b/include/linux/cgroup-defs.h
+@@ -573,10 +573,6 @@ struct cgroup_root {
+ 	/* Unique id for this hierarchy. */
+ 	int hierarchy_id;
+ 
+-	/* A list running through the active hierarchies */
+-	struct list_head root_list;
+-	struct rcu_head rcu;    /* Must be near the top */
+-
+ 	/*
+ 	 * The root cgroup. The containing cgroup_root will be destroyed on its
+ 	 * release. cgrp->ancestors[0] will be used overflowing into the
+@@ -593,6 +589,10 @@ struct cgroup_root {
+ 	/* Wait while cgroups are being destroyed */
+ 	wait_queue_head_t wait;
+ 
++	/* A list running through the active hierarchies */
++	struct list_head root_list;
++	struct rcu_head rcu;
++
+ 	/* Hierarchy-specific flags */
+ 	unsigned int flags;
+ 
+-- 
+2.25.1
+

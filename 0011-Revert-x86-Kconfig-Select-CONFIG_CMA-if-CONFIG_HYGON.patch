@@ -1,0 +1,34 @@
+From 96d192b804267d52287c071ceb1827fdebcf7993 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:44:56 +0800
+Subject: [PATCH 11/23] Revert "x86/Kconfig: Select CONFIG_CMA if
+ CONFIG_HYGON_CSV=y"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 6199dbe536bf6a8bbc08c6dae07a40c702aa6813.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ arch/x86/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index a6bbe6029121..fcd0c3b2065d 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -2075,7 +2075,6 @@ config HYGON_CSV
+ 	bool "Hygon secure virtualization CSV support"
+ 	default y
+ 	depends on CPU_SUP_HYGON && AMD_MEM_ENCRYPT
+-	select CONFIG_CMA
+ 	help
+ 	  Hygon CSV integrates secure processor, memory encryption and
+ 	  memory isolation to provide the ability to protect guest's private
+-- 
+2.25.1
+

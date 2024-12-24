@@ -1,0 +1,37 @@
+From 7f64de266ef1aa56adc82ec55aa787fbc83e0251 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:44:12 +0800
+Subject: [PATCH 09/23] Revert "iommu: Reserve extra KABI entry for struct
+ iopf_group"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 6b0247f6d557172711097fd402d1a5ba63b258fc.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/iommu.h | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/include/linux/iommu.h b/include/linux/iommu.h
+index 83ec4bf9809e..bb463cb96a44 100644
+--- a/include/linux/iommu.h
++++ b/include/linux/iommu.h
+@@ -155,10 +155,6 @@ struct iopf_group {
+ 	KABI_USE(2, u32 cookie)
+ 	KABI_RESERVE(3)
+ 	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+ };
+ 
+ struct iopf_group_extend {
+-- 
+2.25.1
+

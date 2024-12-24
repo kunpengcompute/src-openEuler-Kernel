@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       72
 %global maintenance_release .0.0
-%global pkg_release         .63
+%global pkg_release         .64
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -125,6 +125,25 @@ Patch0001: 0001-riscv-kernel.patch
 Patch0002: 0002-cpupower-clang-compile-support.patch
 Patch0003: 0003-x86_energy_perf_policy-clang-compile-support.patch
 Patch0004: 0004-turbostat-clang-compile-support.patch
+Patch0005: 0005-Revert-seq_file-kabi-KABI-reservation-for-seq_file.patch
+Patch0006: 0006-Revert-statx-kabi-KABI-reservation-for-kstat.patch
+Patch0007: 0007-Revert-net-kabi-Reserve-space-for-net-structures.patch
+Patch0008: 0008-Revert-kabi-net-reserve-space-for-xdp-subsystem-rela.patch
+Patch0009: 0009-Revert-iommu-Reserve-extra-KABI-entry-for-struct-iop.patch
+Patch0010: 0010-Revert-x86-config-Enable-CONFIG_CMA-by-default-in-op.patch
+Patch0011: 0011-Revert-x86-Kconfig-Select-CONFIG_CMA-if-CONFIG_HYGON.patch
+Patch0012: 0012-Revert-include-msi-modify-kabi-size-of-msi_desc.patch
+Patch0013: 0013-Revert-fs-Allow-fine-grained-control-of-folio-sizes.patch
+Patch0014: 0014-Revert-cgroup-add-more-reserve-kabi.patch
+Patch0015: 0015-Revert-cgroup-cpuset-Prevent-UAF-in-proc_cpuset_show.patch
+Patch0016: 0016-Revert-cgroup-Move-rcu_head-up-near-the-top-of-cgrou.patch
+Patch0017: 0017-Revert-cgroup-Make-operations-on-the-cgroup-root_lis.patch
+Patch0018: 0018-Revert-Revert-cgroup-fix-uaf-when-proc_cpuset_show.patch
+Patch0019: 0019-Revert-kabi-reserver-space-for-i2c.patch
+Patch0020: 0020-Revert-kabi-reserve-space-for-uprobes.h.patch
+Patch0021: 0021-Revert-kabi-reserve-space-for-internal.h.patch
+Patch0022: 0022-Revert-kabi-reserve-space-for-perf_event.h.patch
+Patch0023: 0023-Revert-bpf-Add-kabi-reserve-padding-for-uapi-struct-.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -365,6 +384,26 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %patch0003 -p1
 %patch0004 -p1
 %endif
+
+%patch0005 -p1
+%patch0006 -p1
+%patch0007 -p1
+%patch0008 -p1
+%patch0009 -p1
+%patch0010 -p1
+%patch0011 -p1
+%patch0012 -p1
+%patch0013 -p1
+%patch0014 -p1
+%patch0015 -p1
+%patch0016 -p1
+%patch0017 -p1
+%patch0018 -p1
+%patch0019 -p1
+%patch0020 -p1
+%patch0021 -p1
+%patch0022 -p1
+%patch0023 -p1
 
 find . \( -name "*.orig" -o -name "*~" \) -exec rm -f {} \; >/dev/null
 find . -name .gitignore -exec rm -f {} \; >/dev/null
@@ -1085,6 +1124,9 @@ fi
 %endif
 
 %changelog
+* Tue Dec 24 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.0.0.64
+- Revert kabi broken patches for 24.03-LTS
+
 * Tue Dec 24 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.0.0.63
 - !14213 v2  bpf: Add kabi reserve padding for uapi struct bpf_link_info
 - bpf: Add kabi reserve padding for uapi struct bpf_link_info

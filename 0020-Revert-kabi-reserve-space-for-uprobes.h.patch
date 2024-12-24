@@ -1,0 +1,48 @@
+From 1cd1d17b496958d526ba139166d0e0251e2bd224 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:49:30 +0800
+Subject: [PATCH 20/23] Revert "kabi: reserve space for uprobes.h"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 59a2a3e8b1c35d9e0bde08cd2e6f01f1c12d384b.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/uprobes.h | 9 ---------
+ 1 file changed, 9 deletions(-)
+
+diff --git a/include/linux/uprobes.h b/include/linux/uprobes.h
+index 86d0868b584a..f46e0ca0169c 100644
+--- a/include/linux/uprobes.h
++++ b/include/linux/uprobes.h
+@@ -47,7 +47,6 @@ struct uprobe_consumer {
+ 
+ #ifdef CONFIG_UPROBES
+ #include <asm/uprobes.h>
+-#include <linux/kabi.h>
+ 
+ enum uprobe_task_state {
+ 	UTASK_RUNNING,
+@@ -79,14 +78,6 @@ struct uprobe_task {
+ 
+ 	struct return_instance		*return_instances;
+ 	unsigned int			depth;
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+ };
+ 
+ struct return_instance {
+-- 
+2.25.1
+

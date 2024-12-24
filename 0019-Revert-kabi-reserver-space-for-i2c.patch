@@ -1,0 +1,35 @@
+From ad0d39369e6a0374c4fe1cdbc75518333d8cc24d Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:48:58 +0800
+Subject: [PATCH 19/23] Revert "kabi reserver space for i2c"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 3121af55f328c87e8053d6e1580c25d1290899ef.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/i2c.h | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/include/linux/i2c.h b/include/linux/i2c.h
+index 3fd6932bf8cd..32cf5708d5a5 100644
+--- a/include/linux/i2c.h
++++ b/include/linux/i2c.h
+@@ -746,9 +746,6 @@ struct i2c_adapter {
+ 
+ 	struct irq_domain *host_notify_domain;
+ 	struct regulator *bus_regulator;
+-
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+ };
+ #define to_i2c_adapter(d) container_of(d, struct i2c_adapter, dev)
+ 
+-- 
+2.25.1
+
