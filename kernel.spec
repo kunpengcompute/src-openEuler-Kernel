@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2412.3.0
+%global hulkrelease 2412.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0308
+Release: %{hulkrelease}.0309
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,50 @@ fi
 %endif
 
 %changelog
+
+* Wed Dec 25 2024 chenyi <chenyi211@huawei.com> - 4.19.90-2412.4.0.0309
+- !14248  Fix CVE-2024-50194
+- !14285  ACPI: battery: Fix possible crash when unregistering a battery hook
+- !14265  PCI: Mark Creative Labs EMU20k2 INTx masking as broken
+- !14264  PCI: Add function 0 DMA alias quirk for Glenfly Arise chip
+- !14262  x86/apic: Always explicitly disarm TSC-deadline timer
+- ACPI: battery: Fix possible crash when unregistering a battery hook
+- !14249  smb: client: Fix use-after-free of network namespace.
+- !14267  backport LTS commits
+- ACPI: battery: Simplify battery hook locking
+- ACPICA: iasl: handle empty connection_node
+- ACPICA: check null return of ACPI_ALLOCATE_ZEROED() in acpi_db_convert_to_package()
+- ACPI: EC: Do not release locks during operation region accesses
+- ACPICA: Fix memory leak if acpi_ps_get_next_field() fails
+- ACPICA: Fix memory leak if acpi_ps_get_next_namepath() fails
+- ACPI: PMIC: Remove unneeded check in tps68470_pmic_opregion_probe()
+- x86/hyperv: Set X86_FEATURE_TSC_KNOWN_FREQ when Hyper-V provides frequency
+- PCI: Mark Creative Labs EMU20k2 INTx masking as broken
+- PCI: Add function 0 DMA alias quirk for Glenfly Arise chip
+- x86/apic: Always explicitly disarm TSC-deadline timer
+- !14261  io_uring/io-wq: Use set_bit() and test_bit() at worker->flags
+- io_uring/io-wq: Use set_bit() and test_bit() at worker->flags
+- !14255  cgroup: Fix potential overflow issue when checking max_depth
+- cgroup: Fix potential overflow issue when checking max_depth
+- !14240  sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- !14239  sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- !14245  selinux: improve error checking in sel_write_load()
+- smb: client: Fix use-after-free of network namespace.
+- arm64/uprobes: change the uprobe_opcode_t typedef to fix the sparse warning
+- arm64: probes: Fix uprobes for big-endian kernels
+- arm64:uprobe fix the uprobe SWBP_INSN in big-endian
+- !14233  block, bfq: fix possible UAF for bfqq->bic with merge chain
+- selinux: improve error checking in sel_write_load()
+- !14181  net: Fix icmp host relookup triggering ip_rt_bug
+- sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- block, bfq: fix possible UAF for bfqq->bic with merge chain
+- !14139  ocfs2: pass u64 to ocfs2_truncate_inline maybe overflow
+- !14167  CVE-2024-46733
+- net: Fix icmp host relookup triggering ip_rt_bug
+- btrfs: fix the length of reserved qgroup to free
+- btrfs: fix qgroup reserve leaks in cow_file_range
+- ocfs2: pass u64 to ocfs2_truncate_inline maybe overflow
 
 * Wed Dec 18 2024 chenyi <chenyi211@huawei.com> - 4.19.90-2412.3.0.0308
 - !14186  nilfs2: fix null-ptr-deref in block_touch_buffer tracepoint
