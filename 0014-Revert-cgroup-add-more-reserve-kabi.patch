@@ -1,0 +1,90 @@
+From c16fd333dde352930e1255f432e8dfeeef7dfc82 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:46:46 +0800
+Subject: [PATCH 14/23] Revert "cgroup: add more reserve kabi"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 9d62feb292370f2b6d78264613019f7feb7cca4e.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/cgroup-defs.h | 7 -------
+ include/linux/memcontrol.h  | 8 --------
+ kernel/cgroup/cpuset.c      | 5 +++++
+ 3 files changed, 5 insertions(+), 15 deletions(-)
+
+diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
+index f3fd0407d346..8eb518ce87a1 100644
+--- a/include/linux/cgroup-defs.h
++++ b/include/linux/cgroup-defs.h
+@@ -325,8 +325,6 @@ struct cgroup_base_stat {
+ #ifdef CONFIG_SCHED_CORE
+ 	u64 forceidle_sum;
+ #endif
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+ };
+ 
+ /*
+@@ -557,9 +555,6 @@ struct cgroup {
+ 	KABI_RESERVE(3)
+ 	KABI_RESERVE(4)
+ 	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+ 	/* All ancestors including self */
+ 	struct cgroup *ancestors[];
+ };
+@@ -611,8 +606,6 @@ struct cgroup_root {
+ 	KABI_RESERVE(2)
+ 	KABI_RESERVE(3)
+ 	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+ };
+ 
+ /*
+diff --git a/include/linux/memcontrol.h b/include/linux/memcontrol.h
+index abe236201e68..b2a80e089a0a 100644
+--- a/include/linux/memcontrol.h
++++ b/include/linux/memcontrol.h
+@@ -429,14 +429,6 @@ struct mem_cgroup {
+ 	KABI_RESERVE(6)
+ 	KABI_RESERVE(7)
+ 	KABI_RESERVE(8)
+-	KABI_RESERVE(9)
+-	KABI_RESERVE(10)
+-	KABI_RESERVE(11)
+-	KABI_RESERVE(12)
+-	KABI_RESERVE(13)
+-	KABI_RESERVE(14)
+-	KABI_RESERVE(15)
+-	KABI_RESERVE(16)
+ 	struct mem_cgroup_per_node *nodeinfo[];
+ };
+ 
+diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
+index 7ea0a6d00519..f3cf9b1268e0 100644
+--- a/kernel/cgroup/cpuset.c
++++ b/kernel/cgroup/cpuset.c
+@@ -211,6 +211,11 @@ struct cpuset {
+ 
+ 	/* Remote partition silbling list anchored at remote_children */
+ 	struct list_head remote_sibling;
++
++	KABI_RESERVE(1)
++	KABI_RESERVE(2)
++	KABI_RESERVE(3)
++	KABI_RESERVE(4)
+ };
+ 
+ /*
+-- 
+2.25.1
+

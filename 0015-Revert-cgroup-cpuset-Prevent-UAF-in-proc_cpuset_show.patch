@@ -1,0 +1,53 @@
+From 38236cff866b4ec6021318815cd2da4194d6fe35 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:47:09 +0800
+Subject: [PATCH 15/23] Revert "cgroup/cpuset: Prevent UAF in
+ proc_cpuset_show()"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit a91bb3a04430844abe9e89f90af3ee076f2d9387.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ kernel/cgroup/cpuset.c | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
+
+diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
+index f3cf9b1268e0..140dfb5ad3fc 100644
+--- a/kernel/cgroup/cpuset.c
++++ b/kernel/cgroup/cpuset.c
+@@ -21,7 +21,6 @@
+  *  License.  See the file COPYING in the main directory of the Linux
+  *  distribution for more details.
+  */
+-#include "cgroup-internal.h"
+ 
+ #include <linux/cpu.h>
+ #include <linux/cpumask.h>
+@@ -5192,14 +5191,10 @@ int proc_cpuset_show(struct seq_file *m, struct pid_namespace *ns,
+ 	if (!buf)
+ 		goto out;
+ 
+-	rcu_read_lock();
+-	spin_lock_irq(&css_set_lock);
+-	css = task_css(tsk, cpuset_cgrp_id);
+-	retval = cgroup_path_ns_locked(css->cgroup, buf, PATH_MAX,
+-				       current->nsproxy->cgroup_ns);
+-	spin_unlock_irq(&css_set_lock);
+-	rcu_read_unlock();
+-
++	css = task_get_css(tsk, cpuset_cgrp_id);
++	retval = cgroup_path_ns(css->cgroup, buf, PATH_MAX,
++				current->nsproxy->cgroup_ns);
++	css_put(css);
+ 	if (retval >= PATH_MAX)
+ 		retval = -ENAMETOOLONG;
+ 	if (retval < 0)
+-- 
+2.25.1
+

@@ -1,0 +1,55 @@
+From c91689cce7fd2e2e35d7436268a766ebf21abf90 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:50:16 +0800
+Subject: [PATCH 22/23] Revert "kabi: reserve space for perf_event.h"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 279803fa98908bd367cec04ae2600c15764fb977.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/perf_event.h | 16 ----------------
+ 1 file changed, 16 deletions(-)
+
+diff --git a/include/linux/perf_event.h b/include/linux/perf_event.h
+index fe692e9bd0b2..89f2a02db563 100644
+--- a/include/linux/perf_event.h
++++ b/include/linux/perf_event.h
+@@ -1010,14 +1010,6 @@ struct perf_cpu_pmu_context {
+ 	struct hrtimer			hrtimer;
+ 	ktime_t				hrtimer_interval;
+ 	unsigned int			hrtimer_active;
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+ };
+ 
+ /**
+@@ -1039,14 +1031,6 @@ struct perf_cpu_context {
+ 	int				heap_size;
+ 	struct perf_event		**heap;
+ 	struct perf_event		*heap_default[2];
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+ };
+ 
+ struct perf_output_handle {
+-- 
+2.25.1
+

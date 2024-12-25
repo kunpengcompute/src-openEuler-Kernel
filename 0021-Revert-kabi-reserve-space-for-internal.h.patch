@@ -1,0 +1,49 @@
+From 1863036b346af2c6da66ab06bdf86b83b1424dce Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:49:51 +0800
+Subject: [PATCH 21/23] Revert "kabi: reserve space for internal.h"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 078ad81846b81844eb98f90eee57c06954715c8d.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ kernel/events/internal.h | 10 ----------
+ 1 file changed, 10 deletions(-)
+
+diff --git a/kernel/events/internal.h b/kernel/events/internal.h
+index d1ffa00b91b6..d2e6e6144c54 100644
+--- a/kernel/events/internal.h
++++ b/kernel/events/internal.h
+@@ -5,7 +5,6 @@
+ #include <linux/hardirq.h>
+ #include <linux/uaccess.h>
+ #include <linux/refcount.h>
+-#include <linux/kabi.h>
+ 
+ /* Buffer handling */
+ 
+@@ -55,15 +54,6 @@ struct perf_buffer {
+ 	void				**aux_pages;
+ 	void				*aux_priv;
+ 
+-	KABI_RESERVE(1)
+-	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+-	KABI_RESERVE(5)
+-	KABI_RESERVE(6)
+-	KABI_RESERVE(7)
+-	KABI_RESERVE(8)
+-
+ 	struct perf_event_mmap_page	*user_page;
+ 	void				*data_pages[];
+ };
+-- 
+2.25.1
+

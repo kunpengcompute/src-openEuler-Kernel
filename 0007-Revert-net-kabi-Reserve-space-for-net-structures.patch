@@ -1,0 +1,84 @@
+From 93310d0377413e2f3e3625983143a5414ee2eafa Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:43:15 +0800
+Subject: [PATCH 07/23] Revert "net/kabi: Reserve space for net structures"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit a2bbb3a7e3d30f5efc443fa17fcfe20fdd5a98d5.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/net/flow.h            | 2 --
+ include/net/netns/netfilter.h | 2 --
+ include/net/netns/xfrm.h      | 2 --
+ include/net/xfrm.h            | 4 ----
+ 4 files changed, 10 deletions(-)
+
+diff --git a/include/net/flow.h b/include/net/flow.h
+index 72d2ea2374ba..0cc5f2ef1000 100644
+--- a/include/net/flow.h
++++ b/include/net/flow.h
+@@ -46,8 +46,6 @@ struct flowi_common {
+ 
+ 	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ 
+ union flowi_uli {
+diff --git a/include/net/netns/netfilter.h b/include/net/netns/netfilter.h
+index 963588269637..4b77a9b031b6 100644
+--- a/include/net/netns/netfilter.h
++++ b/include/net/netns/netfilter.h
+@@ -34,7 +34,5 @@ struct netns_nf {
+ 
+ 	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ #endif
+diff --git a/include/net/netns/xfrm.h b/include/net/netns/xfrm.h
+index af7f20ef4823..a0c1359cc7eb 100644
+--- a/include/net/netns/xfrm.h
++++ b/include/net/netns/xfrm.h
+@@ -87,8 +87,6 @@ struct netns_xfrm {
+ 
+ 	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ 
+ #endif
+diff --git a/include/net/xfrm.h b/include/net/xfrm.h
+index b9dec5f9c973..c875faf98492 100644
+--- a/include/net/xfrm.h
++++ b/include/net/xfrm.h
+@@ -294,8 +294,6 @@ struct xfrm_state {
+ 
+ 	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ 
+ static inline struct net *xs_net(struct xfrm_state *x)
+@@ -564,8 +562,6 @@ struct xfrm_policy {
+ 
+ 	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+-	KABI_RESERVE(3)
+-	KABI_RESERVE(4)
+ };
+ 
+ static inline struct net *xp_net(const struct xfrm_policy *xp)
+-- 
+2.25.1
+

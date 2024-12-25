@@ -1,0 +1,58 @@
+From 8e55b4465cb45eadc9391b3d3fe8787bc9348a6e Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 24 Dec 2024 16:44:36 +0800
+Subject: [PATCH 10/23] Revert "x86/config: Enable CONFIG_CMA by default in
+ openeuler_defconfig"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 9ecfe480c6fef496105360baa430103754f31bdf.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ arch/x86/configs/openeuler_defconfig | 18 +-----------------
+ 1 file changed, 1 insertion(+), 17 deletions(-)
+
+diff --git a/arch/x86/configs/openeuler_defconfig b/arch/x86/configs/openeuler_defconfig
+index adfaef0cb10c..8e8542796a13 100644
+--- a/arch/x86/configs/openeuler_defconfig
++++ b/arch/x86/configs/openeuler_defconfig
+@@ -1158,11 +1158,7 @@ CONFIG_NEED_PER_CPU_EMBED_FIRST_CHUNK=y
+ CONFIG_NEED_PER_CPU_PAGE_FIRST_CHUNK=y
+ CONFIG_USE_PERCPU_NUMA_NODE_ID=y
+ CONFIG_HAVE_SETUP_PER_CPU_AREA=y
+-CONFIG_CMA=y
+-# CONFIG_CMA_DEBUG is not set
+-# CONFIG_CMA_DEBUGFS is not set
+-# CONFIG_CMA_SYSFS is not set
+-CONFIG_CMA_AREAS=19
++# CONFIG_CMA is not set
+ CONFIG_MEM_SOFT_DIRTY=y
+ CONFIG_GENERIC_EARLY_IOREMAP=y
+ CONFIG_DEFERRED_STRUCT_PAGE_INIT=y
+@@ -9022,18 +9018,6 @@ CONFIG_ARCH_HAS_FORCE_DMA_UNENCRYPTED=y
+ CONFIG_SWIOTLB=y
+ # CONFIG_SWIOTLB_DYNAMIC is not set
+ CONFIG_DMA_COHERENT_POOL=y
+-CONFIG_DMA_CMA=y
+-# CONFIG_DMA_NUMA_CMA is not set
+-
+-#
+-# Default contiguous memory area size:
+-#
+-CONFIG_CMA_SIZE_MBYTES=0
+-CONFIG_CMA_SIZE_SEL_MBYTES=y
+-# CONFIG_CMA_SIZE_SEL_PERCENTAGE is not set
+-# CONFIG_CMA_SIZE_SEL_MIN is not set
+-# CONFIG_CMA_SIZE_SEL_MAX is not set
+-CONFIG_CMA_ALIGNMENT=8
+ # CONFIG_DMA_API_DEBUG is not set
+ # CONFIG_DMA_MAP_BENCHMARK is not set
+ CONFIG_SGL_ALLOC=y
+-- 
+2.25.1
+
