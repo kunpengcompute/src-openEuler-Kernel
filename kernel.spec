@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       242
+%global devel_release       243
 %global maintenance_release .0.0
-%global pkg_release         .144
+%global pkg_release         .145
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -911,6 +911,18 @@ fi
 %endif
 
 %changelog
+* Wed Dec 25 2024 Li Nan <linan122@huawei.com> - 5.10.0-243.0.0.145
+- !14246  soc: hisilicon: hbmdev: Only support built-in
+- !14242  sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- !14241  sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- soc: hisilicon: hbmdev: Only support built-in
+- !14060  etmem : fix page_ref count leak and head missing useing problem
+- !14205  crypto: arm64/sm4 - simplify sm4_ce_expand_key() of CE implementation
+- sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- crypto: arm64/sm4 - simplify sm4_ce_expand_key() of CE implementation
+- etmem : fix page_ref count leak and head missing useing problem
+
 * Wed Dec 18 2024 Li Nan <linan122@huawei.com> - 5.10.0-242.0.0.144
 - !14216 perf cs-etm: Use evlist__event2evsel() in cs-etm.c
 - !14142  x86/CPU/AMD: Clear virtualized VMLOAD/VMSAVE on Zen4 client
