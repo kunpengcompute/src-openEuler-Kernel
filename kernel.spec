@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2412.4.0
+%global hulkrelease 2412.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0309
+Release: %{hulkrelease}.0310
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,27 @@ fi
 %endif
 
 %changelog
+
+* Tue Dec 31 2024 chenyi <chenyi211@huawei.com> - 4.19.90-2412.5.0.0310
+- !14357  media: uapi/linux/cec.h: cec_msg_set_reply_to: zero flags
+- media: uapi/linux/cec.h: cec_msg_set_reply_to: zero flags
+- !14326  mm: Backport mainline patch
+- !14324  mm: shmem: don't truncate page if memory failure happens
+- !14310  signal: Replace BUG_ON()s
+- mm/hugetlb: fix nodes huge page allocation when there are surplus pages
+- mm/compaction: correctly return failure with bogus compound_order in strict mode
+- mm: shmem: don't truncate page if memory failure happens
+- !14306  printk: Fix the qspinlock deadloop caused by zap_locks()
+- signal: Replace BUG_ON()s
+- printk: Fix the qspinlock deadloop caused by zap_locks()
+- !14176  padata: make padata_do_parallel find alternate callback CPU
+- !14000 scsi: smartpqi: add no_write_same for logical volumes
+- !14290  ACPI: PMIC: fix compile error
+- !14288  dhugetlb: keep refcount to 0 while page is actually free in pool
+- ACPI: PMIC: fix compile error
+- dhugetlb: keep refcount to 0 while page is actually free in pool
+- padata: make padata_do_parallel find alternate callback CPU
+- scsi: smartpqi: add no_write_same for logical volumes
 
 * Wed Dec 25 2024 chenyi <chenyi211@huawei.com> - 4.19.90-2412.4.0.0309
 - !14248  Fix CVE-2024-50194
