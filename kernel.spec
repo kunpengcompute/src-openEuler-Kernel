@@ -16,8 +16,8 @@
 %global upstream_version    5.10
 %global upstream_sublevel   0
 %global devel_release       136
-%global maintenance_release .105.0
-%global pkg_release         .186
+%global maintenance_release .107.0
+%global pkg_release         .187
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -941,6 +941,49 @@ fi
 %endif
 
 %changelog
+* Mon Dec 30 2024 Li Nan <linan122@huawei.com> - 5.10.0-136.107.0.187
+- !14270  iomap: fix zero padding data issue in concurrent append writes
+- !14234  xfs: fix attr inactive issue
+- !14335  ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- !13005  Fix CVE-2024-50086
+- !14277  net: hsr: Fix potential use-after-free
+- !14308  printk: Fix the qspinlock deadloop caused by zap_locks()
+- !14275  ixgbevf: Fix resource leak in ixgbevf_init_module()
+- !14276  wifi: mac8021: fix possible oob access in ieee80211_get_rate_duration
+- !14278  net: tun: Fix use-after-free in tun_detach()
+- !14279  Bluetooth: Fix not cleanup led when bt_init fails
+- !14280  igb: Initialize mailbox message for VF reset
+- !14281  CVE-2024-46765
+- printk: Fix the qspinlock deadloop caused by zap_locks()
+- ice: protect XDP configuration with a mutex
+- ice: allow hot-swapping XDP programs
+- ice: Consolidate VSI state and flags
+- ice: fix writeback enable logic
+- ice: Remove vlan_ena from vsi structure
+- igb: Initialize mailbox message for VF reset
+- Bluetooth: Fix not cleanup led when bt_init fails
+- net: tun: Fix use-after-free in tun_detach()
+- net: hsr: Fix potential use-after-free
+- wifi: mac8021: fix possible oob access in ieee80211_get_rate_duration
+- ixgbevf: Fix resource leak in ixgbevf_init_module()
+- iomap: fix zero padding data issue in concurrent append writes
+- xfs: handle attr node/leaf blocks atomically during inactive
+- xfs: factor out xfs_attr3_leaf_init
+- xfs: factor out xfs_da3_node_entry_remove
+- Revert "xfs: factor out __xfs_da3_node_read()"
+- Revert "xfs: atomic drop extent entries when inactiving attr"
+- !14138  ocfs2: pass u64 to ocfs2_truncate_inline maybe overflow
+- !14150  CVE-2024-53142
+- !14173  dmaengine: idxd: Let probe fail when workqueue cannot be enabled
+- dmaengine: idxd: Let probe fail when workqueue cannot be enabled
+- !10238 [sync] PR-10179: [22.03-LTS-SP3]net:openvswitch: Before calling ovs_vport_send, check the link status of vport->dev
+- initramfs: avoid filename buffer overrun
+- ocfs2: pass u64 to ocfs2_truncate_inline maybe overflow
+- ksmbd: fix user-after-free from session log off
+- ksmbd: fix race condition between session lookup and expire
+- net: openvswitch: fix race on port output
+
 * Tue Dec 10 2024 Li Nan <linan122@huawei.com> - 5.10.0-136.105.0.186
 - !14047  smb: client: Fix use-after-free of network namespace.
 - !14118  bpf: sync_linked_regs() must preserve subreg_def
