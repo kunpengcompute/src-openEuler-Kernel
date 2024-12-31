@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       243
+%global devel_release       244
 %global maintenance_release .0.0
-%global pkg_release         .145
+%global pkg_release         .146
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -911,6 +911,187 @@ fi
 %endif
 
 %changelog
+* Tue Dec 31 2024 Li Nan <linan122@huawei.com> - 5.10.0-244.0.0.146
+- !14314  x86/sgx: Fix deadlock in SGX NUMA node search
+- !14315  media: v4l2-tpg: prevent the risk of a division by zero
+- !14293  Fix the incorrect definition and use of IMA_FIX_OVERLAYFS_DETECTION
+- !14289 v2  erofs: add ondemand mode support
+- !14269  iomap: fix zero padding data issue in concurrent append writes
+- !14235  xfs: fix attr inactive issue
+- !14339  ocfs2: free inode when ocfs2_get_init_inode() fails
+- !14331  mm: avoid unconditional one-tick sleep when swapcache_prepare fails
+- !14330  mm/khugepaged: fix ->anon_vma race
+- !14305  RDMA/hns: Some patches are integrated into OLK-5.10
+- !14333  ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- ocfs2: free inode when ocfs2_get_init_inode() fails
+- ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- mm: avoid unconditional one-tick sleep when swapcache_prepare fails
+- mm/khugepaged: fix ->anon_vma race
+- !13006  Fix CVE-2024-50086
+- !14309  printk: Fix the qspinlock deadloop caused by zap_locks()
+- !14252 【OLK-5.10】backport some bugfix of hisi_sas module from upstream
+- media: v4l2-tpg: prevent the risk of a division by zero
+- x86/sgx: Fix deadlock in SGX NUMA node search
+- printk: Fix the qspinlock deadloop caused by zap_locks()
+- RDMA/hns: Don't query *except on hip10*
+- RDMA/hns: Fix creating GSI QP in non-extended SGE QP bank
+- RDMA/hns: Fix bonding failure due to wrong reset_state
+- config: Enable IMA_FIX_OVERLAYFS_DETECTION in openeuler defconfigs
+- IMA: Fix the incorrect definition and use of IMA_FIX_OVERLAYFS_DETECTION
+- !14208 Fix perf coredump and refcnt inccoret
+- cachefiles: modify inappropriate error return value in cachefiles_daemon_secctx
+- fscache: modify fscache_hash_cookie() to enhance security
+- cachefiles: prefault in user pages to aovid ABBA deadlock
+- fscache/cachefiles: add a memory barrier for page_write
+- fscache/cachefiles: add a memory barrier for waking and waiting
+- fscache: add a memory barrier for FSCACHE_COOKIE_LOOKING_UP
+- wait_on_bit: Add wait_on_bit_acquire() to provide memory barrier
+- s390: provide arch_test_bit_acquire() for architecture s390
+- wait_on_bit: add an acquire memory barrier
+- erofs: unify anonymous inodes for blob
+- erofs: remove unused device mapping in meta routine
+- fscache: fix assertion failure in cachefiles_put_object()
+- cachefiles: cyclic allocation of msg_id to avoid reuse
+- fscache: fix op leak due to abort init after parent ready
+- cachefiles: Set object to close if ondemand_id < 0 in copen
+- erofs: correct the blknr/blkoff calculation in erofs_read_raw_page()
+- cachefiles: Change the mark inactive sequence in erofs ondemand mode
+- cachefiles: clear FSCACHE_COOKIE_NO_DATA_YET for the new ondemand object
+- cachefiles: Add restrictions to cachefiles_daemon_cull()
+- cachefiles: disallow to complete open requests with uninitialised ondemand_id
+- cachefiles: defer exposing anon_fd until after copy_to_user() succeeds
+- fscache: Add the unhash_cookie mechanism to fscache_drop_object()
+- cachefiles: call cachefiles_ondemand_init_object() out of dir inode lock
+- cachefiles: Fix cookie reference count leakage error
+- cachefiles: Restrict monitor calls to read_page
+- cachefiles: flush all requests after setting CACHEFILES_DEAD
+- fscache: set the default value of object_max_active to 256
+- cachefiles: Fix NULL pointer dereference in object->file
+- cachefiles: make on-demand read killable
+- cachefiles: never get a new anon fd if ondemand_id is valid
+- cachefiles: add spin_lock for cachefiles_ondemand_info
+- cachefiles: flush ondemand_object_worker during clean object
+- fscache: limit fscache_object_max_active to avoid blocking
+- cachefiles: flush all requests for the object that is being dropped
+- cachefiles: stop sending new request when dropping object
+- cachefiles: add consistency check for copen/cread
+- cachefiles: add output string to cachefiles_obj_[get|put]_ondemand_fd
+- cachefiles: fix slab-use-after-free in cachefiles_ondemand_daemon_read()
+- cachefiles: fix slab-use-after-free in cachefiles_ondemand_get_fd()
+- cachefiles: remove err_put_fd tag in cachefiles_ondemand_daemon_read()
+- fscache: Fix trace UAF in fscache_cookie_put()
+- erofs: fix order >= MAX_ORDER warning due to crafted negative i_size
+- cachefiles: use mainline xattr in ondemand mode
+- fscache: rename new_location to new_version
+- erofs: switch to use new location
+- erofs: remove erofs_fscache_netfs
+- cachefiles: handle the unprintable case for new location in cachefiles_cook_key()
+- cachefiles: use key_hash as csum for new location
+- cachefiles: skip volum csum cachefiles_cook_key() for new location
+- cachefiles: skip acc in cachefiles_cook_key() for new location
+- cachefiles: use volume key directly in cachefiles_cook_key() for new location
+- cachefiles: factor out helper to generate csum from cachefiles_cook_key()
+- cachefiles: factor out helper to generate acc from cachefiles_cook_key()
+- fscache: generate new key_hash for new location
+- fscache: add new helper to determine cachefile location
+- fscache: add a waiting mechanism when duplicate cookies are detected
+- erofs: maintain cookies of share domain in self-contained list
+- fscache: fix kernel BUG at __fscache_read_or_alloc_page
+- erofs: fix handling kern_mount() failure
+- erofs: fix lockdep false positives on initializing erofs_pseudo_mnt
+- erofs: check the uniqueness of fsid in shared domain in advance
+- fscache: fix assertion failure in fscache_put_object()
+- fscache: fix reference count leakage during abort init
+- cachefiles, erofs: Fix NULL deref in when cachefiles is not doing ondemand-mode
+- erofs: relinquish volume with mutex held
+- erofs: add erofs_ondemand switch
+- erofs: add erofs switch to better control it
+- erofs: fix page unlock advance during readahead
+- openeuler_defconfig: enable erofs ondemand for x86 and arm64
+- anolis: cachefiles: fix potential NULL in error path
+- anolis: cachefiles: add missing lock protection when polling
+- anolis: cachefiles: reset object->private to NULL when it's freed
+- anolis: cachefiles: add restore command to recover inflight ondemand read requests
+- anolis: cachefiles: narrow the scope of triggering EPOLLIN events in ondemand mode
+- anolis: cachefiles: resend an open request if the read request's object is closed
+- anolis: cachefiles: extract ondemand info field from cachefiles_object
+- anolis: cachefiles: introduce object ondemand state
+- anolis: fscache: export fscache_object_wq
+- anolis: cachefiles: optimize on-demand IO path with buffer IO
+- erofs: remove unused EROFS_GET_BLOCKS_RAW flag
+- erofs: fix use-after-free of fsid and domain_id string
+- erofs: protect s_inodes with s_inode_list_lock for fscache
+- erofs: introduce 'domain_id' mount option
+- erofs: Support sharing cookies in the same domain
+- erofs: introduce a pseudo mnt to manage shared cookies
+- erofs: introduce fscache-based domain
+- erofs: code clean up for fscache
+- anolis: erofs: implement fscache-based data readahead
+- anolis: fscache,cachefiles: add fscache_prepare_read() helper
+- anolis: cachefiles: maintain a file descriptor to the backing file
+- erofs: leave compressed inodes unsupported in fscache mode for now
+- anolis: erofs: fix the name of erofs_fscache_super_index_def
+- erofs: use kill_anon_super() to kill super in fscache mode
+- erofs: scan devices from device table
+- erofs: add 'fsid' mount option
+- erofs: implement fscache-based data read for inline layout
+- erofs: implement fscache-based data read for non-inline layout
+- erofs: implement fscache-based metadata read
+- erofs: register fscache context for extra data blobs
+- erofs: register fscache context for primary data blob
+- erofs: add anonymous inode caching metadata for data blobs
+- erofs: add fscache context helper functions
+- erofs: register fscache volume
+- erofs: add fscache mode check helper
+- erofs: make erofs_map_blocks() generally available
+- cachefiles: make on-demand request distribution fairer
+- anolis: cachefiles: refactor cachefiles_ondemand_daemon_read()
+- cachefiles: fix error return code in cachefiles_ondemand_copen()
+- anolis: cachefiles: fix volume key setup for cachefiles_open
+- anolis: cachefiles: replace BUG_ON() with WARN_ON()
+- cachefiles: narrow the scope of flushed requests when releasing fd
+- anolis: cachefiles: skip check for n_children in on-demand mode
+- cachefiles: enable on-demand read mode
+- cachefiles: implement on-demand read
+- cachefiles: notify the user daemon when withdrawing cookie
+- cachefiles: unbind cachefiles gracefully in on-demand mode
+- cachefiles: notify the user daemon when looking up cookie
+- erofs: fix misbehavior of unsupported chunk format check
+- erofs: use meta buffers for erofs_read_superblock()
+- erofs: use meta buffers for zmap operations
+- erofs: use meta buffers for xattr operations
+- erofs: use meta buffers for super operations
+- erofs: use meta buffers for inode operations
+- erofs: introduce meta buffer operations
+- erofs: clean up erofs_map_blocks tracepoints
+- erofs: add multiple device support
+- erofs: decouple basic mount options from fs_context
+- erofs: introduce erofs_sb_has_xxx() helpers
+- erofs: fix double free of 'copied'
+- erofs: support reading chunk-based uncompressed files
+- erofs: introduce chunk-based file on-disk format
+- erofs: clean up file headers & footers
+- erofs: don't use erofs_map_blocks() any more
+- [Backport]scsi: hisi_sas: Enable force phy when SATA disk directly connected
+- [Backport]scsi: hisi_sas: Add latest_dump for the debugfs dump
+- [Backport]scsi: hisi_sas: Create all dump files during debugfs initialization
+- [Backport]scsi: hisi_sas: Update v3 hw STP_LINK_TIMER setting
+- [Backport]scsi: hisi_sas: Add time interval between two H2D FIS following soft reset spec
+- [Backport]scsi: hisi_sas: Update disk locked timeout to 7 seconds
+- [Backport]scsi: hisi_sas: Reset PHY again if phyup timeout
+- [Backport]scsi: hisi_sas: Enable all PHYs that are not disabled by user during controller reset
+- [Backport]scsi: hisi_sas: Add firmware information check
+- [Backport]scsi: hisi_sas: Create trigger_dump at the end of the debugfs initialization
+- [Backport]scsi: hisi_sas: Adjust priority of registering and exiting debugfs for security
+- iomap: fix zero padding data issue in concurrent append writes
+- xfs: handle attr node/leaf blocks atomically during inactive
+- xfs: factor out xfs_attr3_leaf_init
+- xfs: factor out xfs_da3_node_entry_remove
+- perf addr_location: Add init/exit/copy functions
+- perf maps: Use a pointer for kmaps
+- ksmbd: fix user-after-free from session log off
+- ksmbd: fix race condition between session lookup and expire
+
 * Wed Dec 25 2024 Li Nan <linan122@huawei.com> - 5.10.0-243.0.0.145
 - !14246  soc: hisilicon: hbmdev: Only support built-in
 - !14242  sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
