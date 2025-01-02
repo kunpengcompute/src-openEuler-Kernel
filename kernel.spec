@@ -11,7 +11,7 @@
 %global upstream_sublevel   0
 %global devel_release       244
 %global maintenance_release .0.0
-%global pkg_release         .146
+%global pkg_release         .147
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -42,7 +42,7 @@
 #default is enabled. You can disable it with --without option
 %define with_perf    %{?_without_perf: 0} %{?!_without_perf: 1}
 
-Name:	 kernel%{?package64kb}
+Name:	 kernel
 Version: %{upstream_version}.%{upstream_sublevel}
 Release: %{devel_release}%{?maintenance_release}%{?pkg_release}%{?extra_release}
 Summary: Linux Kernel
@@ -341,10 +341,6 @@ make mrproper %{_smp_mflags}
 
 %if %{with_64kb}
 sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_4K_PAGES.*/CONFIG_ARM64_64K_PAGES=y/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_PA_BITS=.*/CONFIG_ARM64_PA_BITS=52/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_PA_BITS_.*/CONFIG_ARM64_PA_BITS_52=y/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_VA_BITS=.*/CONFIG_ARM64_VA_BITS=52/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_VA_BITS_.*/CONFIG_ARM64_VA_BITS_52=y/'
 %endif
 
 make ARCH=%{Arch} openeuler_defconfig
@@ -928,6 +924,9 @@ fi
 %endif
 
 %changelog
+* Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.147
+- kernel.spec: remove the PA/VA BITS change for 64KB page size kernel
+
 * Thu Jan 02 2025 Zheng Zengkai <zhengzengkai@huawei.com> - 5.10.0-244.0.0.146
 - kernel.spec: fix posttrans kernel scriptlet failed
 
