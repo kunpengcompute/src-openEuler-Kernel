@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       72
+%global devel_release       73
 %global maintenance_release .0.0
-%global pkg_release         .76
+%global pkg_release         .77
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1092,6 +1092,221 @@ fi
 %endif
 
 %changelog
+* Mon Jan 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-73.0.0.77
+- !14618  drm: zynqmp_kms: Unplug DRM device before removal
+- drm: zynqmp_kms: Unplug DRM device before removal
+- !14621  brd: defer automatic disk creation until module initialization succeeds
+- brd: defer automatic disk creation until module initialization succeeds
+- !14617  block: fix uaf for flush rq while iterating tags
+- block: fix uaf for flush rq while iterating tags
+- !14614  scsi: sg: Fix slab-use-after-free read in sg_release()
+- scsi: sg: Fix slab-use-after-free read in sg_release()
+- !14519  bpf,perf: Fix invalid prog_array access in perf_event_detach_bpf_prog
+- bpf,perf: Fix invalid prog_array access in perf_event_detach_bpf_prog
+- !14593  CVE-2024-56702
+- bpf: Augment raw_tp arguments with PTR_MAYBE_NULL
+- bpf: Revert "bpf: Mark raw_tp arguments with PTR_MAYBE_NULL"
+- bpf: Mark raw_tp arguments with PTR_MAYBE_NULL
+- !14415  ksmbd: fix Out-of-Bounds Read in ksmbd_vfs_stream_read
+- ksmbd: fix Out-of-Bounds Read in ksmbd_vfs_stream_read
+- !14439  sh: intc: Fix use-after-free bug in register_intc_controller()
+- sh: intc: Fix use-after-free bug in register_intc_controller()
+- !14635  Bluetooth: RFCOMM: avoid leaving dangling sk pointer in rfcomm_sock_alloc()
+- Bluetooth: RFCOMM: avoid leaving dangling sk pointer in rfcomm_sock_alloc()
+- !14648  memcg: fix soft lockup in the OOM process
+- memcg: fix soft lockup in the OOM process
+- !14562  f2fs: fix to do sanity check on node blkaddr in truncate_node()
+- f2fs: fix to do sanity check on node blkaddr in truncate_node()
+- !14524  The bugfix for LPM trie
+- bpf: Handle in-place update for full LPM trie correctly
+- bpf: Handle BPF_EXIST and BPF_NOEXIST for LPM trie
+- !14459  sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- !14454  drm/vc4: hdmi: Avoid hang with debug registers when suspended
+- drm/vc4: hdmi: Avoid hang with debug registers when suspended
+- !14385  media: imx-jpeg: Ensure power suppliers be suspended before detach them
+- media: imx-jpeg: Ensure power suppliers be suspended before detach them
+- !14546  media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- !14244  sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- sunrpc: clear XPRT_SOCK_UPD_TIMEOUT when reset transport
+- !14243  sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- sunrpc: fix one UAF issue caused by sunrpc kernel tcp socket
+- !14504  apparmor: test: Fix memory leak for aa_unpack_strdup()
+- apparmor: test: Fix memory leak for aa_unpack_strdup()
+- !14418  LoongArch: Add CPU HWMon platform driver
+- LoongArch: Add CPU HWMon platform driver
+- !14387  LoongArch: compile loongson drm driver as module
+- drm/loongson: compile loongson drm driver as module
+- LoongArch: cleanup loongson3 defconfig
+- !14441  crypto: bcm - add error check in the ahash_hmac_init function
+- crypto: bcm - add error check in the ahash_hmac_init function
+- !14438  media: imx-jpeg: Set video drvdata before register video device
+- media: imx-jpeg: Set video drvdata before register video device
+- !14389  CVE-2024-53173
+- NFSv4.0: Fix a use-after-free problem in the asynchronous open()
+- NFSv4.0: Fix the wake up of the next waiter in nfs_release_seqid()
+- Revert "NFSv4: release seqid when open failed for nfs4.0"
+- Revert "nfs: fix rpc_task use-after-free when open and close different files concurrently"
+- !14469  io_uring/tctx: work around xa_store() allocation error issue
+- io_uring/tctx: work around xa_store() allocation error issue
+- !14447  Fix CVE-2024-56744
+- f2fs: fix to avoid potential deadlock in f2fs_record_stop_reason()
+- !14394  scsi: ufs: qcom: Only free platform MSIs when ESI is enabled
+- scsi: ufs: qcom: Only free platform MSIs when ESI is enabled
+- !14518  hfsplus: don't query the device logical block size multiple times
+- hfsplus: don't query the device logical block size multiple times
+- !14517  scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- !14516  f2fs: fix null-ptr-deref in f2fs_submit_page_bio()
+- f2fs: fix null-ptr-deref in f2fs_submit_page_bio()
+- !14475  ext4: correct behaviors under errors=remount-ro mode
+- Revert "ext4: drop EXT4_MF_FS_ABORTED flag"
+- Revert "ext4: warn on read-only filesystem in ext4_journal_check_start()"
+- Revert "ext4: drop read-only check in ext4_init_inode_table()"
+- Revert "ext4: drop read-only check in ext4_write_inode()"
+- Revert "ext4: drop read-only check from ext4_force_commit()"
+- Revert "ext4: replace read-only check for shutdown check in mmp code"
+- Revert "ext4: don't set SB_RDONLY after filesystem errors"
+- sb_writers: fix kabi broken
+- fs: fix a hungtask problem when freeze/unfreeze fs
+- !14506  iommufd: Fix out_fput in iommufd_fault_alloc()
+- iommufd: Fix out_fput in iommufd_fault_alloc()
+- !14369  crypto: qat/qat_420xx - fix off by one in uof_get_name()
+- crypto: qat/qat_420xx - fix off by one in uof_get_name()
+- !14417 v2  drm/nouveau/gr/gf100: Fix missing unlock in gf100_gr_chan_new()
+- drm/nouveau/gr/gf100: Fix missing unlock in gf100_gr_chan_new()
+- !14423 v2  EDAC/igen6: Avoid segmentation fault on module unload
+- EDAC/igen6: Avoid segmentation fault on module unload
+- !14365  EDAC/bluefield: Fix potential integer overflow
+- EDAC/bluefield: Fix potential integer overflow
+- !14364  clk: clk-apple-nco: Add NULL check in applnco_probe
+- clk: clk-apple-nco: Add NULL check in applnco_probe
+- !14408  bpf: fix OOB devmap writes when deleting elements
+- bpf: fix OOB devmap writes when deleting elements
+- !14367  io_uring: check if iowq is killed before queuing
+- io_uring: check if iowq is killed before queuing
+- !14355  btrfs: ref-verify: fix use-after-free after invalid ref action
+- btrfs: ref-verify: fix use-after-free after invalid ref action
+- !14350  jfs: array-index-out-of-bounds fix in dtReadFirst
+- jfs: array-index-out-of-bounds fix in dtReadFirst
+- !14348  ksmbd: fix use-after-free in SMB request handling
+- ksmbd: fix use-after-free in SMB request handling
+- !14102  OLK-6.6-fix-CVE-2024-49906
+- drm/amd/display: Check null pointer before try to access it
+- drm/amd/display: Check null pointer before try to access it
+- !14346  drm/amd/display: Fix out-of-bounds access in 'dcn21_link_encoder_create'
+- drm/amd/display: Fix out-of-bounds access in 'dcn21_link_encoder_create'
+- !14420  HID: wacom: fix when get product name maybe null pointer
+- HID: wacom: fix when get product name maybe null pointer
+- !14301  Revert "unicode: Don't special case ignorable code points"
+- Revert "unicode: Don't special case ignorable code points"
+- !14332  mm: avoid unconditional one-tick sleep when swapcache_prepare fails
+- mm: avoid unconditional one-tick sleep when swapcache_prepare fails
+- !14362  CVE-2024-53217
+- nfsd: restore callback functionality for NFSv4.0
+- NFSD: Prevent NULL dereference in nfsd4_process_cb_update()
+- !14319  exfat: fix out-of-bounds access of directory entries
+- exfat: fix out-of-bounds access of directory entries
+- !14405  NFSD: Prevent a potential integer overflow
+- NFSD: Prevent a potential integer overflow
+- !14395  scsi: qedf: Fix a possible memory leak in qedf_alloc_and_init_sb()
+- scsi: qedf: Fix a possible memory leak in qedf_alloc_and_init_sb()
+- !14401  gpio: grgpio: Add NULL check in grgpio_probe
+- gpio: grgpio: Add NULL check in grgpio_probe
+- !14400  bpf: Fix UAF via mismatching bpf_prog/attachment RCU flavors
+- bpf: Fix UAF via mismatching bpf_prog/attachment RCU flavors
+- !14329  svcrdma: Address an integer overflow
+- svcrdma: Address an integer overflow
+- !14376  fix CVE-2024-53197
+- ALSA: usb-audio: Fix a DMA to stack memory bug
+- ALSA: usb-audio: Fix potential out-of-bound accesses for Extigy and Mbox devices
+- !14206 v4  erofs/fscache/cachefiles: Add ondemand loading support
+- cachefiles: Fix missing pos updates in cachefiles_ondemand_fd_write_iter()
+- cachefiles: Fix incorrect length return value in cachefiles_ondemand_fd_write_iter()
+- cachefiles: Clean up in cachefiles_commit_tmpfile()
+- cachefiles: Fix NULL pointer dereference in object->file
+- cachefiles: add support for buffer I/O in ondemand mode
+- fscache: clean up for fscache_clear_volume_priv
+- fscache: Add the synchronous waiting mechanism for the volume unhash in erofs ondemand mode
+- cachefiles: Introduce "dir_has_put" in cachefiles_volume
+- erofs: remove EXPERIMENTAL feature warning for fscache-based
+- cachefiles: Add restrictions to cachefiles_daemon_cull()
+- erofs: add erofs_ondemand switch
+- erofs: add erofs switch to better control it
+- fscache: modify the waiting mechanism with duplicate volumes
+- cachefiles: modify inappropriate error return value in cachefiles_daemon_secctx
+- fscache: add a memory barrier for FSCACHE_VOLUME_CREATING
+- !14377  ftrace: Fix regression with module command in stack_trace_filter
+- ftrace: Fix regression with module command in stack_trace_filter
+- !14373 [OLK-6.6]Hygon: Fix objtool warning cause by csv3_active()
+- x86: mm: Fix objtool warning about bool noinstr csv3_active()
+- !14358  firmware_loader: Fix possible resource leak in fw_log_firmware_info()
+- firmware_loader: Fix possible resource leak in fw_log_firmware_info()
+- !14342  hwmon: (nct6775-core) Fix overflows seen when writing limit attributes
+- hwmon: (nct6775-core) Fix overflows seen when writing limit attributes
+- !14271  iomap: fix zero padding data issue in concurrent append writes
+- iomap: fix zero padding data issue in concurrent append writes
+- !14340  ocfs2: free inode when ocfs2_get_init_inode() fails
+- ocfs2: free inode when ocfs2_get_init_inode() fails
+- !14312 OLK-6.6: Some patches of RDMA/hns from Linux to olk-6.6 v2
+- RDMA/hns: Fix missing flush CQE for DWQE
+- RDMA/hns: Fix warning storm caused by invalid input in IO path
+- RDMA/hns: Fix accessing invalid dip_ctx during destroying QP
+- Revert "RDMA/hns: Fix accessing invalid dip_ctx during destroying QP"
+- RDMA/hns: Fix mapping error of zero-hop WQE buffer
+- !14338  CVE-2024-53230
+- cpufreq: CPPC: Fix wrong return value in cppc_get_cpu_cost()
+- cpufreq: CPPC: Fix possible null-ptr-deref for cppc_get_cpu_cost()
+- !14336  mm: Backport mainline patch
+- mm: don't install PMD mappings when THPs are disabled by the hw/process/vma
+- mm: huge_memory: add vma_thp_disabled() and thp_disabled_by_hw()
+- mm: fix arithmetic for max_prop_frac when setting max_ratio
+- mm: fix arithmetic for bdi min_ratio
+- mm/kmemleak: fix partially freeing unknown object warning
+- mm: kmemleak: add __find_and_remove_object()
+- mm: kmemleak: use mem_pool_free() to free object
+- mm: kmemleak: split __create_object into two functions
+- mm/hugetlb: fix nodes huge page allocation when there are surplus pages
+- !14337  ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- !14322  back some mainline patches for damon
+- mm/damon/core: fix return value from damos_wmark_metric_value
+- mm/damon/core: remove unnecessary si_meminfo invoke.
+- !14323  zram: fix NULL pointer in comp_algorithm_show()
+- zram: fix NULL pointer in comp_algorithm_show()
+- !14201 【OLK-6.6】  drivers: arch_topology: Refactor do-while loops
+- drivers: arch_topology: Refactor do-while loops
+- !14295  pmdomain: imx93-blk-ctrl: correct remove path
+- pmdomain: imx93-blk-ctrl: correct remove path
+- !14190  Revert "mmc: dw_mmc: Fix IDMAC operation with pages bigger than 4K"
+- Revert "mmc: dw_mmc: Fix IDMAC operation with pages bigger than 4K"
+- !14134  x86/CPU/AMD: Clear virtualized VMLOAD/VMSAVE on Zen4 client
+- x86/CPU/AMD: Clear virtualized VMLOAD/VMSAVE on Zen4 client
+- !14214  mm: revert "mm: shmem: fix data-race in shmem_getattr()"
+- mm: revert "mm: shmem: fix data-race in shmem_getattr()"
+- !14229 Fix extioi restart issue in vm
+- LoongArch: arch/loongarch/kvm: Fix extioi restart issue
+- !14127 MPTCP Upstream part 24
+- mptcp: refer to 'MPTCP' socket in comments
+- mptcp: add mptcp_space_from_win helper
+- mptcp: use mptcp_win_from_space helper
+- doc: new 'mptcp' page in 'networking'
+- doc: mptcp: alphabetical order
+- doc: mptcp: add missing 'available_schedulers' entry
+- selftests: mptcp: join: mark 'fastclose' tests as flaky
+- selftests: mptcp: lib: support flaky subtests
+- selftests: mptcp: export ip_mptcp to mptcp_lib
+- !13359 [OLK-6.6] [Backport] individual submission
+- MIPS: RB532: Declare prom_setup_cmdline() and rb532_gpio_init() static
+- MIPS: BCM47XX: Declare early_tlb_init() static
+- MIPS: BCM47XX: include header for bcm47xx_prom_highmem_init() prototype
+- ocfs2: spelling fix
+- !14291  vdpa: solidrun: Fix UB bug with devres
+- vdpa: solidrun: Fix UB bug with devres
+- !14256  RDMA/hns: Fix creating GSI QP in non-extended SGE QP bank
+- RDMA/hns: Fix creating GSI QP in non-extended SGE QP bank
+
 * Sat Dec 21 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.0.0.76
 - !14213 v2  bpf: Add kabi reserve padding for uapi struct bpf_link_info
 - bpf: Add kabi reserve padding for uapi struct bpf_link_info
