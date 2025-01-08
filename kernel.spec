@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2412.5.0
+%global hulkrelease 2501.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0310
+Release: %{hulkrelease}.0311
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,83 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 08 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.1.0.0311
+- !14726  etmem: fix use-after-free of mm in the scan release process
+- !14603  scsi: qedi: Fix a possible memory leak in qedi_alloc_and_init_sb()
+- !14658  ALSA: us122l: Use snd_card_free_when_closed() at disconnection
+- !14411  ALSA: 6fire: Release resources at card release
+- !14633  backport mainline bugfix patch
+- !14708  CVE-2024-53158
+- !14596  ALSA: caiaq: Use snd_card_free_when_closed() at disconnection
+- !14707  CVE-2024-56746
+- !14432  hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
+- !14570  PCI: Fix use-after-free of slot->bus on hot remove
+- !14706  9p/xen: fix release of IRQ
+- !14390  CVE-2024-53173
+- etmem: fix use-after-free of mm in the scan release process
+- !14521  netlink: terminate outstanding dump on socket close
+- soc: qcom: geni-se: fix array underflow in geni_se_clk_tbl_get()
+- fbdev: sh7760fb: Fix a possible memory leak in sh7760fb_alloc_mem()
+- fbdev/sh7760fb: Alloc DMA memory from hardware device
+- 9p/xen: fix release of IRQ
+- !14421  sh: intc: Fix use-after-free bug in register_intc_controller()
+- !14556  um: ubd: Do not use drvdata in release
+- !14647  memcg: fix soft lockup in the OOM process
+- !14551  selinux: ignore unknown extended permissions
+- !14566  um: net: Do not use drvdata in release
+- !14567  vfio/pci: Properly hide first-in-list PCIe extended capability
+- !14549  media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- !14646  media: s5p_cec: limit msg.len to CEC_MAX_MSG_SIZE
+- !14641  net: Fix CVE-2024-47684
+- !14640  xfrm: validate new SA's prefixlen using SA family when sel.family is unset
+- !14430  crypto: bcm - add error check in the ahash_hmac_init function
+- !14565  wifi: mwifiex: Fix memcpy() field-spanning write warning in mwifiex_config_scan()
+- ALSA: us122l: Use snd_card_free_when_closed() at disconnection
+- !14297  netfilter: ipset: add missing range check in bitmap_ip_uadt
+- memcg: fix soft lockup in the OOM process
+- media: s5p_cec: limit msg.len to CEC_MAX_MSG_SIZE
+- tcp: check skb is non-NULL in tcp_rto_delta_us()
+- tcp: introduce tcp_skb_timestamp_us() helper
+- xfrm: validate new SA's prefixlen using SA family when sel.family is unset
+- genirq/msi: Fix off-by-one error in msi_domain_alloc()
+- scsi: qedi: Fix a possible memory leak in qedi_alloc_and_init_sb()
+- ALSA: caiaq: Use snd_card_free_when_closed() at disconnection
+- PCI: Fix use-after-free of slot->bus on hot remove
+- vfio/pci: Properly hide first-in-list PCIe extended capability
+- um: net: Do not use drvdata in release
+- wifi: mwifiex: Fix memcpy() field-spanning write warning in mwifiex_config_scan()
+- um: ubd: Do not use drvdata in release
+- selinux: ignore unknown extended permissions
+- media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- !14500  sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- !14413  sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
+- netlink: terminate outstanding dump on socket close
+- sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- !14398  printk: Skip log flush in NMI context when logbuf_lock is held
+- hv_sock: Initializing vsk->trans to NULL to prevent a dangling pointer
+- crypto: bcm - add error check in the ahash_hmac_init function
+- !14386  fix CVE-2024-53197
+- !14361  CVE-2024-53217
+- sh: intc: Fix use-after-free bug in register_intc_controller()
+- !14098  vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
+- !14360  nfs: nfs4_callback_compound should put client with async mode
+- !14404  NFSD: Prevent a potential integer overflow
+- sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
+- ALSA: 6fire: Release resources at card release
+- NFSD: Prevent a potential integer overflow
+- printk: Skip log flush in NMI context when logbuf_lock is held
+- NFSv4.0: Fix a use-after-free problem in the asynchronous open()
+- NFSv4.0: Fix the wake up of the next waiter in nfs_release_seqid()
+- Revert "NFSv4: release seqid when open failed for nfs4.0"
+- Revert "nfs: fix rpc_task use-after-free when open and close different files concurrently"
+- ALSA: usb-audio: Fix a DMA to stack memory bug
+- ALSA: usb-audio: Fix potential out-of-bound accesses for Extigy and Mbox devices
+- nfsd: restore callback functionality for NFSv4.0
+- NFSD: Prevent NULL dereference in nfsd4_process_cb_update()
+- nfs: nfs4_callback_compound should put client with async mode
+- netfilter: ipset: add missing range check in bitmap_ip_uadt
+- vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
 
 * Tue Dec 31 2024 chenyi <chenyi211@huawei.com> - 4.19.90-2412.5.0.0310
 - !14357  media: uapi/linux/cec.h: cec_msg_set_reply_to: zero flags
