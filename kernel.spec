@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       244
+%global devel_release       245
 %global maintenance_release .0.0
-%global pkg_release         .143
+%global pkg_release         .144
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -952,6 +952,168 @@ fi
 %endif
 
 %changelog
+* Wed Jan 08 2025 Li Nan <linan122@huawei.com> - 5.10.0-245.0.0.144
+- !14742  rtc: check if __rtc_read_time was successful in rtc_timer_do_work()
+- !14751  mfd: intel_soc_pmic_bxtwc: Use IRQ domain for USB Type-C device
+- !14679  drm/amd/display: Fix null check for pipe_ctx->plane_state in dcn20_program_pipe
+- !14572  PCI: Fix use-after-free of slot->bus on hot remove
+- !14758  media: platform: allegro-dvt: Fix possible memory leak in allocate_buffers_internal()
+- !14755  i3c: master: Fix miss free init_dyn_addr at i3c_master_put_i3c_addrs()
+- !14777  tracing: Prevent bad count for tracing_cpumask_write
+- !14496  ovl: Filter invalid inodes with missing lookup function
+- !14497  nilfs2: fix potential out-of-bounds memory access in nilfs_find_entry()
+- !14498  f2fs: fix f2fs_bug_on when uninstalling filesystem call f2fs_evict_inode.
+- !14495  ocfs2: fix uninitialized value in ocfs2_file_read_iter()
+- !14606  scsi: qla2xxx: Fix use after free on unload
+- !14579  io_uring: check for overflows in io_pin_pages
+- !14530  sched/deadline: Fix warning in migrate_enable for boosted tasks
+- !14526  drm/amdgpu: set the right AMDGPU sg segment limitation
+- !14734  Fix iBMA bug and change version
+- !14713  Fix CVE-2024-56705
+- tracing: Prevent bad count for tracing_cpumask_write
+- !14604  scsi: qedi: Fix a possible memory leak in qedi_alloc_and_init_sb()
+- !14601  nvme-pci: fix freeing of the HMB descriptor table
+- !14575  etmem: fix use-after-free of mm in the scan release process
+- !14381  virtiofs: use pages instead of pointer for kernel direct IO
+- !14668  Bluetooth: L2CAP: do not leave dangling sk pointer on error in l2cap_sock_create()
+- !14209  gpiolib: fix memory use-after-free in gpiochip_setup_dev()
+- !14651  backport mainline bugfix patch
+- media: platform: allegro-dvt: Fix possible memory leak in allocate_buffers_internal()
+- i3c: master: Fix miss free init_dyn_addr at i3c_master_put_i3c_addrs()
+- !14629  net/mlx5: Fix error path in multi-packet WQE transmit
+- !14627  crypto: hisilicon/qm - inject error before stopping queue
+- !14626  drm/amd/display: Check null pointers before using dc->clk_mgr
+- !14623  staging: iio: frequency: ad9832: fix division by zero in ad9832_calc_freqreg()
+- !14598  blk-cgroup: Fix UAF in blkcg_unpin_online()
+- mfd: intel_soc_pmic_bxtwc: Use IRQ domain for USB Type-C device
+- rtc: check if __rtc_read_time was successful in rtc_timer_do_work()
+- !14704  bpf: Fix narrow scalar spill onto 64-bit spilled scalar slots
+- BMA: Fix Oops and spin lock deadlock problem, and change the version number.
+- !14700  CVE-2024-53158
+- !14457  cgroup: Fix potential overflow issue when checking max_depth
+- !14620  drm: zynqmp_kms: Unplug DRM device before removal
+- !14616  scsi: sg: Fix slab-use-after-free read in sg_release()
+- media: atomisp: Add check for rgby_data memory allocation failure
+- media: atomisp: remove #ifdef HAS_NO_HMEM
+- !14456  f2fs: fix race in concurrent f2fs_stop_gc_thread
+- !14481  jfs: fix array-index-out-of-bounds in jfs_readdir
+- !14470  ksmbd: fix Out-of-Bounds Read in ksmbd_vfs_stream_read
+- bpf: Fix narrow scalar spill onto 64-bit spilled scalar slots
+- soc: qcom: geni-se: fix array underflow in geni_se_clk_tbl_get()
+- !14440  sh: intc: Fix use-after-free bug in register_intc_controller()
+- !14535  RDMA/mlx5: Move events notifier registration to be after device registration
+- !14450  apparmor: test: Fix memory leak for aa_unpack_strdup()
+- !14636  CVE-2024-56604_OLK-5.10
+- !14547  media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- !14563  f2fs: fix to do sanity check on node blkaddr in truncate_node()
+- !14460  sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- !14523  The bugfix for LPM trie
+- !14650  memcg: fix soft lockup in the OOM process
+- drm/amd/display: Fix null check for pipe_ctx->plane_state in dcn20_program_pipe
+- Bluetooth: L2CAP: do not leave dangling sk pointer on error in l2cap_sock_create()
+- !14436  crypto: bcm - add error check in the ahash_hmac_init function
+- genirq/msi: Fix off-by-one error in msi_domain_alloc()
+- memcg: fix soft lockup in the OOM process
+- !14473  smb: client: fix NULL ptr deref in crypto_aead_setkey()
+- !14467  io_uring/tctx: work around xa_store() allocation error issue
+- !14503  net: phy: dp83869: fix memory corruption when enabling fiber
+- !14515  hfsplus: don't query the device logical block size multiple times
+- !14513  scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- !14512  f2fs: fix null-ptr-deref in f2fs_submit_page_bio()
+- !14388  CVE-2024-53173
+- Bluetooth: RFCOMM: avoid leaving dangling sk pointer in rfcomm_sock_alloc()
+- Bluetooth: Consolidate code around sk_alloc into a helper function
+- net/mlx5: Fix error path in multi-packet WQE transmit
+- crypto: hisilicon/qm - inject error before stopping queue
+- drm/amd/display: Check null pointers before using dc->clk_mgr
+- staging: iio: frequency: ad9832: fix division by zero in ad9832_calc_freqreg()
+- drm: zynqmp_kms: Unplug DRM device before removal
+- scsi: sg: Fix slab-use-after-free read in sg_release()
+- scsi: qla2xxx: Fix use after free on unload
+- scsi: qedi: Fix a possible memory leak in qedi_alloc_and_init_sb()
+- nvme-pci: fix freeing of the HMB descriptor table
+- blk-cgroup: Fix UAF in blkcg_unpin_online()
+- io_uring: check for overflows in io_pin_pages
+- etmem: fix use-after-free of mm in the scan release process
+- PCI: Fix use-after-free of slot->bus on hot remove
+- f2fs: fix to do sanity check on node blkaddr in truncate_node()
+- !14366  EDAC/bluefield: Fix potential integer overflow
+- media: wl128x: Fix atomicity violation in fmc_send_cmd()
+- RDMA/mlx5: Move events notifier registration to be after device registration
+- sched/deadline: Fix warning in migrate_enable for boosted tasks
+- drm/amdgpu: set the right AMDGPU sg segment limitation
+- !14380  io_uring: check if iowq is killed before queuing
+- !14354  btrfs: ref-verify: fix use-after-free after invalid ref action
+- !14351  jfs: array-index-out-of-bounds fix in dtReadFirst
+- bpf: Handle in-place update for full LPM trie correctly
+- bpf: Handle BPF_EXIST and BPF_NOEXIST for LPM trie
+- !14344  drm/amd/display: Fix out-of-bounds access in 'dcn21_link_encoder_create'
+- hfsplus: don't query the device logical block size multiple times
+- scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- f2fs: fix null-ptr-deref in f2fs_submit_page_bio()
+- !14371 [OLK-5.10] update AMD Zen5 Turin feature
+- net: phy: dp83869: fix memory corruption when enabling fiber
+- f2fs: fix f2fs_bug_on when uninstalling filesystem call f2fs_evict_inode.
+- nilfs2: fix potential out-of-bounds memory access in nilfs_find_entry()
+- ovl: Filter invalid inodes with missing lookup function
+- ocfs2: fix uninitialized value in ocfs2_file_read_iter()
+- jfs: fix array-index-out-of-bounds in jfs_readdir
+- smb: client: fix NULL ptr deref in crypto_aead_setkey()
+- ksmbd: fix Out-of-Bounds Read in ksmbd_vfs_stream_read
+- io_uring/tctx: work around xa_store() allocation error issue
+- sh: cpuinfo: Fix a warning for CONFIG_CPUMASK_OFFSTACK
+- cgroup: Fix potential overflow issue when checking max_depth
+- f2fs: fix race in concurrent f2fs_stop_gc_thread
+- apparmor: test: Fix memory leak for aa_unpack_strdup()
+- !14409  bpf: fix OOB devmap writes when deleting elements
+- !14419  HID: wacom: fix when get product name maybe null pointer
+- sh: intc: Fix use-after-free bug in register_intc_controller()
+- crypto: bcm - add error check in the ahash_hmac_init function
+- !14268  Revert "unicode: Don't special case ignorable code points"
+- !14397  backport some patches from upstream about HCCS low power
+- !14392  arm64: stacktrace: Handle 'lr' in interrupt context
+- !14317  exfat: fix out-of-bounds access of directory entries
+- !14402  gpio: grgpio: Add NULL check in grgpio_probe
+- !14396  scsi: qedf: Fix a possible memory leak in qedf_alloc_and_init_sb()
+- !14363  CVE-2024-53217
+- HID: wacom: fix when get product name maybe null pointer
+- !14097  vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
+- !14407  NFSD: Prevent a potential integer overflow
+- !14378  ftrace: Fix regression with module command in stack_trace_filter
+- bpf: fix OOB devmap writes when deleting elements
+- !14375  fix CVE-2024-53197
+- NFSD: Prevent a potential integer overflow
+- gpio: grgpio: Add NULL check in grgpio_probe
+- soc: hisilicon: kunpeng_hccs: Support low power feature for the specified HCCS type
+- soc: hisilicon: kunpeng_hccs: Add used HCCS types sysfs
+- soc: hisilicon: kunpeng_hccs: Fix the 'lane_mode' field name in port info structure to 'max_lane_num'
+- soc: hisilicon: kunpeng_hccs: Add the check for base address and size of shared memory
+- soc: hisilicon: kunpeng_hccs: Return failure on having not die or port information
+- soc: hisilicon: kunpeng_hccs: Fix a PCC typo
+- scsi: qedf: Fix a possible memory leak in qedf_alloc_and_init_sb()
+- arm64: stacktrace: Handle 'lr' in interrupt context
+- NFSv4.0: Fix a use-after-free problem in the asynchronous open()
+- NFSv4.0: Fix the wake up of the next waiter in nfs_release_seqid()
+- Revert "NFSv4: release seqid when open failed for nfs4.0"
+- Revert "nfs: fix rpc_task use-after-free when open and close different files concurrently"
+- virtiofs: use pages instead of pointer for kernel direct IO
+- io_uring: check if iowq is killed before queuing
+- ftrace: Fix regression with module command in stack_trace_filter
+- ALSA: usb-audio: Fix a DMA to stack memory bug
+- ALSA: usb-audio: Fix potential out-of-bound accesses for Extigy and Mbox devices
+- x86/CPU/AMD: Add models 0x60-0x6f to the Zen5 range
+- x86/CPU/AMD: Add models 0x10-0x1f to the Zen5 range
+- EDAC/bluefield: Fix potential integer overflow
+- nfsd: restore callback functionality for NFSv4.0
+- NFSD: Prevent NULL dereference in nfsd4_process_cb_update()
+- btrfs: ref-verify: fix use-after-free after invalid ref action
+- jfs: array-index-out-of-bounds fix in dtReadFirst
+- drm/amd/display: Fix out-of-bounds access in 'dcn21_link_encoder_create'
+- exfat: fix out-of-bounds access of directory entries
+- Revert "unicode: Don't special case ignorable code points"
+- gpiolib: fix memory use-after-free in gpiochip_setup_dev()
+- vsock/virtio: Initialization of the dangling pointer occurring in vsk->trans
+
 * Tue Dec 31 2024 Li Nan <linan122@huawei.com> - 5.10.0-244.0.0.143
 - !14314  x86/sgx: Fix deadlock in SGX NUMA node search
 - !14315  media: v4l2-tpg: prevent the risk of a division by zero
