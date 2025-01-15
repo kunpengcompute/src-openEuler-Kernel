@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       245
+%global devel_release       246
 %global maintenance_release .0.0
-%global pkg_release         .144
+%global pkg_release         .145
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -952,6 +952,41 @@ fi
 %endif
 
 %changelog
+* Wed Jan 15 2025 Li Nan <linan122@huawei.com> - 5.10.0-246.0.0.145
+- !14844  merge mainline patch into OLK-5.10
+- !14838 v2  fs: Filter specific inodes to prevent UAF issues
+- fs/proc/task_mmu: indicate PM_FILE for PMD-mapped file THP
+- mm: kfence: fix using kfence_metadata without initialization in show_object()
+- x86/mm: Do not shuffle CPU entry areas without KASLR
+- fs: Filter specific inodes to prevent UAF issues
+- !14599  CVE-2024-56701
+- !14560  CVE-2024-56567
+- !14801  CVE-2024-53237
+- !14793  jfs: fix shift-out-of-bounds in dbSplit
+- !14815  OLK-5.10
+- !14790  acpi: nfit: vmalloc-out-of-bounds Read in acpi_nfit_ctl
+- !14583  ubifs: authentication: Fix use-after-free in ubifs_tnc_end_commit
+- !14582  jfs: add a check to prevent array-index-out-of-bounds in dbAdjTree
+- !14822  ALSA: 6fire: Release resources at card release
+- !14539 RDMA/hns backport some bugfix from maillist-v6.13 2025/01/03
+- ALSA: 6fire: Release resources at card release
+- RDMA/hns: Fix missing flush CQE for DWQE
+- RDMA/hns: Fix warning storm caused by invalid input in IO path
+- RDMA/hns: Fix mapping error of zero-hop WQE buffer
+- wifi: rtlwifi: Drastically reduce the attempts to read efuse in case of failures
+- !14795  btrfs: fix use-after-free when COWing tree bock and tracing is enabled
+- !14768  tcp_bpf: Fix the sk_mem_uncharge logic in tcp_bpf_sendmsg
+- driver core: Introduce device_find_any_child() helper
+- Bluetooth: fix use-after-free in device_for_each_child()
+- btrfs: fix use-after-free when COWing tree bock and tracing is enabled
+- jfs: fix shift-out-of-bounds in dbSplit
+- acpi: nfit: vmalloc-out-of-bounds Read in acpi_nfit_ctl
+- tcp_bpf: Fix the sk_mem_uncharge logic in tcp_bpf_sendmsg
+- powerpc/pseries: Fix dtl_access_lock to be a rw_semaphore
+- ubifs: authentication: Fix use-after-free in ubifs_tnc_end_commit
+- jfs: add a check to prevent array-index-out-of-bounds in dbAdjTree
+- ad7780: fix division by zero in ad7780_write_raw()
+
 * Wed Jan 08 2025 Li Nan <linan122@huawei.com> - 5.10.0-245.0.0.144
 - !14742  rtc: check if __rtc_read_time was successful in rtc_timer_do_work()
 - !14751  mfd: intel_soc_pmic_bxtwc: Use IRQ domain for USB Type-C device
