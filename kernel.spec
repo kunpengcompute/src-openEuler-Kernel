@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2501.1.0
+%global hulkrelease 2501.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0311
+Release: %{hulkrelease}.0312
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,36 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 15 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.3.0.0312
+- !14858  ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- ALSA: usb-audio: Fix out of bounds reads when finding clock sources
+- !14843  acpi: nfit: vmalloc-out-of-bounds Read in acpi_nfit_ctl
+- !14740  NFSv4: Fix deadlock during the running of state manager
+- !14837 v2  fs: Filter specific inodes to prevent UAF issues
+- acpi: nfit: vmalloc-out-of-bounds Read in acpi_nfit_ctl
+- fs: Filter specific inodes to prevent UAF issues
+- !14826 v2  mm: hugetlb: independent PMD page table shared count
+- mm: hugetlb: independent PMD page table shared count
+- !14812  net: af_can: do not leave a dangling sk pointer in can_create()
+- net: af_can: do not leave a dangling sk pointer in can_create()
+- !14661  firmware: arm_scpi: Check the DVFS OPP count returned by the firmware
+- !14482  nilfs2: fix potential out-of-bounds memory access in nilfs_find_entry()
+- !14484  ovl: Filter invalid inodes with missing lookup function
+- !14485  ocfs2: fix uninitialized value in ocfs2_file_read_iter()
+- !14773  CVE-2024-56642
+- !14748  BMA: Fix Oops and spin lock deadlock problem, and change the version number.
+- !14744  rtc: check if __rtc_read_time was successful in rtc_timer_do_work()
+- tipc: fix NULL deref in cleanup_bearer()
+- tipc: Fix use-after-free of kernel socket in cleanup_bearer().
+- tipc: remove ub->ubsock checks
+- BMA: Fix Oops and spin lock deadlock problem, and change the version number.
+- rtc: check if __rtc_read_time was successful in rtc_timer_do_work()
+- NFSv4: Fix deadlock during the running of state manager
+- firmware: arm_scpi: Check the DVFS OPP count returned by the firmware
+- ocfs2: fix uninitialized value in ocfs2_file_read_iter()
+- ovl: Filter invalid inodes with missing lookup function
+- nilfs2: fix potential out-of-bounds memory access in nilfs_find_entry()
 
 * Wed Jan 08 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.1.0.0311
 - !14726  etmem: fix use-after-free of mm in the scan release process
