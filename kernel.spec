@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       73
 %global maintenance_release .0.0
-%global pkg_release         .77
+%global pkg_release         .78
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1092,6 +1092,12 @@ fi
 %endif
 
 %changelog
+* Thu Jan 16 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-73.0.0.78
+- riscv kernel upgrade to 6.6.0-73.0.0
+- Backport RISC-V AIA driver from mainline linux
+- Fix kernel-mode FPU support on riscv
+- Add cache info for SG2042 dts
+
 * Mon Jan 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-73.0.0.77
 - !14618  drm: zynqmp_kms: Unplug DRM device before removal
 - drm: zynqmp_kms: Unplug DRM device before removal
