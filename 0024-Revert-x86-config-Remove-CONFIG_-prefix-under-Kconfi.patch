@@ -1,0 +1,35 @@
+From 7f3e53a74e15e71f38691f82ee6b77ce7c35cd60 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Tue, 21 Jan 2025 19:40:34 +0800
+Subject: [PATCH] Revert "x86/config: Remove 'CONFIG_' prefix under Kconfig
+ entry HYGON_CSV"
+
+hulk inclusion
+category: feature
+bugzilla: https://gitee.com/openeuler/kernel/issues/IBDFAV
+
+----------------------------------------------------------------------
+
+This reverts commit 280610d6243395b8c3ae138a8f4288ca637ebb32.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ arch/x86/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 7efe93e4e771..a6bbe6029121 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -2075,7 +2075,7 @@ config HYGON_CSV
+ 	bool "Hygon secure virtualization CSV support"
+ 	default y
+ 	depends on CPU_SUP_HYGON && AMD_MEM_ENCRYPT
+-	select CMA
++	select CONFIG_CMA
+ 	help
+ 	  Hygon CSV integrates secure processor, memory encryption and
+ 	  memory isolation to provide the ability to protect guest's private
+-- 
+2.25.1
+

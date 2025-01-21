@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       75
 %global maintenance_release .0.0
-%global pkg_release         .67
+%global pkg_release         .68
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -144,6 +144,7 @@ Patch0020: 0020-Revert-kabi-reserve-space-for-uprobes.h.patch
 Patch0021: 0021-Revert-kabi-reserve-space-for-internal.h.patch
 Patch0022: 0022-Revert-kabi-reserve-space-for-perf_event.h.patch
 Patch0023: 0023-Revert-bpf-Add-kabi-reserve-padding-for-uapi-struct-.patch
+Patch0024: 0024-Revert-x86-config-Remove-CONFIG_-prefix-under-Kconfi.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -385,6 +386,7 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %patch0004 -p1
 %endif
 
+%patch0024 -p1
 %patch0005 -p1
 %patch0006 -p1
 %patch0007 -p1
@@ -1124,6 +1126,9 @@ fi
 %endif
 
 %changelog
+* Tue Jan 21 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-75.0.0.68
+- Add a revert patch to fix build error
+
 * Tue Jan 21 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-75.0.0.67
 - !14904  net: renesas: rswitch: avoid use-after-put for a device tree node
 - net: renesas: rswitch: avoid use-after-put for a device tree node
