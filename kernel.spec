@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2501.3.0
+%global hulkrelease 2501.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0312
+Release: %{hulkrelease}.0313
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,25 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 22 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.4.0.0313
+- !14254 [openEuler-1.0-LTS]fix wangxun 1G/10G drivers hardware tx unit hang.
+- net: wangxun: change netdev uc addr num maxmium
+- net: wangxun: fix resolving ipv6 pakets extension header errors
+- net: wangxun: fix tx csum by soft except tcp udp sctp
+- !14871  quota: flush quota_release_work upon quota writeback
+- !9360 Add support for Hygon model 10h processors
+- !14864  drm/sti: avoid potential dereference of error pointers in sti_gdp_atomic_check
+- !14850  Fix rt warning
+- quota: flush quota_release_work upon quota writeback
+- drm/sti: avoid potential dereference of error pointers in sti_gdp_atomic_check
+- sched: Replace WARN_ON_ONCE to printk_deferred_once
+- sched/rt: Fix rt_runtime leaks with cpu hotplug
+- ALSA: hda: Add support for Hygon family 18h model 10h HD-Audio
+- hwmon/k10temp: Add support for Hygon family 18h model 10h
+- EDAC/amd64: Add support for Hygon family 18h model 10h
+- x86/amd_nb: Add support for Hygon family 18h model 10h
+- x86/cpu: Get LLC ID for Hygon family 18h model 10h
 
 * Wed Jan 15 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.3.0.0312
 - !14858  ALSA: usb-audio: Fix out of bounds reads when finding clock sources
