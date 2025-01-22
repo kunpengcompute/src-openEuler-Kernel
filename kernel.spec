@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       246
+%global devel_release       247
 %global maintenance_release .0.0
-%global pkg_release         .145
+%global pkg_release         .146
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -952,6 +952,32 @@ fi
 %endif
 
 %changelog
+* Wed Jan 22 2025 Li Nan <linan122@huawei.com> - 5.10.0-247.0.0.146
+- !14414 sdma-dae: add print in exceptional branch
+- !14870  quota: flush quota_release_work upon quota writeback
+- !14862  drm/sti: avoid potential dereference of error pointers in sti_gdp_atomic_check
+- !14866  NFS: Fix up nfs_ctx_key_to_expire()
+- !14853  drm/i915/hdcp: Add encoder check in hdcp2_get_capability
+- !14852  octeontx2-pf: handle otx2_mbox_get_rsp errors in otx2_ethtool.c
+- !14851  nilfs2: fix null-ptr-deref in block_touch_buffer tracepoint
+- quota: flush quota_release_work upon quota writeback
+- !14663  xsk: Add generic xdp multi-buffer send support
+- NFS: Fix up nfs_ctx_key_to_expire()
+- !14803  net: hsr: avoid potential out-of-bound access in fill_frame_info()
+- !14829  ksmbd: fix Out-of-Bounds Write in ksmbd_vfs_stream_write
+- !14854  btrfs: check folio mapping after unlock in relocate_one_folio()
+- drm/sti: avoid potential dereference of error pointers in sti_gdp_atomic_check
+- !14857  sched: psi: fix bogus pressure spikes from aggregation race
+- sched: psi: fix bogus pressure spikes from aggregation race
+- btrfs: check folio mapping after unlock in relocate_one_folio()
+- drm/i915/hdcp: Add encoder check in hdcp2_get_capability
+- octeontx2-pf: handle otx2_mbox_get_rsp errors in otx2_ethtool.c
+- nilfs2: fix null-ptr-deref in block_touch_buffer tracepoint
+- ksmbd: fix Out-of-Bounds Write in ksmbd_vfs_stream_write
+- net: hsr: avoid potential out-of-bound access in fill_frame_info()
+- xsk: Add generic xdp multi-buffer send support
+- drivers:misc:sdma-dae: add print in exceptional branch
+
 * Wed Jan 15 2025 Li Nan <linan122@huawei.com> - 5.10.0-246.0.0.145
 - !14844  merge mainline patch into OLK-5.10
 - !14838 v2  fs: Filter specific inodes to prevent UAF issues
