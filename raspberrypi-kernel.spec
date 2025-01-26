@@ -2,13 +2,13 @@
 
 %global KernelVer %{version}-%{release}.raspi.%{_target_cpu}
 
-%global hulkrelease 72.0.0
+%global hulkrelease 75.0.0
 
 %global debug_package %{nil}
 
 Name:	 raspberrypi-kernel
 Version: 6.6.0
-Release: %{hulkrelease}.10
+Release: %{hulkrelease}.11
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -281,6 +281,10 @@ fi
 /usr/src/kernels/%{KernelVer}-*
 
 %changelog
+* Fri Jan 24 2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-75.0.0.11
+- update kernel version to openEuler 6.6.0-75.0.0
+- iommu: Hook up '->unmap_pages' driver callback
+
 * Thu Dec 26 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-72.0.0.10
 - update kernel version to openEuler 6.6.0-72.0.0
 
