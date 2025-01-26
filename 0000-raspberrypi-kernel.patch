@@ -1,7 +1,7 @@
-From 5e7a8b6c3024857418c3bbf49eca5345fbaa8474 Mon Sep 17 00:00:00 2001
+From d8f3b3161e079ddf441676146b5bf8f72997bbd2 Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
-Date: Wed, 18 Dec 2024 10:30:39 +0800
-Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-68.0.0)
+Date: Fri, 24 Jan 2025 17:25:52 +0800
+Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-75.0.0)
 
 ---
  .../admin-guide/media/bcm2835-isp.rst         |  127 +
@@ -657,7 +657,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-68.0.0)
  drivers/gpu/drm/vc4/vc4_dsi.c                 |  151 +-
  drivers/gpu/drm/vc4/vc4_firmware_kms.c        | 2077 +++++
  drivers/gpu/drm/vc4/vc4_gem.c                 |   24 +-
- drivers/gpu/drm/vc4/vc4_hdmi.c                |  301 +-
+ drivers/gpu/drm/vc4/vc4_hdmi.c                |  297 +-
  drivers/gpu/drm/vc4/vc4_hdmi.h                |   43 +
  drivers/gpu/drm/vc4/vc4_hdmi_phy.c            |  647 ++
  drivers/gpu/drm/vc4/vc4_hdmi_regs.h           |  222 +-
@@ -708,7 +708,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-68.0.0)
  drivers/iommu/bcm2712-iommu-cache.c           |   77 +
  drivers/iommu/bcm2712-iommu.c                 |  665 ++
  drivers/iommu/bcm2712-iommu.h                 |   45 +
- drivers/iommu/iommu.c                         |   55 +-
+ drivers/iommu/iommu.c                         |   80 +-
  drivers/irqchip/Kconfig                       |    8 +
  drivers/irqchip/Makefile                      |    1 +
  drivers/irqchip/irq-bcm2712-mip.c             |  323 +
@@ -1215,7 +1215,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-68.0.0)
  sound/soc/soc-core.c                          |   14 +-
  sound/usb/card.c                              |    8 +-
  sound/usb/quirks.c                            |    2 +
- 1211 files changed, 246815 insertions(+), 4652 deletions(-)
+ 1211 files changed, 246830 insertions(+), 4658 deletions(-)
  create mode 100644 Documentation/admin-guide/media/bcm2835-isp.rst
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.dot
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.rst
@@ -6015,7 +6015,7 @@ index 24b34cdfa6fe..44589ac3e909 100644
 +    pixfmt-nv24
      pixfmt-m420
 diff --git a/MAINTAINERS b/MAINTAINERS
-index bca43097c2b6..e07ef567a83a 100644
+index b22778025fa0..5cb24fd81a51 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -1569,6 +1569,22 @@ S:	Maintained
@@ -6071,7 +6071,7 @@ index bca43097c2b6..e07ef567a83a 100644
  BROADCOM BCM47XX MIPS ARCHITECTURE
  M:	Hauke Mehrtens <hauke@hauke-m.de>
  M:	Rafał Miłecki <zajec5@gmail.com>
-@@ -15909,6 +15948,14 @@ S:	Maintained
+@@ -15916,6 +15955,14 @@ S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
  F:	drivers/media/i2c/ov5695.c
  
@@ -6086,7 +6086,7 @@ index bca43097c2b6..e07ef567a83a 100644
  OMNIVISION OV7670 SENSOR DRIVER
  L:	linux-media@vger.kernel.org
  S:	Orphan
-@@ -17478,7 +17525,7 @@ F:	drivers/video/backlight/pwm_bl.c
+@@ -17485,7 +17532,7 @@ F:	drivers/video/backlight/pwm_bl.c
  F:	include/dt-bindings/pwm/
  F:	include/linux/pwm.h
  F:	include/linux/pwm_backlight.h
@@ -6095,7 +6095,7 @@ index bca43097c2b6..e07ef567a83a 100644
  
  PXA GPIO DRIVER
  M:	Robert Jarzmik <robert.jarzmik@free.fr>
-@@ -18068,6 +18115,12 @@ F:	drivers/ras/
+@@ -18075,6 +18122,12 @@ F:	drivers/ras/
  F:	include/linux/ras.h
  F:	include/ras/ras_event.h
  
@@ -6108,7 +6108,7 @@ index bca43097c2b6..e07ef567a83a 100644
  RAYLINK/WEBGEAR 802.11 WIRELESS LAN DRIVER
  L:	linux-wireless@vger.kernel.org
  S:	Orphan
-@@ -18079,6 +18132,14 @@ L:	linux-edac@vger.kernel.org
+@@ -18086,6 +18139,14 @@ L:	linux-edac@vger.kernel.org
  S:	Maintained
  F:	drivers/ras/amd/fmpm.c
  
@@ -6123,7 +6123,7 @@ index bca43097c2b6..e07ef567a83a 100644
  RC-CORE / LIRC FRAMEWORK
  M:	Sean Young <sean@mess.org>
  L:	linux-media@vger.kernel.org
-@@ -18676,6 +18737,13 @@ S:	Supported
+@@ -18683,6 +18744,13 @@ S:	Supported
  F:	drivers/iio/light/rohm-bu27008.c
  F:	drivers/iio/light/rohm-bu27034.c
  
@@ -6137,7 +6137,7 @@ index bca43097c2b6..e07ef567a83a 100644
  ROHM MULTIFUNCTION BD9571MWV-M PMIC DEVICE DRIVERS
  M:	Marek Vasut <marek.vasut+renesas@gmail.com>
  L:	linux-kernel@vger.kernel.org
-@@ -20069,7 +20137,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
+@@ -20076,7 +20144,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
  L:	linux-media@vger.kernel.org
  S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
@@ -6146,7 +6146,7 @@ index bca43097c2b6..e07ef567a83a 100644
  F:	drivers/media/i2c/imx258.c
  
  SONY IMX274 SENSOR DRIVER
-@@ -20146,6 +20214,39 @@ T:	git git://linuxtv.org/media_tree.git
+@@ -20153,6 +20221,39 @@ T:	git git://linuxtv.org/media_tree.git
  F:	Documentation/devicetree/bindings/media/i2c/sony,imx415.yaml
  F:	drivers/media/i2c/imx415.c
  
@@ -74186,7 +74186,7 @@ index 428ae54d3196..f1a2505ebc9e 100644
  MODULE_AUTHOR("Eric Anholt <eric@anholt.net>");
  MODULE_DESCRIPTION("Raspberry Pi firmware driver");
 diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 5ddd4a6badf8..413c732f906c 100644
+index 904b71c06eba..66499ab25646 100644
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
 @@ -207,10 +207,16 @@ config GPIO_BCM_XGS_IPROC
@@ -76265,13 +76265,13 @@ index a5b92adb8aff..5352376b5c45 100644
  
  source "drivers/gpu/drm/etnaviv/Kconfig"
 diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-index b120267fbe40..97b0c9bd6cd4 100644
+index 7ba2ec90c3f7..eb25453cfd4a 100644
 --- a/drivers/gpu/drm/Makefile
 +++ b/drivers/gpu/drm/Makefile
 @@ -198,5 +198,6 @@ obj-$(CONFIG_DRM_HYPERV) += hyperv/
  obj-y			+= solomon/
  obj-$(CONFIG_DRM_SPRD) += sprd/
- obj-$(CONFIG_DRM_LOONGSON) += loongson/
+ obj-y += loongson/
 +obj-y			+= rp1/
  obj-$(CONFIG_DRM_PHYTIUM) += phytium/
  obj-$(CONFIG_HYDCU_FIXUP_HEADER) += hygon/hydcu-fixup-header/
@@ -94377,7 +94377,7 @@ index 03648f954985..0d94165d4b6b 100644
  
  	switch (args->madv) {
 diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
-index c6e986f71a26..e1f2ce494241 100644
+index d4487f4cb303..e1f2ce494241 100644
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
 @@ -41,6 +41,8 @@
@@ -94408,25 +94408,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static const char * const output_format_str[] = {
  	[VC4_HDMI_OUTPUT_RGB]		= "RGB",
  	[VC4_HDMI_OUTPUT_YUV420]	= "YUV 4:2:0",
-@@ -179,6 +186,8 @@ static int vc4_hdmi_debugfs_regs(struct seq_file *m, void *unused)
- 	if (!drm_dev_enter(drm, &idx))
- 		return -ENODEV;
- 
-+	WARN_ON(pm_runtime_resume_and_get(&vc4_hdmi->pdev->dev));
-+
- 	drm_print_regset32(&p, &vc4_hdmi->hdmi_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->hd_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->cec_regset);
-@@ -188,6 +197,8 @@ static int vc4_hdmi_debugfs_regs(struct seq_file *m, void *unused)
- 	drm_print_regset32(&p, &vc4_hdmi->ram_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->rm_regset);
- 
-+	pm_runtime_put(&vc4_hdmi->pdev->dev);
-+
- 	drm_dev_exit(idx);
- 
- 	return 0;
-@@ -411,7 +422,7 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
+@@ -415,7 +422,7 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
  				    enum drm_connector_status status)
  {
  	struct drm_connector *connector = &vc4_hdmi->connector;
@@ -94435,7 +94417,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	int ret;
  
  	/*
-@@ -429,12 +440,25 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
+@@ -433,12 +440,25 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
  	 * the lock for now.
  	 */
  
@@ -94462,7 +94444,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	if (!edid)
  		return;
  
-@@ -478,7 +502,9 @@ static int vc4_hdmi_connector_detect_ctx(struct drm_connector *connector,
+@@ -482,7 +502,9 @@ static int vc4_hdmi_connector_detect_ctx(struct drm_connector *connector,
  		return connector_status_unknown;
  	}
  
@@ -94473,7 +94455,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (gpiod_get_value_cansleep(vc4_hdmi->hpd_gpio))
  			status = connector_status_connected;
  	} else {
-@@ -579,6 +605,7 @@ static int vc4_hdmi_connector_atomic_check(struct drm_connector *connector,
+@@ -583,6 +605,7 @@ static int vc4_hdmi_connector_atomic_check(struct drm_connector *connector,
  
  	if (old_state->colorspace != new_state->colorspace ||
  	    old_vc4_state->broadcast_rgb != new_vc4_state->broadcast_rgb ||
@@ -94481,7 +94463,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	    !drm_connector_atomic_hdr_metadata_equal(old_state, new_state)) {
  		struct drm_crtc_state *crtc_state;
  
-@@ -605,6 +632,8 @@ static int vc4_hdmi_connector_get_property(struct drm_connector *connector,
+@@ -609,6 +632,8 @@ static int vc4_hdmi_connector_get_property(struct drm_connector *connector,
  
  	if (property == vc4_hdmi->broadcast_rgb_property) {
  		*val = vc4_conn_state->broadcast_rgb;
@@ -94490,7 +94472,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	} else {
  		drm_dbg(drm, "Unknown property [PROP:%d:%s]\n",
  			property->base.id, property->name);
-@@ -628,6 +657,9 @@ static int vc4_hdmi_connector_set_property(struct drm_connector *connector,
+@@ -632,6 +657,9 @@ static int vc4_hdmi_connector_set_property(struct drm_connector *connector,
  	if (property == vc4_hdmi->broadcast_rgb_property) {
  		vc4_conn_state->broadcast_rgb = val;
  		return 0;
@@ -94500,7 +94482,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	}
  
  	drm_dbg(drm, "Unknown property [PROP:%d:%s]\n",
-@@ -672,6 +704,7 @@ vc4_hdmi_connector_duplicate_state(struct drm_connector *connector)
+@@ -676,6 +704,7 @@ vc4_hdmi_connector_duplicate_state(struct drm_connector *connector)
  	new_state->tmds_char_rate = vc4_state->tmds_char_rate;
  	new_state->output_bpc = vc4_state->output_bpc;
  	new_state->output_format = vc4_state->output_format;
@@ -94508,7 +94490,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	new_state->broadcast_rgb = vc4_state->broadcast_rgb;
  	__drm_atomic_helper_connector_duplicate_state(connector, &new_state->base);
  
-@@ -720,6 +753,33 @@ vc4_hdmi_attach_broadcast_rgb_property(struct drm_device *dev,
+@@ -724,6 +753,33 @@ vc4_hdmi_attach_broadcast_rgb_property(struct drm_device *dev,
  				   VC4_HDMI_BROADCAST_RGB_AUTO);
  }
  
@@ -94542,7 +94524,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static int vc4_hdmi_connector_init(struct drm_device *dev,
  				   struct vc4_hdmi *vc4_hdmi)
  {
-@@ -754,7 +814,6 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
+@@ -758,7 +814,6 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
  
  	drm_connector_attach_colorspace_property(connector);
  	drm_connector_attach_tv_margin_properties(connector);
@@ -94550,7 +94532,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	connector->polled = (DRM_CONNECTOR_POLL_CONNECT |
  			     DRM_CONNECTOR_POLL_DISCONNECT);
-@@ -763,10 +822,15 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
+@@ -767,10 +822,15 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
  	connector->doublescan_allowed = 0;
  	connector->stereo_allowed = 1;
  
@@ -94567,7 +94549,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	drm_connector_attach_encoder(connector, encoder);
  
-@@ -1093,6 +1157,7 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
+@@ -1097,6 +1157,7 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
  {
  	struct vc4_hdmi *vc4_hdmi = encoder_to_vc4_hdmi(encoder);
  	struct drm_device *drm = vc4_hdmi->connector.dev;
@@ -94575,7 +94557,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	unsigned long flags;
  	int idx;
  
-@@ -1109,14 +1174,25 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
+@@ -1113,14 +1174,25 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
  
  	HDMI_WRITE(HDMI_VID_CTL, HDMI_READ(HDMI_VID_CTL) | VC4_HD_VID_CTL_CLRRGB);
  
@@ -94605,7 +94587,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	vc4_hdmi_disable_scrambling(encoder);
  
-@@ -1148,6 +1224,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
+@@ -1152,6 +1224,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
  	if (vc4_hdmi->variant->phy_disable)
  		vc4_hdmi->variant->phy_disable(vc4_hdmi);
  
@@ -94614,7 +94596,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	clk_disable_unprepare(vc4_hdmi->pixel_bvb_clock);
  	clk_disable_unprepare(vc4_hdmi->pixel_clock);
  
-@@ -1744,7 +1822,6 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+@@ -1748,7 +1822,6 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  		goto err_put_runtime_pm;
  	}
  
@@ -94622,7 +94604,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	vc4_hdmi_cec_update_clk_div(vc4_hdmi);
  
  	if (tmds_char_rate > 297000000)
-@@ -1849,12 +1926,15 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
+@@ -1853,12 +1926,15 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
  	spin_lock_irqsave(&vc4_hdmi->hw_lock, flags);
  
  	HDMI_WRITE(HDMI_VID_CTL,
@@ -94644,7 +94626,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	HDMI_WRITE(HDMI_VID_CTL,
  		   HDMI_READ(HDMI_VID_CTL) & ~VC4_HD_VID_CTL_BLANKPIX);
-@@ -1923,6 +2003,10 @@ static void vc4_hdmi_encoder_atomic_mode_set(struct drm_encoder *encoder,
+@@ -1927,6 +2003,10 @@ static void vc4_hdmi_encoder_atomic_mode_set(struct drm_encoder *encoder,
  		      &crtc_state->adjusted_mode);
  	vc4_hdmi->output_bpc = vc4_state->output_bpc;
  	vc4_hdmi->output_format = vc4_state->output_format;
@@ -94655,7 +94637,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	mutex_unlock(&vc4_hdmi->mutex);
  }
  
-@@ -1950,9 +2034,6 @@ vc4_hdmi_sink_supports_format_bpc(const struct vc4_hdmi *vc4_hdmi,
+@@ -1954,9 +2034,6 @@ vc4_hdmi_sink_supports_format_bpc(const struct vc4_hdmi *vc4_hdmi,
  	case VC4_HDMI_OUTPUT_RGB:
  		drm_dbg(dev, "RGB Format, checking the constraints.\n");
  
@@ -94665,7 +94647,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (bpc == 10 && !(info->edid_hdmi_rgb444_dc_modes & DRM_EDID_HDMI_DC_30)) {
  			drm_dbg(dev, "10 BPC but sink doesn't support Deep Color 30.\n");
  			return false;
-@@ -2084,6 +2165,26 @@ vc4_hdmi_encoder_compute_format(const struct vc4_hdmi *vc4_hdmi,
+@@ -2088,6 +2165,26 @@ vc4_hdmi_encoder_compute_format(const struct vc4_hdmi *vc4_hdmi,
  	const struct drm_display_info *info = &connector->display_info;
  	unsigned int format;
  
@@ -94692,7 +94674,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	drm_dbg(dev, "Trying with an RGB output\n");
  
  	format = VC4_HDMI_OUTPUT_RGB;
-@@ -2124,7 +2225,7 @@ vc4_hdmi_encoder_compute_config(const struct vc4_hdmi *vc4_hdmi,
+@@ -2128,7 +2225,7 @@ vc4_hdmi_encoder_compute_config(const struct vc4_hdmi *vc4_hdmi,
  {
  	struct drm_device *dev = vc4_hdmi->connector.dev;
  	struct drm_connector_state *conn_state = &vc4_state->base;
@@ -94701,7 +94683,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	unsigned int bpc;
  	int ret;
  
-@@ -2170,7 +2271,9 @@ static int vc4_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
+@@ -2174,7 +2271,9 @@ static int vc4_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
  	unsigned long long tmds_bit_rate;
  	int ret;
  
@@ -94712,7 +94694,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (mode->flags & DRM_MODE_FLAG_DBLCLK) {
  			/* Only try to fixup DBLCLK modes to get 480i and 576i
  			 * working.
-@@ -2392,7 +2495,7 @@ static int vc4_hdmi_audio_startup(struct device *dev, void *data)
+@@ -2396,7 +2495,7 @@ static int vc4_hdmi_audio_startup(struct device *dev, void *data)
  	}
  
  	if (!vc4_hdmi_audio_can_stream(vc4_hdmi)) {
@@ -94721,7 +94703,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		goto out_dev_exit;
  	}
  
-@@ -2519,6 +2622,7 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
+@@ -2523,6 +2622,7 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
  {
  	struct vc4_hdmi *vc4_hdmi = dev_get_drvdata(dev);
  	struct drm_device *drm = vc4_hdmi->connector.dev;
@@ -94729,7 +94711,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	struct drm_encoder *encoder = &vc4_hdmi->encoder.base;
  	unsigned int sample_rate = params->sample_rate;
  	unsigned int channels = params->channels;
-@@ -2577,11 +2681,24 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
+@@ -2581,11 +2681,24 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
  					     VC4_HDMI_AUDIO_PACKET_CEA_MASK);
  
  	/* Set the MAI threshold */
@@ -94759,7 +94741,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	HDMI_WRITE(HDMI_MAI_CONFIG,
  		   VC4_HDMI_MAI_CONFIG_BIT_REVERSE |
-@@ -2658,8 +2775,23 @@ static int vc4_hdmi_audio_get_eld(struct device *dev, void *data,
+@@ -2662,8 +2775,23 @@ static int vc4_hdmi_audio_get_eld(struct device *dev, void *data,
  	return 0;
  }
  
@@ -94783,7 +94765,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.prepare = vc4_hdmi_audio_prepare,
  	.audio_shutdown = vc4_hdmi_audio_shutdown,
  	.audio_startup = vc4_hdmi_audio_startup,
-@@ -2679,6 +2811,22 @@ static void vc4_hdmi_audio_codec_release(void *ptr)
+@@ -2683,6 +2811,22 @@ static void vc4_hdmi_audio_codec_release(void *ptr)
  	vc4_hdmi->audio.codec_pdev = NULL;
  }
  
@@ -94806,7 +94788,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  {
  	const struct vc4_hdmi_register *mai_data =
-@@ -2687,7 +2835,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2691,7 +2835,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	struct snd_soc_card *card = &vc4_hdmi->audio.card;
  	struct device *dev = &vc4_hdmi->pdev->dev;
  	struct platform_device *codec_pdev;
@@ -94815,7 +94797,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	int index, len;
  	int ret;
  
-@@ -2723,22 +2871,18 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2727,22 +2871,18 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	}
  
  	/*
@@ -94842,7 +94824,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	vc4_hdmi->audio.dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
  	vc4_hdmi->audio.dma_data.maxburst = 2;
  
-@@ -2808,6 +2952,8 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2812,6 +2952,8 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	dai_link->codecs->name = dev_name(&codec_pdev->dev);
  	dai_link->platforms->name = dev_name(dev);
  
@@ -94851,7 +94833,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	card->dai_link = dai_link;
  	card->num_links = 1;
  	card->name = vc4_hdmi->variant->card_name;
-@@ -2837,7 +2983,7 @@ static irqreturn_t vc4_hdmi_hpd_irq_thread(int irq, void *priv)
+@@ -2841,7 +2983,7 @@ static irqreturn_t vc4_hdmi_hpd_irq_thread(int irq, void *priv)
  	struct drm_connector *connector = &vc4_hdmi->connector;
  	struct drm_device *dev = connector->dev;
  
@@ -94860,7 +94842,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		drm_connector_helper_hpd_irq_event(connector);
  
  	return IRQ_HANDLED;
-@@ -3579,6 +3725,9 @@ static int vc4_hdmi_runtime_suspend(struct device *dev)
+@@ -3583,6 +3725,9 @@ static int vc4_hdmi_runtime_suspend(struct device *dev)
  {
  	struct vc4_hdmi *vc4_hdmi = dev_get_drvdata(dev);
  
@@ -94870,7 +94852,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	clk_disable_unprepare(vc4_hdmi->hsm_clock);
  
  	return 0;
-@@ -3611,6 +3760,10 @@ static int vc4_hdmi_runtime_resume(struct device *dev)
+@@ -3615,6 +3760,10 @@ static int vc4_hdmi_runtime_resume(struct device *dev)
  		goto err_disable_clk;
  	}
  
@@ -94881,7 +94863,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	if (vc4_hdmi->variant->reset)
  		vc4_hdmi->variant->reset(vc4_hdmi);
  
-@@ -3663,6 +3816,8 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3667,6 +3816,8 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  	if (ret)
  		return ret;
  
@@ -94890,7 +94872,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	spin_lock_init(&vc4_hdmi->hw_lock);
  	INIT_DELAYED_WORK(&vc4_hdmi->scrambling_work, vc4_hdmi_scrambling_wq);
  
-@@ -3731,7 +3886,9 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3735,7 +3886,9 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  		return ret;
  
  	if ((of_device_is_compatible(dev->of_node, "brcm,bcm2711-hdmi0") ||
@@ -94901,7 +94883,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	    HDMI_READ(HDMI_VID_CTL) & VC4_HD_VID_CTL_ENABLE) {
  		clk_prepare_enable(vc4_hdmi->pixel_clock);
  		clk_prepare_enable(vc4_hdmi->hsm_clock);
-@@ -3773,8 +3930,16 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3777,8 +3930,16 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  	return ret;
  }
  
@@ -94918,7 +94900,7 @@ index c6e986f71a26..e1f2ce494241 100644
  };
  
  static int vc4_hdmi_dev_probe(struct platform_device *pdev)
-@@ -3821,6 +3986,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
+@@ -3825,6 +3986,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
  		PHY_LANE_CK,
  	},
  	.unsupported_odd_h_timings	= true,
@@ -94926,7 +94908,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.external_irq_controller	= true,
  
  	.init_resources		= vc5_hdmi_init_resources,
-@@ -3850,6 +4016,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+@@ -3854,6 +4016,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
  		PHY_LANE_2,
  	},
  	.unsupported_odd_h_timings	= true,
@@ -94934,7 +94916,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.external_irq_controller	= true,
  
  	.init_resources		= vc5_hdmi_init_resources,
-@@ -3865,10 +4032,68 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+@@ -3869,10 +4032,68 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
  	.hp_detect		= vc5_hdmi_hp_detect,
  };
  
@@ -105104,7 +105086,7 @@ index 000000000000..31b811e426dd
 +
 +#endif
 diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 9cdc28dc2cf8..268e2e9e6c43 100644
+index 9cdc28dc2cf8..709d38620ba9 100644
 --- a/drivers/iommu/iommu.c
 +++ b/drivers/iommu/iommu.c
 @@ -2429,6 +2429,30 @@ size_t iommu_pgsize(struct iommu_domain *domain, unsigned long iova,
@@ -105187,7 +105169,55 @@ index 9cdc28dc2cf8..268e2e9e6c43 100644
  
  	return ret;
  
-@@ -2644,11 +2662,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
+@@ -2522,6 +2540,19 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
+ }
+ EXPORT_SYMBOL_GPL(iommu_map);
+ 
++static size_t __iommu_unmap_pages(struct iommu_domain *domain,
++				  unsigned long iova, size_t size,
++				  struct iommu_iotlb_gather *iotlb_gather)
++{
++	const struct iommu_domain_ops *ops = domain->ops;
++	size_t pgsize, count;
++
++	pgsize = iommu_pgsize(domain, iova, iova, size, &count);
++	return ops->unmap_pages ?
++	       ops->unmap_pages(domain, iova, pgsize, count, iotlb_gather) :
++	       ops->unmap(domain, iova, pgsize, iotlb_gather);
++}
++
+ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 			    unsigned long iova, size_t size,
+ 			    struct iommu_iotlb_gather *iotlb_gather)
+@@ -2531,10 +2562,11 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 	unsigned long orig_iova = iova;
+ 	unsigned int min_pagesz;
+ 
+-	if (unlikely(!(domain->type & __IOMMU_DOMAIN_PAGING)))
++	if (unlikely(!(ops->unmap || ops->unmap_pages) ||
++		     domain->pgsize_bitmap == 0UL))
+ 		return 0;
+ 
+-	if (WARN_ON(!ops->unmap_pages || domain->pgsize_bitmap == 0UL))
++	if (unlikely(!(domain->type & __IOMMU_DOMAIN_PAGING)))
+ 		return 0;
+ 
+ 	/* find out the minimum page size supported */
+@@ -2558,10 +2590,9 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 	 * or we hit an area that isn't mapped.
+ 	 */
+ 	while (unmapped < size) {
+-		size_t pgsize, count;
+-
+-		pgsize = iommu_pgsize(domain, iova, iova, size - unmapped, &count);
+-		unmapped_page = ops->unmap_pages(domain, iova, pgsize, count, iotlb_gather);
++		unmapped_page = __iommu_unmap_pages(domain, iova,
++						    size - unmapped,
++						    iotlb_gather);
+ 		if (!unmapped_page)
+ 			break;
+ 
+@@ -2644,11 +2675,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
  			sg = sg_next(sg);
  	}
  
@@ -159667,7 +159697,7 @@ index 0b88635f4fbc..ae266a69822a 100644
  	priv->chip_id = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_ID);
  	priv->chip_rev = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_REV);
 diff --git a/drivers/net/usb/lan78xx.c b/drivers/net/usb/lan78xx.c
-index 921ae046f860..a7f24d6c0cae 100644
+index 2ae33ecb6749..8581f30f7bd6 100644
 --- a/drivers/net/usb/lan78xx.c
 +++ b/drivers/net/usb/lan78xx.c
 @@ -609,6 +609,20 @@ static int lan78xx_alloc_tx_resources(struct lan78xx_net *dev)
@@ -159795,8 +159825,8 @@ index 921ae046f860..a7f24d6c0cae 100644
 +	netif_notice(dev, probe, netdev, "int urb period %d\n", period);
 +
  	maxp = usb_maxpacket(dev->udev, dev->pipe_intr);
- 	buf = kmalloc(maxp, GFP_KERNEL);
- 	if (!buf) {
+ 
+ 	dev->urb_intr = usb_alloc_urb(0, GFP_KERNEL);
 diff --git a/drivers/net/usb/smsc95xx.c b/drivers/net/usb/smsc95xx.c
 index 8e82184be5e7..737a1734e451 100644
 --- a/drivers/net/usb/smsc95xx.c
@@ -183854,7 +183884,7 @@ index 000000000000..107460ad1be3
 +
 +#endif /* __VC_SM_CMA_IOCTL_H */
 diff --git a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
-index aa2313f3bcab..def331ad5517 100644
+index 92aa98bbdc66..83988b4f3cc5 100644
 --- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
 +++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
 @@ -22,6 +22,7 @@
@@ -183899,7 +183929,7 @@ index aa2313f3bcab..def331ad5517 100644
  	struct rpi_firmware *fw;
  };
  
-@@ -115,6 +127,11 @@ struct vchiq_arm_state {
+@@ -115,10 +127,16 @@ struct vchiq_arm_state {
  	int first_connect;
  };
  
@@ -183908,10 +183938,7 @@ index aa2313f3bcab..def331ad5517 100644
 +	.use_36bit_addrs = true,
 +};
 +
- struct vchiq_2835_state {
- 	int inited;
- 	struct vchiq_arm_state arm_state;
-@@ -124,6 +141,7 @@ struct vchiq_pagelist_info {
+ struct vchiq_pagelist_info {
  	struct pagelist *pagelist;
  	size_t pagelist_buffer_size;
  	dma_addr_t dma_addr;
@@ -183919,7 +183946,7 @@ index aa2313f3bcab..def331ad5517 100644
  	enum dma_data_direction dma_dir;
  	unsigned int num_pages;
  	unsigned int pages_need_release;
-@@ -144,10 +162,13 @@ static void __iomem *g_regs;
+@@ -139,10 +157,13 @@ static void __iomem *g_regs;
   * of 32.
   */
  static unsigned int g_cache_line_size = 32;
@@ -183933,7 +183960,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  static DEFINE_SEMAPHORE(g_free_fragments_mutex, 1);
  
-@@ -177,15 +198,20 @@ static void
+@@ -172,15 +193,20 @@ static void
  cleanup_pagelistinfo(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagelistinfo)
  {
  	if (pagelistinfo->scatterlist_mapped) {
@@ -183957,7 +183984,7 @@ index aa2313f3bcab..def331ad5517 100644
  }
  
  static inline bool
-@@ -220,6 +246,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -215,6 +241,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	u32 *addrs;
  	unsigned int num_pages, offset, i, k;
  	int actual_pages;
@@ -183965,7 +183992,7 @@ index aa2313f3bcab..def331ad5517 100644
  	size_t pagelist_size;
  	struct scatterlist *scatterlist, *sg;
  	int dma_buffers;
-@@ -249,8 +276,14 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -244,8 +271,14 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	/* Allocate enough storage to hold the page pointers and the page
  	 * list
  	 */
@@ -183982,7 +184009,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	vchiq_log_trace(vchiq_arm_log_level, "%s - %pK", __func__, pagelist);
  
-@@ -271,6 +304,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -266,6 +299,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	pagelistinfo->pagelist = pagelist;
  	pagelistinfo->pagelist_buffer_size = pagelist_size;
  	pagelistinfo->dma_addr = dma_addr;
@@ -183990,7 +184017,7 @@ index aa2313f3bcab..def331ad5517 100644
  	pagelistinfo->dma_dir =  (type == PAGELIST_WRITE) ?
  				  DMA_TO_DEVICE : DMA_FROM_DEVICE;
  	pagelistinfo->num_pages = num_pages;
-@@ -337,7 +371,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -332,7 +366,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  		count -= len;
  	}
  
@@ -183999,7 +184026,7 @@ index aa2313f3bcab..def331ad5517 100644
  				 scatterlist,
  				 num_pages,
  				 pagelistinfo->dma_dir);
-@@ -351,22 +385,61 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -346,22 +380,61 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  
  	/* Combine adjacent blocks for performance */
  	k = 0;
@@ -184077,7 +184104,7 @@ index aa2313f3bcab..def331ad5517 100644
  	}
  
  	/* Partial cache lines (fragments) require special measures */
-@@ -410,7 +483,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
+@@ -405,7 +478,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
  	 * NOTE: dma_unmap_sg must be called before the
  	 * cpu can touch any of the data/pages.
  	 */
@@ -184086,7 +184113,7 @@ index aa2313f3bcab..def331ad5517 100644
  		     pagelistinfo->num_pages, pagelistinfo->dma_dir);
  	pagelistinfo->scatterlist_mapped = 0;
  
-@@ -465,6 +538,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
+@@ -460,6 +533,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
  static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state *state)
  {
  	struct device *dev = &pdev->dev;
@@ -184094,7 +184121,7 @@ index aa2313f3bcab..def331ad5517 100644
  	struct vchiq_drvdata *drvdata = platform_get_drvdata(pdev);
  	struct rpi_firmware *fw = drvdata->fw;
  	struct vchiq_slot_zero *vchiq_slot_zero;
-@@ -486,6 +560,24 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -481,6 +555,24 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	g_cache_line_size = drvdata->cache_line_size;
  	g_fragments_size = 2 * g_cache_line_size;
  
@@ -184119,7 +184146,7 @@ index aa2313f3bcab..def331ad5517 100644
  	/* Allocate space for the channels in coherent memory */
  	slot_mem_size = PAGE_ALIGN(TOTAL_SLOTS * VCHIQ_SLOT_SIZE);
  	frag_mem_size = PAGE_ALIGN(g_fragments_size * MAX_FRAGMENTS);
-@@ -498,13 +590,14 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -493,13 +585,14 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	}
  
  	WARN_ON(((unsigned long)slot_mem & (PAGE_SIZE - 1)) != 0);
@@ -184135,7 +184162,7 @@ index aa2313f3bcab..def331ad5517 100644
  	vchiq_slot_zero->platform_data[VCHIQ_PLATFORM_FRAGMENTS_COUNT_IDX] =
  		MAX_FRAGMENTS;
  
-@@ -538,7 +631,6 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -533,7 +626,6 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	}
  
  	/* Send the base address of the slots to VideoCore */
@@ -184143,7 +184170,7 @@ index aa2313f3bcab..def331ad5517 100644
  	err = rpi_firmware_property(fw, RPI_FIRMWARE_VCHIQ_INIT,
  				    &channelbase, sizeof(channelbase));
  	if (err) {
-@@ -552,6 +644,15 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -547,6 +639,15 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  		return -ENXIO;
  	}
  
@@ -184159,7 +184186,7 @@ index aa2313f3bcab..def331ad5517 100644
  	vchiq_log_info(vchiq_arm_log_level, "vchiq_init - done (slots %pK, phys %pad)",
  		       vchiq_slot_zero, &slot_phys);
  
-@@ -1765,6 +1866,7 @@ void vchiq_platform_conn_state_changed(struct vchiq_state *state,
+@@ -1752,6 +1853,7 @@ void vchiq_platform_conn_state_changed(struct vchiq_state *state,
  static const struct of_device_id vchiq_of_match[] = {
  	{ .compatible = "brcm,bcm2835-vchiq", .data = &bcm2835_drvdata },
  	{ .compatible = "brcm,bcm2836-vchiq", .data = &bcm2836_drvdata },
@@ -184167,7 +184194,7 @@ index aa2313f3bcab..def331ad5517 100644
  	{},
  };
  MODULE_DEVICE_TABLE(of, vchiq_of_match);
-@@ -1774,6 +1876,7 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
+@@ -1761,6 +1863,7 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
  {
  	struct platform_device_info pdevinfo;
  	struct platform_device *child;
@@ -184175,7 +184202,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	memset(&pdevinfo, 0, sizeof(pdevinfo));
  
-@@ -1782,12 +1885,32 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
+@@ -1769,12 +1872,32 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
  	pdevinfo.id = PLATFORM_DEVID_NONE;
  	pdevinfo.dma_mask = DMA_BIT_MASK(32);
  
@@ -184208,7 +184235,7 @@ index aa2313f3bcab..def331ad5517 100644
  	return child;
  }
  
-@@ -1838,8 +1961,11 @@ static int vchiq_probe(struct platform_device *pdev)
+@@ -1825,8 +1948,11 @@ static int vchiq_probe(struct platform_device *pdev)
  		goto error_exit;
  	}
  
@@ -184220,7 +184247,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	return 0;
  
-@@ -1851,8 +1977,11 @@ static int vchiq_probe(struct platform_device *pdev)
+@@ -1838,8 +1964,11 @@ static int vchiq_probe(struct platform_device *pdev)
  
  static void vchiq_remove(struct platform_device *pdev)
  {
@@ -255060,10 +255087,10 @@ index d6e38a500833..70c233440cdf 100644
  int gpiochip_irq_map(struct irq_domain *d, unsigned int irq,
  		     irq_hw_number_t hwirq);
 diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index bb463cb96a44..703a9e0fa2f8 100644
+index 83ec4bf9809e..ce1e7a9a5990 100644
 --- a/include/linux/iommu.h
 +++ b/include/linux/iommu.h
-@@ -776,15 +776,19 @@ struct iommu_domain_ops {
+@@ -780,15 +780,19 @@ struct iommu_domain_ops {
  	int (*set_dev_pasid)(struct iommu_domain *domain, struct device *dev,
  			     ioasid_t pasid);
  
@@ -257674,10 +257701,10 @@ index 78260e5d9985..f8157c9c9da6 100644
  #define V4L2_PIX_FMT_PRIV_MAGIC		0xfeedcafe
  
 diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
-index 52fe6ba2fefd..9f3574b82c7e 100644
+index c26a9b3a3576..af05b0e86153 100644
 --- a/kernel/cgroup/cgroup.c
 +++ b/kernel/cgroup/cgroup.c
-@@ -6879,6 +6879,31 @@ static int __init cgroup_disable(char *str)
+@@ -6888,6 +6888,31 @@ static int __init cgroup_disable(char *str)
  }
  __setup("cgroup_disable=", cgroup_disable);
  
@@ -257874,7 +257901,7 @@ index f4dfeb5f052f..3ebb1b343284 100644
  /**
   * mpol_to_str - format a mempolicy structure for printing
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 36cd38df0614..1f2a3064d3dc 100644
+index 86922efd7c3e..d6784fbd451e 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -207,6 +207,27 @@ EXPORT_SYMBOL(node_states);
@@ -257923,10 +257950,10 @@ index 36cd38df0614..1f2a3064d3dc 100644
  			if (page)
  				return page;
 diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 10acf5b339a7..e8ae8df26dbe 100644
+index 8e605361b714..ff800f3a1b59 100644
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
-@@ -4766,7 +4766,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
+@@ -4764,7 +4764,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
  		if (!folio)
  			continue;
  
@@ -276194,10 +276221,10 @@ index 7743ea983b1a..cee90e193d22 100644
  	/*
  	 * For devices with more than one control interface, we assume the
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 37211ad31ec8..744a316f47bc 100644
+index 54dff2173b8c..481fb2070e7b 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2197,6 +2197,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+@@ -2224,6 +2224,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
  		   QUIRK_FLAG_ALIGN_TRANSFER),
  	DEVICE_FLG(0x534d, 0x2109, /* MacroSilicon MS2109 */
  		   QUIRK_FLAG_ALIGN_TRANSFER),
