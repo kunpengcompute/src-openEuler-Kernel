@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       75
+%global devel_release       76
 %global maintenance_release .0.0
-%global pkg_release         .68
+%global pkg_release         .69
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1126,6 +1126,145 @@ fi
 %endif
 
 %changelog
+* Thu Feb 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-76.0.0.69
+- !14997  wifi: rtw89: check return value of ieee80211_probereq_get() for RNR
+- wifi: rtw89: check return value of ieee80211_probereq_get() for RNR
+- !14941  CVE-2024-57906
+- iio: adc: ti-ads8688: fix information leak in triggered buffer
+- !14990  mainline patches
+- cgroup/bpf: only cgroup v2 can be attached by bpf programs
+- Revert "cgroup: Fix memory leak caused by missing cgroup_bpf_offline"
+- cgroup/cpuset: Prevent leakage of isolated CPUs into sched domains
+- !14993  arm64: ptrace: fix partial SETREGSET for NT_ARM_TAGGED_ADDR_CTRL
+- arm64: ptrace: fix partial SETREGSET for NT_ARM_TAGGED_ADDR_CTRL
+- !14952  drm/mediatek: Set private->all_drm_private[i
+- drm/mediatek: Set private->all_drm_private[i]->drm to NULL if mtk_drm_bind returns err
+- !14835 v2  media: dvb-frontends: dib3000mb: fix uninit-value in dib3000_write_reg
+- media: dvb-frontends: dib3000mb: fix uninit-value in dib3000_write_reg
+- !14994  mm/compaction: fix UBSAN shift-out-of-bounds warning
+- mm/compaction: fix UBSAN shift-out-of-bounds warning
+- !14893  btrfs: flush delalloc workers queue before stopping cleaner kthread during unmount
+- btrfs: flush delalloc workers queue before stopping cleaner kthread during unmount
+- !14876  *** jffs2: Prevent rtime decompress memory corruption ***
+- jffs2: Fix rtime decompressor
+- jffs2: Prevent rtime decompress memory corruption
+- !14833  btrfs: check folio mapping after unlock in relocate_one_folio()
+- btrfs: check folio mapping after unlock in relocate_one_folio()
+- !14588  smb: Initialize cfid->tcon before performing network ops
+- smb: Initialize cfid->tcon before performing network ops
+- !14977  PCI: imx6: Fix suspend/resume support on i.MX6QDL
+- PCI: imx6: Fix suspend/resume support on i.MX6QDL
+- !14984  vsock/bpf: return early if transport is not assigned
+- vsock/bpf: return early if transport is not assigned
+- !14976  x86/fpu: Ensure shadow stack is active before "getting" registers
+- x86/fpu: Ensure shadow stack is active before "getting" registers
+- !14682  CVE-2024-56701
+- powerpc/pseries: Fix dtl_access_lock to be a rw_semaphore
+- !14780  CVE-2024-56677
+- powerpc/fadump: Move fadump_cma_init to setup_arch() after initmem_init()
+- powerpc/fadump: Refactor and prepare fadump_cma_init for late init
+- !14681  CVE-2024-56567
+- ad7780: fix division by zero in ad7780_write_raw()
+- !14981  nfsd: fix nfs4_openowner leak when concurrent nfsd4_open occur
+- nfsd: fix nfs4_openowner leak when concurrent nfsd4_open occur
+- !14916  CVE-2024-56641
+- net/smc: initialize close_work early to avoid warning
+- net/smc: refactoring initialization of smc sock
+- !14914  bnxt_en: Fix receive ring space parameters when XDP is active
+- bnxt_en: Fix receive ring space parameters when XDP is active
+- !14915  net/smc: protect link down work from execute after lgr freed
+- net/smc: protect link down work from execute after lgr freed
+- !14913  xsk: fix OOB map writes when deleting elements
+- xsk: fix OOB map writes when deleting elements
+- !14911  net/smc: fix LGR and link use-after-free issue
+- net/smc: fix LGR and link use-after-free issue
+- !14912  net: fix data-races around sk->sk_forward_alloc
+- net: fix data-races around sk->sk_forward_alloc
+- !14907  ipv4: ip_tunnel: Fix suspicious RCU usage warning in ip_tunnel_find()
+- ipv4: ip_tunnel: Fix suspicious RCU usage warning in ip_tunnel_find()
+- !14908  net: dsa: improve shutdown sequence
+- net: dsa: improve shutdown sequence
+- !14877  sched: qos sched support online task to preempt offline task
+- sched: qos sched support online task to preempt offline task
+- !14974  BMA: Fix Oops and spin lock deadlock problem, and change the version number.
+- BMA: Fix Oops and spin lock deadlock problem, and change the version number.
+- !14973 v2  fix CVE-2024-54193
+- accel/ivpu: Fix WARN in ivpu_ipc_send_receive_internal()
+- accel/ivpu: Move set autosuspend delay to HW specific code
+- !14901  Fix CVE-2024-47794
+- bpf: Fix kabi breakage in struct bpf_prog_aux
+- selftests/bpf: Add test to verify tailcall and freplace restrictions
+- selftests/bpf: Add testcase for updating attached freplace prog to prog_array map
+- bpf: Prevent tailcall infinite loop caused by freplace
+- !14874  bpf: Check size for BTF-based ctx access of pointer members
+- bpf: Check size for BTF-based ctx access of pointer members
+- !14847  bpf: put bpf_link's program when link is safe to be deallocated
+- bpf: put bpf_link's program when link is safe to be deallocated
+- !14945  btrfs: avoid NULL pointer dereference if no valid extent tree
+- btrfs: avoid NULL pointer dereference if no valid extent tree
+- !14823 mm：some shmem bugfix
+- mm: shmem: fix ShmemHugePages at swapout
+- mm: shmem: extend shmem_unused_huge_shrink() to all sizes
+- mm: shmem: fix minor off-by-one in shrinkable calculation
+- docs: mm: fix the incorrect 'FileHugeMapped' field
+- mm: shmem: fix the update of 'shmem_falloc->nr_unswapped'
+- mm: shmem: fix incorrect index alignment for within_size policy
+- !14970  drm/amd/display: Add check for granularity in dml ceil/floor helpers
+- drm/amd/display: Add check for granularity in dml ceil/floor helpers
+- !14969  topology: Keep the cpumask unchanged when printing cpumap
+- topology: Keep the cpumask unchanged when printing cpumap
+- !14935  Two CVE fixes for ksmbd
+- ksmbd: fix potencial out-of-bounds when buffer offset is invalid
+- ksmbd: fix slab-out-of-bounds in smb_strndup_from_utf16()
+- !14930  tracing/kprobe: Make trace_kprobe's module callback called after jump_label update
+- tracing/kprobe: Make trace_kprobe's module callback called after jump_label update
+- !14931  bpf: Fix theoretical prog_array UAF in __uprobe_perf_func()
+- bpf: Fix theoretical prog_array UAF in __uprobe_perf_func()
+- !14953  mm: khugepaged: fix call hpage_collapse_scan_file() for anonymous vma
+- mm: khugepaged: fix call hpage_collapse_scan_file() for anonymous vma
+- !14767 mm: shmem: control THP support through the kernel command line
+- mm: shmem: remove __shmem_huge_global_enabled()
+- mm: shmem: override mTHP shmem default with a kernel parameter
+- mm: move ``get_order_from_str()`` to internal.h
+- mm: shmem: control THP support through the kernel command line
+- !14962  memcg: fix memcg_swapmax_read() not declared warning
+- memcg: fix memcg_swapmax_read() not declared warning
+- !14944  ocfs2: fix slab-use-after-free due to dangling pointer dqi_priv
+- ocfs2: fix slab-use-after-free due to dangling pointer dqi_priv
+- !14946  swiotlb: fix swiotlb_bounce() to do partial sync's correctly
+- iommu/dma: fix zeroing of bounce buffer padding used by untrusted devices
+- swiotlb: remove alloc_size argument to swiotlb_tbl_map_single()
+- swiotlb: fix swiotlb_bounce() to do partial sync's correctly
+- swiotlb: extend buffer pre-padding to alloc_align_mask if necessary
+- !14897  perf/x86/intel/ds: Unconditionally drain PEBS DS when changing PEBS_DATA_CFG
+- perf/x86/intel/ds: Unconditionally drain PEBS DS when changing PEBS_DATA_CFG
+- !14920  iio: light: vcnl4035: fix information leak in triggered buffer
+- iio: light: vcnl4035: fix information leak in triggered buffer
+- !14964 v2  fix BUG: unable to handle kernel paging request in build_id_parse
+- lib/buildid: Handle memfd_secret() files in build_id_parse()
+- mm: merge folio_is_secretmem() and folio_fast_pin_allowed() into gup_fast_folio_allowed()
+- !14951  Mainline patch to olk-6.6
+- RDMA/hns: Fix UAF for cq async event
+- Revert "RDMA/hns: Fix UAF for cq async event"
+- RDMA/hns: Check atomic wr length
+- Revert "RDMA/hns: Fix a missing check of atomic wr length"
+- Revert "RDMA/hns: Check atomic wr length"
+- !14925  RDMA/hns: Fix unmatch exception handling when request_irq() fails
+- RDMA/hns: Fix unmatch exception handling when request_irq() fails
+- !14884  um: Fix potential integer overflow during physmem setup
+- um: Fix potential integer overflow during physmem setup
+- !14886  Bluetooth: hci_core: Fix not checking skb length on hci_acldata_packet
+- Bluetooth: hci_core: Fix not checking skb length on hci_acldata_packet
+- !14889  clk: ralink: mtmips: clock fixes for Ralink SoCs
+- clk: ralink: mtmips: fix clocks probe order in oldest ralink SoCs
+- clk: ralink: mtmips: fix clock plan for Ralink SoC RT3883
+- !14888  usb: dwc3: gadget: Fix looping of queued SG entries
+- usb: dwc3: gadget: Fix looping of queued SG entries
+- !14924  soc: imx8m: Probe the SoC driver as platform driver
+- soc: imx8m: Probe the SoC driver as platform driver
+- !14813  drm/i915/hdcp: Add encoder check in intel_hdcp_get_capability
+- drm/i915/hdcp: Add encoder check in intel_hdcp_get_capability
+
 * Tue Jan 21 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-75.0.0.68
 - Add a revert patch to fix build error
 
