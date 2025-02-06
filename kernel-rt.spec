@@ -11,8 +11,8 @@
 %global upstream_version    5.10
 %global upstream_sublevel   0
 %global devel_release       153
-%global maintenance_release .34.0
-%global pkg_release         .111
+%global maintenance_release .56.0
+%global pkg_release         .61
 %global rt_release          .rt62
 
 %define with_debuginfo 1
@@ -917,6 +917,9 @@ fi
 %endif
 
 %changelog
+* Thu Feb 06 2025 kylin-mayukun <mayukun@kylinos.cn> - 5.10.0-153.56.0.61
+- update kernel-rt version to 5.10.0-153.56.0
+
 * Thu Nov 30 2023 kylin-mayukun <mayukun@kylinos.cn> - 5.10.0-153.34.0.60
 - update kernel-rt version to 5.10.0-153.34.0
 
