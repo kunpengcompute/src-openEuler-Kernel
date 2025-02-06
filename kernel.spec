@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       247
+%global devel_release       248
 %global maintenance_release .0.0
-%global pkg_release         .146
+%global pkg_release         .147
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -952,6 +952,56 @@ fi
 %endif
 
 %changelog
+* Thu Feb 06 2025 Li Nan <linan122@huawei.com> - 5.10.0-248.0.0.147
+- !14995  mm/compaction: fix UBSAN shift-out-of-bounds warning
+- mm/compaction: fix UBSAN shift-out-of-bounds warning
+- !14894  btrfs: flush delalloc workers queue before stopping cleaner kthread during unmount
+- !14875  *** jffs2: Prevent rtime decompress memory corruption ***
+- !14960  mainline to olk-5.10 RDMA/hns: Check atomic wr length
+- !14937 v2  Two CVE fixes for ksmbd
+- !14966  memcg: fix memcg_swapmax_read() not declared warning
+- memcg: fix memcg_swapmax_read() not declared warning
+- RDMA/hns: Check atomic wr length
+- Revert "RDMA/hns: Fix a missing check of atomic wr length"
+- Revert "RDMA/hns: Check atomic wr length"
+- !14943  fix CVE-2024-57892
+- !14954  zram: fix NULL pointer in comp_algorithm_show()
+- !14948 Mainline patch to olk-5.10 v3
+- zram: fix NULL pointer in comp_algorithm_show()
+- !14247 [OLK-5.10] fix wangxun 1G/10G drivers hardware tx unit hang.
+- !14947  mm/slub: Reduce memory consumption in extreme scenarios
+- RDMA/hns: Fix different dgids mapping to the same dip_idx
+- Revert "RDMA/hns: Fix different dgids mapping to the same dip_idx"
+- RDMA/hns: Fix flush cqe error when racing with destroy qp
+- Revert "RDMA/hns: Fix flush cqe error when racing with destroy qp"
+- mm/slub: Reduce memory consumption in extreme scenarios
+- !14917  merge CVE patches into OLK-5.10
+- ocfs2: fix slab-use-after-free due to dangling pointer dqi_priv
+- ocfs2: correct return value of ocfs2_local_free_info()
+- ksmbd: fix potencial out-of-bounds when buffer offset is invalid
+- ksmbd: fix slab-out-of-bounds in smb_strndup_from_utf16()
+- net: wangxun: change netdev uc addr num maxmium
+- net: wangxun: fix resolving ipv6 pakets extension header errors
+- net: wangxun: fix tx csum by soft except tcp udp sctp
+- drm/i915: Fix potential context UAFs
+- arm64/uprobes: change the uprobe_opcode_t typedef to fix the sparse warning
+- arm64: probes: Fix uprobes for big-endian kernels
+- arm64:uprobe fix the uprobe SWBP_INSN in big-endian
+- dm cache: fix flushing uninitialized delayed_work on cache_ctr error
+- mm/mempolicy: fix migrate_to_node() assuming there is at least one VMA in a MM
+- kcsan: Turn report_filterlist_lock into a raw_spinlock
+- media: uvcvideo: Require entities to have a non-zero unique ID
+- wifi: mwifiex: Fix memcpy() field-spanning write warning in mwifiex_config_scan()
+- um: net: Do not use drvdata in release
+- xen: Fix the issue of resource not being properly released in xenbus_dev_probe()
+- 9p/xen: fix release of IRQ
+- fbdev: sh7760fb: Fix a possible memory leak in sh7760fb_alloc_mem()
+- fbdev/sh7760fb: Alloc DMA memory from hardware device
+- ionic: Fix netdev notifier unregister on failure
+- btrfs: flush delalloc workers queue before stopping cleaner kthread during unmount
+- jffs2: Fix rtime decompressor
+- jffs2: Prevent rtime decompress memory corruption
+
 * Wed Jan 22 2025 Li Nan <linan122@huawei.com> - 5.10.0-247.0.0.146
 - !14414 sdma-dae: add print in exceptional branch
 - !14870  quota: flush quota_release_work upon quota writeback
