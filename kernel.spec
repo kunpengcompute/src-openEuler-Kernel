@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2501.4.0
+%global hulkrelease 2502.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0313
+Release: %{hulkrelease}.0314
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,15 @@ fi
 %endif
 
 %changelog
+
+* Thu Feb 06 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.1.0.0314
+- !14942  fix CVE-2024-57892
+- ocfs2: fix slab-use-after-free due to dangling pointer dqi_priv
+- ocfs2: correct return value of ocfs2_local_free_info()
+- !14933  scsi: sg: Fix slab-use-after-free read in sg_release()
+- scsi: sg: Fix slab-use-after-free read in sg_release()
+- !14919  bpf: fix OOB devmap writes when deleting elements
+- bpf: fix OOB devmap writes when deleting elements
 
 * Wed Jan 22 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2501.4.0.0313
 - !14254 [openEuler-1.0-LTS]fix wangxun 1G/10G drivers hardware tx unit hang.
