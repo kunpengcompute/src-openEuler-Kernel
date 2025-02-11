@@ -1,5 +1,5 @@
 %define with_signmodules  1
-%define with_kabichk 1
+%define with_kabichk 0
 
 # Default without toolchain_clang
 %bcond_with toolchain_clang
@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       35
-%global maintenance_release .0.0
-%global pkg_release         .43
+%global devel_release       72
+%global maintenance_release .1.0
+%global pkg_release         .45
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1089,6 +1089,12 @@ fi
 %endif
 
 %changelog
+* Tue Feb 11 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.1.0.45
+- Update openEuler-25.03 Source to 6.6.0-72.1.0
+
+* Tue Feb 11 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-35.0.0.44
+- Disable kabicheck for openEuler-25.03
+
 * Wed Jul 24 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-35.0.0.43
 - !9782  usb-storage: alauda: Check whether the media is initialized
 - usb-storage: alauda: Check whether the media is initialized
