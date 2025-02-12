@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       76
+%global devel_release       77
 %global maintenance_release .0.0
-%global pkg_release         .69
+%global pkg_release         .70
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1126,6 +1126,81 @@ fi
 %endif
 
 %changelog
+* Wed Feb 12 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-77.0.0.70
+- !15062  gpio: xilinx: Convert gpio_lock to raw spinlock
+- gpio: xilinx: Convert gpio_lock to raw spinlock
+- !15060  RDMA/hns: Fix mbox timing out by adding retry mechanism
+- RDMA/hns: Fix mbox timing out by adding retry mechanism
+- !15052 [OLK-6.6] Intel: Backport KVM Fix for Clearing SGX EDECCSSA to OLK-6.6
+- KVM: VMX: Also clear SGX EDECCSSA in KVM CPU caps when SGX is disabled
+- !15048 net: hns3: add sync command to sync io-pgtable
+- net: hns3: add sync command to sync io-pgtable
+- Revert "net: hns3: add sync command to sync io-pgtable"
+- net: hns3: fix oops when unload drivers paralleling
+- !15031  nbd: don't allow reconnect after disconnect
+- nbd: don't allow reconnect after disconnect
+- !15002  riscv: Fix sleeping in invalid context in die()
+- riscv: Fix sleeping in invalid context in die()
+- !14989  ksmbd: fix a missing return value check bug
+- ksmbd: fix a missing return value check bug
+- !15027  pinmux: Use sequential access to access desc->pinmux data
+- pinmux: Use sequential access to access desc->pinmux data
+- !14321 [OLK-6.6] rcu: Provide a boot time parameter to control lazy RCU
+- rcu: Provide a boot time parameter to control lazy RCU
+- rcu/tree: Remove superfluous return from void call_rcu* functions
+- !14900  LeapIOraid: update leapioraid driver version
+- LeapIOraid: update leapioraid driver version
+- !14325  LeapIOraid: Fix hiding ugood disk problem
+- LeapIOraid: Fix hiding ugood disk problem
+- !15016  spi: mpc52xx: Add cancel_work_sync before module remove
+- spi: mpc52xx: Add cancel_work_sync before module remove
+- !15041  gve: guard XDP xmit NDO on existence of xdp queues
+- gve: guard XDP xmit NDO on existence of xdp queues
+- !15040  gve: guard XSK operations on the existence of queues
+- gve: guard XSK operations on the existence of queues
+- !15039  mptcp: fix TCP options overflow.
+- mptcp: fix TCP options overflow.
+- !15038  net: fix memory leak in tcp_conn_request()
+- net: fix memory leak in tcp_conn_request()
+- !15037  net/smc: check smcd_v2_ext_offset when receiving proposal msg
+- net/smc: check smcd_v2_ext_offset when receiving proposal msg
+- !15036  net/smc: check return value of sock_recvmsg when draining clc data
+- net/smc: check return value of sock_recvmsg when draining clc data
+- !15025  net/smc: check iparea_offset and ipv6_prefixes_cnt when receiving proposal msg
+- net/smc: check iparea_offset and ipv6_prefixes_cnt when receiving proposal msg
+- !15019  platform/x86/amd/pmc: Only disable IRQ1 wakeup where i8042 actually enabled it
+- platform/x86/amd/pmc: Only disable IRQ1 wakeup where i8042 actually enabled it
+- !15020  drm/modes: Avoid divide by zero harder in drm_mode_vrefresh()
+- drm/modes: Avoid divide by zero harder in drm_mode_vrefresh()
+- !14979  igb: Fix potential invalid memory access in igb_init_module()
+- igb: Fix potential invalid memory access in igb_init_module()
+- !14963  exfat: fix the infinite loop in exfat_readdir()
+- exfat: fix the infinite loop in exfat_readdir()
+- !14988  net/smc: check v2_ext_offset/eid_cnt/ism_gid_cnt when receiving proposal msg
+- net/smc: check v2_ext_offset/eid_cnt/ism_gid_cnt when receiving proposal msg
+- !14987  workqueue: Do not warn when cancelling WQ_MEM_RECLAIM work from !WQ_MEM_RECLAIM worker
+- workqueue: Do not warn when cancelling WQ_MEM_RECLAIM work from !WQ_MEM_RECLAIM worker
+- !14985  i3c: Use i3cdev->desc->info instead of calling i3c_device_get_info() to avoid deadlock
+- i3c: Use i3cdev->desc->info instead of calling i3c_device_get_info() to avoid deadlock
+- !14892  s390/cpum_sf: Handle CPU hotplug remove during sampling
+- s390/cpum_sf: Handle CPU hotplug remove during sampling
+- !15013 v2  nilfs2: prevent use of deleted inode
+- nilfs2: prevent use of deleted inode
+- !14845  merge HULK-6.6 patches into OLK-6.6
+- mm: refactor map_deny_write_exec()
+- drm/mediatek: Fix potential NULL dereference in mtk_crtc_destroy()
+- nommu: pass NULL argument to vma_iter_prealloc()
+- mm: page_alloc: move mlocked flag clearance into free_pages_prepare()
+- cacheinfo: Allocate memory during CPU hotplug if not done from the primary CPU
+- kcsan: Turn report_filterlist_lock into a raw_spinlock
+- ionic: Fix netdev notifier unregister on failure
+- !15018  misc: microchip: pci1xxxx: Resolve kernel panic during GPIO IRQ handling
+- misc: microchip: pci1xxxx: Resolve kernel panic during GPIO IRQ handling
+- !15009  i3c: mipi-i3c-hci: Mask ring interrupts before ring stop request
+- i3c: mipi-i3c-hci: Mask ring interrupts before ring stop request
+- !15008  nvme-rdma: unquiesce admin_q before destroy it
+- nvme-rdma: unquiesce admin_q before destroy it
+
 * Thu Feb 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-76.0.0.69
 - !14997  wifi: rtw89: check return value of ieee80211_probereq_get() for RNR
 - wifi: rtw89: check return value of ieee80211_probereq_get() for RNR
