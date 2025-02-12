@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2502.1.0
+%global hulkrelease 2502.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0314
+Release: %{hulkrelease}.0315
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,28 @@ fi
 %endif
 
 %changelog
+
+* Tue Feb 11 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.2.0.0315
+- !15050  brd: fix AA deadlock for concurrent brd_probe()
+- !15030  nbd: don't allow reconnect after disconnect
+- brd: fix AA deadlock for concurrent brd_probe()
+- !15017  spi: mpc52xx: Add cancel_work_sync before module remove
+- !15042  drm: adv7511: Fix use-after-free in adv7533_attach_dsi()
+- !14978  CVE-2024-56604_openEuler-1.0-LTS
+- !15012  Bluetooth: L2CAP: fix CVE-2024-56605
+- !14999  scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- drm: adv7511: Fix use-after-free in adv7533_attach_dsi()
+- !14992  ALSA: seq: oss: Fix races at processing SysEx messages
+- !14996  mm/compaction: fix UBSAN shift-out-of-bounds warning
+- nbd: don't allow reconnect after disconnect
+- spi: mpc52xx: Add cancel_work_sync before module remove
+- Bluetooth: L2CAP: handle NULL sock pointer in l2cap_sock_alloc
+- Bluetooth: L2CAP: do not leave dangling sk pointer on error in l2cap_sock_create()
+- scsi: bfa: Fix use-after-free in bfad_im_module_exit()
+- mm/compaction: fix UBSAN shift-out-of-bounds warning
+- ALSA: seq: oss: Fix races at processing SysEx messages
+- Bluetooth: RFCOMM: avoid leaving dangling sk pointer in rfcomm_sock_alloc()
+- Bluetooth: Consolidate code around sk_alloc into a helper function
 
 * Thu Feb 06 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.1.0.0314
 - !14942  fix CVE-2024-57892
