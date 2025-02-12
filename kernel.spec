@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       248
+%global devel_release       249
 %global maintenance_release .0.0
-%global pkg_release         .150
+%global pkg_release         .151
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -911,6 +911,64 @@ fi
 %endif
 
 %changelog
+* Wed Feb 12 2025 Li Nan <linan122@huawei.com> - 5.10.0-249.0.0.151
+- !15061  ALSA: seq: oss: Fix races at processing SysEx messages
+- ALSA: seq: oss: Fix races at processing SysEx messages
+- !14286 [OLK-5.10] SCSI: Support Linkdata HBA/RAID Controllers
+- !15059  RDMA/hns: Fix free_mr_qp not assigning qp->device in error flow
+- RDMA/hns: Fix free_mr_qp not assigning qp->device in error flow
+- !15051  iio: light: vcnl4035: fix information leak in triggered buffer
+- !9883 AMD QoS new features BMEC and SMBA
+- iio: light: vcnl4035: fix information leak in triggered buffer
+- !14956  nbd: don't allow reconnect after disconnect
+- !15046  pinmux: Use sequential access to access desc->pinmux data
+- !15015  spi: mpc52xx: Add cancel_work_sync before module remove
+- !14865  fs/dirty_pages: Add exclusive open lock to prevent null pointer dereference
+- [PATCH] SCSI: Linkdata: Supports Linkdata HBA/RAID Controllers
+- pinmux: Use sequential access to access desc->pinmux data
+- !15044 [sync] PR-15042:  drm: adv7511: Fix use-after-free in adv7533_attach_dsi()
+- !15024  net/smc: check iparea_offset and ipv6_prefixes_cnt when receiving proposal msg
+- !14991  usb: typec: fix potential array underflow in ucsi_ccg_sync_control()
+- !14891  s390/cpum_sf: Handle CPU hotplug remove during sampling
+- !15014 v2  nilfs2: prevent use of deleted inode
+- drm: adv7511: Fix use-after-free in adv7533_attach_dsi()
+- net/smc: check iparea_offset and ipv6_prefixes_cnt when receiving proposal msg
+- !15010  nvme-rdma: unquiesce admin_q before destroy it
+- spi: mpc52xx: Add cancel_work_sync before module remove
+- nilfs2: prevent use of deleted inode
+- nvme-rdma: unquiesce admin_q before destroy it
+- usb: typec: fix potential array underflow in ucsi_ccg_sync_control()
+- tools headers cpufeatures: Sync with the kernel sources
+- tools arch x86: Sync the msr-index.h copy with the kernel sources
+- tools arch x86: Sync the msr-index.h copy with the kernel sources
+- x86/resctrl: Read supported bandwidth sources from CPUID
+- x86/resctrl: Remove redundant variable in mbm_config_write_domain()
+- x86/resctrl: Add per-rmid arch private storage for overflow and chunks
+- x86/resctrl: Group struct rdt_hw_domain cleanup
+- x86/resctrl: Add domain online callback for resctrl work
+- x86/resctrl: Merge mon_capable and mon_enabled
+- x86/resctrl: Fix kfree() of the wrong type in domain_add_cpu()
+- x86/resctrl: Split struct rdt_domain
+- x86/resctrl: Add interface to write mbm_local_bytes_config
+- x86/resctrl: Add interface to write mbm_total_bytes_config
+- x86/resctrl: Add interface to read mbm_local_bytes_config
+- x86/resctrl: Add interface to read mbm_total_bytes_config
+- x86/resctrl: Support monitor configuration
+- x86/resctrl: Add __init attribute to rdt_get_mon_l3_config()
+- x86/resctrl: Detect and configure Slow Memory Bandwidth Allocation
+- x86/resctrl: Move MSR defines into msr-index.h
+- x86/resctrl: Include new features in command line options
+- x86/cpufeatures: Add Bandwidth Monitoring Event Configuration feature flag
+- x86/resctrl: Add a new resource type RDT_RESOURCE_SMBA
+- x86/cpufeatures: Add Slow Memory Bandwidth Allocation feature flag
+- x86/resctrl: Replace smp_call_function_many() with on_each_cpu_mask()
+- x86/resctrl: Split struct rdt_resource
+- x86/resctrl: Fix kernel-doc in internal.h
+- x86/resctrl: Correct MBM total and local values
+- nbd: don't allow reconnect after disconnect
+- s390/cpum_sf: Handle CPU hotplug remove during sampling
+- fs/dirty_pages: Add exclusive open lock to prevent null pointer dereference
+
 * Thu Feb 06 2025 Li Nan <linan122@huawei.com> - 5.10.0-248.0.0.150
 - !14995  mm/compaction: fix UBSAN shift-out-of-bounds warning
 - mm/compaction: fix UBSAN shift-out-of-bounds warning
