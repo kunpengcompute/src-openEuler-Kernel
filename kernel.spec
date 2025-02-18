@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       77
 %global maintenance_release .0.0
-%global pkg_release         .81
+%global pkg_release         .82
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -78,7 +78,6 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %ifarch aarch64
 %define with_64kb  %{?_with_64kb: 1} %{?!_with_64kb: 0}
 %if %{with_64kb}
-%global package64kb -64kb
 %define with_kabichk 0
 %endif
 %else
@@ -88,7 +87,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 #default is enabled. You can disable it with --without option
 %define with_perf    %{?_without_perf: 0} %{?!_without_perf: 1}
 
-Name:	 kernel%{?package64kb}
+Name:	 kernel
 Version: %{upstream_version}.%{upstream_sublevel}
 Release: %{devel_release}%{?maintenance_release}%{?pkg_release}
 Summary: Linux Kernel
@@ -400,10 +399,6 @@ make mrproper %{_smp_mflags}
 
 %if %{with_64kb}
 sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_4K_PAGES.*/CONFIG_ARM64_64K_PAGES=y/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_PA_BITS=.*/CONFIG_ARM64_PA_BITS=52/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_PA_BITS_.*/CONFIG_ARM64_PA_BITS_52=y/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_VA_BITS=.*/CONFIG_ARM64_VA_BITS=52/'
-sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_VA_BITS_.*/CONFIG_ARM64_VA_BITS_52=y/'
 %endif
 
 %if "%toolchain" == "clang"
@@ -1092,6 +1087,9 @@ fi
 %endif
 
 %changelog
+* Tue Feb 18 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-77.0.0.82
+- kernel.spec: build iso with 64KB page size kernel
+
 * Wed Feb 12 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-77.0.0.81
 - !15062  gpio: xilinx: Convert gpio_lock to raw spinlock
 - gpio: xilinx: Convert gpio_lock to raw spinlock
