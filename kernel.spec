@@ -11,7 +11,7 @@
 %global upstream_sublevel   0
 %global devel_release       249
 %global maintenance_release .0.0
-%global pkg_release         .151
+%global pkg_release         .152
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -128,6 +128,7 @@ ExclusiveOS: Linux
 %if %{with_perf}
 BuildRequires: flex xz-devel libzstd-devel
 BuildRequires: java-devel
+BuildRequires: libtraceevent-devel > 1.2.1-4
 %endif
 
 BuildRequires: dwarves
@@ -187,6 +188,7 @@ the kernel source.
 %if %{with_perf}
 %package -n perf
 Summary: Performance monitoring for the Linux kernel
+Requires: libtraceevent > 1.2.1-4
 %description -n perf
 This package contains the perf tool, which enables performance monitoring
 of the Linux kernel.
@@ -667,6 +669,9 @@ popd
 %endif
 # remove the 'trace' symlink.
 rm -f %{buildroot}%{_bindir}/trace
+# remove any traceevent files, those files should already ship with
+# libtraceevent package.
+rm -rf %{buildroot}%{_libdir}/traceevent
 
 # remove examples
 rm -rf %{buildroot}/usr/lib/perf/examples
@@ -840,8 +845,6 @@ fi
 %files -n perf
 %{_bindir}/perf
 %{_libdir}/libperf-jvmti.so
-%dir %{_libdir}/traceevent
-%{_libdir}/traceevent/plugins/
 %{_libexecdir}/perf-core
 %{_datadir}/perf-core/
 %{_mandir}/man[1-8]/perf*
@@ -911,6 +914,9 @@ fi
 %endif
 
 %changelog
+* Tue Feb 18 2025 Li Nan <linan122@huawei.com> - 5.10.0-249.0.0.153
+- perf: no longer complie libtraceevent into perf
+
 * Wed Feb 12 2025 Li Nan <linan122@huawei.com> - 5.10.0-249.0.0.151
 - !15061  ALSA: seq: oss: Fix races at processing SysEx messages
 - ALSA: seq: oss: Fix races at processing SysEx messages
