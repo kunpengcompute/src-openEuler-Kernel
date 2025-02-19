@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       249
+%global devel_release       250
 %global maintenance_release .0.0
-%global pkg_release         .153
+%global pkg_release         .154
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,44 @@ fi
 %endif
 
 %changelog
+* Wed Feb 19 2025 Li Nan <linan122@huawei.com> - 5.10.0-250.0.0.154
+- !15099  sched: sch_cake: add bounds checks to host bulk flow fairness counts
+- !15087  netfilter: ipset: add missing range check in bitmap_ip_uadt
+- !15085  ila: call nf_unregister_net_hooks() sooner
+- !15100  ila: serialize calls to nf_register_net_hooks()
+- !15097  net: inet6: do not leave a dangling sk pointer in inet6_create()
+- !15096  net: inet: do not leave a dangling sk pointer in inet_create()
+- !15098  netfilter: conntrack: clamp maximum hashtable size to INT_MAX
+- !15089  net/sched: stop qdisc_tree_reduce_backlog on TC_H_ROOT
+- !15086  net: Fix CVE-2024-50125
+- !15117 v3  net: Fix CVE-2024-56658
+- !15095  wifi: ath9k: add range check for conn_rsp_epid in htc_connect_service()
+- !15124 v2  fix CVE-2024-53056 for olk-5.10
+- !15129  comedi: Flush partial mappings in error case
+- !15127  iomap: avoid avoid truncating 64-bit offset to 32 bits
+- comedi: Flush partial mappings in error case
+- iomap: avoid avoid truncating 64-bit offset to 32 bits
+- mm: resolve faulty mmap_region() error path behaviour
+- mm: unconditionally close VMAs on error
+- mm: avoid unsafe VMA hook invocation when error arises on mmap hook
+- !15081  usb: typec: fix potential out of bounds in ucsi_ccg_update_set_new_cam_cmd()
+- !15079  drivers: media: dvb-frontends/rtl2830: fix an out-of-bounds write error
+- net: Fix kabi breakage in struct net
+- net: defer final 'struct net' free in netns dismantle
+- ila: serialize calls to nf_register_net_hooks()
+- sched: sch_cake: add bounds checks to host bulk flow fairness counts
+- netfilter: conntrack: clamp maximum hashtable size to INT_MAX
+- net: inet6: do not leave a dangling sk pointer in inet6_create()
+- net: inet: do not leave a dangling sk pointer in inet_create()
+- wifi: ath9k: add range check for conn_rsp_epid in htc_connect_service()
+- net/sched: stop qdisc_tree_reduce_backlog on TC_H_ROOT
+- netfilter: ipset: add missing range check in bitmap_ip_uadt
+- Bluetooth: SCO: Fix UAF on sco_sock_timeout
+- Bluetooth: call sock_hold earlier in sco_conn_del
+- ila: call nf_unregister_net_hooks() sooner
+- usb: typec: fix potential out of bounds in ucsi_ccg_update_set_new_cam_cmd()
+- drivers: media: dvb-frontends/rtl2830: fix an out-of-bounds write error
+
 * Tue Feb 18 2025 Li Nan <linan122@huawei.com> - 5.10.0-249.0.0.153
 - perf: no longer complie libtraceevent into perf
 
