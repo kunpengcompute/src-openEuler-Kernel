@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2502.2.0
+%global hulkrelease 2502.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0315
+Release: %{hulkrelease}.0316
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,21 @@ fi
 %endif
 
 %changelog
+
+* Tue Feb 18 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.3.0.0316
+- !15116  netfilter: conntrack: clamp maximum hashtable size to INT_MAX
+- !15115  netfilter: x_tables: fix LED ID check in led_tg_check()
+- !15114 v3  net: Fix CVE-2024-56658
+- !14895  ceph: prevent use-after-free in encode_cap_msg()
+- !15131  xsk: fix OOB map writes when deleting elements
+- xsk: fix OOB map writes when deleting elements
+- !15058  net: let net.core.dev_weight always be non-zero
+- netfilter: conntrack: clamp maximum hashtable size to INT_MAX
+- netfilter: x_tables: fix LED ID check in led_tg_check()
+- net: Fix kabi breakage in struct net
+- net: defer final 'struct net' free in netns dismantle
+- net: let net.core.dev_weight always be non-zero
+- ceph: prevent use-after-free in encode_cap_msg()
 
 * Tue Feb 11 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.2.0.0315
 - !15050  brd: fix AA deadlock for concurrent brd_probe()
