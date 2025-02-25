@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       250
+%global devel_release       251
 %global maintenance_release .0.0
-%global pkg_release         .154
+%global pkg_release         .155
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,40 @@ fi
 %endif
 
 %changelog
+* Tue Feb 25 2025 Li Nan <linan122@huawei.com> - 5.10.0-251.0.0.155
+- !14327 [OLK-5.10] Enhanced Hygon processor's processing capabilities for large memory copying
+- !15137  net/mlx5: Fix variable not being completed when function returns
+- !15136  crypto: caam - Fix the pointer passed to caam_qi_shutdown()
+- !15134  usb: typec: altmode should keep reference to parent
+- !15198  CVE-2024-57857
+- !15196  iio: pressure: zpa2326: fix information leak in triggered buffer
+- !15199  power: supply: gpio-charger: Fix set charge current limits
+- power: supply: gpio-charger: Fix set charge current limits
+- RDMA/siw: Remove direct link to net_device
+- RDMA/siw: Fabricate a GID on tun and loopback devices
+- RDMA/siw: Use helper function to set sys_image_guid
+- RDMA/siw: Enable siw on tunnel devices
+- iio: pressure: zpa2326: fix information leak in triggered buffer
+- !15186  CVE-2024-57795
+- !15177  iio: imu: kmx61: fix information leak in triggered buffer
+- RDMA/rxe: Remove the direct link to net_device
+- RDMA: Export ib_device_get_netdev()
+- iio: imu: kmx61: fix information leak in triggered buffer
+- !14910 KVM:arm64:Add a kvm parameter to control guest wfi trapping
+- KVM:arm64:Add a kvm parameter to control guest wfi trapping
+- !15139  apparmor: fix 'Do simple duplicate message elimination'
+- !15094  netfilter: x_tables: fix LED ID check in led_tg_check()
+- !15146  Revert "media: uvcvideo: Require entities to have a non-zero unique ID"
+- !15077  kasan: fix incorrect return type of quarantine_put()
+- Revert "media: uvcvideo: Require entities to have a non-zero unique ID"
+- apparmor: fix 'Do simple duplicate message elimination'
+- net/mlx5: Fix variable not being completed when function returns
+- crypto: caam - Fix the pointer passed to caam_qi_shutdown()
+- usb: typec: altmode should keep reference to parent
+- netfilter: x_tables: fix LED ID check in led_tg_check()
+- kasan: fix incorrect return type of quarantine_put()
+- mm: Enhanced copy capabilities for Hygon processor
+
 * Wed Feb 19 2025 Li Nan <linan122@huawei.com> - 5.10.0-250.0.0.154
 - !15099  sched: sch_cake: add bounds checks to host bulk flow fairness counts
 - !15087  netfilter: ipset: add missing range check in bitmap_ip_uadt
