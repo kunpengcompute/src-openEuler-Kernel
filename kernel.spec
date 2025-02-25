@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       72
 %global maintenance_release .1.0
-%global pkg_release         .47
+%global pkg_release         .48
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1085,6 +1085,9 @@ fi
 %endif
 
 %changelog
+* Tue Feb 25 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.1.0.48
+- Remove redundant Module.symvers_*
+
 * Wed Feb 19 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-72.1.0.47
 - RISC-V kernel update to 6.6.0-72.1.0
 - Add the feature of 24.03-SP1
