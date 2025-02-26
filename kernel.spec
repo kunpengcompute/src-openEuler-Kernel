@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2502.3.0
+%global hulkrelease 2502.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0316
+Release: %{hulkrelease}.0317
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,14 @@ fi
 %endif
 
 %changelog
+
+* Wed Feb 26 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.4.0.0317
+- !9357 Add support for Hygon model 7h processors
+- !15138  drm/amdgpu: fix usage slab after free
+- drm/amdgpu: fix usage slab after free
+- perf/x86/uncore: Add L3 PMU support for Hygon family 18h model 7h
+- EDAC/amd64: Add support for Hygon family 18h model 7h
+- x86/amd_nb: Add support for Hygon family 18h model 7h
 
 * Tue Feb 18 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.3.0.0316
 - !15116  netfilter: conntrack: clamp maximum hashtable size to INT_MAX
