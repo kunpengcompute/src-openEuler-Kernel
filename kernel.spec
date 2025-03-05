@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2502.4.0
+%global hulkrelease 2503.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0317
+Release: %{hulkrelease}.0318
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,22 @@ fi
 %endif
 
 %changelog
+
+* Tue Mar 04 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.1.0.0318
+- !15314  drm/imx: Fix memory leak in imx_pd_connector_get_modes
+- !15313  video: fbdev: smscufx: Fix null-ptr-deref in ufx_usb_probe()
+- !15285  tcp: Defer ts_recent changes until req is owned
+- !15256  ata: sata_dwc_460ex: Fix crash due to OOB write
+- drm/imx: Fix memory leak in imx_pd_connector_get_modes
+- video: fbdev: smscufx: Fix null-ptr-deref in ufx_usb_probe()
+- tcp: Defer ts_recent changes until req is owned
+- !15262  blk-iolatency: Fix inflight count imbalances and IO hangs on offline
+- !15193  Roll back the setting of nfs superblock s_flags.
+- blk-iolatency: Fix inflight count imbalances and IO hangs on offline
+- ata: sata_dwc_460ex: Fix crash due to OOB write
+- Revert "nfs: ignore SB_RDONLY when mounting nfs"
+- Revert "nfs: pass flags to second superblock"
+- Revert "nfs: fix the loss of superblock's initialized flags"
 
 * Wed Feb 26 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2502.4.0.0317
 - !9357 Add support for Hygon model 7h processors
