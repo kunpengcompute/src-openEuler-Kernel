@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       251
+%global devel_release       252
 %global maintenance_release .0.0
-%global pkg_release         .154
+%global pkg_release         .155
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,25 @@ fi
 %endif
 
 %changelog
+* Tue Mar 04 2025 Li Nan <linan122@huawei.com> - 5.10.0-252.0.0.155
+- !15293 ras: ACPI: HED: Always initialize before evged
+- !15269 [OLK-5.10]Intel: Backport to fix EDAC driver for GNR platform
+- !15269 [OLK-5.10]Intel: Backport to fix EDAC driver for GNR platform
+- ras: ACPI: HED: Always initialize before evged
+- EDAC/{skx_common,i10nm}: Fix incorrect far-memory error source indicator
+- EDAC/skx_common: Differentiate memory error sources
+- EDAC/{skx_common,skx,i10nm}: Move the common debug code to skx_common
+- EDAC, i10nm: make skx_common.o a separate module
+- !15246  UBI/UBIFS mainline patch backport
+- !10860 [OLK-5.10] perf/x86/uncore: Add support for Hygon family 18h model 4h-7h   and 10h DF PMU
+- ubi: Add a check for ubi_num
+- ubifs: skip dumping tnc tree when zroot is null
+- !15228 EDAC/amd64: Add support family types for hygon family 4h~5h and 7h.
+- !14810  af_packet: avoid erroring out after sock_init_data() in packet_create()
+- EDAC/amd64: Add support family types for hygon family 4h~5h and 7h.
+- af_packet: avoid erroring out after sock_init_data() in packet_create()
+- perf/x86/uncore: Add support for Hygon family 18h model 4h-7h and 10h DF PMU
+
 * Tue Feb 25 2025 Li Nan <linan122@huawei.com> - 5.10.0-251.0.0.154
 - !14327 [OLK-5.10] Enhanced Hygon processor's processing capabilities for large memory copying
 - !15137  net/mlx5: Fix variable not being completed when function returns
