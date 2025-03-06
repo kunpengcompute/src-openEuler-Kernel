@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       80
 %global maintenance_release .0.0
-%global pkg_release         .73
+%global pkg_release         .74
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -145,6 +145,8 @@ Patch0021: 0021-Revert-kabi-reserve-space-for-internal.h.patch
 Patch0022: 0022-Revert-kabi-reserve-space-for-perf_event.h.patch
 Patch0023: 0023-Revert-bpf-Add-kabi-reserve-padding-for-uapi-struct-.patch
 Patch0024: 0024-Revert-x86-config-Remove-CONFIG_-prefix-under-Kconfi.patch
+Patch0025: 0025-Revert-perf-x86-Fix-kabi-breakage-in-struct-uprobe_t.patch
+Patch0026: 0026-Revert-perf-x86-avoid-missing-caller-address-in-stac.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -386,6 +388,8 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %patch0004 -p1
 %endif
 
+%patch0025 -p1
+%patch0026 -p1
 %patch0024 -p1
 %patch0005 -p1
 %patch0006 -p1
@@ -1126,6 +1130,9 @@ fi
 %endif
 
 %changelog
+* Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-80.0.0.74
+- Revert kabi broken patch.
+
 * Wed Mar 05 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-80.0.0.73
 - !15278  tracing/osnoise: Fix resetting of tracepoints
 - tracing/osnoise: Fix resetting of tracepoints
