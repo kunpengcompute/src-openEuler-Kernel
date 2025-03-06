@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .1.0
-%global pkg_release         .48
+%global maintenance_release .2.0
+%global pkg_release         .49
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1085,6 +1085,45 @@ fi
 %endif
 
 %changelog
+* Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.2.0.49
+- !15325 kernel: configs: enhance hardware compatibility by adding modular drivers
+- configs: enhance hardware compatibility by adding modular drivers
+- !15141 Add HAOC feature for openEuler-25.03: Isolated Execution Environment(IEE).
+- !15141 Add HAOC feature for openEuler-25.03: Isolated Execution Environment(IEE).
+- HAOC: Add ARM64 kernel command line support to switch IEE onoff.
+- HAOC: Add kernel command line support for x86 IEE.
+- HAOC: Add support for AArch64 Isolated Execution Environment(IEE).
+- HAOC: Add support for x86 Isolated Execution Environment
+- !15323 v6  Add TrIO support in EROFS
+- !15323 v6  Add TrIO support in EROFS
+- TrIO: Add README.md
+- TrIO: Add tools for using TrIO
+- erofs: trio: Support TrIO feature in erofs
+- erofs:trio: Add trio_manager in erofs
+- !15261  mm: introduce kernel cmdline option "kernel_replication="
+- mm: introduce kernel cmdline option "kernel_replication="
+- !15233 v4  mm: arm64: Add kernel replication feature
+- mm: init kernel modules with replication support
+- arm64: add kernel modules text and rodata replication support
+- arm64: add support of NUMA replication for ptdump
+- arm64: add support of NUMA replication for efi page tables
+- arm64: make kernel text patching aware about replicas
+- arm64: make KASAN aware about kernel replication
+- arm64: make power management aware about kernel replication
+- mm: enable per-NUMA node kernel text and rodata replication
+- arm64: enable per-NUMA node kernel text and rodata replication
+- mm: add replicas allocation support for vmalloc
+- arm64: bpf arch text poke support
+- mm: set memory permissions for BPF handlers replicas
+- arm64: add support of memory protection for NUMA replicas
+- mm: add support of memory protection for NUMA replicas
+- mm: add apply_to_page_range() for replicated memory
+- mm: per-NUMA node replication core infrastructure
+- arm64: add arch callbacks for kernel replication
+- mm: allow per-NUMA node local P4D/PUD/PMD/PTE allocation
+- arm64: align kernel text and rodata
+- mm: arm64 add Kconfig option for kernel replication
+
 * Tue Feb 25 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.1.0.48
 - Remove redundant Module.symvers_*
 
