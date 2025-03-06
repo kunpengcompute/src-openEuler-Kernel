@@ -1,0 +1,33 @@
+From d6f6c9be930393fcf58b17f97de954b597c1b521 Mon Sep 17 00:00:00 2001
+From: ZhangPeng <zhangpeng362@huawei.com>
+Date: Thu, 6 Mar 2025 09:59:48 +0800
+Subject: [PATCH 1/2] Revert "perf,x86: Fix kabi breakage in struct
+ uprobe_task"
+
+This reverts commit d25d7bb0c8f0db098b5323fda5f5f1f2aee295e6.
+
+Signed-off-by: ZhangPeng <zhangpeng362@huawei.com>
+---
+ include/linux/uprobes.h | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/include/linux/uprobes.h b/include/linux/uprobes.h
+index b0c15a04adcc..c4ff1159cb81 100644
+--- a/include/linux/uprobes.h
++++ b/include/linux/uprobes.h
+@@ -77,9 +77,11 @@ struct uprobe_task {
+ 	struct uprobe			*active_uprobe;
+ 	unsigned long			xol_vaddr;
+ 
++	struct arch_uprobe              *auprobe;
++
+ 	struct return_instance		*return_instances;
+ 	unsigned int			depth;
+-	KABI_USE(1, struct arch_uprobe	*auprobe)
++	KABI_RESERVE(1)
+ 	KABI_RESERVE(2)
+ 	KABI_RESERVE(3)
+ 	KABI_RESERVE(4)
+-- 
+2.25.1
+

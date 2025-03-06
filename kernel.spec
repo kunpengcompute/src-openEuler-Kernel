@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       79
+%global devel_release       80
 %global maintenance_release .0.0
-%global pkg_release         .72
+%global pkg_release         .74
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -145,6 +145,8 @@ Patch0021: 0021-Revert-kabi-reserve-space-for-internal.h.patch
 Patch0022: 0022-Revert-kabi-reserve-space-for-perf_event.h.patch
 Patch0023: 0023-Revert-bpf-Add-kabi-reserve-padding-for-uapi-struct-.patch
 Patch0024: 0024-Revert-x86-config-Remove-CONFIG_-prefix-under-Kconfi.patch
+Patch0025: 0025-Revert-perf-x86-Fix-kabi-breakage-in-struct-uprobe_t.patch
+Patch0026: 0026-Revert-perf-x86-avoid-missing-caller-address-in-stac.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -386,6 +388,8 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %patch0004 -p1
 %endif
 
+%patch0025 -p1
+%patch0026 -p1
 %patch0024 -p1
 %patch0005 -p1
 %patch0006 -p1
@@ -1126,6 +1130,57 @@ fi
 %endif
 
 %changelog
+* Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-80.0.0.74
+- Revert kabi broken patch.
+
+* Wed Mar 05 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-80.0.0.73
+- !15278  tracing/osnoise: Fix resetting of tracepoints
+- tracing/osnoise: Fix resetting of tracepoints
+- !15227 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.54-6.6.55 LTS Conflicts Patches
+- mm: z3fold: deprecate CONFIG_Z3FOLD
+- null_blk: Remove usage of the deprecated ida_simple_xx() API
+- iomap: handle a post-direct I/O invalidate race in iomap_write_delalloc_release
+- proc: add config & param to block forcing mem writes
+- HID: Ignore battery for all ELAN I2C-HID devices
+- ata: sata_sil: Rename sil_blacklist to sil_quirks
+- ata: pata_serverworks: Do not use the term blacklist
+- scsi: aacraid: Rearrange order of struct aac_srb_unit
+- uprobes: Fix race in uprobe_free_utask
+- perf,x86: Fix kabi breakage in struct uprobe_task
+- perf,x86: avoid missing caller address in stack traces captured in uprobe
+- i2c: synquacer: Deal with optional PCLK correctly
+- i2c: synquacer: Remove a clk reference from struct synquacer_i2c
+- !15248 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.64-6.6.66 LTS Conflicts Patches
+- mm/mempolicy: fix migrate_to_node() assuming there is at least one VMA in a MM
+- selftests/ftrace: adjust offset for kprobe syntax error test
+- bpf: Remove unnecessary kfree(im_node) in lpm_trie_update_elem
+- iommu/arm-smmu: Defer probe of clients after smmu device bound
+- gpio: grgpio: use a helper variable to store the address of ofdev->dev
+- KVM: arm64: Change kvm_handle_mmio_return() return polarity
+- !15270 v2  mm: Backport two patch
+- arm64/mm: Drop setting PTE_TYPE_PAGE in pte_mkcont()
+- arm64/mm: Re-organize arch_make_huge_pte()
+- mm/hugetlb: use arch_make_huge_pte() in __hugetlb_insert_pfn()
+- !14820 [OLK-6.6]Hygon: Support kernel boot verification and secret injection for Hygon CSV3 VM
+- KVM: SVM: CSV: Support inject secret to Hygon CSV3 guest
+- KVM: SVM: CSV: Support issue non-4K aligned CSV3_CMD_LAUNCH_ENCRYPT_DATA and more than once
+- KVM: SVM: CSV: Provide KVM_CSV3_SET_GUEST_PRIVATE_MEMORY ioctl interface
+- KVM: SVM: CSV: Provide KVM_CAP_HYGON_COCO_EXT interface
+- crypto: ccp: Provide csv_get_extension_info() to present extensions of newer CSV firmware
+- KVM: SVM: CSV: Ensure all the GPRs and some non-GPRs are synced before LAUNCH_ENCRYPT_VMCB
+- crypto: ccp: Get api version again when update Hygon CSV firmware at runtime
+- KVM: SVM: CSV: Fix the vm_size even if CSV3 feature is unsupported on Hygon CPUs
+- !14819 [OLK-6.6]Hygon: Support CSV3 Attestation
+- x86/configs: openeuler_defconfig: Set CONFIG_VIRT_DRIVERS=y and CONFIG_EFI_SECRET=m
+- virt/csv-guest: Provide interface for request of CSV3 attestation report
+- x86/csv: Add support for CSV3 ATTESTATION secure call
+- x86/csv: Define ATTESTATION secure call command
+- !15251 Intel: Backport upstream auto-tune per-CPU pageset size patchset
+- mm and cache_info: remove unnecessary CPU cache info update
+- !15185 hwtracing: hisi_ptt: Initialize the filter sysfs attribute when allocation
+- hwtracing: hisi_ptt: Check duplicate filters before allocation
+- hwtracing: hisi_ptt: Initialize the filter sysfs attribute when allocation
+
 * Wed Feb 26 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-79.0.0.72
 - !15203  usb: cdc-acm: Check control transfer buffer size before access
 - usb: cdc-acm: Check control transfer buffer size before access
