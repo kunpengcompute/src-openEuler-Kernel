@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .2.0
-%global pkg_release         .50
+%global maintenance_release .3.0
+%global pkg_release         .51
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1122,6 +1122,10 @@ fi
 %endif
 
 %changelog
+* Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.3.0.51
+- !15288 【openEuler-25.03】tlbi: Do not force the broadcasting of TLBI and ICache, and a…
+- tlbi: Do not force the broadcasting of TLBI and ICache, and add TLB flush helpers based on IPI.
+
 * Thu Mar 06 2025 Li Ping <1477412247@qq.com> - 6.6.0-72.2.0.50
 - Split kernel modules into kernel-extra-modules subpackage
 - Prioritizes core kmod (networking/drm/block/modesetting) in main kernel package
