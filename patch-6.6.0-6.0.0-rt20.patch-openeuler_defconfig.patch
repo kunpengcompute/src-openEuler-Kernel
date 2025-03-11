@@ -1,7 +1,7 @@
-From 8d558ca2db5461fee564687fc3b98455c1058158 Mon Sep 17 00:00:00 2001
+From 8b7f719eb652d782bda6fb3dd8d1207115b36ba6 Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Thu, 20 Feb 2025 17:09:19 +0800
-Subject: [PATCH 2/2] rt2
+Date: Tue, 11 Mar 2025 15:53:20 +0800
+Subject: [PATCH] rt2
 
 ---
  arch/arm64/configs/openeuler_defconfig | 4 ++--
@@ -9,10 +9,10 @@ Subject: [PATCH 2/2] rt2
  2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index fc6053a50..64e4bb4f2 100644
+index 79b3616e0..6300b1c35 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
-@@ -96,7 +96,7 @@ CONFIG_PREEMPT_NONE=y
+@@ -97,7 +97,7 @@ CONFIG_PREEMPT_NONE=y
  # CONFIG_PREEMPT_VOLUNTARY is not set
  # CONFIG_PREEMPT is not set
  # CONFIG_PREEMPT_DYNAMIC is not set
@@ -21,7 +21,7 @@ index fc6053a50..64e4bb4f2 100644
  #
  # CPU/Task time and stats accounting
  #
-@@ -761,7 +761,7 @@ CONFIG_HAVE_KVM_VCPU_RUN_PID_CHANGE=y
+@@ -769,7 +769,7 @@ CONFIG_HAVE_KVM_VCPU_RUN_PID_CHANGE=y
  CONFIG_KVM_XFER_TO_GUEST_WORK=y
  CONFIG_KVM_GENERIC_HARDWARE_ENABLING=y
  CONFIG_KVM_HISI_VIRT=y
@@ -29,9 +29,9 @@ index fc6053a50..64e4bb4f2 100644
 +#CONFIG_VIRTUALIZATION is not set
  CONFIG_KVM=y
  CONFIG_HISI_VIRTCCA_HOST=y
- CONFIG_HISI_VIRTCCA_CODA=y
+ # CONFIG_NVHE_EL2_DEBUG is not set
 diff --git a/arch/x86/configs/openeuler_defconfig b/arch/x86/configs/openeuler_defconfig
-index adfaef0cb..fa44cb239 100644
+index 8eaa02177..02fe2ff7c 100644
 --- a/arch/x86/configs/openeuler_defconfig
 +++ b/arch/x86/configs/openeuler_defconfig
 @@ -111,11 +111,11 @@ CONFIG_BPF_SCHED=y
