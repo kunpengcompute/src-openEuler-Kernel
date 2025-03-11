@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       252
+%global devel_release       253
 %global maintenance_release .0.0
-%global pkg_release         .156
+%global pkg_release         .157
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,246 @@ fi
 %endif
 
 %changelog
+* Tue Mar 11 2025 Li Nan <linan122@huawei.com> - 5.10.0-253.0.0.157
+- !15447  Some bug fix patches for RDMA/hns to olk-5.10
+- !15429 mailbox: pcc: Fix the possible race in updation of chan_in_use flag
+- RDMA/hns: Fix default congestion control algorithm not set for kernel QP
+- RDMA/hns: Fix udca not unregistered when reset entry allocation failed
+- RDMA/hns: Fix wrong value of max_sge_rd
+- RDMA/hns: Fix missing xa_destroy()
+- RDMA/hns: Fix a missing rollback in error path of hns_roce_create_qp_common()
+- RDMA/hns: Fix invalid sq params not being blocked
+- RDMA/hns: Fix unmatched condition in error path of alloc_user_qp_db()
+- RDMA/hns: Fix DCA error path in alloc_wqe_buf()
+- mailbox: pcc: Fix the possible race in updation of chan_in_use flag
+- !15419  NFC: nci: Add bounds checking in nci_hci_create_pipe()
+- !15419  NFC: nci: Add bounds checking in nci_hci_create_pipe()
+- !15300 net: hns3: some bugfixes for hns3 driver
+- !15300 net: hns3: some bugfixes for hns3 driver
+- !15422  ocfs2: handle a symlink read error correctly
+- !15426 Some bug fix patches for OLK-5.10 hns RoCE
+- !15426 Some bug fix patches for OLK-5.10 hns RoCE
+- !15428  ubi: fastmap: wl: Schedule fm_work if wear-leveling pool is empty
+- ubi: fastmap: wl: Schedule fm_work if wear-leveling pool is empty
+- RDMA/hns: Fix ifnullfree static warning
+- RDMA/hns: Fix soft lockup by adding cond_resched() to bt pages loop
+- RDMA/hns: Fix unmatched kmalloc and kvfree
+- RDMA/hns: Fix delay-destruction mechanism not processing kernel db
+- RDMA/hns: Fix delayed destruction of db not taking effect
+- RDMA/hns: Move mtr_node into the mtr struct
+- RDMA/hns: Change mtr member to pointer in hns QP/CQ/MR/SRQ/EQ struct
+- net: hns3: add command queue trace for hns3
+- net: hns3: Revert "net: hns3: add command queue trace for hns3"
+- ocfs2: handle a symlink read error correctly
+- net: hns3: add mac tunnel number query
+- NFC: nci: Add bounds checking in nci_hci_create_pipe()
+- !15053  try to backport "block: fix rq-qos breakage from skipping rq_qos_done_bio"
+- !15053  try to backport "block: fix rq-qos breakage from skipping rq_qos_done_bio"
+- !15403  ipmr: do not call mr_mfc_uses_dev() for unres entries
+- !15403  ipmr: do not call mr_mfc_uses_dev() for unres entries
+- !15413  CVE-2025-21756
+- !15413  CVE-2025-21756
+- vsock: Orphan socket after transport release
+- vsock: Keep the binding until socket destruction
+- !15397  Bluetooth: L2CAP: handle NULL sock pointer in l2cap_sock_alloc
+- !15295  netfilter: nf_set_pipapo: fix initial map fill
+- !15295  netfilter: nf_set_pipapo: fix initial map fill
+- ipmr: do not call mr_mfc_uses_dev() for unres entries
+- net: hns3: fix oops when unload drivers paralleling
+- !15382  srcu: Tighten cleanup_srcu_struct() GP checks
+- Bluetooth: L2CAP: handle NULL sock pointer in l2cap_sock_alloc
+- !15387  crypto: qat - add param check for DH
+- !15389  orangefs: fix a oob in orangefs_debug_write
+- !15373  KVM: x86: Reject Hyper-V's SEND_IPI hypercalls if local APIC isn't in-kernel
+- !15241 KVM: arm64: pvsched bugfix and module param
+- orangefs: fix a oob in orangefs_debug_write
+- crypto: qat - add param check for DH
+- !15226 Fix northbridge init warning in guest for Hygon family 18h model 4h
+- !15226 Fix northbridge init warning in guest for Hygon family 18h model 4h
+- !15217 Add device HID for Hygon GPIO controller
+- !15217 Add device HID for Hygon GPIO controller
+- srcu: Tighten cleanup_srcu_struct() GP checks
+- !15232  smb: client: Fix netns refcount imbalance
+- !15232  smb: client: Fix netns refcount imbalance
+- !15348  Mainline Patch
+- KVM: x86: Reject Hyper-V's SEND_IPI hypercalls if local APIC isn't in-kernel
+- bpf: Use preempt_count() directly in bpf_send_signal_common()
+- bpf: Send signals asynchronously if !preemptible
+- KVM:arm64:Add a module param to enable/disable pv_preempted dynamically
+- !15307  net: sfc: add missing xdp queue reinitialization
+- !15279 [OLK-5.10]:update patches for sw64 architecture
+- !15279 [OLK-5.10]:update patches for sw64 architecture
+- net: sfc: add missing xdp queue reinitialization
+- netfilter: nf_set_pipapo: fix initial map fill
+- sw64: pci: add new files to help support ACPI-based PCI initialization
+- sw64: acpi: disable INTC initialization via ACPI MADT table
+- sw64: pci: bypass legacy PCI initialization when ACPI enabled
+- sw64: acpi: use early param to control whether ACPI is enabled
+- sw64: acpi: disable all ACPI features by default
+- pci: let pcibios_root_bridge_prepare() access bridge->windows
+- sw64: fix kernel crash caused by unaligned access exception
+- sw64: iommu: adjust iova map space
+- sw64: msi: split the msi file
+- sw64: use generic dma_direct_ops
+- sw64: fix cpu reduction bug in cpuautoplug
+- sw64: use generated macro in vrt_sigreturn.S
+- sw64: do not allow assembler reorder in __copy_user()
+- sw64: expand vmemmap
+- sw64: iommu: fix dma_supported of dma_ops
+- sw64: add support for TIF_NOTIFY_SIGNAL
+- sw64: fix stack trace error
+- sw64: register suspend entry for cpu 0 only
+- sw64: do not discard exit text at link time
+- sw64: fix syscall restart
+- sw64: usb: redefine some macros
+- sw64: iommu: upgrade sunway_iommu_v2 driver to make it work
+- sw64: fix syscall sigreturn and rt_sigreturn
+- sw64: optimize hmcall rdusp() and wrusp()
+- sw64: rewrite syscall invocation in C
+- sw64: expand struct pt_regs
+- sw64: kvm: delete kvm_sw64_ops structure
+- sw64: add imemb at the end of fixup_hmcall()
+- sw64: c3b: get MCLK rate dynamically according to specification
+- sw64: fix default short clock rate
+- sw64: use call and br in kernel entry
+- sw64: modify do_[rt_]sigreturn
+- sw64: modify fixup_exception()
+- sw64: rewrite struct pt_regs
+- sw64: simplify pt_regs related code
+- sw64: fix pt_regs related code
+- sw64: avoid using wrusp()
+- sw64: use sp in pt_regs
+- sw64: kvm: move bind vcpu init code into kvm_core3.c
+- sw64: add arch/sw_64/Kbuild
+- sw64: Kconfig: clean up out-of-date deep sleep options
+- sw64: Kconfig: rename BUILTIN_DTB option
+- sw64: optimize C4 compilation
+- sw64: kprobe: allow kprobe in atomic sequence on C4
+- sw64: lib: optimize lib functions for C4
+- sw64: optimize __fpstate_save on C4
+- sw64: add new match interface for C4
+- sw64: add C4 FPE_INTDIV support
+- sw64: update default FPCR value
+- sw64: defconfig: add junzhang_defconfig for C4 serials
+- sw64: add basic support for C4 ISA
+- sw64: use PAGE_OFFSET as ktext address head
+- sw64: dts: add an empty dts to support SW8A temporarily
+- sw64: kconfig: add SW8A platform support
+- sw64: kvm: rebuild Core3 and Core4 virtualization
+- sw64: kvm: add support for Core4 memory virtualization
+- sw64: kvm: add config guard for C3B implementation
+- sw64: kvm: add C4 vcpu support
+- sw64: iommu: add new iommu v2 support
+- sw64: pci: add C4 PCI_MSI support
+- sw64: pci: add C4 PCI support
+- sw64: irq: add basic C4 irq support
+- sw64: timer: add C4 timer support
+- sw64: unify io operations interface for C3B and C4
+- sw64: add SW8A io addresses
+- sw64: mm: add C4 hugetlb support
+- sw64: mm: add C4 MMU support
+- sw64: topology: add C4 topology info
+- sw64: add C4 CSRs
+- sw64: add C4 barriers support
+- sw64: add C4 xchg operations support
+- sw64: add C4 bit operations support
+- sw64: add C4 atomic operations support
+- sw64: redesign __cpu_to_rcid initialization
+- sw64: topology: modify topology defines
+- sw64: rename some fields of struct vcpucb
+- sw64: mm: use static ZERO_PAGE
+- sw64: mm: unify _PAGE_CHG_MASK and _HPAGE_CHG_MASK
+- sw64: mm: add more helpers to pgtable.h
+- sw64: mm: fix _PFN_MASK
+- sw64: mm: add _PAGE_CONT helpers
+- sw64: pci: rename PCI_DEVICE_ID_CHIP3
+- sw64: mm: rename _PAGE_PHU and _PAGE_PSE
+- sw64: remove unused file
+- sw64: remove out-of-date LOCK_FIXUP
+- sw64: fix compile error when CONFIG_PM is not set
+- sw64: kconfig: fix config error when PCI_MSI is not set
+- sw64: cpufreq: fix clockevents update method
+- sw64: fix excessive timer interrupts
+- sw64: simplify PMC interfaces
+- sw64: remove sw64_platform_ops
+- sw64: remove chip directory
+- sw64: reorganize pci setup related code
+- sw64: reorganize chip setup code
+- sw64: reorganize msi related code
+- sw64: reorganize basic irq handling code
+- sw64: reorganize pci related quirks
+- sw64: reorganize usb quirks related code
+- sw64: reorganize i2c related code
+- sw64: reorganize timer related code
+- sw64: reorganize cpu frequency related code
+- i2c: designware: add parameter MODEL_SUNWAY
+- sw64: fix compile warnings
+- sw64: cleanup hugetlb code
+- sw64: drop fpga and simulator support
+- sw64: fix indent of inline assembly
+- sw64: fix header include guards
+- sw64: add missing fallthrough
+- sw64: add missing break
+- sw64: Kconfig: remove out-of-date rwsem options
+- sw64: fix frequency in cpufreq_frequency_table
+- sw64: fix incorrect hmcalls in the virtual machine
+- sw64: remove arch overridden RLIM_INFINITY
+- sw64: do not set __ARCH_SI_TRAPNO
+- sw64: remove C3A support
+- sw64: fix s4 sleep bug
+- sw64: reorganize dependency of devmap helpers
+- i2c: sunway: do some cleanup for old i2c driver
+- i2c: designware: add sunway system I2C support
+- sw64: pci: use pci_has_flag to define pcibios_assign_all_busses
+- sw64: modify lock instruction
+- sw64: update openeuler_defconfig
+- sw64: add save_stack_trace_regs()
+- sw64: tools: fix selftests/sigaltstack for sw64
+- sw64: determine external clock according to specification
+- sw64: fix uretprobe implementation
+- sw64: fix some cpu autoplug bugs
+- sw64: kvm: add support for cpu offline and online in guest
+- fbdev: sw64 use __raw I/O memory api
+- sw64: correct the definition of MAX_DMA_ADDRESS
+- sw64: remove S3 flag
+- sw64: rename ptrace macros
+- sw64: fix audit_syscall_exit()
+- sw64: fix some include format
+- sw64: update cpufreq's info when cpu frequency changed
+- sw64: fix a compile error with CONFIG_TRANSPARENT_HUGEPAGE=n
+- sw64: selftests/ftrace: add sw64 support for kprobe args tests
+- sw64: hibernation: update ktp to vcpucb after restoring it
+- sw64: fix CONFIG_GENERIC_SCHED_CLOCK=y
+- sw64: kvm: fix memory hotplug support for guest
+- sw64: hugetlbfs: add arch_hugetlb_valid_size
+- sw64: kvm: fix some build errors for KVM module
+- sw64: perf: add libbfd-buildid and disassembler-four-args support
+- sw64: fix a compile error for headers_install
+- sw64: fix shared_cpu_map of tcache's cacheinfo
+- sw64: kvm: fix an error with non-8MB aligned guest RAM size
+- sw64: selftests/vm: fix virtual address range mapping test
+- sw64: fix KBUILD_DEFCONFIG
+- sw64: send a fake signal to all blocking tasks
+- sw64: clean up useless cpu_idle wrap
+- smb: client: Fix netns refcount imbalance causing leaks and use-after-free
+- smb: client: fix TCP timers deadlock after rmmod
+- x86/amd_nb: Fix northbridge init warning in guest for Hygon family 18h model 4h
+- pinctrl: Add device HID for Hygon GPIO controller
+- block: fix kabi broken due to removing bip_slab
+- block: fix kabi broken
+- block: fix rq-qos breakage from skipping rq_qos_done_bio()
+- block: only mark bio as tracked if it really is tracked
+- block: add a BUILD_BUG_ON() for adding more bio flags than we have space
+- block: use bi_max_vecs to find the bvec pool
+- md/raid10: remove dead code in reshape_request
+- block: mark the bio as cloned in bio_iov_bvec_set
+- block: turn the nr_iovecs argument to bio_alloc* into an unsigned short
+- block: remove the 1 and 4 vec bvec_slabs entries
+- block: streamline bvec_alloc
+- block: factor out a bvec_alloc_gfp helper
+- block: move struct biovec_slab to bio.c
+- block: reuse BIO_INLINE_VECS for integrity bvecs
+
 * Tue Mar 04 2025 Li Nan <linan122@huawei.com> - 5.10.0-252.0.0.156
 - !15293 ras: ACPI: HED: Always initialize before evged
 - !15269 [OLK-5.10]Intel: Backport to fix EDAC driver for GNR platform
