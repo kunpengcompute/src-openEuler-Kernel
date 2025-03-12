@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       253
+%global devel_release       254
 %global maintenance_release .0.0
-%global pkg_release         .156
+%global pkg_release         .157
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,17 @@ fi
 %endif
 
 %changelog
+* Wed Mar 12 2025 Li Nan <linan122@huawei.com> - 5.10.0-254.0.0.157
+- !15460 v2  soc: hisilicon: Add checks against NULL pointer reference
+- !15456  soc: hisilicon: Fix one printing issue and simplify some printing
+- !15454  RDMA/hns: Fix mbox timing out by adding retry mechanism
+- soc: hisilicon: Add checks against NULL pointer reference
+- soc: hisilicon: Fix one printing issue and simplify some printing
+- !15391  backport mainline bugfix patch
+- RDMA/hns: Fix mbox timing out by adding retry mechanism
+- irqchip/gic-v3: Handle CPU_PM_ENTER_FAILED correctly
+- genirq: Make handle_enforce_irqctx() unconditionally available
+
 * Tue Mar 11 2025 Li Nan <linan122@huawei.com> - 5.10.0-253.0.0.156
 - !15447  Some bug fix patches for RDMA/hns to olk-5.10
 - !15429 mailbox: pcc: Fix the possible race in updation of chan_in_use flag
