@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2503.1.0
+%global hulkrelease 2503.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0318
+Release: %{hulkrelease}.0319
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,87 @@ fi
 %endif
 
 %changelog
+
+* Wed Mar 12 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.3.0.0319
+- !15415  tracing/histograms: Fix memory leak problem
+- !15415  tracing/histograms: Fix memory leak problem
+- tracing/histograms: Fix memory leak problem
+- !15398  RDMA/hfi1: Prevent use of lock before it is initialized
+- !15401  hfsplus: don't query the device logical block size multiple times
+- !15401  hfsplus: don't query the device logical block size multiple times
+- !15399  drm/amd/amdgpu/amdgpu_cs: fix refcount leak of a dma_fence obj
+- !15399  drm/amd/amdgpu/amdgpu_cs: fix refcount leak of a dma_fence obj
+- !15411 v2  Ignore SB_RDONLY when mounting and remounting nfs
+- !15411 v2  Ignore SB_RDONLY when mounting and remounting nfs
+- !15337  net: tipc: fix possible refcount leak in tipc_sk_create()
+- !15336  CVE-2025-21702
+- !15335  net: sched: Disallow replacing of child qdisc from one parent to another
+- !15335  net: sched: Disallow replacing of child qdisc from one parent to another
+- nfs: ignore SB_RDONLY when remounting nfs
+- nfs: clear SB_RDONLY before getting superblock
+- !15393  powerpc/fsl_rio: Fix refcount leak in fsl_rio_setup
+- !15392  ARM: hisi: Add missing of_node_put after of_find_compatible_node
+- !15392  ARM: hisi: Add missing of_node_put after of_find_compatible_node
+- !15275  scsi: libfc: Fix use after free in fc_exch_abts_resp()
+- !15297  af_packet: avoid erroring out after sock_init_data() in packet_create()
+- !15297  af_packet: avoid erroring out after sock_init_data() in packet_create()
+- hfsplus: don't query the device logical block size multiple times
+- drm/amd/amdgpu/amdgpu_cs: fix refcount leak of a dma_fence obj
+- RDMA/hfi1: Prevent use of lock before it is initialized
+- !15374  can: gs_usb: gs_usb_open/close(): fix memory leak
+- !15332  Fix CVE-2022-49253
+- !15381  iio: trigger: sysfs: fix use-after-free on remove
+- !15386  crypto: qat - add param check for DH
+- !15353  rtl818x: Prevent using not initialized queues
+- !15354  drm/amdkfd: Check for potential null return of kmalloc_array()
+- !15231  cifs: Prevent NULL pointer dereference caused by cifs_sb->rsize is 0
+- powerpc/fsl_rio: Fix refcount leak in fsl_rio_setup
+- ARM: hisi: Add missing of_node_put after of_find_compatible_node
+- !15240  smb: client: Fix netns refcount imbalance
+- crypto: qat - add param check for DH
+- iio: trigger: sysfs: fix use-after-free on remove
+- !15361  md/bitmap: don't set sb values if can't pass sanity check
+- !15361  md/bitmap: don't set sb values if can't pass sanity check
+- !15351  dm integrity: fix memory corruption when tag_size is less than digest size
+- !15350  video: fbdev: nvidiafb: Use strscpy() to prevent buffer overflow
+- can: gs_usb: gs_usb_open/close(): fix memory leak
+- !15075 v4  Fix CVE-2023-52572 in openEuler-1.0-LTS
+- !15287  bpf, arm64: Clear prog->jited_len along prog->jited
+- md/bitmap: don't set sb values if can't pass sanity check
+- !15324  Fix Fix CVE-2022-49351
+- !15329  Fix CVE-2022-49308
+- drm/amdkfd: Check for potential null return of kmalloc_array()
+- rtl818x: Prevent using not initialized queues
+- dm integrity: fix memory corruption when tag_size is less than digest size
+- video: fbdev: nvidiafb: Use strscpy() to prevent buffer overflow
+- !15282  fix CVE-2022-49404
+- !15282  fix CVE-2022-49404
+- !15273  ARM: davinci: da850-evm: Avoid NULL pointer dereference
+- !15273  ARM: davinci: da850-evm: Avoid NULL pointer dereference
+- !15303  md/raid1: fix memory leak in raid1_run() if no active rdev
+- !15304  md: bypass block throttle for superblock update
+- !15318  md/raid1: fix bitmap update when all write requests fail
+- !15318  md/raid1: fix bitmap update when all write requests fail
+- net: tipc: fix possible refcount leak in tipc_sk_create()
+- pfifo_tail_enqueue: Drop new packet when sch->limit == 0
+- net_sched: sch_fifo: implement lockless __fifo_dump()
+- net: sched: Disallow replacing of child qdisc from one parent to another
+- media: usb: go7007: s2250-board: fix leak in probe()
+- extcon: Modify extcon device to be created after driver data is set
+- extcon: Fix error handling in extcon_dev_register
+- net: altera: Fix refcount leak in altera_tse_mdio_create
+- md/raid1: fix bitmap update when all write requests fail
+- md: bypass block throttle for superblock update
+- md/raid1: fix memory leak in raid1_run() if no active rdev
+- af_packet: avoid erroring out after sock_init_data() in packet_create()
+- bpf, arm64: Clear prog->jited_len along prog->jited
+- RDMA/hfi1: Fix potential integer multiplication overflow errors
+- scsi: libfc: Fix use after free in fc_exch_abts_resp()
+- ARM: davinci: da850-evm: Avoid NULL pointer dereference
+- smb: client: Fix netns refcount imbalance causing leaks and use-after-free
+- smb: client: fix TCP timers deadlock after rmmod
+- cifs: Prevent NULL pointer dereference caused by cifs_sb->rsize is 0
+- cifs: Fix UAF in cifs_demultiplex_thread()
 
 * Tue Mar 04 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.1.0.0318
 - !15314  drm/imx: Fix memory leak in imx_pd_connector_get_modes
