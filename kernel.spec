@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .3.0
-%global pkg_release         .51
+%global maintenance_release .4.0
+%global pkg_release         .52
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1122,6 +1122,10 @@ fi
 %endif
 
 %changelog
+* Wed Mar 12 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.4.0.52
+- !15431 fw, net: wireless: Add RTW88 driver and compressed firmware support
+- fw, net: wireless: Add RTW88 driver and compressed firmware support
+
 * Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.3.0.51
 - !15288 【openEuler-25.03】tlbi: Do not force the broadcasting of TLBI and ICache, and a…
 - tlbi: Do not force the broadcasting of TLBI and ICache, and add TLB flush helpers based on IPI.
