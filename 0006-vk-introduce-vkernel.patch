@@ -1,4 +1,4 @@
-From 7b8c1f8bb2a03701c9ad6f877cfa499be385b650 Mon Sep 17 00:00:00 2001
+From 02840c09c3654c528e4733029a0e7f31ae1d62ee Mon Sep 17 00:00:00 2001
 From: Joy Allen <taozhiheng@jyhlab.org.cn>
 Date: Wed, 12 Feb 2025 14:44:52 +0800
 Subject: [PATCH] vk: introduce vkernel
@@ -123,7 +123,7 @@ Signed-off-by: Joy Allen <taozhiheng@jyhlab.org.cn>
  create mode 100644 kernel/vkernel_hook.c
 
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index fc6053a500db..f35b1f8ba77e 100644
+index 79b3616e0ec3..0534906a8feb 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
 @@ -203,6 +203,7 @@ CONFIG_IPC_NS=y
@@ -212,7 +212,7 @@ index 558e9c9da8a4..bf2da0b4a494 100644
  		ret = do_ni_syscall(regs, scno);
  	}
 diff --git a/arch/x86/configs/openeuler_defconfig b/arch/x86/configs/openeuler_defconfig
-index adfaef0cb10c..30798946ceef 100644
+index 8eaa021779e1..5f9e5a65d1ae 100644
 --- a/arch/x86/configs/openeuler_defconfig
 +++ b/arch/x86/configs/openeuler_defconfig
 @@ -221,6 +221,7 @@ CONFIG_IPC_NS=y
@@ -6468,20 +6468,20 @@ index 3df13ed40214..e59790eac705 100644
  		struct page *zero_page;
  		vm_fault_t ret;
 diff --git a/mm/memory.c b/mm/memory.c
-index a6d146d684e8..d7e8bae24c57 100644
+index f05772babfe0..0e7352cd7f1a 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -79,6 +79,9 @@
- #include <linux/sched/sysctl.h>
+@@ -80,6 +80,9 @@
  #include <linux/userswap.h>
  #include <linux/dynamic_pool.h>
+ #include <linux/numa_kernel_replication.h>
 +#ifdef CONFIG_VKERNEL
 +#include <linux/vkernel.h>
 +#endif
  
  #include <trace/events/kmem.h>
  
-@@ -4697,6 +4700,14 @@ vm_fault_t do_set_pmd(struct vm_fault *vmf, struct page *page)
+@@ -4837,6 +4840,14 @@ vm_fault_t do_set_pmd(struct vm_fault *vmf, struct page *page)
  	unsigned long haddr = vmf->address & HPAGE_PMD_MASK;
  	pmd_t entry;
  	vm_fault_t ret = VM_FAULT_FALLBACK;
@@ -6496,7 +6496,7 @@ index a6d146d684e8..d7e8bae24c57 100644
  
  	/*
  	 * It is too late to allocate a small folio, we already have a large
-@@ -4704,7 +4715,11 @@ vm_fault_t do_set_pmd(struct vm_fault *vmf, struct page *page)
+@@ -4844,7 +4855,11 @@ vm_fault_t do_set_pmd(struct vm_fault *vmf, struct page *page)
  	 * PMD mappings, but PTE-mapped THP are fine. So let's simply refuse any
  	 * PMD mappings if THPs are disabled.
  	 */
@@ -7027,5 +7027,5 @@ index bc0521104197..f7d30e13fb0d 100644
  	/* See if cred has the capability in the target user namespace
  	 * by examining the target user namespace and all of the target
 -- 
-2.25.1
+2.39.5
 
