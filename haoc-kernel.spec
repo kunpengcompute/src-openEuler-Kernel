@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       72
 %global maintenance_release .4.0
-%global pkg_release         .48
+%global pkg_release         .49
 
 %global openeuler_lts       1
 %global openeuler_major     2503
@@ -1088,6 +1088,9 @@ fi
 %endif
 
 %changelog
+* Fri Mar 14 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-72.4.0.49
+- Fix some build error in ARM64.
+
 * Thu Mar 12 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-72.4.0.48
 - Update HAOC for 6.6.0-72.4.0, add support for PTP,SIP,PTRP
 
