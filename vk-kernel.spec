@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .3.0
-%global pkg_release         .52
+%global maintenance_release .4.0
+%global pkg_release         .54
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -237,12 +237,14 @@ Obsoletes: %{name}-tools-libs-devel
 This package contains the development files for the tools/ directory from
 the kernel source.
 
+%ifarch x86_64 aarch64
 %package extra-modules
 Summary: Extra kernel modules to match the kernel
 AutoReqProv: no
 Provides: kernel-extra-modules = %{version}-%{release}
 %description extra-modules
 This package contains optional modules that may be dynamically loaded but not needed for base system operation.
+%endif
 
 %if %{with_perf}
 %package -n perf
@@ -649,23 +651,26 @@ install -m 755 %{SOURCE200} $RPM_BUILD_ROOT%{_sbindir}/mkgrub-menu-%{version}-%{
 # for RPM package specification, while ensuring proper path mapping to /lib/modules/%{KernelVer}/
 
 pushd $RPM_BUILD_ROOT/lib/modules/%{KernelVer}
-
+%ifnarch x86_64 aarch64
+find -type f -name "*.ko" >modnames
+%else
 sed 's!^!kernel/!; s!\.ko$!!' %{_sourcedir}/core-modules_%{_target_cpu}.list > modules.list
 
 %{_sourcedir}/find-module-deps.sh %{KernelVer} "$RPM_BUILD_ROOT" modules.list >modules-core.list
 
 sed 's!^kernel/!!; s!\.ko$!.ko.xz!; s!^!/lib/modules/%{KernelVer}/kernel/!' \
-  modules-core.list > %{_builddir}/%{name}-%{version}/kernel-modules-filelist
+  modules-core.list > %{_builddir}/kernel-%{version}/kernel-modules-filelist
 
 find -type f -name "*.ko" | sort >modnames
 
 grep -vFf modules-core.list modnames > modules-extra.list || true
 
 if [ -s modules-extra.list ]; then
-    sed -e 's!^\.\/kernel/!/lib/modules/%{KernelVer}/kernel/!; s!\.ko$!.ko.xz!' modules-extra.list > %{_builddir}/%{name}-%{version}/kernel-extra-modules-filelist
+    sed -e 's!^\.\/kernel/!/lib/modules/%{KernelVer}/kernel/!; s!\.ko$!.ko.xz!' modules-extra.list > %{_builddir}/kernel-%{version}/kernel-extra-modules-filelist
 else
-    echo "%ghost /nonexistent/dummy/file" > %{_builddir}/%{name}-%{version}/kernel-extra-modules-filelist
+    echo "%ghost /nonexistent/dummy/file" > %{_builddir}/kernel-%{version}/kernel-extra-modules-filelist
 fi
+%endif
 
 # mark modules executable so that strip-to-file can strip them
 xargs --no-run-if-empty chmod u+x < modnames
@@ -705,7 +710,10 @@ grep -E -v \
 	  'GPL( v2)?$|Dual BSD/GPL$|Dual MPL/GPL$|GPL and additional rights$' \
   modinfo && exit 1
 
-rm -f modinfo modnames drivers.undef modules-extra.list modules-core.list modules.list
+rm -f modinfo modnames drivers.undef
+%ifarch x86_64 aarch64
+rm -f modules-extra.list modules-core.list modules.list
+%endif
 
 for i in alias alias.bin builtin.bin ccwmap dep dep.bin ieee1394map inputmap isapnpmap ofmap pcimap seriomap symbols symbols.bin usbmap
 do
@@ -1009,7 +1017,11 @@ fi
 /sbin/ldconfig
 %systemd_postun cpupower.service
 
+%ifnarch x86_64 aarch64
+%files
+%else
 %files -f kernel-modules-filelist
+%endif
 %defattr (-, root, root)
 %doc
 /boot/config-*
@@ -1022,14 +1034,20 @@ fi
 %ghost /boot/initramfs-%{KernelVer}.img
 /boot/.vmlinuz-*.hmac
 /etc/ld.so.conf.d/*
+%ifnarch x86_64 aarch64
+/lib/modules/%{KernelVer}/
+%else
 /lib/modules/%{KernelVer}/vdso/
 /lib/modules/%{KernelVer}/modules.*
+%endif
 %exclude /lib/modules/%{KernelVer}/source
 %exclude /lib/modules/%{KernelVer}/build
 %{_sbindir}/mkgrub-menu*.sh
 
+%ifarch x86_64 aarch64
 %files extra-modules -f kernel-extra-modules-filelist
 %defattr(-,root,root)
+%endif
 
 %files devel
 %defattr (-, root, root)
@@ -1130,8 +1148,15 @@ fi
 %endif
 
 %changelog
-* Tue Mar 11 2025 Joy Allen <1554706732@qq.com> - 6.6.0-72.3.0.52
+* Thu Mar 13 2025 Joy Allen <1554706732@qq.com> - 6.6.0-72.4.0.54
 - vk: introduce vkernel
+
+* Wed Mar 12 2025 laokz <zhangkai@iscas.ac.cn> - 6.6.0-72.4.0.53
+- Let kernel-extra-modules subpackage only for x86_64, aarch64
+
+* Wed Mar 12 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.4.0.52
+- !15431 fw, net: wireless: Add RTW88 driver and compressed firmware support
+- fw, net: wireless: Add RTW88 driver and compressed firmware support
 
 * Thu Mar 06 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.3.0.51
 - !15288 【openEuler-25.03】tlbi: Do not force the broadcasting of TLBI and ICache, and a…
