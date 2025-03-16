@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       82
 %global maintenance_release .0.0
-%global pkg_release         .75
+%global pkg_release         .76
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,12 @@ fi
 %endif
 
 %changelog
+* Fri Mar 14 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-82.0.0.76
+- RISC-V kernel upgrade to 6.6.0-82.0.0
+- riscv: Fixed conflict created by commit c7c8e8a76904
+- riscv: Enable zstd-compressed firmware support
+- riscv: Enable AMDKFD driver for ROCm
+
 * Wed Mar 12 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-82.0.0.75
 - !15440 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.70-6.6.72 LTS Patches
 - drm/mediatek: Only touch DISP_REG_OVL_PITCH_MSB if AFBC is supported
