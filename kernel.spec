@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       82
+%global devel_release       83
 %global maintenance_release .0.0
-%global pkg_release         .76
+%global pkg_release         .77
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,64 @@ fi
 %endif
 
 %changelog
+* Tue Mar 18 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-83.0.0.77
+- !15047 mm: Backport some mm patchs
+- mm/memmap: prevent double scanning of memmap by kmemleak
+- mm: kmemleak: fix upper boundary check for physical address objects
+- mm/vmscan: fix hard LOCKUP in function isolate_lru_folios
+- mm: compaction: use the proper flag to determine watermarks
+- !15271  LoongArch: fix cacheinfo/unaligned/rtc/s3/hda/usb issues
+- blutetooth/btusb: delay 1ms while suspending
+- LoongArch: Correct the cacheinfo sharing information
+- ice: fix unaligned access in ice_create_lag_recipe
+- LoongArch: set CONFIG_CMA_SIZE_MBYTES to 0
+- rtc: loongson: clear TOY_MATCH0_REG in loongson_rtc_isr()
+- hda/pci: Add AZX_DCAPS_NO_TCSEL flag for Loongson HDA devices
+- LoongArch: Update the flush cache policy
+- !15516 mm: shmem: remove unnecessary warning in shmem_writepage()
+- mm: shmem: remove unnecessary warning in shmem_writepage()
+- !15492  Add dp module in hibmc driver
+- drm/hisilicon/hibmc: add dp module in hibmc
+- drm/hisilicon/hibmc: refactored struct hibmc_drm_private
+- drm/hisilicon/hibmc: add dp hw moduel in hibmc driver
+- drm/hisilicon/hibmc: add dp link moduel in hibmc drivers
+- drm/hisilicon/hibmc: add dp aux in hibmc drivers
+- drm/hisilicon/hibmc: convert to struct drm_edid
+- !15395  clk: qcom: dispcc-sm6350: Add missing parent_map for a clock
+- clk: qcom: dispcc-sm6350: Add missing parent_map for a clock
+- !15459  perf: Configure BRBE correctly on VHE host
+- perf: Configure BRBE correctly on VHE host
+- !15369  media: vidtv: Fix a null-ptr-deref in vidtv_mux_stop_thread
+- media: vidtv: Fix a null-ptr-deref in vidtv_mux_stop_thread
+- !15421 [OLK-6.6] [Backport] upstream fix for driver nvme
+- nvme: handle connectivity loss in nvme_set_queue_count
+- nvme: fix bogus kzalloc() return check in nvme_init_effects_log()
+- nvme: Add error path for xa_store in nvme_init_effects
+- nvme: Add error check for xa_store in nvme_get_effects_log
+- !15370  wifi: brcmfmac: Check the return value of of_property_read_string_index()
+- wifi: brcmfmac: Check the return value of of_property_read_string_index()
+- !15483  CVE-2024-58069
+- rtc: pcf85063: fix potential OOB write in PCF85063 NVMEM read
+- !15470  some readahead improvement
+- readahead: properly shorten readahead when falling back to do_page_cache_ra()
+- readahead: don't shorten readahead window in read_pages()
+- readahead: make sure sync readahead reads needed page
+- !15404  ipmr: do not call mr_mfc_uses_dev() for unres entries
+- ipmr: do not call mr_mfc_uses_dev() for unres entries
+- !15376 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.62-6.6.63 LTS Conflicts Patches
+- mptcp: update local address flags when setting it
+- NFSD: Async COPY result needs to return a write verifier
+- !15164 [openEuler-24.03-LTS][linux-6.6.y sync] KVM: x86: Play nice with protected guests in complete_hypercall_exit()
+- KVM: x86: Play nice with protected guests in complete_hypercall_exit()
+- !15375 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.60-6.6.61 LTS Conflicts Patches
+- posix-cpu-timers: Clear TICK_DEP_BIT_POSIX_TIMER on clone
+- !15149 Fix northbridge init warning in guest for Hygon family 18h model 4h
+- x86/amd_nb: Fix northbridge init warning in guest for Hygon family 18h model 4h
+- !15147  Add device HID for Hygon GPIO controller
+- pinctrl: Add device HID for Hygon GPIO controller
+- !15438 fix HCT build err once VFIO disabled
+- hct: fix build err once VFIO disabled
+
 * Fri Mar 14 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-82.0.0.76
 - RISC-V kernel upgrade to 6.6.0-82.0.0
 - riscv: Fixed conflict created by commit c7c8e8a76904
