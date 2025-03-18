@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .4.0
-%global pkg_release         .54
+%global maintenance_release .5.0
+%global pkg_release         .55
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1140,6 +1140,12 @@ fi
 %endif
 
 %changelog
+* Tue Mar 18 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.5.0.55
+- !15551 haoc: add support for versions lower than ARMv8.1-a
+- haoc: add support for versions lower than ARMv8.1-a
+- !15512 haoc: fix memory recognization issue
+- haoc: fix memory recognization issue
+
 * Fri Mar 14 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-72.4.0.54
 - RISC-V kernel upgrade to 6.6.0-72.4.0
 - riscv: config: Enable zstd-compressed firmware support
