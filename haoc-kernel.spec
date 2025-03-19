@@ -1088,6 +1088,9 @@ fi
 %endif
 
 %changelog
+* Wed Mar 19 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-72.5.0.50
+- Update HAOC for 6.6.0-72.5.0
+
 * Fri Mar 14 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-72.4.0.49
 - Fix some build error in ARM64.
 
