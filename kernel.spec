@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2503.3.0
+%global hulkrelease 2503.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0319
+Release: %{hulkrelease}.0320
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,62 @@ fi
 %endif
 
 %changelog
+
+* Wed Mar 19 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.4.0.0320
+- !15574  some CVE fixes
+- rtc: mt6397: check return value after calling platform_get_resource()
+- nfc: st21nfca: fix memory leaks in EVT_TRANSACTION handling
+- drivers: staging: rtl8192e: Fix deadlock in rtllib_beacons_stop()
+- !15503  ubi: Fix race condition between ctrl_cdev_ioctl and ubi_cdev_ioctl
+- !15500  Fix 4 CVEs in JFFS2
+- !15544  ext4: fix race condition between ext4_write and ext4_convert_inline_data
+- !15521  ALSA: firewire-lib: fix uninitialized flag for AV/C deferred transaction
+- ext4: fix race condition between ext4_write and ext4_convert_inline_data
+- ALSA: firewire-lib: fix uninitialized flag for AV/C deferred transaction
+- !15495  drm/msm/disp/dpu1: set vbif hw config to NULL to avoid use after memory free during pm runtime resume
+- !15372  xtensa: Fix refcount leak bug in time.c
+- !15494  mips: cpc: Fix refcount leak in mips_cpc_default_phys_base
+- ubi: Fix race condition between ctrl_cdev_ioctl and ubi_cdev_ioctl
+- !15448  vrf: use RCU protection in l3mdev_l3_out()
+- !15433  scsi: qla2xxx: Suppress a kernel complaint in qla_create_qpair()
+- !15432  CVE-2022-49087
+- !15486  mm: fix unexpected zeroed page mapping with zram swap
+- !15487  CVE-2022-49514
+- !15485  media: venus: hfi: avoid null dereference in deinit
+- !15484  drm/msm/mdp5: Return error code in mdp5_mixer_release when deadlock is detected
+- jffs2: fix memory leak in jffs2_do_fill_super
+- jffs2: fix memory leak in jffs2_do_mount_fs
+- jffs2: fix memory leak in jffs2_scan_medium
+- jffs2: fix use-after-free in jffs2_clear_xattr_subsystem
+- drm/msm/disp/dpu1: set vbif hw config to NULL to avoid use after memory free during pm runtime resume
+- mips: cpc: Fix refcount leak in mips_cpc_default_phys_base
+- !15371  pinctrl: ralink: Check for null return of devm_kcalloc
+- !15343  ipw2x00: Fix potential NULL dereference in libipw_xmit()
+- !15342  drm/virtio: fix NULL pointer dereference in virtio_gpu_conn_get_modes
+- !15425  CVE-2022-49513
+- ASoC: mediatek: Fix error handling in mt8173_max98090_dev_probe
+- ASoC: mediatek: mt8173: fix device_node leak
+- mm: fix unexpected zeroed page mapping with zram swap
+- media: venus: hfi: avoid null dereference in deinit
+- drm/msm/mdp5: Return error code in mdp5_mixer_release when deadlock is detected
+- !15461  be2net: Fix buffer overflow in be_get_module_eeprom
+- !15443  i40e: Fix call trace in setup_tx_descriptors
+- !15442  nfc: nfcmrvl: Fix memory leak in nfcmrvl_play_deferred
+- !15458  sfc: fix kernel panic when creating VF
+- be2net: Fix buffer overflow in be_get_module_eeprom
+- sfc: fix kernel panic when creating VF
+- vrf: use RCU protection in l3mdev_l3_out()
+- i40e: Fix call trace in setup_tx_descriptors
+- nfc: nfcmrvl: Fix memory leak in nfcmrvl_play_deferred
+- scsi: qla2xxx: Suppress a kernel complaint in qla_create_qpair()
+- rxrpc: Restore removed timer deletion
+- rxrpc: fix a race in rxrpc_exit_net()
+- cpufreq: governor: Use kobject release() method to free dbs_data
+- cpufreq: Move to_gov_attr_set() to cpufreq.h
+- xtensa: Fix refcount leak bug in time.c
+- pinctrl: ralink: Check for null return of devm_kcalloc
+- ipw2x00: Fix potential NULL dereference in libipw_xmit()
+- drm/virtio: fix NULL pointer dereference in virtio_gpu_conn_get_modes
 
 * Wed Mar 12 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.3.0.0319
 - !15415  tracing/histograms: Fix memory leak problem
