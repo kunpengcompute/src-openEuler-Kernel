@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       72
-%global maintenance_release .5.0
-%global pkg_release         .55
+%global maintenance_release .6.0
+%global pkg_release         .56
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1140,6 +1140,14 @@ fi
 %endif
 
 %changelog
+* Fri Mar 21 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.6.0.56
+- !15572 tlbi: fix the problem of incorrect TLB flashing
+- KVM: arm64: Allow vcpus running without HCR_EL2.FB
+- tlbi: fix the problem of incorrect TLB flashing
+- PINCTRL: Fix the issue that CONFIG_PINCTRL_AMD do not support m option
+- !15588 Enable CONFIG_PINCTRL_AMD， Resolve touchpad malfunction issue
+- PINCTRL:ENABLE_CONFIG_PINCTRL_AMD
+
 * Tue Mar 18 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.5.0.55
 - !15551 haoc: add support for versions lower than ARMv8.1-a
 - haoc: add support for versions lower than ARMv8.1-a
