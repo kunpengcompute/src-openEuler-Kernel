@@ -1,12 +1,12 @@
-From b0de26eeabf3d8a823dae04a66f094251c01b532 Mon Sep 17 00:00:00 2001
+From 82657210c46576a3041f98431c42296d355d1dec Mon Sep 17 00:00:00 2001
 From: Liu Zhehui <liuzhh@zgclab.edu.cn>
-Date: Wed, 19 Mar 2025 04:36:40 +0000
+Date: Sat, 22 Mar 2025 07:33:39 +0000
 Subject: [PATCH] migrate
 
 ---
  .../admin-guide/kernel-parameters.txt         |    7 -
- arch/arm64/Kconfig                            |   28 -
- arch/arm64/configs/openeuler_defconfig        |   18 +-
+ arch/arm64/Kconfig                            |   26 -
+ arch/arm64/configs/openeuler_defconfig        |   21 +-
  arch/arm64/include/asm/assembler.h            |    6 +
  arch/arm64/include/asm/efi.h                  |   18 +-
  arch/arm64/include/asm/fixmap.h               |    4 +
@@ -28,12 +28,13 @@ Subject: [PATCH] migrate
  arch/arm64/include/asm/haoc/iee-token.h       |   70 +
  arch/arm64/include/asm/haoc/iee-vmlinux.h     |   54 +
  arch/arm64/include/asm/haoc/iee.h             |   24 +-
+ arch/arm64/include/asm/kvm_emulate.h          |    9 -
  arch/arm64/include/asm/memory.h               |    4 +
- arch/arm64/include/asm/mmu_context.h          |   28 +-
- arch/arm64/include/asm/pgtable.h              |   23 +-
+ arch/arm64/include/asm/mmu_context.h          |   24 +-
+ arch/arm64/include/asm/numa_replication.h     |   54 -
+ arch/arm64/include/asm/pgtable.h              |   19 +-
  arch/arm64/include/asm/tlb.h                  |    4 +
- arch/arm64/include/asm/tlbflush.h             |  101 -
- arch/arm64/kernel/Makefile                    |    1 -
+ arch/arm64/include/asm/tlbflush.h             |   75 -
  arch/arm64/kernel/alternative.c               |   27 +-
  arch/arm64/kernel/armv8_deprecated.c          |   19 +
  arch/arm64/kernel/cpu_errata.c                |   15 +
@@ -70,10 +71,12 @@ Subject: [PATCH] migrate
  arch/arm64/kernel/proton-pack.c               |   11 +
  arch/arm64/kernel/setup.c                     |   10 +
  arch/arm64/kernel/sleep.S                     |    8 -
- arch/arm64/kernel/smp.c                       |   29 -
+ arch/arm64/kernel/smp.c                       |   22 -
  arch/arm64/kernel/suspend.c                   |    6 -
  arch/arm64/kernel/vmlinux.lds.S               |   40 +-
- arch/arm64/mm/context.c                       |   63 +-
+ arch/arm64/kvm/Kconfig                        |   15 -
+ arch/arm64/kvm/arm.c                          |   29 -
+ arch/arm64/mm/context.c                       |   57 +-
  arch/arm64/mm/fault.c                         |   12 +
  arch/arm64/mm/fixmap.c                        |   31 +
  arch/arm64/mm/init.c                          |   53 +-
@@ -88,7 +91,7 @@ Subject: [PATCH] migrate
  arch/x86/Kconfig                              |   17 +
  arch/x86/boot/compressed/ident_map_64.c       |   34 +
  arch/x86/boot/compressed/pgtable_64.c         |    4 +
- arch/x86/configs/openeuler_defconfig          |  102 +-
+ arch/x86/configs/openeuler_defconfig          |  104 +-
  arch/x86/include/asm/desc.h                   |   15 +
  arch/x86/include/asm/haoc/haoc-def.h          |   33 +-
  arch/x86/include/asm/haoc/haoc.h              |   32 +-
@@ -135,6 +138,7 @@ Subject: [PATCH] migrate
  fs/erofs/inode.c                              |    2 -
  fs/erofs/internal.h                           |   56 -
  fs/erofs/super.c                              |   49 +-
+ fs/erofs/trio_manager.c                       |  365 ----
  fs/exec.c                                     |   23 +
  include/asm-generic/pgalloc.h                 |   78 -
  include/asm-generic/pgtable-nop4d.h           |    5 -
@@ -143,9 +147,11 @@ Subject: [PATCH] migrate
  include/asm-generic/tlb.h                     |   25 +
  include/linux/efi.h                           |    3 +
  include/linux/gfp.h                           |    5 -
+ include/linux/kvm_host.h                      |    3 -
  include/linux/mm.h                            |  102 +-
  include/linux/mm_types.h                      |    7 +-
  include/linux/moduleloader.h                  |    6 -
+ include/linux/numa_kernel_replication.h       |  220 ---
  include/linux/ptp-cache.h                     |   37 +
  include/linux/set_memory.h                    |   35 -
  include/linux/vmalloc.h                       |   19 -
@@ -171,13 +177,22 @@ Subject: [PATCH] migrate
  mm/mmap.c                                     |   35 +
  mm/mmu_gather.c                               |  196 ++
  mm/mprotect.c                                 |   12 +
+ mm/numa_kernel_replication.c                  |  835 --------
  mm/page_alloc.c                               |   20 -
  mm/pgtable-generic.c                          |   25 +
  mm/slub.c                                     |   34 +
  mm/sparse-vmemmap.c                           |   17 +
  mm/vmalloc.c                                  |  469 +----
  net/bpf/bpf_dummy_struct_ops.c                |    2 +-
- 173 files changed, 8664 insertions(+), 2451 deletions(-)
+ tools/trio/README.md                          |  446 -----
+ tools/trio/bpf/iotracker/Makefile             |   99 -
+ tools/trio/bpf/iotracker/iotracker.bpf.c      |   52 -
+ tools/trio/bpf/iotracker/iotracker.c          |   57 -
+ tools/trio/bpf/rio_tracker_mod/Makefile       |    9 -
+ tools/trio/bpf/rio_tracker_mod/rio_tracker.c  |  370 ----
+ tools/trio/scripts/trace_parser.py            |  287 ---
+ virt/kvm/kvm_main.c                           |    3 -
+ 188 files changed, 8665 insertions(+), 5258 deletions(-)
  create mode 100644 arch/arm64/include/asm/haoc/haoc-bitmap.h
  create mode 100644 arch/arm64/include/asm/haoc/iee-cred.h
  create mode 100644 arch/arm64/include/asm/haoc/iee-fixmap.h
@@ -188,6 +203,7 @@ Subject: [PATCH] migrate
  create mode 100644 arch/arm64/include/asm/haoc/iee-si.h
  create mode 100644 arch/arm64/include/asm/haoc/iee-token.h
  create mode 100644 arch/arm64/include/asm/haoc/iee-vmlinux.h
+ delete mode 100644 arch/arm64/include/asm/numa_replication.h
  create mode 100644 arch/arm64/kernel/haoc/credp/Makefile
  create mode 100644 arch/arm64/kernel/haoc/credp/credp.c
  create mode 100644 arch/arm64/kernel/haoc/haoc-bitmap.c
@@ -210,9 +226,19 @@ Subject: [PATCH] migrate
  create mode 100644 arch/x86/kernel/haoc/ptp/ident_map.c
  create mode 100644 arch/x86/kernel/haoc/ptp/ptp-gate.S
  create mode 100644 arch/x86/kernel/haoc/ptp/ptp.c
+ delete mode 100644 fs/erofs/trio_manager.c
+ delete mode 100644 include/linux/numa_kernel_replication.h
  create mode 100644 include/linux/ptp-cache.h
  create mode 100644 mm/haoc/Makefile
  create mode 100644 mm/haoc/ptp-pg_cache.c
+ delete mode 100644 mm/numa_kernel_replication.c
+ delete mode 100644 tools/trio/README.md
+ delete mode 100644 tools/trio/bpf/iotracker/Makefile
+ delete mode 100644 tools/trio/bpf/iotracker/iotracker.bpf.c
+ delete mode 100644 tools/trio/bpf/iotracker/iotracker.c
+ delete mode 100644 tools/trio/bpf/rio_tracker_mod/Makefile
+ delete mode 100644 tools/trio/bpf/rio_tracker_mod/rio_tracker.c
+ delete mode 100644 tools/trio/scripts/trace_parser.py
 
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
 index 0f1f6143f53f..5bf51e171ee7 100644
@@ -233,10 +259,10 @@ index 0f1f6143f53f..5bf51e171ee7 100644
  			Format: <Controller#>[,poll interval]
  			The controller # is the number of the ehci usb debug
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 6f72be31061b..fd8277dd363c 100644
+index d3ce44c166ce..fd8277dd363c 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -2672,34 +2672,6 @@ config ARCH_CPUIDLE_HALTPOLL
+@@ -2672,32 +2672,6 @@ config ARCH_CPUIDLE_HALTPOLL
  
  endmenu # "Power management options"
  
@@ -247,10 +273,8 @@ index 6f72be31061b..fd8277dd363c 100644
 -	depends on ARM64
 -	default n
 -	help
--	  adds new boot parameter 'disable_tlbflush_is' to disable TLB flush
--	  within the same inner shareable domain for performance tuning.
--
--	  When this new parameter is specified, TLB entry is invalidated by
+-	  Disable TLB flush within the same inner shareable domain for performance
+-	  tuning. When this new parameter is specified, TLB entry is invalidated by
 -	  __tlbi(aside1, asid) only on the CPUs specified by mm_cpumask(mm).
 -
 -	  By using TLB.IS, all CPUs within the same inner shareable domain
@@ -272,7 +296,7 @@ index 6f72be31061b..fd8277dd363c 100644
  
  source "drivers/cpuidle/Kconfig"
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index 04c4b92e7377..fc6053a500db 100644
+index 8f97574813ca..fc6053a500db 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
 @@ -632,12 +632,6 @@ CONFIG_ARCH_SUSPEND_POSSIBLE=y
@@ -288,20 +312,21 @@ index 04c4b92e7377..fc6053a500db 100644
  #
  # CPU Power Management
  #
-@@ -777,12 +771,6 @@ CONFIG_ARCH_VCPU_STAT=y
+@@ -776,13 +770,6 @@ CONFIG_KVM_ARM_MULTI_LPI_TRANSLATE_CACHE=y
+ CONFIG_ARCH_VCPU_STAT=y
  CONFIG_VIRT_VTIMER_IRQ_BYPASS=y
  CONFIG_CPU_MITIGATIONS=y
- 
+-# CONFIG_ARM64_KVM_HCR_NOFB is not set
+-
 -#
 -# Hardware Assisted OS Compartmentalization(HAOC)
 -#
 -CONFIG_IEE=y
 -# end of Hardware Assisted OS Compartmentalization(HAOC)
--
+ 
  #
  # General architecture-dependent options
- #
-@@ -1224,7 +1212,6 @@ CONFIG_ARM64_HAFT=y
+@@ -1225,7 +1212,6 @@ CONFIG_ARM64_HAFT=y
  CONFIG_ARCH_SUPPORTS_PER_VMA_LOCK=y
  CONFIG_PER_VMA_LOCK=y
  CONFIG_LOCK_MM_AND_FIND_VMA=y
@@ -309,7 +334,7 @@ index 04c4b92e7377..fc6053a500db 100644
  CONFIG_IOMMU_MM_DATA=y
  # CONFIG_ASCEND_FEATURES is not set
  CONFIG_PAGE_CACHE_LIMIT=y
-@@ -2125,15 +2112,13 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
+@@ -2126,15 +2112,13 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
  #
  # Firmware loader
  #
@@ -326,7 +351,16 @@ index 04c4b92e7377..fc6053a500db 100644
  CONFIG_FW_CACHE=y
  CONFIG_FW_UPLOAD=y
  # end of Firmware loader
-@@ -7185,7 +7170,6 @@ CONFIG_EROFS_FS_POSIX_ACL=y
+@@ -3946,7 +3930,7 @@ CONFIG_PINMUX=y
+ CONFIG_PINCONF=y
+ CONFIG_GENERIC_PINCONF=y
+ # CONFIG_DEBUG_PINCTRL is not set
+-CONFIG_PINCTRL_AMD=y
++# CONFIG_PINCTRL_AMD is not set
+ # CONFIG_PINCTRL_CY8C95X0 is not set
+ # CONFIG_PINCTRL_MCP23S08 is not set
+ # CONFIG_PINCTRL_MICROCHIP_SGPIO is not set
+@@ -7186,7 +7170,6 @@ CONFIG_EROFS_FS_POSIX_ACL=y
  CONFIG_EROFS_FS_SECURITY=y
  # CONFIG_EROFS_FS_ZIP is not set
  CONFIG_EROFS_FS_ONDEMAND=y
@@ -3527,6 +3561,33 @@ index 1b3b1cbe070f..9eaa15e98758 100644
 -extern const char *esr_get_class_string(unsigned long esr);
 -
  #endif
+diff --git a/arch/arm64/include/asm/kvm_emulate.h b/arch/arm64/include/asm/kvm_emulate.h
+index 9020678f01cb..f0b10cb2c87d 100644
+--- a/arch/arm64/include/asm/kvm_emulate.h
++++ b/arch/arm64/include/asm/kvm_emulate.h
+@@ -66,10 +66,6 @@ static __always_inline bool vcpu_el1_is_32bit(struct kvm_vcpu *vcpu)
+ }
+ #endif
+ 
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-extern bool kvm_hcr_nofb;
+-#endif
+-
+ static inline void vcpu_reset_hcr(struct kvm_vcpu *vcpu)
+ {
+ 	vcpu->arch.hcr_el2 = HCR_GUEST_FLAGS;
+@@ -105,11 +101,6 @@ static inline void vcpu_reset_hcr(struct kvm_vcpu *vcpu)
+ 
+ 	if (kvm_has_mte(vcpu->kvm))
+ 		vcpu->arch.hcr_el2 |= HCR_ATA;
+-
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	if (unlikely(kvm_hcr_nofb))
+-		vcpu->arch.hcr_el2 &= ~HCR_FB;
+-#endif
+ }
+ 
+ static inline unsigned long *vcpu_hcr(struct kvm_vcpu *vcpu)
 diff --git a/arch/arm64/include/asm/memory.h b/arch/arm64/include/asm/memory.h
 index fde4186cc387..d6a43c8e9722 100644
 --- a/arch/arm64/include/asm/memory.h
@@ -3544,7 +3605,7 @@ index fde4186cc387..d6a43c8e9722 100644
  
  #define MIN_THREAD_SHIFT	(14 + KASAN_THREAD_SHIFT)
 diff --git a/arch/arm64/include/asm/mmu_context.h b/arch/arm64/include/asm/mmu_context.h
-index 29c0a86629e2..0a954f2af9fa 100644
+index 411c3800bd11..0a954f2af9fa 100644
 --- a/arch/arm64/include/asm/mmu_context.h
 +++ b/arch/arm64/include/asm/mmu_context.h
 @@ -24,6 +24,9 @@
@@ -3607,25 +3668,80 @@ index 29c0a86629e2..0a954f2af9fa 100644
  		/*
  		 * cpu_replace_ttbr1() is used when there's a boot CPU
  		 * up (i.e. cpufeature framework is not up yet) and
-@@ -265,15 +276,8 @@ static inline void
- switch_mm(struct mm_struct *prev, struct mm_struct *next,
- 	  struct task_struct *tsk)
- {
--	if (prev != next) {
-+	if (prev != next)
- 		__switch_mm(next);
--#ifdef CONFIG_ARM64_TLBI_IPI
--		if (unlikely(test_tlbi_ipi_switch())) {
--			cpumask_clear_cpu(smp_processor_id(), mm_cpumask(prev));
--			local_flush_tlb_mm(prev);
--		}
--#endif
--	}
+@@ -249,11 +260,6 @@ enter_lazy_tlb(struct mm_struct *mm, struct task_struct *tsk)
  
+ static inline void __switch_mm(struct mm_struct *next)
+ {
+-#ifdef CONFIG_ARM64_TLBI_IPI
+-	unsigned int cpu = smp_processor_id();
+-
+-	cpumask_set_cpu(cpu, mm_cpumask(next));
+-#endif
  	/*
- 	 * Update the saved TTBR0_EL1 of the scheduled-in task as the previous
+ 	 * init_mm.pgd does not contain any user mappings and it is always
+ 	 * active for kernel addresses in TTBR1. Just set the reserved TTBR0.
+diff --git a/arch/arm64/include/asm/numa_replication.h b/arch/arm64/include/asm/numa_replication.h
+deleted file mode 100644
+index 7b515c7d4198..000000000000
+--- a/arch/arm64/include/asm/numa_replication.h
++++ /dev/null
+@@ -1,54 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef __ASM_NUMA_REPLICATION_H
+-#define __ASM_NUMA_REPLICATION_H
+-
+-#ifdef CONFIG_KERNEL_REPLICATION
+-#include <asm/pgtable.h>
+-#include <asm/tlbflush.h>
+-#include <asm/pgalloc.h>
+-#include <asm/memory.h>
+-#include <asm/mmu_context.h>
+-#include <linux/mm.h>
+-#include <linux/seq_file.h>
+-
+-#define PAGE_TABLE_REPLICATION_LEFT  ((max((u64)_end - SZ_2G, (u64)MODULES_VADDR)) & PGDIR_MASK)
+-#define PAGE_TABLE_REPLICATION_RIGHT ((((u64)_end + SZ_2G) & PGDIR_MASK) + PGDIR_SIZE - 1)
+-
+-static inline pgd_t *numa_replicate_pgt_pgd(int nid)
+-{
+-	pgd_t *new_pgd;
+-	struct page *pgd_page;
+-
+-	pgd_page = alloc_pages_node(nid, GFP_PGTABLE_KERNEL, 2);
+-	BUG_ON(pgd_page == NULL);
+-
+-	new_pgd = (pgd_t *)page_address(pgd_page);
+-	new_pgd += (PAGE_SIZE * 2 / sizeof(pgd_t)); //Extra pages for KPTI
+-	copy_page(new_pgd, swapper_pg_dir);
+-
+-	return new_pgd;
+-}
+-
+-static inline void numa_load_replicated_pgd(pgd_t *pgd)
+-{
+-	cpu_replace_ttbr1(pgd, idmap_pg_dir);
+-	local_flush_tlb_all();
+-}
+-
+-static inline ssize_t numa_cpu_dump(struct seq_file *m)
+-{
+-	seq_printf(m, "NODE: #%02d, CPU: #%04d, ttbr1_el1: 0x%p, COMM: %s\n",
+-		numa_node_id(),
+-		smp_processor_id(),
+-		(void *)read_sysreg(ttbr1_el1),
+-		current->group_leader->comm);
+-	return 0;
+-}
+-
+-static inline void numa_sync_text_replicas(unsigned long start, unsigned long end)
+-{
+-	caches_clean_inval_pou(start, end);
+-	icache_inval_all_pou();
+-}
+-#endif /* CONFIG_KERNEL_REPLICATION */
+-#endif /* __ASM_NUMA_REPLICATION_H */
 diff --git a/arch/arm64/include/asm/pgtable.h b/arch/arm64/include/asm/pgtable.h
-index c7d494d76c36..11d960aac7a8 100644
+index b30e43b84a64..11d960aac7a8 100644
 --- a/arch/arm64/include/asm/pgtable.h
 +++ b/arch/arm64/include/asm/pgtable.h
 @@ -5,6 +5,10 @@
@@ -3667,19 +3783,7 @@ index c7d494d76c36..11d960aac7a8 100644
  static inline void __set_pte_at(struct mm_struct *mm,
  				unsigned long __always_unused addr,
  				pte_t *ptep, pte_t pte, unsigned int nr)
-@@ -946,11 +937,7 @@ static inline int __ptep_clear_flush_young(struct vm_area_struct *vma,
- 		 * context-switch, which provides a DSB to complete the TLB
- 		 * invalidation.
- 		 */
--#ifdef CONFIG_ARM64_TLBI_IPI
--		flush_tlb_page_nosync_ipi(vma, address);
--#else
- 		flush_tlb_page_nosync(vma, address);
--#endif
- 	}
- 
- 	return young;
-@@ -1537,4 +1524,6 @@ void vmemmap_update_pte(unsigned long addr, pte_t *ptep, pte_t pte);
+@@ -1533,4 +1524,6 @@ void vmemmap_update_pte(unsigned long addr, pte_t *ptep, pte_t pte);
  
  #endif /* !__ASSEMBLY__ */
  
@@ -3703,151 +3807,114 @@ index 2c29239d05c3..1c3489ff2277 100644
  
  #define tlb_flush tlb_flush
 diff --git a/arch/arm64/include/asm/tlbflush.h b/arch/arm64/include/asm/tlbflush.h
-index 66ac917641d1..4bbd9ed591f2 100644
+index af5e6681b0d2..4bbd9ed591f2 100644
 --- a/arch/arm64/include/asm/tlbflush.h
 +++ b/arch/arm64/include/asm/tlbflush.h
-@@ -16,8 +16,6 @@
- #include <linux/mmu_notifier.h>
- #include <asm/cputype.h>
- #include <asm/mmu.h>
--#include <linux/smp.h>
--#include <linux/ctype.h>
- 
- /*
-  * Raw TLBI operations.
-@@ -252,100 +250,6 @@ static inline void flush_tlb_all(void)
+@@ -250,18 +250,6 @@ static inline void flush_tlb_all(void)
  	isb();
  }
  
 -#ifdef CONFIG_ARM64_TLBI_IPI
--static unsigned int disable_tlbflush_is;
+-static inline void flush_tlb_mm_nosync(struct mm_struct *mm)
+-{
+-	unsigned long asid;
 -
--#define FLAG_TLBFLUSH_PAGE      0x0002
--#define FLAG_TLBFLUSH_SWITCH    0x0004
--#define FLAG_TLBFLUSH_MM        0x0008
--
--#define TEST_TLBFLUSH_FLAG_EXTERN(flag, FLAG)                   \
--bool test_tlbi_ipi_##flag(void)                                 \
--{                                                               \
--    return !!(disable_tlbflush_is & FLAG_TLBFLUSH_##FLAG);  \
+-	dsb(ishst);
+-	asid = __TLBI_VADDR(0, ASID(mm));
+-	__tlbi(aside1is, asid);
+-	__tlbi_user(aside1is, asid);
+-	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
 -}
--
--#define TEST_TLBFLUSH_FLAG(flag, FLAG)                          \
--static __always_inline TEST_TLBFLUSH_FLAG_EXTERN(flag, FLAG)
--
--TEST_TLBFLUSH_FLAG(mm, MM)
--TEST_TLBFLUSH_FLAG(page, PAGE)
--TEST_TLBFLUSH_FLAG(switch, SWITCH)
--
+-#else
+ static inline void flush_tlb_mm(struct mm_struct *mm)
+ {
+ 	unsigned long asid;
+@@ -273,7 +261,6 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
+ 	dsb(ish);
+ 	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
+ }
+-#endif
+ 
+ static inline void __flush_tlb_page_nosync(struct mm_struct *mm,
+ 					   unsigned long uaddr)
+@@ -288,54 +275,6 @@ static inline void __flush_tlb_page_nosync(struct mm_struct *mm,
+ 						(uaddr & PAGE_MASK) + PAGE_SIZE);
+ }
+ 
+-#ifdef CONFIG_ARM64_TLBI_IPI
 -static inline void local_flush_tlb_mm(struct mm_struct *mm)
 -{
--    unsigned long asid = __TLBI_VADDR(0, ASID(mm));
+-	unsigned long asid = __TLBI_VADDR(0, ASID(mm));
 -
--    dsb(nshst);
--    __tlbi(aside1, asid);
--    __tlbi_user(aside1, asid);
--    dsb(nsh);
--}
--
--static inline void __flush_tlb_mm(struct mm_struct *mm)
--{
--    unsigned long asid = __TLBI_VADDR(0, ASID(mm));
--
--    dsb(ishst);
--    __tlbi(aside1is, asid);
--    __tlbi_user(aside1is, asid);
--    dsb(ish);
--}
--
--static inline void ipi_flush_tlb_mm(void *arg)
--{
--    struct mm_struct *mm = arg;
--
--    local_flush_tlb_mm(mm);
+-	dsb(nshst);
+-	__tlbi(aside1, asid);
+-	dsb(nsh);
+-	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
 -}
 -
 -static inline void flush_tlb_mm(struct mm_struct *mm)
 -{
--    if (unlikely(test_tlbi_ipi_mm()))
--		on_each_cpu_mask(mm_cpumask(mm), ipi_flush_tlb_mm,
--				(void *)mm, true);
--    else
--		__flush_tlb_mm(mm);
--    mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
+-	if (unlikely(cpumask_full(mm_cpumask(mm)))) {
+-		flush_tlb_mm_nosync(mm);
+-		dsb(ish);
+-	} else {
+-		on_each_cpu_mask(mm_cpumask(mm), (smp_call_func_t)local_flush_tlb_mm, mm, 1);
+-	}
 -}
 -
--static inline void __flush_tlb_page_nosync_ipi(unsigned long addr)
+-struct tlb_args {
+-	struct vm_area_struct *ta_vma;
+-	unsigned long ta_start;
+-	unsigned long ta_end;
+-};
+-
+-static inline void local_flush_tlb_page(struct vm_area_struct *vma,
+-	unsigned long uaddr)
 -{
--    dsb(ishst);
--    __tlbi(vale1is, addr);
--    __tlbi_user(vale1is, addr);
+-	unsigned long addr = __TLBI_VADDR(uaddr, ASID(vma->vm_mm));
+-
+-	dsb(nshst);
+-	__tlbi(vale1, addr);
+-	__tlbi_user(vale1, addr);
+-	dsb(nsh);
+-	mmu_notifier_arch_invalidate_secondary_tlbs(vma->vm_mm, uaddr & PAGE_MASK,
+-						(uaddr & PAGE_MASK) + PAGE_SIZE);
 -}
 -
--static inline void __local_flush_tlb_page_nosync(unsigned long addr)
+-static inline void ipi_flush_tlb_page(void *arg)
 -{
--    dsb(nshst);
--    __tlbi(vale1, addr);
--    __tlbi_user(vale1, addr);
--    dsb(nsh);
+-	struct tlb_args *ta = arg;
+-
+-	local_flush_tlb_page(ta->ta_vma, ta->ta_start);
 -}
--
--static inline void ipi_flush_tlb_page_nosync(void *arg)
--{
--    unsigned long addr = *(unsigned long *)arg;
--
--    __local_flush_tlb_page_nosync(addr);
--}
--
--static inline void flush_tlb_page_nosync_ipi(struct vm_area_struct *vma, unsigned long uaddr)
--{
--    unsigned long addr = __TLBI_VADDR(uaddr, ASID(vma->vm_mm));
--
--    if (unlikely(test_tlbi_ipi_page()))
--		on_each_cpu_mask(mm_cpumask(vma->vm_mm),
--				ipi_flush_tlb_page_nosync, &addr, true);
--    else
--		__flush_tlb_page_nosync_ipi(addr);
--    mmu_notifier_arch_invalidate_secondary_tlbs(vma->vm_mm, uaddr & PAGE_MASK,
--					(uaddr & PAGE_MASK) + PAGE_SIZE);
--}
--
--#else /* CONFIG_ARM64_TLBI_IPI */
--
- static inline void flush_tlb_mm(struct mm_struct *mm)
- {
- 	unsigned long asid;
-@@ -357,7 +261,6 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
- 	dsb(ish);
- 	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
- }
 -#endif /* CONFIG_ARM64_TLBI_IPI */
- 
- static inline void __flush_tlb_page_nosync(struct mm_struct *mm,
- 					   unsigned long uaddr)
-@@ -381,11 +284,7 @@ static inline void flush_tlb_page_nosync(struct vm_area_struct *vma,
+-
+ static inline void flush_tlb_page_nosync(struct vm_area_struct *vma,
+ 					 unsigned long uaddr)
+ {
+@@ -345,22 +284,8 @@ static inline void flush_tlb_page_nosync(struct vm_area_struct *vma,
  static inline void flush_tlb_page(struct vm_area_struct *vma,
  				  unsigned long uaddr)
  {
 -#ifdef CONFIG_ARM64_TLBI_IPI
--	flush_tlb_page_nosync_ipi(vma, uaddr);
+-	struct tlb_args ta = {
+-		.ta_vma = vma,
+-		.ta_start = uaddr
+-	};
+-
+-	if (unlikely(cpumask_full(mm_cpumask(vma->vm_mm)))) {
+-		flush_tlb_page_nosync(vma, uaddr);
+-		dsb(ish);
+-	} else {
+-		on_each_cpu_mask(mm_cpumask(vma->vm_mm), ipi_flush_tlb_page, &ta, 1);
+-	}
 -#else
  	flush_tlb_page_nosync(vma, uaddr);
--#endif
  	dsb(ish);
+-#endif
  }
  
-diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
-index f96459f1be83..8c5ac2b7ab2e 100644
---- a/arch/arm64/kernel/Makefile
-+++ b/arch/arm64/kernel/Makefile
-@@ -36,7 +36,6 @@ obj-y			:= debug-monitors.o entry.o irq.o fpsimd.o		\
- 			   syscall.o proton-pack.o idreg-override.o idle.o	\
- 			   patching.o
- 
--obj-$(CONFIG_ARM64_TLBI_IPI)		+= tlbflush.o
- obj-$(CONFIG_IEE)				+= haoc/
- obj-$(CONFIG_AARCH32_EL0)		+= binfmt_elf32.o sys32.o signal32.o			\
- 					   sys_compat.o
+ static inline bool arch_tlbbatch_should_defer(struct mm_struct *mm)
 diff --git a/arch/arm64/kernel/alternative.c b/arch/arm64/kernel/alternative.c
 index 680f5efa2858..8ff6610af496 100644
 --- a/arch/arm64/kernel/alternative.c
@@ -7983,7 +8050,7 @@ index b4bcc43393ab..2aa5129d8253 100644
  	ldp	x21, x22, [x29, #32]
  	ldp	x23, x24, [x29, #48]
 diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
-index 49cf07d171d2..50f6576f1b31 100644
+index 440701144f8f..50f6576f1b31 100644
 --- a/arch/arm64/kernel/smp.c
 +++ b/arch/arm64/kernel/smp.c
 @@ -34,7 +34,6 @@
@@ -8008,9 +8075,6 @@ index 49cf07d171d2..50f6576f1b31 100644
  	mmgrab(mm);
  	current->active_mm = mm;
  
--#ifdef CONFIG_ARM64_TLBI_IPI
--	cpumask_set_cpu(cpu, mm_cpumask(mm));
--#endif
 -#ifdef CONFIG_IEE
 -	if (haoc_enabled)
 -		iee_setup_asid();
@@ -8022,24 +8086,13 @@ index 49cf07d171d2..50f6576f1b31 100644
 -	 */
 -	numa_setup_pgd();
 -
+-#ifdef CONFIG_ARM64_TLBI_IPI
+-	cpumask_set_cpu(cpu, mm_cpumask(mm));
+-#endif
  	/*
  	 * TTBR0 is only used for the identity mapping at this stage. Make it
  	 * point to zero page to avoid speculatively fetching new entries.
-@@ -334,13 +316,6 @@ int __cpu_disable(void)
- 	 */
- 	irq_migrate_all_off_this_cpu();
- 
--#ifdef CONFIG_ARM64_TLBI_IPI
--	/*
--	 * Remove this CPU from the vm mask set of all processes.
--	 */
--	clear_tasks_mm_cpumask(cpu);
--#endif
--
- 	return 0;
- }
- 
-@@ -489,10 +464,6 @@ void __init smp_prepare_boot_cpu(void)
+@@ -482,10 +464,6 @@ void __init smp_prepare_boot_cpu(void)
  	kasan_init_hw_tags();
  	/* Init percpu seeds for random tags after cpus are set up. */
  	kasan_init_sw_tags();
@@ -8158,8 +8211,95 @@ index 48f27897159d..889d29c5416e 100644
  	. = ALIGN(SEGMENT_ALIGN);
  	__init_begin = .;
  	__inittext_begin = .;
+diff --git a/arch/arm64/kvm/Kconfig b/arch/arm64/kvm/Kconfig
+index 1d1a2f72085a..52edbd7f6340 100644
+--- a/arch/arm64/kvm/Kconfig
++++ b/arch/arm64/kvm/Kconfig
+@@ -99,19 +99,4 @@ config VIRT_VTIMER_IRQ_BYPASS
+ 	depends on KVM && ARM64 && ARCH_HISI && HISILICON_IRQ_MBIGEN
+ 	default n
+ 
+-config ARM64_KVM_HCR_NOFB
+-	bool "Disable HCR_EL2.FB on kvm(EXPERIMENTAL)"
+-	depends on ARM64
+-	default n
+-	help
+-	  Add new boot parameter 'kvm-arm.hcr_nofb' to allow all vcpus running
+-	  without HCR_EL2.FB.
+-
+-	  NOTE(Important)
+-	  This feature is used for learning and debugging only. Please don't
+-	  enable it on commercial products.
+-	  If you know exactly what the impact of the feature is, you can
+-	  configure it as you do.
+-
+-	  If unsure, say N.
+ endif # VIRTUALIZATION
+diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+index a59671c0d3bc..f4194603eae5 100644
+--- a/arch/arm64/kvm/arm.c
++++ b/arch/arm64/kvm/arm.c
+@@ -67,16 +67,6 @@ bool kvm_ncsnp_support;
+ /* Capability of DVMBM */
+ bool kvm_dvmbm_support;
+ 
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-bool kvm_hcr_nofb;
+-
+-static int __init early_hcr_nofb_cfg(char *buf)
+-{
+-	return strtobool(buf, &kvm_hcr_nofb);
+-}
+-early_param("kvm-arm.hcr_nofb", early_hcr_nofb_cfg);
+-#endif
+-
+ static DEFINE_PER_CPU(unsigned char, kvm_hyp_initialized);
+ DEFINE_STATIC_KEY_FALSE(userspace_irqchip_in_use);
+ 
+@@ -573,9 +563,6 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
+ {
+ 	struct kvm_s2_mmu *mmu;
+ 	int *last_ran;
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	bool flushed = false;
+-#endif
+ 
+ 	mmu = vcpu->arch.hw_mmu;
+ 	last_ran = this_cpu_ptr(mmu->last_vcpu_ran);
+@@ -592,21 +579,8 @@ void kvm_arch_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
+ 	if (*last_ran != vcpu->vcpu_id) {
+ 		kvm_call_hyp(__kvm_flush_cpu_context, mmu);
+ 		*last_ran = vcpu->vcpu_id;
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-		flushed = true;
+-#endif
+ 	}
+ 
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	/*
+-	 * If FB (Force broadcast) is cleared, we have to nuke the
+-	 * vcpu context as well in case it is loaded on to the new
+-	 * physical CPU.
+-	 */
+-	if (unlikely(kvm_hcr_nofb) && vcpu->pre_pcpu != cpu && !flushed)
+-		kvm_call_hyp(__kvm_flush_cpu_context, mmu);
+-#endif
+-
+ 	vcpu->cpu = cpu;
+ 
+ #ifdef CONFIG_HISI_VIRTCCA_HOST
+@@ -672,9 +646,6 @@ void kvm_arch_vcpu_put(struct kvm_vcpu *vcpu)
+ 	kvm_arm_vmid_clear_active();
+ 
+ 	vcpu_clear_on_unsupported_cpu(vcpu);
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	vcpu->pre_pcpu = vcpu->cpu;
+-#endif
+ 	vcpu->cpu = -1;
+ 
+ 	kvm_tlbi_dvmbm_vcpu_put(vcpu);
 diff --git a/arch/arm64/mm/context.c b/arch/arm64/mm/context.c
-index fe82d5d3005a..2ec33b019cdd 100644
+index 5abe1be1bcac..2ec33b019cdd 100644
 --- a/arch/arm64/mm/context.c
 +++ b/arch/arm64/mm/context.c
 @@ -11,7 +11,6 @@
@@ -8180,26 +8320,7 @@ index fe82d5d3005a..2ec33b019cdd 100644
  
  static u32 asid_bits;
  static DEFINE_RAW_SPINLOCK(cpu_asid_lock);
-@@ -214,9 +216,6 @@ static u64 new_context(struct mm_struct *mm)
- set_asid:
- 	__set_bit(asid, asid_map);
- 	cur_idx = asid;
--#ifdef CONFIG_ARM64_TLBI_IPI
--	cpumask_clear(mm_cpumask(mm));
--#endif
- 	return asid2ctxid(asid, generation);
- }
- 
-@@ -269,16 +268,13 @@ void check_and_switch_context(struct mm_struct *mm)
- switch_mm_fastpath:
- 
- 	arm64_apply_bp_hardening();
--#ifdef CONFIG_ARM64_TLBI_IPI
--	cpumask_set_cpu(cpu, mm_cpumask(mm));
--#endif
- 
- 	/*
- 	 * Defer TTBR0_EL1 setting for user threads to uaccess_enable() when
+@@ -272,7 +274,7 @@ void check_and_switch_context(struct mm_struct *mm)
  	 * emulating PAN.
  	 */
  	if (!system_uses_ttbr0_pan())
@@ -8208,7 +8329,7 @@ index fe82d5d3005a..2ec33b019cdd 100644
  }
  
  unsigned long arm64_mm_context_get(struct mm_struct *mm)
-@@ -359,7 +355,9 @@ asmlinkage void post_ttbr_update_workaround(void)
+@@ -353,7 +355,9 @@ asmlinkage void post_ttbr_update_workaround(void)
  
  void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
  {
@@ -8218,7 +8339,7 @@ index fe82d5d3005a..2ec33b019cdd 100644
  	unsigned long asid = ASID(mm);
  	unsigned long ttbr0 = phys_to_ttbr(pgd_phys);
  
-@@ -372,27 +370,20 @@ void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
+@@ -366,27 +370,20 @@ void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
  		ttbr0 |= FIELD_PREP(TTBR_ASID_MASK, asid);
  
  #ifdef CONFIG_IEE
@@ -8259,7 +8380,7 @@ index fe82d5d3005a..2ec33b019cdd 100644
  #else
  	/* Set ASID in TTBR1 since TCR.A1 is set */
  	ttbr1 &= ~TTBR_ASID_MASK;
-@@ -415,7 +406,7 @@ static int asids_update_limit(void)
+@@ -409,7 +406,7 @@ static int asids_update_limit(void)
  		if (pinned_asid_map)
  			set_kpti_asid_bits(pinned_asid_map);
  #ifdef CONFIG_IEE
@@ -8268,7 +8389,7 @@ index fe82d5d3005a..2ec33b019cdd 100644
  			__set_bit(ctxid2asid(IEE_ASID), pinned_asid_map);
  			__set_bit(ctxid2asid(IEE_ASID | ASID_BIT), pinned_asid_map);
  		}
-@@ -459,14 +450,12 @@ static int asids_init(void)
+@@ -453,14 +450,12 @@ static int asids_init(void)
  	if (IS_ENABLED(CONFIG_UNMAP_KERNEL_AT_EL0))
  		set_kpti_asid_bits(asid_map);
  #ifdef CONFIG_IEE
@@ -9391,7 +9512,7 @@ index 7939eb6e6ce9..671867644355 100644
  	/* Restore trampoline memory */
  	memcpy(trampoline_32bit, trampoline_save, TRAMPOLINE_32BIT_SIZE);
 diff --git a/arch/x86/configs/openeuler_defconfig b/arch/x86/configs/openeuler_defconfig
-index b86de4b7dbe8..adfaef0cb10c 100644
+index 6ece34678378..adfaef0cb10c 100644
 --- a/arch/x86/configs/openeuler_defconfig
 +++ b/arch/x86/configs/openeuler_defconfig
 @@ -2,7 +2,6 @@
@@ -9626,6 +9747,15 @@ index b86de4b7dbe8..adfaef0cb10c 100644
  
  #
  # Other I2C/SMBus bus drivers
+@@ -4157,7 +4115,7 @@ CONFIG_PINMUX=y
+ CONFIG_PINCONF=y
+ CONFIG_GENERIC_PINCONF=y
+ # CONFIG_DEBUG_PINCTRL is not set
+-CONFIG_PINCTRL_AMD=y
++# CONFIG_PINCTRL_AMD is not set
+ # CONFIG_PINCTRL_CY8C95X0 is not set
+ # CONFIG_PINCTRL_MCP23S08 is not set
+ # CONFIG_PINCTRL_SX150X is not set
 @@ -6531,9 +6489,8 @@ CONFIG_USB_HIDDEV=y
  # end of USB HID support
  
@@ -12711,6 +12841,377 @@ index 6207c6727c00..43e3a8322a6c 100644
  	erofs_exit_sysfs();
  	z_erofs_exit_zip_subsystem();
  	z_erofs_deflate_exit();
+diff --git a/fs/erofs/trio_manager.c b/fs/erofs/trio_manager.c
+deleted file mode 100644
+index 3f82f301e29b..000000000000
+--- a/fs/erofs/trio_manager.c
++++ /dev/null
+@@ -1,365 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- *
+- * Copyright (C) 2025 Huawei Inc.
+- */
+-
+-#include <linux/sysfs.h>
+-#include <linux/kstrtox.h>
+-#include <linux/hashtable.h>
+-#include <linux/crc32.h>
+-#include <linux/printk.h>
+-#include <linux/mm.h>
+-#include <linux/vmalloc.h>
+-#include <linux/pfn_t.h>
+-#include <linux/fs.h>
+-#include <linux/slab.h>
+-#include <linux/uio.h>
+-#include <linux/string.h>
+-
+-#include "internal.h"
+-
+-#define PATH_IO_DELIMIT		"|"
+-#define PATH_PATH_DELIMIT	"@"
+-#define IO_IO_DELIMIT		"+"
+-#define VAR_DELIMIT		","
+-
+-struct trace_object {
+-	uint64_t		ino;  /* inode number of this trace object */
+-	struct list_head	head;   /* record the all trace io */
+-	struct hlist_node	node;   /* link into hashtable */
+-};
+-
+-struct trace_io {
+-	struct list_head	link;    /* link of this io */
+-	uint64_t		soff;    /* offset in source file, trace.data */
+-	uint64_t		len;     /* length of this io */
+-	uint64_t		doff;    /* offset in destination */
+-};
+-
+-static struct kmem_cache *trio_iop;
+-static struct kmem_cache *trio_objp;
+-
+-static struct trace_object *alloc_trace_object(uint64_t ino)
+-{
+-	struct trace_object *obj = kmem_cache_zalloc(trio_objp, GFP_KERNEL);
+-
+-	if (!obj)
+-		return NULL;
+-
+-	obj->ino = ino;
+-	INIT_LIST_HEAD(&obj->head);
+-
+-	return obj;
+-}
+-
+-static void free_trace_object(struct trace_object *obj)
+-{
+-	struct list_head *pos, *n;
+-	struct trace_io *io;
+-
+-	if (IS_ERR_OR_NULL(obj))
+-		return;
+-
+-	list_for_each_safe(pos, n, &obj->head) {
+-		io = list_entry(pos, struct  trace_io, link);
+-		list_del(&io->link);
+-		kmem_cache_free(trio_iop, io);
+-	}
+-	kmem_cache_free(trio_objp, obj);
+-}
+-
+-static void hash_add_trace_object(struct hlist_head *trace_ht,
+-			struct trace_object *obj)
+-{
+-	hlist_add_head(&obj->node, &trace_ht[hash_min(obj->ino, TRIO_HT_BITS)]);
+-}
+-
+-static const struct hlist_head *_find_by_hash(struct hlist_head *ht, uint64_t ino)
+-{
+-	struct hlist_head *h;
+-
+-	h = &ht[hash_min(ino, TRIO_HT_BITS)];
+-	if (hlist_empty(h))
+-		return NULL;
+-
+-	return h;
+-}
+-
+-static struct trace_object *find_trace_object(struct inode *inode)
+-{
+-	struct erofs_sb_info *sbi = EROFS_SB(inode->i_sb);
+-	unsigned long ino  = inode->i_ino;
+-	const struct hlist_head *handlers;
+-	struct trace_object *obj;
+-
+-	handlers = _find_by_hash(sbi->meta_ht, ino);
+-	if (!handlers)
+-		return NULL;
+-
+-	hlist_for_each_entry(obj, handlers, node)
+-		if (obj->ino == ino)
+-			return obj;
+-
+-	return NULL;
+-}
+-
+-struct trace_io *get_io_from_object(struct trace_object *obj,
+-			loff_t off, size_t len, size_t *hit_len)
+-{
+-	struct list_head *tmp;
+-	struct trace_io *io = NULL;
+-	size_t can_read = 0;
+-
+-	list_for_each(tmp, &obj->head) {
+-		io = list_entry(tmp, struct trace_io, link);
+-		/* next bigger one */
+-		if (io->doff + io->len <= off)
+-			continue;
+-
+-		/* last unmatch one */
+-		if (off + len <= io->doff)
+-			break;
+-
+-		/* io include the read range */
+-		if (io->doff <= off) {
+-			can_read = min_t(size_t, len, io->doff + io->len - off);
+-			break;
+-		}
+-	}
+-
+-	*hit_len = can_read;
+-	return io;
+-}
+-
+-static void *_read_data_inner(struct super_block *sb, const char *path,
+-				   uint64_t *rsize)
+-{
+-	struct file *filp = filp_open(path, O_RDONLY, 0644);
+-	loff_t size, off, pos = 0;
+-	ssize_t ret = 0;
+-	void *data;
+-	char *buf;
+-
+-	if (IS_ERR(filp)) {
+-		erofs_err(sb, "open target file:%s failed", path);
+-		return NULL;
+-	}
+-
+-	size = i_size_read(filp->f_inode);
+-	data = vmalloc(size + 1);
+-	if (!data) {
+-		erofs_err(sb, "alloc buffer for size:%lld failed", size);
+-		goto close_data;
+-	}
+-
+-	off = 0;
+-	while ((ret = kernel_read(filp, data + pos, size - pos, &off)) > 0) {
+-		pos += ret;
+-		if (pos >= size)
+-			break;
+-	}
+-
+-	if (ret < 0) {
+-		erofs_err(sb, "read failed size:%lld, read:%lld, ret:%zd",
+-			  size, pos, ret);
+-		vfree(data);
+-		data = NULL;
+-		goto close_data;
+-	}
+-
+-	if (pos != size) {
+-		erofs_err(sb, "read incomplete size:%lld, read:%lld, ret:%zd",
+-			  size, pos, ret);
+-		vfree(data);
+-		data = NULL;
+-		goto close_data;
+-	}
+-
+-	buf = (char *)data;
+-	buf[size] = '\0';
+-	*rsize = size;
+-
+-close_data:
+-	filp_close(filp, NULL);
+-	return data;
+-}
+-
+-void *erofs_get_trio_object(struct inode *inode)
+-{
+-	struct trace_object *obj;
+-
+-	obj = find_trace_object(inode);
+-	return obj;
+-}
+-
+-ssize_t erofs_read_from_trio(struct address_space *mapping,
+-			loff_t pos, size_t len)
+-{
+-	struct inode *inode = mapping->host;
+-	struct erofs_sb_info *sbi = EROFS_SB(inode->i_sb);
+-	struct trace_object *obj;
+-	struct trace_io *target_io;
+-	struct iov_iter iter;
+-	loff_t new_foff;
+-	size_t hit_len;
+-	ssize_t ret;
+-
+-	if (!inode->i_private)
+-		return 0;
+-
+-	obj = (struct trace_object *)inode->i_private;
+-	target_io = get_io_from_object(obj, pos, len, &hit_len);
+-	if (!target_io || !hit_len)
+-		return 0;
+-
+-	iov_iter_xarray(&iter, ITER_DEST, &mapping->i_pages, pos, hit_len);
+-	new_foff = (pos - target_io->doff) + target_io->soff;
+-	ret = copy_to_iter(sbi->buffer + new_foff, hit_len, &iter);
+-	if (ret != hit_len)
+-		return -EFAULT;
+-	return ret;
+-}
+-
+-int erofs_register_trio(struct super_block *sb)
+-{
+-	struct erofs_sb_info *sbi = EROFS_SB(sb);
+-	char *item, *path, *ios, *io, *s_toff, *s_len, *s_foff;
+-	uint64_t ino, doff, soff, len, dsize, msize;
+-	char *meta_buffer, *tmp;
+-	struct trace_object *obj;
+-	struct trace_io *io_item;
+-	struct list_head *pos, *n;
+-	LIST_HEAD(head);
+-	int ret = -EINVAL;
+-
+-	if (!sbi->trio_meta && !sbi->trio_data)
+-		return 0;
+-
+-	if (!sbi->trio_meta || !sbi->trio_data) {
+-		erofs_err(sb, "trio_meta and trio_data must be set together");
+-		return ret;
+-	}
+-
+-	sbi->buffer = _read_data_inner(sb, sbi->trio_data, &dsize);
+-	if (!sbi->buffer)
+-		return ret;
+-
+-	meta_buffer = _read_data_inner(sb, sbi->trio_meta, &msize);
+-	if (!meta_buffer)
+-		goto free_obj;
+-
+-	tmp = meta_buffer;
+-	while ((item = strsep(&tmp, PATH_PATH_DELIMIT)) != NULL) {
+-		path = strsep(&item, PATH_IO_DELIMIT);
+-		ios = item;
+-		ret = kstrtou64(path, 10, &ino);
+-		if (ret < 0) {
+-			erofs_err(sb, "parse inode failed ino:%s failed", path);
+-			goto free_obj;
+-		}
+-
+-		while ((io = strsep(&ios, IO_IO_DELIMIT)) != NULL) {
+-			s_toff = strsep(&io, VAR_DELIMIT);
+-			s_len = strsep(&io, VAR_DELIMIT);
+-			s_foff = strsep(&io, VAR_DELIMIT);
+-
+-			ret = kstrtou64(s_toff, 10, &doff);
+-			if (ret < 0) {
+-				erofs_err(sb, "set target_offset failed path:%s,io(%s,%s,%s)",
+-				       path, s_toff, s_len, s_foff);
+-				goto free_obj;
+-			}
+-
+-			ret = kstrtou64(s_len, 10, &len);
+-			if (ret < 0) {
+-				erofs_err(sb, "set target_length failed path:%s,io(%s,%s,%s)",
+-				       path, s_toff, s_len, s_foff);
+-				goto free_obj;
+-			}
+-
+-			ret = kstrtou64(s_foff, 10, &soff);
+-			if (ret < 0) {
+-				erofs_err(sb, "set source_offset failed path:%s,io(%s,%s,%s)",
+-				       path, s_toff, s_len, s_foff);
+-				goto free_obj;
+-			}
+-			DBG_BUGON(soff + round_up(len, PAGE_SIZE) > dsize);
+-
+-			io_item = kmem_cache_zalloc(trio_iop, GFP_KERNEL);
+-			if (!io_item) {
+-				erofs_err(sb, "alloc for trace io failed");
+-				ret = -ENOMEM;
+-				goto free_obj;
+-			}
+-			INIT_LIST_HEAD(&io_item->link);
+-			io_item->len = len;
+-			io_item->doff = doff;
+-			io_item->soff = soff;
+-
+-			list_add_tail(&io_item->link, &head);
+-		}
+-
+-		obj = alloc_trace_object(ino);
+-		if (obj == NULL) {
+-			erofs_err(sb, "alloc trace object failed");
+-			ret = -ENOMEM;
+-			goto free_obj;
+-		}
+-
+-		list_splice_init(&head, &obj->head);
+-		hash_add_trace_object(sbi->meta_ht, obj);
+-	}
+-	ret = 0;
+-
+-free_meta:
+-	vfree(meta_buffer);
+-	return ret;
+-free_obj:
+-	list_for_each_safe(pos, n, &head) {
+-		io_item = list_entry(pos, struct trace_io, link);
+-		list_del(&io_item->link);
+-		kmem_cache_free(trio_iop, io_item);
+-	}
+-	vfree(sbi->buffer);
+-	sbi->buffer = NULL;
+-	goto free_meta;
+-}
+-
+-void erofs_unregister_trio(struct super_block *sb)
+-{
+-	struct erofs_sb_info *sbi = EROFS_SB(sb);
+-	struct hlist_node *tmp;
+-	struct trace_object *obj;
+-	int i;
+-
+-	hash_for_each_safe(sbi->meta_ht, i, tmp, obj, node) {
+-		hlist_del(&obj->node);
+-		free_trace_object(obj);
+-	}
+-	vfree(sbi->buffer);
+-	sbi->buffer = NULL;
+-}
+-
+-int trio_manager_init(void)
+-{
+-	trio_objp = kmem_cache_create("trio_obj_pool",
+-				     sizeof(struct trace_object), 0, 0, NULL);
+-	if (!trio_objp)
+-		return -ENOMEM;
+-
+-	trio_iop = kmem_cache_create("trio_io_pool", sizeof(struct trace_io),
+-				     0, 0, NULL);
+-	if (!trio_iop) {
+-		kmem_cache_destroy(trio_objp);
+-		return -ENOMEM;
+-	}
+-
+-	return 0;
+-}
+-
+-void trio_manager_exit(void)
+-{
+-	kmem_cache_destroy(trio_iop);
+-	kmem_cache_destroy(trio_objp);
+-}
 diff --git a/fs/exec.c b/fs/exec.c
 index eaec57f79aa1..1d3e9f076210 100644
 --- a/fs/exec.c
@@ -13033,6 +13534,20 @@ index 068d41941401..b2d4f45a866b 100644
  void *alloc_pages_exact(size_t size, gfp_t gfp_mask) __alloc_size(1);
  void free_pages_exact(void *virt, size_t size);
  __meminit void *alloc_pages_exact_nid(int nid, size_t size, gfp_t gfp_mask) __alloc_size(2);
+diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
+index 98328fe7a68b..7db0aeba781e 100644
+--- a/include/linux/kvm_host.h
++++ b/include/linux/kvm_host.h
+@@ -336,9 +336,6 @@ struct kvm_vcpu {
+ 	u64 requests;
+ 	unsigned long guest_debug;
+ 
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	int pre_pcpu;
+-#endif
+ 	struct mutex mutex;
+ 	struct kvm_run *run;
+ 
 diff --git a/include/linux/mm.h b/include/linux/mm.h
 index f706eed1a8b5..3f55e0d3977a 100644
 --- a/include/linux/mm.h
@@ -13267,6 +13782,232 @@ index c2f5d2e33f2c..6683ad87a0ff 100644
  /* Free memory returned from module_alloc. */
  void module_memfree(void *module_region);
  
+diff --git a/include/linux/numa_kernel_replication.h b/include/linux/numa_kernel_replication.h
+deleted file mode 100644
+index 37e7b56b5aa9..000000000000
+--- a/include/linux/numa_kernel_replication.h
++++ /dev/null
+@@ -1,220 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef _LINUX_NUMA_REPLICATION_H
+-#define _LINUX_NUMA_REPLICATION_H
+-
+-#ifdef CONFIG_KERNEL_REPLICATION
+-
+-#include <linux/kabi.h>
+-
+-/*
+- * Why? Because linux is defined to 1 for some reason,
+- * and linux/mm.h converted to 1/mm.h. Perhaps compiler?
+- * Do not ask me, I have no idea.
+- */
+-#if defined(linux)
+-#define tmp_linux_value linux
+-#undef linux
+-#endif
+-
+-#include KABI_HIDE_INCLUDE(<linux/mm_types.h>)
+-#include KABI_HIDE_INCLUDE(<linux/nodemask.h>)
+-#include KABI_HIDE_INCLUDE(<linux/module.h>)
+-#include KABI_HIDE_INCLUDE(<linux/mm.h>)
+-#include KABI_HIDE_INCLUDE(<asm/numa_replication.h>)
+-
+-#if defined(tmp_linux_value)
+-#define linux tmp_linux_value
+-#undef tmp_linux_value
+-#endif
+-
+-typedef enum {
+-	NONE = 0,
+-	PMD_PROPAGATION = 1,
+-	PUD_PROPAGATION = 2,
+-	P4D_PROPAGATION = 3,
+-	PGD_PROPAGATION = 4
+-} propagation_level_t;
+-
+-extern nodemask_t replica_nodes;
+-
+-#define for_each_memory_node(nid)			\
+-	for (nid = first_node(replica_nodes);		\
+-	     nid != MAX_NUMNODES;			\
+-	     nid = next_node(nid, replica_nodes))
+-
+-bool is_text_replicated(void);
+-
+-static inline pgd_t *this_node_pgd(struct mm_struct *mm)
+-{
+-	if (is_text_replicated())
+-		return mm->pgd_numa[numa_node_id()];
+-	else
+-		return mm->pgd;
+-}
+-
+-static inline pgd_t *per_node_pgd(struct mm_struct *mm, int nid)
+-{
+-	if (is_text_replicated())
+-		return mm->pgd_numa[nid];
+-	else
+-		return mm->pgd;
+-}
+-
+-static inline pgd_t **per_node_pgd_ptr(struct mm_struct *mm, int nid)
+-{
+-	if (is_text_replicated())
+-		return &mm->pgd_numa[nid];
+-	else
+-		return &mm->pgd;
+-}
+-
+-static inline bool numa_addr_has_replica(const void *addr)
+-{
+-	return ((unsigned long)addr >= PAGE_TABLE_REPLICATION_LEFT) &&
+-		((unsigned long)addr <= PAGE_TABLE_REPLICATION_RIGHT);
+-}
+-
+-void __init numa_replication_init(void);
+-void __init numa_replicate_kernel_text(void);
+-void numa_replicate_kernel_rodata(void);
+-void numa_replication_fini(void);
+-
+-propagation_level_t get_propagation_level(void);
+-void numa_setup_pgd(void);
+-void __init_or_module *numa_get_replica(void *vaddr, int nid);
+-int numa_get_memory_node(int nid);
+-void dump_mm_pgtables(struct mm_struct *mm,
+-		      unsigned long start, unsigned long end);
+-
+-/* Macro to walk over mm->pgd_numa and cast it to appropriate level type */
+-#define for_each_pgtable_replica(table, mm, replica, nid, offset)				\
+-	for (nid = first_node(replica_nodes), offset = ((unsigned long)table) & (~PAGE_MASK),	\
+-	     replica = (typeof(table))(((unsigned long)mm->pgd_numa[nid]) + offset);		\
+-	     nid != MAX_NUMNODES;								\
+-	     nid = next_node(nid, replica_nodes),						\
+-	     replica = (typeof(table))(((unsigned long)mm->pgd_numa[nid]) + offset))
+-
+-static inline void pgd_populate_replicated(struct mm_struct *mm, pgd_t *pgdp, p4d_t *p4dp)
+-{
+-	int nid;
+-	pgd_t *curr_pgd;
+-	unsigned long offset;
+-
+-	if (get_propagation_level() == PGD_PROPAGATION) {
+-		for_each_pgtable_replica(pgdp, mm, curr_pgd, nid, offset) {
+-			pgd_populate(mm, curr_pgd, p4dp);
+-		}
+-	} else {
+-		pgd_populate(mm, pgdp, p4dp);
+-	}
+-}
+-
+-static inline void p4d_populate_replicated(struct mm_struct *mm, p4d_t *p4dp, pud_t *pudp)
+-{
+-	int nid;
+-	p4d_t *curr_p4d;
+-	unsigned long offset;
+-
+-	if (get_propagation_level() == P4D_PROPAGATION) {
+-		for_each_pgtable_replica(p4dp, mm, curr_p4d, nid, offset) {
+-			p4d_populate(mm, curr_p4d, pudp);
+-		}
+-	} else {
+-		p4d_populate(mm, p4dp, pudp);
+-	}
+-}
+-
+-static inline void pud_populate_replicated(struct mm_struct *mm, pud_t *pudp, pmd_t *pmdp)
+-{
+-	int nid;
+-	pud_t *curr_pud;
+-	unsigned long offset;
+-
+-	if (get_propagation_level() == PUD_PROPAGATION) {
+-		for_each_pgtable_replica(pudp, mm, curr_pud, nid, offset) {
+-			pud_populate(mm, curr_pud, pmdp);
+-		}
+-	} else {
+-		pud_populate(mm, pudp, pmdp);
+-	}
+-}
+-
+-static inline void pmd_populate_replicated(struct mm_struct *mm, pmd_t *pmdp, pgtable_t ptep)
+-{
+-	int nid;
+-	pmd_t *curr_pmd;
+-	unsigned long offset;
+-
+-	if (get_propagation_level() == PMD_PROPAGATION) {
+-		for_each_pgtable_replica(pmdp, mm, curr_pmd, nid, offset) {
+-			pmd_populate(mm, curr_pmd, ptep);
+-		}
+-	} else {
+-		pmd_populate(mm, pmdp, ptep);
+-	}
+-}
+-
+-#else
+-
+-#if defined(linux)
+-#define tmp_linux_value linux
+-#undef linux
+-#endif
+-
+-#include KABI_HIDE_INCLUDE(<linux/mm.h>)
+-
+-#if defined(tmp_linux_value)
+-#define linux tmp_linux_value
+-#undef tmp_linux_value
+-#endif
+-
+-#define this_node_pgd(mm) ((mm)->pgd)
+-#define per_node_pgd(mm, nid) ((mm)->pgd)
+-
+-static inline void numa_setup_pgd(void)
+-{
+-}
+-
+-static inline void __init numa_replication_init(void)
+-{
+-}
+-
+-static inline void __init numa_replicate_kernel_text(void)
+-{
+-}
+-
+-static inline void numa_replicate_kernel_rodata(void)
+-{
+-}
+-
+-static inline void numa_replication_fini(void)
+-{
+-}
+-
+-static inline bool numa_addr_has_replica(const void *addr)
+-{
+-	return false;
+-}
+-
+-static inline bool is_text_replicated(void)
+-{
+-	return false;
+-}
+-
+-static inline void *numa_get_replica(void *vaddr, int nid)
+-{
+-	return lm_alias(vaddr);
+-}
+-
+-static inline void dump_mm_pgtables(struct mm_struct *mm,
+-				    unsigned long start, unsigned long end)
+-{
+-}
+-
+-#define pgd_populate_replicated pgd_populate
+-#define p4d_populate_replicated p4d_populate
+-#define pud_populate_replicated pud_populate
+-#define pmd_populate_replicated pmd_populate
+-
+-#endif /*CONFIG_KERNEL_REPLICATION*/
+-#endif /*_LINUX_NUMA_REPLICATION_H*/
 diff --git a/include/linux/ptp-cache.h b/include/linux/ptp-cache.h
 new file mode 100644
 index 000000000000..57d3c232b0c2
@@ -15124,6 +15865,847 @@ index ed0e21a05339..3ff7fc643024 100644
  
  	/*
  	 * Private VM_LOCKED VMA becoming writable: trigger COW to avoid major
+diff --git a/mm/numa_kernel_replication.c b/mm/numa_kernel_replication.c
+deleted file mode 100644
+index 17664a1300b8..000000000000
+--- a/mm/numa_kernel_replication.c
++++ /dev/null
+@@ -1,835 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-#include <linux/kernel.h>
+-#include <linux/pagewalk.h>
+-#include <linux/numa_kernel_replication.h>
+-#include <linux/memblock.h>
+-#include <linux/pgtable.h>
+-#include <linux/hugetlb.h>
+-#include <linux/kobject.h>
+-#include <linux/debugfs.h>
+-
+-#include <asm/sections.h>
+-#include <asm/tlbflush.h>
+-#include <asm/mmu_context.h>
+-
+-#define KERNEL_TEXT_START	((unsigned long)&_stext)
+-#define KERNEL_TEXT_END		((unsigned long)&_etext)
+-
+-#define KERNEL_RODATA_START ((unsigned long)&__start_rodata)
+-#define KERNEL_RODATA_END ((unsigned long)&__end_rodata)
+-
+-#define PMD_ALLOC_ORDER		(PMD_SHIFT-PAGE_SHIFT)
+-#define PAGES_PER_PMD		(1 << PMD_ALLOC_ORDER)
+-
+-#define replication_log(data, fmt, args...)		\
+-({							\
+-	if (data && data->m)				\
+-		seq_printf(data->m, fmt, ##args);	\
+-	else						\
+-		pr_info(KERN_CONT fmt, ##args);		\
+-})
+-
+-struct numa_node_desc {
+-	pgd_t *pgd;
+-	void *text_vaddr;
+-	void *rodata_vaddr;
+-};
+-
+-static struct numa_node_desc __initdata_or_module node_desc[MAX_NUMNODES];
+-
+-struct dump_data {
+-	struct seq_file *m;
+-};
+-
+-struct dump_config {
+-	int pgd_extra_info:1;
+-	int p4d_extra_info:1;
+-	int pud_extra_info:1;
+-	int pmd_extra_info:1;
+-	int pte_extra_info:1;
+-	struct dump_data *data;
+-};
+-
+-static bool text_replicated;
+-static propagation_level_t prop_level = NONE;
+-/*
+- * The first ready NUMA node, used as a source node
+- * for kernel text and rodata replication
+- */
+-static unsigned int master_node = INT_MAX;
+-/*
+- * The case when machine has memoryless nodes is rare
+- * but possible. To handle memoryless nodes properly
+- * kernel replication maintains mapping node -> node with memory
+- * for all NUMA nodes.
+- */
+-static int node_to_memory_node[MAX_NUMNODES];
+-
+-static bool kernel_replication_enabled;
+-
+-static bool pgtables_extra;
+-static DEFINE_SPINLOCK(debugfs_lock);
+-
+-propagation_level_t get_propagation_level(void)
+-{
+-	return prop_level;
+-}
+-
+-bool is_text_replicated(void)
+-{
+-	return text_replicated;
+-}
+-
+-static void binary_dump(struct dump_data *data, unsigned long value)
+-{
+-	int i;
+-
+-	for (i = BITS_PER_LONG - 1; i >= 0; i--) {
+-		if ((BITS_PER_LONG - 1 - i) % BITS_PER_BYTE == 0)
+-			replication_log(data, "%-9d", i);
+-	}
+-	replication_log(data, "%d\n", 0);
+-
+-	for (i = BITS_PER_LONG - 1; i >= 0; i--) {
+-		if ((BITS_PER_LONG - 1 - i) % BITS_PER_BYTE == 0)
+-			replication_log(data, "|");
+-
+-		replication_log(data, "%d", (1UL << i) & value ? 1 : 0);
+-	}
+-	replication_log(data, "|\n");
+-}
+-
+-static int pgd_callback(pgd_t *pgd,
+-			unsigned long addr, unsigned long next,
+-			struct mm_walk *walk)
+-{
+-	unsigned long val = pgd_val(*pgd);
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	if (!val)
+-		return 0;
+-
+-	addr = addr & PGDIR_MASK;
+-	next = (addr & PGDIR_MASK) - 1 + PGDIR_SIZE;
+-
+-	replication_log(c->data,
+-			"PGD ADDR: 0x%p PGD VAL: 0x%016lx [%p --- %p]\n",
+-			pgd, val, (void *)addr, (void *)next);
+-
+-	if (c->pgd_extra_info)
+-		binary_dump(c->data, val);
+-
+-	return 0;
+-}
+-
+-static int p4d_callback(p4d_t *p4d,
+-			unsigned long addr, unsigned long next,
+-			struct mm_walk *walk)
+-{
+-	unsigned long val = p4d_val(*p4d);
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	if (!val)
+-		return 0;
+-
+-	addr = addr & P4D_MASK;
+-	next = (addr & P4D_MASK) - 1 + P4D_SIZE;
+-
+-	replication_log(c->data,
+-			"P4D ADDR: 0x%p P4D VAL: 0x%016lx [%p --- %p]\n",
+-			p4d, val, (void *)addr, (void *)next);
+-
+-	if (c->p4d_extra_info)
+-		binary_dump(c->data, val);
+-
+-	return 0;
+-}
+-
+-static int pud_callback(pud_t *pud,
+-			unsigned long addr, unsigned long next,
+-			struct mm_walk *walk)
+-{
+-	unsigned long val = pud_val(*pud);
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	if (!val)
+-		return 0;
+-
+-	addr = addr & PUD_MASK;
+-	next = (addr & PUD_MASK) - 1 + PUD_SIZE;
+-
+-	replication_log(c->data,
+-		"PUD ADDR: 0x%p PUD VAL: 0x%016lx huge(%d) [%p --- %p]\n",
+-		pud, val, pud_huge(*pud), (void *)addr, (void *)next);
+-
+-	if (c->pud_extra_info)
+-		binary_dump(c->data, val);
+-
+-	return 0;
+-}
+-
+-static int pmd_callback(pmd_t *pmd,
+-			unsigned long addr, unsigned long next,
+-			struct mm_walk *walk)
+-{
+-	unsigned long val = pmd_val(*pmd);
+-	unsigned long paddr = pmd_pfn(*pmd) << PAGE_SHIFT;
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	if (!val)
+-		return 0;
+-
+-	addr = addr & PMD_MASK;
+-	next = (addr & PMD_MASK) - 1 + PMD_SIZE;
+-
+-	replication_log(c->data,
+-		"PMD ADDR: 0x%p PMD VAL: 0x%016lx huge(%d) [%p --- %p] to %p\n",
+-		pmd, val, pmd_huge(*pmd), (void *)addr, (void *)next, (void *)paddr);
+-
+-	if (c->pmd_extra_info)
+-		binary_dump(c->data, val);
+-
+-	return 0;
+-}
+-
+-static int pte_callback(pte_t *pte,
+-			unsigned long addr, unsigned long next,
+-			struct mm_walk *walk)
+-{
+-	unsigned long val = pte_val(*pte);
+-	unsigned long paddr = pte_pfn(*pte) << PAGE_SHIFT;
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	if (!val)
+-		return 0;
+-
+-	addr = addr & PAGE_MASK;
+-	next = (addr & PAGE_MASK) - 1 + PAGE_SIZE;
+-
+-	replication_log(c->data,
+-		"PTE ADDR: 0x%p PTE VAL: 0x%016lx [%p --- %p] to %p\n",
+-		pte, val, (void *)addr, (void *)next, (void *)paddr);
+-
+-	if (c->pte_extra_info)
+-		binary_dump(c->data, val);
+-
+-	return 0;
+-}
+-
+-static int pte_hole_callback(unsigned long addr, unsigned long next,
+-			     int depth, struct mm_walk *walk)
+-{
+-	struct dump_config *c = (struct dump_config *)walk->private;
+-
+-	replication_log(c->data, "%*chole\n", depth * 2, ' ');
+-
+-	return 0;
+-}
+-
+-static void dump_pgtables(struct mm_struct *mm,
+-			  struct dump_data *data,
+-			  unsigned long start, unsigned long end)
+-{
+-	int nid = 0;
+-	int extra = pgtables_extra ? 1 : 0;
+-	bool locked = false;
+-	struct dump_config conf = {
+-		.pgd_extra_info = extra,
+-		.p4d_extra_info = extra,
+-		.pud_extra_info = extra,
+-		.pmd_extra_info = extra,
+-		.pte_extra_info = extra,
+-		.data = data,
+-	};
+-
+-	const struct mm_walk_ops ops = {
+-		.pgd_entry = pgd_callback,
+-		.p4d_entry = p4d_callback,
+-		.pud_entry = pud_callback,
+-		.pmd_entry = pmd_callback,
+-		.pte_entry = pte_callback,
+-		.pte_hole  = pte_hole_callback
+-	};
+-
+-	BUG_ON(data && data->m == NULL);
+-
+-	start = start & PAGE_MASK;
+-	end = (end & PAGE_MASK) - 1 + PAGE_SIZE;
+-
+-	if (!mm->pgd_numa)
+-		return;
+-
+-	replication_log(data,
+-			"----PER-NUMA NODE KERNEL REPLICATION ENABLED----\n");
+-
+-	if (rwsem_is_locked(&mm->mmap_lock))
+-		locked = true;
+-	else
+-		mmap_read_lock(mm);
+-
+-	for_each_memory_node(nid) {
+-		replication_log(data, "NUMA node id #%d\n", nid);
+-		replication_log(data, "PGD: %p  PGD phys: %p\n",
+-			mm->pgd_numa[nid], (void *)virt_to_phys(mm->pgd_numa[nid]));
+-		walk_page_range_novma(mm, start, end, &ops, mm->pgd_numa[nid], &conf);
+-	}
+-
+-	if (!locked)
+-		mmap_read_unlock(mm);
+-
+-	replication_log(data,
+-			"----PER-NUMA NODE KERNEL REPLICATION ENABLED----\n");
+-}
+-
+-static void dump_kernel_pgtables(struct dump_data *data,
+-				 unsigned long start, unsigned long end)
+-{
+-	dump_pgtables(&init_mm, data, start, end);
+-}
+-
+-void dump_mm_pgtables(struct mm_struct *mm,
+-		      unsigned long start, unsigned long end)
+-{
+-	dump_pgtables(mm, NULL, start, end);
+-}
+-
+-static void cpu_dump(void *info)
+-{
+-	struct dump_data *data = (struct dump_data *)info;
+-
+-	spin_lock(&debugfs_lock);
+-	numa_cpu_dump(data->m);
+-	spin_unlock(&debugfs_lock);
+-}
+-
+-static int stats_show(struct seq_file *m, void *v)
+-{
+-	int cpu;
+-	struct dump_data data = {
+-		.m = m,
+-	};
+-
+-	for_each_online_cpu(cpu)
+-		smp_call_function_single(cpu, cpu_dump, &data, 1);
+-
+-	return 0;
+-}
+-
+-DEFINE_SHOW_ATTRIBUTE(stats);
+-
+-static int pgtables_show(struct seq_file *m, void *v)
+-{
+-	struct dump_data data = {
+-		.m = m,
+-	};
+-
+-	dump_kernel_pgtables(&data,
+-			KERNEL_TEXT_START, KERNEL_RODATA_END - 1);
+-
+-	return 0;
+-}
+-
+-DEFINE_SHOW_ATTRIBUTE(pgtables);
+-
+-void debugfs_init(void)
+-{
+-	struct dentry *dir;
+-	static struct dentry *debugfs_dir;
+-
+-	debugfs_dir = debugfs_create_dir("numa_replication", NULL);
+-	if (IS_ERR(debugfs_dir)) {
+-		pr_err("Failed to create debugfs entry for NUMA"
+-			" replication: %ld\n",
+-			PTR_ERR(debugfs_dir));
+-		return;
+-	}
+-	dir = debugfs_create_file("stats", 0400, debugfs_dir,
+-				  NULL, &stats_fops);
+-	if (IS_ERR(dir)) {
+-		pr_err("Failed to create debugfs entry for NUMA"
+-			" replication stats: %ld\n",
+-			PTR_ERR(dir));
+-		return;
+-	}
+-
+-	dir = debugfs_create_file("pgtables_kernel", 0400, debugfs_dir,
+-				  NULL, &pgtables_fops);
+-	if (IS_ERR(dir)) {
+-		pr_err("Failed to create debugfs entry for NUMA"
+-			" replication pgtables: %ld\n",
+-			PTR_ERR(dir));
+-		return;
+-	}
+-
+-	debugfs_create_bool("pgtables_kernel_extra", 0600, debugfs_dir,
+-			    &pgtables_extra);
+-}
+-
+-/*
+- * The case, when machine has memoryless NUMA nodes
+- * should be handled in a special way. To do this we
+- * create node<->memory mapping to have an information
+- * about the node with memory that memoryless node can use.
+- */
+-static void init_node_to_memory_mapping(void)
+-{
+-	int nid;
+-
+-	for_each_online_node(nid) {
+-		int memory_nid;
+-		int min_dist = INT_MAX;
+-
+-		node_to_memory_node[nid] = nid;
+-		for_each_memory_node(memory_nid) {
+-			int dist = node_distance(nid, memory_nid);
+-
+-			if (dist < min_dist) {
+-				min_dist = dist;
+-				node_to_memory_node[nid] = memory_nid;
+-			}
+-		}
+-		pr_info("For node %d memory is on the node - %d\n",
+-			nid, node_to_memory_node[nid]);
+-	}
+-}
+-
+-int numa_get_memory_node(int nid)
+-{
+-	return node_to_memory_node[nid];
+-}
+-
+-/*
+- * The function creates replica of particular memory area
+- * and install replicated memory in translation table of
+- * required NUMA node.
+- */
+-static void replicate_memory(void *dst, unsigned long start, unsigned long end, int nid)
+-{
+-	pgd_t *pgd;
+-	p4d_t *p4d;
+-	pud_t *pud;
+-	pmd_t *pmd;
+-	pte_t *pte;
+-	pgprot_t prot;
+-	unsigned int offset_in_pages = 0;
+-	unsigned long vaddr = start;
+-	struct page *pages = virt_to_page(dst);
+-
+-	memcpy(dst, lm_alias(start), end - start);
+-	while (vaddr < end) {
+-		pgd = pgd_offset_pgd(node_desc[nid].pgd, vaddr);
+-		p4d = p4d_offset(pgd, vaddr);
+-		pud = pud_offset(p4d, vaddr);
+-		pmd = pmd_offset(pud, vaddr);
+-
+-		if (pmd_leaf(*pmd)) {
+-			prot = pmd_pgprot(*pmd);
+-
+-			set_pmd(pmd, pfn_pmd(page_to_pfn(pages) + offset_in_pages, prot));
+-			offset_in_pages += PAGES_PER_PMD;
+-			vaddr += PMD_SIZE;
+-			continue;
+-		}
+-		pte = pte_offset_kernel(pmd, vaddr);
+-		prot = pte_pgprot(*pte);
+-		__set_pte(pte, pfn_pte(page_to_pfn(pages) + offset_in_pages, prot));
+-		offset_in_pages++;
+-		vaddr += PAGE_SIZE;
+-	}
+-}
+-
+-static void __init replicate_kernel_text(int nid)
+-{
+-	replicate_memory(node_desc[nid].text_vaddr,
+-			 KERNEL_TEXT_START, KERNEL_TEXT_END, nid);
+-	numa_sync_text_replicas((unsigned long)node_desc[nid].text_vaddr,
+-		(unsigned long)node_desc[nid].text_vaddr + (KERNEL_TEXT_END - KERNEL_TEXT_START));
+-}
+-
+-static void replicate_kernel_rodata(int nid)
+-{
+-	replicate_memory(node_desc[nid].rodata_vaddr,
+-			 KERNEL_RODATA_START, KERNEL_RODATA_END, nid);
+-}
+-
+-//'-1' in next functions have only one purpose - prevent unsgined long overflow
+-static void replicate_pgt_pte(pud_t *dst, pud_t *src,
+-			      unsigned long start, unsigned long end,
+-			      unsigned int nid)
+-{
+-	unsigned long left = start & PMD_MASK;
+-	unsigned long right = (end & PMD_MASK) - 1 + PMD_SIZE;
+-	unsigned long addr;
+-
+-	pmd_t *clone_pmd = pmd_offset(dst, left);
+-	pmd_t *orig_pmd = pmd_offset(src, left);
+-
+-	for (addr = left;
+-			(addr >= left && addr < right); addr += PMD_SIZE) {
+-		pgtable_t new_pte;
+-
+-		if (pmd_none(*orig_pmd) || pmd_huge(*orig_pmd)  ||
+-				pmd_val(*orig_pmd) == 0)
+-			goto skip;
+-
+-		pmd_clear(clone_pmd);
+-		new_pte = pte_alloc_one_node(nid, &init_mm);
+-		pmd_populate_kernel(&init_mm, clone_pmd, page_to_virt(new_pte));
+-		BUG_ON(new_pte == NULL);
+-
+-		copy_page(page_to_virt(pmd_pgtable(*clone_pmd)),
+-				       page_to_virt(pmd_pgtable(*orig_pmd)));
+-skip:
+-		clone_pmd++;
+-		orig_pmd++;
+-	}
+-}
+-
+-//'-1' in next functions have only one purpose - prevent unsgined long overflow
+-static void replicate_pgt_pmd(p4d_t *dst, p4d_t *src,
+-			      unsigned long start, unsigned long end,
+-			      unsigned int nid)
+-{
+-	unsigned long left = start & PUD_MASK;
+-	unsigned long right = (end & PUD_MASK) - 1 + PUD_SIZE;
+-
+-	pud_t *clone_pud = pud_offset(dst, left);
+-	pud_t *orig_pud = pud_offset(src, left);
+-
+-	for (unsigned long addr = left;
+-			(addr >= left && addr < right); addr += PUD_SIZE) {
+-		pmd_t *new_pmd;
+-
+-		if (pud_none(*orig_pud) || pud_huge(*orig_pud)  ||
+-				pud_val(*orig_pud) == 0)
+-			goto skip;
+-
+-		pud_clear(clone_pud);
+-		new_pmd = pmd_alloc_node(nid, &init_mm, clone_pud, addr);
+-		BUG_ON(new_pmd == NULL);
+-
+-		copy_page(pud_pgtable(*clone_pud), pud_pgtable(*orig_pud));
+-
+-		replicate_pgt_pte(clone_pud, orig_pud, max(addr, start),
+-				  min(addr - 1 + PUD_SIZE, end), nid);
+-skip:
+-		clone_pud++;
+-		orig_pud++;
+-	}
+-}
+-
+-static void replicate_pgt_pud(pgd_t *dst, pgd_t *src,
+-			      unsigned long start, unsigned long end,
+-			      unsigned int nid)
+-{
+-	unsigned long left = start & P4D_MASK;
+-	unsigned long right = (end & P4D_MASK) - 1 + P4D_SIZE;
+-
+-	p4d_t *clone_p4d = p4d_offset(dst, left);
+-	p4d_t *orig_p4d = p4d_offset(src, left);
+-
+-	for (unsigned long addr = left;
+-			(addr >= left && addr < right); addr += P4D_SIZE) {
+-		pud_t *new_pud;
+-
+-		if (p4d_none(*orig_p4d) || p4d_huge(*orig_p4d)  ||
+-				p4d_val(*orig_p4d) == 0)
+-			goto skip;
+-
+-		p4d_clear(clone_p4d);
+-		new_pud = pud_alloc_node(nid, &init_mm, clone_p4d, addr);
+-		BUG_ON(new_pud == NULL);
+-
+-		copy_page(p4d_pgtable(*clone_p4d), p4d_pgtable(*orig_p4d));
+-		/*
+-		 * start and end passed to the next function must be in
+-		 * range of p4ds, so min and max are used here
+-		 */
+-		replicate_pgt_pmd(clone_p4d, orig_p4d, max(addr, start),
+-				  min(addr - 1 + P4D_SIZE, end), nid);
+-skip:
+-		clone_p4d++;
+-		orig_p4d++;
+-	}
+-}
+-
+-static void replicate_pgt_p4d(pgd_t *dst, pgd_t *src,
+-			      unsigned long start, unsigned long end,
+-			      unsigned int nid)
+-{
+-	unsigned long left = start & PGDIR_MASK;
+-	unsigned long right = (end & PGDIR_MASK) - 1 + PGDIR_SIZE;
+-
+-	pgd_t *clone_pgd = pgd_offset_pgd(dst, left);
+-	pgd_t *orig_pgd = pgd_offset_pgd(src, left);
+-
+-	for (unsigned long addr = left;
+-			(addr >= left && addr < right); addr += PGDIR_SIZE) {
+-		p4d_t *new_p4d;
+-
+-		/* TODO: remove last condition and do something better
+-		 * In the case of a folded P4D level, pgd_none and pgd_huge
+-		 * always return 0, so we might start to replicate empty entries.
+-		 * We obviously want to avoid this, so the last check is performed here.
+-		 */
+-		if (pgd_none(*orig_pgd) || pgd_huge(*orig_pgd) ||
+-				pgd_val(*orig_pgd) == 0)
+-			goto skip;
+-
+-		pgd_clear(clone_pgd);
+-		new_p4d = p4d_alloc_node(nid, &init_mm, clone_pgd, addr);
+-		BUG_ON(new_p4d == NULL);
+-
+-		copy_page((void *)pgd_page_vaddr(*clone_pgd),
+-				(void *)pgd_page_vaddr(*orig_pgd));
+-		replicate_pgt_pud(clone_pgd, orig_pgd, max(addr, start),
+-				  min(addr - 1 + PGDIR_SIZE, end), nid);
+-skip:
+-		clone_pgd++;
+-		orig_pgd++;
+-	}
+-}
+-
+-static void replicate_pgt(int nid, unsigned long start, unsigned long end)
+-{
+-	replicate_pgt_p4d(node_desc[nid].pgd, init_mm.pgd, start, end, nid);
+-}
+-
+-/*
+- * Page tables replication works in a way when first
+- * pgd level replicated and then the replication of the
+- * left part if done. The only part of pagetable that
+- * contains text and rodata is replicated. Obviously a
+- * part of upper layer entries of page table should be
+- * replicated too. As result, the pgd, p4d, pud and pmd
+- * layers are touched by replication. In particular, the
+- * page table sub-tree that cover kernel text and rodata.
+- */
+-static void replicate_pgtables(void)
+-{
+-	int nid;
+-
+-	init_mm.pgd_numa = (pgd_t **)kmalloc(sizeof(pgd_t *) * MAX_NUMNODES, GFP_PGTABLE_KERNEL);
+-	BUG_ON(!init_mm.pgd_numa);
+-
+-	for_each_memory_node(nid) {
+-		node_desc[nid].pgd = numa_replicate_pgt_pgd(nid);
+-		replicate_pgt(nid, PAGE_TABLE_REPLICATION_LEFT,
+-				   PAGE_TABLE_REPLICATION_RIGHT);
+-	}
+-
+-	init_mm.pgd = node_desc[numa_get_memory_node(0)].pgd;
+-
+-	for_each_online_node(nid) {
+-		int memory_nid = numa_get_memory_node(nid);
+-
+-		init_mm.pgd_numa[nid] = node_desc[memory_nid].pgd;
+-	}
+-}
+-
+-static void __init numa_replicate_kernel_text_disabled(void)
+-{
+-	int nid;
+-
+-	init_mm.pgd_numa = (pgd_t **)kmalloc(sizeof(pgd_t *) * MAX_NUMNODES, GFP_PGTABLE_KERNEL);
+-	BUG_ON(!init_mm.pgd_numa);
+-	for_each_online_node(nid) {
+-		init_mm.pgd_numa[nid] = init_mm.pgd;
+-	}
+-}
+-
+-
+-/*
+- * Kernel text replication includes two steps:
+- * 1. page tables replication for init_mm
+- * 2. kernel text pages replication and
+- *    corresponding page table update.
+- * 3. setup page table, related to
+- *    current NUMA node on current cpu,
+- *    for other NUMA cpus page tables will
+- *    be updated later, during cpu initialization.
+- * Master node - the first NUMA node, used as
+- * a source for replicas. Memory for master node
+- * is expected to be already local.
+- */
+-void __init numa_replicate_kernel_text(void)
+-{
+-	int nid;
+-
+-	if (!kernel_replication_enabled) {
+-		numa_replicate_kernel_text_disabled();
+-		return;
+-	}
+-
+-	replicate_pgtables();
+-
+-	for_each_memory_node(nid) {
+-		if (nid == master_node)
+-			continue;
+-		replicate_kernel_text(nid);
+-	}
+-
+-	text_replicated = true;
+-
+-	if (!mm_p4d_folded(&init_mm))
+-		prop_level = PGD_PROPAGATION;
+-	if (mm_p4d_folded(&init_mm) && !mm_pud_folded(&init_mm))
+-		prop_level = P4D_PROPAGATION;
+-	if (mm_p4d_folded(&init_mm) && mm_pud_folded(&init_mm) && !mm_pmd_folded(&init_mm))
+-		prop_level = PUD_PROPAGATION;
+-	if (mm_p4d_folded(&init_mm) && mm_pud_folded(&init_mm) && mm_pmd_folded(&init_mm))
+-		prop_level = PMD_PROPAGATION;
+-
+-	BUG_ON(prop_level == NONE);
+-
+-	numa_setup_pgd();
+-}
+-
+-void numa_replicate_kernel_rodata(void)
+-{
+-	int nid;
+-
+-	if (!kernel_replication_enabled) {
+-		return;
+-	}
+-
+-	for_each_memory_node(nid) {
+-		if (nid == master_node)
+-			continue;
+-		replicate_kernel_rodata(nid);
+-	}
+-
+-	flush_tlb_all();
+-}
+-
+-void numa_setup_pgd(void)
+-{
+-	numa_load_replicated_pgd(this_node_pgd(&init_mm));
+-}
+-
+-void __init_or_module *numa_get_replica(void *vaddr, int nid)
+-{
+-	unsigned long addr = (unsigned long)vaddr;
+-	unsigned long offset = addr - KERNEL_TEXT_START;
+-
+-	BUG_ON(addr < KERNEL_TEXT_START || addr >= KERNEL_TEXT_END);
+-	BUG_ON(node_desc[nid].text_vaddr == NULL);
+-	BUG_ON(numa_get_memory_node(nid) != nid);
+-
+-	return node_desc[nid].text_vaddr + offset;
+-}
+-
+-static int __init setup_kernel_replication(char *str)
+-{
+-	int ret = 0;
+-
+-	if (!str)
+-		goto out;
+-	if (!strcmp(str, "on")) {
+-		kernel_replication_enabled = true;
+-		pr_info("Kernel replication enabled via cmdline\n");
+-		ret = 1;
+-	} else if (!strcmp(str, "off")) {
+-		kernel_replication_enabled = false;
+-		pr_info("Kernel replication disabled via cmdline\n");
+-		ret = 1;
+-	}
+-out:
+-	if (!ret)
+-		pr_warn("kernel_replication= cannot parse, ignored\n");
+-	return ret;
+-}
+-__setup("kernel_replication=", setup_kernel_replication);
+-
+-
+-nodemask_t __ro_after_init replica_nodes = { { [0] = 1UL } };
+-
+-/*
+- * Let us pretend, that we have only single node fore replicas.
+- * Do not replicate anything.
+- */
+-static void __init numa_replication_init_disabled(void)
+-{
+-	int nid;
+-
+-	__node_set(0, &replica_nodes);
+-	for_each_online_node(nid) {
+-		node_to_memory_node[nid] = 0;
+-	}
+-
+-	node_desc[0].text_vaddr = lm_alias((void *)KERNEL_TEXT_START);
+-	node_desc[0].rodata_vaddr = lm_alias((void *)KERNEL_RODATA_START);
+-}
+-
+-void __init numa_replication_init(void)
+-{
+-	int nid;
+-
+-	unsigned long align = PAGE_SIZE;
+-#ifdef CONFIG_ARM64_4K_PAGES
+-	align = HPAGE_SIZE;
+-#else
+-	align = CONT_PTE_SIZE;
+-#endif
+-	nodes_clear(replica_nodes);
+-
+-	if (kernel_replication_enabled)
+-		pr_info("WARNING! WARNING! WARNING! Kernel replication enabled WARNING! WARNING! WARNING!\n");
+-	else
+-		pr_info("Kernel replication disabled\n");
+-
+-	if (!kernel_replication_enabled) {
+-		numa_replication_init_disabled();
+-		return;
+-	}
+-
+-	for_each_node_state(nid, N_MEMORY) {
+-		__node_set(nid, &replica_nodes);
+-	}
+-
+-	for_each_memory_node(nid)
+-		pr_info("Memory node: %d\n", nid);
+-
+-	init_node_to_memory_mapping();
+-	master_node = page_to_nid(virt_to_page(lm_alias((void *)KERNEL_TEXT_START)));
+-
+-	pr_info("Master Node: #%d\n", master_node);
+-	for_each_memory_node(nid) {
+-		if (nid == master_node) {
+-			node_desc[nid].text_vaddr = lm_alias((void *)KERNEL_TEXT_START);
+-			node_desc[nid].rodata_vaddr = lm_alias((void *)KERNEL_RODATA_START);
+-		} else {
+-			node_desc[nid].text_vaddr = memblock_alloc_try_nid(
+-					(KERNEL_TEXT_END - KERNEL_TEXT_START),
+-					align, 0, MEMBLOCK_ALLOC_ANYWHERE, nid);
+-
+-			node_desc[nid].rodata_vaddr = memblock_alloc_try_nid(
+-					(KERNEL_RODATA_END - KERNEL_RODATA_START),
+-					align, 0, MEMBLOCK_ALLOC_ANYWHERE, nid);
+-		}
+-
+-		BUG_ON(node_desc[nid].text_vaddr == NULL);
+-		BUG_ON(node_desc[nid].rodata_vaddr == NULL);
+-	}
+-}
+-
+-void numa_replication_fini(void)
+-{
+-	int nid;
+-
+-	/*
+-	 * Clear addresses form linear space
+-	 */
+-	for_each_memory_node(nid) {
+-		node_desc[nid].text_vaddr = NULL;
+-		node_desc[nid].rodata_vaddr = NULL;
+-	}
+-
+-	debugfs_init();
+-
+-	pr_info("Replicated page table : [%p --- %p]\n",
+-			(void *)PAGE_TABLE_REPLICATION_LEFT,
+-			(void *)PAGE_TABLE_REPLICATION_RIGHT);
+-
+-	dump_kernel_pgtables(NULL, KERNEL_TEXT_START, KERNEL_RODATA_END - 1);
+-}
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
 index d2b1191efa28..36cd38df0614 100644
 --- a/mm/page_alloc.c
@@ -16031,6 +17613,1382 @@ index 45a5dbd379ac..5918d1b32e19 100644
  	prog_ret = dummy_ops_call_op(image, args);
  
  	err = dummy_ops_copy_args(args);
+diff --git a/tools/trio/README.md b/tools/trio/README.md
+deleted file mode 100644
+index d4aaeec1a1bf..000000000000
+--- a/tools/trio/README.md
++++ /dev/null
+@@ -1,446 +0,0 @@
+-### About TrIO
+-
+-On-demand loading of container images significantly improves container startup performance. However, compared to traditional full-image loading solutions, this method triggers many discrete network I/O operations during container runtime, which can introduce considerable overhead during the container's running phase. TrIO can be used to accelerate this scenario.
+-
+-TrIO can be used to boost container startup based on Nydus, which is a typical container image on-demand loading solutions in container cases. It first tracks the I/O requests for reading image files during container runtime; the data corresponding to these I/O requests is the data needed for container running. Then, it orchestrates these I/O requests into the container's images and pushes them to the image repository. When a container is launched, TrIO can first pull these orchestrated I/O requests (referred to as I/O traces) to the local container node in the form of large I/O operations and use this data to reconstruct the rootfs required for container runtime. This rootfs will be used during container startup.
+-
+-The core idea of TrIO is to aggregate I/O operations. It orchestrates the I/O operations actually used during container runtime into a single large I/O operation to pull all the required data to the container node in a single I/O, thereby reducing the network overhead associated with image fetching.
+-
+-### Best Practice
+-
+-The functionality of loading trace into the rootfs has already been implemented in the kernel, but the creation of trace requires coordination with user-space programs. In this case, we leverage the capabilities of eBPF to orchestrate the trace. Here are the files we will use in the following steps:
+-
+-```shell
+-$ tree {KERNEL_TREE}/tools/trio/
+-├── bpf
+-│   ├── iotracker
+-│   │   ├── iotracker.bpf.c    # ebpf probe
+-│   │   ├── iotracker.c        # ebpf loading program
+-│   │   └── Makefile
+-│   └── rio_tracker_mod
+-│       ├── Makefile
+-│       └── rio_tracker.c      # provide the kfunc for probe
+-└── scripts
+-    └── trace_parser.py        # parse the raw trace
+-```
+-
+-#### **Prerequisites**
+-
+-- **kernel config**
+-
+-If you want to enable TrIO, you should first compile the kernel with `CONFIG_EROFS_TRIO` enabled.
+-
+-- **apply patch on nydus-snapshotter**
+-
+-We assume that you have already set up the environment for on-demand container image loading and that you can successfully run the on-demand loading process for containers. To use TrIO, you can make some simple modifications to the snapshotter module of containerd. Here, we use `nydus-snapshotter-0.13.10` as an example for a brief explanation. Our goal is to make the functionality work, so we will make some simple adaptations within the snapshotter to fetch the I/O traces and load them into the kernel. The adaptation process can be as follow:
+-
+-```shell
+-$ mkdir nydus-snapshotter-0.13.10/pkg/utils/trace
+-$ vim helper.go
+-```
+-
+-In `helper.go` the content is:
+-
+-```go
+-package trace
+-
+-import (
+-	"fmt"
+-	"io"
+-	"net/http"
+-	"os"
+-	"time"
+-	"bufio"
+-	"strings"
+-)
+-
+-const (
+-    BaseUrl       = "${trace_repo_url}"  // trace repo server, you can download traces from this url.   Such as http://10.67.175.82:8080
+-    LocalTraceDir = "${trace_repo_dir}"  // the directory where you download, Such as /home/trace-repo
+-)
+-
+-func downloadCost(start time.Time, path string) {
+-	tc := time.Since(start)
+-	fmt.Printf("Downloading trace:%s cost = %v\n", path, tc)
+-}
+-
+-func GetTraceHintFile() (string, string) {
+-	trace_hint := "/var/log/trace_hint"
+-	if _, err := os.Stat(trace_hint); os.IsNotExist(err) {
+-		return "", ""
+-	}
+-	file, err := os.Open(trace_hint)
+-	if err != nil {
+-		return "", ""
+-	}
+-	defer file.Close()
+-
+-	reader := bufio.NewReader(file)
+-	content, err := reader.ReadString('\n')
+-	if err != nil {
+-		return "", ""
+-	}
+-	content = strings.TrimSuffix(content, "\n")
+-	if len(content) == 0 {
+-		return "", ""
+-	}
+-	strArray := strings.Split(content, ",")
+-	return strArray[0], strArray[1]
+-}
+-
+-func GetTraceHintPath() (string, string) {
+-	meta, data := GetTraceHintFile()
+-	if len(meta) == 0 || len(data) == 0 {
+-		return "", ""
+-	}
+-	real_meta := fmt.Sprintf("%s/%s", LocalTraceDir, meta)
+-	real_data := fmt.Sprintf("%s/%s", LocalTraceDir, data)
+-	return real_meta, real_data
+-}
+-
+-func FetchTraceFile(filename string) string {
+-	localPath := fmt.Sprintf("%s/%s", LocalTraceDir, filename)
+-	finfo, err := os.Stat(localPath)
+-        if !os.IsNotExist(err) && finfo.Size() > 0 {
+-                return localPath
+-        }
+-	url := fmt.Sprintf("%s/%s", BaseUrl, filename)
+-	defer downloadCost(time.Now(), url)
+-
+-	resp, err := http.Get(url)
+-	if err != nil {
+-		panic(err)
+-	}
+-	defer resp.Body.Close()
+-
+-	/* create local file */
+-	file, err := os.Create(localPath)
+-	if err != nil {
+-		panic(err)
+-	}
+-	defer file.Close()
+-
+-	/* copy http file to local */
+-	_, err = io.Copy(file, resp.Body)
+-	if err != nil {
+-		panic(err)
+-	}
+-	return localPath
+-}
+-```
+-
+-> $trace_repo_url and $trace_repo_dir should be set.
+-
+-In order the fetch I/O traces, we should add pulling logical in `snapshot/snapshot.go` . Here are the total changes:
+-
+-```go
+-diff -Nuar -x bin ../nydus-snapshotter-0.13.10/pkg/daemon/daemon.go ./pkg/daemon/daemon.go
+---- ../nydus-snapshotter-0.13.10/pkg/daemon/daemon.go	2024-03-19 09:30:29.000000000 +0800
+-+++ ./pkg/daemon/daemon.go	2025-02-21 19:36:29.208911094 +0800
+-@@ -20,6 +20,7 @@
+- 
+- 	"github.com/containerd/containerd/log"
+- 
+-+	"github.com/containerd/nydus-snapshotter/pkg/utils/trace"
+- 	"github.com/containerd/nydus-snapshotter/config"
+- 	"github.com/containerd/nydus-snapshotter/config/daemonconfig"
+- 	"github.com/containerd/nydus-snapshotter/pkg/daemon/types"
+-@@ -306,7 +307,9 @@
+- 	ra.AddAnnotation(rafs.AnnoFsCacheDomainID, cfg.DomainID)
+- 	ra.AddAnnotation(rafs.AnnoFsCacheID, fscacheID)
+- 
+--	if err := erofs.Mount(cfg.DomainID, fscacheID, mountPoint); err != nil {
+-+
+-+	meta, data := trace.GetTraceHintPath()
+-+	if err := erofs.Mount(cfg.DomainID, fscacheID, meta, data, mountPoint); err != nil {
+- 		if !errdefs.IsErofsMounted(err) {
+- 			return errors.Wrapf(err, "mount erofs to %s", mountPoint)
+- 		}
+-diff -Nuar -x bin ../nydus-snapshotter-0.13.10/pkg/utils/erofs/erofs.go ./pkg/utils/erofs/erofs.go
+---- ../nydus-snapshotter-0.13.10/pkg/utils/erofs/erofs.go	2024-03-19 09:30:29.000000000 +0800
+-+++ ./pkg/utils/erofs/erofs.go	2025-02-21 19:38:06.655911094 +0800
+-@@ -15,16 +15,21 @@
+- 	"golang.org/x/sys/unix"
+- )
+- 
+--func Mount(domainID, fscacheID, mountpoint string) error {
+-+func Mount(domainID, fscacheID, meta, data, mountpoint string) error {
+- 	mount := unix.Mount
+- 	var opts string
+- 
+- 	// Nydusd must have domain_id specified and it is set to fsid if it is
+- 	// never specified.
+-+	if meta != "" && data != "" {
+-+		opts = fmt.Sprintf("trio_meta=%s,trio_data=%s,", meta, data)
+-+	} else {
+-+		opts = ""
+-+	}
+- 	if domainID != "" && domainID != fscacheID {
+--		opts = fmt.Sprintf("domain_id=%s,fsid=%s", domainID, fscacheID)
+-+		opts = fmt.Sprintf("%sdomain_id=%s,fsid=%s", opts, domainID, fscacheID)
+- 	} else {
+--		opts = "fsid=" + fscacheID
+-+		opts = fmt.Sprintf("%sfsid=%s", opts, fscacheID)
+- 	}
+- 	log.L.Infof("Mount erofs to %s with options %s", mountpoint, opts)
+- 
+-diff -Nuar -x bin ../nydus-snapshotter-0.13.10/snapshot/process.go ./snapshot/process.go
+---- ../nydus-snapshotter-0.13.10/snapshot/process.go	2024-03-19 09:30:29.000000000 +0800
+-+++ ./snapshot/process.go	2025-03-05 06:46:41.254104087 +0800
+-@@ -41,6 +41,7 @@
+- 
+- 	remoteHandler := func(id string, labels map[string]string) func() (bool, []mount.Mount, error) {
+- 		return func() (bool, []mount.Mount, error) {
+-+			sn.traceSync.Wait()
+- 			logger.Debugf("Prepare remote snapshot %s", id)
+- 			if err := sn.fs.Mount(ctx, id, labels, &s); err != nil {
+- 				return false, nil, err
+-diff -Nuar -x bin ../nydus-snapshotter-0.13.10/snapshot/snapshot.go ./snapshot/snapshot.go
+---- ../nydus-snapshotter-0.13.10/snapshot/snapshot.go	2024-03-19 09:30:29.000000000 +0800
+-+++ ./snapshot/snapshot.go	2025-03-05 06:48:32.530104087 +0800
+-@@ -13,6 +13,7 @@
+- 	"os"
+- 	"path/filepath"
+- 	"strings"
+-+	"sync"
+- 
+- 	"github.com/pkg/errors"
+- 
+-@@ -26,6 +27,7 @@
+- 	"github.com/containerd/nydus-snapshotter/config"
+- 	"github.com/containerd/nydus-snapshotter/config/daemonconfig"
+- 
+-+	"github.com/containerd/nydus-snapshotter/pkg/utils/trace"
+- 	"github.com/containerd/nydus-snapshotter/pkg/cache"
+- 	"github.com/containerd/nydus-snapshotter/pkg/cgroup"
+- 	v2 "github.com/containerd/nydus-snapshotter/pkg/cgroup/v2"
+-@@ -58,6 +60,7 @@
+- 	enableKataVolume     bool
+- 	syncRemove           bool
+- 	cleanupOnClose       bool
+-+	traceSync            sync.WaitGroup
+- }
+- 
+- func NewSnapshotter(ctx context.Context, cfg *config.SnapshotterConfig) (snapshots.Snapshotter, error) {
+-@@ -293,6 +296,7 @@
+- 		enableNydusOverlayFS: cfg.SnapshotsConfig.EnableNydusOverlayFS,
+- 		enableKataVolume:     cfg.SnapshotsConfig.EnableKataVolume,
+- 		cleanupOnClose:       cfg.CleanupOnClose,
+-+		traceSync:	sync.WaitGroup{},
+- 	}, nil
+- }
+- 
+-@@ -454,6 +458,17 @@
+- 	}
+- 
+- 	logger.Debugf("[Prepare] snapshot with labels %v", info.Labels)
+-+	if len(parent) == 0 {
+-+		o.traceSync.Add(1)
+-+		go func() {
+-+			defer o.traceSync.Done()
+-+			meta, data := trace.GetTraceHintFile()
+-+			if len(meta) != 0 && len(data) != 0 {
+-+				trace.FetchTraceFile(meta)
+-+				trace.FetchTraceFile(data)
+-+			}
+-+		}()
+-+	}
+- 
+- 	processor, target, err := chooseProcessor(ctx, logger, o, s, key, parent, info.Labels, func() string { return o.upperPath(s.ID) })
+- 	if err != nil {
+-@@ -492,6 +507,7 @@
+- 		// Nydusd might not be running. We should run nydusd to reflect the rootfs.
+- 		if err = o.fs.WaitUntilReady(pID); err != nil {
+- 			if errors.Is(err, errdefs.ErrNotFound) {
+-+				o.traceSync.Wait()
+- 				if err := o.fs.Mount(ctx, pID, pInfo.Labels, nil); err != nil {
+- 					return nil, errors.Wrapf(err, "mount rafs, instance id %s", pID)
+- 				}
+-@@ -522,6 +538,7 @@
+- 		if err != nil {
+- 			return nil, errors.Wrapf(err, "merge tarfs layers for snapshot %s", pID)
+- 		}
+-+		o.traceSync.Wait()
+- 		if err := o.fs.Mount(ctx, pID, pInfo.Labels, &s); err != nil {
+- 			return nil, errors.Wrapf(err, "mount tarfs, snapshot id %s", pID)
+- 		}
+-```
+-
+-- **Trace Server**
+-
+-Here we start an independent server to act as the server-side of the trace repository. In more formal way, the trace can be packed in the container images. For testing, the server only provides file download functionality.
+-
+-```go
+-// trace_server.go
+-package main
+-
+-import (
+-	"fmt"
+-	"io"
+-	"net/http"
+-	"net/url"
+-	"os"
+-	"strconv"
+-	"time"
+-)
+-
+-func timeCost(start time.Time, path, action string) {
+-	tc := time.Since(start)
+-	fmt.Printf("%v file:%s cost = %v, at:%v\n", action, path, tc, time.Now().Format("2006-01-02 15:04:05.000"))
+-}
+-
+-func download(w http.ResponseWriter, req *http.Request) {
+-	defer timeCost(time.Now(), req.RequestURI, "Downloading")
+-
+-	filename := req.RequestURI[1:]
+-	enEscapeUrl, err := url.QueryUnescape(filename)
+-	if err != nil {
+-		w.Write([]byte(err.Error()))
+-		return
+-	}
+-
+-	f, err := os.Open("./" + enEscapeUrl)
+-	if err != nil {
+-		w.Write([]byte(err.Error()))
+-		return
+-	}
+-
+-	info, err := f.Stat()
+-	if err != nil {
+-		w.Write([]byte(err.Error()))
+-		return
+-	}
+-
+-	w.Header().Set("Content-Type", "application/octet-stream")
+-	w.Header().Set("Content-Length", strconv.FormatInt(info.Size(), 10))
+-
+-	f.Seek(0, 0)
+-	io.Copy(w, f)
+-}
+-
+-func main() {
+-	fmt.Printf("linsten on :8080 \n")
+-	http.HandleFunc("/", download)
+-	http.ListenAndServe(":8080", nil)
+-}
+-```
+-
+-
+-
+-#### How to work
+-
+-- **Track the runtime io for container**
+-
+-> Notes: The container node for tracing can be different with running nodes.
+-
+-###### Prepare
+-
+-```shell
+-$ modprobe erofs; modprobe cachefiles;  # prepare nydus environment
+-$ cd $KERNEL_SRC/tools/trio/bpf/iotracker && make -j32; cd $KERNEL_SRC/tools/trio/bpf/rio_tracker_mod && make -j32
+-$ cd $KERNEL_SRC/tools/trio/bpf
+-$ insmod rio_tracker_mod/rio_tracker.ko tracker_output="/var/log/trace.txt"
+-$ iotracker/.output/iotracker
+-```
+-
+-Now you have prepared the tracker environment. Then you should open a new terminal to prepare the following steps:
+-
+-###### Tracker
+-
+-```shell
+-$ sync; echo 1 > /proc/sys/vm/drop_caches; sleep 5
+-$ echo 4096 > /sys/kernel/debug/fault_around_bytes  # The original value should be keep, default 65536.
+-$ echo 1 > /sys/kernel/rio_tracker/reset
+-$ echo -n TRACE_HOST_NAME > /sys/kernel/rio_tracker/host_ns  # It will tracker the io in ${host_name} uts namespace. Here uts namespace is TRACE_HOST_NAME, it will be used when launch the container.
+-$ echo 1 > /sys/kernel/rio_tracker/enable
+-```
+-
+-Then you just run your container task. Here we take running pytorch container in `Nydus` as an example:
+-
+-- Terminal A:
+-
+-  ```shell
+-  $ containerd-nydus-grpc --config /etc/nydus/config.toml --nydusd-config /etc/nydus/nydusd-config.fscache.json --fs-driver fscache --log-to-stdout
+-  ```
+-
+-- Terminal B:
+-
+-  ```shell
+-  $ nerdctl --snapshotter=nydus run -ti --hostname TRACE_HOST_NAME --rm --insecure-registry 10.67.175.82:5001/nydus/pytorch:nydus python -c "import datetime; print(datetime.datetime.now()); import torch;print(torch.cuda.is_available()); print(datetime.datetime.now())"  # If you want to run nginx, you may be like: nerdctl --snapshotter=nydus run --name test-nginx --hostname TRACE_HOST_NAME -p 9001:80 -d --insecure-registry 10.67.175.82:5001/nydus/nginx:nydus;./nginx_ok.sh
+-  ```
+-
+-> Notes: You should launch the target container with `--hostname TRACE_HOST_NAME` which you used in the before step.
+-
+-In our example, we launch a pytorch task with the output results. If you want trace the container which runs in backend (such as web services), Then after launching the container service, you should prepare the condition that serves the request. For network services (e.g., nginx, httpd), HTTP status OK is suitable for internal probes (this can trigger to load the necessary libraries). Such as:`curl -kv 127.0.0.1:9001`. So in our pytorch exmple, when the task finished, we stop tracing.
+-
+-After the target condition is matched (finished), we can execute:
+-
+-```shell
+-$ echo 0 > /sys/kernel/rio_tracker/enable
+-$ echo 65536 > /sys/kernel/debug/fault_around_bytes # recovery
+-$ echo 1 > /sys/kernel/rio_tracker/dump
+-```
+-
+-Then your tracing about the target container task is finished. And the raw trace source is dumped at `/var/log/trace.txt`.
+-
+-###### **Arrangement**
+-
+-Launch the container again to obtain the rootfs (need run container in backend, such as `-d` flags), it is like:`/run/containerd/io.containerd.runtime.v2.task/default/${container_id}/rootfs` (You can see this by `df -h` command).
+-
+-```shell
+-$ nerdctl --snapshotter=nydus run -d --insecure-registry 10.67.175.82:5001/nydus/pytorch:nydus sleep 999
+-$ df -h  # Then you can see the live rootfs
+-```
+-
+-Then you can use the scripts `trace_parser.py` to process the traces.
+-
+-```shell
+-$ cd $KERNEL_SRC/tools/trio/scripts
+-$ python3 trace_parser.py --trace_file=/var/log/trace.txt --output_dir=/var/log --root=${erofs root}  # such as python3 scripts/trace_parser.py --trace_file=/var/log/trace.txt --output_dir=/var/log --root=/home/containerd-root/containerd-nydus/snapshots/8/mnt
+-```
+-
+-> erofs_root means the lowerdir of your container's rootfs
+-
+-The output will show the trace data and metadata named as their `sha256` values. Then you can keep these trace files in the trace repository, here we can just use `scp` to transfer the traces to trace repository ( such as `scp /var/log/9af53bf836cc89591eb3f1df9a5302c5965c0049bb2622710a04519c06bd25c5 /var/log/fc8401b2850cc16d5850bf876543b85fd2b70fc5d112a846ca70e75a738cdbab root@10.67.175.82:/home/trace_hub`).
+-
+-> Notes: In fact, I/O traces can be arraged into container images by modifying the container management tools. To achieve this, you need to modify the `nerdctl` and `containerd` packages.
+-
+-- **Launch container by TrIO**
+-
+-> Normally, the running node is different with the tracing node.
+-
+-On the images or traces repository nodes (here is `10.67.175.82`), we can launch the traces server:
+-
+-```shell
+-$ cd /home/trace_hub
+-$ go run trace_server.go
+-```
+-
+-> Notes: the trace should be put into the same directory of `server.go`
+-
+-Then on container node, we can start container. First, you should run container in on-demand loading mode. Take Nydus as example, we start nydus-snapshoter in one termimal, and run :
+-
+-- Termimal A
+-
+-  ```shell
+-  $ modprobe erofs; modprobe cachefiles;
+-  $ containerd-nydus-grpc --config /etc/nydus/config.toml --nydusd-config /etc/nydus/nydusd-config.fscache.json --fs-driver fscache --log-to-stdout
+-  ```
+-
+-- Termimal B
+-
+-```shell
+-$ echo "${trace_meta_name},${trace_data_name}" > /var/log/trace_hint     # such as echo "9af53bf836cc89591eb3f1df9a5302c5965c0049bb2622710a04519c06bd25c5,fc8401b2850cc16d5850bf876543b85fd2b70fc5d112a846ca70e75a738cdbab" > /var/log/trace_hint
+-$ nerdctl --snapshotter=nydus run -ti --rm --insecure-registry 10.67.175.82:5001/nydus/pytorch:nydus python -c "import datetime; print(datetime.datetime.now()); import torch;print(torch.cuda.is_available()); print(datetime.datetime.now())"
+-```
+-
+-### Results
+-
+-We conducted simple experiments on the following containers. By leveraging TrIO, we were able to significantly improve the startup performance of containers under on-demand loading scenarios.
+-
+-|            | nginx   | redis   | tomcat   | pytorch   | tensorflow |
+-| ---------- | ------- | ------- | -------- | --------- | ---------- |
+-| Base       | 4.85 s  | 4.756 s | 10.026 s | 127.986 s | 35.164 s   |
+-| Nydus      | 3.136 s | 2.705 s | 6.794 s  | 19.136 s  | 29.931 s   |
+-| Nydus+TrIO | 2.873 s | 2.263 s | 4.954 s  | 6.814 s   | 8.496 s    |
+-
+diff --git a/tools/trio/bpf/iotracker/Makefile b/tools/trio/bpf/iotracker/Makefile
+deleted file mode 100644
+index f5c279c62224..000000000000
+--- a/tools/trio/bpf/iotracker/Makefile
++++ /dev/null
+@@ -1,99 +0,0 @@
+-# SPDX-License-Identifier: (LGPL-2.1 OR BSD-2-Clause)
+-include ../../../scripts/Makefile.include
+-
+-OUTPUT ?= $(abspath .output)
+-
+-BPFTOOL_OUTPUT := $(OUTPUT)bpftool/
+-DEFAULT_BPFTOOL := $(BPFTOOL_OUTPUT)bootstrap/bpftool
+-BPFTOOL ?= $(DEFAULT_BPFTOOL)
+-LIBBPF_SRC := $(abspath ../../../lib/bpf)
+-BPFOBJ_OUTPUT := $(OUTPUT)libbpf/
+-BPFOBJ := $(BPFOBJ_OUTPUT)libbpf.a
+-BPF_DESTDIR := $(BPFOBJ_OUTPUT)
+-BPF_INCLUDE := $(BPF_DESTDIR)/include
+-INCLUDES := -I$(OUTPUT) -I$(BPF_INCLUDE) -I$(abspath ../../../include/uapi)
+-CFLAGS := -g -Wall $(CLANG_CROSS_FLAGS)
+-CFLAGS += $(EXTRA_CFLAGS)
+-LDFLAGS += $(EXTRA_LDFLAGS)
+-LDLIBS += -lelf -lz
+-ifeq ($(shell uname -m), x86_64)
+-	ARCH_FLAG := __TARGET_ARCH_x86
+-else
+-	ARCH_FLAG := __TARGET_ARCH_arm64
+-endif
+-
+-# Try to detect best kernel BTF source
+-KERNEL_REL := $(shell uname -r)
+-VMLINUX_BTF_PATHS := $(if $(O),$(O)/vmlinux)		\
+-	$(if $(KBUILD_OUTPUT),$(KBUILD_OUTPUT)/vmlinux) \
+-	../../../../vmlinux /sys/kernel/btf/vmlinux	\
+-	/boot/vmlinux-$(KERNEL_REL)
+-VMLINUX_BTF_PATH := $(or $(VMLINUX_BTF),$(firstword			       \
+-					  $(wildcard $(VMLINUX_BTF_PATHS))))
+-
+-ifeq ($(V),1)
+-Q =
+-else
+-Q = @
+-MAKEFLAGS += --no-print-directory
+-submake_extras := feature_display=0
+-endif
+-
+-.DELETE_ON_ERROR:
+-
+-.PHONY: all clean iotracker libbpf_hdrs
+-all: iotracker
+-
+-iotracker: $(OUTPUT)/iotracker
+-
+-clean:
+-	$(call QUIET_CLEAN, iotracker)
+-	$(Q)$(RM) -r $(BPFOBJ_OUTPUT) $(BPFTOOL_OUTPUT)
+-	$(Q)$(RM) $(OUTPUT)*.o $(OUTPUT)*.d
+-	$(Q)$(RM) $(OUTPUT)*.skel.h $(OUTPUT)vmlinux.h
+-	$(Q)$(RM) $(OUTPUT)iotracker
+-	$(Q)$(RM) -r .output
+-
+-libbpf_hdrs: $(BPFOBJ)
+-
+-$(OUTPUT)/iotracker: $(OUTPUT)/iotracker.o $(BPFOBJ)
+-	$(QUIET_LINK)$(CC) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+-
+-$(OUTPUT)/iotracker.o: $(OUTPUT)/iotracker.skel.h	      \
+-			$(OUTPUT)/iotracker.bpf.o | libbpf_hdrs
+-
+-$(OUTPUT)/iotracker.bpf.o: $(OUTPUT)/vmlinux.h | libbpf_hdrs
+-
+-$(OUTPUT)/%.skel.h: $(OUTPUT)/%.bpf.o | $(BPFTOOL)
+-	$(QUIET_GEN)$(BPFTOOL) gen skeleton $< > $@
+-
+-
+-$(OUTPUT)/%.bpf.o: %.bpf.c $(BPFOBJ) | $(OUTPUT)
+-	$(QUIET_GEN)$(CLANG) -g -O2 --target=bpf -D$(ARCH_FLAG) $(INCLUDES)		      \
+-		 -c $(filter %.c,$^) -o $@ &&				      \
+-	$(LLVM_STRIP) -g $@
+-
+-$(OUTPUT)/%.o: %.c | $(OUTPUT)
+-	$(QUIET_CC)$(CC) $(CFLAGS) $(INCLUDES) -c $(filter %.c,$^) -o $@
+-
+-$(OUTPUT) $(BPFOBJ_OUTPUT) $(BPFTOOL_OUTPUT):
+-	$(QUIET_MKDIR)mkdir -p $@
+-
+-$(OUTPUT)/vmlinux.h: $(VMLINUX_BTF_PATH) | $(OUTPUT) $(BPFTOOL)
+-ifeq ($(VMLINUX_H),)
+-	$(Q)if [ ! -e "$(VMLINUX_BTF_PATH)" ] ; then \
+-		echo "Couldn't find kernel BTF; set VMLINUX_BTF to"	       \
+-			"specify its location." >&2;			       \
+-		exit 1;\
+-	fi
+-	$(QUIET_GEN)$(BPFTOOL) btf dump file $(VMLINUX_BTF_PATH) format c > $@
+-else
+-	$(Q)cp "$(VMLINUX_H)" $@
+-endif
+-
+-$(BPFOBJ): $(wildcard $(LIBBPF_SRC)/*.[ch] $(LIBBPF_SRC)/Makefile) | $(BPFOBJ_OUTPUT)
+-	$(Q)$(MAKE) $(submake_extras) -C $(LIBBPF_SRC) OUTPUT=$(BPFOBJ_OUTPUT) \
+-		    DESTDIR=$(BPFOBJ_OUTPUT) prefix= $(abspath $@) install_headers
+-
+-$(DEFAULT_BPFTOOL): | $(BPFTOOL_OUTPUT)
+-	$(Q)$(MAKE) $(submake_extras) -C ../../../bpf/bpftool OUTPUT=$(BPFTOOL_OUTPUT) bootstrap
+diff --git a/tools/trio/bpf/iotracker/iotracker.bpf.c b/tools/trio/bpf/iotracker/iotracker.bpf.c
+deleted file mode 100644
+index d032fb52c059..000000000000
+--- a/tools/trio/bpf/iotracker/iotracker.bpf.c
++++ /dev/null
+@@ -1,52 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/* Copyright(c) 2025 Huawei Technologies Co., Ltd
+- */
+-
+-#include <vmlinux.h>
+-#include <bpf/bpf_helpers.h>
+-#include <bpf/bpf_core_read.h>
+-#include <bpf/bpf_tracing.h>
+-
+-enum {
+-	TAG_READ = 0,
+-	TAG_PRE_FAULT = 1,
+-	TAG_POST_FAULT = 2
+-};
+-
+-extern void bpf_tracker_rio(unsigned long addr1, unsigned long addr2, int tag) __ksym;
+-
+-char LICENSE[] SEC("license") = "Dual BSD/GPL";
+-
+-SEC("kprobe/erofs_file_read_iter")
+-int BPF_KPROBE(erofs_file_read_iter_entry, struct kiocb *iocb,
+-	       struct iov_iter *to)
+-{
+-	struct kiocb *_iocb;
+-	struct iov_iter *_to;
+-
+-	bpf_core_read(&_iocb, sizeof(struct kiocb *), &iocb);
+-	bpf_core_read(&_to, sizeof(struct iov_iter *), &to);
+-
+-	bpf_tracker_rio((unsigned long)_iocb, (unsigned long)_to, TAG_READ);
+-	return 0;
+-}
+-
+-SEC("kprobe/filemap_fault")
+-int BPF_KPROBE(filemap_fault_entry, struct vm_fault *vmf)
+-{
+-	struct vm_fault *_vmf;
+-
+-	bpf_core_read(&_vmf, sizeof(struct vm_fault *), &vmf);
+-	bpf_tracker_rio((unsigned long)_vmf, 0, TAG_PRE_FAULT);
+-	return 0;
+-}
+-
+-SEC("kprobe/finish_fault")
+-int BPF_KPROBE(finish_fault_entry, struct vm_fault *vmf)
+-{
+-	struct vm_fault *_vmf;
+-
+-	bpf_core_read(&_vmf, sizeof(struct vm_fault *), &vmf);
+-	bpf_tracker_rio((unsigned long)_vmf, 0, TAG_POST_FAULT);
+-	return 0;
+-}
+diff --git a/tools/trio/bpf/iotracker/iotracker.c b/tools/trio/bpf/iotracker/iotracker.c
+deleted file mode 100644
+index a9af6087793a..000000000000
+--- a/tools/trio/bpf/iotracker/iotracker.c
++++ /dev/null
+@@ -1,57 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/* Copyright(c) 2025 Huawei Technologies Co., Ltd
+- */
+-
+-#include <stdio.h>
+-#include <unistd.h>
+-#include <sys/resource.h>
+-#include <bpf/libbpf.h>
+-#include "iotracker.skel.h"
+-
+-static int libbpf_print_fn(enum libbpf_print_level level, const char *format, va_list args)
+-{
+-	return vfprintf(stderr, format, args);
+-}
+-
+-int main(int argc, char **argv)
+-{
+-	struct iotracker_bpf *skel;
+-	int err;
+-
+-	/* Set up libbpf errors and debug info callback */
+-	libbpf_set_print(libbpf_print_fn);
+-
+-	/* Open BPF application */
+-	skel = iotracker_bpf__open();
+-	if (!skel) {
+-		fprintf(stderr, "Failed to open BPF skeleton\n");
+-		return 1;
+-	}
+-
+-	/* Load & verify BPF programs */
+-	err = iotracker_bpf__load(skel);
+-	if (err) {
+-		fprintf(stderr, "Failed to load and verify BPF skeleton\n");
+-		goto cleanup;
+-	}
+-
+-	/* Attach tracepoint handler */
+-	err = iotracker_bpf__attach(skel);
+-	if (err) {
+-		fprintf(stderr, "Failed to attach BPF skeleton\n");
+-		goto cleanup;
+-	}
+-
+-	printf("Successfully started! Please run `sudo cat /sys/kernel/debug/tracing/trace_pipe`"
+-	       "to see output of the BPF programs.\n");
+-
+-	for (;;) {
+-		/* trigger our BPF program */
+-		fprintf(stderr, ".");
+-		sleep(1);
+-	}
+-
+-cleanup:
+-	iotracker_bpf__destroy(skel);
+-	return -err;
+-}
+diff --git a/tools/trio/bpf/rio_tracker_mod/Makefile b/tools/trio/bpf/rio_tracker_mod/Makefile
+deleted file mode 100644
+index 22942d7124c7..000000000000
+--- a/tools/trio/bpf/rio_tracker_mod/Makefile
++++ /dev/null
+@@ -1,9 +0,0 @@
+-PWD = $(shell pwd)
+-KVERS =$(shell uname -r)
+-KERNDIR =/lib/modules/${KVERS}/build/
+-obj-m += rio_tracker.o
+-build: kernel_modules
+-kernel_modules:
+-	make -C $(KERNDIR) M=$(PWD) modules
+-clean:
+-	make -C $(KERNDIR) M=$(PWD) clean
+diff --git a/tools/trio/bpf/rio_tracker_mod/rio_tracker.c b/tools/trio/bpf/rio_tracker_mod/rio_tracker.c
+deleted file mode 100644
+index 656805e4bcba..000000000000
+--- a/tools/trio/bpf/rio_tracker_mod/rio_tracker.c
++++ /dev/null
+@@ -1,370 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/* Copyright(c) 2025 Huawei Technologies Co., Ltd
+- */
+-
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/btf.h>
+-#include <linux/btf_ids.h>
+-
+-#include <linux/dcache.h>
+-#include <linux/string.h>
+-#include <asm/current.h>
+-#include <linux/uaccess.h>
+-#include <linux/vmalloc.h>
+-#include <linux/spinlock.h>
+-#include <linux/fs.h>
+-#include <linux/pagemap.h>
+-#include <linux/mm.h>
+-#include <linux/uio.h>
+-#include <linux/err.h>
+-#include <linux/nsproxy.h>
+-#include <linux/utsname.h>
+-#include <linux/printk.h>
+-
+-/* 20MB for default, changed as your needs */
+-static uint32_t tracker_buffer_size = 20971520;
+-module_param(tracker_buffer_size, uint, 0444);
+-
+-static char *tracker_output = "/";
+-module_param(tracker_output, charp, 0444);
+-MODULE_PARM_DESC(tracker_output, "Must be set by the user.");
+-
+-struct rio_tracker_mgr {
+-	bool		enable;
+-	struct kobject	*object;
+-	char		*host_ns;
+-
+-	/* buffer for trace */
+-	spinlock_t	lock;
+-	char		*data;
+-	uint32_t	pos;
+-};
+-
+-enum {
+-	TAG_READ = 0,
+-	TAG_PRE_FAULT = 1,
+-	TAG_POST_FAULT = 2
+-};
+-
+-static struct rio_tracker_mgr rtracker = {0};
+-
+-ssize_t enable_show(struct kobject *kobj, struct kobj_attribute *attr,
+-			char *buf)
+-{
+-	return sprintf(buf, "%d\n", rtracker.enable);
+-}
+-
+-ssize_t enable_store(struct kobject *kobj, struct kobj_attribute *attr,
+-			 const char *buf, size_t count)
+-{
+-	ssize_t ret;
+-	int value;
+-
+-	ret = kstrtoint(buf, 10, &value);
+-	if (ret < 0) {
+-		pr_err("store attr failed\n");
+-		return -EINVAL;
+-	}
+-
+-	if (0 != value && 1 != value)
+-		return -EINVAL;
+-
+-	rtracker.enable = value;
+-	return count;
+-}
+-
+-static void _dump_trace(void)
+-{
+-	struct file *filp;
+-	void *buffer;
+-	ssize_t ret;
+-	loff_t pos;
+-
+-	spin_lock(&rtracker.lock);
+-	rtracker.data[rtracker.pos] = '\0';
+-	buffer = rtracker.data;
+-	spin_unlock(&rtracker.lock);
+-
+-	filp = filp_open(tracker_output, O_RDWR | O_CREAT | O_TRUNC, 0644);
+-	if (IS_ERR(filp)) {
+-		pr_warn("dump failed, file(%s) open failed, err:%ld\n",
+-			tracker_output, PTR_ERR(filp));
+-		return;
+-	}
+-
+-	pos = 0;
+-	ret = kernel_write(filp, buffer, rtracker.pos, &pos);
+-	if (ret < 0)
+-		pr_warn("dump failed, file(%s) write failed, err:%ld, len:%u\n",
+-			tracker_output, ret, rtracker.pos);
+-	else
+-		pr_info("dump to %s %ld bytes successfully!\n",
+-			tracker_output, ret);
+-	filp_close(filp, NULL);
+-}
+-
+-ssize_t dump_store(struct kobject *kobj, struct kobj_attribute *attr,
+-		      const char *buf, size_t count)
+-{
+-	_dump_trace();
+-	return count;
+-}
+-
+-ssize_t reset_store(struct kobject *kobj, struct kobj_attribute *attr,
+-			const char *buf, size_t count)
+-{
+-	spin_lock(&rtracker.lock);
+-	rtracker.pos = 0;
+-	spin_unlock(&rtracker.lock);
+-	return count;
+-}
+-
+-ssize_t host_ns_show(struct kobject *kobj, struct kobj_attribute *attr,
+-			char *buf)
+-{
+-	return sprintf(buf, "%s\n", rtracker.host_ns);
+-}
+-
+-ssize_t host_ns_store(struct kobject *kobj, struct kobj_attribute *attr,
+-			const char *buf, size_t count)
+-{
+-	char *new_prefix = kstrdup(buf, GFP_KERNEL);
+-
+-	if (!new_prefix)
+-		return -ENOMEM;
+-
+-	swap(rtracker.host_ns, new_prefix);
+-	kfree(new_prefix);
+-	return count;
+-}
+-
+-static struct kobj_attribute enable_attr =
+-	__ATTR(enable, 0664, enable_show, enable_store);
+-struct kobj_attribute dump_attr =
+-	__ATTR(dump, 0200, NULL, dump_store);
+-struct kobj_attribute reset_attr =
+-	__ATTR(reset, 0200, NULL, reset_store);
+-struct kobj_attribute host_ns_attr =
+-	__ATTR(host_ns, 0664, host_ns_show, host_ns_store);
+-
+-static struct attribute *tracker_kobj_attrs[] = {
+-	&enable_attr.attr,
+-	&dump_attr.attr,
+-	&reset_attr.attr,
+-	&host_ns_attr.attr,
+-	NULL,
+-};
+-
+-const struct attribute_group tracker_attr_group = {
+-	.attrs = tracker_kobj_attrs,
+-};
+-
+-__diag_push();
+-__diag_ignore_all("-Wmissing-prototypes",
+-"Global functions as their definitions will be in rio_tracker.ko BTF");
+-
+-static inline bool _target_process(const char *name)
+-{
+-	if (!rtracker.host_ns)
+-		return false;
+-
+-	return !!str_has_prefix(name, rtracker.host_ns);
+-}
+-
+-static void mark_rio(struct file *file, unsigned long off, unsigned long len)
+-{
+-	const struct path *path = (const struct path *)&(file->f_path);
+-	char buff[256] = {0};
+-	char *ret_path = NULL;
+-	int written;
+-
+-	/* only track regular file */
+-	if (!S_ISREG(file_inode(file)->i_mode))
+-		return;
+-
+-	ret_path = d_path(path, buff, sizeof(buff));
+-	if (IS_ERR(ret_path)) {
+-		pr_err("get fpath failed, ret:%ld\n", PTR_ERR(ret_path));
+-		return;
+-	}
+-
+-	spin_lock(&rtracker.lock);
+-	if (rtracker.pos >= tracker_buffer_size) {
+-		spin_unlock(&rtracker.lock);
+-		pr_err("tracker buffer is not enough, please enlarge it!\n");
+-		return;
+-	}
+-
+-	/* fill each trace item */
+-	written = snprintf(rtracker.data + rtracker.pos,
+-			   tracker_buffer_size - rtracker.pos, "%s,%lu,%lu,%lu\n",
+-			   ret_path, file_inode(file)->i_ino, off, len);
+-	if (written >= 0 && written <= tracker_buffer_size - rtracker.pos) {
+-		rtracker.pos += written;
+-	} else {
+-		pr_warn("trace data append failed for path:%s, off:%lu, len:%lu\n",
+-			ret_path, off, len);
+-	}
+-	spin_unlock(&rtracker.lock);
+-}
+-
+-void bpf_tracker_rio_read(unsigned long addr1, unsigned long addr2)
+-{
+-	struct kiocb *iocb = (struct kiocb *)addr1;
+-	struct iov_iter *to = (struct iov_iter *)addr2;
+-	struct file *filp;
+-	size_t size, count;
+-	loff_t foff;
+-
+-	filp = iocb->ki_filp;
+-	count = iov_iter_count(to);
+-	foff = (iocb->ki_pos >> PAGE_SHIFT) << PAGE_SHIFT;
+-	size = ((count >> PAGE_SHIFT) + 1) << PAGE_SHIFT;
+-	mark_rio(filp, foff, size);
+-}
+-
+-void bpf_tracker_rio_pre_fault(unsigned long addr)
+-{
+-	struct vm_fault *vmf = (struct vm_fault *)addr;
+-	struct file *file = vmf->vma->vm_file;
+-	struct inode *inode;
+-	struct address_space *mapping;
+-	struct folio *folio;
+-	pgoff_t max_idx, index;
+-	loff_t off;
+-	size_t len;
+-
+-	if (!file)
+-		return;
+-
+-	mapping = file->f_mapping;
+-	inode = mapping->host;
+-	index = vmf->pgoff;
+-	max_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
+-	if (index >= max_idx)
+-		return;
+-	folio = filemap_get_folio(mapping, index);
+-	if (IS_ERR(folio))
+-		return;
+-	off = folio_pos(folio);
+-	len = folio_size(folio);
+-	folio_put(folio);
+-
+-	mark_rio(file, off, len);
+-}
+-
+-void bpf_tracker_rio_post_fault(unsigned long addr)
+-{
+-	struct vm_fault *vmf = (struct vm_fault *)addr;
+-	struct vm_area_struct *vma = vmf->vma;
+-	bool is_cow = (vmf->flags & FAULT_FLAG_WRITE) &&
+-		      !(vma->vm_flags & VM_SHARED);
+-	struct file *file = vmf->vma->vm_file;
+-	struct folio *folio;
+-
+-	/* only tracker the fault by reading */
+-	if (is_cow)
+-		return;
+-
+-	if (!file)
+-		return;
+-
+-	folio = page_folio(vmf->page);
+-	mark_rio(file, folio_pos(folio), folio_size(folio));
+-}
+-
+-__bpf_kfunc void bpf_tracker_rio(unsigned long addr1, unsigned long addr2,
+-				      int tag)
+-{
+-	if (!rtracker.enable)
+-		return;
+-
+-	/* only track the matched UTS namespace */
+-	if (!_target_process(current->nsproxy->uts_ns->name.nodename))
+-		return;
+-
+-	switch (tag) {
+-	case TAG_READ:
+-		bpf_tracker_rio_read(addr1, addr2);
+-		break;
+-	case TAG_PRE_FAULT:
+-		bpf_tracker_rio_pre_fault(addr1);
+-		break;
+-	case TAG_POST_FAULT:
+-		bpf_tracker_rio_post_fault(addr1);
+-		break;
+-	}
+-}
+-
+-__diag_pop();
+-
+-BTF_SET8_START(bpf_rio_tracker_ids)
+-BTF_ID_FLAGS(func, bpf_tracker_rio)
+-BTF_SET8_END(bpf_rio_tracker_ids)
+-
+-static const struct btf_kfunc_id_set kfuncs_set = {
+-	.owner = THIS_MODULE,
+-	.set = &bpf_rio_tracker_ids,
+-};
+-
+-static __init int rio_tracker_init(void)
+-{
+-	struct file *filp = filp_open(tracker_output, O_RDWR | O_CREAT, 0644);
+-	int ret;
+-
+-	if (IS_ERR(filp)) {
+-		pr_err("rio tracker parameter error, %s is invalid, err:%ld\n",
+-		       tracker_output, PTR_ERR(filp));
+-		return -EINVAL;
+-	}
+-	filp_close(filp, NULL);
+-
+-	rtracker.enable = false;
+-	rtracker.object = kobject_create_and_add("rio_tracker", kernel_kobj);
+-	ret = sysfs_create_group(rtracker.object, &tracker_attr_group);
+-	if (ret < 0) {
+-		pr_err("rio tracker init failed, sysfs kobject create failed\n");
+-		kobject_put(rtracker.object);
+-		return ret;
+-	}
+-
+-	rtracker.data = vmalloc(tracker_buffer_size + 1);
+-	if (!rtracker.data) {
+-		ret = -ENOMEM;
+-		goto cleanup;
+-	}
+-	spin_lock_init(&rtracker.lock);
+-	rtracker.pos = 0;
+-
+-	/* register self-defined bpf helper */
+-	ret = register_btf_kfunc_id_set(BPF_PROG_TYPE_UNSPEC, &kfuncs_set);
+-	if (ret) {
+-		pr_err("register btf kfunc error with retcode:%d\n", ret);
+-		goto cleanup;
+-	}
+-
+-	pr_info("rio tracker init success!\n");
+-	return 0;
+-
+-cleanup:
+-	if (rtracker.data)
+-		vfree(rtracker.data);
+-	kobject_put(rtracker.object);
+-	return ret;
+-}
+-
+-static __exit void rio_tracker_exit(void)
+-{
+-	_dump_trace();
+-	kfree(rtracker.host_ns);
+-	vfree(rtracker.data);
+-	kobject_put(rtracker.object);
+-	pr_info("rio tracker exit\n");
+-}
+-
+-module_init(rio_tracker_init);
+-module_exit(rio_tracker_exit);
+-
+-MODULE_LICENSE("Dual BSD/GPL");
+-MODULE_DESCRIPTION("Runtime io Tracker module!");
+diff --git a/tools/trio/scripts/trace_parser.py b/tools/trio/scripts/trace_parser.py
+deleted file mode 100644
+index 5cffc70ad8c4..000000000000
+--- a/tools/trio/scripts/trace_parser.py
++++ /dev/null
+@@ -1,287 +0,0 @@
+-#! /usr/env python
+-# SPDX-License-Identifier: GPL-2.0
+-import os
+-import sys
+-import copy
+-import json
+-import argparse
+-import shutil
+-import hashlib
+-import subprocess
+-
+-
+-PATH_IO_DELIMIT = "|"
+-PATH_PATH_DELIMIT = "@"
+-IO_IO_DELIMIT = "+"
+-VAR_DELIMIT = ","
+-
+-
+-class TraceParser(object):
+-    def __init__(self, trace_file, output_dir, rootfs):
+-        self.output = os.path.join(output_dir, "trace.json")
+-        self.meta = os.path.join(output_dir, "trace.meta")
+-        self.data = os.path.join(output_dir, "trace.data")
+-        self.src_file = trace_file
+-        self.parent = rootfs
+-        self.trace_map = {}
+-        self.fpath_map = {}
+-        self.total_bytes = 0
+-
+-    @staticmethod
+-    def get_page_size():
+-        try:
+-            size = subprocess.run(["getconf", "PAGESIZE"], capture_output=True, text=True)
+-            page_size = int(size.stdout.strip())
+-            return page_size
+-        except Exception as e:
+-            print("Exception:%s, set default pagesize is 4096" % str(e))
+-            return 4096
+-
+-    @staticmethod
+-    def merge_partition(entry, items):
+-        target_begin = entry[0]
+-        target_end = entry[1]
+-        prev_begin = 0
+-        prev_end = 0
+-
+-        # copy one for operating
+-        items_bak = copy.deepcopy(items)
+-        pidx = -1
+-        # find the insert point
+-        for item in items:
+-            curr_begin = item[0]
+-            curr_end = item[1]
+-            if curr_begin > target_begin:
+-                break
+-            pidx += 1
+-            prev_begin = curr_begin
+-            prev_end = curr_end
+-
+-        # merge prev node
+-        if pidx != -1:
+-            if prev_end >= target_begin:
+-                target_begin = prev_begin
+-                if target_end < prev_end:
+-                    target_end = prev_end
+-                # remove extra overlay item
+-                del items_bak[pidx]
+-                # put placeholder
+-                items_bak.insert(pidx, (0, 0))
+-
+-        # merge next node
+-        idx = pidx + 1
+-        while idx < len(items):
+-            next_begin = items[idx][0]
+-            next_end = items[idx][1]
+-            if target_end < next_begin:
+-                break
+-            if target_end < next_end:
+-                target_end = next_end
+-            del items_bak[idx]
+-            # put placeholder
+-            items_bak.insert(idx, (0, 0))
+-            idx += 1
+-
+-        # release old list
+-        del items
+-        items_bak.insert(pidx + 1, (target_begin, target_end))
+-        for item in items_bak:
+-            # remove placeholder
+-            if item[0] == 0 and item[1] == 0:
+-                items_bak.remove(item)
+-        return items_bak
+-
+-    def in_blacklist(self, path):
+-        # not tracker the memory file system
+-        if (path.startswith("/tmp/") or path.startswith("/proc/")
+-                or path.startswith("/sys/")):
+-            return True
+-        return False
+-
+-    def parse_trace(self):
+-        with open(self.src_file, 'r') as f:
+-            for line in f.readlines():
+-                buf_list = line.split(',')
+-                filepath = buf_list[0].strip()
+-                ino = int(buf_list[1].strip())
+-                off = int(buf_list[2].strip())
+-                len = int(buf_list[3].strip())
+-                real_path = filepath if not self.parent else "%s/%s" % (self.parent, filepath)
+-                if not os.path.exists(real_path) or not os.path.isfile(real_path):
+-                    continue
+-
+-                if self.in_blacklist(filepath):
+-                    print("Path %s in blacklist should be skip!" % filepath)
+-                    continue
+-
+-                # verify file io
+-                size = int(os.path.getsize(real_path))
+-                end = len + off
+-                if off >= size:
+-                    continue
+-                if end > size:
+-                    end = size
+-
+-                if filepath not in self.trace_map:
+-                    self.trace_map[filepath] = [(off, end)]
+-                    self.fpath_map[filepath] = ino
+-                else:
+-                    items = self.trace_map[filepath]
+-                    new_items = TraceParser.merge_partition((off, end), items)
+-                    self.trace_map[filepath] = new_items
+-
+-        for value in self.trace_map.values():
+-            for item in value:
+-                self.total_bytes += (item[1] - item[0])
+-
+-    def trans_data(self):
+-        try:
+-            with open(self.data, 'rb') as f:
+-                data = f.read()
+-            file_hash = hashlib.sha256(data).hexdigest()
+-            file_hash = os.path.join(os.path.dirname(self.data), file_hash)
+-            shutil.copyfile(self.data, file_hash)
+-            print("trace data:%s" % file_hash)
+-        except Exception as e:
+-            raise Exception("trans data exception:%s" % str(e))
+-
+-    def trans_meta(self):
+-        try:
+-            all = ""
+-            f = open(self.meta)
+-            data = json.load(f)
+-            entries = data["entries"]
+-            for entry in entries:
+-                #name = entry["name"]
+-                ios = entry["io"]
+-                ino = entry["ino"]
+-                ios_str = ""
+-                for io in ios:
+-                    target_off = io[0]
+-                    target_len = io[1]
+-                    source_off = io[2]
+-                    if ios_str == "":
+-                        ios_str = "%d%s%d%s%d" % (target_off, VAR_DELIMIT, target_len, VAR_DELIMIT, source_off)
+-                        continue
+-                    ios_str = "%s%s%d%s%d%s%d" % (ios_str, IO_IO_DELIMIT, target_off, VAR_DELIMIT, target_len, VAR_DELIMIT, source_off)
+-                if all == "":
+-                    all = "%d%s%s" % (ino, PATH_IO_DELIMIT, ios_str)
+-                    continue
+-                all = "%s%s%s%s%s" % (all, PATH_PATH_DELIMIT, ino, PATH_IO_DELIMIT, ios_str)
+-
+-            # save file
+-            hashobj = hashlib.sha256()
+-            hashobj.update(all.encode())
+-            sha256 = hashobj.hexdigest()
+-            sha256 = os.path.join(os.path.dirname(self.meta), sha256)
+-            with open(sha256, 'w') as f:
+-                f.write(all)
+-            print("trace meta:%s" % sha256)
+-        except Exception as e:
+-            raise Exception("trans meta exception:%s" % str(e))
+-
+-    @staticmethod
+-    def dump_map(map, path):
+-        jsObj = json.dumps(map)
+-        fd = open(path, 'w')
+-        fd.write(jsObj)
+-        fd.close()
+-
+-    def dump_trace(self):
+-        TraceParser.dump_map(self.trace_map, self.output)
+-
+-    def generate_data(self):
+-        def read_data(path, off, len):
+-            with open(path, "rb") as fd:
+-                fd.seek(off, 0)
+-                text = fd.read(len)
+-            return text
+-
+-        def read_zero_data(len):
+-            tmp_file = "/tmp/zero.bin"
+-            if not os.path.exists(tmp_file):
+-                zero_data = b'\x00' * TraceParser.get_page_size()
+-                with open(tmp_file, 'wb') as f:
+-                    f.write(zero_data)
+-            with open(tmp_file, 'rb') as fd:
+-                fd.seek(0, 0)
+-                text = fd.read(len)
+-            return text
+-
+-        trace_meta = {
+-            "version": 1,
+-            "entries": []
+-        }
+-        foff = 0
+-        with open(self.data, "wb") as file:
+-            for key, value in self.trace_map.items():
+-                path = key
+-                real_path = path if not self.parent else "%s/%s" % (self.parent, path)
+-                if not os.path.exists(real_path):
+-                    continue
+-                entry = {
+-                    "name": path,
+-                    "ino": self.fpath_map[path],
+-                    "io": []
+-                }
+-                for item in value:
+-                    off = item[0]
+-                    len = (item[1] - item[0])
+-                    data = read_data(real_path, off, len)
+-                    file.write(data)
+-                    entry["io"].append((off, len, foff))
+-                    # padding with zero
+-                    page_size = TraceParser.get_page_size()
+-                    pad_len = page_size - (len % page_size)
+-                    if pad_len != page_size:
+-                        pad_data = read_zero_data(pad_len)
+-                        file.write(pad_data)
+-                        len += pad_len
+-                    foff += len
+-                trace_meta["entries"].append(entry)
+-        TraceParser.dump_map(trace_meta, self.meta)
+-
+-
+-def main(argv):
+-    parser = argparse.ArgumentParser('container trace parser')
+-    parser.add_argument('--trace_file',
+-                        required=True,
+-                        type=str,
+-                        help='trace source')
+-    parser.add_argument('--output_dir',
+-                        required=True,
+-                        type=str,
+-                        help='output directory')
+-    parser.add_argument('--root',
+-                        required=True,
+-                        type=str,
+-                        help='root of filter')
+-    try:
+-        args = parser.parse_args()
+-        trace_file = args.trace_file
+-        output_dir = args.output_dir
+-        rootfs = args.root
+-        if not os.path.exists(trace_file) or not os.path.exists(output_dir) \
+-                or not os.path.exists(rootfs):
+-            print("Please input the valid path")
+-            return -1
+-        parser = TraceParser(trace_file, output_dir, rootfs)
+-        parser.parse_trace()
+-        parser.dump_trace()  # metadata to json
+-        parser.generate_data()
+-        parser.trans_meta()
+-        parser.trans_data()
+-
+-        return 0
+-    except Exception as e:
+-        print("page cache build exception:%s" % str(e))
+-        return -1
+-
+-
+-if __name__ == '__main__':
+-    try:
+-        ret = main(sys.argv[1:])
+-    except Exception as main_e:
+-        print(str(main_e))
+-        ret = -1
+-    sys.exit(ret)
+diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+index abc89a2de3dd..421f253903ca 100644
+--- a/virt/kvm/kvm_main.c
++++ b/virt/kvm/kvm_main.c
+@@ -505,9 +505,6 @@ static void kvm_vcpu_init(struct kvm_vcpu *vcpu, struct kvm *kvm, unsigned id)
+ #endif
+ 	kvm_async_pf_vcpu_init(vcpu);
+ 
+-#ifdef CONFIG_ARM64_KVM_HCR_NOFB
+-	vcpu->pre_pcpu = -1;
+-#endif
+ 	kvm_vcpu_set_in_spin_loop(vcpu, false);
+ 	kvm_vcpu_set_dy_eligible(vcpu, false);
+ 	vcpu->preempted = false;
 -- 
 2.43.0
 
