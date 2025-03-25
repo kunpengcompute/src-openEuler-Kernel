@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       254
+%global devel_release       256
 %global maintenance_release .0.0
-%global pkg_release         .157
+%global pkg_release         .158
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,27 @@ fi
 %endif
 
 %changelog
+* Tue Mar 25 2025 Li Nan <linan122@huawei.com> - 5.10.0-256.0.0.158
+- !15379  bus: fsl-mc-bus: fix KASAN use-after-free in fsl_mc_bus_remove()
+- !15606  Fix instance dir use-after-free in tracefs
+- !15272 [Intel-SIG] 5.10-x86/cpu: Clearwater Forest new model and ISAs support.
+- tracing: Fix illegal address access of trace_event_file in tracing_release_file_tr()
+- tracing: Avoid use-after-free in tracing_open_file_tr()
+- !15591 【olk 5.10】revert and backport a bugfix
+- net: hns3: add mac tunnel number query
+- Revert "net: hns3: add mac tunnel number query"
+- !15501  module: fix [e_shstrndx
+- !14905 [OLK-5.10] backport important bugfix from the kernel-5.10.y
+- !14918 [OLK-5.10] backport important bugfix from the kernel-5.10.y
+- module: fix [e_shstrndx].sh_size=0 OOB access
+- !2893 igc: add default intel igc driver module support
+- bus: fsl-mc-bus: fix KASAN use-after-free in fsl_mc_bus_remove()
+- x86: KVM: Advertise CPUIDs for new instructions in Clearwater Forest
+- x86/cpu: Add model number for Intel Clearwater Forest processor
+- scsi: mpt3sas: Diag-Reset when Doorbell-In-Use bit is set during driver load time
+- bnxt_en: Reserve rings after PCIe AER recovery if NIC interface is down
+- igc:add default intel igc driver support
+
 * Wed Mar 12 2025 Li Nan <linan122@huawei.com> - 5.10.0-254.0.0.157
 - !15460 v2  soc: hisilicon: Add checks against NULL pointer reference
 - !15456  soc: hisilicon: Fix one printing issue and simplify some printing
