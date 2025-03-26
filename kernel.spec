@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       256
+%global devel_release       257
 %global maintenance_release .0.0
-%global pkg_release         .159
+%global pkg_release         .160
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,14 @@ fi
 %endif
 
 %changelog
+* Wed Mar 26 2025 Li Nan <linan122@huawei.com> - 5.10.0-257.0.0.160
+- !15643 drivers:misc:sdma-dae: sync code to openEuler
+- drivers:misc:sdma-dae: remove unnecessary return in void function
+- drivers:misc:sdma-dae fix incorrect resource release
+- drivers:misc:sdma-dae remove lock while pausing channels
+- drivers:misc:sdma-dae add mmu_notifier
+- drivers:misc:sdma-dae: add MODULE_VERSION to control version
+
 * Tue Mar 25 2025 Li Nan <linan122@huawei.com> - 5.10.0-256.0.0.159
 - !15379  bus: fsl-mc-bus: fix KASAN use-after-free in fsl_mc_bus_remove()
 - !15606  Fix instance dir use-after-free in tracefs
