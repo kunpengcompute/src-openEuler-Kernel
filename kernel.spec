@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2503.4.0
+%global hulkrelease 2503.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0320
+Release: %{hulkrelease}.0321
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,41 @@ fi
 %endif
 
 %changelog
+
+* Wed Mar 26 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.5.0.0321
+- !15605  mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
+- !15600  vfio/platform: check the bounds of read/write syscalls
+- !15633  ASoC: atmel: Add missing of_node_put() in at91sam9g20ek_audio_probe
+- !15634  ALSA: oss: Fix PCM OSS buffer allocation overflow
+- ALSA: oss: Fix PCM OSS buffer allocation overflow
+- ASoC: atmel: Add missing of_node_put() in at91sam9g20ek_audio_probe
+- !15582  CVE-2022-49508
+- !15467  net: mdio: unexport __init-annotated mdio_bus_init()
+- !15465  CVE-2022-49490
+- !15604 v3  rtc: Fix race when disable/enable UIE in rtc_set_time()
+- !15583  block: fix error unwinding in blk_register_queue
+- mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
+- rtc: Fix race when disable/enable UIE in rtc_set_time()
+- rtc: Cleanup for UIE timer/polling emulation support
+- vfio/platform: check the bounds of read/write syscalls
+- !15586  scsi: lpfc: Fix null pointer dereference after failing to issue FLOGI and PLOGI
+- scsi: lpfc: Fix null pointer dereference after failing to issue FLOGI and PLOGI
+- !15569  ubi: ubi_create_volume: Fix use-after-free when volume creation failed
+- !15579  block: Fix handling of offline queues in blk_mq_alloc_request_hctx()
+- !15578  scsi: target: tcmu: Fix possible page UAF
+- !15577  drm/plane: Move range check for format_count earlier
+- !15576  drm/amdgpu/cs: make commands with 0 chunks illegal behaviour.
+- block: fix error unwinding in blk_register_queue
+- HID: elan: Fix potential double free in elan_input_configured
+- HID: elan: Fix memleak in elan_input_configured
+- block: Fix handling of offline queues in blk_mq_alloc_request_hctx()
+- scsi: target: tcmu: Fix possible page UAF
+- drm/plane: Move range check for format_count earlier
+- drm/amdgpu/cs: make commands with 0 chunks illegal behaviour.
+- ubi: ubi_create_volume: Fix use-after-free when volume creation failed
+- net: mdio: unexport __init-annotated mdio_bus_init()
+- drm/msm/mdp5: Fix global state lock backoff
+- drm/msm/mdp5: Return error code in mdp5_pipe_release when deadlock is detected
 
 * Wed Mar 19 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.4.0.0320
 - !15574  some CVE fixes
