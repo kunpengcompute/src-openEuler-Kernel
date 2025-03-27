@@ -1,7 +1,7 @@
-From b6ae2bce109e1c3e65d9f339138d27b9c9a89d03 Mon Sep 17 00:00:00 2001
+From d8f3b3161e079ddf441676146b5bf8f72997bbd2 Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
-Date: Tue, 29 Oct 2024 17:36:48 +0800
-Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-48.0.0)
+Date: Fri, 24 Jan 2025 17:25:52 +0800
+Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-75.0.0)
 
 ---
  .../admin-guide/media/bcm2835-isp.rst         |  127 +
@@ -657,7 +657,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-48.0.0)
  drivers/gpu/drm/vc4/vc4_dsi.c                 |  151 +-
  drivers/gpu/drm/vc4/vc4_firmware_kms.c        | 2077 +++++
  drivers/gpu/drm/vc4/vc4_gem.c                 |   24 +-
- drivers/gpu/drm/vc4/vc4_hdmi.c                |  301 +-
+ drivers/gpu/drm/vc4/vc4_hdmi.c                |  297 +-
  drivers/gpu/drm/vc4/vc4_hdmi.h                |   43 +
  drivers/gpu/drm/vc4/vc4_hdmi_phy.c            |  647 ++
  drivers/gpu/drm/vc4/vc4_hdmi_regs.h           |  222 +-
@@ -691,7 +691,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-48.0.0)
  drivers/i2c/busses/i2c-bcm2708.c              |  512 ++
  drivers/i2c/busses/i2c-bcm2835.c              |  133 +-
  drivers/i2c/busses/i2c-designware-common.c    |   39 +
- drivers/i2c/busses/i2c-designware-core.h      |   11 +
+ drivers/i2c/busses/i2c-designware-core.h      |   10 +
  drivers/i2c/busses/i2c-designware-master.c    |   76 +-
  drivers/i2c/busses/i2c-gpio.c                 |    4 +-
  drivers/i2c/i2c-mux.c                         |    5 +
@@ -704,11 +704,11 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-48.0.0)
  drivers/input/touchscreen/goodix.c            |   75 +-
  drivers/input/touchscreen/goodix.h            |    5 +
  drivers/iommu/Kconfig                         |    7 +
- drivers/iommu/Makefile                        |    1 +
+ drivers/iommu/Makefile                        |    2 +-
  drivers/iommu/bcm2712-iommu-cache.c           |   77 +
  drivers/iommu/bcm2712-iommu.c                 |  665 ++
  drivers/iommu/bcm2712-iommu.h                 |   45 +
- drivers/iommu/iommu.c                         |   55 +-
+ drivers/iommu/iommu.c                         |   80 +-
  drivers/irqchip/Kconfig                       |    8 +
  drivers/irqchip/Makefile                      |    1 +
  drivers/irqchip/irq-bcm2712-mip.c             |  323 +
@@ -1215,7 +1215,7 @@ Subject: [PATCH] apply RPi patch of 6.6.59 (openEuler 6.6.0-48.0.0)
  sound/soc/soc-core.c                          |   14 +-
  sound/usb/card.c                              |    8 +-
  sound/usb/quirks.c                            |    2 +
- 1211 files changed, 246816 insertions(+), 4651 deletions(-)
+ 1211 files changed, 246830 insertions(+), 4658 deletions(-)
  create mode 100644 Documentation/admin-guide/media/bcm2835-isp.rst
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.dot
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.rst
@@ -6015,7 +6015,7 @@ index 24b34cdfa6fe..44589ac3e909 100644
 +    pixfmt-nv24
      pixfmt-m420
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 379a23308af5..e8b4eb99927d 100644
+index b22778025fa0..5cb24fd81a51 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -1569,6 +1569,22 @@ S:	Maintained
@@ -6071,7 +6071,7 @@ index 379a23308af5..e8b4eb99927d 100644
  BROADCOM BCM47XX MIPS ARCHITECTURE
  M:	Hauke Mehrtens <hauke@hauke-m.de>
  M:	Rafał Miłecki <zajec5@gmail.com>
-@@ -15892,6 +15931,14 @@ S:	Maintained
+@@ -15916,6 +15955,14 @@ S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
  F:	drivers/media/i2c/ov5695.c
  
@@ -6086,7 +6086,7 @@ index 379a23308af5..e8b4eb99927d 100644
  OMNIVISION OV7670 SENSOR DRIVER
  L:	linux-media@vger.kernel.org
  S:	Orphan
-@@ -17461,7 +17508,7 @@ F:	drivers/video/backlight/pwm_bl.c
+@@ -17485,7 +17532,7 @@ F:	drivers/video/backlight/pwm_bl.c
  F:	include/dt-bindings/pwm/
  F:	include/linux/pwm.h
  F:	include/linux/pwm_backlight.h
@@ -6095,7 +6095,7 @@ index 379a23308af5..e8b4eb99927d 100644
  
  PXA GPIO DRIVER
  M:	Robert Jarzmik <robert.jarzmik@free.fr>
-@@ -18051,6 +18098,12 @@ F:	drivers/ras/
+@@ -18075,6 +18122,12 @@ F:	drivers/ras/
  F:	include/linux/ras.h
  F:	include/ras/ras_event.h
  
@@ -6108,7 +6108,7 @@ index 379a23308af5..e8b4eb99927d 100644
  RAYLINK/WEBGEAR 802.11 WIRELESS LAN DRIVER
  L:	linux-wireless@vger.kernel.org
  S:	Orphan
-@@ -18062,6 +18115,14 @@ L:	linux-edac@vger.kernel.org
+@@ -18086,6 +18139,14 @@ L:	linux-edac@vger.kernel.org
  S:	Maintained
  F:	drivers/ras/amd/fmpm.c
  
@@ -6123,7 +6123,7 @@ index 379a23308af5..e8b4eb99927d 100644
  RC-CORE / LIRC FRAMEWORK
  M:	Sean Young <sean@mess.org>
  L:	linux-media@vger.kernel.org
-@@ -18659,6 +18720,13 @@ S:	Supported
+@@ -18683,6 +18744,13 @@ S:	Supported
  F:	drivers/iio/light/rohm-bu27008.c
  F:	drivers/iio/light/rohm-bu27034.c
  
@@ -6137,7 +6137,7 @@ index 379a23308af5..e8b4eb99927d 100644
  ROHM MULTIFUNCTION BD9571MWV-M PMIC DEVICE DRIVERS
  M:	Marek Vasut <marek.vasut+renesas@gmail.com>
  L:	linux-kernel@vger.kernel.org
-@@ -20052,7 +20120,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
+@@ -20076,7 +20144,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
  L:	linux-media@vger.kernel.org
  S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
@@ -6146,7 +6146,7 @@ index 379a23308af5..e8b4eb99927d 100644
  F:	drivers/media/i2c/imx258.c
  
  SONY IMX274 SENSOR DRIVER
-@@ -20129,6 +20197,39 @@ T:	git git://linuxtv.org/media_tree.git
+@@ -20153,6 +20221,39 @@ T:	git git://linuxtv.org/media_tree.git
  F:	Documentation/devicetree/bindings/media/i2c/sony,imx415.yaml
  F:	drivers/media/i2c/imx415.c
  
@@ -55548,10 +55548,10 @@ index 7e8773a2d99d..a1ff693e49bf 100644
  	/*
  	 * Save the userland NEON/VFP state. Under UP,
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 501ec560a939..062196d2632e 100644
+index 9da9d58f1c02..a7e2fda4c4ab 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -125,7 +125,8 @@ config ARM64
+@@ -129,7 +129,8 @@ config ARM64
  	select CRC32
  	select DCACHE_WORD_ACCESS
  	select DYNAMIC_FTRACE if FUNCTION_TRACER
@@ -55561,7 +55561,7 @@ index 501ec560a939..062196d2632e 100644
  	select DMA_DIRECT_REMAP
  	select EDAC_SUPPORT
  	select FRAME_POINTER
-@@ -1596,6 +1597,16 @@ config ARCH_CUSTOM_NUMA_DISTANCE
+@@ -1641,6 +1642,16 @@ config ARCH_CUSTOM_NUMA_DISTANCE
  
  	  If unsure, say N.
  
@@ -66044,7 +66044,7 @@ index c0436881a533..0717d12f972a 100644
  		if (H5_HDR_LEN(hdr) > 2)
  			h5->tx_win = (data[2] & 0x07);
 diff --git a/drivers/char/Kconfig b/drivers/char/Kconfig
-index 625af75833fc..96c3c37b7577 100644
+index ea7ace87a9df..601667c291c9 100644
 --- a/drivers/char/Kconfig
 +++ b/drivers/char/Kconfig
 @@ -5,6 +5,8 @@
@@ -66056,7 +66056,7 @@ index 625af75833fc..96c3c37b7577 100644
  source "drivers/tty/Kconfig"
  
  config TTY_PRINTK
-@@ -422,4 +424,12 @@ config ADI
+@@ -442,4 +444,12 @@ config ADI
  	  and SSM (Silicon Secured Memory).  Intended consumers of this
  	  driver include crash and makedumpfile.
  
@@ -66070,10 +66070,10 @@ index 625af75833fc..96c3c37b7577 100644
 +
  endmenu
 diff --git a/drivers/char/Makefile b/drivers/char/Makefile
-index c5f532e412f1..2ae16025a64b 100644
+index 109af71c5416..0af99e408e35 100644
 --- a/drivers/char/Makefile
 +++ b/drivers/char/Makefile
-@@ -44,3 +44,5 @@ obj-$(CONFIG_PS3_FLASH)		+= ps3flash.o
+@@ -46,3 +46,5 @@ obj-$(CONFIG_PS3_FLASH)		+= ps3flash.o
  obj-$(CONFIG_XILLYBUS_CLASS)	+= xillybus/
  obj-$(CONFIG_POWERNV_OP_PANEL)	+= powernv-op-panel.o
  obj-$(CONFIG_ADI)		+= adi.o
@@ -74186,7 +74186,7 @@ index 428ae54d3196..f1a2505ebc9e 100644
  MODULE_AUTHOR("Eric Anholt <eric@anholt.net>");
  MODULE_DESCRIPTION("Raspberry Pi firmware driver");
 diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 509f42e6ab6a..0c1e188c75a4 100644
+index 904b71c06eba..66499ab25646 100644
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
 @@ -207,10 +207,16 @@ config GPIO_BCM_XGS_IPROC
@@ -74207,7 +74207,7 @@ index 509f42e6ab6a..0c1e188c75a4 100644
  	select GPIO_GENERIC
  	select IRQ_DOMAIN
  	help
-@@ -512,6 +518,14 @@ config GPIO_PL061
+@@ -513,6 +519,14 @@ config GPIO_PL061
  	help
  	  Say yes here to support the PrimeCell PL061 GPIO device.
  
@@ -74222,7 +74222,7 @@ index 509f42e6ab6a..0c1e188c75a4 100644
  config GPIO_PXA
  	bool "PXA GPIO support"
  	depends on ARCH_PXA || ARCH_MMP || COMPILE_TEST
-@@ -1302,6 +1316,15 @@ config GPIO_ELKHARTLAKE
+@@ -1303,6 +1317,15 @@ config GPIO_ELKHARTLAKE
  	  To compile this driver as a module, choose M here: the module will
  	  be called gpio-elkhartlake.
  
@@ -76265,13 +76265,13 @@ index a5b92adb8aff..5352376b5c45 100644
  
  source "drivers/gpu/drm/etnaviv/Kconfig"
 diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-index b120267fbe40..97b0c9bd6cd4 100644
+index 7ba2ec90c3f7..eb25453cfd4a 100644
 --- a/drivers/gpu/drm/Makefile
 +++ b/drivers/gpu/drm/Makefile
 @@ -198,5 +198,6 @@ obj-$(CONFIG_DRM_HYPERV) += hyperv/
  obj-y			+= solomon/
  obj-$(CONFIG_DRM_SPRD) += sprd/
- obj-$(CONFIG_DRM_LOONGSON) += loongson/
+ obj-y += loongson/
 +obj-y			+= rp1/
  obj-$(CONFIG_DRM_PHYTIUM) += phytium/
  obj-$(CONFIG_HYDCU_FIXUP_HEADER) += hygon/hydcu-fixup-header/
@@ -76445,7 +76445,7 @@ index 784e63d70a42..d7c761d9fb72 100644
  		if (!drm_object_property_get_default_value(&plane->base,
  							   plane->zpos_property,
 diff --git a/drivers/gpu/drm/drm_atomic_uapi.c b/drivers/gpu/drm/drm_atomic_uapi.c
-index 98d3b10c08ae..1e7c35b36a39 100644
+index ab03b08433f8..3c5375016d73 100644
 --- a/drivers/gpu/drm/drm_atomic_uapi.c
 +++ b/drivers/gpu/drm/drm_atomic_uapi.c
 @@ -580,6 +580,10 @@ static int drm_atomic_plane_set_property(struct drm_plane *plane,
@@ -94377,7 +94377,7 @@ index 03648f954985..0d94165d4b6b 100644
  
  	switch (args->madv) {
 diff --git a/drivers/gpu/drm/vc4/vc4_hdmi.c b/drivers/gpu/drm/vc4/vc4_hdmi.c
-index c6e986f71a26..e1f2ce494241 100644
+index d4487f4cb303..e1f2ce494241 100644
 --- a/drivers/gpu/drm/vc4/vc4_hdmi.c
 +++ b/drivers/gpu/drm/vc4/vc4_hdmi.c
 @@ -41,6 +41,8 @@
@@ -94408,25 +94408,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static const char * const output_format_str[] = {
  	[VC4_HDMI_OUTPUT_RGB]		= "RGB",
  	[VC4_HDMI_OUTPUT_YUV420]	= "YUV 4:2:0",
-@@ -179,6 +186,8 @@ static int vc4_hdmi_debugfs_regs(struct seq_file *m, void *unused)
- 	if (!drm_dev_enter(drm, &idx))
- 		return -ENODEV;
- 
-+	WARN_ON(pm_runtime_resume_and_get(&vc4_hdmi->pdev->dev));
-+
- 	drm_print_regset32(&p, &vc4_hdmi->hdmi_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->hd_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->cec_regset);
-@@ -188,6 +197,8 @@ static int vc4_hdmi_debugfs_regs(struct seq_file *m, void *unused)
- 	drm_print_regset32(&p, &vc4_hdmi->ram_regset);
- 	drm_print_regset32(&p, &vc4_hdmi->rm_regset);
- 
-+	pm_runtime_put(&vc4_hdmi->pdev->dev);
-+
- 	drm_dev_exit(idx);
- 
- 	return 0;
-@@ -411,7 +422,7 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
+@@ -415,7 +422,7 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
  				    enum drm_connector_status status)
  {
  	struct drm_connector *connector = &vc4_hdmi->connector;
@@ -94435,7 +94417,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	int ret;
  
  	/*
-@@ -429,12 +440,25 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
+@@ -433,12 +440,25 @@ static void vc4_hdmi_handle_hotplug(struct vc4_hdmi *vc4_hdmi,
  	 * the lock for now.
  	 */
  
@@ -94462,7 +94444,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	if (!edid)
  		return;
  
-@@ -478,7 +502,9 @@ static int vc4_hdmi_connector_detect_ctx(struct drm_connector *connector,
+@@ -482,7 +502,9 @@ static int vc4_hdmi_connector_detect_ctx(struct drm_connector *connector,
  		return connector_status_unknown;
  	}
  
@@ -94473,7 +94455,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (gpiod_get_value_cansleep(vc4_hdmi->hpd_gpio))
  			status = connector_status_connected;
  	} else {
-@@ -579,6 +605,7 @@ static int vc4_hdmi_connector_atomic_check(struct drm_connector *connector,
+@@ -583,6 +605,7 @@ static int vc4_hdmi_connector_atomic_check(struct drm_connector *connector,
  
  	if (old_state->colorspace != new_state->colorspace ||
  	    old_vc4_state->broadcast_rgb != new_vc4_state->broadcast_rgb ||
@@ -94481,7 +94463,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	    !drm_connector_atomic_hdr_metadata_equal(old_state, new_state)) {
  		struct drm_crtc_state *crtc_state;
  
-@@ -605,6 +632,8 @@ static int vc4_hdmi_connector_get_property(struct drm_connector *connector,
+@@ -609,6 +632,8 @@ static int vc4_hdmi_connector_get_property(struct drm_connector *connector,
  
  	if (property == vc4_hdmi->broadcast_rgb_property) {
  		*val = vc4_conn_state->broadcast_rgb;
@@ -94490,7 +94472,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	} else {
  		drm_dbg(drm, "Unknown property [PROP:%d:%s]\n",
  			property->base.id, property->name);
-@@ -628,6 +657,9 @@ static int vc4_hdmi_connector_set_property(struct drm_connector *connector,
+@@ -632,6 +657,9 @@ static int vc4_hdmi_connector_set_property(struct drm_connector *connector,
  	if (property == vc4_hdmi->broadcast_rgb_property) {
  		vc4_conn_state->broadcast_rgb = val;
  		return 0;
@@ -94500,7 +94482,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	}
  
  	drm_dbg(drm, "Unknown property [PROP:%d:%s]\n",
-@@ -672,6 +704,7 @@ vc4_hdmi_connector_duplicate_state(struct drm_connector *connector)
+@@ -676,6 +704,7 @@ vc4_hdmi_connector_duplicate_state(struct drm_connector *connector)
  	new_state->tmds_char_rate = vc4_state->tmds_char_rate;
  	new_state->output_bpc = vc4_state->output_bpc;
  	new_state->output_format = vc4_state->output_format;
@@ -94508,7 +94490,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	new_state->broadcast_rgb = vc4_state->broadcast_rgb;
  	__drm_atomic_helper_connector_duplicate_state(connector, &new_state->base);
  
-@@ -720,6 +753,33 @@ vc4_hdmi_attach_broadcast_rgb_property(struct drm_device *dev,
+@@ -724,6 +753,33 @@ vc4_hdmi_attach_broadcast_rgb_property(struct drm_device *dev,
  				   VC4_HDMI_BROADCAST_RGB_AUTO);
  }
  
@@ -94542,7 +94524,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static int vc4_hdmi_connector_init(struct drm_device *dev,
  				   struct vc4_hdmi *vc4_hdmi)
  {
-@@ -754,7 +814,6 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
+@@ -758,7 +814,6 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
  
  	drm_connector_attach_colorspace_property(connector);
  	drm_connector_attach_tv_margin_properties(connector);
@@ -94550,7 +94532,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	connector->polled = (DRM_CONNECTOR_POLL_CONNECT |
  			     DRM_CONNECTOR_POLL_DISCONNECT);
-@@ -763,10 +822,15 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
+@@ -767,10 +822,15 @@ static int vc4_hdmi_connector_init(struct drm_device *dev,
  	connector->doublescan_allowed = 0;
  	connector->stereo_allowed = 1;
  
@@ -94567,7 +94549,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	drm_connector_attach_encoder(connector, encoder);
  
-@@ -1093,6 +1157,7 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
+@@ -1097,6 +1157,7 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
  {
  	struct vc4_hdmi *vc4_hdmi = encoder_to_vc4_hdmi(encoder);
  	struct drm_device *drm = vc4_hdmi->connector.dev;
@@ -94575,7 +94557,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	unsigned long flags;
  	int idx;
  
-@@ -1109,14 +1174,25 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
+@@ -1113,14 +1174,25 @@ static void vc4_hdmi_encoder_post_crtc_disable(struct drm_encoder *encoder,
  
  	HDMI_WRITE(HDMI_VID_CTL, HDMI_READ(HDMI_VID_CTL) | VC4_HD_VID_CTL_CLRRGB);
  
@@ -94605,7 +94587,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	vc4_hdmi_disable_scrambling(encoder);
  
-@@ -1148,6 +1224,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
+@@ -1152,6 +1224,8 @@ static void vc4_hdmi_encoder_post_crtc_powerdown(struct drm_encoder *encoder,
  	if (vc4_hdmi->variant->phy_disable)
  		vc4_hdmi->variant->phy_disable(vc4_hdmi);
  
@@ -94614,7 +94596,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	clk_disable_unprepare(vc4_hdmi->pixel_bvb_clock);
  	clk_disable_unprepare(vc4_hdmi->pixel_clock);
  
-@@ -1744,7 +1822,6 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
+@@ -1748,7 +1822,6 @@ static void vc4_hdmi_encoder_pre_crtc_configure(struct drm_encoder *encoder,
  		goto err_put_runtime_pm;
  	}
  
@@ -94622,7 +94604,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	vc4_hdmi_cec_update_clk_div(vc4_hdmi);
  
  	if (tmds_char_rate > 297000000)
-@@ -1849,12 +1926,15 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
+@@ -1853,12 +1926,15 @@ static void vc4_hdmi_encoder_post_crtc_enable(struct drm_encoder *encoder,
  	spin_lock_irqsave(&vc4_hdmi->hw_lock, flags);
  
  	HDMI_WRITE(HDMI_VID_CTL,
@@ -94644,7 +94626,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	HDMI_WRITE(HDMI_VID_CTL,
  		   HDMI_READ(HDMI_VID_CTL) & ~VC4_HD_VID_CTL_BLANKPIX);
-@@ -1923,6 +2003,10 @@ static void vc4_hdmi_encoder_atomic_mode_set(struct drm_encoder *encoder,
+@@ -1927,6 +2003,10 @@ static void vc4_hdmi_encoder_atomic_mode_set(struct drm_encoder *encoder,
  		      &crtc_state->adjusted_mode);
  	vc4_hdmi->output_bpc = vc4_state->output_bpc;
  	vc4_hdmi->output_format = vc4_state->output_format;
@@ -94655,7 +94637,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	mutex_unlock(&vc4_hdmi->mutex);
  }
  
-@@ -1950,9 +2034,6 @@ vc4_hdmi_sink_supports_format_bpc(const struct vc4_hdmi *vc4_hdmi,
+@@ -1954,9 +2034,6 @@ vc4_hdmi_sink_supports_format_bpc(const struct vc4_hdmi *vc4_hdmi,
  	case VC4_HDMI_OUTPUT_RGB:
  		drm_dbg(dev, "RGB Format, checking the constraints.\n");
  
@@ -94665,7 +94647,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (bpc == 10 && !(info->edid_hdmi_rgb444_dc_modes & DRM_EDID_HDMI_DC_30)) {
  			drm_dbg(dev, "10 BPC but sink doesn't support Deep Color 30.\n");
  			return false;
-@@ -2084,6 +2165,26 @@ vc4_hdmi_encoder_compute_format(const struct vc4_hdmi *vc4_hdmi,
+@@ -2088,6 +2165,26 @@ vc4_hdmi_encoder_compute_format(const struct vc4_hdmi *vc4_hdmi,
  	const struct drm_display_info *info = &connector->display_info;
  	unsigned int format;
  
@@ -94692,7 +94674,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	drm_dbg(dev, "Trying with an RGB output\n");
  
  	format = VC4_HDMI_OUTPUT_RGB;
-@@ -2124,7 +2225,7 @@ vc4_hdmi_encoder_compute_config(const struct vc4_hdmi *vc4_hdmi,
+@@ -2128,7 +2225,7 @@ vc4_hdmi_encoder_compute_config(const struct vc4_hdmi *vc4_hdmi,
  {
  	struct drm_device *dev = vc4_hdmi->connector.dev;
  	struct drm_connector_state *conn_state = &vc4_state->base;
@@ -94701,7 +94683,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	unsigned int bpc;
  	int ret;
  
-@@ -2170,7 +2271,9 @@ static int vc4_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
+@@ -2174,7 +2271,9 @@ static int vc4_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
  	unsigned long long tmds_bit_rate;
  	int ret;
  
@@ -94712,7 +94694,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		if (mode->flags & DRM_MODE_FLAG_DBLCLK) {
  			/* Only try to fixup DBLCLK modes to get 480i and 576i
  			 * working.
-@@ -2392,7 +2495,7 @@ static int vc4_hdmi_audio_startup(struct device *dev, void *data)
+@@ -2396,7 +2495,7 @@ static int vc4_hdmi_audio_startup(struct device *dev, void *data)
  	}
  
  	if (!vc4_hdmi_audio_can_stream(vc4_hdmi)) {
@@ -94721,7 +94703,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		goto out_dev_exit;
  	}
  
-@@ -2519,6 +2622,7 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
+@@ -2523,6 +2622,7 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
  {
  	struct vc4_hdmi *vc4_hdmi = dev_get_drvdata(dev);
  	struct drm_device *drm = vc4_hdmi->connector.dev;
@@ -94729,7 +94711,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	struct drm_encoder *encoder = &vc4_hdmi->encoder.base;
  	unsigned int sample_rate = params->sample_rate;
  	unsigned int channels = params->channels;
-@@ -2577,11 +2681,24 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
+@@ -2581,11 +2681,24 @@ static int vc4_hdmi_audio_prepare(struct device *dev, void *data,
  					     VC4_HDMI_AUDIO_PACKET_CEA_MASK);
  
  	/* Set the MAI threshold */
@@ -94759,7 +94741,7 @@ index c6e986f71a26..e1f2ce494241 100644
  
  	HDMI_WRITE(HDMI_MAI_CONFIG,
  		   VC4_HDMI_MAI_CONFIG_BIT_REVERSE |
-@@ -2658,8 +2775,23 @@ static int vc4_hdmi_audio_get_eld(struct device *dev, void *data,
+@@ -2662,8 +2775,23 @@ static int vc4_hdmi_audio_get_eld(struct device *dev, void *data,
  	return 0;
  }
  
@@ -94783,7 +94765,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.prepare = vc4_hdmi_audio_prepare,
  	.audio_shutdown = vc4_hdmi_audio_shutdown,
  	.audio_startup = vc4_hdmi_audio_startup,
-@@ -2679,6 +2811,22 @@ static void vc4_hdmi_audio_codec_release(void *ptr)
+@@ -2683,6 +2811,22 @@ static void vc4_hdmi_audio_codec_release(void *ptr)
  	vc4_hdmi->audio.codec_pdev = NULL;
  }
  
@@ -94806,7 +94788,7 @@ index c6e986f71a26..e1f2ce494241 100644
  static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  {
  	const struct vc4_hdmi_register *mai_data =
-@@ -2687,7 +2835,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2691,7 +2835,7 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	struct snd_soc_card *card = &vc4_hdmi->audio.card;
  	struct device *dev = &vc4_hdmi->pdev->dev;
  	struct platform_device *codec_pdev;
@@ -94815,7 +94797,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	int index, len;
  	int ret;
  
-@@ -2723,22 +2871,18 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2727,22 +2871,18 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	}
  
  	/*
@@ -94842,7 +94824,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	vc4_hdmi->audio.dma_data.addr_width = DMA_SLAVE_BUSWIDTH_4_BYTES;
  	vc4_hdmi->audio.dma_data.maxburst = 2;
  
-@@ -2808,6 +2952,8 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
+@@ -2812,6 +2952,8 @@ static int vc4_hdmi_audio_init(struct vc4_hdmi *vc4_hdmi)
  	dai_link->codecs->name = dev_name(&codec_pdev->dev);
  	dai_link->platforms->name = dev_name(dev);
  
@@ -94851,7 +94833,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	card->dai_link = dai_link;
  	card->num_links = 1;
  	card->name = vc4_hdmi->variant->card_name;
-@@ -2837,7 +2983,7 @@ static irqreturn_t vc4_hdmi_hpd_irq_thread(int irq, void *priv)
+@@ -2841,7 +2983,7 @@ static irqreturn_t vc4_hdmi_hpd_irq_thread(int irq, void *priv)
  	struct drm_connector *connector = &vc4_hdmi->connector;
  	struct drm_device *dev = connector->dev;
  
@@ -94860,7 +94842,7 @@ index c6e986f71a26..e1f2ce494241 100644
  		drm_connector_helper_hpd_irq_event(connector);
  
  	return IRQ_HANDLED;
-@@ -3579,6 +3725,9 @@ static int vc4_hdmi_runtime_suspend(struct device *dev)
+@@ -3583,6 +3725,9 @@ static int vc4_hdmi_runtime_suspend(struct device *dev)
  {
  	struct vc4_hdmi *vc4_hdmi = dev_get_drvdata(dev);
  
@@ -94870,7 +94852,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	clk_disable_unprepare(vc4_hdmi->hsm_clock);
  
  	return 0;
-@@ -3611,6 +3760,10 @@ static int vc4_hdmi_runtime_resume(struct device *dev)
+@@ -3615,6 +3760,10 @@ static int vc4_hdmi_runtime_resume(struct device *dev)
  		goto err_disable_clk;
  	}
  
@@ -94881,7 +94863,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	if (vc4_hdmi->variant->reset)
  		vc4_hdmi->variant->reset(vc4_hdmi);
  
-@@ -3663,6 +3816,8 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3667,6 +3816,8 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  	if (ret)
  		return ret;
  
@@ -94890,7 +94872,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	spin_lock_init(&vc4_hdmi->hw_lock);
  	INIT_DELAYED_WORK(&vc4_hdmi->scrambling_work, vc4_hdmi_scrambling_wq);
  
-@@ -3731,7 +3886,9 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3735,7 +3886,9 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  		return ret;
  
  	if ((of_device_is_compatible(dev->of_node, "brcm,bcm2711-hdmi0") ||
@@ -94901,7 +94883,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	    HDMI_READ(HDMI_VID_CTL) & VC4_HD_VID_CTL_ENABLE) {
  		clk_prepare_enable(vc4_hdmi->pixel_clock);
  		clk_prepare_enable(vc4_hdmi->hsm_clock);
-@@ -3773,8 +3930,16 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
+@@ -3777,8 +3930,16 @@ static int vc4_hdmi_bind(struct device *dev, struct device *master, void *data)
  	return ret;
  }
  
@@ -94918,7 +94900,7 @@ index c6e986f71a26..e1f2ce494241 100644
  };
  
  static int vc4_hdmi_dev_probe(struct platform_device *pdev)
-@@ -3821,6 +3986,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
+@@ -3825,6 +3986,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi0_variant = {
  		PHY_LANE_CK,
  	},
  	.unsupported_odd_h_timings	= true,
@@ -94926,7 +94908,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.external_irq_controller	= true,
  
  	.init_resources		= vc5_hdmi_init_resources,
-@@ -3850,6 +4016,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+@@ -3854,6 +4016,7 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
  		PHY_LANE_2,
  	},
  	.unsupported_odd_h_timings	= true,
@@ -94934,7 +94916,7 @@ index c6e986f71a26..e1f2ce494241 100644
  	.external_irq_controller	= true,
  
  	.init_resources		= vc5_hdmi_init_resources,
-@@ -3865,10 +4032,68 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
+@@ -3869,10 +4032,68 @@ static const struct vc4_hdmi_variant bcm2711_hdmi1_variant = {
  	.hp_detect		= vc5_hdmi_hp_detect,
  };
  
@@ -98643,7 +98625,7 @@ index 5495f2a94fa9..eb57a1b96ab1 100644
  	dev->mode_config.preferred_depth = 24;
  	dev->mode_config.async_page_flip = true;
 diff --git a/drivers/gpu/drm/vc4/vc4_perfmon.c b/drivers/gpu/drm/vc4/vc4_perfmon.c
-index c4ac2c946238..4cd3643c3ba7 100644
+index c00a5cc2316d..75ff2f748235 100644
 --- a/drivers/gpu/drm/vc4/vc4_perfmon.c
 +++ b/drivers/gpu/drm/vc4/vc4_perfmon.c
 @@ -23,7 +23,7 @@ void vc4_perfmon_get(struct vc4_perfmon *perfmon)
@@ -98700,7 +98682,7 @@ index c4ac2c946238..4cd3643c3ba7 100644
  		return;
  
  	mutex_init(&vc4file->perfmon.lock);
-@@ -126,7 +126,7 @@ void vc4_perfmon_close_file(struct vc4_file *vc4file)
+@@ -131,7 +131,7 @@ void vc4_perfmon_close_file(struct vc4_file *vc4file)
  {
  	struct vc4_dev *vc4 = vc4file->dev;
  
@@ -98709,7 +98691,7 @@ index c4ac2c946238..4cd3643c3ba7 100644
  		return;
  
  	mutex_lock(&vc4file->perfmon.lock);
-@@ -146,7 +146,7 @@ int vc4_perfmon_create_ioctl(struct drm_device *dev, void *data,
+@@ -151,7 +151,7 @@ int vc4_perfmon_create_ioctl(struct drm_device *dev, void *data,
  	unsigned int i;
  	int ret;
  
@@ -98718,7 +98700,7 @@ index c4ac2c946238..4cd3643c3ba7 100644
  		return -ENODEV;
  
  	if (!vc4->v3d) {
-@@ -200,7 +200,7 @@ int vc4_perfmon_destroy_ioctl(struct drm_device *dev, void *data,
+@@ -205,7 +205,7 @@ int vc4_perfmon_destroy_ioctl(struct drm_device *dev, void *data,
  	struct drm_vc4_perfmon_destroy *req = data;
  	struct vc4_perfmon *perfmon;
  
@@ -98727,7 +98709,7 @@ index c4ac2c946238..4cd3643c3ba7 100644
  		return -ENODEV;
  
  	if (!vc4->v3d) {
-@@ -228,7 +228,7 @@ int vc4_perfmon_get_values_ioctl(struct drm_device *dev, void *data,
+@@ -233,7 +233,7 @@ int vc4_perfmon_get_values_ioctl(struct drm_device *dev, void *data,
  	struct vc4_perfmon *perfmon;
  	int ret;
  
@@ -101662,10 +101644,10 @@ index 000000000000..e8d2b4b162f7
 +	VC_IMAGE_YUVINFO_CSC_REC_2020        = 9,
 +};
 diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
-index a5987fafbedd..7efed563cbe1 100644
+index dd696cb559ae..eec8a133ff73 100644
 --- a/drivers/hid/hid-ids.h
 +++ b/drivers/hid/hid-ids.h
-@@ -239,6 +239,9 @@
+@@ -242,6 +242,9 @@
  #define USB_VENDOR_ID_BAANTO		0x2453
  #define USB_DEVICE_ID_BAANTO_MT_190W2	0x0100
  
@@ -101675,7 +101657,7 @@ index a5987fafbedd..7efed563cbe1 100644
  #define USB_VENDOR_ID_BELKIN		0x050d
  #define USB_DEVICE_ID_FLIP_KVM		0x3201
  
-@@ -1409,6 +1412,9 @@
+@@ -1420,6 +1423,9 @@
  #define USB_VENDOR_ID_XIAOMI		0x2717
  #define USB_DEVICE_ID_MI_SILENT_MOUSE	0x5014
  
@@ -101738,10 +101720,10 @@ index 257dd73e37bf..fb588ac24acc 100644
  		ret = -ENOMEM;
  		if (usb_endpoint_dir_in(endpoint)) {
 diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-index b7ce1654c48e..5b3cc16b9512 100644
+index ee2eaf825c62..ad9b4810b496 100644
 --- a/drivers/hwmon/Kconfig
 +++ b/drivers/hwmon/Kconfig
-@@ -2386,6 +2386,13 @@ config SENSORS_INTEL_M10_BMC_HWMON
+@@ -2390,6 +2390,13 @@ config SENSORS_INTEL_M10_BMC_HWMON
  	  sensors monitor various telemetry data of different components on the
  	  card, e.g. board temperature, FPGA core temperature/voltage/current.
  
@@ -102509,7 +102491,7 @@ index 79657910b79e..122a1031b4d8 100644
  	.id_table    = sht3x_ids,
  };
 diff --git a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
-index 9b4369ce8759..bb555bfcc6aa 100644
+index 9766c2ade6d8..5044b032adb9 100644
 --- a/drivers/i2c/busses/Kconfig
 +++ b/drivers/i2c/busses/Kconfig
 @@ -16,6 +16,25 @@ config I2C_CCGX_UCSI
@@ -102539,7 +102521,7 @@ index 9b4369ce8759..bb555bfcc6aa 100644
  	tristate "ALI 1535"
  	depends on PCI
 diff --git a/drivers/i2c/busses/Makefile b/drivers/i2c/busses/Makefile
-index f15e364622e7..48d24d0d1bd8 100644
+index 738519b0a9cb..c7edcf58420e 100644
 --- a/drivers/i2c/busses/Makefile
 +++ b/drivers/i2c/busses/Makefile
 @@ -3,6 +3,8 @@
@@ -103299,7 +103281,7 @@ index b92de1944221..71a74de9fa5a 100644
  
  static const struct i2c_algorithm bcm2835_i2c_algo = {
 diff --git a/drivers/i2c/busses/i2c-designware-common.c b/drivers/i2c/busses/i2c-designware-common.c
-index 83803a63e23f..5cb4fcf562eb 100644
+index c283743916fe..a53514813924 100644
 --- a/drivers/i2c/busses/i2c-designware-common.c
 +++ b/drivers/i2c/busses/i2c-designware-common.c
 @@ -57,6 +57,8 @@ static char *abort_sources[] = {
@@ -103352,7 +103334,7 @@ index 83803a63e23f..5cb4fcf562eb 100644
  }
  EXPORT_SYMBOL_GPL(i2c_dw_adjust_bus_speed);
  
-@@ -574,8 +603,16 @@ int i2c_dw_wait_bus_not_busy(struct dw_i2c_dev *dev)
+@@ -590,8 +619,16 @@ int i2c_dw_wait_bus_not_busy(struct dw_i2c_dev *dev)
  int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
  {
  	unsigned long abort_source = dev->abort_source;
@@ -103369,7 +103351,7 @@ index 83803a63e23f..5cb4fcf562eb 100644
  	if (abort_source & DW_IC_TX_ABRT_NOACK) {
  		for_each_set_bit(i, &abort_source, ARRAY_SIZE(abort_sources))
  			dev_dbg(dev->dev,
-@@ -590,6 +627,8 @@ int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
+@@ -606,6 +643,8 @@ int i2c_dw_handle_tx_abort(struct dw_i2c_dev *dev)
  		return -EAGAIN;
  	else if (abort_source & DW_IC_TX_ABRT_GCALL_READ)
  		return -EINVAL; /* wrong msgs[] data */
@@ -103379,7 +103361,7 @@ index 83803a63e23f..5cb4fcf562eb 100644
  		return -EIO;
  }
 diff --git a/drivers/i2c/busses/i2c-designware-core.h b/drivers/i2c/busses/i2c-designware-core.h
-index 03483288ecf8..20c29e6c997f 100644
+index d4909e9b1c84..15c8520bde40 100644
 --- a/drivers/i2c/busses/i2c-designware-core.h
 +++ b/drivers/i2c/busses/i2c-designware-core.h
 @@ -79,9 +79,12 @@
@@ -103395,19 +103377,18 @@ index 03483288ecf8..20c29e6c997f 100644
  #define DW_IC_COMP_TYPE				0xfc
  #define DW_IC_COMP_TYPE_VALUE			0x44570140 /* "DW" + 0x0140 */
  
-@@ -109,20 +112,25 @@
- 						 DW_IC_INTR_RX_UNDER | \
- 						 DW_IC_INTR_RD_REQ)
+@@ -111,6 +114,7 @@
  
-+#define DW_IC_ENABLE_ENABLE			BIT(0)
+ #define DW_IC_ENABLE_ENABLE			BIT(0)
  #define DW_IC_ENABLE_ABORT			BIT(1)
 +#define DW_IC_ENABLE_BUS_RECOVERY		BIT(3)
  
  #define DW_IC_STATUS_ACTIVITY			BIT(0)
  #define DW_IC_STATUS_TFE			BIT(2)
- #define DW_IC_STATUS_RFNE			BIT(3)
+@@ -118,13 +122,16 @@
  #define DW_IC_STATUS_MASTER_ACTIVITY		BIT(5)
  #define DW_IC_STATUS_SLAVE_ACTIVITY		BIT(6)
+ #define DW_IC_STATUS_MASTER_HOLD_TX_FIFO_EMPTY	BIT(7)
 +#define DW_IC_STATUS_SDA_STUCK_NOT_RECOVERED	BIT(11)
  
  #define DW_IC_SDA_HOLD_RX_SHIFT			16
@@ -103421,7 +103402,7 @@ index 03483288ecf8..20c29e6c997f 100644
  
  #define DW_IC_COMP_PARAM_1_SPEED_MODE_HIGH	(BIT(2) | BIT(3))
  #define DW_IC_COMP_PARAM_1_SPEED_MODE_MASK	GENMASK(3, 2)
-@@ -161,6 +169,7 @@
+@@ -163,6 +170,7 @@
  #define ABRT_SLAVE_FLUSH_TXFIFO			13
  #define ABRT_SLAVE_ARBLOST			14
  #define ABRT_SLAVE_RD_INTX			15
@@ -103429,7 +103410,7 @@ index 03483288ecf8..20c29e6c997f 100644
  
  #define DW_IC_TX_ABRT_7B_ADDR_NOACK		BIT(ABRT_7B_ADDR_NOACK)
  #define DW_IC_TX_ABRT_10ADDR1_NOACK		BIT(ABRT_10ADDR1_NOACK)
-@@ -176,6 +185,7 @@
+@@ -178,6 +186,7 @@
  #define DW_IC_RX_ABRT_SLAVE_RD_INTX		BIT(ABRT_SLAVE_RD_INTX)
  #define DW_IC_RX_ABRT_SLAVE_ARBLOST		BIT(ABRT_SLAVE_ARBLOST)
  #define DW_IC_RX_ABRT_SLAVE_FLUSH_TXFIFO	BIT(ABRT_SLAVE_FLUSH_TXFIFO)
@@ -103437,7 +103418,7 @@ index 03483288ecf8..20c29e6c997f 100644
  
  #define DW_IC_TX_ABRT_NOACK			(DW_IC_TX_ABRT_7B_ADDR_NOACK | \
  						 DW_IC_TX_ABRT_10ADDR1_NOACK | \
-@@ -289,6 +299,7 @@ struct dw_i2c_dev {
+@@ -291,6 +300,7 @@ struct dw_i2c_dev {
  	u16			fp_lcnt;
  	u16			hs_hcnt;
  	u16			hs_lcnt;
@@ -103446,7 +103427,7 @@ index 03483288ecf8..20c29e6c997f 100644
  	void			(*release_lock)(void);
  	int			semaphore_idx;
 diff --git a/drivers/i2c/busses/i2c-designware-master.c b/drivers/i2c/busses/i2c-designware-master.c
-index 85dbd0eb5392..7593bcf03b9f 100644
+index 579c668cb78a..f32ed9486ac0 100644
 --- a/drivers/i2c/busses/i2c-designware-master.c
 +++ b/drivers/i2c/busses/i2c-designware-master.c
 @@ -38,6 +38,34 @@ static void i2c_dw_configure_fifo_master(struct dw_i2c_dev *dev)
@@ -103572,7 +103553,7 @@ index 85dbd0eb5392..7593bcf03b9f 100644
  	regmap_update_bits(dev->map, DW_IC_CON, DW_IC_CON_10BITADDR_MASTER,
  			   ic_con);
  
-@@ -472,6 +528,14 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
+@@ -500,6 +556,14 @@ i2c_dw_xfer_msg(struct dw_i2c_dev *dev)
  		regmap_read(dev->map, DW_IC_RXFLR, &flr);
  		rx_limit = dev->rx_fifo_depth - flr;
  
@@ -103587,7 +103568,7 @@ index 85dbd0eb5392..7593bcf03b9f 100644
  		while (buf_len > 0 && tx_limit > 0 && rx_limit > 0) {
  			u32 cmd = 0;
  
-@@ -743,7 +807,7 @@ static const struct i2c_algorithm i2c_dw_algo = {
+@@ -781,7 +845,7 @@ static const struct i2c_algorithm i2c_dw_algo = {
  };
  
  static const struct i2c_adapter_quirks i2c_dw_quirks = {
@@ -103596,7 +103577,7 @@ index 85dbd0eb5392..7593bcf03b9f 100644
  };
  
  static u32 i2c_dw_read_clear_intrbits(struct dw_i2c_dev *dev)
-@@ -876,7 +940,8 @@ void i2c_dw_configure_master(struct dw_i2c_dev *dev)
+@@ -914,7 +978,8 @@ void i2c_dw_configure_master(struct dw_i2c_dev *dev)
  {
  	struct i2c_timings *t = &dev->timings;
  
@@ -103606,7 +103587,7 @@ index 85dbd0eb5392..7593bcf03b9f 100644
  
  	dev->master_cfg = DW_IC_CON_MASTER | DW_IC_CON_SLAVE_DISABLE |
  			  DW_IC_CON_RESTART_EN;
-@@ -983,6 +1048,7 @@ int i2c_dw_probe_master(struct dw_i2c_dev *dev)
+@@ -1021,6 +1086,7 @@ int i2c_dw_probe_master(struct dw_i2c_dev *dev)
  	struct i2c_adapter *adap = &dev->adapter;
  	unsigned long irq_flags;
  	unsigned int ic_con;
@@ -103614,7 +103595,7 @@ index 85dbd0eb5392..7593bcf03b9f 100644
  	int ret;
  
  	init_completion(&dev->cmd_complete);
-@@ -1018,7 +1084,11 @@ int i2c_dw_probe_master(struct dw_i2c_dev *dev)
+@@ -1056,7 +1122,11 @@ int i2c_dw_probe_master(struct dw_i2c_dev *dev)
  	if (ret)
  		return ret;
  
@@ -103874,7 +103855,7 @@ index a1b037891af2..a1cf56096156 100644
  
  	for (i = 0; i < pdata->num_row_gpios; i++)
 diff --git a/drivers/input/touchscreen/edt-ft5x06.c b/drivers/input/touchscreen/edt-ft5x06.c
-index 457d53337fbb..1d2b8df0aea9 100644
+index a365577a1994..b590bc18dde6 100644
 --- a/drivers/input/touchscreen/edt-ft5x06.c
 +++ b/drivers/input/touchscreen/edt-ft5x06.c
 @@ -69,6 +69,7 @@
@@ -104054,7 +104035,7 @@ index 457d53337fbb..1d2b8df0aea9 100644
  		tsdata->tdata_offset + crclen;
  }
  
-@@ -1243,7 +1322,7 @@ static int edt_ft5x06_ts_probe(struct i2c_client *client)
+@@ -1261,7 +1340,7 @@ static int edt_ft5x06_ts_probe(struct i2c_client *client)
  	if (tsdata->reset_gpio) {
  		usleep_range(5000, 6000);
  		gpiod_set_value_cansleep(tsdata->reset_gpio, 0);
@@ -104063,7 +104044,7 @@ index 457d53337fbb..1d2b8df0aea9 100644
  	}
  
  	input = devm_input_allocate_device(&client->dev);
-@@ -1317,17 +1396,28 @@ static int edt_ft5x06_ts_probe(struct i2c_client *client)
+@@ -1335,17 +1414,28 @@ static int edt_ft5x06_ts_probe(struct i2c_client *client)
  		return error;
  	}
  
@@ -104102,7 +104083,7 @@ index 457d53337fbb..1d2b8df0aea9 100644
  	}
  
  	error = devm_device_add_group(&client->dev, &edt_ft5x06_attr_group);
-@@ -1353,6 +1443,10 @@ static void edt_ft5x06_ts_remove(struct i2c_client *client)
+@@ -1371,6 +1461,10 @@ static void edt_ft5x06_ts_remove(struct i2c_client *client)
  {
  	struct edt_ft5x06_ts_data *tsdata = i2c_get_clientdata(client);
  
@@ -104111,8 +104092,8 @@ index 457d53337fbb..1d2b8df0aea9 100644
 +		cancel_work_sync(&tsdata->work_i2c_poll);
 +	}
  	edt_ft5x06_ts_teardown_debugfs(tsdata);
- 	regmap_exit(tsdata->regmap);
  }
+ 
 diff --git a/drivers/input/touchscreen/goodix.c b/drivers/input/touchscreen/goodix.c
 index b068ff8afbc9..23134a20ef50 100644
 --- a/drivers/input/touchscreen/goodix.c
@@ -104271,10 +104252,10 @@ index 87797cc88b32..235dd5f264c5 100644
  
  int goodix_i2c_read(struct i2c_client *client, u16 reg, u8 *buf, int len);
 diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
-index 75131a1b762c..688c17737ef8 100644
+index 56eafa478c34..c5726a5794f4 100644
 --- a/drivers/iommu/Kconfig
 +++ b/drivers/iommu/Kconfig
-@@ -518,6 +518,13 @@ config SPRD_IOMMU
+@@ -539,6 +539,13 @@ config SPRD_IOMMU
  
  	  Say Y here if you want to use the multimedia devices listed above.
  
@@ -104289,14 +104270,16 @@ index 75131a1b762c..688c17737ef8 100644
  	bool "SMMU bypass streams for some specific devices"
  	depends on ARM_SMMU_V3=y
 diff --git a/drivers/iommu/Makefile b/drivers/iommu/Makefile
-index c2ea11d810ca..036793279696 100644
+index e3ecb2040808..f2adf15beabc 100644
 --- a/drivers/iommu/Makefile
 +++ b/drivers/iommu/Makefile
-@@ -30,3 +30,4 @@ obj-$(CONFIG_IOMMU_SVA) += iommu-sva.o
+@@ -30,5 +30,5 @@ obj-$(CONFIG_IOMMU_SVA) += iommu-sva.o
  obj-$(CONFIG_IOMMU_IOPF) += io-pgfault.o
  obj-$(CONFIG_SPRD_IOMMU) += sprd-iommu.o
  obj-$(CONFIG_APPLE_DART) += apple-dart.o
 +obj-$(CONFIG_BCM2712_IOMMU) += bcm2712-iommu.o bcm2712-iommu-cache.o
+ obj-$(CONFIG_LOONGARCH_IOMMU) += loongarch_iommu.o
+-
 diff --git a/drivers/iommu/bcm2712-iommu-cache.c b/drivers/iommu/bcm2712-iommu-cache.c
 new file mode 100644
 index 000000000000..fdea69f5370b
@@ -105103,10 +105086,10 @@ index 000000000000..31b811e426dd
 +
 +#endif
 diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 28f63ad432de..3d3cd850c9aa 100644
+index 9cdc28dc2cf8..709d38620ba9 100644
 --- a/drivers/iommu/iommu.c
 +++ b/drivers/iommu/iommu.c
-@@ -2410,6 +2410,30 @@ size_t iommu_pgsize(struct iommu_domain *domain, unsigned long iova,
+@@ -2429,6 +2429,30 @@ size_t iommu_pgsize(struct iommu_domain *domain, unsigned long iova,
  }
  EXPORT_SYMBOL_GPL(iommu_pgsize);
  
@@ -105137,7 +105120,7 @@ index 28f63ad432de..3d3cd850c9aa 100644
  static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  		       phys_addr_t paddr, size_t size, int prot, gfp_t gfp)
  {
-@@ -2420,12 +2444,13 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2439,12 +2463,13 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  	phys_addr_t orig_paddr = paddr;
  	int ret = 0;
  
@@ -105154,7 +105137,7 @@ index 28f63ad432de..3d3cd850c9aa 100644
  	/* find out the minimum page size supported */
  	min_pagesz = 1 << __ffs(domain->pgsize_bitmap);
  
-@@ -2443,14 +2468,10 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2462,14 +2487,10 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  	pr_debug("map: iova 0x%lx pa %pa size 0x%zx\n", iova, &paddr, size);
  
  	while (size) {
@@ -105172,7 +105155,7 @@ index 28f63ad432de..3d3cd850c9aa 100644
  		/*
  		 * Some pages may have been mapped, even if an error occurred,
  		 * so we should account for those so they can be unmapped.
-@@ -2487,11 +2508,8 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2506,11 +2527,8 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
  		return -EINVAL;
  
  	ret = __iommu_map(domain, iova, paddr, size, prot, gfp);
@@ -105186,7 +105169,55 @@ index 28f63ad432de..3d3cd850c9aa 100644
  
  	return ret;
  
-@@ -2625,11 +2643,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
+@@ -2522,6 +2540,19 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
+ }
+ EXPORT_SYMBOL_GPL(iommu_map);
+ 
++static size_t __iommu_unmap_pages(struct iommu_domain *domain,
++				  unsigned long iova, size_t size,
++				  struct iommu_iotlb_gather *iotlb_gather)
++{
++	const struct iommu_domain_ops *ops = domain->ops;
++	size_t pgsize, count;
++
++	pgsize = iommu_pgsize(domain, iova, iova, size, &count);
++	return ops->unmap_pages ?
++	       ops->unmap_pages(domain, iova, pgsize, count, iotlb_gather) :
++	       ops->unmap(domain, iova, pgsize, iotlb_gather);
++}
++
+ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 			    unsigned long iova, size_t size,
+ 			    struct iommu_iotlb_gather *iotlb_gather)
+@@ -2531,10 +2562,11 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 	unsigned long orig_iova = iova;
+ 	unsigned int min_pagesz;
+ 
+-	if (unlikely(!(domain->type & __IOMMU_DOMAIN_PAGING)))
++	if (unlikely(!(ops->unmap || ops->unmap_pages) ||
++		     domain->pgsize_bitmap == 0UL))
+ 		return 0;
+ 
+-	if (WARN_ON(!ops->unmap_pages || domain->pgsize_bitmap == 0UL))
++	if (unlikely(!(domain->type & __IOMMU_DOMAIN_PAGING)))
+ 		return 0;
+ 
+ 	/* find out the minimum page size supported */
+@@ -2558,10 +2590,9 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+ 	 * or we hit an area that isn't mapped.
+ 	 */
+ 	while (unmapped < size) {
+-		size_t pgsize, count;
+-
+-		pgsize = iommu_pgsize(domain, iova, iova, size - unmapped, &count);
+-		unmapped_page = ops->unmap_pages(domain, iova, pgsize, count, iotlb_gather);
++		unmapped_page = __iommu_unmap_pages(domain, iova,
++						    size - unmapped,
++						    iotlb_gather);
+ 		if (!unmapped_page)
+ 			break;
+ 
+@@ -2644,11 +2675,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
  			sg = sg_next(sg);
  	}
  
@@ -105201,10 +105232,10 @@ index 28f63ad432de..3d3cd850c9aa 100644
  
  out_err:
 diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
-index 6ffcdad8b131..81c3c771e45d 100644
+index 6edafab595e6..be5a0146c1b3 100644
 --- a/drivers/irqchip/Kconfig
 +++ b/drivers/irqchip/Kconfig
-@@ -152,6 +152,14 @@ config I8259
+@@ -166,6 +166,14 @@ config I8259
  	bool
  	select IRQ_DOMAIN
  
@@ -105220,10 +105251,10 @@ index 6ffcdad8b131..81c3c771e45d 100644
  	bool
  	select GENERIC_IRQ_CHIP
 diff --git a/drivers/irqchip/Makefile b/drivers/irqchip/Makefile
-index 246aa0603d6e..a9f13a66b191 100644
+index f4697c1a39c0..bde5526f3660 100644
 --- a/drivers/irqchip/Makefile
 +++ b/drivers/irqchip/Makefile
-@@ -74,6 +74,7 @@ obj-$(CONFIG_XTENSA_MX)			+= irq-xtensa-mx.o
+@@ -70,6 +70,7 @@ obj-$(CONFIG_XTENSA_MX)			+= irq-xtensa-mx.o
  obj-$(CONFIG_XILINX_INTC)		+= irq-xilinx-intc.o
  obj-$(CONFIG_IRQ_CROSSBAR)		+= irq-crossbar.o
  obj-$(CONFIG_SOC_VF610)			+= irq-vf610-mscm-ir.o
@@ -106201,7 +106232,7 @@ index 000000000000..8a974a355656
 +MODULE_DESCRIPTION("Set LED GPIO to Input \"trigger\"");
 +MODULE_LICENSE("GPL");
 diff --git a/drivers/mailbox/bcm2835-mailbox.c b/drivers/mailbox/bcm2835-mailbox.c
-index fbfd0202047c..7e0d62fbc83e 100644
+index ea12fb8d2401..8c54980b4b7e 100644
 --- a/drivers/mailbox/bcm2835-mailbox.c
 +++ b/drivers/mailbox/bcm2835-mailbox.c
 @@ -45,12 +45,15 @@
@@ -106226,10 +106257,10 @@ index fbfd0202047c..7e0d62fbc83e 100644
  
 -	ret = devm_request_irq(dev, irq_of_parse_and_map(dev->of_node, 0),
 +	ret = devm_request_irq(dev, platform_get_irq(pdev, 0),
- 			       bcm2835_mbox_irq, 0, dev_name(dev), mbox);
+ 			       bcm2835_mbox_irq, IRQF_NO_SUSPEND, dev_name(dev),
+ 			       mbox);
  	if (ret) {
- 		dev_err(dev, "Failed to register a mailbox IRQ handler: %d\n",
-@@ -192,7 +195,18 @@ static struct platform_driver bcm2835_mbox_driver = {
+@@ -193,7 +196,18 @@ static struct platform_driver bcm2835_mbox_driver = {
  	},
  	.probe		= bcm2835_mbox_probe,
  };
@@ -106250,7 +106281,7 @@ index fbfd0202047c..7e0d62fbc83e 100644
  MODULE_AUTHOR("Lubomir Rintel <lkundrak@v3.sk>");
  MODULE_DESCRIPTION("BCM2835 mailbox IPC driver");
 diff --git a/drivers/media/common/videobuf2/videobuf2-core.c b/drivers/media/common/videobuf2/videobuf2-core.c
-index 468191438849..33c39d5daa46 100644
+index 29bfc2bf796b..0a34ad9d9ce4 100644
 --- a/drivers/media/common/videobuf2/videobuf2-core.c
 +++ b/drivers/media/common/videobuf2/videobuf2-core.c
 @@ -2229,12 +2229,12 @@ static int __find_plane_by_offset(struct vb2_queue *q, unsigned long off,
@@ -151510,7 +151541,7 @@ index 8db9ac9c1433..c21ddbbfa50e 100644
  	schedule_next = _v4l2_m2m_job_finish(m2m_dev, m2m_ctx);
  	spin_unlock_irqrestore(&m2m_dev->job_spinlock, flags);
 diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-index 6b653487d954..8e29244ef05f 100644
+index 96633e8d4a9c..a9c54de16024 100644
 --- a/drivers/mfd/Kconfig
 +++ b/drivers/mfd/Kconfig
 @@ -1178,6 +1178,16 @@ config MFD_SY7636A
@@ -151549,7 +151580,7 @@ index 6b653487d954..8e29244ef05f 100644
  	tristate "Renesas Synchronization Management Unit with I2C"
  	depends on I2C && OF
 diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-index 50b42df268ea..e131b7ed5ca4 100644
+index 95867f732d2e..3194780558e4 100644
 --- a/drivers/mfd/Makefile
 +++ b/drivers/mfd/Makefile
 @@ -285,3 +285,5 @@ obj-$(CONFIG_MFD_ATC260X_I2C)	+= atc260x-i2c.o
@@ -152028,7 +152059,7 @@ index 6eda79533208..67f74304f2bf 100644
  };
  MODULE_DEVICE_TABLE(of, simple_mfd_i2c_of_match);
 diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 7178d7da37e0..dd25ffdaffcf 100644
+index 452e8ea8bfd7..c3e2cbde2f22 100644
 --- a/drivers/misc/Kconfig
 +++ b/drivers/misc/Kconfig
 @@ -9,6 +9,14 @@ config SENSORS_LIS3LV02D
@@ -158902,7 +158933,7 @@ index 78c972bb1d96..2e259d91b936 100644
  	struct macb_tx_skb	rm9200_txq[2];
  	unsigned int		max_tx_length;
 diff --git a/drivers/net/ethernet/cadence/macb_main.c b/drivers/net/ethernet/cadence/macb_main.c
-index b940dcd3ace6..79fab300a534 100644
+index 8f61731e4554..0f9080371c4e 100644
 --- a/drivers/net/ethernet/cadence/macb_main.c
 +++ b/drivers/net/ethernet/cadence/macb_main.c
 @@ -40,6 +40,9 @@
@@ -158944,7 +158975,7 @@ index b940dcd3ace6..79fab300a534 100644
  static void macb_init_buffers(struct macb *bp)
  {
  	struct macb_queue *queue;
-@@ -969,6 +985,7 @@ static int macb_mii_init(struct macb *bp)
+@@ -977,6 +993,7 @@ static int macb_mii_init(struct macb *bp)
  	bp->mii_bus->write = &macb_mdio_write_c22;
  	bp->mii_bus->read_c45 = &macb_mdio_read_c45;
  	bp->mii_bus->write_c45 = &macb_mdio_write_c45;
@@ -158952,7 +158983,7 @@ index b940dcd3ace6..79fab300a534 100644
  	snprintf(bp->mii_bus->id, MII_BUS_ID_SIZE, "%s-%x",
  		 bp->pdev->name, bp->pdev->id);
  	bp->mii_bus->priv = bp;
-@@ -1640,6 +1657,11 @@ static int macb_rx(struct macb_queue *queue, struct napi_struct *napi,
+@@ -1648,6 +1665,11 @@ static int macb_rx(struct macb_queue *queue, struct napi_struct *napi,
  
  		macb_init_rx_ring(queue);
  		queue_writel(queue, RBQP, queue->rx_ring_dma);
@@ -158964,7 +158995,7 @@ index b940dcd3ace6..79fab300a534 100644
  
  		macb_writel(bp, NCR, ctrl | MACB_BIT(RE));
  
-@@ -1940,8 +1962,9 @@ static irqreturn_t macb_interrupt(int irq, void *dev_id)
+@@ -1948,8 +1970,9 @@ static irqreturn_t macb_interrupt(int irq, void *dev_id)
  				queue_writel(queue, ISR, MACB_BIT(TCOMP) |
  							 MACB_BIT(TXUBR));
  
@@ -158975,7 +159006,7 @@ index b940dcd3ace6..79fab300a534 100644
  				wmb(); // ensure softirq can see update
  			}
  
-@@ -2394,6 +2417,11 @@ static netdev_tx_t macb_start_xmit(struct sk_buff *skb, struct net_device *dev)
+@@ -2402,6 +2425,11 @@ static netdev_tx_t macb_start_xmit(struct sk_buff *skb, struct net_device *dev)
  	skb_tx_timestamp(skb);
  
  	spin_lock_irq(&bp->lock);
@@ -158987,7 +159018,7 @@ index b940dcd3ace6..79fab300a534 100644
  	macb_writel(bp, NCR, macb_readl(bp, NCR) | MACB_BIT(TSTART));
  	spin_unlock_irq(&bp->lock);
  
-@@ -2768,6 +2796,37 @@ static void macb_configure_dma(struct macb *bp)
+@@ -2776,6 +2804,37 @@ static void macb_configure_dma(struct macb *bp)
  	}
  }
  
@@ -159025,7 +159056,7 @@ index b940dcd3ace6..79fab300a534 100644
  static void macb_init_hw(struct macb *bp)
  {
  	u32 config;
-@@ -2796,6 +2855,11 @@ static void macb_init_hw(struct macb *bp)
+@@ -2804,6 +2863,11 @@ static void macb_init_hw(struct macb *bp)
  	if (bp->caps & MACB_CAPS_JUMBO)
  		bp->rx_frm_len_mask = MACB_RX_JFRMLEN_MASK;
  
@@ -159037,7 +159068,7 @@ index b940dcd3ace6..79fab300a534 100644
  	macb_configure_dma(bp);
  
  	/* Enable RX partial store and forward and set watermark */
-@@ -3157,6 +3221,52 @@ static void gem_get_ethtool_strings(struct net_device *dev, u32 sset, u8 *p)
+@@ -3165,6 +3229,52 @@ static void gem_get_ethtool_strings(struct net_device *dev, u32 sset, u8 *p)
  	}
  }
  
@@ -159090,7 +159121,7 @@ index b940dcd3ace6..79fab300a534 100644
  static struct net_device_stats *macb_get_stats(struct net_device *dev)
  {
  	struct macb *bp = netdev_priv(dev);
-@@ -3749,6 +3859,8 @@ static const struct ethtool_ops macb_ethtool_ops = {
+@@ -3757,6 +3867,8 @@ static const struct ethtool_ops macb_ethtool_ops = {
  };
  
  static const struct ethtool_ops gem_ethtool_ops = {
@@ -159099,7 +159130,7 @@ index b940dcd3ace6..79fab300a534 100644
  	.get_regs_len		= macb_get_regs_len,
  	.get_regs		= macb_get_regs,
  	.get_wol		= macb_get_wol,
-@@ -3758,6 +3870,8 @@ static const struct ethtool_ops gem_ethtool_ops = {
+@@ -3766,6 +3878,8 @@ static const struct ethtool_ops gem_ethtool_ops = {
  	.get_ethtool_stats	= gem_get_ethtool_stats,
  	.get_strings		= gem_get_ethtool_strings,
  	.get_sset_count		= gem_get_sset_count,
@@ -159108,7 +159139,7 @@ index b940dcd3ace6..79fab300a534 100644
  	.get_link_ksettings     = macb_get_link_ksettings,
  	.set_link_ksettings     = macb_set_link_ksettings,
  	.get_ringparam		= macb_get_ringparam,
-@@ -5054,6 +5168,11 @@ static int macb_probe(struct platform_device *pdev)
+@@ -5062,6 +5176,11 @@ static int macb_probe(struct platform_device *pdev)
  			}
  		}
  	}
@@ -159120,7 +159151,7 @@ index b940dcd3ace6..79fab300a534 100644
  	spin_lock_init(&bp->lock);
  
  	/* setup capabilities */
-@@ -5109,6 +5228,21 @@ static int macb_probe(struct platform_device *pdev)
+@@ -5117,6 +5236,21 @@ static int macb_probe(struct platform_device *pdev)
  	else
  		bp->phy_interface = interface;
  
@@ -159142,7 +159173,7 @@ index b940dcd3ace6..79fab300a534 100644
  	/* IP specific init */
  	err = init(pdev);
  	if (err)
-@@ -5185,6 +5319,19 @@ static int macb_remove(struct platform_device *pdev)
+@@ -5193,6 +5327,19 @@ static int macb_remove(struct platform_device *pdev)
  	return 0;
  }
  
@@ -159162,7 +159193,7 @@ index b940dcd3ace6..79fab300a534 100644
  static int __maybe_unused macb_suspend(struct device *dev)
  {
  	struct net_device *netdev = dev_get_drvdata(dev);
-@@ -5399,6 +5546,7 @@ static const struct dev_pm_ops macb_pm_ops = {
+@@ -5407,6 +5554,7 @@ static const struct dev_pm_ops macb_pm_ops = {
  static struct platform_driver macb_driver = {
  	.probe		= macb_probe,
  	.remove		= macb_remove,
@@ -159368,7 +159399,7 @@ index 000000000000..007d077edcad
 +		rtl8168_setup_ldev(leds + i, ndev, i);
 +}
 diff --git a/drivers/net/ethernet/realtek/r8169_main.c b/drivers/net/ethernet/realtek/r8169_main.c
-index 8a732edac15a..7b5a96607ef4 100644
+index 115adbce6c56..010f09d39679 100644
 --- a/drivers/net/ethernet/realtek/r8169_main.c
 +++ b/drivers/net/ethernet/realtek/r8169_main.c
 @@ -289,6 +289,7 @@ enum rtl8168_8101_registers {
@@ -159379,7 +159410,7 @@ index 8a732edac15a..7b5a96607ef4 100644
  	LED_FREQ		= 0x1a,
  	EEE_LED			= 0x1b,
  	ERIDR			= 0x70,
-@@ -620,6 +621,7 @@ struct rtl8169_private {
+@@ -647,6 +648,7 @@ struct rtl8169_private {
  
  	raw_spinlock_t config25_lock;
  	raw_spinlock_t mac_ocp_lock;
@@ -159387,7 +159418,7 @@ index 8a732edac15a..7b5a96607ef4 100644
  
  	raw_spinlock_t cfg9346_usage_lock;
  	int cfg9346_usage_count;
-@@ -792,6 +794,62 @@ static const struct rtl_cond name = {			\
+@@ -819,6 +821,62 @@ static const struct rtl_cond name = {			\
  							\
  static bool name ## _check(struct rtl8169_private *tp)
  
@@ -159450,7 +159481,7 @@ index 8a732edac15a..7b5a96607ef4 100644
  static void r8168fp_adjust_ocp_cmd(struct rtl8169_private *tp, u32 *cmd, int type)
  {
  	/* based on RTL8168FP_OOBMAC_BASE in vendor driver */
-@@ -5254,6 +5312,7 @@ static int rtl_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
+@@ -5283,6 +5341,7 @@ static int rtl_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
  	raw_spin_lock_init(&tp->cfg9346_usage_lock);
  	raw_spin_lock_init(&tp->config25_lock);
  	raw_spin_lock_init(&tp->mac_ocp_lock);
@@ -159458,7 +159489,7 @@ index 8a732edac15a..7b5a96607ef4 100644
  
  	dev->tstats = devm_netdev_alloc_pcpu_stats(&pdev->dev,
  						   struct pcpu_sw_netstats);
-@@ -5410,6 +5469,12 @@ static int rtl_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
+@@ -5439,6 +5498,12 @@ static int rtl_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
  	if (rc)
  		return rc;
  
@@ -159666,7 +159697,7 @@ index 0b88635f4fbc..ae266a69822a 100644
  	priv->chip_id = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_ID);
  	priv->chip_rev = phy_read_mmd(phydev, 3, LAN88XX_MMD3_CHIP_REV);
 diff --git a/drivers/net/usb/lan78xx.c b/drivers/net/usb/lan78xx.c
-index 921ae046f860..a7f24d6c0cae 100644
+index 2ae33ecb6749..8581f30f7bd6 100644
 --- a/drivers/net/usb/lan78xx.c
 +++ b/drivers/net/usb/lan78xx.c
 @@ -609,6 +609,20 @@ static int lan78xx_alloc_tx_resources(struct lan78xx_net *dev)
@@ -159794,8 +159825,8 @@ index 921ae046f860..a7f24d6c0cae 100644
 +	netif_notice(dev, probe, netdev, "int urb period %d\n", period);
 +
  	maxp = usb_maxpacket(dev->udev, dev->pipe_intr);
- 	buf = kmalloc(maxp, GFP_KERNEL);
- 	if (!buf) {
+ 
+ 	dev->urb_intr = usb_alloc_urb(0, GFP_KERNEL);
 diff --git a/drivers/net/usb/smsc95xx.c b/drivers/net/usb/smsc95xx.c
 index 8e82184be5e7..737a1734e451 100644
 --- a/drivers/net/usb/smsc95xx.c
@@ -162905,10 +162936,10 @@ index e47a77f943b1..457a8d29fad8 100644
  
  fail:
 diff --git a/drivers/perf/Kconfig b/drivers/perf/Kconfig
-index 273d67ecf6d2..b73a4880578e 100644
+index 7b7b15f9bb6f..8de6595f1001 100644
 --- a/drivers/perf/Kconfig
 +++ b/drivers/perf/Kconfig
-@@ -208,6 +208,14 @@ config ALIBABA_UNCORE_DRW_PMU
+@@ -220,6 +220,14 @@ config ALIBABA_UNCORE_DRW_PMU
  	  Support for Driveway PMU events monitoring on Yitian 710 DDR
  	  Sub-system.
  
@@ -162924,10 +162955,10 @@ index 273d67ecf6d2..b73a4880578e 100644
  
  config MARVELL_CN10K_DDR_PMU
 diff --git a/drivers/perf/Makefile b/drivers/perf/Makefile
-index 16b3ec4db916..d33610e432dc 100644
+index a8b7bc22e3d6..56bc50c79f78 100644
 --- a/drivers/perf/Makefile
 +++ b/drivers/perf/Makefile
-@@ -26,3 +26,4 @@ obj-$(CONFIG_ALIBABA_UNCORE_DRW_PMU) += alibaba_uncore_drw_pmu.o
+@@ -27,3 +27,4 @@ obj-$(CONFIG_ALIBABA_UNCORE_DRW_PMU) += alibaba_uncore_drw_pmu.o
  obj-$(CONFIG_ARM_CORESIGHT_PMU_ARCH_SYSTEM_PMU) += arm_cspmu/
  obj-$(CONFIG_MESON_DDR_PMU) += amlogic/
  obj-$(CONFIG_CXL_PMU) += cxl_pmu.o
@@ -169319,10 +169350,10 @@ index f96906795fa6..3856477b14ff 100644
  	help
  	  This enables support for the RPi power domains which can be enabled
 diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index 60826b7ed21e..3f3e1fd9d7ff 100644
+index e3217ce5a3f6..95d6b1020dfd 100644
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -846,6 +846,18 @@ config SPI_RB4XX
+@@ -861,6 +861,18 @@ config SPI_RB4XX
  	help
  	  SPI controller driver for the Mikrotik RB4xx series boards.
  
@@ -169342,10 +169373,10 @@ index 60826b7ed21e..3f3e1fd9d7ff 100644
  	tristate "Renesas RPC-IF SPI driver"
  	depends on RENESAS_RPCIF
 diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
-index 26bf16fcf890..a0e7d833b9d9 100644
+index d6fdb887d97d..ac9020ce9bb8 100644
 --- a/drivers/spi/Makefile
 +++ b/drivers/spi/Makefile
-@@ -116,6 +116,7 @@ obj-$(CONFIG_SPI_ROCKCHIP)		+= spi-rockchip.o
+@@ -118,6 +118,7 @@ obj-$(CONFIG_SPI_ROCKCHIP)		+= spi-rockchip.o
  obj-$(CONFIG_SPI_ROCKCHIP_SFC)		+= spi-rockchip-sfc.o
  obj-$(CONFIG_SPI_RB4XX)			+= spi-rb4xx.o
  obj-$(CONFIG_MACH_REALTEK_RTL)		+= spi-realtek-rtl.o
@@ -183853,7 +183884,7 @@ index 000000000000..107460ad1be3
 +
 +#endif /* __VC_SM_CMA_IOCTL_H */
 diff --git a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
-index aa2313f3bcab..def331ad5517 100644
+index 92aa98bbdc66..83988b4f3cc5 100644
 --- a/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
 +++ b/drivers/staging/vc04_services/interface/vchiq_arm/vchiq_arm.c
 @@ -22,6 +22,7 @@
@@ -183898,7 +183929,7 @@ index aa2313f3bcab..def331ad5517 100644
  	struct rpi_firmware *fw;
  };
  
-@@ -115,6 +127,11 @@ struct vchiq_arm_state {
+@@ -115,10 +127,16 @@ struct vchiq_arm_state {
  	int first_connect;
  };
  
@@ -183907,10 +183938,7 @@ index aa2313f3bcab..def331ad5517 100644
 +	.use_36bit_addrs = true,
 +};
 +
- struct vchiq_2835_state {
- 	int inited;
- 	struct vchiq_arm_state arm_state;
-@@ -124,6 +141,7 @@ struct vchiq_pagelist_info {
+ struct vchiq_pagelist_info {
  	struct pagelist *pagelist;
  	size_t pagelist_buffer_size;
  	dma_addr_t dma_addr;
@@ -183918,7 +183946,7 @@ index aa2313f3bcab..def331ad5517 100644
  	enum dma_data_direction dma_dir;
  	unsigned int num_pages;
  	unsigned int pages_need_release;
-@@ -144,10 +162,13 @@ static void __iomem *g_regs;
+@@ -139,10 +157,13 @@ static void __iomem *g_regs;
   * of 32.
   */
  static unsigned int g_cache_line_size = 32;
@@ -183932,7 +183960,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  static DEFINE_SEMAPHORE(g_free_fragments_mutex, 1);
  
-@@ -177,15 +198,20 @@ static void
+@@ -172,15 +193,20 @@ static void
  cleanup_pagelistinfo(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagelistinfo)
  {
  	if (pagelistinfo->scatterlist_mapped) {
@@ -183956,7 +183984,7 @@ index aa2313f3bcab..def331ad5517 100644
  }
  
  static inline bool
-@@ -220,6 +246,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -215,6 +241,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	u32 *addrs;
  	unsigned int num_pages, offset, i, k;
  	int actual_pages;
@@ -183964,7 +183992,7 @@ index aa2313f3bcab..def331ad5517 100644
  	size_t pagelist_size;
  	struct scatterlist *scatterlist, *sg;
  	int dma_buffers;
-@@ -249,8 +276,14 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -244,8 +271,14 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	/* Allocate enough storage to hold the page pointers and the page
  	 * list
  	 */
@@ -183981,7 +184009,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	vchiq_log_trace(vchiq_arm_log_level, "%s - %pK", __func__, pagelist);
  
-@@ -271,6 +304,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -266,6 +299,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  	pagelistinfo->pagelist = pagelist;
  	pagelistinfo->pagelist_buffer_size = pagelist_size;
  	pagelistinfo->dma_addr = dma_addr;
@@ -183989,7 +184017,7 @@ index aa2313f3bcab..def331ad5517 100644
  	pagelistinfo->dma_dir =  (type == PAGELIST_WRITE) ?
  				  DMA_TO_DEVICE : DMA_FROM_DEVICE;
  	pagelistinfo->num_pages = num_pages;
-@@ -337,7 +371,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -332,7 +366,7 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  		count -= len;
  	}
  
@@ -183998,7 +184026,7 @@ index aa2313f3bcab..def331ad5517 100644
  				 scatterlist,
  				 num_pages,
  				 pagelistinfo->dma_dir);
-@@ -351,22 +385,61 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
+@@ -346,22 +380,61 @@ create_pagelist(struct vchiq_instance *instance, char *buf, char __user *ubuf,
  
  	/* Combine adjacent blocks for performance */
  	k = 0;
@@ -184076,7 +184104,7 @@ index aa2313f3bcab..def331ad5517 100644
  	}
  
  	/* Partial cache lines (fragments) require special measures */
-@@ -410,7 +483,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
+@@ -405,7 +478,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
  	 * NOTE: dma_unmap_sg must be called before the
  	 * cpu can touch any of the data/pages.
  	 */
@@ -184085,7 +184113,7 @@ index aa2313f3bcab..def331ad5517 100644
  		     pagelistinfo->num_pages, pagelistinfo->dma_dir);
  	pagelistinfo->scatterlist_mapped = 0;
  
-@@ -465,6 +538,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
+@@ -460,6 +533,7 @@ free_pagelist(struct vchiq_instance *instance, struct vchiq_pagelist_info *pagel
  static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state *state)
  {
  	struct device *dev = &pdev->dev;
@@ -184093,7 +184121,7 @@ index aa2313f3bcab..def331ad5517 100644
  	struct vchiq_drvdata *drvdata = platform_get_drvdata(pdev);
  	struct rpi_firmware *fw = drvdata->fw;
  	struct vchiq_slot_zero *vchiq_slot_zero;
-@@ -486,6 +560,24 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -481,6 +555,24 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	g_cache_line_size = drvdata->cache_line_size;
  	g_fragments_size = 2 * g_cache_line_size;
  
@@ -184118,7 +184146,7 @@ index aa2313f3bcab..def331ad5517 100644
  	/* Allocate space for the channels in coherent memory */
  	slot_mem_size = PAGE_ALIGN(TOTAL_SLOTS * VCHIQ_SLOT_SIZE);
  	frag_mem_size = PAGE_ALIGN(g_fragments_size * MAX_FRAGMENTS);
-@@ -498,13 +590,14 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -493,13 +585,14 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	}
  
  	WARN_ON(((unsigned long)slot_mem & (PAGE_SIZE - 1)) != 0);
@@ -184134,7 +184162,7 @@ index aa2313f3bcab..def331ad5517 100644
  	vchiq_slot_zero->platform_data[VCHIQ_PLATFORM_FRAGMENTS_COUNT_IDX] =
  		MAX_FRAGMENTS;
  
-@@ -538,7 +631,6 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -533,7 +626,6 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  	}
  
  	/* Send the base address of the slots to VideoCore */
@@ -184142,7 +184170,7 @@ index aa2313f3bcab..def331ad5517 100644
  	err = rpi_firmware_property(fw, RPI_FIRMWARE_VCHIQ_INIT,
  				    &channelbase, sizeof(channelbase));
  	if (err) {
-@@ -552,6 +644,15 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
+@@ -547,6 +639,15 @@ static int vchiq_platform_init(struct platform_device *pdev, struct vchiq_state
  		return -ENXIO;
  	}
  
@@ -184158,7 +184186,7 @@ index aa2313f3bcab..def331ad5517 100644
  	vchiq_log_info(vchiq_arm_log_level, "vchiq_init - done (slots %pK, phys %pad)",
  		       vchiq_slot_zero, &slot_phys);
  
-@@ -1765,6 +1866,7 @@ void vchiq_platform_conn_state_changed(struct vchiq_state *state,
+@@ -1752,6 +1853,7 @@ void vchiq_platform_conn_state_changed(struct vchiq_state *state,
  static const struct of_device_id vchiq_of_match[] = {
  	{ .compatible = "brcm,bcm2835-vchiq", .data = &bcm2835_drvdata },
  	{ .compatible = "brcm,bcm2836-vchiq", .data = &bcm2836_drvdata },
@@ -184166,7 +184194,7 @@ index aa2313f3bcab..def331ad5517 100644
  	{},
  };
  MODULE_DEVICE_TABLE(of, vchiq_of_match);
-@@ -1774,6 +1876,7 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
+@@ -1761,6 +1863,7 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
  {
  	struct platform_device_info pdevinfo;
  	struct platform_device *child;
@@ -184174,7 +184202,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	memset(&pdevinfo, 0, sizeof(pdevinfo));
  
-@@ -1782,12 +1885,32 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
+@@ -1769,12 +1872,32 @@ vchiq_register_child(struct platform_device *pdev, const char *name)
  	pdevinfo.id = PLATFORM_DEVID_NONE;
  	pdevinfo.dma_mask = DMA_BIT_MASK(32);
  
@@ -184207,7 +184235,7 @@ index aa2313f3bcab..def331ad5517 100644
  	return child;
  }
  
-@@ -1838,8 +1961,11 @@ static int vchiq_probe(struct platform_device *pdev)
+@@ -1825,8 +1948,11 @@ static int vchiq_probe(struct platform_device *pdev)
  		goto error_exit;
  	}
  
@@ -184219,7 +184247,7 @@ index aa2313f3bcab..def331ad5517 100644
  
  	return 0;
  
-@@ -1851,8 +1977,11 @@ static int vchiq_probe(struct platform_device *pdev)
+@@ -1838,8 +1964,11 @@ static int vchiq_probe(struct platform_device *pdev)
  
  static void vchiq_remove(struct platform_device *pdev)
  {
@@ -188527,10 +188555,10 @@ index 362bbcdece0d..39fd89e8e663 100644
  }
  
 diff --git a/drivers/tty/serial/sc16is7xx.c b/drivers/tty/serial/sc16is7xx.c
-index f290fbe21d63..f5b57f96ec6b 100644
+index 673aeda71388..df6023ddaee0 100644
 --- a/drivers/tty/serial/sc16is7xx.c
 +++ b/drivers/tty/serial/sc16is7xx.c
-@@ -777,6 +777,8 @@ static bool sc16is7xx_port_irq(struct sc16is7xx_port *s, int portno)
+@@ -766,6 +766,8 @@ static bool sc16is7xx_port_irq(struct sc16is7xx_port *s, int portno)
  
  		if (rxlen)
  			sc16is7xx_handle_rx(port, rxlen, iir);
@@ -188539,7 +188567,7 @@ index f290fbe21d63..f5b57f96ec6b 100644
  		break;
  		/* CTSRTS interrupt comes only when CTS goes inactive */
  	case SC16IS7XX_IIR_CTSRTS_SRC:
-@@ -1208,6 +1210,9 @@ static int sc16is7xx_startup(struct uart_port *port)
+@@ -1197,6 +1199,9 @@ static int sc16is7xx_startup(struct uart_port *port)
  	      SC16IS7XX_IER_MSI_BIT;
  	sc16is7xx_port_write(port, SC16IS7XX_IER_REG, val);
  
@@ -188877,10 +188905,10 @@ index db67df29fb2b..b16e528859a8 100644
  }
  
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 9955091c5336..0f4a9a8b28db 100644
+index fcb509059d7c..220d09c555d9 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -1202,6 +1202,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
+@@ -1208,6 +1208,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
  	}
  }
  
@@ -188905,7 +188933,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  /**
   * dwc3_core_init - Low-level initialization of DWC3 Core
   * @dwc: Pointer to our controller context structure
-@@ -1267,6 +1285,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1273,6 +1291,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_set_incr_burst_type(dwc);
  
@@ -188914,7 +188942,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	ret = dwc3_phy_power_on(dwc);
  	if (ret)
  		goto err_exit_phy;
-@@ -1346,6 +1366,9 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1352,6 +1372,9 @@ static int dwc3_core_init(struct dwc3 *dwc)
  		if (dwc->parkmode_disable_hs_quirk)
  			reg |= DWC3_GUCTL1_PARKMODE_DISABLE_HS;
  
@@ -188924,7 +188952,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  		if (DWC3_VER_IS_WITHIN(DWC3, 290A, ANY) &&
  		    (dwc->maximum_speed == USB_SPEED_HIGH ||
  		     dwc->maximum_speed == USB_SPEED_FULL))
-@@ -1356,6 +1379,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1362,6 +1385,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_config_threshold(dwc);
  
@@ -188949,7 +188977,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	return 0;
  
  err_power_off_phy:
-@@ -1499,6 +1540,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1505,6 +1546,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	u8			tx_thr_num_pkt_prd = 0;
  	u8			tx_max_burst_prd = 0;
  	u8			tx_fifo_resize_max_num;
@@ -188957,7 +188985,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	const char		*usb_psy_name;
  	int			ret;
  
-@@ -1521,6 +1563,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1527,6 +1569,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	 */
  	tx_fifo_resize_max_num = 6;
  
@@ -188967,7 +188995,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	dwc->maximum_speed = usb_get_maximum_speed(dev);
  	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
  	dwc->dr_mode = usb_get_dr_mode(dev);
-@@ -1622,6 +1667,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1628,6 +1673,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  				"snps,parkmode-disable-ss-quirk");
  	dwc->parkmode_disable_hs_quirk = device_property_read_bool(dev,
  				"snps,parkmode-disable-hs-quirk");
@@ -188976,7 +189004,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	dwc->gfladj_refclk_lpm_sel = device_property_read_bool(dev,
  				"snps,gfladj-refclk-lpm-sel-quirk");
  
-@@ -1642,6 +1689,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1648,6 +1695,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->dis_split_quirk = device_property_read_bool(dev,
  				"snps,dis-split-quirk");
  
@@ -188986,7 +189014,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
  	dwc->tx_de_emphasis = tx_de_emphasis;
  
-@@ -1659,6 +1709,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1665,6 +1715,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->tx_thr_num_pkt_prd = tx_thr_num_pkt_prd;
  	dwc->tx_max_burst_prd = tx_max_burst_prd;
  
@@ -188995,7 +189023,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	dwc->imod_interval = 0;
  
  	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
-@@ -1934,6 +1986,12 @@ static int dwc3_probe(struct platform_device *pdev)
+@@ -1940,6 +1992,12 @@ static int dwc3_probe(struct platform_device *pdev)
  
  	dwc3_get_properties(dwc);
  
@@ -189009,7 +189037,7 @@ index 9955091c5336..0f4a9a8b28db 100644
  	if (IS_ERR(dwc->reset)) {
  		ret = PTR_ERR(dwc->reset);
 diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index db1a793a9b13..0aa6a1052336 100644
+index 3325796f3cb4..1338b30466af 100644
 --- a/drivers/usb/dwc3/core.h
 +++ b/drivers/usb/dwc3/core.h
 @@ -185,6 +185,9 @@
@@ -189055,7 +189083,7 @@ index db1a793a9b13..0aa6a1052336 100644
   * @tx_de_emphasis_quirk: set if we enable Tx de-emphasis quirk
   * @tx_de_emphasis: Tx de-emphasis value
   *	0	- -6dB de-emphasis
-@@ -1296,6 +1303,7 @@ struct dwc3 {
+@@ -1298,6 +1305,7 @@ struct dwc3 {
  	u8			tx_max_burst_prd;
  	u8			tx_fifo_resize_max_num;
  	u8			clear_stall_protocol;
@@ -189063,7 +189091,7 @@ index db1a793a9b13..0aa6a1052336 100644
  
  	const char		*hsphy_interface;
  
-@@ -1339,6 +1347,7 @@ struct dwc3 {
+@@ -1341,6 +1349,7 @@ struct dwc3 {
  	unsigned		ulpi_ext_vbus_drv:1;
  	unsigned		parkmode_disable_ss_quirk:1;
  	unsigned		parkmode_disable_hs_quirk:1;
@@ -248953,7 +248981,7 @@ index 54c47463c215..17f4a9fabee6 100644
  
  	erst_base = xhci_read_64(xhci, &ir->ir_set->erst_base);
 diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-index 7257f2b78a12..f84be33f39f5 100644
+index b23ee4e9bde0..755c9faef791 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
 @@ -27,6 +27,8 @@
@@ -248965,7 +248993,7 @@ index 7257f2b78a12..f84be33f39f5 100644
  /* Device for a quirk */
  #define PCI_VENDOR_ID_FRESCO_LOGIC	0x1b73
  #define PCI_DEVICE_ID_FRESCO_LOGIC_PDK	0x1000
-@@ -294,6 +296,16 @@ static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
+@@ -295,6 +297,16 @@ static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
  	return 0;
  }
  
@@ -248982,7 +249010,7 @@ index 7257f2b78a12..f84be33f39f5 100644
  static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  {
  	struct pci_dev                  *pdev = to_pci_dev(dev);
-@@ -489,8 +501,15 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+@@ -497,8 +509,15 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  			pdev->device == 0x3432)
  		xhci->quirks |= XHCI_BROKEN_STREAMS;
  
@@ -249000,7 +249028,7 @@ index 7257f2b78a12..f84be33f39f5 100644
  	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
  		pdev->device == PCI_DEVICE_ID_ASMEDIA_1042_XHCI) {
 diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index 824c578522f4..ac001bfbf700 100644
+index 84cc0bf7066d..1c319e713b7f 100644
 --- a/drivers/usb/host/xhci-ring.c
 +++ b/drivers/usb/host/xhci-ring.c
 @@ -633,8 +633,11 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
@@ -249263,10 +249291,10 @@ index f005ce1f91ca..f2a81c18a28c 100644
  	.enable_device =	xhci_enable_device,
  	.update_hub_device =	xhci_update_hub_device,
 diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
-index d6ba4da64f49..f970f45cc048 100644
+index e8530f0ee27a..e79177e7bf43 100644
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
-@@ -1681,8 +1681,9 @@ struct urb_priv {
+@@ -1425,8 +1425,9 @@ struct urb_priv {
   * Each segment table entry is 4*32bits long.  1K seems like an ok size:
   * (1K bytes * 8bytes/bit) / (4*32 bits) = 64 segment entries in the table,
   * meaning 64 ring segments.
@@ -249278,7 +249306,7 @@ index d6ba4da64f49..f970f45cc048 100644
  /* Poll every 60 seconds */
  #define	POLL_TIMEOUT	60
  /* Stop endpoint command timeout (secs) for URB cancellation watchdog timer */
-@@ -1918,6 +1919,11 @@ struct xhci_hcd {
+@@ -1662,6 +1663,11 @@ struct xhci_hcd {
  #define XHCI_WRITE_64_HI_LO	BIT_ULL(47)
  #define XHCI_CDNS_SCTX_QUIRK	BIT_ULL(48)
  
@@ -254020,10 +254048,10 @@ index bb001c5d7f17..2ce96ba0ee39 100644
  
  static int bcm2835_wdt_probe(struct platform_device *pdev)
 diff --git a/fs/ntfs3/fslog.c b/fs/ntfs3/fslog.c
-index 231b012fb19d..7140cbf7b83e 100644
+index 2a1aeab53ea4..1d4255d1999d 100644
 --- a/fs/ntfs3/fslog.c
 +++ b/fs/ntfs3/fslog.c
-@@ -3914,6 +3914,8 @@ int log_replay(struct ntfs_inode *ni, bool *initialized)
+@@ -3929,6 +3929,8 @@ int log_replay(struct ntfs_inode *ni, bool *initialized)
  		log->l_size = log->orig_file_size;
  		log->page_size = norm_file_page(t32, &log->l_size,
  						t32 == DefaultLogPageSize);
@@ -255059,10 +255087,10 @@ index d6e38a500833..70c233440cdf 100644
  int gpiochip_irq_map(struct irq_domain *d, unsigned int irq,
  		     irq_hw_number_t hwirq);
 diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index 0dad8f803586..905a8769833a 100644
+index 83ec4bf9809e..ce1e7a9a5990 100644
 --- a/include/linux/iommu.h
 +++ b/include/linux/iommu.h
-@@ -697,15 +697,19 @@ struct iommu_domain_ops {
+@@ -780,15 +780,19 @@ struct iommu_domain_ops {
  	int (*set_dev_pasid)(struct iommu_domain *domain, struct device *dev,
  			     ioasid_t pasid);
  
@@ -255257,7 +255285,7 @@ index 6727576a8755..52f2c7a90a13 100644
   * SCR field definitions
   */
 diff --git a/include/linux/module.h b/include/linux/module.h
-index 4db2878d9e42..bf726cea4035 100644
+index 990f9d66d2f1..74a8b16b3bcf 100644
 --- a/include/linux/module.h
 +++ b/include/linux/module.h
 @@ -513,7 +513,7 @@ struct module {
@@ -255268,7 +255296,7 @@ index 4db2878d9e42..bf726cea4035 100644
 +#if 1
  	unsigned int btf_data_size;
  	void *btf_data;
- #endif
+ #else
 diff --git a/include/linux/platform_data/dma-bcm2708.h b/include/linux/platform_data/dma-bcm2708.h
 new file mode 100644
 index 000000000000..6ca874d332a8
@@ -257673,10 +257701,10 @@ index 78260e5d9985..f8157c9c9da6 100644
  #define V4L2_PIX_FMT_PRIV_MAGIC		0xfeedcafe
  
 diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
-index 19ad62f66285..97d2b80a66d5 100644
+index c26a9b3a3576..af05b0e86153 100644
 --- a/kernel/cgroup/cgroup.c
 +++ b/kernel/cgroup/cgroup.c
-@@ -6879,6 +6879,31 @@ static int __init cgroup_disable(char *str)
+@@ -6888,6 +6888,31 @@ static int __init cgroup_disable(char *str)
  }
  __setup("cgroup_disable=", cgroup_disable);
  
@@ -257709,7 +257737,7 @@ index 19ad62f66285..97d2b80a66d5 100644
  
  static int __init enable_cgroup_debug(char *str)
 diff --git a/kernel/resource.c b/kernel/resource.c
-index ce127a829ead..454b92e9d650 100644
+index 635e858db0fe..4e0033e5ba28 100644
 --- a/kernel/resource.c
 +++ b/kernel/resource.c
 @@ -200,6 +200,12 @@ static int __release_resource(struct resource *old, bool release_child)
@@ -257873,7 +257901,7 @@ index f4dfeb5f052f..3ebb1b343284 100644
  /**
   * mpol_to_str - format a mempolicy structure for printing
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 52382ba24232..e987fac9ed69 100644
+index 86922efd7c3e..d6784fbd451e 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -207,6 +207,27 @@ EXPORT_SYMBOL(node_states);
@@ -257904,7 +257932,7 @@ index 52382ba24232..e987fac9ed69 100644
  /*
   * A cached value of the page's pageblock's migratetype, used when the page is
   * put on a pcplist. Used to avoid the pageblock migratetype lookup when
-@@ -2107,12 +2128,13 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
+@@ -2115,12 +2136,13 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
  	if (IS_ENABLED(CONFIG_CMA)) {
  		/*
  		 * Balance movable allocations between regular and CMA areas by
@@ -257922,10 +257950,10 @@ index 52382ba24232..e987fac9ed69 100644
  			if (page)
  				return page;
 diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 6c6c2d18010b..3d8de1306449 100644
+index 8e605361b714..ff800f3a1b59 100644
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
-@@ -4750,7 +4750,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
+@@ -4764,7 +4764,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
  		if (!folio)
  			continue;
  
@@ -257935,10 +257963,10 @@ index 6c6c2d18010b..3d8de1306449 100644
  
  		young++;
 diff --git a/net/bluetooth/hci_sync.c b/net/bluetooth/hci_sync.c
-index 75515a1d2923..95a5e1070600 100644
+index c553b637cda7..1500bf5fdb4f 100644
 --- a/net/bluetooth/hci_sync.c
 +++ b/net/bluetooth/hci_sync.c
-@@ -4861,6 +4861,8 @@ static const struct {
+@@ -4865,6 +4865,8 @@ static const struct {
   */
  static int hci_dev_setup_sync(struct hci_dev *hdev)
  {
@@ -257947,7 +257975,7 @@ index 75515a1d2923..95a5e1070600 100644
  	int ret = 0;
  	bool invalid_bdaddr;
  	size_t i;
-@@ -4889,7 +4891,8 @@ static int hci_dev_setup_sync(struct hci_dev *hdev)
+@@ -4893,7 +4895,8 @@ static int hci_dev_setup_sync(struct hci_dev *hdev)
  			 test_bit(HCI_QUIRK_USE_BDADDR_PROPERTY, &hdev->quirks);
  	if (!ret) {
  		if (test_bit(HCI_QUIRK_USE_BDADDR_PROPERTY, &hdev->quirks) &&
@@ -276173,10 +276201,10 @@ index e65fe3a7c3e4..df3a3046c9f8 100644
  			return ret;
  	}
 diff --git a/sound/usb/card.c b/sound/usb/card.c
-index 1b2edc0fd2e9..297d6ad1d8c0 100644
+index 7743ea983b1a..cee90e193d22 100644
 --- a/sound/usb/card.c
 +++ b/sound/usb/card.c
-@@ -857,8 +857,14 @@ static int usb_audio_probe(struct usb_interface *intf,
+@@ -863,8 +863,14 @@ static int usb_audio_probe(struct usb_interface *intf,
  	if (ignore_ctl_error)
  		chip->quirk_flags |= QUIRK_FLAG_IGNORE_CTL_ERROR;
  
@@ -276193,10 +276221,10 @@ index 1b2edc0fd2e9..297d6ad1d8c0 100644
  	/*
  	 * For devices with more than one control interface, we assume the
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 9ba985c6a408..3281a9b081a3 100644
+index 54dff2173b8c..481fb2070e7b 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2191,6 +2191,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+@@ -2224,6 +2224,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
  		   QUIRK_FLAG_ALIGN_TRANSFER),
  	DEVICE_FLG(0x534d, 0x2109, /* MacroSilicon MS2109 */
  		   QUIRK_FLAG_ALIGN_TRANSFER),
