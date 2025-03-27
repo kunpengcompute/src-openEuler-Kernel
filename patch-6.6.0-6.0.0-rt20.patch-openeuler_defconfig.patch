@@ -1,7 +1,7 @@
-From cb6750f16a7d1d5074b0f7c46270014dd348a958 Mon Sep 17 00:00:00 2001
+From d292d20a40e1769d90c7bac74a60e96428ba744a Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Tue, 21 May 2024 14:50:20 +0800
-Subject: [PATCH] rt2
+Date: Tue, 12 Nov 2024 13:34:33 +0800
+Subject: [PATCH 2/2] rt2
 
 ---
  arch/arm64/configs/openeuler_defconfig | 4 ++--
@@ -9,7 +9,7 @@ Subject: [PATCH] rt2
  2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index 3b8d78f94..6c7e6f2f9 100644
+index 61f3e4e34..0d3cabb17 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
 @@ -97,7 +97,7 @@ CONFIG_PREEMPT_NONE=y
@@ -21,17 +21,17 @@ index 3b8d78f94..6c7e6f2f9 100644
  #
  # CPU/Task time and stats accounting
  #
-@@ -755,7 +755,7 @@ CONFIG_HAVE_KVM_VCPU_RUN_PID_CHANGE=y
+@@ -757,7 +757,7 @@ CONFIG_HAVE_KVM_VCPU_RUN_PID_CHANGE=y
  CONFIG_KVM_XFER_TO_GUEST_WORK=y
  CONFIG_KVM_GENERIC_HARDWARE_ENABLING=y
  CONFIG_KVM_HISI_VIRT=y
 -CONFIG_VIRTUALIZATION=y
 +#CONFIG_VIRTUALIZATION is not set
  CONFIG_KVM=y
- CONFIG_CVM_HOST=y
- # CONFIG_NVHE_EL2_DEBUG is not set
+ CONFIG_HISI_VIRTCCA_HOST=y
+ CONFIG_HISI_VIRTCCA_CODA=y
 diff --git a/arch/x86/configs/openeuler_defconfig b/arch/x86/configs/openeuler_defconfig
-index 9b5df8585..ece62e3df 100644
+index 61af907af..4c0ea9071 100644
 --- a/arch/x86/configs/openeuler_defconfig
 +++ b/arch/x86/configs/openeuler_defconfig
 @@ -112,11 +112,11 @@ CONFIG_BPF_SCHED=y
@@ -57,7 +57,7 @@ index 9b5df8585..ece62e3df 100644
  CONFIG_UID16=y
  CONFIG_MULTIUSER=y
  CONFIG_SGETMASK_SYSCALL=y
-@@ -744,7 +744,7 @@ CONFIG_HAVE_KVM_NO_POLL=y
+@@ -746,7 +746,7 @@ CONFIG_HAVE_KVM_NO_POLL=y
  CONFIG_KVM_XFER_TO_GUEST_WORK=y
  CONFIG_HAVE_KVM_PM_NOTIFIER=y
  CONFIG_KVM_GENERIC_HARDWARE_ENABLING=y

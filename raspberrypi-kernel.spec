@@ -2,13 +2,13 @@
 
 %global KernelVer %{version}-%{release}.raspi.%{_target_cpu}
 
-%global hulkrelease 48.0.0
+%global hulkrelease 75.0.0
 
 %global debug_package %{nil}
 
 Name:	 raspberrypi-kernel
 Version: 6.6.0
-Release: %{hulkrelease}.7
+Release: %{hulkrelease}.11
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -281,13 +281,27 @@ fi
 /usr/src/kernels/%{KernelVer}-*
 
 %changelog
-* Wed Nov 6  2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-48.0.0.7
+* Fri Jan 24 2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-75.0.0.11
+- update kernel version to openEuler 6.6.0-75.0.0
+- iommu: Hook up '->unmap_pages' driver callback
+
+* Thu Dec 26 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-72.0.0.10
+- update kernel version to openEuler 6.6.0-72.0.0
+
+* Wed Dec 18 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-68.0.0.9
+- update kernel version to openEuler 6.6.0-68.0.0
+
+* Thu Dec 12 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-66.0.0.8
+- update kernel version to openEuler 6.6.0-66.0.0
+
+* Tue Dec 3  2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-59.0.0.7
+- update kernel version to openEuler 6.6.0-59.0.0
+
+* Mon Nov 11 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-53.0.0.6
+- update kernel version to openEuler 6.6.0-53.0.0
+- update Raspberry Pi patch, last commit (ff0fe12ab875d587348b6f2b9e73ae928049ebee): dtoverlay: Add a dtoverlay for pwm-gpio
 - fix: initial output, then the screen goes black
 - add support for RPi 5
-
-* Mon Nov 4  2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-48.0.0.6
-- update kernel version to openEuler 6.6.0-48.0.0
-- update Raspberry Pi patch, last commit (ff0fe12ab875d587348b6f2b9e73ae928049ebee): dtoverlay: Add a dtoverlay for pwm-gpio
 
 * Wed May 29 2024 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-28.0.0.5
 - update kernel version to openEuler 6.6.0-28.0.0
