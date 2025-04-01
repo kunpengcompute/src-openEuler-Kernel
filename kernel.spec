@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2503.5.0
+%global hulkrelease 2504.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0321
+Release: %{hulkrelease}.0322
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,61 @@ fi
 %endif
 
 %changelog
+
+* Tue Apr 01 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.1.0.0322
+- !15491  dlm: fix plock invalid read
+- !15468  ath9k_htc: fix potential out of bounds access with invalid rxstatus->rs_keyix
+- !15466  ASoC: mediatek: Fix missing of_node_put in mt2701_wm8960_machine_probe
+- !15653  tty: goldfish: Fix free_irq() on remove
+- !15654  media: pvrusb2: fix array-index-out-of-bounds in pvr2_i2c_core_init
+- !15703  tracing: Make sure trace_printk() can output as soon as it can be used
+- !15702  trace_events_hist: add check for return value of 'create_hist_field'
+- !15708  f2fs: fix dereference of stale list iterator after loop body
+- f2fs: fix dereference of stale list iterator after loop body
+- tracing: Make sure trace_printk() can output as soon as it can be used
+- !15508  scsi: zorro7xx: Fix a resource leak in zorro7xx_remove_one()
+- !15509  ath9k_htc: fix uninit value bugs
+- !15506  phy: qcom-qmp: fix struct clk leak on probe errors
+- !15505  net: sfp: fix memory leak in sfp_probe()
+- trace_events_hist: add check for return value of 'create_hist_field'
+- !15647  nilfs2: do not force clear folio if buffer is referenced
+- !15628  ASoC: mxs-saif: Fix refcount leak in mxs_saif_probe
+- !15629  ata: pata_octeon_cf: Fix refcount leak in octeon_cf_probe
+- !15674  arm64: cacheinfo: Avoid out-of-bounds write to cacheinfo array
+- arm64: cacheinfo: Avoid out-of-bounds write to cacheinfo array
+- !15661  ath5k: fix OOB in ath5k_eeprom_read_pcal_info_5111
+- !15662  media: stk1160: If start stream fails, return buffers with VB2_BUF_STATE_QUEUED
+- !15663  ARM: versatile: Add missing of_node_put in dcscb_init
+- !15504  um: Fix out-of-bounds read in LDT setup
+- !15311  net: dsa: mv88e6xxx: Fix refcount leak in mv88e6xxx_mdios_register
+- ARM: versatile: Add missing of_node_put in dcscb_init
+- media: stk1160: If start stream fails, return buffers with VB2_BUF_STATE_QUEUED
+- ath5k: fix OOB in ath5k_eeprom_read_pcal_info_5111
+- !15502  wifi: mac80211: fix use-after-free in chanctx code
+- !15316  ocfs2: dlmfs: fix error handling of user_dlm_destroy_lock
+- !15322  can: m_can: m_can_tx_handler(): fix use after free of skb
+- !15497  cifs: Fix an infinite loop in cifsd caused by a failed mount attempt on port 139
+- !15655  cifs: Revert two patches to prevent statistics leakage on the lo device.
+- Revert "smb: client: fix TCP timers deadlock after rmmod"
+- Revert "smb: client: Fix netns refcount imbalance causing leaks and use-after-free"
+- media: pvrusb2: fix array-index-out-of-bounds in pvr2_i2c_core_init
+- tty: goldfish: Fix free_irq() on remove
+- nilfs2: do not force clear folio if buffer is referenced
+- ata: pata_octeon_cf: Fix refcount leak in octeon_cf_probe
+- ASoC: mxs-saif: Fix refcount leak in mxs_saif_probe
+- ath9k_htc: fix uninit value bugs
+- scsi: zorro7xx: Fix a resource leak in zorro7xx_remove_one()
+- phy: qcom-qmp: fix struct clk leak on probe errors
+- net: sfp: fix memory leak in sfp_probe()
+- um: Fix out-of-bounds read in LDT setup
+- wifi: mac80211: fix use-after-free in chanctx code
+- cifs: Fix an infinite loop in cifsd caused by a failed mount attempt on port 139
+- dlm: fix plock invalid read
+- ath9k_htc: fix potential out of bounds access with invalid rxstatus->rs_keyix
+- ASoC: mediatek: Fix missing of_node_put in mt2701_wm8960_machine_probe
+- can: m_can: m_can_tx_handler(): fix use after free of skb
+- ocfs2: dlmfs: fix error handling of user_dlm_destroy_lock
+- net: dsa: mv88e6xxx: Fix refcount leak in mv88e6xxx_mdios_register
 
 * Wed Mar 26 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2503.5.0.0321
 - !15605  mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
