@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       257
+%global devel_release       258
 %global maintenance_release .0.0
-%global pkg_release         .159
+%global pkg_release         .160
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,179 @@ fi
 %endif
 
 %changelog
+* Tue Apr 01 2025 Li Nan <linan122@huawei.com> - 5.10.0-258.0.0.160
+- !15699  Push 2 self-developed patches to OLK-5.10
+- !15671  ovl: fix UAF in ovl_dentry_update_reval by moving dput() in ovl_link_up
+- !15669  arm64: mm: add mc support for __buffer_migrate_page
+- !15630  Fix CVE-2022-49553
+- !15627  fs/ntfs3: Fix some memory leaks in an error handling path of 'log_replay()'
+- printk: Skip log flush in NMI context when logbuf_lock is held
+- x86: reboot: Initialize the printk locks to avoid deadlock
+- !15675  arm64: cacheinfo: Avoid out-of-bounds write to cacheinfo array
+- !15646  nilfs2: do not force clear folio if buffer is referenced
+- !15676  sched/fair: Optimize the dynamic smt
+- !15330 [OLK-5.10]:update patches for sw64 architecture
+- sched/fair: Optimize the dynamic smt
+- arm64: cacheinfo: Avoid out-of-bounds write to cacheinfo array
+- ovl: fix UAF in ovl_dentry_update_reval by moving dput() in ovl_link_up
+- arm64: mm: add mc support for __buffer_migrate_page
+- !15595  io_uring: prevent opcode speculation
+- nilfs2: do not force clear folio if buffer is referenced
+- fs/ntfs3: Avoid UBSAN error on true_sectors_per_clst()
+- fs/ntfs3: validate BOOT sectors_per_clusters
+- fs/ntfs3: Fix some memory leaks in an error handling path of 'log_replay()'
+- io_uring: prevent opcode speculation
+- sw64: distribute intx interrupts by hose
+- sw64: kvm: use generic kvm mmu memory caches
+- sw64: fix msi interrupt for guest os
+- sw64: acpi: remove constraint that cid of boot core must be zero
+- sw64: pci: get register base address from firmware
+- sw64: fix compile warning of do_entUna()
+- sw64: fix save_ktp compatibility for C3
+- sw64: fix PTBR save/restore for hibernation
+- sw64: kvm: remove some unused codes
+- sw64: add syscall pfh_ops
+- sw64: fix broken rdfpcr()
+- sw64: force kernel stack to be 16 bytes aligned
+- sw64: match platform device by acpi method
+- sw64: iommu: support acpi init
+- sw64: spi: update spi controller driver
+- sw64: irqchip: fix compatibility with old dts
+- sw64: kvm: fix pmd_trans_cont
+- sw64: add -fno-sw-unalign-byte to cflags for C4
+- sw64: define cpu_relax() as imb()
+- sw64: kvm: fix size of struct kvm_regs for C3B
+- sw64: fix the .endm in hibernate_asm.S
+- sw64: fix compile error of efi.systab
+- sw64: pci: adjust the maximum number of RC per node
+- sw64: get mclk and external clk from firmware
+- sw64: fix compile error of MMSIZE
+- sw64: acpi: disable ACPI for xuelang
+- sw64: ahci: disable parallel bus scan
+- sw64: redesign run mode setup method
+- sw64: rename static key and related simd libraries
+- sw64: fix secondary cpu bring up bug
+- sw64: acpi: fix coding style and typos
+- sw64: irq: fix compilation error
+- sw64: improve the verification logic of DTB
+- sw64: kvm: add the member of the vcpucb structure
+- sw64: kvm: fix the check for THP
+- sw64: kvm: fix page walk error of unmap_apt_range()
+- sw64: apply new boot params from DTB chosen node
+- sw64: receive new boot params from firmware
+- sw64: setup stackframe at kernel entry point
+- sw64: save and restore CSR_WR_FREGS for SIMD libs
+- sw64: rename copy and set lib functions
+- sw64: rename copy and set lib files
+- sw64: choose lib at compile time
+- sw64: perf: add core4 pmu support
+- sw64: redesign struct kvm_regs for C4
+- sw64: store topology and numa info by each cpu itself
+- sw64: kvm: fix live migration bug
+- sw64: kvm: fix APT fault handler
+- sw64: work around suspend for C4
+- sw64: employ trick on regs.pc for specific exception
+- sw64: enable CONFIG_FRAME_POINTER by default for junzhang
+- sw64: fix syscall_fallback() for vdso gettimeofday
+- sw64: dts: add Junzhang
+- sw64: lpc: work around hardware flaws
+- sw64: improve cpu bring up method
+- sw64: introduce new entry framework for C4
+- sw64: irq: update the initial value of nr_irqs
+- sw64: msi: fix sw64_set_affinity function in msi-v2
+- sw64: dynamically switch between lib implementation
+- sw64: kvm: fix unmap_apt_{ptes, pmds}
+- sw64: msi: remove redundant interrupt enables
+- sw64: add unaligned access support for C4 new instructions
+- sw64: fix compilation warning
+- sw64: fix kconfig selections
+- sw64: iommu: adjust iova range
+- sw64: iommu: introduce generic DMA ops to iommu_v2
+- sw64: iommu: fix iommu_v2 compile problems
+- sw64: acpi: fix missed upper bits of rcid for junzhang
+- sw64: pci: remove duplicate pcie operations
+- sw64: irq: remove unnecessary initialization
+- sw64: acpi: enable generic GSI
+- sw64: irqchip: support ACPI-based interrupt controller initialization
+- sw64: acpi: support MADT entry print for SW PINTC, MSIC and LPC-INTC
+- sw64: acpi: add ACPI-style structures for SW PINTC, MSIC and LPC-INTC
+- sw64: mm: fix PTE bits check
+- sw64: use a new wrap_asid hmcall when asid wraps
+- sw64: rewrite fpcr and swcr conversion
+- sw64: enable hardware denorm by default
+- sw64: add four-socket system support
+- sw64: add a new kernel parameter to override mclk
+- sw64: improve sw64_printk()
+- sw64: msi: fix bugs in multi-msi interrupts allocation and release
+- sw64: pci: change pci transaction ordering rule settings
+- sw64: irqchip: fix virtual PINTC not working properly
+- sw64: dts: improve properties for PINTC
+- sw64: dts: improve properties for LPC-INTC
+- sw64: dts: fix interrupt related properties for GPIO
+- sw64: dts: add chosen node
+- sw64: dts: fix properties for spi controller device node
+- sw64: fix coding style and typos
+- sw64: acpi: fix function acpi_numa_processor_affinity_init()
+- sw64: fix rd_f compatibility issue for C4
+- sw64: export mclk for guest os
+- sw64: refactor device interrupt domain
+- sw64: kvm: fix clock sync of CORE4 live migration
+- sw64: kvm: delete memory hotplug codes for CORE3B
+- sw64: add missing c4 legacy power management code
+- sw64: add missing c4 intc kconfig
+- sw64: fix macro definition compilation error
+- i2c: designware: Do not complete i2c read without RX_FULL interrupt
+- sw64: add macros for mother board config info
+- sw64: kvm: scale up the range of target vcpu parsed by hypervisor
+- sw64: pci: reset dma mask for devices on zx200
+- sw64: kvm: fix return value of vmem_mmap
+- sw64: msi: make vector_irq_t and sw64_msi_chip_data cache line aligned
+- sw64: iommu: add default DMA ops for passthrough domains
+- sw64: iommu: recognize potential multiple aliases for devices
+- sw64: iommu: fix group allocation semantics
+- sw64: iommu: rename sunway iommu filenames
+- sw64: iommu: remove unnecessary locking for sunway iommu driver
+- sw64: fix dtb address validity check
+- sw64: iommu: use a generic implementation of DMA ops
+- sw64: pci: fix compile error when CONFIG_ACPI=n
+- sw64: smp: suppress function setup_smp() when ACPI enabled
+- sw64: acpi: parse SW CINTC for SMP initialization
+- sw64: acpi: support MADT entry print for SW CINTC
+- sw64: acpi: add ACPI-style structures for SW CINTC
+- sw64: smp: add new structure to record rcid information
+- sw64: smp: modify function smp_rcb_init() to receive base address
+- sw64: pci: synchronize the OEM table ID of MCFG with BIOS
+- sw64: kvm: add trace kvm function
+- sw64: iommu: fix the bug when vfio_iommu unpin pages
+- sw64: use rvpcr() to setup run mode
+- sw64: kgdb: add single-step debug support
+- sw64: fix lockdep error
+- sw64: perf: do all event checks in sw64_pmu_event_init()
+- sw64: numa: fix compile error when CONFIG_ACPI_NUMA=n
+- sw64: pci: export some pci functions
+- sw64: uapi: fix a compile error for headers_install
+- sw64: perf: hide hardware performance events in guest os
+- sw64: fix hugepage support
+- sw64: extern vdso_start and vdso_end as char[]
+- sw64: remove useless current_policy
+- sw64: make sure _PAGE_LEAF is zero for swap pte
+- sw64: get cpufreq_policy with standard interface
+- sw64: mm: fix function numa_clear_node()
+- sw64: acpi: enable upgrade acpi tables via initrd
+- sw64: acpi: suppress the function cpu_set_node() when CONFIG_ACPI_NUMA=y
+- sw64: acpi: fix the function for parsing CPU affinity
+- sw64: acpi: use common functions about parsing SRAT and SLIT
+- sw64: acpi: enable CONFIG_ACPI_NUMA
+- sw64: move function setup_smp() before NUMA initialization
+- sw64: acpi: move ACPI initialization before NUMA initialization
+- sw64: pci: adjust the directory structure of PCI-related source files
+- sw64: pci: move some common functions from kernel/pci.c to pci/pci.c
+- sw64: pci: support ACPI-based PCI initialization
+- sw64: iommu: apply subsys_initcall_sync for function sunway_iommu_init()
+- sw64: iommu: register iommu_cpu_syscore_ops in function sunway_iommu_init()
+- sw64: pci: use pci_bus_to_pci_controller to get pci_controller
+- sw64: pci: add quirks for ACPI-based ECAM
+
 * Wed Mar 26 2025 Li Nan <linan122@huawei.com> - 5.10.0-257.0.0.159
 - !15643 drivers:misc:sdma-dae: sync code to openEuler
 - drivers:misc:sdma-dae: remove unnecessary return in void function
