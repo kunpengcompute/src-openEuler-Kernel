@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       85
 %global maintenance_release .0.0
-%global pkg_release         .79
+%global pkg_release         .80
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,12 @@ fi
 %endif
 
 %changelog
+* Thu Apr 03 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-85.0.0.80
+- RISC-V kernel upgrade to 6.6.0-85.0.0
+- Add spacemit k1 support, include pinctrl, gpio, clk, reset, uart, dts-bindings and dts
+- KVM AIA: Enable HW_ACCL
+- RISC-V: Remove unnecessary include from compat.h
+
 * Tue Apr 01 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-85.0.0.79
 - !15705  tracing: Fix use-after-free in print_graph_function_flags during tracer switching
 - tracing: Fix use-after-free in print_graph_function_flags during tracer switching
