@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       258
+%global devel_release       259
 %global maintenance_release .0.0
-%global pkg_release         .160
+%global pkg_release         .161
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,61 @@ fi
 %endif
 
 %changelog
+* Tue Apr 08 2025 Li Nan <linan122@huawei.com> - 5.10.0-259.0.0.161
+- !15773  drm/drm_vma_manager: Add drm_vma_node_allow_once()
+- !15794  Revert "arm64: mm: add mc support for __buffer_migrate_page"
+- !15802  hrtimers: Handle CPU state correctly on hotplug
+- hrtimers: Handle CPU state correctly on hotplug
+- !15679  list: fix a data-race around ep->rdllist
+- !15683  CVE-2025-21726
+- !15682  padata: fix UAF in padata_reorder
+- !15728  *** CVE-2025-21823 ***
+- !15782 sdma-dae: modify ttl_processes reduce logic
+- Revert "arm64: mm: add mc support for __buffer_migrate_page"
+- !15409  CVE-2025-21715
+- sdma-dae: modify ttl_processes reduce logic
+- !15760  uprobes: Reject the shared zeropage in uprobe_write_opcode()
+- !15766  bpf, sockmap: Fix race between element replace and close()
+- !15765  CVE-2024-56642
+- drm/drm_vma_manager: Add drm_vma_node_allow_once()
+- !15769  gpio: aggregator: protect driver attr handlers against module unload
+- !15753  x86/dumpstack: Fix inaccurate unwinding from exception stacks due to misplaced assignment
+- gpio: aggregator: protect driver attr handlers against module unload
+- bpf, sockmap: Fix race between element replace and close()
+- tipc: fix NULL deref in cleanup_bearer()
+- tipc: Fix use-after-free of kernel socket in cleanup_bearer().
+- uprobes: Reject the shared zeropage in uprobe_write_opcode()
+- x86/dumpstack: Fix inaccurate unwinding from exception stacks due to misplaced assignment
+- !15365 mm/init: Add quirk for phytium ps23064 SoC
+- !15690  net: rose: fix timer races against user threads
+- !15716  CVE-2022-49513
+- !15733  tracing: Fix use-after-free in print_graph_function_flags during tracer switching
+- tracing: Fix use-after-free in print_graph_function_flags during tracer switching
+- !15449  vrf: use RCU protection in l3mdev_l3_out()
+- batman-adv: Drop unmanaged ELP metric worker
+- batman-adv: Ignore neighbor throughput metrics in error case
+- batman-adv: fix panic during interface removal
+- batman-adv: Drop initialization of flexible ethtool_link_ksettings
+- batman-adv: Add new include for min/max helpers
+- !15701  usb: gadget: f_tcm: Don't free command immediately
+- !15510 v3  CVE-2025-21816
+- !15480  PCI: rcar-ep: Fix incorrect variable used when calling devm_request_mem_region()
+- mm/init: Add quirk for phytium ps23064 SoC
+- cpufreq: governor: Use kobject release() method to free dbs_data
+- cpufreq: Move to_gov_attr_set() to cpufreq.h
+- usb: gadget: f_tcm: Don't free command immediately
+- net: rose: fix timer races against user threads
+- padata: avoid UAF for reorder_work
+- padata: add pd get/put refcnt helper
+- padata: fix UAF in padata_reorder
+- list: fix a data-race around ep->rdllist
+- hrtimer: Fix kabi broken of struct hrtimer_cpu_base
+- hrtimers: Force migrate away hrtimers queued after CPUHP_AP_HRTIMERS_DYING
+- hrtimer: Report offline hrtimer enqueue
+- PCI: rcar-ep: Fix incorrect variable used when calling devm_request_mem_region()
+- vrf: use RCU protection in l3mdev_l3_out()
+- net: davicom: fix UAF in dm9000_drv_remove
+
 * Tue Apr 01 2025 Li Nan <linan122@huawei.com> - 5.10.0-258.0.0.160
 - !15699  Push 2 self-developed patches to OLK-5.10
 - !15671  ovl: fix UAF in ovl_dentry_update_reval by moving dput() in ovl_link_up
