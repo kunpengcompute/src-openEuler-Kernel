@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2504.1.0
+%global hulkrelease 2504.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0322
+Release: %{hulkrelease}.0323
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,66 @@ fi
 %endif
 
 %changelog
+
+* Wed Apr 09 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.2.0.0323
+- !15796  ALSA: hda/via: Avoid potential array out-of-bound in add_secret_dac_path()
+- !15805  dmaengine: imx-sdma: Fix a possible memory leak in sdma_transfer_init
+- !15806  bus: fsl-mc-bus: fix KASAN use-after-free in fsl_mc_bus_remove()
+- !15377  virtio_console: eliminate anonymous module_init & module_exit
+- bus: fsl-mc-bus: fix KASAN use-after-free in fsl_mc_bus_remove()
+- dmaengine: imx-sdma: Fix a possible memory leak in sdma_transfer_init
+- ALSA: hda/via: Avoid potential array out-of-bound in add_secret_dac_path()
+- !15784  HID: betop: check shape of output reports
+- HID: betop: check shape of output reports
+- !15740  ftrace: Avoid potential division by zero in function_stat_show()
+- !15747  bpf: Fix pointer-leak due to insufficient speculative store bypass mitigation
+- !15637  net_sched: sch_sfq: don't allow 1 packet limit
+- !15763  dmaengine: Fix double increment of client_count in dma_chan_get()
+- !15761  EDAC/highbank: Fix memory leak in highbank_mc_probe()
+- !15638  CVE-2022-49374
+- !15692  tty: fix deadlock caused by calling printk() under tty_port->lock
+- !15693  rxrpc: Fix listen() setting the bar too high for the prealloc rings
+- !15694  firmware: arm_scmi: Fix list protocols enumeration in the base protocol
+- !15691  media: uvcvideo: Fix double free in error path
+- !15732  drm/rockchip: vop: fix possible null-ptr-deref in vop_bind()
+- !15695  fs/dcache: fix bad unlock balance in shrink_dentry_list()
+- dmaengine: Fix double increment of client_count in dma_chan_get()
+- EDAC/highbank: Fix memory leak in highbank_mc_probe()
+- bpf: Fix pointer-leak due to insufficient speculative store bypass mitigation
+- ftrace: Avoid potential division by zero in function_stat_show()
+- !15514  cpufreq: pmac32-cpufreq: Fix refcount leak bug
+- drm/rockchip: vop: fix possible null-ptr-deref in vop_bind()
+- !15677  regulator: pfuze100: Fix refcount leak in pfuze_parse_regulators_dt
+- !15678  drm: msm: fix possible memory leak in mdp5_crtc_cursor_set()
+- !15632  macsec: fix UAF bug for real_dev
+- !15687  drivers: usb: host: Fix deadlock in oxu_bus_suspend()
+- !15688  usb: usbip: fix a refcount leak in stub_probe()
+- !15713  CVE-2022-49370
+- !15712  drbd: Fix five use after free bugs in get_initial_state
+- !15619  partitions: mac: fix handling of bogus partition table
+- !15723  phy: qcom-qmp: fix reset-controller leak on probe errors
+- !15720  nfc: nci: add flush_workqueue to prevent uaf
+- phy: qcom-qmp: fix reset-controller leak on probe errors
+- nfc: nci: add flush_workqueue to prevent uaf
+- firmware: dmi-sysfs: Fix null-ptr-deref in dmi_sysfs_register_handle
+- firmware: dmi-sysfs: Fix memory leak in dmi_sysfs_register_handle
+- drbd: Fix five use after free bugs in get_initial_state
+- fs/dcache: fix bad unlock balance in shrink_dentry_list()
+- firmware: arm_scmi: Fix list protocols enumeration in the base protocol
+- rxrpc: Fix listen() setting the bar too high for the prealloc rings
+- tty: fix deadlock caused by calling printk() under tty_port->lock
+- media: uvcvideo: Fix double free in error path
+- usb: usbip: fix a refcount leak in stub_probe()
+- drivers: usb: host: Fix deadlock in oxu_bus_suspend()
+- drm: msm: fix possible memory leak in mdp5_crtc_cursor_set()
+- regulator: pfuze100: Fix refcount leak in pfuze_parse_regulators_dt
+- tipc: check attribute length for bearer name
+- tipc: add extack messages for bearer/media failure
+- net_sched: sch_sfq: don't allow 1 packet limit
+- macsec: fix UAF bug for real_dev
+- partitions: mac: fix handling of bogus partition table
+- cpufreq: pmac32-cpufreq: Fix refcount leak bug
+- virtio_console: eliminate anonymous module_init & module_exit
 
 * Tue Apr 01 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.1.0.0322
 - !15491  dlm: fix plock invalid read
