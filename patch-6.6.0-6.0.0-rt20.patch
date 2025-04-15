@@ -1,7 +1,7 @@
-From 033015fbad811f653c8b8bfc9f8fb9943d7104f1 Mon Sep 17 00:00:00 2001
+From c21e5a6a370d2d18683d7301cee2a3c08815cedc Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Thu, 27 Feb 2025 14:01:35 +0800
-Subject: [PATCH] openEuler-24.03-LTS
+Date: Mon, 14 Apr 2025 16:56:52 +0800
+Subject: [PATCH] rt1
 
 ---
  arch/arm/Kconfig                              |    6 +-
@@ -897,7 +897,7 @@ index d154b5d77..52f5ce0a9 100644
  		raw_local_irq_disable();
  	}
 diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index 42aff7991..d905e53f7 100644
+index d04ceeadb..9c2a78cf0 100644
 --- a/drivers/block/zram/zram_drv.c
 +++ b/drivers/block/zram/zram_drv.c
 @@ -57,6 +57,41 @@ static void zram_free_page(struct zram *zram, size_t index);
@@ -950,7 +950,7 @@ index 42aff7991..d905e53f7 100644
  
  static inline bool init_done(struct zram *zram)
  {
-@@ -1252,6 +1288,7 @@ static bool zram_meta_alloc(struct zram *zram, u64 disksize)
+@@ -1253,6 +1289,7 @@ static bool zram_meta_alloc(struct zram *zram, u64 disksize)
  
  	if (!huge_class_size)
  		huge_class_size = zs_huge_class_size(zram->mem_pool);
@@ -1740,7 +1740,7 @@ index 9afd5979c..db23b3a02 100644
  
  	return 0;
 diff --git a/drivers/tty/serial/8250/8250_core.c b/drivers/tty/serial/8250/8250_core.c
-index 3449f8790..30434718f 100644
+index c536028e9..efb6f1c19 100644
 --- a/drivers/tty/serial/8250/8250_core.c
 +++ b/drivers/tty/serial/8250/8250_core.c
 @@ -259,7 +259,7 @@ static void serial8250_backup_timeout(struct timer_list *t)
@@ -1843,7 +1843,7 @@ index 3449f8790..30434718f 100644
  }
  
  /**
-@@ -1194,9 +1234,9 @@ void serial8250_unregister_port(int line)
+@@ -1197,9 +1237,9 @@ void serial8250_unregister_port(int line)
  	if (uart->em485) {
  		unsigned long flags;
  
@@ -2238,7 +2238,7 @@ index a3b25779d..53e238c8c 100644
  	mutex_unlock(&tport->mutex);
  }
 diff --git a/drivers/tty/serial/8250/8250_port.c b/drivers/tty/serial/8250/8250_port.c
-index a17803da8..2d4e775cd 100644
+index 2b1b2928e..d70026d03 100644
 --- a/drivers/tty/serial/8250/8250_port.c
 +++ b/drivers/tty/serial/8250/8250_port.c
 @@ -557,6 +557,11 @@ static int serial8250_em485_init(struct uart_8250_port *p)
@@ -2480,7 +2480,7 @@ index a17803da8..2d4e775cd 100644
  	serial8250_rpm_put(up);
  }
  
-@@ -2205,7 +2222,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2206,7 +2223,7 @@ int serial8250_do_startup(struct uart_port *port)
  		 *
  		 * Synchronize UART_IER access against the console.
  		 */
@@ -2489,7 +2489,7 @@ index a17803da8..2d4e775cd 100644
  		up->acr = 0;
  		serial_port_out(port, UART_LCR, UART_LCR_CONF_MODE_B);
  		serial_port_out(port, UART_EFR, UART_EFR_ECB);
-@@ -2215,7 +2232,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2216,7 +2233,7 @@ int serial8250_do_startup(struct uart_port *port)
  		serial_port_out(port, UART_LCR, UART_LCR_CONF_MODE_B);
  		serial_port_out(port, UART_EFR, UART_EFR_ECB);
  		serial_port_out(port, UART_LCR, 0);
@@ -2498,7 +2498,7 @@ index a17803da8..2d4e775cd 100644
  	}
  
  	if (port->type == PORT_DA830) {
-@@ -2224,10 +2241,10 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2225,10 +2242,10 @@ int serial8250_do_startup(struct uart_port *port)
  		 *
  		 * Synchronize UART_IER access against the console.
  		 */
@@ -2511,7 +2511,7 @@ index a17803da8..2d4e775cd 100644
  		mdelay(10);
  
  		/* Enable Tx, Rx and free run mode */
-@@ -2341,7 +2358,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2342,7 +2359,7 @@ int serial8250_do_startup(struct uart_port *port)
  		 *
  		 * Synchronize UART_IER access against the console.
  		 */
@@ -2520,7 +2520,7 @@ index a17803da8..2d4e775cd 100644
  
  		wait_for_xmitr(up, UART_LSR_THRE);
  		serial_port_out_sync(port, UART_IER, UART_IER_THRI);
-@@ -2353,7 +2370,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2354,7 +2371,7 @@ int serial8250_do_startup(struct uart_port *port)
  		iir = serial_port_in(port, UART_IIR);
  		serial_port_out(port, UART_IER, 0);
  
@@ -2529,7 +2529,7 @@ index a17803da8..2d4e775cd 100644
  
  		if (port->irqflags & IRQF_SHARED)
  			enable_irq(port->irq);
-@@ -2376,7 +2393,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2377,7 +2394,7 @@ int serial8250_do_startup(struct uart_port *port)
  	 */
  	serial_port_out(port, UART_LCR, UART_LCR_WLEN8);
  
@@ -2538,7 +2538,7 @@ index a17803da8..2d4e775cd 100644
  	if (up->port.flags & UPF_FOURPORT) {
  		if (!up->port.irq)
  			up->port.mctrl |= TIOCM_OUT1;
-@@ -2422,7 +2439,7 @@ int serial8250_do_startup(struct uart_port *port)
+@@ -2423,7 +2440,7 @@ int serial8250_do_startup(struct uart_port *port)
  	}
  
  dont_test_tx_en:
@@ -2547,7 +2547,7 @@ index a17803da8..2d4e775cd 100644
  
  	/*
  	 * Clear the interrupt registers again for luck, and clear the
-@@ -2493,17 +2510,17 @@ void serial8250_do_shutdown(struct uart_port *port)
+@@ -2494,17 +2511,17 @@ void serial8250_do_shutdown(struct uart_port *port)
  	 *
  	 * Synchronize UART_IER access against the console.
  	 */
@@ -2568,7 +2568,7 @@ index a17803da8..2d4e775cd 100644
  	if (port->flags & UPF_FOURPORT) {
  		/* reset interrupts on the AST Fourport board */
  		inb((port->iobase & 0xfe0) | 0x1f);
-@@ -2512,7 +2529,7 @@ void serial8250_do_shutdown(struct uart_port *port)
+@@ -2513,7 +2530,7 @@ void serial8250_do_shutdown(struct uart_port *port)
  		port->mctrl &= ~TIOCM_OUT2;
  
  	serial8250_set_mctrl(port, port->mctrl);
@@ -2577,7 +2577,7 @@ index a17803da8..2d4e775cd 100644
  
  	/*
  	 * Disable break condition and FIFOs
-@@ -2748,14 +2765,14 @@ void serial8250_update_uartclk(struct uart_port *port, unsigned int uartclk)
+@@ -2749,14 +2766,14 @@ void serial8250_update_uartclk(struct uart_port *port, unsigned int uartclk)
  	quot = serial8250_get_divisor(port, baud, &frac);
  
  	serial8250_rpm_get(up);
@@ -2594,7 +2594,7 @@ index a17803da8..2d4e775cd 100644
  	serial8250_rpm_put(up);
  
  out_unlock:
-@@ -2792,7 +2809,7 @@ serial8250_do_set_termios(struct uart_port *port, struct ktermios *termios,
+@@ -2793,7 +2810,7 @@ serial8250_do_set_termios(struct uart_port *port, struct ktermios *termios,
  	 * Synchronize UART_IER access against the console.
  	 */
  	serial8250_rpm_get(up);
@@ -2603,7 +2603,7 @@ index a17803da8..2d4e775cd 100644
  
  	up->lcr = cval;					/* Save computed LCR */
  
-@@ -2895,7 +2912,7 @@ serial8250_do_set_termios(struct uart_port *port, struct ktermios *termios,
+@@ -2896,7 +2913,7 @@ serial8250_do_set_termios(struct uart_port *port, struct ktermios *termios,
  		serial_port_out(port, UART_FCR, up->fcr);	/* set fcr */
  	}
  	serial8250_set_mctrl(port, port->mctrl);
@@ -2612,7 +2612,7 @@ index a17803da8..2d4e775cd 100644
  	serial8250_rpm_put(up);
  
  	/* Don't rewrite B0 */
-@@ -2918,15 +2935,15 @@ void serial8250_do_set_ldisc(struct uart_port *port, struct ktermios *termios)
+@@ -2919,15 +2936,15 @@ void serial8250_do_set_ldisc(struct uart_port *port, struct ktermios *termios)
  {
  	if (termios->c_line == N_PPS) {
  		port->flags |= UPF_HARDPPS_CD;
@@ -2632,7 +2632,7 @@ index a17803da8..2d4e775cd 100644
  		}
  	}
  }
-@@ -3322,6 +3339,11 @@ static void serial8250_console_putchar(struct uart_port *port, unsigned char ch)
+@@ -3323,6 +3340,11 @@ static void serial8250_console_putchar(struct uart_port *port, unsigned char ch)
  
  	wait_for_xmitr(up, UART_LSR_THRE);
  	serial_port_out(port, UART_TX, ch);
@@ -2644,15 +2644,15 @@ index a17803da8..2d4e775cd 100644
  }
  
  /*
-@@ -3350,6 +3372,7 @@ static void serial8250_console_restore(struct uart_8250_port *up)
- 	serial8250_out_MCR(up, up->mcr | UART_MCR_DTR | UART_MCR_RTS);
+@@ -3361,6 +3383,7 @@ static void fifo_wait_for_lsr(struct uart_8250_port *up, unsigned int count)
+ 	}
  }
  
 +#ifdef CONFIG_SERIAL_8250_LEGACY_CONSOLE
  /*
   * Print a string to the serial port using the device FIFO
   *
-@@ -3400,15 +3423,15 @@ void serial8250_console_write(struct uart_8250_port *up, const char *s,
+@@ -3420,15 +3443,15 @@ void serial8250_console_write(struct uart_8250_port *up, const char *s,
  	touch_nmi_watchdog();
  
  	if (oops_in_progress)
@@ -2671,7 +2671,7 @@ index a17803da8..2d4e775cd 100644
  
  	/* check scratch reg to see if port powered off during system sleep */
  	if (up->canary && (up->canary != serial_port_in(port, UART_SCR))) {
-@@ -3472,8 +3495,137 @@ void serial8250_console_write(struct uart_8250_port *up, const char *s,
+@@ -3492,8 +3515,137 @@ void serial8250_console_write(struct uart_8250_port *up, const char *s,
  		serial8250_modem_status(up);
  
  	if (locked)
@@ -2810,7 +2810,7 @@ index a17803da8..2d4e775cd 100644
  
  static unsigned int probe_baud(struct uart_port *port)
  {
-@@ -3492,6 +3644,7 @@ static unsigned int probe_baud(struct uart_port *port)
+@@ -3512,6 +3664,7 @@ static unsigned int probe_baud(struct uart_port *port)
  
  int serial8250_console_setup(struct uart_port *port, char *options, bool probe)
  {
@@ -2818,7 +2818,7 @@ index a17803da8..2d4e775cd 100644
  	int baud = 9600;
  	int bits = 8;
  	int parity = 'n';
-@@ -3501,6 +3654,8 @@ int serial8250_console_setup(struct uart_port *port, char *options, bool probe)
+@@ -3521,6 +3674,8 @@ int serial8250_console_setup(struct uart_port *port, char *options, bool probe)
  	if (!port->iobase && !port->membase)
  		return -ENODEV;
  
@@ -7084,7 +7084,7 @@ index f3cd69346..dbec29d9a 100644
  
  static int __init sbd_console_setup(struct console *co, char *options)
 diff --git a/drivers/tty/serial/sc16is7xx.c b/drivers/tty/serial/sc16is7xx.c
-index 673aeda71..a227b3d3a 100644
+index 2962e2351..0b1cfbdf6 100644
 --- a/drivers/tty/serial/sc16is7xx.c
 +++ b/drivers/tty/serial/sc16is7xx.c
 @@ -810,6 +810,7 @@ static void sc16is7xx_tx_proc(struct kthread_work *ws)
@@ -9849,7 +9849,7 @@ index 9aac2ab15..6b9c8a16e 100644
  
  static inline struct task_struct *this_cpu_ksoftirqd(void)
 diff --git a/include/linux/netdevice.h b/include/linux/netdevice.h
-index 70eec8a48..6b4f36bd3 100644
+index 044527ef5..25b806cab 100644
 --- a/include/linux/netdevice.h
 +++ b/include/linux/netdevice.h
 @@ -3300,7 +3300,11 @@ struct softnet_data {
@@ -14570,7 +14570,7 @@ index 11a1fac3a..6f085a159 100644
  
  static void print_cpu_stall(unsigned long gps)
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index de6dd807d..987b959aa 100644
+index 6a01cd02b..8a0947884 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
 @@ -901,14 +901,15 @@ static inline void hrtick_rq_init(struct rq *rq)
@@ -14678,7 +14678,7 @@ index de6dd807d..987b959aa 100644
  		smp_send_reschedule(cpu);
  	else
  		trace_sched_wake_idle_without_ipi(cpu);
-@@ -6775,10 +6795,14 @@ void __noreturn do_task_dead(void)
+@@ -6776,10 +6796,14 @@ void __noreturn do_task_dead(void)
  
  static inline void sched_submit_work(struct task_struct *tsk)
  {
@@ -14695,7 +14695,7 @@ index de6dd807d..987b959aa 100644
  
  	task_flags = tsk->flags;
  	/*
-@@ -6804,6 +6828,8 @@ static inline void sched_submit_work(struct task_struct *tsk)
+@@ -6805,6 +6829,8 @@ static inline void sched_submit_work(struct task_struct *tsk)
  	 * make sure to submit it to avoid deadlocks.
  	 */
  	blk_flush_plug(tsk->plug, true);
@@ -14704,7 +14704,7 @@ index de6dd807d..987b959aa 100644
  }
  
  static void sched_update_worker(struct task_struct *tsk)
-@@ -6818,16 +6844,26 @@ static void sched_update_worker(struct task_struct *tsk)
+@@ -6819,16 +6845,26 @@ static void sched_update_worker(struct task_struct *tsk)
  	}
  }
  
@@ -14736,7 +14736,7 @@ index de6dd807d..987b959aa 100644
  	sched_update_worker(tsk);
  }
  EXPORT_SYMBOL(schedule);
-@@ -6891,11 +6927,7 @@ void __sched schedule_preempt_disabled(void)
+@@ -6892,11 +6928,7 @@ void __sched schedule_preempt_disabled(void)
  #ifdef CONFIG_PREEMPT_RT
  void __sched notrace schedule_rtlock(void)
  {
@@ -14749,7 +14749,7 @@ index de6dd807d..987b959aa 100644
  }
  NOKPROBE_SYMBOL(schedule_rtlock);
  #endif
-@@ -7091,6 +7123,32 @@ static void __setscheduler_prio(struct task_struct *p, int prio)
+@@ -7092,6 +7124,32 @@ static void __setscheduler_prio(struct task_struct *p, int prio)
  
  #ifdef CONFIG_RT_MUTEXES
  
@@ -14782,7 +14782,7 @@ index de6dd807d..987b959aa 100644
  static inline int __rt_effective_prio(struct task_struct *pi_task, int prio)
  {
  	if (pi_task)
-@@ -8953,6 +9011,21 @@ static inline void preempt_dynamic_init(void) { }
+@@ -8954,6 +9012,21 @@ static inline void preempt_dynamic_init(void) { }
  
  #endif /* #ifdef CONFIG_PREEMPT_DYNAMIC */
  
@@ -14842,7 +14842,7 @@ index 8b3063398..76530c8b3 100644
  }
  late_initcall(sched_init_debug);
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index c9a4ea466..de39191ea 100644
+index c530d501b..6595ad6fe 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
 @@ -1170,8 +1170,10 @@ static void clear_buddies(struct cfs_rq *cfs_rq, struct sched_entity *se);
@@ -15103,7 +15103,7 @@ index c73873d67..aef5dcf43 100644
  	cgroup_leave_frozen(true);
  
 diff --git a/kernel/softirq.c b/kernel/softirq.c
-index cd8770b2f..10099e684 100644
+index f8cf88cc4..13f919072 100644
 --- a/kernel/softirq.c
 +++ b/kernel/softirq.c
 @@ -247,6 +247,19 @@ void __local_bh_enable_ip(unsigned long ip, unsigned int cnt)
@@ -15126,7 +15126,7 @@ index cd8770b2f..10099e684 100644
  /*
   * Invoked from ksoftirqd_run() outside of the interrupt disabled section
   * to acquire the per CPU local lock for reentrancy protection.
-@@ -623,6 +636,24 @@ static inline void tick_irq_exit(void)
+@@ -630,6 +643,24 @@ static inline void tick_irq_exit(void)
  #endif
  }
  
@@ -15151,7 +15151,7 @@ index cd8770b2f..10099e684 100644
  static inline void __irq_exit_rcu(void)
  {
  #ifndef __ARCH_IRQ_EXIT_IRQS_DISABLED
-@@ -635,6 +666,10 @@ static inline void __irq_exit_rcu(void)
+@@ -642,6 +673,10 @@ static inline void __irq_exit_rcu(void)
  	if (!in_interrupt() && local_softirq_pending())
  		invoke_softirq();
  
@@ -15162,7 +15162,7 @@ index cd8770b2f..10099e684 100644
  	tick_irq_exit();
  }
  
-@@ -1014,12 +1049,70 @@ static struct smp_hotplug_thread softirq_threads = {
+@@ -1021,12 +1056,70 @@ static struct smp_hotplug_thread softirq_threads = {
  	.thread_comm		= "ksoftirqd/%u",
  };
  
@@ -15235,7 +15235,7 @@ index cd8770b2f..10099e684 100644
  }
  early_initcall(spawn_ksoftirqd);
 diff --git a/kernel/time/hrtimer.c b/kernel/time/hrtimer.c
-index 57e5cb36f..c4ae45701 100644
+index e99b1305e..c4ce69da0 100644
 --- a/kernel/time/hrtimer.c
 +++ b/kernel/time/hrtimer.c
 @@ -1812,7 +1812,7 @@ void hrtimer_interrupt(struct clock_event_device *dev)
@@ -15350,10 +15350,10 @@ index 2b948d35f..959f09ab8 100644
  		need_resched = 'p';
  		break;
 diff --git a/net/core/dev.c b/net/core/dev.c
-index 75e94b327..5d021cc1f 100644
+index 115de6fee..2bf5b6889 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
-@@ -4723,15 +4723,6 @@ static void rps_trigger_softirq(void *data)
+@@ -4725,15 +4725,6 @@ static void rps_trigger_softirq(void *data)
  
  #endif /* CONFIG_RPS */
  
@@ -15369,7 +15369,7 @@ index 75e94b327..5d021cc1f 100644
  /*
   * After we queued a packet into sd->input_pkt_queue,
   * we need to make sure this queue is serviced soon.
-@@ -6711,6 +6702,32 @@ static void skb_defer_free_flush(struct softnet_data *sd)
+@@ -6713,6 +6704,32 @@ static void skb_defer_free_flush(struct softnet_data *sd)
  	}
  }
  
@@ -15402,7 +15402,7 @@ index 75e94b327..5d021cc1f 100644
  static int napi_threaded_poll(void *data)
  {
  	struct napi_struct *napi = data;
-@@ -11648,7 +11665,11 @@ static int __init net_dev_init(void)
+@@ -11654,7 +11671,11 @@ static int __init net_dev_init(void)
  		INIT_CSD(&sd->csd, rps_trigger_softirq, sd);
  		sd->cpu = i;
  #endif
