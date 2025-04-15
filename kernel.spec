@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       259
+%global devel_release       260
 %global maintenance_release .0.0
-%global pkg_release         .161
+%global pkg_release         .162
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,25 @@ fi
 %endif
 
 %changelog
+* Tue Apr 15 2025 Li Nan <linan122@huawei.com> - 5.10.0-260.0.0.162
+- !15841  HID: intel-ish-hid: Fix use-after-free issue in ishtp_hid_remove()
+- !15837  CVE-2025-21858
+- HID: intel-ish-hid: Fix use-after-free issue in ishtp_hid_remove()
+- geneve: Suppress list corruption splat in geneve_destroy_tunnels().
+- geneve: Fix use-after-free in geneve_find_dev().
+- !15828  mt76: fix use-after-free by removing a non-RCU wcid pointer
+- !15717  media: uvcvideo: Fix double free in error path
+- !15759  Fix kmemleak false positive
+- mt76: fix use-after-free by removing a non-RCU wcid pointer
+- !15378  ASoC: atmel: Fix error handling in snd_proto_probe
+- !15696  fs/dcache: fix bad unlock balance in shrink_dentry_list()
+- !15816 perf: Configure BRBE correctly on VHE host
+- perf: Configure BRBE correctly on VHE host
+- efi/arm64: Fix kmemleak false positive in arm64_efi_rt_init()
+- media: uvcvideo: Fix double free in error path
+- fs/dcache: fix bad unlock balance in shrink_dentry_list()
+- ASoC: atmel: Fix error handling in snd_proto_probe
+
 * Tue Apr 08 2025 Li Nan <linan122@huawei.com> - 5.10.0-259.0.0.161
 - !15773  drm/drm_vma_manager: Add drm_vma_node_allow_once()
 - !15794  Revert "arm64: mm: add mc support for __buffer_migrate_page"
