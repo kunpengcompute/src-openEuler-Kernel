@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2504.2.0
+%global hulkrelease 2504.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0323
+Release: %{hulkrelease}.0324
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,31 @@ fi
 %endif
 
 %changelog
+
+* Wed Apr 16 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.3.0.0324
+- !15862  tty: goldfish: Use tty_port_destroy() to destroy port
+- tty: goldfish: Use tty_port_destroy() to destroy port
+- !15843  tty: synclink_gt: Fix null-pointer-dereference in slgt_clean()
+- !15825  Fix CVE-2023-52973 for openEuler-1.0-LTS
+- tty: synclink_gt: Fix null-pointer-dereference in slgt_clean()
+- !15664  CVE-2025-21858
+- !15815  dm raid: fix accesses beyond end of raid member array
+- !15368  nfsd: clear acl_access/acl_default after releasing them
+- !15253  NFSD: prevent underflow in nfssvc_decode_writeargs()
+- vc_screen: don't clobber return value in vcs_read
+- vc_screen: modify vcs_size() handling in vcs_read()
+- vc_screen: move load of struct vc_data pointer in vcs_read() to avoid UAF
+- !15380  media: cx25821: Fix the warning when removing the module
+- !15649  media: uvcvideo: Remove dangling pointers
+- !15814  wifi: brcmfmac: Check the count value of channel spec to prevent out-of-bounds reads
+- dm raid: fix accesses beyond end of raid member array
+- wifi: brcmfmac: Check the count value of channel spec to prevent out-of-bounds reads
+- geneve: Suppress list corruption splat in geneve_destroy_tunnels().
+- geneve: Fix use-after-free in geneve_find_dev().
+- media: uvcvideo: Remove dangling pointers
+- media: cx25821: Fix the warning when removing the module
+- nfsd: clear acl_access/acl_default after releasing them
+- NFSD: prevent underflow in nfssvc_decode_writeargs()
 
 * Wed Apr 09 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.2.0.0323
 - !15796  ALSA: hda/via: Avoid potential array out-of-bound in add_secret_dac_path()
