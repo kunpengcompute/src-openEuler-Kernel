@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       260
+%global devel_release       261
 %global maintenance_release .0.0
-%global pkg_release         .162
+%global pkg_release         .163
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,30 @@ fi
 %endif
 
 %changelog
+* Tue Apr 22 2025 Li Nan <linan122@huawei.com> - 5.10.0-261.0.0.163
+- !15959  iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- !15956  drm/amdgpu: avoid buffer overflow attach in smu_sys_set_pp_table()
+- !15956  drm/amdgpu: avoid buffer overflow attach in smu_sys_set_pp_table()
+- !15791  CVE-2025-21877
+- iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- drm/amdgpu: avoid buffer overflow attach in smu_sys_set_pp_table()
+- !15894  ftrace: Avoid potential division by zero in function_stat_show()
+- !15892  bnxt: Do not read past the end of test names
+- !15840  block: fix bugs in blk_register_queue()
+- !15867  soc: hisilicon: Serialize the online and onfline the acpi devices
+- !15883 v2  iommu/arm-smmu-v3: Fix the extra atc tlb flush
+- !15811  rapidio: add check for rio_add_net() in rio_scan_alloc_net()
+- !15756  powerpc: Fix save r13 on kprobe/ftrace entry
+- ftrace: Avoid potential division by zero in function_stat_show()
+- bnxt: Do not read past the end of test names
+- iommu/arm-smmu-v3: Fix the extra atc tlb flush
+- soc: hisilicon: Serialize the online and onfline the acpi devices
+- block: fix lock ordering in blk_register_queue() error path
+- block: fix resource leak in elevator registration error path
+- rapidio: add check for rio_add_net() in rio_scan_alloc_net()
+- usbnet: gl620a: fix endpoint checking in genelink_bind()
+- powerpc: Fix save r13 on kprobe/ftrace entry
+
 * Tue Apr 15 2025 Li Nan <linan122@huawei.com> - 5.10.0-260.0.0.162
 - !15841  HID: intel-ish-hid: Fix use-after-free issue in ishtp_hid_remove()
 - !15837  CVE-2025-21858
