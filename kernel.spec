@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       86
+%global devel_release       87
 %global maintenance_release .0.0
-%global pkg_release         .81
+%global pkg_release         .82
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,262 @@ fi
 %endif
 
 %changelog
+* Wed Apr 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-87.0.0.82
+- !15987 v12  Add support for IPIv
+- kabi: Use KABI_EXTEND to perform kabi repair for IPIV
+- kvm: hisi_virt: Probe and configure IPIV capacity on HIP12
+- kvm: arm64: Add interface KVM_CAP_ARM_IPIV_MODE
+- kvm: hisi_virt: Register ipiv exception interrupt
+- irqchip: gicv3-its: Set base address of vm table and targe ITS when vpe schedule and deschedule
+- kvm: arm64: avoid sending multi-SGIs in IPIV
+- kvm: hisi_virt: Allocate VM table and save vpeid in it
+- !15980  ntb_hw_switchtec: Fix shift-out-of-bounds in switchtec_ntb_mw_set_trans
+- !15979  thermal: int340x: Add NULL check for adev
+- !15921 Support SMT control on arm64.
+- !15975  perf/x86: Fix open counting event error
+- ntb_hw_switchtec: Fix shift-out-of-bounds in switchtec_ntb_mw_set_trans
+- thermal: int340x: Add NULL check for adev
+- !15968 v3  Backport mainline patches to avoid crash caused by rsize being 0
+- !15960  iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- !15974  RDMA/bnxt_re: Fix the page details for the srq created by kernel consumers
+- !15952  ksmbd: validate zero num_subauth before sub_auth is accessed
+- !15950  drm/hyperv: Fix address space leak when Hyper-V DRM device is removed
+- perf/x86: Fix open counting event error
+- RDMA/bnxt_re: Fix the page details for the srq created by kernel consumers
+- smb: client: Update IO sizes after reconnection
+- smb: client: Store original IO parameters and prevent zero IO sizes
+- smb:client: smb: client: Add reverse mapping from tcon to superblocks
+- Revert "cifs: Prevent NULL pointer dereference caused by cifs_sb->rsize is 0"
+- !15958 cpufreq: governor: Fix negative 'idle_time' handling in dbs_update()
+- !15916  LoongArch: Increase ARCH_DMA_MINALIGN up to 16
+- !15961  drm/mediatek: dp: drm_err => dev_err in HPD path to avoid NULL ptr
+- !15945 crypto: hisilicon - some bugfix
+- drm/mediatek: dp: drm_err => dev_err in HPD path to avoid NULL ptr
+- iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- !15929  arm_mpam: Add SMMU support for MPAM
+- cpufreq: governor: Fix negative 'idle_time' handling in dbs_update()
+- !15793  CVE-2025-21892
+- !15795  CVE-2025-21941
+- ksmbd: validate zero num_subauth before sub_auth is accessed
+- drm/hyperv: Fix address space leak when Hyper-V DRM device is removed
+- !15871 v2  CVE-2024-57795
+- !15906 [OLK-6.6] drm/hisilicon/hibmc: some bugfixes for hibmc-drm driver
+- !15834 uacce: fix for the numa distance calculation
+- crypto: hisilicon/qm - disable error report before flr
+- hisi_acc_vfio_pci: obtain the mailbox configuration at one time
+- crypto: hisilicon/qm - obtain the mailbox configuration at one time
+- crypto: hisilicon/qm - fix the pf2vf timeout when global reset
+- crypto: hisilicon/qm - modify interrupt processing resource application
+- crypto: hisilicon/qm - mask axi error before memory init
+- crypto: hisilicon/qm - invalidate queues in use
+- crypto: hisilicon/sec2 - fix memory use-after-free issue
+- crypto: hisilicon/sec2 - fix for gcm spec check
+- crypto: hisilicon/hpre - fix dma unmap sequence
+- !15936  ASoC: imx-card: Add NULL check in imx_card_probe()
+- !15922 mm: shmem: fix potential data corruption during shmem swapin
+- !15924 mm/vmscan: drop checking if _deferred_list is empty before using TTU_SYNC
+- !15913  block: fix resource leak in blk_register_queue() error path
+- ASoC: imx-card: Add NULL check in imx_card_probe()
+- !15923 RDMA/hns :Add some mainline patches to OLK-6.6
+- iommu: Fix kabi broken of struct iommu_ops
+- fs/resctrl: Move iommu_groups back when their associated RDT group is deleted
+- fs/resctrl: Fix the iommu_group parsing process
+- iommu/arm-smmu-v3: Check pointer valid before dereferencing it
+- arm_mpam: Select CONFIG_RESCTRL_IOMMU on the ARM64 by default
+- ACPI/MPAM: Parse the rest of the ACPI table
+- fs/resctrl: Add support for assigning iommu_groups to resctrl groups
+- arm_mpam: resctrl: Add iommu helpers to get/set the partid and pmg
+- kobject: Add kset_get_next_obj() to allow a kset to be walked
+- iommu: Add helper to retrieve iommu kset
+- iommu: Add helpers to retrieve iommu_groups by id or kobject
+- iommu: Add helpers to get and set the QoS state
+- iommu/arm-smmu-v3: Add mpam helpers to query and set state
+- iommu/arm-smmu-v3: Issue a batch of commands to the same cmdq
+- iommu/arm-smmu-v3: Register SMMU capabilities with MPAM
+- mm: shmem: fix potential data corruption during shmem swapin
+- mm/vmscan: drop checking if _deferred_list is empty before using TTU_SYNC
+- RDMA/hns: Fix wrong maximum DMA segment size
+- Revert "RDMA/hns: fix iommu_map_sg() failed when MR bigger than 4G"
+- RDMA/hns: initialize db in update_srq_db()
+- RDMA/hns: Remove unused parameters
+- config: enable CONFIG_HOTPLUG_SMT for arm64
+- arm64: Kconfig: Enable HOTPLUG_SMT
+- arm64: topology: Support SMT control on ACPI based system
+- arch_topology: Support SMT control for OF based system
+- cpu/SMT: Provide a default topology_is_primary_thread()
+- Revert "arm64: Kconfig: Enable HOTPLUG_SMT"
+- !15904 v2  PCI: AER: fix deadlock in do_recovery
+- !15910 v2  soc cache: Add support for HiSilicon L3 cache
+- LoongArch: Increase ARCH_DMA_MINALIGN up to 16
+- block: fix resource leak in blk_register_queue() error path
+- drm/hisilicon/hibmc: fix irq_request()'s irq name variable is local
+- drm/hisilicon/hibmc: fix HPD interrupts triggering the wrong behavior
+- !15909  coresight: tmc: Don't change the buffer size if it's in use
+- soc cache: Modify default config to compile HiSilicon SoC cache driver
+- soc cache: Support cache maintenance for HiSilicon SoC Hydra Home Agent
+- soc cache: Add framework driver for HiSilicon SoC cache
+- coresight: tmc: Don't change the buffer size if it's in use
+- PCI: AER: fix deadlock in do_recovery
+- !15863 Some mainline patches merged into olk-6.6: drivers/hwmon
+- !15812  rapidio: add check for rio_add_net() in rio_scan_alloc_net()
+- !15821  LoongArch: Set hugetlb mmap base address aligned with pmd size
+- !15882  Updates for HiSilicon L3C PMU driver
+- !15886  Add HPD, getting EDID, colorbar features in DP function
+- !15851 migration: adapt to new migration configuration
+- drm/hisilicon/hibmc: Add vga connector detect functions
+- drm/hisilicon/hibmc: Add MSI irq getting and requesting for HPD
+- drm/hisilicon/hibmc: Enable this hot plug detect of irq feature
+- drm/hisilicon/hibmc: Add colorbar-cfg feature and its debugfs file
+- drm/hisilicon/hibmc: Getting connector info and EDID by using AUX channel
+- drm/hisilicon/hibmc: Refactor the member of drm_aux in struct hibmc_dp
+- drm/hisilicon/hibmc: Add dp serdes cfg in dp process
+- drm/hisilicon/hibmc: Add dp serdes cfg to adjust serdes rate, voltage and pre-emphasis
+- drm/hisilicon/hibmc: Restructuring the header dp_reg.h
+- drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER
+- drm: Call drm_atomic_helper_shutdown() at shutdown time for misc drivers
+- drm/ast: Implement polling for VGA and SIL164 connectors
+- drm/sysfs: Register "ddc" symlink later
+- !15612 Some trivial cleanups for shmem
+- drivers/perf: hisi: Add support for L3C PMU v3
+- drivers/perf: hisi: Refactor the event configuration of L3C PMU
+- drivers/perf: hisi: Extend the field of tt_core
+- drivers/perf: hisi: Extract the event filter check of L3C PMU
+- drivers/perf: hisi: Simplify the probe process of each L3C PMU version
+- drivers/perf: hisi: Export hisi_uncore_pmu_isr()
+- drivers/perf: hisi: Relax the event ID check in the framework
+- !15872 【olk 6.6】backport some bugfixes for hibmcge driver
+- !15852  Fix CVE-2025-22013
+- !15845  regulator: check that dummy regulator has been probed before using it
+- !15854  perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- !15838  General updates of HiSilicon PMU drivers
+- hwmon: (acpi_power_meter) Replace the deprecated hwmon_device_register
+- hwmon: Fix the missing of 'average' word in hwmon_power_attr_templates
+- hwmon: (acpi_power_meter) Ensure IPMI space handler is ready on Dell systems
+- ACPI: IPMI: Add helper to wait for when SMI is selected
+- RDMA/rxe: Fix the failure of ibv_query_device() and ibv_query_device_ex() tests
+- RDMA/rxe: Remove the direct link to net_device
+- net: hibmcge: fix multiple phy_stop() issue
+- net: hibmcge: fix not restore rx pause mac addr after reset issue
+- net: hibmcge: fix the incorrect np_link fail state issue.
+- net: hibmcge: fix wrong mtu log issue
+- net: hibmcge: fix the share of irq statistics among different network ports issue
+- net: hibmcge: fix incorrect multicast filtering issue
+- net: hibmcge: fix incorrect pause frame statistics issue
+- migration: adapt to new migration configuration
+- migration: qm updates BAR configuration
+- migration: update BAR space size
+- hisi_acc_vfio_pci: update function return values
+- hisi_acc_vfio_pci: bugfix live migration function without VF device driver
+- hisi_acc_vfio_pci: bugfix the problem of uninstalling driver
+- hisi_acc_vfio_pci: bugfix cache write-back issue
+- hisi_acc_vfio_pci: add eq and aeq interruption restore
+- hisi_acc_vfio_pci: fix XQE dma address error
+- !15839  ext4: Some zeroing fixes
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- arm64/fpsimd: Remove unused declaration fpsimd_kvm_prepare()
+- KVM: arm64: Unconditionally save+flush host FPSIMD/SVE/SME state
+- !15321  printk: Fix signed integer overflow when defining LOG_BUF_LEN_MAX
+- regulator: check that dummy regulator has been probed before using it
+- !15826  nvme-tcp: fix potential memory corruption in nvme_tcp_recv_pdu()
+- !15754 v3  Support the FEAT_HDBSS introduced in Armv9.5
+- jbd2: fix off-by-one while erasing journal
+- iomap: do not interrupt IOMAP_ZERO
+- ext4: fix potential memory exposure issues during truncate in iomap mode.
+- ext4: do not always order data when partial zeroing out a block
+- mm: zero range of eof folio exposed by inode size extension
+- mm: convert pagecache_isize_extended to use a folio
+- ext4: goto right label 'out_mmap_sem' in ext4_setattr()
+- drivers/perf: hisi: Add support for HiSilicon MN PMU driver
+- drivers/perf: hisi: Add support for HiSilicon NoC PMU
+- drivers/perf: hisi: Support PMUs with no interrupt
+- drivers/perf: hisi: Relax the event number check of v2 PMUs
+- drivers/perf: hisi: Add support for HiSilicon SLLC v3 PMU driver
+- drivers/perf: hisi: Use ACPI driver_data to retrieve SLLC PMU information
+- drivers/perf: hisi: Add support for HiSilicon DDRC v3 PMU driver
+- drivers/perf: hisi: Simplify the probe process for each DDRC version
+- drivers/perf: hisi: Delete redundant blank line of DDRC PMU
+- drivers/perf: hisi: Fix incorrect variable name "hha_pmu" in DDRC PMU driver
+- drivers/perf: hisi: Export associated CPUs of each PMU through sysfs
+- drivers/perf: hisi: Provide a generic implementation of cpumask/identifier
+- drivers/perf: hisi: Add a common function to retrieve topology from firmware
+- drivers/perf: hisi: Extract topology information to a separate structure
+- drivers/perf: hisi: Refactor the detection of associated CPUs
+- drivers/perf: hisi: Migrate to one online CPU if no associated one online
+- drivers/perf: hisi: Don't update the associated_cpus on CPU offline
+- drivers/perf: hisi: Define a symbol namespace for HiSilicon Uncore PMUs
+- !15827  perf stat: Enable iostat mode for HiSilicon PCIe PMU
+- !15072 hisilicon: ACC Live Migration DFX Replacement Mainline Solution
+- x86: openeuler_defconfig add CONFIG_VFIO_DEBUGFS=y
+- arm64: openeuler_defconfig add CONFIG_VFIO_DEBUGFS=y
+- perf stat: Enable iostat mode for HiSilicon PCIe PMU
+- vfio: fix kabi breakage due to struct vfio_device and enum vfio_device_mig_state
+- Documentation: add debugfs description for vfio
+- Documentation: add debugfs description for hisi migration
+- MAINTAINERS: Add vfio debugfs interface doc link
+- nvme-tcp: fix potential memory corruption in nvme_tcp_recv_pdu()
+- MAINTAINERS: add Baolin as shmem reviewer
+- mm: shmem: factor out the within_size logic into a new helper
+- mm: shmem: change the return value of shmem_find_swap_entries()
+- mm: shmem: remove duplicate error validation
+- mm: shmem: remove 'fadvise()' comments
+- mm: shmem: drop the unused macro
+- docs: tmpfs: drop 'fadvise()' from the documentation
+- !15611 Minimize xa_node allocation during xarry split
+- docs: tmpfs: update the large folios policy for tmpfs and shmem
+- mm: shmem: add a kernel command line to change the default huge policy for tmpfs
+- hisi_acc_vfio_pci: register debugfs for hisilicon migration driver
+- hisi_acc_vfio_pci: create subfunction for data reading
+- hisi_acc_vfio_pci: extract public functions for container_of
+- hisi_acc_vfio_pci: Remove the deferred_reset logic
+- vfio/migration: Add debugfs to live migration driver
+- Revert "vfio/migration: added map length page alignment"
+- Revert "vfio/migration: bugfix some driver code"
+- Revert "vfio/migration: add eq and aeq interruption restore"
+- Revert "vfio/migration: bugfix cache write-back issue"
+- Revert "vfio/migration: remove unused local variable"
+- Revert "hisi-acc-vfio-pci:add DFX for acc migration driver"
+- Revert "hisi_acc_vfio_pci: add exception error handling"
+- Revert "migration: fix reference counting exception issue"
+- Revert "migration: modify dfx error type without VM driver"
+- !15636 Kunpeng Accelerator Enables New Features
+- LoongArch: Set hugetlb mmap base address aligned with pmd size
+- crypto: hisilicon/sec2 - fix for sec spec check
+- crypto: hisilicon/sec2 - fix for aead authsize alignment
+- crypto: hisilicon/sec2 - fix for aead auth key length
+- crypto: hisilicon/hpre - adapt ECDH for high-performance cores
+- crypto: hisilicon/qm - support new function communication
+- Revert "crypto: hisilicon/qm - fix the pf2vf timeout when global reset"
+- Revert "crypto: hisilicon/qm - obtain the mailbox configuration at one time"
+- crypto: hisilicon/sec2 - fix for aead invalid authsize
+- crypto: hisilicon/sec2 - fix for aead icv error
+- Revert "crypto: hisilicon/sec2: fix memory use-after-free issue"
+- Revert "crypto: hisilicon/sec2 - fix for aead icv error"
+- Revert "crypto: hisilicon/sec2 - fix for aead invalid authsize"
+- crypto: hisilicon/zip - support new error report
+- Revert "crypto: hisilicon/qm - check device status before sending mailbox"
+- Revert "hisi_acc_vfio_pci: obtain the mailbox configuration at one time"
+- Revert "crypto: hisilicon/qm - disable error report before flr"
+- crypto: hisilicon/zip - add data aggregation feature
+- rapidio: add check for rio_add_net() in rio_scan_alloc_net()
+- drm/amd/display: Fix null check for pipe_ctx->plane_state in resource_build_scaling_params
+- RDMA/mlx5: Fix the recovery flow of the UMR QP
+- arm64/kabi: use KABI_EXTEND to skip KABI check
+- arm64/config: add config to control whether enable HDBSS feature
+- arm64/kvm: support to handle the HDBSSF event
+- arm64/kvm: using ioctl to enable/disable the HDBSS feature
+- arm64/kvm: support set the DBM attr during memory abort
+- arm64/sysreg: add HDBSS related register information
+- uacce: fix for the numa distance calculation
+- uacce: fixes the mutex repeatedly locking error
+- mm/shmem: use xas_try_split() in shmem_split_large_entry()
+- mm/filemap: use xas_try_split() in __filemap_add_folio()
+- xarray: add xas_try_split() to split a multi-index entry
+- mm: shmem: add large folio support for tmpfs
+- mm: shmem: change shmem_huge_global_enabled() to return huge order bitmap
+- mm: factor out the order calculation into a new helper
+- Xarray: distinguish large entries correctly in xas_split_alloc()
+- printk: Fix signed integer overflow when defining LOG_BUF_LEN_MAX
+
 * Wed Apr 09 2025 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-86.0.0.81
 - !15783 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.80-6.6.81 LTS Patches
 - firmware: cs_dsp: Ensure cs_dsp_load[_coeff]() returns 0 on success
