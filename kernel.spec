@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2504.3.0
+%global hulkrelease 2504.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0324
+Release: %{hulkrelease}.0325
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,27 @@ fi
 %endif
 
 %changelog
+
+* Wed Apr 23 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.4.0.0325
+- !15624  proc: fix use-after-free in proc_get_inode()
+- !15900  Backport mainline patches to avoid crash caused by rsize being 0
+- !15820  io_uring: prevent opcode speculation
+- !15751  fix-CVE-2022-49538
+- !15914  block: fix resource leak in blk_register_queue() error path
+- !15930  loop: fix UAF in mutex_spin_on_owner()
+- loop: loop_set_status_from_info() check before assignment
+- Revert "loop: loop_set_status_from_info() check before assignment"
+- block: fix resource leak in blk_register_queue() error path
+- smb: client: Update IO sizes after reconnection
+- smb: client: Store original IO parameters and prevent zero IO sizes
+- smb:client: smb: client: Add reverse mapping from tcon to superblocks
+- Revert "cifs: Prevent NULL pointer dereference caused by cifs_sb->rsize is 0"
+- !15830  ASoC: rt5645: Fix errorenous cleanup order
+- ASoC: rt5645: Fix errorenous cleanup order
+- io_uring: prevent opcode speculation
+- ALSA: jack: Fix mutex call in snd_jack_report()
+- ALSA: jack: Access input_dev under mutex
+- proc: fix use-after-free in proc_get_inode()
 
 * Wed Apr 16 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.3.0.0324
 - !15862  tty: goldfish: Use tty_port_destroy() to destroy port
