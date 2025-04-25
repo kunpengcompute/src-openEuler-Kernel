@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       87
+%global devel_release       88
 %global maintenance_release .0.0
-%global pkg_release         .90
+%global pkg_release         .91
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,28 @@ fi
 %endif
 
 %changelog
+* Fri Apr 25 2025 Li Nan <linan122@huawei.com> - 6.6.0-88.0.0.91
+- !16007  compile error: implicit declaration of
+- kvm: hisi_virt: Fix compilation error due to missing ACPI configuration
+- !15981  LoongArch: BPF: Fix off-by-one error in build_prologue()
+- !15935  HID: appleir: Fix potential NULL dereference at raw event handle
+- !15988  fs/resctrl: Fix configuration to wrong control group when CDP is enabled
+- !15970  erofs/cachefiles: Change the unmark inuse sequence in erofs ondemand mode
+- fs/resctrl: Fix configuration to wrong control group when CDP is enabled
+- arm64/mpam: Add debugging information about CDP monitor value
+- arm64/mpam: Fix allocated cache size information
+- fs/resctrl: Fix kmemleak caused by closid_init()
+- arm64/mpam: Correct the judgment condition of the CMAX feature
+- arm64/mpam: Set the cpbm width of msc class with the minimum
+- fs/resctrl: Determine whether the MBM monitors require overflow checking
+- arm64/mpam: Optimize CSU/MBWU monitor multiplexing
+- arm64/mpam: fix impossible condition in resctrl_arch_rmid_read()
+- arm64/mpam: fix impossible condition in get_cpumask_from_cache_id()
+- arm64/mpam: fix memleak in resctrl_arch_mon_ctx_alloc_no_wait()
+- LoongArch: BPF: Fix off-by-one error in build_prologue()
+- erofs/cachefiles: Change the unmark inuse sequence in erofs ondemand mode
+- HID: appleir: Fix potential NULL dereference at raw event handle
+
 * Wed Apr 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-87.0.0.90
 - !15987 v12  Add support for IPIv
 - kabi: Use KABI_EXTEND to perform kabi repair for IPIV
