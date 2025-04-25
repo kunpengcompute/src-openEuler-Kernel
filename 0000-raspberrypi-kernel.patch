@@ -1,7 +1,7 @@
-From 232b56a1e85105d24c7235a5da31e3d7fc53cde3 Mon Sep 17 00:00:00 2001
+From 994664541b0893b50f9e21735f9c14cd73ac9728 Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
-Date: Tue, 8 Apr 2025 15:57:43 +0800
-Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-84.0.0)
+Date: Fri, 11 Apr 2025 10:39:03 +0800
+Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-86.0.0)
 
 ---
  .../admin-guide/media/bcm2835-isp.rst         |  127 +
@@ -760,7 +760,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-84.0.0)
  drivers/media/i2c/imx219.c                    |  413 +-
  drivers/media/i2c/imx258.c                    |  799 +-
  drivers/media/i2c/imx290.c                    |   89 +-
- drivers/media/i2c/imx296.c                    |  166 +-
+ drivers/media/i2c/imx296.c                    |  164 +-
  drivers/media/i2c/imx415.c                    |  442 +-
  drivers/media/i2c/imx477.c                    | 2387 ++++++
  drivers/media/i2c/imx500.c                    | 3227 ++++++++
@@ -1267,7 +1267,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-84.0.0)
  sound/soc/soc-core.c                          |   14 +-
  sound/usb/card.c                              |    8 +-
  sound/usb/quirks.c                            |    2 +
- 1263 files changed, 256193 insertions(+), 4758 deletions(-)
+ 1263 files changed, 256191 insertions(+), 4758 deletions(-)
  create mode 100644 Documentation/admin-guide/media/bcm2835-isp.rst
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.dot
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.rst
@@ -74777,7 +74777,7 @@ index 72fb40de58b3..acd0833b7bd4 100644
  
  	pm_runtime_enable(chip->dev);
 diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
-index cc4716c037a6..6293ecb2d484 100644
+index 0f3cd1b05ae3..ca85470c61a1 100644
 --- a/drivers/firmware/Kconfig
 +++ b/drivers/firmware/Kconfig
 @@ -153,6 +153,15 @@ config RASPBERRYPI_FIRMWARE
@@ -77204,10 +77204,10 @@ index c9f9f4e36c89..25c08cc5cd20 100644
  	} else {
  		if (flags & BGPIOF_NO_OUTPUT)
 diff --git a/drivers/gpio/gpio-pca953x.c b/drivers/gpio/gpio-pca953x.c
-index 9c33f9da724c..faeb5a6cfb15 100644
+index b882b26ab500..6fdcc0c6fd9c 100644
 --- a/drivers/gpio/gpio-pca953x.c
 +++ b/drivers/gpio/gpio-pca953x.c
-@@ -1330,6 +1330,7 @@ static const struct of_device_id pca953x_dt_ids[] = {
+@@ -1311,6 +1311,7 @@ static const struct of_device_id pca953x_dt_ids[] = {
  	{ .compatible = "ti,tca6424", .data = OF_953X(24, PCA_INT), },
  	{ .compatible = "ti,tca9538", .data = OF_953X( 8, PCA_INT), },
  	{ .compatible = "ti,tca9539", .data = OF_953X(16, PCA_INT), },
@@ -78070,10 +78070,10 @@ index 309aad5f0c80..09cd1df2d6c4 100644
  	return drm_connector_set_panel_orientation(connector, orientation);
  }
 diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 618b04523033..e6698f3a5b73 100644
+index b507c1c008a3..660b434c5ea7 100644
 --- a/drivers/gpu/drm/drm_fb_helper.c
 +++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -1851,7 +1851,7 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
+@@ -1853,7 +1853,7 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
  	struct drm_device *dev = fb_helper->dev;
  	struct fb_info *info;
  	unsigned int width, height;
@@ -78082,7 +78082,7 @@ index 618b04523033..e6698f3a5b73 100644
  
  	width = dev->mode_config.max_width;
  	height = dev->mode_config.max_height;
-@@ -1879,6 +1879,15 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
+@@ -1881,6 +1881,15 @@ __drm_fb_helper_initial_config_and_unlock(struct drm_fb_helper *fb_helper)
  	 * register the fbdev emulation instance in kernel_fb_helper_list. */
  	mutex_unlock(&fb_helper->lock);
  
@@ -78177,10 +78177,10 @@ index c90afb5d0898..49816a7353bc 100644
  
  		if (drm_object_property_get_default_value(&connector->base,
 diff --git a/drivers/gpu/drm/i915/display/intel_display.c b/drivers/gpu/drm/i915/display/intel_display.c
-index 1a59fca40252..0e941ce3d5a4 100644
+index 347527885ffd..33b8cd680886 100644
 --- a/drivers/gpu/drm/i915/display/intel_display.c
 +++ b/drivers/gpu/drm/i915/display/intel_display.c
-@@ -7280,6 +7280,19 @@ int intel_atomic_commit(struct drm_device *dev, struct drm_atomic_state *_state,
+@@ -7298,6 +7298,19 @@ int intel_atomic_commit(struct drm_device *dev, struct drm_atomic_state *_state,
  				state->base.legacy_cursor_update = false;
  	}
  
@@ -116608,7 +116608,7 @@ index f8ada6c1ef65..509ccc247383 100644
  	{ /* sentinel */ },
  };
 diff --git a/drivers/media/i2c/imx296.c b/drivers/media/i2c/imx296.c
-index 3b4539b622b4..e87cc1dc038e 100644
+index 330e7e149a62..e87cc1dc038e 100644
 --- a/drivers/media/i2c/imx296.c
 +++ b/drivers/media/i2c/imx296.c
 @@ -20,6 +20,10 @@
@@ -116899,15 +116899,6 @@ index 3b4539b622b4..e87cc1dc038e 100644
  	format->field = V4L2_FIELD_NONE;
  	format->colorspace = V4L2_COLORSPACE_RAW;
  	format->ycbcr_enc = V4L2_YCBCR_ENC_DEFAULT;
-@@ -960,6 +1026,8 @@ static int imx296_identify_model(struct imx296 *sensor)
- 		return ret;
- 	}
- 
-+	usleep_range(2000, 5000);
-+
- 	ret = imx296_read(sensor, IMX296_SENSOR_INFO);
- 	if (ret < 0) {
- 		dev_err(sensor->dev, "failed to read sensor information (%d)\n",
 diff --git a/drivers/media/i2c/imx415.c b/drivers/media/i2c/imx415.c
 index 3f00172df3cc..7affead11d22 100644
 --- a/drivers/media/i2c/imx415.c
@@ -167164,10 +167155,10 @@ index a194b0e68eb5..935c858f422d 100644
  	err = brcmf_fil_cmd_int_set(ifp, BRCMF_C_SET_SCAN_CHANNEL_TIME,
  				    BRCMF_DEFAULT_SCAN_CHANNEL_TIME);
 diff --git a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
-index f599d5f896e8..c188e7ca72a3 100644
+index 96f607f35490..1cbdfa365655 100644
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
-@@ -1318,7 +1318,7 @@ int brcmf_alloc(struct device *dev, struct brcmf_mp_device *settings)
+@@ -1323,7 +1323,7 @@ int brcmf_alloc(struct device *dev, struct brcmf_mp_device *settings)
  	return 0;
  }
  
@@ -167176,7 +167167,7 @@ index f599d5f896e8..c188e7ca72a3 100644
  {
  	struct brcmf_bus *bus_if = dev_get_drvdata(dev);
  	struct brcmf_pub *drvr = bus_if->drvr;
-@@ -1355,10 +1355,13 @@ int brcmf_attach(struct device *dev)
+@@ -1360,10 +1360,13 @@ int brcmf_attach(struct device *dev)
  	/* attach firmware event handler */
  	brcmf_fweh_attach(drvr);
  
@@ -168059,7 +168050,7 @@ index 0340bba96868..090a75bcd728 100644
 +
  #endif				/* _SBCHIPC_H */
 diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index 52c8fd3d5c47..e4ee8e61d7fa 100644
+index b1310e69d07d..94c477ef2872 100644
 --- a/drivers/nvme/host/pci.c
 +++ b/drivers/nvme/host/pci.c
 @@ -1932,6 +1932,7 @@ static void nvme_free_host_mem(struct nvme_dev *dev)
@@ -195263,7 +195254,7 @@ index 849dc1ec8d27..394c6de3250b 100644
  		dev_dbg(&instance->cdev->device, "old_target=%d, target=%d\n",
  					old_target, (int)instance->target);
 diff --git a/drivers/tty/serial/8250/8250.h b/drivers/tty/serial/8250/8250.h
-index 1aa3e55c8b47..ae5b995d9d9a 100644
+index f76c9ecc51bc..988883d1f4d1 100644
 --- a/drivers/tty/serial/8250/8250.h
 +++ b/drivers/tty/serial/8250/8250.h
 @@ -92,6 +92,7 @@ struct serial8250_config {
@@ -195334,7 +195325,7 @@ index c536028e92dc..679a74d9ff29 100644
  	 * If the "interrupt" for this port doesn't correspond with any
  	 * hardware interrupt, we use a timer-based system.  The original
 diff --git a/drivers/tty/serial/8250/8250_port.c b/drivers/tty/serial/8250/8250_port.c
-index 2b1b2928ef7b..e854c61065f1 100644
+index c2778300e151..57bc60fcc40a 100644
 --- a/drivers/tty/serial/8250/8250_port.c
 +++ b/drivers/tty/serial/8250/8250_port.c
 @@ -1529,6 +1529,9 @@ static void serial8250_stop_tx(struct uart_port *port)
@@ -196230,10 +196221,10 @@ index 12b6dfeaf658..0de6ac768188 100644
   * endpoint state is gone from hardware.  usb_hcd_flush_endpoint() must
   * have been called previously.  Use for set_configuration, set_interface,
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index d54fbf6555c5..3d5093f88eaf 100644
+index 38f3f5a766df..82b890704183 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -5723,7 +5723,7 @@ static void port_event(struct usb_hub *hub, int port1)
+@@ -5722,7 +5722,7 @@ static void port_event(struct usb_hub *hub, int port1)
  		port_dev->over_current_count++;
  		port_over_current_notify(port_dev);
  
@@ -258646,7 +258637,7 @@ index b9607d5a370d..c846d4de679d 100644
  	/* clear out the mapping that we setup */
  	for (i = 0 ; i < info->fix.smem_len; i += PAGE_SIZE) {
 diff --git a/drivers/video/fbdev/core/fbmem.c b/drivers/video/fbdev/core/fbmem.c
-index ee44a46a66be..e21782ba1ce2 100644
+index 990a4e63a916..be961669fb6d 100644
 --- a/drivers/video/fbdev/core/fbmem.c
 +++ b/drivers/video/fbdev/core/fbmem.c
 @@ -49,6 +49,7 @@ struct class *fb_class;
@@ -262807,7 +262798,7 @@ index b1c49616416b..08e95cce2a86 100644
  extern int __init cma_alloc_areas(unsigned int max_cma_size);
  #endif
 diff --git a/include/linux/fb.h b/include/linux/fb.h
-index 195513d589c2..146c0b309265 100644
+index 2b917f2a2400..4cc56b4293fc 100644
 --- a/include/linux/fb.h
 +++ b/include/linux/fb.h
 @@ -504,6 +504,7 @@ struct fb_info {
@@ -262825,7 +262816,7 @@ index 195513d589c2..146c0b309265 100644
 +extern void fb_set_lowest_dynamic_fb(int min_fb_dev);
  extern int register_framebuffer(struct fb_info *fb_info);
  extern void unregister_framebuffer(struct fb_info *fb_info);
- extern int fb_prepare_logo(struct fb_info *fb_info, int rotate);
+ extern int devm_register_framebuffer(struct device *dev, struct fb_info *fb_info);
 diff --git a/include/linux/gpio/driver.h b/include/linux/gpio/driver.h
 index d6e38a500833..70c233440cdf 100644
 --- a/include/linux/gpio/driver.h
@@ -286959,10 +286950,10 @@ index 7743ea983b1a..cee90e193d22 100644
  	/*
  	 * For devices with more than one control interface, we assume the
 diff --git a/sound/usb/quirks.c b/sound/usb/quirks.c
-index 93d9ed8983df..871550ccd8d2 100644
+index d9d4c5922a50..3d261fec650e 100644
 --- a/sound/usb/quirks.c
 +++ b/sound/usb/quirks.c
-@@ -2253,6 +2253,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
+@@ -2254,6 +2254,8 @@ static const struct usb_audio_quirk_flags_table quirk_flags_table[] = {
  		   QUIRK_FLAG_ALIGN_TRANSFER),
  	DEVICE_FLG(0x534d, 0x2109, /* MacroSilicon MS2109 */
  		   QUIRK_FLAG_ALIGN_TRANSFER),
