@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       88
 %global maintenance_release .0.0
-%global pkg_release         .91
+%global pkg_release         .92
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,14 @@ fi
 %endif
 
 %changelog
+* Wed May 07 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-88.0.0.92
+- riscv kernel upgrade to 6.6.0-88.0.0
+- RISC-V: Remove unnecessary include from compat.h
+- KVM AIA: Enable HW_ACCL
+- spacemit k1 dts/clk/reset/pinctrl/gpio/uart support
+- Enable ROCm-related kernel configs and update openeuler_defconfig
+- kconfig: enable zstd-compressed firmware support
+
 * Fri Apr 25 2025 Li Nan <linan122@huawei.com> - 6.6.0-88.0.0.91
 - !16007  compile error: implicit declaration of
 - kvm: hisi_virt: Fix compilation error due to missing ACPI configuration
