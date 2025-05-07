@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2504.4.0
+%global hulkrelease 2505.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0325
+Release: %{hulkrelease}.0326
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,85 @@ fi
 %endif
 
 %changelog
+
+* Wed May 07 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.1.0.0326
+- !16154  driver: base: fix UAF when driver_attach failed
+- !16148 v2  ipv6: mcast: extend RCU protection in igmp6_send()
+- !16153  scsi: pm8001: Fix abort all task initialization
+- !16152  video: fbdev: cirrusfb: check pixclock to avoid divide by zero
+- !16107  qede: confirm skb is allocated before using
+- !16112  mpage: fix softlockup in mpage_readahead()
+- !16104  md/raid1,raid10: don't ignore IO flags
+- driver: base: fix UAF when driver_attach failed
+- !16151  can: peak_usb: fix use after free bugs
+- scsi: pm8001: Fix abort all task initialization
+- video: fbdev: cirrusfb: check pixclock to avoid divide by zero
+- !16131  net: mdio: validate parameter addr in mdiobus_get_phy()
+- can: peak_usb: fix use after free bugs
+- ipv6: mcast: extend RCU protection in igmp6_send()
+- !16142  CVE-2023-53023
+- !16077  CVE-2022-49626
+- !16078  CVE-2022-49429
+- net: nfc: Fix use-after-free in local_cleanup()
+- !16123  netfilter: ipset: Fix overflow before widen in the bitmap_ip_create() function.
+- !16122  ndisc: extend RCU protection in ndisc_send_skb()
+- !16111  arp: use RCU protection in arp_xmit()
+- !16110  openvswitch: use RCU protection in ovs_vport_cmd_fill_info()
+- !16109  net: Fix CVE-2025-21763
+- !16126  net: openvswitch: fix leak of nested actions
+- net: mdio: validate parameter addr in mdiobus_get_phy()
+- net: openvswitch: fix leak of nested actions
+- netfilter: ipset: Fix overflow before widen in the bitmap_ip_create() function.
+- ndisc: extend RCU protection in ndisc_send_skb()
+- mpage: fix softlockup in mpage_readahead()
+- arp: use RCU protection in arp_xmit()
+- openvswitch: use RCU protection in ovs_vport_cmd_fill_info()
+- neighbour: use RCU protection in __neigh_notify()
+- neighbour: delete redundant judgment statements
+- qede: confirm skb is allocated before using
+- md/raid1,raid10: don't ignore IO flags
+- !16082  CVE-2021-47668
+- !16089  mm/khugepaged: fix ->anon_vma race
+- !16071  Backport SMC patchs
+- mm/khugepaged: fix ->anon_vma race
+- !16054  jfs: add check read-only before truncation in jfs_truncate_nolock()
+- can: dev: can_restart: fix use after free bug
+- can: dev: can_restart(): post buffer from the right context
+- RDMA/hfi1: Prevent panic when SDMA is disabled
+- sfc: fix use after free when disabling sriov
+- sfc: error code if SRIOV cannot be disabled
+- net/smc: fix restoring of fallback changes
+- net/smc: fix closing of fallback SMC sockets
+- net/smc: propagate file from SMC to TCP socket
+- !16067  net: fix geneve_opt length integer overflow
+- !16058  udp: Fix memory accounting leak.
+- !16029  CVE-2022-49647
+- !16064  ndisc: Fix CVE-2025-21764
+- net: fix geneve_opt length integer overflow
+- ndisc: use RCU protection in ndisc_alloc_skb()
+- net: add dev_net_rcu() helper
+- net: treat possible_net_t net pointer as an RCU one and add read_pnet_rcu()
+- udp: Fix memory accounting leak.
+- !15781  drm/amd/display: Fix a NULL pointer dereference in amdgpu_dm_connector_add_common_modes()
+- !15780  staging: rtl8712: fix uninit-value in r871xu_drv_init()
+- jfs: add check read-only before truncation in jfs_truncate_nolock()
+- !16032  net: atm: fix use after free in lec_send()
+- net: atm: fix use after free in lec_send()
+- cgroup: fix kabi for css_set
+- cgroup: Use separate src/dst nodes when preloading css_sets for migration
+- !15993  Fix CVE-2025-37785
+- !15984  vlan: enforce underlying device type
+- ext4: fix OOB read when checking dotdot dir
+- ext4: optimize __ext4_check_dir_entry()
+- !15978  tracing: Fix use-after-free in print_graph_function_flags during tracer switching
+- vlan: enforce underlying device type
+- !15953  Fix CVE-2020-36789
+- !15957  iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- tracing: Fix use-after-free in print_graph_function_flags during tracer switching
+- iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
+- can: dev: can_get_echo_skb(): prevent call to kfree_skb() in hard IRQ context
+- drm/amd/display: Fix a NULL pointer dereference in amdgpu_dm_connector_add_common_modes()
+- staging: rtl8712: fix uninit-value in r871xu_drv_init()
 
 * Wed Apr 23 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2504.4.0.0325
 - !15624  proc: fix use-after-free in proc_get_inode()
