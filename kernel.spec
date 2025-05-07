@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       87
+%global devel_release       89
 %global maintenance_release .0.0
-%global pkg_release         .82
+%global pkg_release         .83
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,155 @@ fi
 %endif
 
 %changelog
+* Wed May 07 2025 Li Nan <linan122@huawei.com> - 6.6.0-89.0.0.83
+- !16087  CVE-2025-21979
+- !16102 V3:mm: shmem: skip swapcache for swapin of synchronous swap device
+- !16144 [openEuler-24.03-LTS-SP2] drivers: update Yunsilicon drivers to 2412GA
+- !16101  scsi: qla1280: Fix kernel oops when debug level > 2
+- !16103  md/raid1,raid10: don't ignore IO flags
+- !16055 mailbox: pcc: Always clear the platform ack interrupt first
+- !16143  Revert "tmpfs: fault in smaller chunks if large folio allocation not allowed"
+- !16108  mm: zswap: handle incorrect attempts to load large folios
+- !16075  mpage: fix softlockup in mpage_readahead()
+- !16079 v2  tracing: Verify event formats that have "%*p.."
+- Revert "tmpfs: fault in smaller chunks if large folio allocation not allowed"
+- !16117  PCI: brcmstb: Fix error path after a call to regulator_bulk_get()
+- !16116  spufs: fix gang directory lifetimes
+- drivers: update Yunsilicon drivers to version rel_2412_std_card
+- mailbox: pcc: Always clear the platform ack interrupt first
+- mailbox: pcc: Fix the possible race in updation of chan_in_use flag
+- !16099  fs/resctrl: Create l2 cache monitors
+- PCI: brcmstb: Fix error path after a call to regulator_bulk_get()
+- spufs: fix gang directory lifetimes
+- !15719 vdpa/iommufd: Support taking over vDPA devices' iommu groups through the iommufd API
+- !14169 [OLK-6.6] Fix rnp errors dmesg show in hygon
+- !14174 [OLK-6.6] Fix os crash when cat some sys interface when net down
+- !14100 [OLK-6.6] mucse: rnpm ocp nic support hotplug and show sub-zero temperature
+- !16080  PCI/ASPM: Fix link state exit during switch upstream function removal
+- !16074  x86/mm: Fix flush_tlb_range() when used for zapping normal PMDs
+- !16073  acpi: nfit: fix narrowing conversion in acpi_nfit_ctl
+- !15908  soc: qcom: pdr: Fix the potential deadlock
+- !16094  ksmbd: fix session use-after-free in multichannel connection
+- mm: zswap: handle incorrect attempts to load large folios
+- md/raid1,raid10: don't ignore IO flags
+- !16086  media: streamzap: fix race between device disconnection and urb callback
+- mm: shmem: skip swapcache for swapin of synchronous swap device
+- mm: swap: remove 'synchronous' argument to swap_read_folio()
+- vhost/vdpa: Add support to bind and attach iommufd
+- scsi: qla1280: Fix kernel oops when debug level > 2
+- !15897 Two backport bugfix patches
+- !15948 mm/huge_memory: drop beyond-EOF folios with the right number of refs
+- arm64/mpam: Refuse to enter powerdown state after L2 msc updated
+- arm64/mpam: Refuse cpu offline when L2 msc is enabled
+- fs/resctrl: Add l2 mount option to enable L2 msc
+- arm64: mpam: Restore the expected MPAM sysregs on cpuhp
+- arm64: mpam: Add cpu_pm notifier to restore MPAM sysregs
+- fs/resctrl: Create l2 cache monitors
+- x86/resctrl: Add a handling path of default label in get_arch_mbm_state()
+- ksmbd: fix session use-after-free in multichannel connection
+- !16034  swap-in support large folio
+- !15994  ksmbd: fix use-after-free in ksmbd_sessions_deregister()
+- !16066  rds: sysctl: rds_tcp_{rcv,snd}buf: avoid using current->nsproxy
+- !16062  arm64/mpam: Expanding MPAM's QoS capability
+- !16053  jfs: add check read-only before truncation in jfs_truncate_nolock()
+- !16037  ext4: fix the logic to determine whether buffered IO can use iomap
+- wifi: cfg80211: init wiphy_work before allocating rfkill fails
+- wifi: cfg80211: cancel wiphy_work before freeing wiphy
+- media: streamzap: fix race between device disconnection and urb callback
+- !15986  RDMA/hns: Fix the compatibility between the kernel mode and user mode
+- PCI/ASPM: Fix link state exit during switch upstream function removal
+- tracing: Verify event formats that have "%*p.."
+- mpage: fix softlockup in mpage_readahead()
+- x86/mm: Fix flush_tlb_range() when used for zapping normal PMDs
+- acpi: nfit: fix narrowing conversion in acpi_nfit_ctl
+- !16045  irqchip/mbigen: add check before deference 'mgn_chip'
+- rds: sysctl: rds_tcp_{rcv,snd}buf: avoid using current->nsproxy
+- arm64/mpam: Add limit feature
+- arm64/mpam: Add PRIO feature
+- arm64/mpam: Add mbw_min and cmin features
+- arm64/mpam: Add CMAX feature
+- fs/resctrl: As a pre-patch for expanding MPAM's QoS capability
+- soc: hisilicon: kunpeng_hccs: Fix incorrect string assembly
+- jfs: add check read-only before truncation in jfs_truncate_nolock()
+- !15887  LoongArch: sync internal repository 20250414
+- !15937  md/raid1: fix memleak and double free in
+- irqchip/mbigen: add check before deference 'mgn_chip'
+- ext4: fix the logic to determine whether buffered IO can use iomap
+- mm: add per-order mTHP swap-in fallback/fallback_charge counters
+- mm: add per-order mTHP swpin counters
+- mm: fix PSWPIN counter for large folios swap-in
+- mm: remove unused stub for can_swapin_thp()
+- mm: zswap: fix zswap_never_enabled() for CONFIG_ZSWAP==N
+- mm: support large folios swap-in for sync io devices
+- mm: add nr argument in mem_cgroup_swapin_uncharge_swap() helper to support large folios
+- mm: zswap: add zswap_never_enabled()
+- mm: convert swap_cluster_readahead and swap_vma_readahead to return a folio
+- mm: return a folio from read_swap_cache_async()
+- mm: remove page_swap_info()
+- mm: convert swap_readpage() to swap_read_folio()
+- mm: convert swap_page_sector() to swap_folio_sector()
+- mm: pass a folio to swap_readpage_bdev_async()
+- mm: pass a folio to swap_readpage_bdev_sync()
+- mm: pass a folio to swap_readpage_fs()
+- mm: pass a folio to swap_writepage_bdev_async()
+- mm: pass a folio to swap_writepage_bdev_sync()
+- mm: pass a folio to swap_writepage_fs()
+- mm: pass a folio to __swap_writepage()
+- mm: return the folio from __read_swap_cache_async()
+- !15931  CVE-2025-22113
+- !16023  CVE-2025-22121
+- ext4: Restore the deleted check paths of the xattr.
+- ext4: fix out-of-bound read in ext4_xattr_inode_dec_ref_all()
+- ext4: introduce ITAIL helper
+- !15918 [OLK-6.6] 从上游linux-6.6.y回合nvme驱动重要bugfix
+- !15589 [OLK-6.6] Ethernet: Supports Linkdata ethernet Controllers
+- !15962  LoongArch: BPF: Don't override subprog's return value
+- !16007  compile error: implicit declaration of
+- kvm: hisi_virt: Fix compilation error due to missing ACPI configuration
+- !15981  LoongArch: BPF: Fix off-by-one error in build_prologue()
+- !15935  HID: appleir: Fix potential NULL dereference at raw event handle
+- !15988  fs/resctrl: Fix configuration to wrong control group when CDP is enabled
+- ksmbd: fix use-after-free in ksmbd_sessions_deregister()
+- !15970  erofs/cachefiles: Change the unmark inuse sequence in erofs ondemand mode
+- fs/resctrl: Fix configuration to wrong control group when CDP is enabled
+- arm64/mpam: Add debugging information about CDP monitor value
+- arm64/mpam: Fix allocated cache size information
+- fs/resctrl: Fix kmemleak caused by closid_init()
+- arm64/mpam: Correct the judgment condition of the CMAX feature
+- arm64/mpam: Set the cpbm width of msc class with the minimum
+- fs/resctrl: Determine whether the MBM monitors require overflow checking
+- arm64/mpam: Optimize CSU/MBWU monitor multiplexing
+- arm64/mpam: fix impossible condition in resctrl_arch_rmid_read()
+- arm64/mpam: fix impossible condition in get_cpumask_from_cache_id()
+- arm64/mpam: fix memleak in resctrl_arch_mon_ctx_alloc_no_wait()
+- RDMA/hns: Fix the compatibility between the kernel mode and user mode
+- LoongArch: BPF: Fix off-by-one error in build_prologue()
+- erofs/cachefiles: Change the unmark inuse sequence in erofs ondemand mode
+- LoongArch: BPF: Don't override subprog's return value
+- mm/huge_memory: drop beyond-EOF folios with the right number of refs
+- md/raid1: fix memory leak in raid1_run() if no active rdev
+- md/raid1: don't free conf on raid0_run failure
+- HID: appleir: Fix potential NULL dereference at raw event handle
+- ext4: avoid journaling sb update on error if journal is destroying
+- ext4: define ext4_journal_destroy wrapper
+- mm: fix filemap_get_folios_contig returning batches of identical folios
+- nvmet-tcp: Fix a possible sporadic response drops in weakly ordered arch
+- nvme-tcp: fix possible UAF in nvme_tcp_poll
+- soc: qcom: pdr: Fix the potential deadlock
+- selftests: mincore: fix tmpfs mincore test failure
+- LoongArch: Export some signal functions
+- LoongArch: Make some signal and ptrace functions non-static
+- LoongArch: Handle fp, lsx, lasx and lbt assembly symbols
+- LoongArch: Preserve firmware configuration if ACPI requires.
+- LoongArch: configs: enable some configs
+- LoongArch: configs: set CONFIG_UNWINDER_ORC=y
+- LoongArch: configs: Disable CONFIG_RT_GROUP_SCHED to prevent cgroup2 issues
+- objtool: Fix C jump table annotations for Clang
+- Ethernet: Linkdata: Supports Linkdata ethernet Controllers
+- RNP: NET: Fix rnp errors dmesg show in hygon
+- net: mucse: Fix os crash when cat some sys interface when net down
+- mucse: rnpm ocp nic support hotplug and show sub-zero temperature
+
 * Wed Apr 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-87.0.0.82
 - !15987 v12  Add support for IPIv
 - kabi: Use KABI_EXTEND to perform kabi repair for IPIV
