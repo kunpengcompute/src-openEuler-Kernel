@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       261
+%global devel_release       262
 %global maintenance_release .0.0
-%global pkg_release         .164
+%global pkg_release         .165
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,54 @@ fi
 %endif
 
 %changelog
+* Tue May 06 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-262.0.0.165
+- !16057 mailbox: pcc: Always clear the platform ack interrupt first
+- !16076  mpage: fix softlockup in mpage_readahead()
+- !15888 [OLK-5.10] backport important bugfix for nvme driver from the kernel-5.10.y
+- !16128  openvswitch: use RCU protection in ovs_vport_cmd_fill_info()
+- !16127  net: Fix CVE-2025-21763
+- !16125  ndisc: extend RCU protection in ndisc_send_skb()
+- !16129  arp: use RCU protection in arp_xmit()
+- arp: use RCU protection in arp_xmit()
+- openvswitch: use RCU protection in ovs_vport_cmd_fill_info()
+- neighbour: use RCU protection in __neigh_notify()
+- neighbour: delete redundant judgment statements
+- ndisc: extend RCU protection in ndisc_send_skb()
+- !16088  CVE-2024-58094
+- jfs: add check read-only before truncation in jfs_truncate_nolock()
+- mpage: fix softlockup in mpage_readahead()
+- !16063  ndisc: Fix CVE-2025-21764
+- ndisc: use RCU protection in ndisc_alloc_skb()
+- net: add dev_net_rcu() helper
+- net: treat possible_net_t net pointer as an RCU one and add read_pnet_rcu()
+- mailbox: pcc: Always clear the platform ack interrupt first
+- soc: hisilicon: kunpeng_hccs: Fix incorrect string assembly
+- !15776 [OLK-5.10] new bugfix from mainline for Turin
+- !15941  block: fix UAF in blk_mq_has_sqsched()
+- !15939  md/raid1: fix memory leak in raid1_run() if no active rdev
+- !15938  md: bypass block throttle for superblock update
+- !15940  md/raid1: fix bitmap update when all write requests fail
+- !15220 [OLK-5.10] Ethernet: Supports Linkdata ethernet Controllers
+- !15990  Backport the perf fix patch
+- perf: Really fix event_function_call() locking
+- perf: Fix event_function_call() locking
+- perf/core: Fix missing wakeup when waiting for context reference
+- perf/core: Fix perf_cgroup_switch()
+- block: Decode all flag names in the debugfs output
+- blk-mq: avoid to touch q->elevator without any protection
+- blk-mq: protect q->elevator by ->sysfs_lock in blk_mq_elv_switch_none
+- block: remove QUEUE_FLAG_DEAD
+- md/raid1: fix bitmap update when all write requests fail
+- md/raid1: fix memory leak in raid1_run() if no active rdev
+- md: bypass block throttle for superblock update
+- nvme-pci: fix multiple races in nvme_setup_io_queues
+- nvme-tcp: fix possible UAF in nvme_tcp_poll
+- nvmet-tcp: Fix a possible sporadic response drops in weakly ordered arch
+- x86/CPU/AMD: Only apply Zenbleed fix for Zen2 during late microcode load
+- tools/power/cpupower: Fix Pstate frequency reporting on AMD Family 1Ah CPUs
+- x86/CPU/AMD: Do the common init on future Zens too
+- Ethernet: Linkdata: Supports Linkdata ethernet Controllers
+
 * Tue Apr 22 2025 Li Nan <linan122@huawei.com> - 5.10.0-261.0.0.164
 - !15959  iscsi_ibft: Fix UBSAN shift-out-of-bounds warning in ibft_attr_show_nic()
 - !15956  drm/amdgpu: avoid buffer overflow attach in smu_sys_set_pp_table()
