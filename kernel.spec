@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       262
+%global devel_release       263
 %global maintenance_release .0.0
-%global pkg_release         .165
+%global pkg_release         .166
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,23 @@ fi
 %endif
 
 %changelog
+* Tue May 13 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-263.0.0.166
+- !16242  fuse: support fastpath
+- !16225  backlight: led_bl: Hold led_access lock when calling led_sysfs_disable()
+- fuse: support fastpath via fast_ipc
+- fuse: add fast path for fuse_range_is_writeback
+- fuse: fix matching of FUSE_DEV_IOC_CLONE command
+- fuse: 32-bit user space ioctl compat for fuse device
+- ipc: add fast_ipc module to enable fast process switching
+- !16036  proc: fix UAF in proc_get_inode()
+- backlight: led_bl: Hold led_access lock when calling led_sysfs_disable()
+- !16164  fix CVE-2023-53093
+- !16184  net/hinic3: Synchronize new NIC features and bug fixes
+- net/hinic3: Synchronize new NIC features and bug fixes
+- tracing/histograms: Allow variables to have some modifiers
+- tracing: Do not let histogram values have some modifiers
+- proc: fix UAF in proc_get_inode()
+
 * Tue May 06 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-262.0.0.165
 - !16057 mailbox: pcc: Always clear the platform ack interrupt first
 - !16076  mpage: fix softlockup in mpage_readahead()
