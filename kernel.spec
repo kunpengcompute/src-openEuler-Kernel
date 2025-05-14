@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2505.1.0
+%global hulkrelease 2505.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0326
+Release: %{hulkrelease}.0327
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,32 @@ fi
 %endif
 
 %changelog
+
+* Wed May 14 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.3.0.0327
+- !16177  Fix CVE-2022-49850
+- !16176  Fix CVE-2022-49842
+- !16187  ata: libata-transport: fix double ata_host_put() in ata_tport_add()
+- !16188  nvmet: avoid potential UAF in nvmet_req_complete()
+- !16238  dm ioctl: fix misbehavior if list_versions races with module loading
+- !16200  drm/amdkfd: Fix an illegal memory access
+- dm ioctl: fix misbehavior if list_versions races with module loading
+- !16175  Fix CVE-2022-49915
+- drm/amdkfd: Fix an illegal memory access
+- nvmet: avoid potential UAF in nvmet_req_complete()
+- ata: libata-transport: fix double ata_host_put() in ata_tport_add()
+- nilfs2: fix deadlock in nilfs_count_free_blocks()
+- ASoC: soc-utils: Remove __exit for snd_soc_util_exit()
+- ASoC: core: Fix use-after-free in snd_soc_exit()
+- mISDN: fix misuse of put_device() in mISDN_register_device()
+- mISDN: fix possible memory leak in mISDN_register_device()
+- !16139  Bluetooth: Fix use after free in hci_send_acl
+- !16140  NFC: NULL out the dev->rfkill to prevent UAF
+- !16145  CVE-2022-49755
+- usb: gadget: f_fs: Add unbind event before functionfs_unbind
+- usb: gadget: f_fs: Fix unbalanced spinlock in __ffs_ep0_queue_wait
+- usb: gadget: f_fs: Prevent race during ffs_ep0_queue_wait
+- NFC: NULL out the dev->rfkill to prevent UAF
+- Bluetooth: Fix use after free in hci_send_acl
 
 * Wed May 07 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.1.0.0326
 - !16154  driver: base: fix UAF when driver_attach failed
