@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       89
+%global devel_release       90
 %global maintenance_release .0.0
-%global pkg_release         .83
+%global pkg_release         .84
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,100 @@ fi
 %endif
 
 %changelog
+* Wed May 14 2025 Li Nan <linan122@huawei.com> - 6.6.0-90.0.0.84
+- !16277 Revert DP HPD module to fix the problem
+- !16192 drivers/yunsilicon: fix query/modify pkt_dst_info return error
+- !16180 PINCTRL:ENABLE_CONFIG_PINCTRL for resolve Intel notebook touchpad issue;  fw, net: wireless: Add RTW88 driver and compressed firmware support
+- !16231  LoongArch: Return NULL from huge_pte_offset() for invalid PMD
+- !16256  CVE-2025-21916
+- !16257  CVE-2025-21950
+- Revert "drm/sysfs: Register "ddc" symlink later"
+- Revert "drm/ast: Implement polling for VGA and SIL164 connectors"
+- Revert "drm: Call drm_atomic_helper_shutdown() at shutdown time for misc drivers"
+- Revert "drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER"
+- Revert "drm/hisilicon/hibmc: Restructuring the header dp_reg.h"
+- Revert "drm/hisilicon/hibmc: Add dp serdes cfg to adjust serdes rate, voltage and pre-emphasis"
+- Revert "drm/hisilicon/hibmc: Add dp serdes cfg in dp process"
+- Revert "drm/hisilicon/hibmc: Refactor the member of drm_aux in struct hibmc_dp"
+- Revert "drm/hisilicon/hibmc: Getting connector info and EDID by using AUX channel"
+- Revert "drm/hisilicon/hibmc: Add colorbar-cfg feature and its debugfs file"
+- Revert "drm/hisilicon/hibmc: Enable this hot plug detect of irq feature"
+- Revert "drm/hisilicon/hibmc: Add MSI irq getting and requesting for HPD"
+- Revert "drm/hisilicon/hibmc: Add vga connector detect functions"
+- Revert "drm/hisilicon/hibmc: fix HPD interrupts triggering the wrong behavior"
+- Revert "drm/hisilicon/hibmc: fix irq_request()'s irq name variable is local"
+- !16039 [OLK-6.6] 优化海光密钥管理虚拟化场景的性能
+- !16233  usb: chipidea: ci_hdrc_imx: fix usbmisc handling
+- !16208 Fix CVE-2025-37860
+- !16189  jfs: Fix uninit-value access of imap allocated in the diMount() function
+- drivers: virt: acrn: hsm: Use kzalloc to avoid info leak in pmcmd_ioctl
+- usb: atm: cxacru: fix a flaw in existing endpoint checks
+- !16183 xhci: Limit time spent with xHC interrupts disabled during bus resume
+- !16193  net: libwx: handle page_pool_dev_alloc_pages error
+- !16224  backlight: led_bl: Hold led_access lock when calling led_sysfs_disable()
+- !16198  Fix CVE-2025-37830
+- sfc: fix NULL dereferences in ef100_process_design_param()
+- !16174 Add gpio-hisi softdepend
+- usb: chipidea: ci_hdrc_imx: fix usbmisc handling
+- LoongArch: Return NULL from huge_pte_offset() for invalid PMD
+- backlight: led_bl: Hold led_access lock when calling led_sysfs_disable()
+- !16196  net/hinic3: Synchronize new NIC features and bug fixes
+- !16165  vmxnet3: Fix malformed packet sizing in vmxnet3_process_xdp
+- !12616 [OLK-6.6] fix bug：compiler error on loongarch64 for mucse rnpm driver
+- !16186 【olk 6.6】net: hns3: backport some bugfixes
+- !15158  Add support for Hygon family 18h model 8h
+- !14328 Fixed multiple vfio devices not working properly
+- !16081  Revert "LoongArch: Set hugetlb mmap base address aligned with pmd size"
+- !16024 [OLK-6.6][bugfix]Hygon: Remove HYDCU fixup header driver from kernel source code
+- !16026 [OLK-6.6]Hygon: In a CSV3 VM, the hypercall should notify real page enc/dec status
+- !16025 [OLK-6.6][bugfix]Hygon：Avoid concurrent pinning shared pages at both KVM side and vfio side when passthrough device to CSV3 VM
+- !16020 [OLK-6.6]Backport some mm related commits from Linux upstream
+- !16019 [OLK-6.6][bugfix]Hygon: Return 0 at the beginning of csv_guest_hygon_coco_extension() for non-CSV3 VMs
+- cpufreq: scmi: Fix null-ptr-deref in scmi_cpufreq_get_rate()
+- net/hinic3: Synchronize new NIC features and bug fixes
+- drivers/yunsilicon: fix query/modify pkt_dst_info return error
+- net: libwx: handle page_pool_dev_alloc_pages error
+- jfs: Fix uninit-value access of imap allocated in the diMount() function
+- xhci: Limit time spent with xHC interrupts disabled during bus resume
+- Add gpio-hisi softdepend
+- net: hns3: defer calling ptp_clock_register()
+- net: hns3: fixed debugfs tm_qset size
+- net: hns3: fix an interrupt residual problem
+- net: hns3: store rx VLAN tag offload state for VF
+- vmxnet3: Fix malformed packet sizing in vmxnet3_process_xdp
+- Revert "LoongArch: Set hugetlb mmap base address aligned with pmd size"
+- crypto: ccp: Support vpsp ringbuffer overcommit
+- crypto: ccp: Use a workqueue to clean up the vpsp ringbuffer
+- crypto: ccp: move vpsp-related functions to vpsp.c
+- x86/kvm: Don't hypercall to enc all usable RAM on CSV3 platform
+- KVM: SVM: CSV: fix CSV3 launch failures because of concurrent longterm pin
+- Revert "drm/hygon: Add support to passthrough Hygon DCU to virtual machine"
+- Revert "x86/config: Set CONFIG_HYDCU_FIXUP_HEADER=y by default"
+- mm/hugetlb: wait for hugetlb folios to be freed
+- mm: replace free hugepage folios after migration
+- mm/cma: using per-CMA locks to improve concurrent allocation performance
+- KVM: SEV: Use long-term pin when registering encrypted memory regions
+- Revert "KVM: SEV: Pin SEV guest memory out of CMA area"
+- KVM: SVM: CSV: Return 0 at the beginning of csv_guest_hygon_coco_extension() for non-CSV3 VMs
+- drivers/pci: Enable pci bridge acs capability
+- driver/iommu: Set iommu driver buildin kernel
+- LoongArch: Revert "LoongArch: Fix cpu hotplug issue"
+- LoongArch: KVM: Repair the restart pressure test virtual machine hang dead problem
+- LoongArch:config: enable pci host controller fdt driver
+- PINCTRL:ENABLE_CONFIG_PINCTRL_AMD
+- LoongArch: KVM: Add interrupt checking with Loongson AVEC
+- LoongArch: KVM: Reload guest CSR registers after S4
+- anolis: LoongArch: KVM: add virt extioi cpu encode support
+- anolis: LoongArch: KVM: Fixed VM migration failure after ptw was enabled
+- anolis: LoongArch: KVM: Add reset function for irqchip
+- anolis: LoongArch: LSVZ: Clear LLBCTL if secondary mmu mapping is changed
+- anolis: driver/iommu: Fixed multiple vfio devices not working properly
+- anolis: LoongArch: KVM: enable ptw for kvm
+- anolis: LoongArch: fix compile error when enable CONFIG_PARAVIRT
+- EDAC/amd64: Add support for Hygon family 18h model 8h
+- x86/amd_nb: Add support for Hygon family 18h model 8h
+- mucse: rnpm compiler error on loongarch64
+
 * Wed May 07 2025 Li Nan <linan122@huawei.com> - 6.6.0-89.0.0.83
 - !16087  CVE-2025-21979
 - !16102 V3:mm: shmem: skip swapcache for swapin of synchronous swap device
