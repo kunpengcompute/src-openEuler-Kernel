@@ -1,7 +1,7 @@
-From 994664541b0893b50f9e21735f9c14cd73ac9728 Mon Sep 17 00:00:00 2001
+From 4a1a71fabd20f5b6ac434fd15fedcb0f5ff2bf3f Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
-Date: Fri, 11 Apr 2025 10:39:03 +0800
-Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-86.0.0)
+Date: Wed, 21 May 2025 18:38:17 +0800
+Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
 
 ---
  .../admin-guide/media/bcm2835-isp.rst         |  127 +
@@ -1056,7 +1056,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-86.0.0)
  drivers/usb/core/hub.c                        |    2 +-
  drivers/usb/core/message.c                    |   94 +
  drivers/usb/core/otg_productlist.h            |  114 +-
- drivers/usb/dwc3/core.c                       |   68 +
+ drivers/usb/dwc3/core.c                       |   70 +
  drivers/usb/dwc3/core.h                       |   23 +-
  drivers/usb/dwc3/host.c                       |    9 +-
  drivers/usb/gadget/file_storage.c             | 3676 +++++++++
@@ -1123,7 +1123,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-86.0.0)
  .../usb/host/dwc_otg/test/test_mod_param.pl   |  133 +
  drivers/usb/host/dwc_otg/test/test_sysfs.pl   |  193 +
  drivers/usb/host/xhci-mem.c                   |   48 +-
- drivers/usb/host/xhci-pci.c                   |   21 +-
+ drivers/usb/host/xhci-pci.c                   |   19 +-
  drivers/usb/host/xhci-ring.c                  |   99 +-
  drivers/usb/host/xhci.c                       |  104 +
  drivers/usb/host/xhci.h                       |   12 +-
@@ -6125,10 +6125,10 @@ index 24b34cdfa6fe..44589ac3e909 100644
 +    pixfmt-nv24
      pixfmt-m420
 diff --git a/MAINTAINERS b/MAINTAINERS
-index b22778025fa0..5cb24fd81a51 100644
+index 6ddb6b82eef5..3f9e67b07f6c 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1569,6 +1569,22 @@ S:	Maintained
+@@ -1575,6 +1575,22 @@ S:	Maintained
  F:	drivers/net/arcnet/
  F:	include/uapi/linux/if_arcnet.h
  
@@ -6151,7 +6151,7 @@ index b22778025fa0..5cb24fd81a51 100644
  ARM AND ARM64 SoC SUB-ARCHITECTURES (COMMON PARTS)
  M:	Arnd Bergmann <arnd@arndb.de>
  M:	Olof Johansson <olof@lixom.net>
-@@ -3922,6 +3938,29 @@ N:	bcm113*
+@@ -3928,6 +3944,29 @@ N:	bcm113*
  N:	bcm216*
  N:	kona
  
@@ -6181,7 +6181,7 @@ index b22778025fa0..5cb24fd81a51 100644
  BROADCOM BCM47XX MIPS ARCHITECTURE
  M:	Hauke Mehrtens <hauke@hauke-m.de>
  M:	Rafał Miłecki <zajec5@gmail.com>
-@@ -15916,6 +15955,14 @@ S:	Maintained
+@@ -15929,6 +15968,14 @@ S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
  F:	drivers/media/i2c/ov5695.c
  
@@ -6196,7 +6196,7 @@ index b22778025fa0..5cb24fd81a51 100644
  OMNIVISION OV7670 SENSOR DRIVER
  L:	linux-media@vger.kernel.org
  S:	Orphan
-@@ -17485,7 +17532,7 @@ F:	drivers/video/backlight/pwm_bl.c
+@@ -17498,7 +17545,7 @@ F:	drivers/video/backlight/pwm_bl.c
  F:	include/dt-bindings/pwm/
  F:	include/linux/pwm.h
  F:	include/linux/pwm_backlight.h
@@ -6205,7 +6205,7 @@ index b22778025fa0..5cb24fd81a51 100644
  
  PXA GPIO DRIVER
  M:	Robert Jarzmik <robert.jarzmik@free.fr>
-@@ -18075,6 +18122,12 @@ F:	drivers/ras/
+@@ -18088,6 +18135,12 @@ F:	drivers/ras/
  F:	include/linux/ras.h
  F:	include/ras/ras_event.h
  
@@ -6218,7 +6218,7 @@ index b22778025fa0..5cb24fd81a51 100644
  RAYLINK/WEBGEAR 802.11 WIRELESS LAN DRIVER
  L:	linux-wireless@vger.kernel.org
  S:	Orphan
-@@ -18086,6 +18139,14 @@ L:	linux-edac@vger.kernel.org
+@@ -18099,6 +18152,14 @@ L:	linux-edac@vger.kernel.org
  S:	Maintained
  F:	drivers/ras/amd/fmpm.c
  
@@ -6233,7 +6233,7 @@ index b22778025fa0..5cb24fd81a51 100644
  RC-CORE / LIRC FRAMEWORK
  M:	Sean Young <sean@mess.org>
  L:	linux-media@vger.kernel.org
-@@ -18683,6 +18744,13 @@ S:	Supported
+@@ -18696,6 +18757,13 @@ S:	Supported
  F:	drivers/iio/light/rohm-bu27008.c
  F:	drivers/iio/light/rohm-bu27034.c
  
@@ -6247,7 +6247,7 @@ index b22778025fa0..5cb24fd81a51 100644
  ROHM MULTIFUNCTION BD9571MWV-M PMIC DEVICE DRIVERS
  M:	Marek Vasut <marek.vasut+renesas@gmail.com>
  L:	linux-kernel@vger.kernel.org
-@@ -20076,7 +20144,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
+@@ -20089,7 +20157,7 @@ M:	Sakari Ailus <sakari.ailus@linux.intel.com>
  L:	linux-media@vger.kernel.org
  S:	Maintained
  T:	git git://linuxtv.org/media_tree.git
@@ -6256,7 +6256,7 @@ index b22778025fa0..5cb24fd81a51 100644
  F:	drivers/media/i2c/imx258.c
  
  SONY IMX274 SENSOR DRIVER
-@@ -20153,6 +20221,39 @@ T:	git git://linuxtv.org/media_tree.git
+@@ -20166,6 +20234,39 @@ T:	git git://linuxtv.org/media_tree.git
  F:	Documentation/devicetree/bindings/media/i2c/sony,imx415.yaml
  F:	drivers/media/i2c/imx415.c
  
@@ -56270,10 +56270,10 @@ index 7e8773a2d99d..a1ff693e49bf 100644
  	/*
  	 * Save the userland NEON/VFP state. Under UP,
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index 9da9d58f1c02..a7e2fda4c4ab 100644
+index dabbbb0e012c..881c3ca69ed3 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
-@@ -129,7 +129,8 @@ config ARM64
+@@ -130,7 +130,8 @@ config ARM64
  	select CRC32
  	select DCACHE_WORD_ACCESS
  	select DYNAMIC_FTRACE if FUNCTION_TRACER
@@ -56283,7 +56283,7 @@ index 9da9d58f1c02..a7e2fda4c4ab 100644
  	select DMA_DIRECT_REMAP
  	select EDAC_SUPPORT
  	select FRAME_POINTER
-@@ -1641,6 +1642,16 @@ config ARCH_CUSTOM_NUMA_DISTANCE
+@@ -1642,6 +1643,16 @@ config ARCH_CUSTOM_NUMA_DISTANCE
  
  	  If unsure, say N.
  
@@ -66554,7 +66554,7 @@ index 87ac0b9c0b4f..fe108a850d4d 100644
  		break;
  	case INSN_OBSOLETE:
 diff --git a/arch/arm64/kernel/cpuinfo.c b/arch/arm64/kernel/cpuinfo.c
-index 7466b6066d87..2c5f88bb8764 100644
+index dade66047478..abd8521f5a39 100644
 --- a/arch/arm64/kernel/cpuinfo.c
 +++ b/arch/arm64/kernel/cpuinfo.c
 @@ -17,6 +17,7 @@
@@ -66565,7 +66565,7 @@ index 7466b6066d87..2c5f88bb8764 100644
  #include <linux/personality.h>
  #include <linux/preempt.h>
  #include <linux/printk.h>
-@@ -178,6 +179,10 @@ static int c_show(struct seq_file *m, void *v)
+@@ -180,6 +181,10 @@ static int c_show(struct seq_file *m, void *v)
  {
  	int i, j;
  	bool aarch32 = personality(current->personality) == PER_LINUX32;
@@ -66576,7 +66576,7 @@ index 7466b6066d87..2c5f88bb8764 100644
  
  	for_each_online_cpu(i) {
  		struct cpuinfo_arm64 *cpuinfo = &per_cpu(cpu_data, i);
-@@ -238,6 +243,24 @@ static int c_show(struct seq_file *m, void *v)
+@@ -240,6 +245,24 @@ static int c_show(struct seq_file *m, void *v)
  		seq_printf(m, "CPU revision\t: %d\n\n", MIDR_REVISION(midr));
  	}
  
@@ -77435,7 +77435,7 @@ index efb592b6f6aa..d1881980a123 100644
  			 "%s: tried to flag a GPIO set as output for IRQ\n",
  			 __func__);
 diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-index a5b92adb8aff..5352376b5c45 100644
+index d1cad875d2f7..89eb6afe2688 100644
 --- a/drivers/gpu/drm/Kconfig
 +++ b/drivers/gpu/drm/Kconfig
 @@ -346,6 +346,8 @@ source "drivers/gpu/drm/v3d/Kconfig"
@@ -77448,16 +77448,15 @@ index a5b92adb8aff..5352376b5c45 100644
  
  source "drivers/gpu/drm/etnaviv/Kconfig"
 diff --git a/drivers/gpu/drm/Makefile b/drivers/gpu/drm/Makefile
-index 7ba2ec90c3f7..eb25453cfd4a 100644
+index f93fd0ac8661..7dd5a7828a69 100644
 --- a/drivers/gpu/drm/Makefile
 +++ b/drivers/gpu/drm/Makefile
-@@ -198,5 +198,6 @@ obj-$(CONFIG_DRM_HYPERV) += hyperv/
+@@ -198,4 +198,5 @@ obj-$(CONFIG_DRM_HYPERV) += hyperv/
  obj-y			+= solomon/
  obj-$(CONFIG_DRM_SPRD) += sprd/
  obj-y += loongson/
 +obj-y			+= rp1/
  obj-$(CONFIG_DRM_PHYTIUM) += phytium/
- obj-$(CONFIG_HYDCU_FIXUP_HEADER) += hygon/hydcu-fixup-header/
 diff --git a/drivers/gpu/drm/bridge/Kconfig b/drivers/gpu/drm/bridge/Kconfig
 index 3e6a4e2044c0..b1c5ef817598 100644
 --- a/drivers/gpu/drm/bridge/Kconfig
@@ -107267,10 +107266,10 @@ index 000000000000..31b811e426dd
 +
 +#endif
 diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index 8e02783eabcb..4ef997dc5c22 100644
+index 98397cbb8b9b..591b202094d4 100644
 --- a/drivers/iommu/iommu.c
 +++ b/drivers/iommu/iommu.c
-@@ -2430,6 +2430,30 @@ size_t iommu_pgsize(struct iommu_domain *domain, unsigned long iova,
+@@ -2475,6 +2475,30 @@ size_t iommu_pgsize(struct iommu_domain *domain, unsigned long iova,
  }
  EXPORT_SYMBOL_GPL(iommu_pgsize);
  
@@ -107301,7 +107300,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  		       phys_addr_t paddr, size_t size, int prot, gfp_t gfp)
  {
-@@ -2440,12 +2464,13 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2485,12 +2509,13 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  	phys_addr_t orig_paddr = paddr;
  	int ret = 0;
  
@@ -107318,7 +107317,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  	/* find out the minimum page size supported */
  	min_pagesz = 1 << __ffs(domain->pgsize_bitmap);
  
-@@ -2463,14 +2488,10 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2508,14 +2533,10 @@ static int __iommu_map(struct iommu_domain *domain, unsigned long iova,
  	pr_debug("map: iova 0x%lx pa %pa size 0x%zx\n", iova, &paddr, size);
  
  	while (size) {
@@ -107336,7 +107335,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  		/*
  		 * Some pages may have been mapped, even if an error occurred,
  		 * so we should account for those so they can be unmapped.
-@@ -2507,11 +2528,8 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2552,11 +2573,8 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
  		return -EINVAL;
  
  	ret = __iommu_map(domain, iova, paddr, size, prot, gfp);
@@ -107350,7 +107349,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  
  	return ret;
  
-@@ -2523,6 +2541,19 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
+@@ -2568,6 +2586,19 @@ int iommu_map(struct iommu_domain *domain, unsigned long iova,
  }
  EXPORT_SYMBOL_GPL(iommu_map);
  
@@ -107370,7 +107369,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  static size_t __iommu_unmap(struct iommu_domain *domain,
  			    unsigned long iova, size_t size,
  			    struct iommu_iotlb_gather *iotlb_gather)
-@@ -2532,10 +2563,11 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+@@ -2577,10 +2608,11 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
  	unsigned long orig_iova = iova;
  	unsigned int min_pagesz;
  
@@ -107384,7 +107383,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  		return 0;
  
  	/* find out the minimum page size supported */
-@@ -2559,10 +2591,9 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
+@@ -2604,10 +2636,9 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
  	 * or we hit an area that isn't mapped.
  	 */
  	while (unmapped < size) {
@@ -107398,7 +107397,7 @@ index 8e02783eabcb..4ef997dc5c22 100644
  		if (!unmapped_page)
  			break;
  
-@@ -2645,11 +2676,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
+@@ -2690,11 +2721,8 @@ ssize_t iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
  			sg = sg_next(sg);
  	}
  
@@ -168585,7 +168584,7 @@ index a9a292d6d59b..2cc25b5811b9 100644
  	new_prop = kzalloc(sizeof(*new_prop), GFP_KERNEL);
  	if (!new_prop)
 diff --git a/drivers/pci/controller/pcie-brcmstb.c b/drivers/pci/controller/pcie-brcmstb.c
-index e47a77f943b1..457a8d29fad8 100644
+index e07fda97c7eb..be7be3a1b0f9 100644
 --- a/drivers/pci/controller/pcie-brcmstb.c
 +++ b/drivers/pci/controller/pcie-brcmstb.c
 @@ -14,6 +14,7 @@
@@ -169341,7 +169340,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	return 0;
  }
  
-@@ -1192,6 +1583,7 @@ static void brcm_pcie_enter_l23(struct brcm_pcie *pcie)
+@@ -1193,6 +1584,7 @@ static void brcm_pcie_enter_l23(struct brcm_pcie *pcie)
  
  static int brcm_phy_cntl(struct brcm_pcie *pcie, const int start)
  {
@@ -169349,7 +169348,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	static const u32 shifts[PCIE_DVT_PMU_PCIE_PHY_CTRL_DAST_NFLDS] = {
  		PCIE_DVT_PMU_PCIE_PHY_CTRL_DAST_PWRDN_SHIFT,
  		PCIE_DVT_PMU_PCIE_PHY_CTRL_DAST_RESET_SHIFT,
-@@ -1224,6 +1616,9 @@ static int brcm_phy_cntl(struct brcm_pcie *pcie, const int start)
+@@ -1225,6 +1617,9 @@ static int brcm_phy_cntl(struct brcm_pcie *pcie, const int start)
  		dev_err(pcie->dev, "failed to %s phy\n", (start ? "start" : "stop"));
  
  	return ret;
@@ -169359,7 +169358,7 @@ index e47a77f943b1..457a8d29fad8 100644
  }
  
  static inline int brcm_phy_start(struct brcm_pcie *pcie)
-@@ -1256,6 +1651,12 @@ static void brcm_pcie_turn_off(struct brcm_pcie *pcie)
+@@ -1257,6 +1652,12 @@ static void brcm_pcie_turn_off(struct brcm_pcie *pcie)
  	u32p_replace_bits(&tmp, 1, PCIE_MISC_HARD_PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
  	writel(tmp, base + PCIE_MISC_HARD_PCIE_HARD_DEBUG);
  
@@ -169372,7 +169371,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	/* Shutdown PCIe bridge */
  	pcie->bridge_sw_init_set(pcie, 1);
  }
-@@ -1286,9 +1687,9 @@ static int brcm_pcie_suspend_noirq(struct device *dev)
+@@ -1287,9 +1688,9 @@ static int brcm_pcie_suspend_noirq(struct device *dev)
  	if (brcm_phy_stop(pcie))
  		dev_err(dev, "Could not stop phy for suspend\n");
  
@@ -169384,7 +169383,7 @@ index e47a77f943b1..457a8d29fad8 100644
  		return ret;
  	}
  
-@@ -1383,7 +1784,7 @@ static int brcm_pcie_resume_noirq(struct device *dev)
+@@ -1384,7 +1785,7 @@ static int brcm_pcie_resume_noirq(struct device *dev)
  	if (pcie->sr)
  		regulator_bulk_disable(pcie->sr->num_supplies, pcie->sr->supplies);
  err_reset:
@@ -169393,7 +169392,7 @@ index e47a77f943b1..457a8d29fad8 100644
  err_disable_clk:
  	clk_disable_unprepare(pcie->clk);
  	return ret;
-@@ -1395,8 +1796,8 @@ static void __brcm_pcie_remove(struct brcm_pcie *pcie)
+@@ -1396,8 +1797,8 @@ static void __brcm_pcie_remove(struct brcm_pcie *pcie)
  	brcm_pcie_turn_off(pcie);
  	if (brcm_phy_stop(pcie))
  		dev_err(pcie->dev, "Could not stop phy\n");
@@ -169404,7 +169403,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	clk_disable_unprepare(pcie->clk);
  }
  
-@@ -1414,12 +1815,16 @@ static const int pcie_offsets[] = {
+@@ -1415,12 +1816,16 @@ static const int pcie_offsets[] = {
  	[RGR1_SW_INIT_1] = 0x9210,
  	[EXT_CFG_INDEX]  = 0x9000,
  	[EXT_CFG_DATA]   = 0x9004,
@@ -169421,7 +169420,7 @@ index e47a77f943b1..457a8d29fad8 100644
  };
  
  static const struct pcie_cfg_data generic_cfg = {
-@@ -1427,6 +1832,7 @@ static const struct pcie_cfg_data generic_cfg = {
+@@ -1428,6 +1833,7 @@ static const struct pcie_cfg_data generic_cfg = {
  	.type		= GENERIC,
  	.perst_set	= brcm_pcie_perst_set_generic,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
@@ -169429,7 +169428,7 @@ index e47a77f943b1..457a8d29fad8 100644
  };
  
  static const struct pcie_cfg_data bcm7425_cfg = {
-@@ -1434,6 +1840,7 @@ static const struct pcie_cfg_data bcm7425_cfg = {
+@@ -1435,6 +1841,7 @@ static const struct pcie_cfg_data bcm7425_cfg = {
  	.type		= BCM7425,
  	.perst_set	= brcm_pcie_perst_set_generic,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
@@ -169437,7 +169436,7 @@ index e47a77f943b1..457a8d29fad8 100644
  };
  
  static const struct pcie_cfg_data bcm7435_cfg = {
-@@ -1448,12 +1855,15 @@ static const struct pcie_cfg_data bcm4908_cfg = {
+@@ -1449,12 +1856,15 @@ static const struct pcie_cfg_data bcm4908_cfg = {
  	.type		= BCM4908,
  	.perst_set	= brcm_pcie_perst_set_4908,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
@@ -169453,7 +169452,7 @@ index e47a77f943b1..457a8d29fad8 100644
  };
  
  static const struct pcie_cfg_data bcm7278_cfg = {
-@@ -1461,6 +1871,7 @@ static const struct pcie_cfg_data bcm7278_cfg = {
+@@ -1462,6 +1872,7 @@ static const struct pcie_cfg_data bcm7278_cfg = {
  	.type		= BCM7278,
  	.perst_set	= brcm_pcie_perst_set_7278,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_7278,
@@ -169461,7 +169460,7 @@ index e47a77f943b1..457a8d29fad8 100644
  };
  
  static const struct pcie_cfg_data bcm2711_cfg = {
-@@ -1468,10 +1879,27 @@ static const struct pcie_cfg_data bcm2711_cfg = {
+@@ -1469,10 +1880,27 @@ static const struct pcie_cfg_data bcm2711_cfg = {
  	.type		= BCM2711,
  	.perst_set	= brcm_pcie_perst_set_generic,
  	.bridge_sw_init_set = brcm_pcie_bridge_sw_init_set_generic,
@@ -169489,7 +169488,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	{ .compatible = "brcm,bcm4908-pcie", .data = &bcm4908_cfg },
  	{ .compatible = "brcm,bcm7211-pcie", .data = &generic_cfg },
  	{ .compatible = "brcm,bcm7278-pcie", .data = &bcm7278_cfg },
-@@ -1512,7 +1940,7 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1513,7 +1941,7 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  
  	data = of_device_get_match_data(&pdev->dev);
  	if (!data) {
@@ -169498,7 +169497,7 @@ index e47a77f943b1..457a8d29fad8 100644
  		return -EINVAL;
  	}
  
-@@ -1523,6 +1951,7 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1524,6 +1952,7 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  	pcie->type = data->type;
  	pcie->perst_set = data->perst_set;
  	pcie->bridge_sw_init_set = data->bridge_sw_init_set;
@@ -169506,7 +169505,7 @@ index e47a77f943b1..457a8d29fad8 100644
  
  	pcie->base = devm_platform_ioremap_resource(pdev, 0);
  	if (IS_ERR(pcie->base))
-@@ -1536,6 +1965,9 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1537,6 +1966,9 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  	pcie->gen = (ret < 0) ? 0 : ret;
  
  	pcie->ssc = of_property_read_bool(np, "brcm,enable-ssc");
@@ -169516,7 +169515,7 @@ index e47a77f943b1..457a8d29fad8 100644
  
  	ret = clk_prepare_enable(pcie->clk);
  	if (ret) {
-@@ -1552,14 +1984,20 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1553,14 +1985,20 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  		clk_disable_unprepare(pcie->clk);
  		return PTR_ERR(pcie->perst_reset);
  	}
@@ -169539,7 +169538,7 @@ index e47a77f943b1..457a8d29fad8 100644
  		clk_disable_unprepare(pcie->clk);
  		return ret;
  	}
-@@ -1582,6 +2020,33 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1583,6 +2021,33 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  			dev_err(pcie->dev, "probe of internal MSI failed");
  			goto fail;
  		}
@@ -169573,7 +169572,7 @@ index e47a77f943b1..457a8d29fad8 100644
  	}
  
  	bridge->ops = pcie->type == BCM7425 ? &brcm7425_pcie_ops : &brcm_pcie_ops;
-@@ -1598,6 +2063,8 @@ static int brcm_pcie_probe(struct platform_device *pdev)
+@@ -1599,6 +2064,8 @@ static int brcm_pcie_probe(struct platform_device *pdev)
  		return ret;
  	}
  
@@ -174198,7 +174197,7 @@ index 5d19baae6a38..0675c8a2e560 100644
  	return pps_cdev_ioctl(file, cmd, arg);
  }
 diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
-index 8ebcddf91f7b..4e7147c23a6a 100644
+index da57f4a2bde0..6c4ab3303b2a 100644
 --- a/drivers/pwm/Kconfig
 +++ b/drivers/pwm/Kconfig
 @@ -217,6 +217,17 @@ config PWM_FSL_FTM
@@ -174219,7 +174218,7 @@ index 8ebcddf91f7b..4e7147c23a6a 100644
  config PWM_HIBVT
  	tristate "HiSilicon BVT PWM support"
  	depends on ARCH_HISI || COMPILE_TEST
-@@ -454,6 +465,17 @@ config PWM_PCA9685
+@@ -466,6 +477,17 @@ config PWM_PCA9685
  	  To compile this driver as a module, choose M here: the module
  	  will be called pwm-pca9685.
  
@@ -174237,7 +174236,7 @@ index 8ebcddf91f7b..4e7147c23a6a 100644
  config PWM_PXA
  	tristate "PXA PWM support"
  	depends on ARCH_PXA || ARCH_MMP || COMPILE_TEST
-@@ -473,6 +495,15 @@ config PWM_RASPBERRYPI_POE
+@@ -485,6 +507,15 @@ config PWM_RASPBERRYPI_POE
  	  Enable Raspberry Pi firmware controller PWM bus used to control the
  	  official RPI PoE hat
  
@@ -174254,7 +174253,7 @@ index 8ebcddf91f7b..4e7147c23a6a 100644
  	tristate "Renesas R-Car PWM support"
  	depends on ARCH_RENESAS || COMPILE_TEST
 diff --git a/drivers/pwm/Makefile b/drivers/pwm/Makefile
-index c822389c2a24..ba58ed4f754d 100644
+index 5d5b64c25b7f..7dadff97f41e 100644
 --- a/drivers/pwm/Makefile
 +++ b/drivers/pwm/Makefile
 @@ -18,6 +18,7 @@ obj-$(CONFIG_PWM_CROS_EC)	+= pwm-cros-ec.o
@@ -174265,7 +174264,7 @@ index c822389c2a24..ba58ed4f754d 100644
  obj-$(CONFIG_PWM_HIBVT)		+= pwm-hibvt.o
  obj-$(CONFIG_PWM_IMG)		+= pwm-img.o
  obj-$(CONFIG_PWM_IMX1)		+= pwm-imx1.o
-@@ -41,8 +42,10 @@ obj-$(CONFIG_PWM_MXS)		+= pwm-mxs.o
+@@ -42,8 +43,10 @@ obj-$(CONFIG_PWM_MXS)		+= pwm-mxs.o
  obj-$(CONFIG_PWM_NTXEC)		+= pwm-ntxec.o
  obj-$(CONFIG_PWM_OMAP_DMTIMER)	+= pwm-omap-dmtimer.o
  obj-$(CONFIG_PWM_PCA9685)	+= pwm-pca9685.o
@@ -196221,7 +196220,7 @@ index 12b6dfeaf658..0de6ac768188 100644
   * endpoint state is gone from hardware.  usb_hcd_flush_endpoint() must
   * have been called previously.  Use for set_configuration, set_interface,
 diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index 38f3f5a766df..82b890704183 100644
+index 760283a541b4..00b84a961aa6 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
 @@ -5722,7 +5722,7 @@ static void port_event(struct usb_hub *hub, int port1)
@@ -196503,10 +196502,10 @@ index db67df29fb2b..b16e528859a8 100644
  }
  
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 318ae24a41f4..0778adc52f37 100644
+index 30404461ef7d..205e86523a37 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -1208,6 +1208,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
+@@ -1223,6 +1223,24 @@ static void dwc3_config_threshold(struct dwc3 *dwc)
  	}
  }
  
@@ -196531,7 +196530,7 @@ index 318ae24a41f4..0778adc52f37 100644
  /**
   * dwc3_core_init - Low-level initialization of DWC3 Core
   * @dwc: Pointer to our controller context structure
-@@ -1273,6 +1291,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1288,6 +1306,8 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_set_incr_burst_type(dwc);
  
@@ -196540,7 +196539,7 @@ index 318ae24a41f4..0778adc52f37 100644
  	ret = dwc3_phy_power_on(dwc);
  	if (ret)
  		goto err_exit_phy;
-@@ -1346,12 +1366,21 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1361,12 +1381,21 @@ static int dwc3_core_init(struct dwc3 *dwc)
  		if (dwc->dis_tx_ipgap_linecheck_quirk)
  			reg |= DWC3_GUCTL1_TX_IPGAP_LINECHECK_DIS;
  
@@ -196562,7 +196561,7 @@ index 318ae24a41f4..0778adc52f37 100644
  		if (DWC3_VER_IS_WITHIN(DWC3, 290A, ANY) &&
  		    (dwc->maximum_speed == USB_SPEED_HIGH ||
  		     dwc->maximum_speed == USB_SPEED_FULL))
-@@ -1362,6 +1391,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
+@@ -1377,6 +1406,24 @@ static int dwc3_core_init(struct dwc3 *dwc)
  
  	dwc3_config_threshold(dwc);
  
@@ -196587,7 +196586,7 @@ index 318ae24a41f4..0778adc52f37 100644
  	return 0;
  
  err_power_off_phy:
-@@ -1505,6 +1552,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1520,6 +1567,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	u8			tx_thr_num_pkt_prd = 0;
  	u8			tx_max_burst_prd = 0;
  	u8			tx_fifo_resize_max_num;
@@ -196595,7 +196594,7 @@ index 318ae24a41f4..0778adc52f37 100644
  
  	/* default to highest possible threshold */
  	lpm_nyet_threshold = 0xf;
-@@ -1525,6 +1573,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1540,6 +1588,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	 */
  	tx_fifo_resize_max_num = 6;
  
@@ -196605,7 +196604,7 @@ index 318ae24a41f4..0778adc52f37 100644
  	dwc->maximum_speed = usb_get_maximum_speed(dev);
  	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
  	dwc->dr_mode = usb_get_dr_mode(dev);
-@@ -1615,10 +1666,16 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1630,10 +1681,16 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  				"snps,resume-hs-terminations");
  	dwc->ulpi_ext_vbus_drv = device_property_read_bool(dev,
  				"snps,ulpi-ext-vbus-drv");
@@ -196622,7 +196621,7 @@ index 318ae24a41f4..0778adc52f37 100644
  	dwc->gfladj_refclk_lpm_sel = device_property_read_bool(dev,
  				"snps,gfladj-refclk-lpm-sel-quirk");
  
-@@ -1639,6 +1696,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1654,6 +1711,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->dis_split_quirk = device_property_read_bool(dev,
  				"snps,dis-split-quirk");
  
@@ -196632,16 +196631,18 @@ index 318ae24a41f4..0778adc52f37 100644
  	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
  	dwc->tx_de_emphasis = tx_de_emphasis;
  
-@@ -1656,6 +1716,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+@@ -1671,6 +1731,10 @@ static void dwc3_get_properties(struct dwc3 *dwc)
  	dwc->tx_thr_num_pkt_prd = tx_thr_num_pkt_prd;
  	dwc->tx_max_burst_prd = tx_max_burst_prd;
  
 +	dwc->axi_pipe_limit = axi_pipe_limit;
 +
- 	dwc->imod_interval = 0;
- 
++	dwc->imod_interval = 0;
++
  	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
-@@ -1952,6 +2014,12 @@ static int dwc3_probe(struct platform_device *pdev)
+ }
+ 
+@@ -1963,6 +2027,12 @@ static int dwc3_probe(struct platform_device *pdev)
  	if (IS_ERR(dwc->usb_psy))
  		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
  
@@ -196655,7 +196656,7 @@ index 318ae24a41f4..0778adc52f37 100644
  	if (IS_ERR(dwc->reset)) {
  		ret = PTR_ERR(dwc->reset);
 diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 516bace7e1dc..4d985479ff75 100644
+index 06be72f78969..4c3ccf6ef9dd 100644
 --- a/drivers/usb/dwc3/core.h
 +++ b/drivers/usb/dwc3/core.h
 @@ -185,6 +185,9 @@
@@ -256523,7 +256524,7 @@ index 000000000000..cdc9963176e5
 +test_main();
 +0;
 diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
-index 54c47463c215..24e1854e18b1 100644
+index b0137eac7ab3..823a9d6d6936 100644
 --- a/drivers/usb/host/xhci-mem.c
 +++ b/drivers/usb/host/xhci-mem.c
 @@ -716,6 +716,14 @@ void xhci_setup_streams_ep_input_ctx(struct xhci_hcd *xhci,
@@ -256624,7 +256625,7 @@ index 54c47463c215..24e1854e18b1 100644
  
  	erst_base = xhci_read_64(xhci, &ir->ir_set->erst_base);
 diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-index ff461c3ed6ff..31e7625e325b 100644
+index 52aeec2cad78..41d7165cd790 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
 @@ -27,6 +27,8 @@
@@ -256634,9 +256635,9 @@ index ff461c3ed6ff..31e7625e325b 100644
 +#define VL805_FW_VER_0138C0	0x0138C0
 +
  /* Device for a quirk */
- #define PCI_VENDOR_ID_FRESCO_LOGIC	0x1b73
- #define PCI_DEVICE_ID_FRESCO_LOGIC_PDK	0x1000
-@@ -295,6 +297,16 @@ static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
+ #define PCI_VENDOR_ID_FRESCO_LOGIC		0x1b73
+ #define PCI_DEVICE_ID_FRESCO_LOGIC_PDK		0x1000
+@@ -297,6 +299,16 @@ static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
  	return 0;
  }
  
@@ -256653,23 +256654,22 @@ index ff461c3ed6ff..31e7625e325b 100644
  static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  {
  	struct pci_dev                  *pdev = to_pci_dev(dev);
-@@ -487,8 +499,15 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+@@ -489,9 +501,14 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  			pdev->device == 0x3432)
  		xhci->quirks |= XHCI_BROKEN_STREAMS;
  
--	if (pdev->vendor == PCI_VENDOR_ID_VIA && pdev->device == 0x3483)
+-	if (pdev->vendor == PCI_VENDOR_ID_VIA && pdev->device == PCI_DEVICE_ID_VIA_VL805) {
 +	if (pdev->vendor == PCI_VENDOR_ID_VIA && pdev->device == 0x3483) {
  		xhci->quirks |= XHCI_LPM_SUPPORT;
 +		xhci->quirks |= XHCI_EP_CTX_BROKEN_DCS;
 +		xhci->quirks |= XHCI_AVOID_DQ_ON_LINK;
-+		xhci->quirks |= XHCI_ZHAOXIN_TRB_FETCH;
+ 		xhci->quirks |= XHCI_TRB_OVERFETCH;
 +		xhci->quirks |= XHCI_VLI_SS_BULK_OUT_BUG;
 +		if (xhci_vl805_get_fw_version(pdev) < VL805_FW_VER_0138C0)
 +			xhci->quirks |= XHCI_VLI_HUB_TT_QUIRK;
-+	}
+ 	}
  
  	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
- 		pdev->device == PCI_DEVICE_ID_ASMEDIA_1042_XHCI) {
 diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
 index 9d3f1cfe388d..ba7686d3e101 100644
 --- a/drivers/usb/host/xhci-ring.c
@@ -256832,7 +256832,7 @@ index 9d3f1cfe388d..ba7686d3e101 100644
  			start_cycle, start_trb);
  	return 0;
 diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-index 70e6c240a540..3ef2c3de9141 100644
+index c21397c4b3a3..998f9510a494 100644
 --- a/drivers/usb/host/xhci.c
 +++ b/drivers/usb/host/xhci.c
 @@ -1497,6 +1497,109 @@ static int xhci_check_maxpacket(struct xhci_hcd *xhci, unsigned int slot_id,
@@ -256954,7 +256954,7 @@ index 70e6c240a540..3ef2c3de9141 100644
  	.enable_device =	xhci_enable_device,
  	.update_hub_device =	xhci_update_hub_device,
 diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
-index 02a3e93e1a63..7ee95d456ab4 100644
+index acb71394d709..6448688cd4b3 100644
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
 @@ -492,6 +492,8 @@ struct xhci_ep_ctx {
@@ -262830,10 +262830,10 @@ index d6e38a500833..70c233440cdf 100644
  int gpiochip_irq_map(struct irq_domain *d, unsigned int irq,
  		     irq_hw_number_t hwirq);
 diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index 83ec4bf9809e..ce1e7a9a5990 100644
+index f95e11c4052d..a22352b92c99 100644
 --- a/include/linux/iommu.h
 +++ b/include/linux/iommu.h
-@@ -780,15 +780,19 @@ struct iommu_domain_ops {
+@@ -785,15 +785,19 @@ struct iommu_domain_ops {
  	int (*set_dev_pasid)(struct iommu_domain *domain, struct device *dev,
  			     ioasid_t pasid);
  
@@ -267332,10 +267332,10 @@ index d2c37d64fd0c..4b1ce69a6ee5 100644
  }
 +EXPORT_SYMBOL_GPL(find_cpio_data);
 diff --git a/mm/cma.c b/mm/cma.c
-index 61c92b9b7664..5715b4f84bd7 100644
+index 7d5253421f34..50d3aecc2cde 100644
 --- a/mm/cma.c
 +++ b/mm/cma.c
-@@ -623,3 +623,39 @@ int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
+@@ -624,3 +624,39 @@ int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
  
  	return 0;
  }
@@ -267376,10 +267376,10 @@ index 61c92b9b7664..5715b4f84bd7 100644
 +	return cma_for_each_area(check_range, &range);
 +}
 diff --git a/mm/mempolicy.c b/mm/mempolicy.c
-index 219c098b3ffa..5f06bbb19129 100644
+index 88f0bb008efd..5a79986958ac 100644
 --- a/mm/mempolicy.c
 +++ b/mm/mempolicy.c
-@@ -2979,7 +2979,9 @@ void __init numa_policy_init(void)
+@@ -3125,7 +3125,9 @@ void __init numa_policy_init(void)
  /* Reset policy of current process to default */
  void numa_default_policy(void)
  {
@@ -267390,7 +267390,7 @@ index 219c098b3ffa..5f06bbb19129 100644
  }
  
  /*
-@@ -2998,7 +3000,6 @@ static const char * const policy_modes[] =
+@@ -3144,7 +3146,6 @@ static const char * const policy_modes[] =
  };
  
  
@@ -267398,7 +267398,7 @@ index 219c098b3ffa..5f06bbb19129 100644
  /**
   * mpol_parse_str - parse string to mempolicy, for tmpfs mpol mount option.
   * @str:  string containing mempolicy to parse
-@@ -3011,13 +3012,18 @@ static const char * const policy_modes[] =
+@@ -3157,13 +3158,18 @@ static const char * const policy_modes[] =
   */
  int mpol_parse_str(char *str, struct mempolicy **mpol)
  {
@@ -267418,7 +267418,7 @@ index 219c098b3ffa..5f06bbb19129 100644
  	if (flags)
  		*flags++ = '\0';	/* terminate mode string */
  
-@@ -3096,9 +3102,16 @@ int mpol_parse_str(char *str, struct mempolicy **mpol)
+@@ -3242,9 +3248,16 @@ int mpol_parse_str(char *str, struct mempolicy **mpol)
  			goto out;
  	}
  
@@ -267438,7 +267438,7 @@ index 219c098b3ffa..5f06bbb19129 100644
  
  	/*
  	 * Save nodes for mpol_to_str() to show the tmpfs mount options
-@@ -3131,7 +3144,29 @@ int mpol_parse_str(char *str, struct mempolicy **mpol)
+@@ -3277,7 +3290,29 @@ int mpol_parse_str(char *str, struct mempolicy **mpol)
  		*mpol = new;
  	return err;
  }
@@ -267470,7 +267470,7 @@ index 219c098b3ffa..5f06bbb19129 100644
  /**
   * mpol_to_str - format a mempolicy structure for printing
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 09aea6306ec3..bbad3b168bb3 100644
+index 29b03083969e..ba9955416c75 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -207,6 +207,27 @@ EXPORT_SYMBOL(node_states);
@@ -267519,7 +267519,7 @@ index 09aea6306ec3..bbad3b168bb3 100644
  			if (page)
  				return page;
 diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 5a55788c5b95..7cd50a5f3753 100644
+index 5b281e5ee668..e17efba57eac 100644
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
 @@ -4775,7 +4775,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
