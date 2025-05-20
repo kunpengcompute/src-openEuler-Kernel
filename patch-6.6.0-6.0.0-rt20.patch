@@ -1,7 +1,7 @@
-From bde28cdceefa663be235a70b69e475612b544d8d Mon Sep 17 00:00:00 2001
+From 59f66cd50419c7fb2ecf962f4f35b09bf935de85 Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Thu, 24 Apr 2025 10:02:38 +0800
-Subject: [PATCH] kernel-rt1
+Date: Mon, 19 May 2025 17:35:29 +0800
+Subject: [PATCH] 222
 
 ---
  arch/arm/Kconfig                              |    6 +-
@@ -41,6 +41,7 @@ Subject: [PATCH] kernel-rt1
  drivers/gpu/drm/i915/i915_request.c           |    2 -
  drivers/gpu/drm/i915/i915_trace.h             |    6 +-
  drivers/gpu/drm/i915/i915_utils.h             |    2 +-
+ .../ethernet/yunsilicon/xsc/common/xsc_core.h |    2 +-
  drivers/tty/serial/21285.c                    |    8 +-
  drivers/tty/serial/8250/8250_aspeed_vuart.c   |    6 +-
  drivers/tty/serial/8250/8250_bcm7271.c        |   28 +-
@@ -170,7 +171,7 @@ Subject: [PATCH] kernel-rt1
  kernel/trace/trace_output.c                   |   16 +-
  net/core/dev.c                                |   39 +-
  net/core/skbuff.c                             |    7 +-
- 166 files changed, 5013 insertions(+), 1508 deletions(-)
+ 167 files changed, 5014 insertions(+), 1509 deletions(-)
  create mode 100644 kernel/printk/nbcon.c
 
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
@@ -973,18 +974,18 @@ index d090753f9..833abc17d 100644
  	ktime_t ac_time;
  #endif
 diff --git a/drivers/crypto/ccp/hygon/psp-dev.c b/drivers/crypto/ccp/hygon/psp-dev.c
-index c150aa163..cdd2d1a39 100644
+index f67b5370d..6cb16ef7b 100644
 --- a/drivers/crypto/ccp/hygon/psp-dev.c
 +++ b/drivers/crypto/ccp/hygon/psp-dev.c
-@@ -17,7 +17,7 @@
+@@ -15,7 +15,7 @@
+ #include <linux/psp-hygon.h>
+ #include <linux/bitfield.h>
  #include <linux/delay.h>
- #include <linux/sort.h>
- #include <linux/bsearch.h>
 -#include <linux/rwlock.h>
 +//#include <linux/rwlock.h>
  
  #include "psp-dev.h"
- 
+ #include "vpsp.h"
 diff --git a/drivers/crypto/ccp/hygon/tdm-dev.c b/drivers/crypto/ccp/hygon/tdm-dev.c
 index 42322c6bd..46aa8b02d 100644
 --- a/drivers/crypto/ccp/hygon/tdm-dev.c
@@ -1560,6 +1561,19 @@ index c61066498..48e19e55d 100644
  # define _WAIT_FOR_ATOMIC_CHECK(ATOMIC) WARN_ON_ONCE((ATOMIC) && !in_atomic())
  #else
  # define _WAIT_FOR_ATOMIC_CHECK(ATOMIC) do { } while (0)
+diff --git a/drivers/net/ethernet/yunsilicon/xsc/common/xsc_core.h b/drivers/net/ethernet/yunsilicon/xsc/common/xsc_core.h
+index 1eaaf0b3d..9874fdb74 100644
+--- a/drivers/net/ethernet/yunsilicon/xsc/common/xsc_core.h
++++ b/drivers/net/ethernet/yunsilicon/xsc/common/xsc_core.h
+@@ -26,7 +26,7 @@
+ #include <linux/version.h>
+ #include <linux/if_vlan.h>
+ #include <linux/reboot.h>
+-#include <linux/rwlock.h>
++//#include <linux/rwlock.h>
+ 
+ #include "common/xsc_cmd.h"
+ #include "common/xsc_ioctl.h"
 diff --git a/drivers/tty/serial/21285.c b/drivers/tty/serial/21285.c
 index d756fcc88..4de0c975e 100644
 --- a/drivers/tty/serial/21285.c
