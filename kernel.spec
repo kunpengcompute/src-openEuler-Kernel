@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       263
+%global devel_release       264
 %global maintenance_release .0.0
-%global pkg_release         .165
+%global pkg_release         .166
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,231 @@ fi
 %endif
 
 %changelog
+* Wed May 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-264.0.0.166
+- !16356  bugfixes for fuse fastpath and fast_ipc
+- !16327  mfd: ene-kb3930: Fix a potential NULL pointer dereference
+- ipc: fix error kill signal handle in fast_ipc
+- fuse: add fuse fastpath forget cmd support
+- !16316  bpf: Fix kmemleak warning for percpu hashmap
+- !16343  ext4: fix OOB read when checking dotdot dir
+- !16048 [OLK-5.10] iommu/vt-d: Set No Execute Enable bit in PASID table entry
+- !16206  ext4: update s_journal_inum if it changes after journal replay
+- !16220  jbd2: remove wrong sb->s_sequence check
+- !15899  Backport mainline patches to avoid crash caused by rsize being 0
+- !16215 uffd: Fix bug of cannot set mode in userfaultfd_copy
+- !15498  cifs: Fix an infinite loop in cifsd caused by a failed mount attempt on port 139
+- !15709 [OLK-5.10]:update patches for sw64 architecture
+- !16309  ocfs2: validate l_tree_depth to avoid out-of-bounds access
+- ext4: fix OOB read when checking dotdot dir
+- !16322  bpf: Fix WARN() in get_bpf_raw_tp_regs
+- !16204  ext4: fix off-by-one error in do_split
+- mfd: ene-kb3930: Fix a potential NULL pointer dereference
+- bpf: Fix WARN() in get_bpf_raw_tp_regs
+- bpf: Fix kmemleak warning for percpu hashmap
+- ocfs2: validate l_tree_depth to avoid out-of-bounds access
+- !8014 [22.03-LTS-SP3]Solve the problem that a virtual machine cannot identify the GPU by passthrough
+- uffd: Fix bug of cannot set mode in userfaultfd_copy
+- !16274  kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- !15296 [Intel-SIG]dmaengine: idxd: Add a new DSA device ID for Granite Rapids-D platform
+- !13916 intel: backport intel_pstate driver update from 6.11
+- kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- jbd2: remove wrong sb->s_sequence check
+- ext4: update s_journal_inum if it changes after journal replay
+- ext4: fix off-by-one error in do_split
+- cpufreq: intel_pstate: Support highest performance change interrupt
+- x86/cpufeatures: Add HWP highest perf change feature flag
+- iommu/vt-d: Set No Execute Enable bit in PASID table entry
+- smb: client: Update IO sizes after reconnection
+- smb: client: Store original IO parameters and prevent zero IO sizes
+- smb:client: smb: client: Add reverse mapping from tcon to superblocks
+- sw64: provide arch_test_bit_acquire() for architecture sw64
+- sw64: ftrace: implement ftrace_modify_call
+- sw64: cpu: give preference to CPU information from SMBIOS
+- sw64: irqchip: use sunway as vendor prefix in device tree
+- sw64: irqchip: use pr_fmt instead of prefix string macro
+- sw64: numa: decrease CONFIG_NODES_SHIFT to 3
+- perf jitdump: Add SW64 support
+- sw64: emulator: add shutdown and restart functions
+- sw64: emulator: fix the multi-core boot issue
+- sw64: fix bad address error for vfio
+- sw64: kvm: convert to the gfn-based MMU notifier callbacks
+- sw64: add SO_NETNS_COOKIE definition
+- sw64: locking: Move qrwlock.h include after qspinlock.h
+- sw64: fix no CONFIG_DYNAMIC_FTRACE_WITH_REGS error
+- sw64: fix kprobe function
+- sw64: perf: fix specific performance events can be sampled
+- sw64: bpf: optimize JIT for load imm
+- sw64: bpf: fix BPF_CALL JIT for multi-function programs
+- libbpf: add sw64 support
+- sw64: implementing VDSO with generic code
+- sw64: rename mmap protection_map
+- sw64: ptrace: add NT_SW64_SYSTEM_CALL regset
+- sw64: ensure sw64 handle PF_IO_WORKER in copy_thread()
+- sw64 bpf: Add missing uapi header for BPF_PROG_TYPE_PERF_EVENT programs
+- sw64 bpf: add BPF_NOSPEC jit
+- sw64: rename _PFN_BITS to __PFN_BITS
+- sw64: bpf: optimize some instructions
+- sw64: bpf: fix XADD32 and XADD64
+- sw64: irqchip: fix irq_enable/disable callback for MCU controller
+- sw64: update defconfig
+- sw64: kvm: remove unused argument 'addr' of apt_dissolve_pud/pmd()
+- sw64: cache: fix shared_cpu_map when PPTT is valid
+- sw64: kvm: fix tlb flush implementation of dirty page tracking
+- sw64: kvm: declare KVM_CAP_SET_GUEST_DEBUG
+- sw64: pci: remove function fix_jm585_reset()
+- sw64: irqchip: remove fallback after kzalloc_node()
+- sw64: irqchip: improve intx implementation
+- sw64: kvm: add KVM_CAP_READONLY_MEM support
+- sw64: pci: fix incorrect pointer of struct pci_controller
+- sw64: fix mmap protection_map
+- sw64: show CPU feature UNA in /proc/cpuinfo
+- sw64: fix the error of cpufreq update
+- sw64: mm: support fdt memory reservation
+- sw64: remove deprecated annotation in irq.h
+- sw64: introduce a fine-grained intx mask/unmask system
+- sw64: move handle_intx() into pci-intx handle
+- sw64: perf: fix system hang problem when using perf callchain sampling
+- sw64: fix compilation issues on match.c
+- sw64: iommu: fix NULL hose check
+- sw64: mm: fix PFN of PMDs for 512M hugepage
+- sw64: kvm: fix an error when unmapping 512M hugepages
+- sw64: modify sys_pfh_ops
+- sw64: pci: fix legacy PCI not initialized for XueLang platform
+- sw64: fix set_huge_pte_at for C4
+- sw64: fix compilation issues
+- sw64: add arch_hugetlb_valid_size for C4
+- sw64: pci: remove legacy io reservation
+- sw64: cache: give preference to cache information from PPTT table
+- sw64: cpu: refactor cpuinfo related code
+- sw64: cache: refactor cacheinfo related code
+- sw64: cpu: move cpu related code to the newly created cpu.c
+- sw64: topology: support initializing topology via DT or ACPI
+- sw64: defconfig: fix SPI related configuration items
+- sw64: irqchip: add version 3 for PINTC
+- sw64: fix null pointer issue when CONFIG_BUILTIN_DTB=y
+- sw64: acpi: suppress log of function acpi_numa_x2apic_affinity_init()
+- sw64: clk: further fix the clock frequency of SPI and I2C
+- sw64: smp: fix function fdt_setup_smp()
+- Revert "sw64: fdt: map physical node ID to logical node ID"
+- sw64: kvm: adjust interrupt priority for guest
+- sw64: fix judgements about legacy pci support
+- sw64: compatible with suspend implementation
+- sw64: add junzhang_v1/2/3_key
+- sw64: fix LPC legacy IO space on chip junzhang and junzhang_v2
+- sw64: fix numa setup when acpi is disabled
+- sw64: fix setup_mem_size()
+- sw64: mm: remove legacy memory detection for JunZhang platform
+- sw64: fix the register bug in do_entUna
+- sw64: iommu: improve iommu initialization
+- sw64: add unaligned access handling code for SIMD in kernel mode (5.10)
+- sw64: select different MUX to read cpu frequency
+- sw64: clk: fix the clock frequency of SPI and I2C
+- sw64: fix a bug in huge_pte_offset()
+- sw64: pci: rename some functions
+- sw64: pci: support PCIe controller driver based on device tree
+- PCI: Allow architecture-specific pci_remap_iospace()
+- sw64: remove sw64_io related functions
+- sw64: platform: add misc platform driver
+- sw64: perf: remove redundant link options
+- sw64: lpc: fix ast2400 driver error for C4
+- sw64: improve lib performance for new archs
+- sw64: remove unnecessary parameter passing
+- sw64: kvm: fix invalid memslot flags checking during dirty logging
+- sw64: kvm: don't retrieve memory slot again in page fault handler
+- sw64: pci: fix the policy of pci resource assignment
+- sw64: kexec: remove code for compatibility with builtin DTB
+- sw64: smp: allow NR_CPUS less than the number detected by firmware
+- sw64: dtb: fix DTB not reserved when CONFIG_EFI=n for xuelang
+- sw64: fix C4 INTx configuration
+- sw64: pci: fix compile error when CONFIG_PCI_MSI=n
+- sw64: add basic frequency scaling support for JunZhang
+- sw64: add __vdso_getcpu support
+- sw64: pci: fix unable to get node ID when numa_off is set
+- sw64: kexec: fix kernel crashdump bugs
+- sw64: bpf: fix BPF_CALL address
+- sw64: fix irq work
+- sw64: pciehp: get enabled/disabled status of RCs from firmware
+- sw64: reset the CSR:PTBR_USR
+- sw64: dts: support online-capable property for cpu device node
+- sw64: fix a base address of msiaddr register
+- sw64: fix some S3 CSRs problems for C4
+- sw64: bypass sunway pcie hotplug driver in non-physical scenario
+- sw64: seperate IRQ_MSI configs for sub-architectures
+- sw64: handle null MSI irq in guest os
+- sw64: handle null MSI irq
+- sw64: kvm: fix mmio GPA for C4
+- sw64: iommu: fix wrong devfn setup
+- sw64: iommu: fix some iova related checks
+- sw64: defconfig: update defconfig for kata-containers
+- sw64: add HARDLOCKUP_DETECTOR support
+- sw64: add dependency for sunway-ged driver
+- sw64: fix compile error with CONFIG_SUNWAY_GED=m
+- sw64: remove unused sunway_memory_get_meminfo()
+- sw64: Kconfig: activate ARCH_KEEP_MEMBLOCK
+- sw64: fix bugs in decreasing frequency
+- sw64: add cpu hotplug support for C4 guest
+- sw64: add NMI support
+- sw64: add CSR_CAUSE into pt_regs
+- sw64: optimize the code in do_entInt()
+- sw64: kvm: support up to 256 vCPUs for C4
+- sw64: fdt: map physical node ID to logical node ID
+- sw64: perf: hide hardware performance events in guest os for c4
+- sw64: kvm: fix inconsistent vcpucb of C4
+- sw64: kvm: implement kvm_arch_set_irq_inatomic()
+- sw64: fix regs.pc on single-step with ptrace
+- sw64: modify some interrupt target core to logic 0 core
+- sw64: fix guest send ipi target
+- sw64: fix sw64_is_fake_mcount() of recordmcount
+- sw64: remove some unused module init/exit/license
+- sw64: kvm: add numa support for memory hotplug
+- sw64: numa: support NUMA initialization based on device tree
+- sw64: smp: support SMP initialization based on device tree
+- sw64: dtb: disable built-in DTB for junzhang
+- sw64: ata: add ata_hrst_delay cmdline option
+- sw64: kvm: fix bug when vcpu disable irq
+- sw64: kconfig: add I2C and SPI defconfig for junzhang
+- sw64: kconfig: set default y for GPIO if ACPI enabled
+- sw64: spi: fix compatibility with dts for xuelang
+- sw64: pci: use readq/writeq to read/write RC and PIU IO registers
+- sw64: msi: modify msi migration strategy
+- sw64: gpu: memset_io and memcpy_toio/fromio for iomem on AMD swsmu
+- sw64: pciehp: add pcie hotplug driver support for C4
+- sw64: remove redundant intx code
+- sw64: irq: support interrupt for virtual GPIO
+- sw64: acpi: enable ACPI by default
+- sw64: mm: fix mem=start@size invalid in some cases
+- sw64: use generic page_is_ram()
+- sw64: mm: take memory information from firmware
+- sw64: kvm: acpi: match sunway_ged by acpi method
+- sw64: lpc: fix compile error with CONFIG_SUNWAY_SUPERIO_AST2400=y
+- sw64: fix typo in gpio-sunway
+- sw64: fix compile warning of handle_pci_msi_interrupt
+- sw64: fix usage of __add_memory() in sunway-ged driver
+- sw64: change FORCE_MAX_ZONEORDER default value
+- sw64: perf: fix event check order
+- sw64: wrap frequency workaround into standalone functions
+- sw64: remove redudant save_ktp
+- sw64: fix compile warning of smp_callin()
+- cifs: Fix an infinite loop in cifsd caused by a failed mount attempt on port 139
+- cpufreq: intel_pstate: Simplify spinlock locking
+- cpufreq: intel_pstate: Drop redundant locking from intel_pstate_driver_cleanup()
+- cpufreq: intel_pstate: remove cpudata::prev_cummulative_iowait
+- cpufreq: intel_pstate: Add Emerald Rapids support in no-HWP mode
+- cpufreq: intel_pstate: Revise global turbo disable check
+- cpufreq: intel_pstate: set stale CPU frequency to minimum
+- cpufreq: intel_pstate: remove MODULE_LICENSE in non-modules
+- cpufreq: intel_pstate: Update cpuinfo.max_freq on HWP_CAP changes
+- cpufreq: intel_pstate: ITMT support for overclocked system
+- cpufreq: intel_pstate: Fix active mode offline/online EPP handling
+- cpufreq: intel_pstate: Clear HWP Status during HWP Interrupt enable
+- cpufreq: intel_pstate: Fix unchecked MSR 0x773 access
+- cpufreq: intel_pstate: Process HWP Guaranteed change notification
+- cpufreq: intel_pstate: Simplify intel_pstate_update_perf_limits()
+- cpufreq: intel_pstate: Clean up frequency computations
+- cpufreq: intel_pstate: Always read hwp_cap_cached with READ_ONCE()
+- dmaengine: idxd: Add a new DSA device ID for Granite Rapids-D platform
+- config: Enable the VGA and IGD features of vfio
+
 * Tue May 13 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-263.0.0.165
 - !16242  fuse: support fastpath
 - !16225  backlight: led_bl: Hold led_access lock when calling led_sysfs_disable()
