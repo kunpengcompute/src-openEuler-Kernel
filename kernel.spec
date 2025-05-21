@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       91
+%global devel_release       92
 %global maintenance_release .0.0
-%global pkg_release         .85
+%global pkg_release         .86
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,129 @@ fi
 %endif
 
 %changelog
+* Wed May 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-92.0.0.86
+- !16367  scsi: sg: fix refcount underflow in
+- scsi: sg: Enable runtime power management
+- Revert "scsi: sg: Enable runtime power management"
+- !16349 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.82-6.6.83 LTS Patches
+- !16359 net: hns3: some bugfixes for hns3 driver
+- !16350 [OLK-6.6]Hygon: Address boot failures of CSV1/CSV2 VMs on Hygon 2g and C86-3g CPUs with firmware build ID below 1878 and 1810.
+- net: hns3: disable interrupt when ptp init failed
+- net: hns3: avoid unnecessary checking when unmap buffer
+- net: hns3: fix a use of uninitialized variable problem
+- kbuild: userprogs: use correct lld when linking through clang
+- pfifo_tail_enqueue: Drop new packet when sch->limit == 0
+- spi-mxs: Fix chipselect glitch
+- x86/boot: Sanitize boot params before parsing command line
+- x86/boot: Rename conflicting 'boot_params' pointer to 'boot_params_ptr'
+- ima: Reset IMA_NONACTION_RULE_FLAGS after post_setattr
+- x86/mm: Don't disable PCID when INVLPG has been fixed by microcode
+- drm/i915/dsi: Use TRANS_DDI_FUNC_CTL's own port width macro
+- ALSA: hda: realtek: fix incorrect IS_REACHABLE() usage
+- mm: hugetlb: Add huge page size param to huge_ptep_get_and_clear()
+- iio: adc: at91-sama5d2_adc: fix sama7g5 realbits value
+- iio: dac: ad3552r: clear reset status flag
+- iio: filter: admv8818: Force initialization of SDO
+- eeprom: digsy_mtc: Make GPIO lookup table match the device
+- bus: mhi: host: pci_generic: Use pci_try_reset_function() to avoid deadlock
+- drivers: core: fix device leak in __fw_devlink_relax_cycles()
+- intel_th: pci: Add Panther Lake-P/U support
+- intel_th: pci: Add Panther Lake-H support
+- intel_th: pci: Add Arrow Lake support
+- mei: me: add panther lake P DID
+- cdx: Fix possible UAF error in driver_override_show()
+- KVM: x86: Explicitly zero EAX and EBX when PERFMON_V2 isn't supported by KVM
+- KVM: SVM: Suppress DEBUGCTL.BTF on AMD
+- KVM: SVM: Drop DEBUGCTL[5:2] from guest's effective value
+- usb: xhci: Enable the TRB overfetch quirk on VIA VL805
+- xhci: pci: Fix indentation in the PCI device ID definitions
+- usb: gadget: Check bmAttributes only if configuration is valid
+- usb: gadget: Fix setting self-powered state on suspend
+- usb: gadget: Set self-powered based on MaxPower and bmAttributes
+- usb: typec: tcpci_rt1711h: Unmask alert interrupts to fix functionality
+- usb: typec: ucsi: increase timeout for PPM reset operations
+- usb: dwc3: gadget: Prevent irq storm when TH re-executes
+- usb: dwc3: Set SUSPENDENABLE soon after phy init
+- usb: gadget: u_ether: Set is_suspend flag if remote wakeup fails
+- usb: renesas_usbhs: Flush the notify_hotplug_work
+- usb: typec: ucsi: Fix NULL pointer access
+- usb: quirks: Add DELAY_INIT and NO_LPM for Prolific Mass Storage Card Reader
+- usb: hub: lack of clearing xHC resources
+- usb: renesas_usbhs: Use devm_usb_get_phy()
+- usb: renesas_usbhs: Call clk_put()
+- gpio: rcar: Fix missing of_node_put() call
+- net: dsa: mt7530: Fix traffic flooding for MMIO devices
+- sched/fair: Fix potential memory corruption in child_cfs_rq_on_list
+- ublk: set_params: properly check if parameters can be applied
+- net-timestamp: support TCP GSO case for a few missing flags
+- exfat: fix soft lockup in exfat_clear_bitmap
+- x86/sgx: Fix size overflows in sgx_encl_create()
+- vlan: enforce underlying device type
+- ppp: Fix KMSAN uninit-value warning with bpf
+- net: ipa: Enable checksum for IPA_ENDPOINT_AP_MODEM_{RX,TX} for v4.7
+- net: ipa: Fix QSB data for v4.7
+- net: ipa: Fix v4.7 resource group names
+- be2net: fix sleeping while atomic bugs in be_ndo_bridge_getlink
+- drm/sched: Fix preprocessor guard
+- hwmon: fix a NULL vs IS_ERR_OR_NULL() check in xgene_hwmon_probe()
+- llc: do not use skb_get() before dev_queue_xmit()
+- ALSA: usx2y: validate nrpacks module parameter on probe
+- tracing: probe-events: Remove unused MAX_ARG_BUF_LEN macro
+- hwmon: (ad7314) Validate leading zero bits and return error
+- hwmon: (ntc_thermistor) Fix the ncpXXxh103 sensor table
+- hwmon: (pmbus) Initialise page count in pmbus_identify()
+- caif_virtio: fix wrong pointer check in cfv_probe()
+- net: gso: fix ownership in __udp_gso_segment
+- bluetooth: btusb: Initialize .owner field of force_poll_sync_fops
+- HID: google: fix unused variable warning under !CONFIG_ACPI
+- wifi: iwlwifi: limit printed string from FW file
+- mm: don't skip arch_sync_kernel_mappings() in error paths
+- mm/page_alloc: fix uninitialized variable
+- block: fix conversion of GPT partition name to 7-bit
+- s390/traps: Fix test_monitor_call() inline assembly
+- dma: kmsan: export kmsan_handle_dma() for modules
+- rapidio: fix an API misues when rio_add_net() fails
+- wifi: nl80211: reject cooked mode if it is set along with other flags
+- Bluetooth: Add check for mgmt_alloc_skb() in mgmt_device_connected()
+- Bluetooth: Add check for mgmt_alloc_skb() in mgmt_remote_name()
+- mptcp: fix 'scheduling while atomic' in mptcp_pm_nl_append_new_local_addr
+- x86/cpu: Properly parse CPUID leaf 0x2 TLB descriptor 0x63
+- x86/cpu: Validate CPUID leaf 0x2 EDX output
+- x86/cacheinfo: Validate CPUID leaf 0x2 EDX output
+- platform/x86: thinkpad_acpi: Add battery quirk for ThinkPad X131e
+- drm/radeon: Fix rs400_gpu_init for ATI mobility radeon Xpress 200M
+- hwmon: (peci/dimmtemp) Do not provide fake thresholds data
+- ALSA: hda/realtek: update ALC222 depop optimize
+- ALSA: hda/realtek - add supported Mic Mute LED for Lenovo platform
+- ALSA: hda: intel: Add Dell ALC3271 to power_save denylist
+- ALSA: seq: Avoid module auto-load handling at event delivery
+- gpio: rcar: Use raw_spinlock to protect register access
+- ksmbd: fix bug on trap in smb2_lock
+- ksmbd: fix use-after-free in smb2_lock
+- ksmbd: fix type confusion via race condition when using ipc_msg_send_request
+- LoongArch: Set max_pfn with the PFN of the last page
+- LoongArch: Use polling play_dead() when resuming from hibernation
+- LoongArch: Convert unreachable() to BUG()
+- tracing: tprobe-events: Fix a memory leak when tprobe with $retval
+- riscv: cacheinfo: Use of_property_present() for non-boolean properties
+- riscv: Prevent a bad reference count on CPU nodes
+- riscv: cacheinfo: initialize cacheinfo's level and type from ACPI PPTT
+- riscv: cacheinfo: remove the useless input parameter (node) of ci_leaf_init()
+- NFS: O_DIRECT writes must check and adjust the file length
+- x86/speculation: Add __update_spec_ctrl() helper
+- net: enetc: VFs do not support HWTSTAMP_TX_ONESTEP_SYNC
+- net: enetc: Replace ifdef with IS_ENABLED
+- net: enetc: Remove setting of RX software timestamp
+- drm/amdgpu: disable BAR resize on Dell G5 SE
+- drm/amdgpu: Check extended configuration space register when system uses large bar
+- smb: client: fix chmod(2) regression with ATTR_READONLY
+- drm/i915/ddi: Fix HDMI port width programming in DDI_BUF_CTL
+- drm/i915/xe2lpd: Move D2D enable/disable
+- efi: Don't map the entire mokvar table to determine its size
+- x86/amd_nb: Use rdmsr_safe() in amd_get_mmconfig_range()
+- KVM: SVM: CSV is unsupported if both the firmware with a build ID < 1878 and SME is not in use
+- KVM: SVM: The ASID range available for CSV2 guests vary across different firmware
+
 * Wed May 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-91.0.0.85
 - !16281 【OLK-6.6】新增海光psp/ccp device id以及优化海光可信功能内核驱动
 - !16344 [OLK-6.6] backport important bugfix for nvme driver from upstream linux-6.6.y
