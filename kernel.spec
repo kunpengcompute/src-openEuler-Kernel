@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       90
+%global devel_release       91
 %global maintenance_release .0.0
-%global pkg_release         .95
+%global pkg_release         .96
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,128 @@ fi
 %endif
 
 %changelog
+* Wed May 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-91.0.0.96
+- !16281 【OLK-6.6】新增海光psp/ccp device id以及优化海光可信功能内核驱动
+- !16344 [OLK-6.6] backport important bugfix for nvme driver from upstream linux-6.6.y
+- !16325  perf/core: Fix WARN_ON(!ctx) in __free_event() for partial init
+- !16326  mfd: ene-kb3930: Fix a potential NULL pointer dereference
+- crypto: ccp: Fix for potential memory Out-of-Bounds access due to insufficient array size
+- !16324  LoongArch: add PCA953X/2K3000 GMAC/IGC netcard/NR_CPUS=2048/SCHED_MC support
+- !16352 [OLK-6.6] Fix sxe compile errors without CONFIG_PM_SLEEP
+- Linkdata：net：fix sxe compile errors 'sxe_resume' defined but not used
+- !16280  Add Loongson PWM controller support
+- !16279  crypto: loongson: add wst se chip support
+- !16342 v5  Memory access profiler(SPE) driven NUMA balancing and damon
+- !16302 IMA: support virtcca extend assigned register
+- !15384 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.63-6.6.64 LTS Conflicts Patches
+- !16229 drivers/iommu: Enhance the robustness of the iommu module
+- !16328  drm/amd/display: prevent hang on link training fail
+- !16310  ocfs2: validate l_tree_depth to avoid out-of-bounds access
+- IMA: support virtcca extend assigned register
+- nvme-tcp: fix premature queue removal and I/O failover
+- config: Enable memory sampling based pmu for numa balance and damon by default
+- arm-spe: Export boost SPE sampling info via tracefs tracepoint
+- arm-spe: Add kernel cmdline option to enable SPE boost
+- arm-spe: Boost SPE add TLB hot page and remote access tracking
+- mm/damon/vaddr: Add demotion interface for migrating cold pages to target nodemask
+- mm/damon/vaddr: Extend mem_sampling sysctl to support DAMON
+- mm/damon/vaddr: Support hardware-assisted memory access sampling
+- mm/numa: Add tracepoints for access sampling and NUMA page migration
+- mm/mem_sampling: Add sysctl control for NUMA balancing integration
+- mm/numa: Enable mem_sampling-based access tracking for NUMA balancing
+- mm/numa: Use mem_sampling framework for NUMA balancing
+- mm/mem_sampling:: Add proc and cmdline interface to control sampling enable
+- sched: Enable per-process mem_sampling from sched switch path
+- mm/mem_sampling: Add sched switch hook to control sampling state
+- mm/mem_sampling: Add eBPF interface for memory access tracing
+- mm_monitor/mm_spe: Introduce arm_spe_user to abstract SPE usage
+- mm_monitor/mm_spe: Add PMU based memory sampling abstract layer
+- mm_monitor/mm_spe: Init per-CPU buffers and SPE state
+- mm_monitor/mm_spe: Introduce standalone SPE profiling framework
+- !16323  bpf: Fix WARN() in get_bpf_raw_tp_regs
+- !16286 arm64: Add support for FEAT_{LS64, LS64_V}.
+- !12573 [OLK-6.6] Fix rnpvf compile errors without CONFIG_MXGBEVF_FIX_VF_QUEUE
+- !15434 Backport PRM update and bugfixes up to v6.14.
+- !16278  drm: LoongArch: fix rx550/gfx6/gfx7/gfx8 error
+- drm/amd/display: prevent hang on link training fail
+- mfd: ene-kb3930: Fix a potential NULL pointer dereference
+- perf/core: Fix WARN_ON(!ctx) in __free_event() for partial init
+- LoongArch: Prevent cond_resched() occurring within kernel-fpu
+- LoongArch: 2K3000 GMAC support.
+- LoongArch: Add SCHED_MC (Multi-core scheduler) support
+- LoongArch: Enable GPIO_PCA953X driver
+- LoongArch: Enable IGC driver
+- LoongArch: CONFIG_NR_CPUS expanded to 2048
+- bpf: Fix WARN() in get_bpf_raw_tp_regs
+- !16298 v2  CVE-2024-58098
+- !16218  bpf: Fix kmemleak warning for percpu hashmap
+- !16217  bpf: Fix deadlock between rcu_tasks_trace and event_mutex.
+- KVM: arm64: Enable FEAT_{LS64, LS64_V} in the supported guest
+- Workaround the issue when compile with CONFIG_FUNCTION_ALIGNMENT_64B
+- arm64: Add support for FEAT_{LS64, LS64_V}
+- arm64: Provide basic EL2 setup for FEAT_{LS64, LS64_V} usage at EL0/1
+- !16300 【olk 6.6】 add two bugfixes for ptp_hisi driver
+- binfmt_elf: Wire up AT_HWCAP3 at AT_HWCAP4
+- uapi/auxvec: Define AT_HWCAP3 and AT_HWCAP4 aux vector, entries
+- arm64: Support AT_HWCAP3
+- ocfs2: validate l_tree_depth to avoid out-of-bounds access
+- ptp: hisi: the print of element in ptp need protected by lock
+- ptp: hisi: fix list not delete problem
+- !15157 Add support edac for hygon family 18h model 10h
+- !15155 Add LS and IF mce types for Hygon family 18h model 7h
+- bpf: Fix kabi breakage in struct bpf_subprog_info
+- selftests/bpf: test for changing packet data from global functions
+- bpf: track changes_pkt_data property for global functions
+- bpf: refactor bpf_helper_changes_pkt_data to use helper number
+- bpf: add find_containing_subprog() utility function
+- crypto: ccp: add new pci device id and modify psp_do_cmd() interface to not rely on sev device
+- !16271  kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- !16284  Sync from 6.6 for the sam kabi
+- !15291 [Intel-SIG]dmaengine: idxd: Add a new DSA device ID for Granite Rapids-D platform
+- tracing: Return from tracing_buffers_read() if the file has been closed
+- trace: Fix kabi breakage in struct trace_iterator
+- ring-buffer: Make wake once of ring_buffer_wait() more robust
+- tracing/ring-buffer: Fix wait_on_pipe() race
+- pwm: Add Loongson pwm driver support
+- dt-bindings: pwm: Add Loongson PWM controller
+- crypto: loongson: add wst se chip support
+- drm/amdgpu: Fix RX550 pcie order dislocation.
+- drm/amdgpu: make duplicated EOP packet for GFX6 have real content
+- drm/amdgpu: make duplicated EOP packet for GFX7/8 have real content
+- drm/radeon: repeat the same EOP packet for EOP workaround on CIK
+- drm/amdgpu: Fix pcie order dislocation
+- kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- drivers/iommu: Enhance the robustness of the iommu module
+- driver/vfio: disable vfio pci intx
+- drivers/iommu: Define the alias of the iommu device
+- loongarch/configs: enable vfio mdev config
+- drivers/iommu: Add the "iommu disable" probe
+- bpf: Fix kmemleak warning for percpu hashmap
+- bpf: Fix deadlock between rcu_tasks_trace and event_mutex.
+- KVM: arm64: vgic-its: Add stronger type-checking to the ITS entry sizes
+- mptcp: fix possible integer overflow in mptcp_reset_tout_timer
+- ext4: fix race in buffer_head read fault injection
+- ext4: remove array of buffer_heads from mext_page_mkuptodate()
+- ext4: pipeline buffer reads in mext_page_mkuptodate()
+- Revert "ext4: Fix race in buffer_head read fault injection"
+- scsi: sg: Enable runtime power management
+- gfs2: Remove and replace gfs2_glock_queue_work
+- gfs2: Fix unlinked inode cleanup
+- gfs2: Replace gfs2_glock_queue_put with gfs2_glock_put_async
+- gfs2: No longer use 'extern' in function declarations
+- KVM: arm64: vgic-its: Add a data length check in vgic_its_save_*
+- ACPI: PRM: Remove unnecessary strict handler address checks
+- ACPI: PRM: Add PRM handler direct call support
+- ACPI: PRM: Annotate struct prm_module_info with __counted_by
+- KVM: arm64: vgic-its: Clear ITE when DISCARD frees an ITE
+- KVM: arm64: vgic-its: Clear DTE when MAPD unmaps a device
+- dmaengine: idxd: Add a new DSA device ID for Granite Rapids-D platform
+- EDAC/mce_amd: Add LS and IF mce types for Hygon family 18h model 7h
+- EDAC/amd64: Get correct memory type for Hygon family 18h model 10h
+- EDAC/amd64: Check if umc channel is enabled for Hygon family 18h model 10h
+- x86/amd_nb: Add helper function to identify Hygon family 18h model 10h
+- RNPVF: NET: Fix rnpvf compile errors without CONFIG_MXGBEVF_FIX_VF_QUEUE
+
 * Wed May 14 2025 Li Nan <linan122@huawei.com> - 6.6.0-90.0.0.95
 - !16277 Revert DP HPD module to fix the problem
 - !16192 drivers/yunsilicon: fix query/modify pkt_dst_info return error
