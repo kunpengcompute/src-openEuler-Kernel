@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2505.3.0
+%global hulkrelease 2505.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0327
+Release: %{hulkrelease}.0328
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,39 @@ fi
 %endif
 
 %changelog
+
+* Wed May 21 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.4.0.0328
+- !15445 Add IOAPIC support for Hygon family 18h model 10h
+- !15444 Add LS and IF mce types for Hygon family 18h model 7h
+- !16321  bpf: Fix WARN() in get_bpf_raw_tp_regs
+- !16293  mISDN: fix possible memory leak in mISDN_dsp_element_register()
+- !16203  ext4: fix off-by-one error in do_split
+- !16221  jbd2: remove wrong sb->s_sequence check
+- !16205  ext4: update s_journal_inum if it changes after journal replay
+- !16288  scsi: core: Clear driver private data when retrying request
+- bpf: Fix WARN() in get_bpf_raw_tp_regs
+- !15446 Add support for Hygon family 18h model 8h
+- !15356 Fix northbridge init warning in guest for Hygon family 18h model 4h
+- !16290  CVE-2024-57982
+- !16285  udf: Fix a slab-out-of-bounds write bug in udf_find_entry()
+- !16275  kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- !16199 [openEuler-1.0-LTS] Enhanced Hygon processor's processing capabilities for large memory copying
+- mISDN: fix possible memory leak in mISDN_dsp_element_register()
+- net: fix kabi broken in struct netns_xfrm
+- xfrm: state: fix out-of-bounds read during lookup
+- net: xfrm: Localize sequence counter per network namespace
+- scsi: core: Clear driver private data when retrying request
+- udf: Fix a slab-out-of-bounds write bug in udf_find_entry()
+- x86: Enhanced copy capabilities for Hygon processor
+- kvm: x86: fix infinite loop in kvm_guest_time_update when tsc is 0
+- jbd2: remove wrong sb->s_sequence check
+- ext4: update s_journal_inum if it changes after journal replay
+- ext4: fix off-by-one error in do_split
+- EDAC/amd64: Add support for Hygon family 18h model 8h
+- x86/amd_nb: Add support for Hygon family 18h model 8h
+- iommu/hygon: Add support for Hygon family 18h model 10h IOAPIC
+- EDAC/mce_amd: Add LS and IF mce types for Hygon family 18h model 7h
+- x86/amd_nb: Fix northbridge init warning in guest for Hygon family 18h model 4h
 
 * Wed May 14 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.3.0.0327
 - !16177  Fix CVE-2022-49850
