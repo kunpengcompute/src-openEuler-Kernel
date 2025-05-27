@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       264
+%global devel_release       265
 %global maintenance_release .0.0
-%global pkg_release         .167
+%global pkg_release         .168
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,118 @@ fi
 %endif
 
 %changelog
+* Tue May 27 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-265.0.0.168
+- !16446 Intel: Intel_idle add GNRD and CWF platform support for 5.10
+- !16357 [OLK-5.10]:update patches for sw64 architecture
+- !16258 修复CVE-2022-3238
+- !16403 wifi: ath11k: fix RCU stall while reaping monitor destination ring
+- !16439 drivers:misc:sdma-dae: sdma fix PUAF problem fork risk
+- !16397 CVE-2025-37925
+- !16292 Fix CVE-2025-37773
+- !16318 Fix CVE-2025-37782
+- !16442 v4  io_uring patches backport
+- !16305 [OLK-5.10] scsi: libsas: Abort all in-flight requests when device is gone
+- !16305 [OLK-5.10] scsi: libsas: Abort all in-flight requests when device is gone
+- intel_idle: add Clearwater Forest SoC support
+- intel_idle: add Granite Rapids Xeon D support
+- io_uring/io-wq: do not use bogus hash value
+- io_uring/sqpoll: fix sqpoll error handling races
+- io_uring: protect register tracing
+- io_uring/sqpoll: close race on waiting for sqring entries
+- io_uring: check for iowq alloc_workqueue failure
+- io_uring: use private workqueue for exit work
+- io_uring/fdinfo: remove need for sqpoll lock for thread/pid retrieval
+- io_uring: kiocb_done() should *not* trust ->ki_pos if ->{read,write}_iter() failed
+- io-wq: fully initialize wqe before calling cpuhp_state_add_instance_nocalls()
+- io_uring/sqpoll: Do not set PF_NO_SETAFFINITY on sqpoll threads
+- io_uring/io-wq: stop setting PF_NO_SETAFFINITY on io-wq workers
+- drivers:misc:sdma-dae: sdma fix PUAF problem fork risk
+- !16424  CVE-2024-57876
+- drm/dp_mst: fix kabi broken in struct drm_dp_mst_topology_mgr
+- drm/dp_mst: Fix resetting msg rx state after topology removal
+- sw64: gpu: replace __sw_64__ with CONFIG_SW64
+- sw64: kprobe on ftrace: fix bug in restoring regs
+- sw64: ioremap: map some IO space with ioremap
+- sw64: ioremap: fix an overflow in pci_remap_cfgspace
+- sw64: ioremap: support generic ioremap for C4
+- sw64: qspinlock: add CNA support for sw64
+- sw64: qspinlock: add PARAVIRT SPINLOCK support for sw64
+- sw64: move syscall handling to sys_sw64.c
+- sw64: improve sw64_rrk
+- sw64: fix printing issue when using kprobe on ftrace
+- sw64: add powercap driver
+- sw64: clocksource: fix the issue of clockevents not being notified
+- sw64: fix shared_cpu_map of L3 Cache
+- sw64: iommu: work around iova range check after resv_region
+- sw64: fix some compile issues for cpuautoplug.c
+- sw64: cpufreq: fix for emulator that do not support cpufreq
+- sw64: cpufreq: refactor cpufreq related code
+- sw64: cpufreq: remove some meaningless code
+- sw64: cpufreq: move cpufreq notifier to its user
+- sw64: cpufreq: rename sw64_cpufreq.c to sunway-cpufreq.c
+- sw64: cpufreq: remove debugfs code
+- sw64: msi: fix guest msi interrupt handling
+- sw64: msi: clear the residual vector_irq information of cpu
+- sw64: ftrace: add notrace attribute to memset&memcpy
+- sw64: ftrace: fix bug in restoring regs
+- sw64: fix an error in BPF exception handling
+- sw64: fix cpu_autoplug error
+- sw64: msi: fix irq affinity setting during migration
+- sw64: use CONFIG_HZ_PERIODIC by default
+- sw64: fix specific performance counter error
+- sw64: enable all HW PMUs for max sampling period events
+- sw64: update exclusive counter handling
+- sw64: fix perf event L1I cache write support
+- sw64: kexec: add support for crashkernel=size[KMG]
+- sw64: bpf: add ARCH_HAS_NON_OVERLAPPING_ADDRESS_SPACE to Kconfig
+- sw64: ftrace: save&restore more stack frame in ftrace_caller
+- sw64: fix secondary_cpu_start for CORE3B
+- sw64: fix inslb compiling error
+- sw64: vdso: add support for time namespaces
+- sw64: fix SWVM_IRQS undeclared when enabling HIBERNATION
+- sw64: kvm: optimize the compatibility of guest interrupt
+- sw64: kvm: optimize the implementation of guest interrupt
+- sw64: sound: fix compile error when CONFIG_SND_DUMMY=y
+- sw64: ftrace: fix atomicity bugs in ftrace
+- sw64: fix nmi_[enter/exit] error in CORE3B
+- sw64: kvm: modify parameters of the exception functions
+- sw64: reimplement cmpxchg and xchg
+- sw64: enable -fsw-unalign-byte for new subarchs
+- sw64: reduce jump instructions in entUna
+- sw64: simplify GP handling for entUna
+- sw64: iommu: print more info for interrupts
+- sw64: add a 1ms delay before CPU offline
+- sw64: modify the interface for firmware to pass the running mode
+- sw64: change condition of some cflags
+- sw64: put cpu_set_node() in init text
+- sw64: make sw64_(read/write)_csr always inline
+- sw64: compile divide.S for c3b only
+- sw64: topology: discard topology information from PPTT
+- sw64/kvm: fix a bug for starting CORE3 VM
+- sw64: iommu: implement resv_region APIs
+- sw64: rename PT_REGS_SP to PT_REGS_R30
+- sw64: modify parameters of the exception functions
+- sw64: modify CPU autoplug initialization process
+- sw64: pci: fix secondary bus reset issue
+- sw64/vdso: support mremap() for vDSO
+- wifi: ath11k: fix RCU stall while reaping monitor destination ring
+- jfs: reject on-disk inodes of an unsupported type
+- !16360 [OLK-5.10] Fix sxe compile errors without CONFIG_PM_SLEEP
+- sw64: sound: avoid pagefault in pcm driver's memset
+- sw64: flush TLB after modifying ptbr_sys
+- sw64: fix an error when running no main() program
+- !16373 [OLK-5.10]:sw64: perf: fix compilation error with undeclared EM_SW_64
+- !16370  ftrace: Add cond_resched() to ftrace_graph_set_hash()
+- sw64: perf: fix compilation error with undeclared EM_SW_64
+- ftrace: Add cond_resched() to ftrace_graph_set_hash()
+- !16345 [OLK-5.10]scsi: hisi_sas: Fixed failure to issue vendor specific commands
+- fs/ntfs3: Fix double free on remount
+- Linkdata：net：fix sxe compile errors 'sxe_resume' defined but not used
+- scsi: hisi_sas: Fixed failure to issue vendor specific commands
+- scsi: libsas: Abort all in-flight requests when device is gone
+- hfs/hfsplus: fix slab-out-of-bounds in hfs_bnode_read_key
+- virtiofs: add filesystem context source name check
+
 * Wed May 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-264.0.0.167
 - !16356  bugfixes for fuse fastpath and fast_ipc
 - !16327  mfd: ene-kb3930: Fix a potential NULL pointer dereference
