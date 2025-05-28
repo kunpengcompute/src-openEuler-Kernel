@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       92
+%global devel_release       93
 %global maintenance_release .0.0
-%global pkg_release         .96
+%global pkg_release         .97
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,443 @@ fi
 %endif
 
 %changelog
+* Wed May 28 2025 Li Nan <linan122@huawei.com> - 6.6.0-93.0.0.97
+- !16510 v5  Support soft domain
+- !16509 v2  Support thp policy control per process
+- !16479  wifi: ath12k: Fix invalid data access in ath12k_dp_rx_h_undecap_nwifi
+- !16478  pds_core: make wait_context part of q_info
+- !16476  drm/i915/huc: Fix fence not released on early probe errors
+- !16499  padata: do not leak refcount in reorder_work
+- config: Configurate CONFIG_SCHED_SOFT_DOMAIN
+- sched: fair: Disable numa migrate for soft domian task
+- sched: fair: Select idle cpu in soft domain
+- sched: Attach task group to soft domain
+- sched: topology: Build soft domain for LLC
+- mm: tool: add task_thpctl to control thp per process
+- mm: add thp process control interface module
+- !16489 v5  Cgroup-Based Interference Statistics
+- !16453  perf/x86/intel: KVM: Mask PEBS_ENABLE loaded for guest with vCPU's value.
+- !16458 v3  arm64: idle: Handle idle state for xcall/xint
+- !16496  fbdev: omapfb: Add 'plane' value check
+- !16459  fs/jfs: Prevent integer overflow in AG size calculation
+- !16486 v10  High Performance Container Resource View Isolation
+- padata: do not leak refcount in reorder_work
+- !16461 net: hns3: add set_loopback interface to realtek phy driver
+- !16414  drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+- !16413  bus: mhi: host: Fix race between unprepare and queue_buf
+- !15156 Add IOAPIC  support for Hygon family 18h model 10h
+- fbdev: omapfb: Add 'plane' value check
+- !16449 [OLK-6.6]Hygon: Support to dec and enc userspace pages
+- !16488 drm/hisilicon/hibmc: add HPD, getting EDID, colorbar features in DP function
+- !16431 v5  IPIV-BUGFIX for HIP12
+- drm/hisilicon/hibmc: hibmc-drm bugfix for DP
+- drm/hisilicon/hibmc:fix KVM is not displaying when GRUB VGA is on
+- drm/hisilicon/hibmc: fix irq_request()'s irq name variable is local
+- drm/hisilicon/hibmc: fix HPD interrupts triggering the wrong behavior
+- drm/hisilicon/hibmc: Add vga connector detect functions
+- drm/hisilicon/hibmc: Add MSI irq getting and requesting for HPD
+- drm/hisilicon/hibmc: Enable this hot plug detect of irq feature
+- drm/hisilicon/hibmc: Add colorbar-cfg feature and its debugfs file
+- drm/hisilicon/hibmc: Getting connector info and EDID by using AUX channel
+- drm/hisilicon/hibmc: Refactor the member of drm_aux in struct hibmc_dp
+- drm/hisilicon/hibmc: Add dp serdes cfg in dp process
+- drm/hisilicon/hibmc: Add dp serdes cfg to adjust serdes rate, voltage and pre-emphasis
+- drm/hisilicon/hibmc: Restructuring the header dp_reg.h
+- drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER
+- drm: Call drm_atomic_helper_shutdown() at shutdown time for misc drivers
+- drm/ast: Implement polling for VGA and SIL164 connectors
+- drm/sysfs: Register "ddc" symlink later
+- openeuler_defconfig: Disable CGROUP_IFS config by default
+- interference: Add cgroup v1 support for CGROUP_IFS
+- interference: Add irq interference track support
+- interference: Add sched wakelat interference track support
+- interference: Exclude throttle time from rundelay
+- interference: Add sched throttle interference track support
+- interference: Add sched sleep interference track support
+- interference: Add sched rundelay interference track support
+- interference: Add smt interference track support
+- interference: Add cgroup-based inteference statistics framework
+- cgroup: Export cgroup_addrm_files as internal interface
+- cgroup: Export cgroup_init_cftypes as internal interface
+- interference: Add CGROUP_IFS_DEFAULT_ENABLED config
+- interference: Add CGROUP_IFS config
+- !16487 hisi_sas: Misc patches and cleanups
+- scsi: hisi_sas: Fix warning detected by sparse
+- scsi: hisi_sas: Wait until error handling is complete
+- scsi: hisi_sas: Code style cleanup
+- scsi: hisi_sas: Call I_T_nexus after soft reset for SATA disk
+- scsi: hisi_sas: Use macro instead of magic number
+- scsi: hisi_sas: Fix I/O errors caused by hardware port ID changes
+- scsi: hisi_sas: Enable force phy when SATA disk directly connected
+- scsi: hisi_sas: Fixed failure to issue vendor specific commands
+- Revert "Revert "scsi: hisi_sas: Disable SATA disk phy for severe I_T nexus reset failure""
+- Revert "scsi: hisi_sas: Enable force phy when SATA disk directly connected"
+- !15150 correct address translation  for Hygon family 18h model 4h~10h
+- !16445 [OLK-6.6][Bugfix]hugetlb: Fix NULL pointer dereference BUG
+- !16484  v5: ucounts: rlimit scalability issues
+- !16481  net: tcp: scale connect() under pressure
+- config: Turn on CONFIG_BPF_RVI for openeuler_defconfig
+- samples/bpf: Add iterator program for cpu_online
+- samples/bpf: Add iterator program for cpuinfo_x86
+- bpf: Add bpf_arch_flags kunc for x86
+- bpf: Add cpuinfo_x86 iterator target
+- bpf: pidns: Add {bpf,get}_current_level1_reaper()
+- bpf: Add bpf_cpumask_weight() kfunc
+- cpuset: Add task_effective_cpumask()
+- bpf: cpuset: Add bpf_cpuset_from_task() kfunc
+- bpf: Add generic_single_iter
+- bpf: Add CONFIG_BPF_RVI
+- ucount: fix kabi for ucounts
+- ucounts: reinplement rlimit with percpu_counter
+- ucounts: add input for inc_rlimit_[get_]ucounts_limit
+- ucounts: add CONFIG_UCOUNTS_PERCPU_COUNTER
+- ucount: use rcuref_t for reference counting
+- ucount: use RCU for ucounts lookups
+- ucount: replace get_ucounts_or_wrap() with atomic_inc_not_zero()
+- ucounts: move kfree() out of critical zone protected by ucounts_lock
+- rcu: provide a static initializer for hlist_nulls_head
+- !16473  RDMA/hns: Trace support and bugfixes
+- !15148 Add  hygon_set_guest_pat_wb parameter  to  enhance performance for non-passthrough application scenarios
+- tcp: Fix bind() regression for v6-only wildcard and v4-mapped-v6 non-wildcard addresses.
+- inet: call inet6_ehashfn() once from inet6_hash_connect()
+- inet: change lport contribution to inet_ehashfn() and inet6_ehashfn()
+- tcp: use RCU lookup in __inet_hash_connect()
+- tcp: add RCU management to inet_bind_bucket
+- tcp: optimize inet_use_bhash2_on_bind()
+- tcp: Use bhash2 for v4-mapped-v6 non-wildcard address.
+- tcp: use RCU in __inet{6}_check_established()
+- wifi: ath12k: Fix invalid data access in ath12k_dp_rx_h_undecap_nwifi
+- pds_core: make wait_context part of q_info
+- drm/i915/huc: Fix fence not released on early probe errors
+- !16422 v3  fuse: Backport Anolis Features and Performance patches
+- RDMA/hns: Optimize HW performance by limiting ACK request frequency
+- RDMA/hns: Fix scc_param failed logic judgments
+- RDMA/hns: Fix congestion control algorithm parameter range
+- RDMA/hns: Fix address information leakage of DCA memory
+- RDMA/hns: Inappropriate format characters cleanup
+- RDMA/hns: Add trace for CMDQ dumping
+- RDMA/hns: Include hnae3.h in hns_roce_hw_v2.h
+- RDMA/hns: Add trace for MR/MTR attribute dumping
+- RDMA/hns: Add trace for AEQE dumping
+- RDMA/hns: Add trace for WQE dumping
+- RDMA/hns: Add trace for flush CQE
+- !16448 [OLK-6.6]riscv: fix kprobe crash due to broken patch_text() API
+- !16447 Intel: Intel_idle add GNRD and CWF platform support for 6.6
+- !16441  ext4: better scalability for ext4 block allocation
+- !16456 v5  xfs: support log grant track bytes
+- !16346  yt6801: Add Motorcomm yt6801 PCIe driver
+- !16028 [OLK-6.6][eNFS]add nfs feature to support multipath
+- !16398  cachefiles: Parse the "secctx" immediately
+- net: hns3: add set_loopback interface to realtek phy driver
+- !16363 [OLK-6.6]:update patches for sw64 architecture
+- riscv: livepatch.c adapt patch_text() changes
+- !15153 Get the correct  instance id  calculation for Hygon family 18h model 6h~10h
+- fs/jfs: Prevent integer overflow in AG size calculation
+- arm64: entry: Support hardware xcall and xint
+- arm64/Kconfig: Add turbo features submenuconfig
+- xfs: fix incorrect tail lsn tracking when AIL is empty
+- xfs: revert AIL TASK_KILLABLE threshold
+- xfs: skip flushing log items during push
+- xfs: grant heads track byte counts, not LSNs
+- xfs: pass the full grant head to accounting functions
+- xfs: track log space pinned by the AIL
+- xfs: collapse xlog_state_set_callback in caller
+- xfs: l_last_sync_lsn is really AIL state
+- xfs: ensure log tail is always up to date
+- xfs: background AIL push should target physical space
+- xfs: AIL doesn't need manual pushing
+- xfs: move and rename xfs_trans_committed_bulk
+- Revert "xfs: update the last_sync_lsn with ctx start lsn"
+- !16404 FIX CVE-2024-58096
+- !16432 wifi: ath11k: fix RCU stall while reaping monitor destination ring
+- perf/x86/intel: KVM: Mask PEBS_ENABLE loaded for guest with vCPU's value.
+- !16433 Fix CVE-2025-21972
+- x86/mm: support to dec and enc userspace pages
+- !16399 CVE-2025-37925
+- !16291 Fix CVE-2025-37773
+- !16317 Fix CVE-2025-37782
+- !16378 vdpa:Adding compilation macro to decouple the vdpa and iommufd modules
+- riscv: Pass patch_text() the length in bytes
+- intel_idle: add Clearwater Forest SoC support
+- intel_idle: add Granite Rapids Xeon D support
+- !16041 [OLK-6.6] 支持用户态通过hygon_psp_resource2设备节点mmap PSP设备的mmio内存
+- mm/hugetlb: fix kernel NULL pointer dereference when replacing free hugetlb folios
+- ext4: move mb_last_[group|start] to ext4_inode_info
+- ext4: add ext4_try_lock_group() to skip busy groups
+- !16366  Backport 6.6.55-6.6.60 LTS
+- !16389  mm: remove unnecessary calls to lru_add_drain
+- !16388  cgroup: Eliminate the need for cgroup_mutex in proc_cgroup_show()
+- vdpa:Adding compilation macro to decouple the vdpa and iommufd modules
+- EDAC/amd64: Get intlv_num_dies from F0x60 for Hygon family 18h model 6h
+- EDAC/amd64: Use u16 for some umc variables for Hygon family 18h model 4h
+- EDAC/amd64: Fix the calculation of cs id for Hygon family 18h model 4h
+- EDAC/amd64: Rename the address translation function for hygon family 18h model 4h
+- crypto: ccp: Support userspace mmap psp mmio
+- !16100 kvm:Optimize the processing performance of multiple eventfd and irqfd
+- !16427 [OLK-6.6] 移除vpsp运行时对CSV功能的依赖
+- !16428  RDMA/core: Silence oversized kvmalloc() warning
+- !16408  drm/amdgpu: handle amdgpu_cgs_create_device() errors in amd_powerplay_create()
+- wifi: ath11k: fix RCU stall while reaping monitor destination ring
+- !16423  arm64/mpam: Update QoS partition default value
+- net: mctp: unshare packets when reassembling
+- arm64/kabi: use KABI_EXTEND to skip KABI check
+- kvm: hisi: print error for IPIV
+- KVM: arm64: using kvm_vgic_global_state for ipiv
+- kvm: hisi: Don't allow to change mpidr in IPIv
+- kvm: hisi: make sure vcpu_id and vcpu_idx have same value in IPIv
+- KVM: arm64: fix live migration bug of IPIv
+- irqchip/gic: Add HiSilicon PV SGI support
+- KVM: arm64: Implement PV_SGI related calls
+- KVM: arm64: Document PV-sgi interface
+- KVM: arm64: Introduce ipiv enable ioctl
+- arm64/config: add config to control whether enable IPIV feature
+- !15657 [OLK-6.6] perf/x86/uncore: Add DF PMU support for Hygon family 18h model 8h
+- RDMA/core: Silence oversized kvmalloc() warning
+- !16421  mm: fix VMA heap bounds checking
+- crypto: ccp: support psp generic ringbuffer
+- crypto: ccp: Remove vpsp's dependency on sev module
+- !15903 bcache: call force_wake_up_gc() if necessary in check_should_bypass()
+- !16394  CVE-2025-37970
+- arm64/mpam: Update QoS partition default value
+- x86/resctrl: Add max_bw to struct resctrl_membw
+- x86/resctrl: Remove hard-coded memory bandwidth limit
+- arm64/mpam: Set 1 as the minimum setting value for MBA
+- arm64/mpam: Fix num_rmids information
+- fs/resctrl: Fix the crash caused by mounting resctrl but not support RDT
+- fuse: remove an unnecessary if statement
+- fuse: use fuse_range_is_writeback() instead of iterating pages
+- fuse: remove unneeded lock which protecting update of congestion_threshold
+- fuse: clear FR_PENDING if abort is detected when sending request
+- fuse: cleanup request queuing towards virtiofs
+- fuse: add fast path for fuse_range_is_writeback
+- fuse: enable dynamic configuration of fuse max pages limit (FUSE_MAX_MAX_PAGES)
+- fuse: Add initial support for fs-verity
+- anolis: fuse: introduce write alignment
+- anolis: fuse: separate bg_queue for write and other requests
+- fuse: check aborted connection before adding requests to pending list for resending
+- fuse: clear FR_SENT when re-adding requests into pending list
+- fuse: set FR_PENDING atomically in fuse_resend()
+- fuse: Use the high bit of request ID for indicating resend requests
+- fuse: Introduce a new notification type for resend pending requests
+- fuse: add support for explicit export disabling
+- config: enable FS_STACK at correct position
+- mm: fix VMA heap bounds checking
+- drm/nouveau: prime: fix ttm_bo_delayed_delete oops
+- bus: mhi: host: Fix race between unprepare and queue_buf
+- add enfs feature
+- !16392 【olk 6.6】backport two bugfixes for hibmcge driver
+- drm/amdgpu: handle amdgpu_cgs_create_device() errors in amd_powerplay_create()
+- !16401 v7  Add FUSE Passthrough Support
+- wifi: ath11k: add srng->lock for ath11k_hal_srng_* in monitor mode
+- fuse: config: enable FUSE_PASSTHROUGH and FS_STACK
+- fs: use do_splice_direct() for nfsd/ksmbd server-side-copy
+- fs: move file_start_write() into direct_splice_actor()
+- fs: fork splice_file_range() from do_splice_direct()
+- backing-file: convert to using fops->splice_write
+- fuse: update inode size after extending passthrough write
+- fs: pass offset and result to backing_file end_write() callback
+- fuse: disable the combination of passthrough and writeback cache
+- fs: fix __sb_write_started() kerneldoc formatting
+- remap_range: merge do_clone_file_range() into vfs_clone_file_range()
+- ovl: relax WARN_ON in ovl_verify_area()
+- ovl: fix dentry reference leak after changes to underlying layers
+- fuse: use exclusive lock when FUSE_I_CACHE_IO_MODE is set
+- fuse: respect FOPEN_KEEP_CACHE on opendir
+- fuse: verify zero padding in fuse_backing_map
+- fuse: fix parallel dio write on file open in passthrough mode
+- fuse: fix wrong ff->iomode state changes from parallel dio write
+- fuse: implement passthrough for mmap
+- fuse: implement splice read/write passthrough
+- fuse: implement read/write passthrough
+- fuse: implement open in passthrough mode
+- fuse: prepare for opening file in passthrough mode
+- fuse: implement ioctls to manage backing files
+- fuse: introduce FUSE_PASSTHROUGH capability
+- fuse: factor out helper for FUSE_DEV_IOC_CLONE
+- fs: factor out backing_file_mmap() helper
+- fs: factor out backing_file_splice_{read,write}() helpers
+- fs: factor out backing_file_{read,write}_iter() helpers
+- fs: prepare for stackable filesystems backing file helpers
+- fs: create {sb,file}_write_not_started() helpers
+- fs: create file_write_started() helper
+- fs: create __sb_write_started() helper
+- fs: move kiocb_start_write() into vfs_iocb_iter_write()
+- fs: move permission hook out of do_iter_read()
+- fs: move permission hook out of do_iter_write()
+- fs: move file_start_write() into vfs_iter_write()
+- coda: change locking order in coda_file_write_iter()
+- btrfs: move file_start_write() to after permission hook
+- remap_range: move file_start_write() to after permission hook
+- remap_range: move permission hooks out of do_clone_file_range()
+- splice: remove permission hook from iter_file_splice_write()
+- splice: move permission hook out of splice_file_to_pipe()
+- splice: move permission hook out of splice_direct_to_actor()
+- splice: remove permission hook from do_splice_direct()
+- ovl: add permission hooks outside of do_splice_direct()
+- ovl: do not encode lower fh with upper sb_writers held
+- ovl: do not open/llseek lower file with upper sb_writers held
+- ovl: reorder ovl_want_write() after ovl_inode_lock()
+- ovl: split ovl_want_write() into two helpers
+- ovl: add helper ovl_file_modified()
+- fs: store real path instead of fake path in backing file f_path
+- fs: create helper file_user_path() for user displayed mapped file path
+- fs: get mnt_writers count for an open backing file's real path
+- ovl: protect copying of realinode attributes to ovl inode
+- ovl: punt write aio completion to workqueue
+- ovl: propagate IOCB_APPEND flag on writes to realfile
+- ovl: use simpler function to convert iocb to rw flags
+- fuse: allow parallel dio writes with FUSE_DIRECT_IO_ALLOW_MMAP
+- fuse: introduce inode io modes
+- fuse: prepare for failing open response
+- fuse: break up fuse_open_common()
+- fuse: allocate ff->release_args only if release is needed
+- fuse: factor out helper fuse_truncate_update_attr()
+- fuse: add fuse_dio_lock/unlock helper functions
+- fuse: create helper function if DIO write needs exclusive lock
+- fs: export mnt_{get,put}_write_access() to modules
+- fs: rename __mnt_{want,drop}_write*() helpers
+- jfs: reject on-disk inodes of an unsupported type
+- cachefiles: Parse the "secctx" immediately
+- iio: imu: st_lsm6dsx: fix possible lockup in st_lsm6dsx_read_fifo
+- net: hibmcge: fix wrong ndo.open() after reset fail issue.
+- net: hibmcge: fix incorrect statistics update issue
+- sw64: adapt to the upstream changes in early_init_dt_(scan/verify)
+- sw64: gpu: replace __sw_64__ with CONFIG_SW64
+- sw64: kprobe on ftrace: fix bug in restoring regs
+- sw64: iommu: do real map on iova in 32bit mmio space
+- mm: remove unnecessary calls to lru_add_drain
+- cgroup: Eliminate the need for cgroup_mutex in proc_cgroup_show()
+- !16374  LTS Conflicts Backport
+- sw64: qspinlock: add CNA support for sw64
+- sw64: qspinlock: add PARAVIRT SPINLOCK support for sw64
+- sw64: gpu: memset_io and memcpy_toio/fromio for iomem on AMD swsmu
+- Revert "sw64: gpu: memset_io and memcpy_toio/fromio for iomem on AMD swsmu"
+- sw64: move syscall handling to sys_sw64.c
+- sw64: improve sw64_rrk
+- sw64: fix printing issue when using kprobe on ftrace
+- sw64: add powercap driver
+- sw64: clocksource: fix the issue of clockevents not being notified
+- sw64: modify the interface for firmware to pass the running mode
+- sw64: fix shared_cpu_map of L3 Cache
+- sw64: fix SWVM_IRQS undeclared when enabling HIBERNATION
+- sw64: kvm: optimize the compatibility of guest interrupt
+- sw64: kvm: optimize the implementation of guest interrupt
+- sw64: fix some compile issues for cpuautoplug.c
+- sw64: cpufreq: fix for emulator that do not support cpufreq
+- sw64: cpufreq: refactor cpufreq related code
+- sw64: iommu: work around iova range check after resv_region
+- sw64: gpu: fix SIMD IO access issues
+- sw64: msi: fix guest msi interrupt handling
+- sw64: msi: modify msi migration strategy
+- sw64: msi: clear the residual vector_irq information of cpu
+- sw64: ftrace: add notrace attribute to memset&memcpy
+- sw64: ftrace: fix bug in restoring regs
+- sw64: cpufreq: remove some meaningless code
+- sw64: cpufreq: move cpufreq notifier to its user
+- sw64: cpufreq: rename sw64_cpufreq.c to sunway-cpufreq.c
+- sw64: cpufreq: remove debugfs code
+- sw64: fix an error in BPF exception handling
+- sw64: modify CPU autoplug initialization process
+- sw64: iommu: print more info for interrupts
+- sw64: msi: fix irq affinity setting during migration
+- sw64: use CONFIG_HZ_PERIODIC by default
+- sw64: fix specific performance counter error
+- sw64: enable all HW PMUs for max sampling period events
+- sw64: update exclusive counter handling
+- sw64: fix perf event L1I cache write support
+- sw64: locking/atomic: make atomic*_{cmp,}xchg optional
+- sw64: sound: fix compile error when CONFIG_SND_DUMMY=y
+- sw64: kexec: add support for crashkernel=size[KMG]
+- sw64: bpf: add ARCH_HAS_NON_OVERLAPPING_ADDRESS_SPACE to Kconfig
+- sw64: ftrace: save&restore more stack frame in ftrace_caller
+- sw64: enable -fsw-unalign-byte for new subarchs
+- sw64: reduce jump instructions in entUna
+- sw64: simplify GP handling for entUna
+- sw64: fix secondary_cpu_start for CORE3B
+- sw64: reimplement cmpxchg and xchg
+- sw64: change condition of some cflags
+- sw64: put cpu_set_node() in init text
+- sw64: make sw64_(read/write)_csr always inline
+- sw64: compile divide.S for c3b only
+- sw64: vdso: add support for time namespaces
+- sw64: rename PT_REGS_SP to PT_REGS_R30
+- sw64: modify parameters of the exception functions
+- sw64: kvm: modify parameters of the exception functions
+- sw64/vdso: Support mremap() for vDSO
+- sw64/kvm: fix a bug for starting CORE3 VM
+- sw64: ftrace: fix atomicity bugs in ftrace
+- sw64: fix copy_oldmem_page according to upstream
+- sw64: fix nmi_(enter/exit) error in CORE3B
+- sw64: add a 1ms delay before CPU offline
+- sw64: topology: discard topology information from PPTT
+- sw64: iommu: implement resv_region APIs
+- sw64: pci: fix secondary bus reset issue
+- sw64: sound: avoid pagefault in pcm driver's memset
+- sw64: flush TLB after modifying ptbr_sys
+- sw64: fix an error when running no main() program
+- sw64: cache: fix cache ID is not unique when ACPI disabled
+- sw64: ftrace: implement ftrace_modify_call
+- sw64: kvm: fix incorrect vm_flags in vmem_mmap()
+- sw64: cpu: give preference to CPU information from SMBIOS
+- sw64: irqchip: use sunway as vendor prefix in device tree
+- sw64: irqchip: use pr_fmt instead of prefix string macro
+- sw64: numa: decrease CONFIG_NODES_SHIFT to 3
+- sw64: acpi: suppress meaningless error log when acpi=off
+- sw64: emulator: refactor shutdown and restart functions
+- perf jitdump: Add SW64 support
+- sw64: emulator: add shutdown and restart functions
+- sw64: emulator: fix the multi-core boot issue
+- sw64: fix bad address error for vfio
+- sw64: acpi: add support for ACPI S3
+- sw64: iommu: restore iommu_map/unmap callbacks
+- sw64: iommu: work around lazy translation initialization
+- sw64: iommu: adjust def_domain_type
+- sw64: iommu: fix iommu_v1 capability
+- sw64: fix iommu commandline parameter
+- sw64: iommu: remove unnecessary locking in map/unmap_pages
+- sw64: fix no CONFIG_DYNAMIC_FTRACE_WITH_REGS error
+- sw64: fix kprobe function
+- sw64: perf: fix specific performance events can be sampled
+- sw64: bpf: optimize JIT for load imm
+- sw64: bpf: fix BPF_CALL JIT for multi-function programs
+- sw64: bpf: optimize some instructions
+- sw64: bpf: fix XADD32 and XADD64
+- sw64: kexec: fix a bug in menuconfig
+- sw64: kexec: fix a compilation error
+- sw64: iommu: mark hose->iommu_enable as true before probing
+- sw64: iommu: fix work around of iommu interrupt remapping capability
+- sw64: iommu: fix def_domain_type callback
+- sw64: iommu: introduce PCI device check before iommu probing
+- !16085  init/Kconfig: Add SMP to the dependencies of QOS_SCHED
+- !16311  kernel: Remove signal hacks for vhost_tasks
+- !16365  Add CFTYPE_NOT_ON_ROOT for qos_level
+- !16364  gfp: include __GFP_NOWARN in GFP_NOWAIT
+- eventfd:Introduce the eventfd batch processing interface
+- !16369  ftrace: Add cond_resched() to ftrace_graph_set_hash()
+- x86/ptrace: Fix kabi breakage in struct pt_regs
+- x86/ptrace: Add FRED additional information to the pt_regs structure
+- x86/ptrace: Cleanup the definition of the pt_regs structure
+- ftrace: Add cond_resched() to ftrace_graph_set_hash()
+- net: Fix kabi breakage in struct netlink_dump_control
+- net: Fix kabi breakage in struct netlink_callback
+- rtnetlink: add RTNL_FLAG_DUMP_UNLOCKED flag
+- rtnetlink: change nlk->cb_mutex role
+- Add CFTYPE_NOT_ON_ROOT for qos_level
+- docs/core-api: memory-allocation: GFP_NOWAIT doesn't need __GFP_NOWARN
+- gfp: include __GFP_NOWARN in GFP_NOWAIT
+- yt6801: Add Motorcomm yt6801 PCIe driver
+- kernel: Remove signal hacks for vhost_tasks
+- hfs/hfsplus: fix slab-out-of-bounds in hfs_bnode_read_key
+- bcache: call force_wake_up_gc() if necessary in check_should_bypass()
+- virtiofs: add filesystem context source name check
+- KVM: x86/svm: Add hygon_set_guest_pat_wb parameter for non-passthrough application scenarios
+- init/Kconfig: Add SMP to the dependencies of QOS_SCHED
+- perf/x86/uncore: Add DF PMU support for Hygon family 18h model 8h
+- EDAC/amd64: Refactor the calculation of instance id for Hygon family 18h model 10h
+- EDAC/amd64: Calculate instance id for hygon family 18h model 7h
+- iommu/hygon: Add support for Hygon family 18h model 10h IOAPIC
+- EDAC/amd64: Fix the calculation of instance id for Hygon family 18h model 6h
+
 * Wed May 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-92.0.0.96
 - !16367  scsi: sg: fix refcount underflow in
 - scsi: sg: Enable runtime power management
