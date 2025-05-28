@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2505.4.0
+%global hulkrelease 2505.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0328
+Release: %{hulkrelease}.0329
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,20 @@ fi
 %endif
 
 %changelog
+
+* Wed May 28 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.5.0.0329
+- !16353  CVE-2022-49769
+- !16417  dm-bufio: don't schedule in atomic context
+- !16409  HID: hyperv: fix possible memory leak in mousevsc_probe()
+- !16425  misc/vmw_vmci: fix an infoleak in vmci_host_do_receive_datagram()
+- misc/vmw_vmci: fix an infoleak in vmci_host_do_receive_datagram()
+- dm-bufio: don't schedule in atomic context
+- HID: hyperv: fix possible memory leak in mousevsc_probe()
+- !16375  CVE-2025-37752
+- net_sched: sch_sfq: move the limit validation
+- net_sched: sch_sfq: use a temporary work area for validating configuration
+- gfs2: Check sb_bsize_shift after reading superblock
+- gfs2: add validation checks for size of superblock
 
 * Wed May 21 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.4.0.0328
 - !15445 Add IOAPIC support for Hygon family 18h model 10h
