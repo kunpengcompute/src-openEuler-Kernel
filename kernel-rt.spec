@@ -41,9 +41,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       90
+%global devel_release       93
 %global maintenance_release .0.0
-%global pkg_release         .11
+%global pkg_release         .12
 %global rt_release          .rt47
 
 %define with_debuginfo 1
@@ -1058,6 +1058,9 @@ fi
 %endif
 
 %changelog
+* Thu May  29  2025 zhangyu <zhangyu4@kylinos.cn> - 6.6.0-93.0.0.12
+- update kernel-rt version to 6.6.0-93.0.0.12
+
 * Mon May  19  2025 zhangyu <zhangyu4@kylinos.cn> - 6.6.0-90.0.0.11
 - update kernel-rt version to 6.6.0-90.0.0.11
 
