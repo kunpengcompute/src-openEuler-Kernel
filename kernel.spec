@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       93
+%global devel_release       94
 %global maintenance_release .0.0
-%global pkg_release         .97
+%global pkg_release         .98
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,30 @@ fi
 %endif
 
 %changelog
+* Thu May 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-94.0.0.98
+- !16527 v2  some fix about ifs
+- !16521  drm/amd/display: Fix slab-use-after-free in hdcp
+- !16513  fs/resctrl: Restore default settings for all resctrl_res_level
+- interference: Fix IFS cannot show in cgroup v1 sub-cgroup
+- interference: Fix compilation issue
+- !16523 v2  arm64: entry: Fix ACTLR_XCALL_XINT not set build problem
+- !16515  ASoC: qcom: Fix sc7280 lpass potential buffer overflow
+- !16483 bugfix for hisilicon accelerator driver
+- arm64: entry: Fix ACTLR_XCALL_XINT not set build problem
+- drm/amd/display: Fix slab-use-after-free in hdcp
+- ASoC: qcom: Fix sc7280 lpass potential buffer overflow
+- fs/resctrl: Add missing rdt_last_cmd_clear() after rdtgroup_kn_lock_live()
+- fs/resctrl: Restore default settings for all resctrl_res_level
+- fs/resctrl: Free mbm_total and mbm_local when fails
+- crypto: hisilicon/zip - do not expose hashagg algorithm when uacce mode is 2
+- crypto: hisilicon/trng - use DEFINE_MUTEX() for mutex lock
+- crypto: hisilicon - enable error reporting again
+- crypto: hisilicon/qm - alloc power of 2 interrupts
+- crypto: hisilicon/qm - fix vfs_num error
+- uacce: fix unsigned long print format
+- uacce: delete some redundant code
+- uacce: fix isolate sysfs check condition
+
 * Wed May 28 2025 Li Nan <linan122@huawei.com> - 6.6.0-93.0.0.97
 - !16510 v5  Support soft domain
 - !16509 v2  Support thp policy control per process
