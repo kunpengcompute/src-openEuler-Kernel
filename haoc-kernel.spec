@@ -1095,7 +1095,7 @@ fi
 /usr/src/linux-%{KernelVer}/.config
 %endif
 
-%changelog6.6.0-92.0.0.79
+%changelog
 * Fri May 30 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-94.0.0.80
 - update HAOC to 6.6.0-94.0.0
 * Tue May 21 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-92.0.0.79
