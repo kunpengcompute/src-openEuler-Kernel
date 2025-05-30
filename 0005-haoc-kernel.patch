@@ -1,7 +1,7 @@
-From 811aca937a4142b55b9fe16da855bf89dfb0f0bc Mon Sep 17 00:00:00 2001
+From 3bf5e37adb8313c508d5a26e03fdafe44c9aae39 Mon Sep 17 00:00:00 2001
 From: Liu Zhehui <liuzhh@zgclab.edu.cn>
-Date: Wed, 21 May 2025 21:00:33 +0800
-Subject: [PATCH] update HAOC to 6.6.0-92.0.0
+Date: Fri, 30 May 2025 06:10:51 +0000
+Subject: [PATCH] Update HAOC to 6.6.0-94.0.0
 
 ---
  Makefile                                      |    7 +
@@ -357,7 +357,7 @@ index 4cbc72182f6b..c2daa535954e 100644
  KBUILD_CPPFLAGS := -D__KERNEL__
  KBUILD_RUSTFLAGS := $(rust_common_flags) \
 diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index dabbbb0e012c..47b84be3ba9d 100644
+index 6d9def7a9c02..9e36fb7f705c 100644
 --- a/arch/arm64/Kconfig
 +++ b/arch/arm64/Kconfig
 @@ -1777,6 +1777,41 @@ config UNMAP_KERNEL_AT_EL0
@@ -403,7 +403,7 @@ index dabbbb0e012c..47b84be3ba9d 100644
  	bool "Mitigate Spectre style attacks against branch history" if EXPERT
  	default y
 diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
-index 3f9be66edece..6e40965014fa 100644
+index 9723c76e56a6..d38ea2362fd9 100644
 --- a/arch/arm64/configs/openeuler_defconfig
 +++ b/arch/arm64/configs/openeuler_defconfig
 @@ -89,6 +89,7 @@ CONFIG_BPF_JIT_DEFAULT_ON=y
@@ -413,8 +413,8 @@ index 3f9be66edece..6e40965014fa 100644
 +CONFIG_HIVE=y
  # end of BPF subsystem
  
- CONFIG_PREEMPT_NONE_BUILD=y
-@@ -1398,7 +1399,7 @@ CONFIG_NETFILTER_NETLINK_ACCT=m
+ CONFIG_BPF_RVI=y
+@@ -1411,7 +1412,7 @@ CONFIG_NETFILTER_NETLINK_ACCT=m
  CONFIG_NETFILTER_NETLINK_QUEUE=m
  CONFIG_NETFILTER_NETLINK_LOG=m
  CONFIG_NETFILTER_NETLINK_OSF=m
@@ -423,7 +423,7 @@ index 3f9be66edece..6e40965014fa 100644
  CONFIG_NF_LOG_SYSLOG=m
  CONFIG_NETFILTER_CONNCOUNT=m
  CONFIG_NF_CONNTRACK_MARK=y
-@@ -1429,7 +1430,7 @@ CONFIG_NF_CT_NETLINK=m
+@@ -1442,7 +1443,7 @@ CONFIG_NF_CT_NETLINK=m
  CONFIG_NF_CT_NETLINK_TIMEOUT=m
  CONFIG_NF_CT_NETLINK_HELPER=m
  CONFIG_NETFILTER_NETLINK_GLUE_CT=y
@@ -432,7 +432,7 @@ index 3f9be66edece..6e40965014fa 100644
  CONFIG_NF_NAT_AMANDA=m
  CONFIG_NF_NAT_FTP=m
  CONFIG_NF_NAT_IRC=m
-@@ -1633,7 +1634,7 @@ CONFIG_IP_VS_PE_SIP=m
+@@ -1646,7 +1647,7 @@ CONFIG_IP_VS_PE_SIP=m
  #
  # IP: Netfilter Configuration
  #
@@ -441,7 +441,7 @@ index 3f9be66edece..6e40965014fa 100644
  CONFIG_NF_SOCKET_IPV4=m
  CONFIG_NF_TPROXY_IPV4=m
  CONFIG_NF_TABLES_IPV4=y
-@@ -1705,7 +1706,7 @@ CONFIG_IP6_NF_TARGET_MASQUERADE=m
+@@ -1718,7 +1719,7 @@ CONFIG_IP6_NF_TARGET_MASQUERADE=m
  CONFIG_IP6_NF_TARGET_NPT=m
  # end of IPv6: Netfilter Configuration
  
@@ -2882,10 +2882,10 @@ index 2e5e4052a182..d27d11d7b7bb 100644
  
  #ifdef CONFIG_HISILICON_ERRATUM_HIP08_RU_PREFETCH
 diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-index 5c3d206785bd..44273445a9f5 100644
+index b13858668877..0ee9b22f5dd2 100644
 --- a/arch/arm64/kernel/cpufeature.c
 +++ b/arch/arm64/kernel/cpufeature.c
-@@ -94,6 +94,11 @@
+@@ -95,6 +95,11 @@
  #include <asm/vectors.h>
  #include <asm/virt.h>
  
@@ -2897,7 +2897,7 @@ index 5c3d206785bd..44273445a9f5 100644
  /* Kernel representation of AT_HWCAP and AT_HWCAP2 */
  static DECLARE_BITMAP(elf_hwcap, MAX_CPU_FEATURES) __read_mostly;
  
-@@ -1618,7 +1623,11 @@ static void cpu_emulate_effective_ctr(const struct arm64_cpu_capabilities *__unu
+@@ -1619,7 +1624,11 @@ static void cpu_emulate_effective_ctr(const struct arm64_cpu_capabilities *__unu
  	 * value.
  	 */
  	if (!(read_cpuid_cachetype() & BIT(CTR_EL0_IDC_SHIFT)))
@@ -2909,7 +2909,7 @@ index 5c3d206785bd..44273445a9f5 100644
  }
  
  static bool has_cache_dic(const struct arm64_cpu_capabilities *entry,
-@@ -1879,7 +1888,11 @@ static inline void __cpu_enable_hw_dbm(void)
+@@ -1880,7 +1889,11 @@ static inline void __cpu_enable_hw_dbm(void)
  {
  	u64 tcr = read_sysreg(tcr_el1) | TCR_HD;
  
@@ -2921,7 +2921,7 @@ index 5c3d206785bd..44273445a9f5 100644
  	isb();
  	local_flush_tlb_all();
  }
-@@ -2062,7 +2075,9 @@ static void cpu_enable_pan(const struct arm64_cpu_capabilities *__unused)
+@@ -2063,7 +2076,9 @@ static void cpu_enable_pan(const struct arm64_cpu_capabilities *__unused)
  	 */
  	WARN_ON_ONCE(in_interrupt());
  
@@ -2931,7 +2931,7 @@ index 5c3d206785bd..44273445a9f5 100644
  	set_pstate_pan(1);
  }
  #endif /* CONFIG_ARM64_PAN */
-@@ -2127,7 +2142,11 @@ static bool has_generic_auth(const struct arm64_cpu_capabilities *entry,
+@@ -2128,7 +2143,11 @@ static bool has_generic_auth(const struct arm64_cpu_capabilities *entry,
  static void cpu_enable_e0pd(struct arm64_cpu_capabilities const *cap)
  {
  	if (this_cpu_has_cap(ARM64_HAS_E0PD))
@@ -2943,7 +2943,7 @@ index 5c3d206785bd..44273445a9f5 100644
  }
  #endif /* CONFIG_ARM64_E0PD */
  
-@@ -2256,7 +2275,11 @@ static void nmi_enable(const struct arm64_cpu_capabilities *__unused)
+@@ -2257,7 +2276,11 @@ static void nmi_enable(const struct arm64_cpu_capabilities *__unused)
  	 * avoid leaving things masked.
  	 */
  	_allint_clear();
@@ -2955,7 +2955,7 @@ index 5c3d206785bd..44273445a9f5 100644
  	isb();
  }
  #endif
-@@ -2271,7 +2294,11 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
+@@ -2272,7 +2295,11 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
  	 * So, be strict and forbid other BRs using other registers to
  	 * jump onto a PACIxSP instruction:
  	 */
@@ -2967,7 +2967,7 @@ index 5c3d206785bd..44273445a9f5 100644
  	isb();
  }
  #endif /* CONFIG_ARM64_BTI */
-@@ -2279,7 +2306,11 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
+@@ -2280,7 +2307,11 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
  #ifdef CONFIG_ARM64_MTE
  static void cpu_enable_mte(struct arm64_cpu_capabilities const *cap)
  {
@@ -2979,7 +2979,7 @@ index 5c3d206785bd..44273445a9f5 100644
  
  	mte_cpu_setup();
  
-@@ -2324,7 +2355,11 @@ static bool is_kvm_protected_mode(const struct arm64_cpu_capabilities *entry, in
+@@ -2325,7 +2356,11 @@ static bool is_kvm_protected_mode(const struct arm64_cpu_capabilities *entry, in
  
  static void cpu_trap_el0_impdef(const struct arm64_cpu_capabilities *__unused)
  {
@@ -2991,7 +2991,7 @@ index 5c3d206785bd..44273445a9f5 100644
  }
  
  static void cpu_enable_dit(const struct arm64_cpu_capabilities *__unused)
-@@ -2334,7 +2369,11 @@ static void cpu_enable_dit(const struct arm64_cpu_capabilities *__unused)
+@@ -2335,7 +2370,11 @@ static void cpu_enable_dit(const struct arm64_cpu_capabilities *__unused)
  
  static void cpu_enable_mops(const struct arm64_cpu_capabilities *__unused)
  {
@@ -3003,7 +3003,7 @@ index 5c3d206785bd..44273445a9f5 100644
  }
  
  /* Internal helper functions to match cpu capability type */
-@@ -3674,6 +3713,43 @@ static void __init setup_system_capabilities(void)
+@@ -3755,6 +3794,43 @@ static void __init setup_system_capabilities(void)
  	enable_cpu_capabilities(SCOPE_ALL & ~SCOPE_BOOT_CPU);
  }
  
@@ -3047,7 +3047,7 @@ index 5c3d206785bd..44273445a9f5 100644
  void __init setup_cpu_features(void)
  {
  	u32 cwg;
-@@ -3702,6 +3778,10 @@ void __init setup_cpu_features(void)
+@@ -3783,6 +3859,10 @@ void __init setup_cpu_features(void)
  	if (!cwg)
  		pr_warn("No Cache Writeback Granule information, assuming %d\n",
  			ARCH_DMA_MINALIGN);
@@ -3078,10 +3078,10 @@ index 745aefddd9a3..265417e0ad81 100644
  NOKPROBE_SYMBOL(mdscr_write);
  
 diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
-index 4602c107c40a..73aa0aad07b1 100644
+index a90231346751..5e08a3ac6add 100644
 --- a/arch/arm64/kernel/entry-common.c
 +++ b/arch/arm64/kernel/entry-common.c
-@@ -212,7 +212,11 @@ static __always_inline void fast_enter_from_user_mode(struct pt_regs *regs)
+@@ -214,7 +214,11 @@ static __always_inline void fast_enter_from_user_mode(struct pt_regs *regs)
   * mode. Before this function is called it is not safe to call regular kernel
   * code, instrumentable code, or any code which may trigger an exception.
   */
@@ -3094,7 +3094,7 @@ index 4602c107c40a..73aa0aad07b1 100644
  	regs->lockdep_hardirqs = lockdep_hardirqs_enabled();
  
 diff --git a/arch/arm64/kernel/entry.S b/arch/arm64/kernel/entry.S
-index da3809632f0f..40c279f562f0 100644
+index bd43e39d35c0..a64e8d318654 100644
 --- a/arch/arm64/kernel/entry.S
 +++ b/arch/arm64/kernel/entry.S
 @@ -29,12 +29,399 @@
@@ -3497,7 +3497,7 @@ index da3809632f0f..40c279f562f0 100644
  	.macro kernel_ventry, el:req, ht:req, regsize:req, label:req
  	.align 7
  .Lventry_start\@:
-@@ -53,6 +440,15 @@
+@@ -63,6 +450,15 @@
  .Lskip_tramp_vectors_cleanup\@:
  	.endif
  
@@ -3513,7 +3513,7 @@ index da3809632f0f..40c279f562f0 100644
  	sub	sp, sp, #PT_REGS_SIZE
  #ifdef CONFIG_VMAP_STACK
  	/*
-@@ -332,6 +728,17 @@ alternative_else_nop_endif
+@@ -342,6 +738,17 @@ alternative_else_nop_endif
  	msr_s	SYS_ICC_PMR_EL1, x20
  
  .Lskip_pmr_save\@:
@@ -3531,7 +3531,7 @@ index da3809632f0f..40c279f562f0 100644
  #endif
  
  	/*
-@@ -345,9 +752,11 @@ alternative_else_nop_endif
+@@ -355,9 +762,11 @@ alternative_else_nop_endif
  	.endm
  
  	.macro	kernel_exit, el, fast_mode = std
@@ -3543,7 +3543,7 @@ index da3809632f0f..40c279f562f0 100644
  
  #ifdef CONFIG_ARM64_PSEUDO_NMI
  alternative_if_not ARM64_HAS_GIC_PRIO_MASKING
-@@ -435,6 +844,40 @@ alternative_else_nop_endif
+@@ -445,6 +854,40 @@ alternative_else_nop_endif
  
  	msr	elr_el1, x21			// set up the return data
  	msr	spsr_el1, x22
@@ -3584,7 +3584,7 @@ index da3809632f0f..40c279f562f0 100644
  	ldp	x0, x1, [sp, #16 * 0]
  	ldp	x2, x3, [sp, #16 * 1]
  	ldp	x4, x5, [sp, #16 * 2]
-@@ -480,6 +923,17 @@ alternative_if ARM64_WORKAROUND_SPECULATIVE_UNPRIV_LOAD
+@@ -490,6 +933,17 @@ alternative_if ARM64_WORKAROUND_SPECULATIVE_UNPRIV_LOAD
  alternative_else_nop_endif
  	.endif
  	eret
@@ -3602,7 +3602,7 @@ index da3809632f0f..40c279f562f0 100644
  	.else
  	ldr	lr, [sp, #S_LR]
  	add	sp, sp, #PT_REGS_SIZE		// restore sp
-@@ -488,7 +942,13 @@ alternative_else_nop_endif
+@@ -498,7 +952,13 @@ alternative_else_nop_endif
  	.if \fast_mode == std
  	alternative_insn nop, "dmb sy", ARM64_WORKAROUND_1508412
  	.endif
@@ -3617,7 +3617,7 @@ index da3809632f0f..40c279f562f0 100644
  	eret
  	.endif
  	sb
-@@ -600,6 +1060,151 @@ SYM_CODE_START_LOCAL(__bad_stack)
+@@ -635,6 +1095,151 @@ SYM_CODE_START_LOCAL(__bad_stack)
  SYM_CODE_END(__bad_stack)
  #endif /* CONFIG_VMAP_STACK */
  
@@ -3769,7 +3769,7 @@ index da3809632f0f..40c279f562f0 100644
  #ifdef CONFIG_FAST_SYSCALL
  	.macro check_esr_el1_ec_svc64
  	/* Only support SVC64 for now */
-@@ -731,8 +1336,18 @@ SYM_CODE_START_LOCAL(el\el\ht\()_\regsize\()_\label)
+@@ -766,8 +1371,18 @@ SYM_CODE_START_LOCAL(el\el\ht\()_\regsize\()_\label)
  	.endif
  #endif
  	kernel_entry \el, \regsize
@@ -3788,7 +3788,7 @@ index da3809632f0f..40c279f562f0 100644
  	.if \el == 0
  	b	ret_to_user
  	.else
-@@ -764,9 +1379,15 @@ SYM_CODE_END(el\el\ht\()_\regsize\()_\label)
+@@ -803,9 +1418,15 @@ SYM_CODE_END(el\el\ht\()_\regsize\()_\label)
  	entry_handler	0, t, 32, fiq
  	entry_handler	0, t, 32, error
  
@@ -21439,7 +21439,7 @@ index 45b42d8f6453..b71072d6957e 100644
  	ehci_bar += bar_val & ~PAGE_MASK;
  	dbgp_printk("ehci_bar: %p\n", ehci_bar);
 diff --git a/fs/coredump.c b/fs/coredump.c
-index 9d235fa14ab9..72be355903ca 100644
+index ead3b05fb8f4..64d7343e13d0 100644
 --- a/fs/coredump.c
 +++ b/fs/coredump.c
 @@ -53,6 +53,10 @@
@@ -21453,7 +21453,7 @@ index 9d235fa14ab9..72be355903ca 100644
  static bool dump_vma_snapshot(struct coredump_params *cprm);
  static void free_vma_snapshot(struct coredump_params *cprm);
  
-@@ -564,7 +568,11 @@ void do_coredump(const kernel_siginfo_t *siginfo)
+@@ -562,7 +566,11 @@ void do_coredump(const kernel_siginfo_t *siginfo)
  	 */
  	if (__get_dumpable(cprm.mm_flags) == SUID_DUMP_ROOT) {
  		/* Setuid core dump mode */
@@ -21732,7 +21732,7 @@ index 2dc927ba067f..39c6f1d1438c 100644
  	}
  out:
 diff --git a/fs/exec.c b/fs/exec.c
-index eaec57f79aa1..5688b11ec9d4 100644
+index 2ac3ef80628f..5b5d4190ef5c 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
 @@ -76,6 +76,14 @@
@@ -21750,7 +21750,7 @@ index eaec57f79aa1..5688b11ec9d4 100644
  static int bprm_creds_from_file(struct linux_binprm *bprm);
  
  int suid_dumpable = 0;
-@@ -733,7 +741,11 @@ static int shift_arg_pages(struct vm_area_struct *vma, unsigned long shift)
+@@ -732,7 +740,11 @@ static int shift_arg_pages(struct vm_area_struct *vma, unsigned long shift)
  		free_pgd_range(&tlb, old_start, old_end, new_end,
  			next ? next->vm_start : USER_PGTABLES_CEILING);
  	}
@@ -21762,7 +21762,7 @@ index eaec57f79aa1..5688b11ec9d4 100644
  
  	vma_prev(&vmi);
  	/* Shrink the vma to just the new range */
-@@ -1023,6 +1035,9 @@ static int exec_mmap(struct mm_struct *mm)
+@@ -1022,6 +1034,9 @@ static int exec_mmap(struct mm_struct *mm)
  	if (!IS_ENABLED(CONFIG_ARCH_WANT_IRQS_OFF_ACTIVATE_MM))
  		local_irq_enable();
  	activate_mm(active_mm, mm);
@@ -21772,7 +21772,7 @@ index eaec57f79aa1..5688b11ec9d4 100644
  	if (IS_ENABLED(CONFIG_ARCH_WANT_IRQS_OFF_ACTIVATE_MM))
  		local_irq_enable();
  	lru_gen_add_mm(mm);
-@@ -1678,12 +1693,20 @@ static void bprm_fill_uid(struct linux_binprm *bprm, struct file *file)
+@@ -1677,12 +1692,20 @@ static void bprm_fill_uid(struct linux_binprm *bprm, struct file *file)
  
  	if (mode & S_ISUID) {
  		bprm->per_clear |= PER_CLEAR_ON_SETID;
@@ -22064,7 +22064,7 @@ index c2495d98c189..779471a0aa66 100644
  		put_cred(new);
  	} else {
 diff --git a/fs/open.c b/fs/open.c
-index f9ac703ec1b2..5561a7ece18d 100644
+index 4679db501d43..9cc0ef0a797d 100644
 --- a/fs/open.c
 +++ b/fs/open.c
 @@ -35,6 +35,11 @@
@@ -22127,7 +22127,7 @@ index f9ac703ec1b2..5561a7ece18d 100644
  	old_cred = override_creds(override_cred);
  
 diff --git a/fs/overlayfs/dir.c b/fs/overlayfs/dir.c
-index 54602f0bed8b..58534612dc64 100644
+index 68cfb2959f75..100ff75e98d7 100644
 --- a/fs/overlayfs/dir.c
 +++ b/fs/overlayfs/dir.c
 @@ -16,6 +16,10 @@
@@ -22141,7 +22141,7 @@ index 54602f0bed8b..58534612dc64 100644
  static unsigned short ovl_redirect_max = 256;
  module_param_named(redirect_max, ovl_redirect_max, ushort, 0644);
  MODULE_PARM_DESC(redirect_max,
-@@ -590,8 +594,13 @@ static int ovl_create_or_link(struct dentry *dentry, struct inode *inode,
+@@ -586,8 +590,13 @@ static int ovl_create_or_link(struct dentry *dentry, struct inode *inode,
  		 * create a new inode, so just use the ovl mounter's
  		 * fs{u,g}id.
  		 */
@@ -22156,7 +22156,7 @@ index 54602f0bed8b..58534612dc64 100644
  				attr->mode, &dentry->d_name, old_cred,
  				override_cred);
 diff --git a/fs/overlayfs/super.c b/fs/overlayfs/super.c
-index 2c056d737c27..9ede99ddb04b 100644
+index 65ea8fc5b670..0a354c70fa5d 100644
 --- a/fs/overlayfs/super.c
 +++ b/fs/overlayfs/super.c
 @@ -21,6 +21,10 @@
@@ -22170,7 +22170,7 @@ index 2c056d737c27..9ede99ddb04b 100644
  MODULE_AUTHOR("Miklos Szeredi <miklos@szeredi.hu>");
  MODULE_DESCRIPTION("Overlay filesystem");
  MODULE_LICENSE("GPL");
-@@ -1485,7 +1489,15 @@ int ovl_fill_super(struct super_block *sb, struct fs_context *fc)
+@@ -1501,7 +1505,15 @@ int ovl_fill_super(struct super_block *sb, struct fs_context *fc)
  		sb->s_export_op = &ovl_export_fid_operations;
  
  	/* Never override disk quota limits or use reserved space */
@@ -23186,7 +23186,7 @@ index 938d7ecfb495..057252aacc13 100644
  /*
   * the userspace interface
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index c127b74f2c90..72ba93c5b66b 100644
+index b974880cf283..38a04972cf9f 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -32,6 +32,11 @@
@@ -23429,10 +23429,10 @@ index 98db43432ee9..dca565ffb64d 100644
  static inline void arch_do_swap_page_nr(struct mm_struct *mm,
  				     struct vm_area_struct *vma,
 diff --git a/include/linux/sched.h b/include/linux/sched.h
-index a694cc11dea5..5b89c9c5485d 100644
+index 3979c34e9b83..03927be97713 100644
 --- a/include/linux/sched.h
 +++ b/include/linux/sched.h
-@@ -773,6 +773,24 @@ struct task_struct_resvd {
+@@ -778,6 +778,24 @@ struct task_struct_resvd {
  	struct task_struct	*task;
  };
  
@@ -23457,7 +23457,7 @@ index a694cc11dea5..5b89c9c5485d 100644
  struct task_struct {
  #ifdef CONFIG_THREAD_INFO_IN_TASK
  	/*
-@@ -795,6 +813,7 @@ struct task_struct {
+@@ -800,6 +818,7 @@ struct task_struct {
  	randomized_struct_fields_start
  
  	void				*stack;
@@ -23597,7 +23597,7 @@ index ee97668bdadb..104caf07a85f 100644
  /* alu/jmp fields */
  #define BPF_OP(code)    ((code) & 0xf0)
 diff --git a/init/main.c b/init/main.c
-index 8fdfa69dba0f..feca51bc2ef9 100644
+index 02a2c5d9be67..0405de718605 100644
 --- a/init/main.c
 +++ b/init/main.c
 @@ -102,6 +102,16 @@
@@ -23630,7 +23630,7 @@ index 8fdfa69dba0f..feca51bc2ef9 100644
  	poking_init();
  	ftrace_init();
  
-@@ -1073,6 +1089,20 @@ void start_kernel(void)
+@@ -1074,6 +1090,20 @@ void start_kernel(void)
  	arch_post_acpi_subsys_init();
  	kcsan_init();
  
@@ -23651,7 +23651,7 @@ index 8fdfa69dba0f..feca51bc2ef9 100644
  	/* Do the rest non-__init'ed, we're now alive */
  	arch_call_rest_init();
  
-@@ -1460,7 +1490,7 @@ static int __ref kernel_init(void *unused)
+@@ -1461,7 +1491,7 @@ static int __ref kernel_init(void *unused)
  	 * to finalize PTI.
  	 */
  	pti_finalize();
@@ -26802,7 +26802,7 @@ index c033a201c808..813db29f35df 100644
  }
  EXPORT_SYMBOL(set_create_files_as);
 diff --git a/kernel/exit.c b/kernel/exit.c
-index 3540b2c9b1b6..3bb305d7edf2 100644
+index f2b87b2a7009..faf0517e4ce9 100644
 --- a/kernel/exit.c
 +++ b/kernel/exit.c
 @@ -74,6 +74,11 @@
@@ -26817,7 +26817,7 @@ index 3540b2c9b1b6..3bb305d7edf2 100644
  /*
   * The default value should be high enough to not crash a system that randomly
   * crashes its kernel from time to time, but low enough to at least not permit
-@@ -560,6 +565,9 @@ static void exit_mm(void)
+@@ -557,6 +562,9 @@ static void exit_mm(void)
  	smp_mb__after_spinlock();
  	local_irq_disable();
  	current->mm = NULL;
@@ -26828,7 +26828,7 @@ index 3540b2c9b1b6..3bb305d7edf2 100644
  	enter_lazy_tlb(mm, current);
  	local_irq_enable();
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 4b37cb915f7b..35e3dbb1570d 100644
+index 96c6a9e446ac..110aa8c26444 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -116,6 +116,13 @@
@@ -27165,7 +27165,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		mmput(mm);
  		mm = ERR_PTR(-EACCES);
  	}
-@@ -1659,7 +1691,7 @@ static void complete_vfork_done(struct task_struct *tsk)
+@@ -1660,7 +1692,7 @@ static void complete_vfork_done(struct task_struct *tsk)
  }
  
  static int wait_for_vfork_done(struct task_struct *child,
@@ -27174,7 +27174,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  {
  	unsigned int state = TASK_UNINTERRUPTIBLE|TASK_KILLABLE|TASK_FREEZABLE;
  	int killed;
-@@ -1710,8 +1742,8 @@ static void mm_release(struct task_struct *tsk, struct mm_struct *mm)
+@@ -1711,8 +1743,8 @@ static void mm_release(struct task_struct *tsk, struct mm_struct *mm)
  			 * not set up a proper pointer then tough luck.
  			 */
  			put_user(0, tsk->clear_child_tid);
@@ -27185,7 +27185,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		}
  		tsk->clear_child_tid = NULL;
  	}
-@@ -1795,6 +1827,9 @@ static int copy_mm(unsigned long clone_flags, struct task_struct *tsk)
+@@ -1796,6 +1828,9 @@ static int copy_mm(unsigned long clone_flags, struct task_struct *tsk)
  #endif
  
  	tsk->mm = NULL;
@@ -27195,7 +27195,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	tsk->active_mm = NULL;
  
  	/*
-@@ -1826,6 +1861,9 @@ static int copy_mm(unsigned long clone_flags, struct task_struct *tsk)
+@@ -1827,6 +1862,9 @@ static int copy_mm(unsigned long clone_flags, struct task_struct *tsk)
  	}
  
  	tsk->mm = mm;
@@ -27205,7 +27205,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	tsk->active_mm = mm;
  	sched_mm_cid_fork(tsk);
  	return 0;
-@@ -2040,8 +2078,8 @@ static inline void init_task_pid_links(struct task_struct *task)
+@@ -2041,8 +2079,8 @@ static inline void init_task_pid_links(struct task_struct *task)
  		INIT_HLIST_NODE(&task->pid_links[type]);
  }
  
@@ -27216,7 +27216,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  {
  	if (type == PIDTYPE_PID)
  		task->thread_pid = pid;
-@@ -2303,6 +2341,11 @@ static void copy_oom_score_adj(u64 clone_flags, struct task_struct *tsk)
+@@ -2304,6 +2342,11 @@ static void copy_oom_score_adj(u64 clone_flags, struct task_struct *tsk)
  	mutex_unlock(&oom_adj_mutex);
  }
  
@@ -27228,7 +27228,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  #ifdef CONFIG_RV
  static void rv_task_fork(struct task_struct *p)
  {
-@@ -2340,10 +2383,12 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2341,10 +2384,12 @@ __latent_entropy struct task_struct *copy_process(
  	 * Don't allow sharing the root directory with processes in a different
  	 * namespace
  	 */
@@ -27243,7 +27243,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		return ERR_PTR(-EINVAL);
  
  	/*
-@@ -2368,7 +2413,7 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2369,7 +2414,7 @@ __latent_entropy struct task_struct *copy_process(
  	 * from creating siblings.
  	 */
  	if ((clone_flags & CLONE_PARENT) &&
@@ -27252,7 +27252,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		return ERR_PTR(-EINVAL);
  
  	/*
-@@ -2413,6 +2458,10 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2414,6 +2459,10 @@ __latent_entropy struct task_struct *copy_process(
  	p = dup_task_struct(current, node);
  	if (!p)
  		goto fork_out;
@@ -27263,7 +27263,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	p->flags &= ~PF_KTHREAD;
  	if (args->kthread)
  		p->flags |= PF_KTHREAD;
-@@ -2434,7 +2483,8 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2435,7 +2484,8 @@ __latent_entropy struct task_struct *copy_process(
  	/*
  	 * Clear TID on mm_release()?
  	 */
@@ -27273,7 +27273,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  
  	ftrace_graph_init_task(p);
  
-@@ -2555,10 +2605,10 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2556,10 +2606,10 @@ __latent_entropy struct task_struct *copy_process(
  #endif
  #ifdef CONFIG_TRACE_IRQFLAGS
  	memset(&p->irqtrace, 0, sizeof(p->irqtrace));
@@ -27288,7 +27288,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  #endif
  
  	p->pagefault_disabled = 0;
-@@ -2571,8 +2621,8 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2572,8 +2622,8 @@ __latent_entropy struct task_struct *copy_process(
  	p->blocked_on = NULL; /* not blocked yet */
  #endif
  #ifdef CONFIG_BCACHE
@@ -27299,7 +27299,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  #endif
  #ifdef CONFIG_BPF_SYSCALL
  	RCU_INIT_POINTER(p->bpf_storage, NULL);
-@@ -2659,7 +2709,7 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2660,7 +2710,7 @@ __latent_entropy struct task_struct *copy_process(
  	/*
  	 * sigaltstack should be cleared when sharing the same VM
  	 */
@@ -27308,7 +27308,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		sas_ss_reset(p);
  
  	/*
-@@ -2738,7 +2788,7 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2739,7 +2789,7 @@ __latent_entropy struct task_struct *copy_process(
  	write_lock_irq(&tasklist_lock);
  
  	/* CLONE_PARENT re-uses the old parent */
@@ -27317,7 +27317,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		p->real_parent = current->real_parent;
  		p->parent_exec_id = current->parent_exec_id;
  		if (clone_flags & CLONE_THREAD)
-@@ -2802,8 +2852,9 @@ __latent_entropy struct task_struct *copy_process(
+@@ -2803,8 +2853,9 @@ __latent_entropy struct task_struct *copy_process(
  			 * tasklist_lock with adding child to the process tree
  			 * for propagate_has_child_subreaper optimization.
  			 */
@@ -27329,7 +27329,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  			list_add_tail(&p->sibling, &p->real_parent->children);
  			list_add_tail_rcu(&p->tasks, &init_task.tasks);
  			attach_pid(p, PIDTYPE_TGID);
-@@ -2954,8 +3005,8 @@ struct task_struct * __init fork_idle(int cpu)
+@@ -2955,8 +3006,8 @@ struct task_struct * __init fork_idle(int cpu)
   */
  struct task_struct *create_io_thread(int (*fn)(void *), void *arg, int node)
  {
@@ -27340,7 +27340,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	struct kernel_clone_args args = {
  		.flags		= ((lower_32_bits(flags) | CLONE_VM |
  				    CLONE_UNTRACED) & ~CSIGNAL),
-@@ -3119,8 +3170,8 @@ SYSCALL_DEFINE0(fork)
+@@ -3120,8 +3171,8 @@ SYSCALL_DEFINE0(fork)
  SYSCALL_DEFINE0(vfork)
  {
  	struct kernel_clone_args args = {
@@ -27351,7 +27351,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	};
  
  	return kernel_clone(&args);
-@@ -3130,35 +3181,30 @@ SYSCALL_DEFINE0(vfork)
+@@ -3131,35 +3182,30 @@ SYSCALL_DEFINE0(vfork)
  #ifdef __ARCH_WANT_SYS_CLONE
  #ifdef CONFIG_CLONE_BACKWARDS
  SYSCALL_DEFINE5(clone, unsigned long, clone_flags, unsigned long, newsp,
@@ -27403,7 +27403,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	};
  
  	return kernel_clone(&args);
-@@ -3214,21 +3260,21 @@ noinline static int copy_clone_args_from_user(struct kernel_clone_args *kargs,
+@@ -3215,21 +3261,21 @@ noinline static int copy_clone_args_from_user(struct kernel_clone_args *kargs,
  		return -EINVAL;
  
  	*kargs = (struct kernel_clone_args){
@@ -27437,7 +27437,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		return -EFAULT;
  
  	kargs->set_tid = kset_tid;
-@@ -3323,7 +3369,8 @@ SYSCALL_DEFINE2(clone3, struct clone_args __user *, uargs, size_t, size)
+@@ -3324,7 +3370,8 @@ SYSCALL_DEFINE2(clone3, struct clone_args __user *, uargs, size_t, size)
  }
  #endif
  
@@ -27447,7 +27447,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  {
  	struct task_struct *leader, *parent, *child;
  	int res;
-@@ -3331,8 +3378,8 @@ void walk_process_tree(struct task_struct *top, proc_visitor visitor, void *data
+@@ -3332,8 +3379,8 @@ void walk_process_tree(struct task_struct *top, proc_visitor visitor, void *data
  	read_lock(&tasklist_lock);
  	leader = top = top->group_leader;
  down:
@@ -27458,7 +27458,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  			res = visitor(child, data);
  			if (res) {
  				if (res < 0)
-@@ -3340,8 +3387,7 @@ void walk_process_tree(struct task_struct *top, proc_visitor visitor, void *data
+@@ -3341,8 +3388,7 @@ void walk_process_tree(struct task_struct *top, proc_visitor visitor, void *data
  				leader = child;
  				goto down;
  			}
@@ -27468,7 +27468,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		}
  	}
  
-@@ -3418,11 +3464,11 @@ void __init proc_caches_init(void)
+@@ -3419,11 +3465,11 @@ void __init proc_caches_init(void)
   */
  static int check_unshare_flags(unsigned long unshare_flags)
  {
@@ -27485,7 +27485,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		return -EINVAL;
  	/*
  	 * Not implemented, but pretend it works if there is nothing
-@@ -3532,7 +3578,7 @@ int ksys_unshare(unsigned long unshare_flags)
+@@ -3533,7 +3579,7 @@ int ksys_unshare(unsigned long unshare_flags)
  	 * to a new ipc namespace, the semaphore arrays from the old
  	 * namespace are unreachable.
  	 */
@@ -27494,7 +27494,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  		do_sysvsem = 1;
  	err = unshare_fs(unshare_flags, &new_fs);
  	if (err)
-@@ -3543,8 +3589,8 @@ int ksys_unshare(unsigned long unshare_flags)
+@@ -3544,8 +3590,8 @@ int ksys_unshare(unsigned long unshare_flags)
  	err = unshare_userns(unshare_flags, &new_cred);
  	if (err)
  		goto bad_unshare_cleanup_fd;
@@ -27505,7 +27505,7 @@ index 4b37cb915f7b..35e3dbb1570d 100644
  	if (err)
  		goto bad_unshare_cleanup_cred;
  
-@@ -3641,8 +3687,8 @@ int unshare_files(void)
+@@ -3642,8 +3688,8 @@ int unshare_files(void)
  	return 0;
  }
  
@@ -28091,7 +28091,7 @@ index 04b5e55ed95f..0a10a459bdaa 100644
  	return err;
  }
 diff --git a/mm/Kconfig b/mm/Kconfig
-index 88addd002bb5..20d7cf810f0d 100644
+index bdd8372552ff..0e2791eb7f82 100644
 --- a/mm/Kconfig
 +++ b/mm/Kconfig
 @@ -543,6 +543,11 @@ config NUMA_KEEP_MEMINFO
@@ -28372,7 +28372,7 @@ index 24c809379274..4539eb8e7cce 100644
 +}
 +#endif
 diff --git a/mm/memory.c b/mm/memory.c
-index c17564374b6c..7c045b3059c1 100644
+index abc7f1645831..ac51605813b7 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
 @@ -80,6 +80,11 @@
@@ -28395,7 +28395,7 @@ index c17564374b6c..7c045b3059c1 100644
  	src_pte = pte_offset_map_nolock(src_mm, src_pmd, addr, &src_ptl);
  	if (!src_pte) {
  		pte_unmap_unlock(dst_pte, dst_ptl);
-@@ -6855,12 +6861,20 @@ bool ptlock_alloc(struct ptdesc *ptdesc)
+@@ -6854,12 +6860,20 @@ bool ptlock_alloc(struct ptdesc *ptdesc)
  	ptl = kmem_cache_alloc(page_ptl_cachep, GFP_KERNEL);
  	if (!ptl)
  		return false;
@@ -28417,10 +28417,10 @@ index c17564374b6c..7c045b3059c1 100644
  }
  #endif
 diff --git a/mm/mmap.c b/mm/mmap.c
-index 4a36526d8caf..8a881a2bbdea 100644
+index 59f410c03f2b..765d2e10dc38 100644
 --- a/mm/mmap.c
 +++ b/mm/mmap.c
-@@ -2412,10 +2412,17 @@ static void unmap_region(struct mm_struct *mm, struct ma_state *mas,
+@@ -2411,10 +2411,17 @@ static void unmap_region(struct mm_struct *mm, struct ma_state *mas,
  	update_hiwater_rss(mm);
  	unmap_vmas(&tlb, mas, vma, start, end, tree_end, mm_wr_locked);
  	mas_set(mas, mt_start);
@@ -28438,7 +28438,7 @@ index 4a36526d8caf..8a881a2bbdea 100644
  }
  
  /*
-@@ -3376,9 +3383,16 @@ void exit_mmap(struct mm_struct *mm)
+@@ -3374,9 +3381,16 @@ void exit_mmap(struct mm_struct *mm)
  	mmap_write_lock(mm);
  	mt_clear_in_rcu(&mm->mm_mt);
  	mas_set(&mas, vma->vm_end);
@@ -33569,5 +33569,5 @@ index 4625674f0e95..cbd843db9d41 100644
  
  /**
 -- 
-2.49.0
+2.43.0
 
