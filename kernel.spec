@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       95
 %global maintenance_release .0.0
-%global pkg_release         .99
+%global pkg_release         .100
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,12 @@ fi
 %endif
 
 %changelog
+* Fri Jun 06 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-95.0.0.100
+- RISC-V kernel upgrade to 6.6.0-95.0.0
+- Hwprobe related backport
+- Add ACPI NUMA support for RISC-V
+- Backport RISC-V external interrupt controller support for ACPI
+
 * Wed Jun 04 2025 Li Nan <linan122@huawei.com> - 6.6.0-95.0.0.99
 - !16482 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.69-6.6.70 LTS Conflicts Patches
 - !16211 [OLK-6.6] Fix CVE-2025-22028
