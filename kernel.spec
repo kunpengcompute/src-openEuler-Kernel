@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       265
+%global devel_release       266
 %global maintenance_release .0.0
-%global pkg_release         .167
+%global pkg_release         .168
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,35 @@ fi
 %endif
 
 %changelog
+* Tue Jun 03 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-266.0.0.168
+- !16219  cachefiles: Fix non-taking of sb_writers around set/removexattr
+- !16444 powercap: intel_rapl_tpmi: backport 2 rapl tpmi update and fix from upstream6.12
+- !16535  CVE-2022-49647
+- !14483 [OLK-5.10]Arm64:KVM: Auto get the virtual_dev irq bypass's devid
+- !16533  memcg: always call cond_resched() after fn()
+- !16452  xfs: read only mounts with fsopen mount API are busted
+- cgroup: fix kabi for css_set
+- cgroup: Use separate src/dst nodes when preloading css_sets for migration
+- memcg: always call cond_resched() after fn()
+- !16493 drivers:misc:sdma-dae: fix incorrect kmalloc flag
+- !16498  padata: do not leak refcount in reorder_work
+- !16299  sched/fair: Fix the bug in dynamic smt when getting physical core load
+- !16502  sched/dynamic_affinity: fix preffered_cpu offline problem
+- !16457  fs/jfs: Prevent integer overflow in AG size calculation
+- sched/dynamic_affinity: fix preffered_cpu offline problem
+- irqchip/gic-v3-its: Init reserved rsv_devid_pools use pci bus info
+- padata: do not leak refcount in reorder_work
+- drivers:misc:sdma-dae: fix incorrect kmalloc flag
+- fs/jfs: Prevent integer overflow in AG size calculation
+- xfs: read only mounts with fsopen mount API are busted
+- powercap: intel_rapl_tpmi: Ignore minor version change
+- powercap: intel_rapl_tpmi: Fix bogus register reading
+- sched/fair: Fix the bug in dynamic smt when getting physical core load
+- cachefiles: Fix non-taking of sb_writers around set/removexattr
+- irqchip/gic-v3-its: Move build_devid_pools from its to acpi iort init
+- irqchip/gic-v3-its: Add ACPI_IORT as VIRT_PLAT_DEV's dependency
+- acpi/iort: Add func to get used deviceid bitmap
+
 * Tue May 27 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-265.0.0.167
 - !16446 Intel: Intel_idle add GNRD and CWF platform support for 5.10
 - !16357 [OLK-5.10]:update patches for sw64 architecture
