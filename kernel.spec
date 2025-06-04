@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2505.5.0
+%global hulkrelease 2506.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0329
+Release: %{hulkrelease}.0330
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,18 @@ fi
 %endif
 
 %changelog
+
+* Wed Jun 04 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.1.0.0330
+- !16548  mm/vmscan: don't try to reclaim hwpoison folio
+- !16511  media: dw2102: Fix null-ptr-deref in dw2102_i2c_transfer()
+- !16294  fs/jfs: Prevent integer overflow in AG size calculation
+- mm/vmscan: don't try to reclaim hwpoison folio
+- !16534  memcg: always call cond_resched() after fn()
+- memcg: always call cond_resched() after fn()
+- !16519  mmc: sdhci-pci: Fix possible memory leak caused by missing pci_dev_put()
+- mmc: sdhci-pci: Fix possible memory leak caused by missing pci_dev_put()
+- media: dw2102: Fix null-ptr-deref in dw2102_i2c_transfer()
+- fs/jfs: Prevent integer overflow in AG size calculation
 
 * Wed May 28 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2505.5.0.0329
 - !16353  CVE-2022-49769
