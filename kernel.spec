@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       94
+%global devel_release       95
 %global maintenance_release .0.0
-%global pkg_release         .98
+%global pkg_release         .99
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,63 @@ fi
 %endif
 
 %changelog
+* Wed Jun 04 2025 Li Nan <linan122@huawei.com> - 6.6.0-95.0.0.99
+- !16482 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.69-6.6.70 LTS Conflicts Patches
+- !16211 [OLK-6.6] Fix CVE-2025-22028
+- !16210 [OLK-6.6] Fix CVE-2025-22109
+- !16209 [OLK-6.6] Fix CVE-2025-22127
+- !16207 [OLK-6.6] Fix CVE-2025-22104
+- !16563 Some random fixes and cleanup to shmem
+- !16564  tracing: Fix filter string testing
+- mm/shmem: remove unneeded xa_is_value() check in shmem_unuse_swap_entries()
+- mm/shmem: fix potential dead loop in shmem_unuse()
+- mm: shmem: add missing shmem_unacct_size() in __shmem_file_setup()
+- !16536  sched: fair: Use rq_clock_task to account rq->idle_avg
+- tracing: Fix filter string testing
+- mm: shmem: avoid unpaired folio_unlock() in shmem_swapin_folio()
+- !16542  perf: Fix hang while freeing sigtrap event
+- !16313  PCI: Fix reference leak in pci_register_host_bridge()
+- !16395  PCI: vmd: Make vmd_dev::cfg_lock a raw_spinlock_t type
+- !16246 backport mainline mm bugfix
+- !16541  irqchip/gic: remove useless printing in pv sgi
+- !16477  CVE-2024-50140
+- !16435  fix a couple of races in MNT_TREE_BENEATH handling by do_move_mount()
+- !16372  ksmbd: Fix UAF in __close_file_table_ids
+- !16371  ext4: ignore xattrs past end
+- perf: Fix hang while freeing sigtrap event
+- irqchip/gic: remove useless printing in pv sgi
+- !16532  memcg: always call cond_resched() after fn()
+- sched: fair: Use rq_clock_task to account rq->idle_avg
+- memcg: always call cond_resched() after fn()
+- !16524 v3  CVE-2024-27079
+- iommu/vt-d: Fix NULL domain on device release
+- iommu: Fix kabi breakage for release_domain in struct iommu_ops
+- iommu: Add static iommu_ops->release_domain
+- usb: typec: ucsi: Set orientation as none when connector is unplugged
+- usb: typec: ucsi: glink: fix off-by-one in connector_status
+- usb: typec: ucsi: glink: be more precise on orientation-aware ports
+- usb: typec: ucsi: glink: set orientation aware if supported
+- usb: typec: ucsi: glink: move GPIO reading into connector_status callback
+- task_work: make TWA_NMI_CURRENT handling conditional on IRQ_WORK
+- task_work: Fix kabi breakage in enum task_work_notify_mode
+- sched/core: Disable page allocation in task_tick_mm_cid()
+- task_work: Add TWA_NMI_CURRENT as an additional notify mode.
+- wifi: ath12k: Optimize the mac80211 hw data access
+- mm/huge_memory: fix dereferencing invalid pmd migration entry
+- selftests/mm: compaction_test: support platform with huge mount of memory
+- fix a couple of races in MNT_TREE_BENEATH handling by do_move_mount()
+- PCI: vmd: Make vmd_dev::cfg_lock a raw_spinlock_t type
+- ksmbd: Fix UAF in __close_file_table_ids
+- ext4: ignore xattrs past end
+- PCI: Fix reference leak in pci_register_host_bridge()
+- media: vimc: skip .s_stream() for stopped entities
+- media: subdev: Add v4l2_subdev_is_streaming()
+- media: subdev: Improve v4l2_subdev_enable/disable_streams_fallback
+- media: subdev: Fix use of sd->enabled_streams in call_s_stream()
+- f2fs: fix potential deadloop in prepare_compress_overwrite()
+- ax25: Remove broken autobind
+- ibmvnic: Use kernel helpers for hex dumps
+
 * Thu May 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-94.0.0.98
 - !16527 v2  some fix about ifs
 - !16521  drm/amd/display: Fix slab-use-after-free in hdcp
