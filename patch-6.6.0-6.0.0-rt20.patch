@@ -1,7 +1,7 @@
-From 706ceb4b4f46c7b1c8274fbad5c9231bcf25d605 Mon Sep 17 00:00:00 2001
+From 30dc6318d635b255370eb1de5e41c11a2e3698ea Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Thu, 29 May 2025 11:03:24 +0800
-Subject: [PATCH] reee
+Date: Thu, 5 Jun 2025 09:52:02 +0800
+Subject: [PATCH] rt1
 
 ---
  arch/arm/Kconfig                              |    6 +-
@@ -158,7 +158,7 @@ Subject: [PATCH] reee
  kernel/sched/core.c                           |  127 +-
  kernel/sched/debug.c                          |   19 +
  kernel/sched/fair.c                           |   49 +-
- kernel/sched/features.h                       |    2 +-
+ kernel/sched/features.h                       |    1 +
  kernel/sched/idle.c                           |    3 +-
  kernel/sched/rt.c                             |    5 +-
  kernel/sched/sched.h                          |    1 +
@@ -171,7 +171,7 @@ Subject: [PATCH] reee
  kernel/trace/trace_output.c                   |   16 +-
  net/core/dev.c                                |   39 +-
  net/core/skbuff.c                             |    7 +-
- 167 files changed, 5014 insertions(+), 1509 deletions(-)
+ 167 files changed, 5014 insertions(+), 1508 deletions(-)
  create mode 100644 kernel/printk/nbcon.c
 
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
@@ -14572,7 +14572,7 @@ index 11a1fac3a..6f085a159 100644
  
  static void print_cpu_stall(unsigned long gps)
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 917b62588..62c2dfc67 100644
+index fa8c8e585..c6a8b3e9b 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
 @@ -906,14 +906,15 @@ static inline void hrtick_rq_init(struct rq *rq)
@@ -14680,7 +14680,7 @@ index 917b62588..62c2dfc67 100644
  		smp_send_reschedule(cpu);
  	else
  		trace_sched_wake_idle_without_ipi(cpu);
-@@ -6787,10 +6807,14 @@ void __noreturn do_task_dead(void)
+@@ -6792,10 +6812,14 @@ void __noreturn do_task_dead(void)
  
  static inline void sched_submit_work(struct task_struct *tsk)
  {
@@ -14697,7 +14697,7 @@ index 917b62588..62c2dfc67 100644
  
  	task_flags = tsk->flags;
  	/*
-@@ -6816,6 +6840,8 @@ static inline void sched_submit_work(struct task_struct *tsk)
+@@ -6821,6 +6845,8 @@ static inline void sched_submit_work(struct task_struct *tsk)
  	 * make sure to submit it to avoid deadlocks.
  	 */
  	blk_flush_plug(tsk->plug, true);
@@ -14706,7 +14706,7 @@ index 917b62588..62c2dfc67 100644
  }
  
  static void sched_update_worker(struct task_struct *tsk)
-@@ -6830,16 +6856,26 @@ static void sched_update_worker(struct task_struct *tsk)
+@@ -6835,16 +6861,26 @@ static void sched_update_worker(struct task_struct *tsk)
  	}
  }
  
@@ -14738,7 +14738,7 @@ index 917b62588..62c2dfc67 100644
  	sched_update_worker(tsk);
  }
  EXPORT_SYMBOL(schedule);
-@@ -6903,11 +6939,7 @@ void __sched schedule_preempt_disabled(void)
+@@ -6908,11 +6944,7 @@ void __sched schedule_preempt_disabled(void)
  #ifdef CONFIG_PREEMPT_RT
  void __sched notrace schedule_rtlock(void)
  {
@@ -14751,7 +14751,7 @@ index 917b62588..62c2dfc67 100644
  }
  NOKPROBE_SYMBOL(schedule_rtlock);
  #endif
-@@ -7103,6 +7135,32 @@ static void __setscheduler_prio(struct task_struct *p, int prio)
+@@ -7108,6 +7140,32 @@ static void __setscheduler_prio(struct task_struct *p, int prio)
  
  #ifdef CONFIG_RT_MUTEXES
  
@@ -14784,7 +14784,7 @@ index 917b62588..62c2dfc67 100644
  static inline int __rt_effective_prio(struct task_struct *pi_task, int prio)
  {
  	if (pi_task)
-@@ -8965,6 +9023,21 @@ static inline void preempt_dynamic_init(void) { }
+@@ -8970,6 +9028,21 @@ static inline void preempt_dynamic_init(void) { }
  
  #endif /* #ifdef CONFIG_PREEMPT_DYNAMIC */
  
@@ -14844,7 +14844,7 @@ index 8b3063398..76530c8b3 100644
  }
  late_initcall(sched_init_debug);
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index bd2c45048..44abbcc86 100644
+index 21bd2ca41..b804ca83a 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
 @@ -1173,8 +1173,10 @@ static void clear_buddies(struct cfs_rq *cfs_rq, struct sched_entity *se);
@@ -14912,7 +14912,7 @@ index bd2c45048..44abbcc86 100644
  static void update_curr_fair(struct rq *rq)
  {
  	update_curr(cfs_rq_of(&rq->curr->se));
-@@ -5673,7 +5689,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
+@@ -5676,7 +5692,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
  	/*
  	 * Update run-time statistics of the 'current'.
  	 */
@@ -14921,7 +14921,7 @@ index bd2c45048..44abbcc86 100644
  
  	/*
  	 * Ensure that runnable average is periodically updated.
-@@ -5687,7 +5703,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
+@@ -5690,7 +5706,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
  	 * validating it and just reschedule.
  	 */
  	if (queued) {
@@ -14930,7 +14930,7 @@ index bd2c45048..44abbcc86 100644
  		return;
  	}
  	/*
-@@ -5833,7 +5849,7 @@ static void __account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec)
+@@ -5836,7 +5852,7 @@ static void __account_cfs_rq_runtime(struct cfs_rq *cfs_rq, u64 delta_exec)
  	 * hierarchy can be throttled
  	 */
  	if (!assign_cfs_rq_runtime(cfs_rq) && likely(cfs_rq->curr))
@@ -14939,7 +14939,7 @@ index bd2c45048..44abbcc86 100644
  }
  
  static __always_inline
-@@ -6136,7 +6152,7 @@ void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
+@@ -6139,7 +6155,7 @@ void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
  
  	/* Determine whether we need to wake up potentially idle CPU: */
  	if (rq->curr == rq->idle && rq->cfs.nr_running)
@@ -14948,7 +14948,7 @@ index bd2c45048..44abbcc86 100644
  }
  
  #ifdef CONFIG_SMP
-@@ -7378,7 +7394,7 @@ static void hrtick_start_fair(struct rq *rq, struct task_struct *p)
+@@ -7381,7 +7397,7 @@ static void hrtick_start_fair(struct rq *rq, struct task_struct *p)
  
  		if (delta < 0) {
  			if (task_current(rq, p))
@@ -14957,7 +14957,7 @@ index bd2c45048..44abbcc86 100644
  			return;
  		}
  		hrtick_start(rq, delta);
-@@ -9425,7 +9441,7 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
+@@ -9428,7 +9444,7 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
  	 * prevents us from potentially nominating it as a false LAST_BUDDY
  	 * below.
  	 */
@@ -14966,7 +14966,7 @@ index bd2c45048..44abbcc86 100644
  		return;
  
  	if (!sched_feat(WAKEUP_PREEMPTION))
-@@ -9468,7 +9484,7 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
+@@ -9471,7 +9487,7 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
  	return;
  
  preempt:
@@ -14975,7 +14975,7 @@ index bd2c45048..44abbcc86 100644
  }
  
  #ifdef CONFIG_QOS_SCHED
-@@ -9957,8 +9973,7 @@ static bool _qos_smt_check_need_resched(int this_cpu, struct rq *rq)
+@@ -9960,8 +9976,7 @@ static bool _qos_smt_check_need_resched(int this_cpu, struct rq *rq)
  
  		/*
  		* There are two cases rely on the set need_resched to drive away
@@ -14985,7 +14985,7 @@ index bd2c45048..44abbcc86 100644
  		* b) The qos_smt_status of siblings cpu is offline, the task of curr cpu is idle,
  		*    and current cpu only has SCHED_IDLE tasks enqueued.
  		*/
-@@ -14341,7 +14356,7 @@ static inline void task_tick_core(struct rq *rq, struct task_struct *curr)
+@@ -14344,7 +14359,7 @@ static inline void task_tick_core(struct rq *rq, struct task_struct *curr)
  	 */
  	if (rq->core->core_forceidle_count && rq->cfs.nr_running == 1 &&
  	    __entity_slice_used(&curr->se, MIN_NR_TASKS_DURING_FORCEIDLE))
@@ -14994,7 +14994,7 @@ index bd2c45048..44abbcc86 100644
  }
  
  /*
-@@ -14659,7 +14674,7 @@ prio_changed_fair(struct rq *rq, struct task_struct *p, int oldprio)
+@@ -14662,7 +14677,7 @@ prio_changed_fair(struct rq *rq, struct task_struct *p, int oldprio)
  	 */
  	if (task_current(rq, p)) {
  		if (p->prio > oldprio)
@@ -15004,18 +15004,17 @@ index bd2c45048..44abbcc86 100644
  		check_preempt_curr(rq, p, 0);
  }
 diff --git a/kernel/sched/features.h b/kernel/sched/features.h
-index 02577ddf1..6769c9053 100644
+index ea7ba7481..ebb168b1e 100644
 --- a/kernel/sched/features.h
 +++ b/kernel/sched/features.h
-@@ -98,7 +98,7 @@ SCHED_FEAT(UTIL_EST_FASTUP, true)
- SCHED_FEAT(LATENCY_WARN, false)
+@@ -99,6 +99,7 @@ SCHED_FEAT(LATENCY_WARN, false)
  
  SCHED_FEAT(HZ_BW, true)
--
+ SCHED_FEAT(IRQ_AVG, false)
 +SCHED_FEAT(FORCE_NEED_RESCHED, false)
+ 
  #ifdef CONFIG_QOS_SCHED_DYNAMIC_AFFINITY
  /*
-  * Use util_avg of bottom-Level taskgroup
 diff --git a/kernel/sched/idle.c b/kernel/sched/idle.c
 index 5007b25c5..95e1b3df1 100644
 --- a/kernel/sched/idle.c
