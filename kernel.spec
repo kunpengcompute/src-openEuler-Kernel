@@ -38,7 +38,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 %global debuginfodir /usr/lib/debug
 
-%global upstream_version    6.6
+%global upstream_version    6.12
 %global upstream_sublevel   0
 %global devel_release       0
 %global maintenance_release .0.0
@@ -60,7 +60,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global openeuler_minor     %{?_openeuler_minor} %{?!_openeuler_minor: 0}
 %endif
 
-%define with_debuginfo 1
+%define with_debuginfo 0
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
 %global _missing_build_ids_terminate_build 1
 %global _no_recompute_build_ids 1
@@ -69,7 +69,6 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %undefine _unique_build_ids
 
 %define with_source 1
-
 %define with_python2 0
 
 # failed if there is new config options
@@ -113,6 +112,10 @@ Source200: mkgrub-menu-aarch64.sh
 
 Source2000: cpupower.service
 Source2001: cpupower.config
+
+Source3000: kernel-6.12.0-aarch64.config
+Source3001: kernel-6.12.0-x86_64.config
+Source3002: kernel-6.12.0-riscv64.config
 
 %if 0%{?with_patch}
 Source9000: apply-patches
@@ -376,13 +379,18 @@ cp -a tools/perf tools/python3-perf
 cd linux-%{KernelVer}
 
 perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = -%{release}.%{_target_cpu}/" Makefile
+
+%if %{with openeuler_version}
 perl -p -i -e "s/^OPENEULER_LTS.*/OPENEULER_LTS = %{openeuler_lts}/" Makefile.oever
 perl -p -i -e "s/^OPENEULER_MAJOR.*/OPENEULER_MAJOR = %{openeuler_major}/" Makefile.oever
 perl -p -i -e "s/^OPENEULER_MINOR.*/OPENEULER_MINOR = %{openeuler_minor}/" Makefile.oever
 perl -p -i -e "s/^OPENEULER_RELEASE.*/OPENEULER_RELEASE = \"%{release}\"/" Makefile.oever
+%endif
 
 ## make linux
 make mrproper %{_smp_mflags}
+
+cp $RPM_SOURCE_DIR/kernel-%{upstream_version}.%{upstream_sublevel}-%{_host_cpu}.config arch/%{Arch}/configs/openeuler_defconfig
 
 %if %{with_64kb}
 sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_4K_PAGES.*/CONFIG_ARM64_64K_PAGES=y/'
@@ -468,10 +476,10 @@ TargetImage=$(basename $(make -s image_name))
 %ifarch aarch64
 # aarch64 make perf with CORESIGHT=1
 %global perf_make \
-    make %{?clang_make_opts} EXTRA_LDFLAGS="%[ "%{toolchain}" == "clang" ? "-z now" : "" ]" EXTRA_CFLAGS="%[ "%{toolchain}" == "clang" ? "" : "-Wl,-z,now" ] -g -Wall -fstack-protector-strong -fPIC" EXTRA_PERFLIBS="-fpie -pie" %{?_smp_mflags} -s V=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_LIBNUMA=1 NO_STRLCPY=1 CORESIGHT=1 prefix=%{_prefix}
+    make %{?clang_make_opts} EXTRA_LDFLAGS="%[ "%{toolchain}" == "clang" ? "-z now" : "" ]" EXTRA_CFLAGS="%[ "%{toolchain}" == "clang" ? "" : "-Wl,-z,now" ] -g -Wall -fstack-protector-strong -fPIC" EXTRA_PERFLIBS="-fpie" %{?_smp_mflags} -s V=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_LIBNUMA=1 NO_STRLCPY=1 CORESIGHT=1 prefix=%{_prefix}
 %else
 %global perf_make \
-    make %{?clang_make_opts} EXTRA_LDFLAGS="%[ "%{toolchain}" == "clang" ? "-z now" : "" ]" EXTRA_CFLAGS="%[ "%{toolchain}" == "clang" ? "" : "-Wl,-z,now" ] -g -Wall -fstack-protector-strong -fPIC" EXTRA_PERFLIBS="-fpie -pie" %{?_smp_mflags} -s V=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_LIBNUMA=1 NO_STRLCPY=1 prefix=%{_prefix}
+    make %{?clang_make_opts} EXTRA_LDFLAGS="%[ "%{toolchain}" == "clang" ? "-z now" : "" ]" EXTRA_CFLAGS="%[ "%{toolchain}" == "clang" ? "" : "-Wl,-z,now" ] -g -Wall -fstack-protector-strong -fPIC" EXTRA_PERFLIBS="-fpie" %{?_smp_mflags} -s V=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_LIBNUMA=1 NO_STRLCPY=1 prefix=%{_prefix}
 %endif
 %if 0%{?with_python2}
 %global perf_python2 -C tools/perf PYTHON=%{__python2}
@@ -540,10 +548,6 @@ popd
 # libbpf.a and bpf_helper_defs.h
 pushd tools/lib/bpf
 %{make}
-popd
-# netacc
-pushd tools/netacc
-%{make} BPFTOOL=../../tools/bpf/bpftool/bpftool
 popd
 
 %install
@@ -818,7 +822,6 @@ rm -rf %{buildroot}/usr/lib/perf/include/bpf/
 
 # perf man pages (note: implicit rpm magic compresses them later)
 install -d %{buildroot}/%{_mandir}/man1
-install -pm0644 tools/kvm/kvm_stat/kvm_stat.1 %{buildroot}/%{_mandir}/man1/
 install -pm0644 tools/perf/Documentation/*.1 %{buildroot}/%{_mandir}/man1/
 %endif
 
@@ -876,10 +879,6 @@ popd
 # kvm
 pushd tools/kvm/kvm_stat
 %{make} INSTALL_ROOT=%{buildroot} install-tools
-popd
-# netacc
-pushd tools/netacc
-%{make} INSTALL_ROOT=%{buildroot} install
 popd
 
 %define __spec_install_post\
@@ -1042,10 +1041,7 @@ fi
 %{_bindir}/gpio-hammer
 %{_bindir}/gpio-event-mon
 %{_bindir}/gpio-watch
-%{_mandir}/man1/kvm_stat*
 %{_bindir}/kvm_stat
-%{_sbindir}/net-acc
-%{_sbindir}/tuned_acc/netacc
 %{_libdir}/libcpupower.so.1
 %{_libdir}/libcpupower.so.0.0.1
 %license linux-%{KernelVer}/COPYING
@@ -1080,4 +1076,8 @@ fi
 %endif
 
 %changelog
-- init from linux v6.6
+* Sat Jun 07 2025 Xie XiuQi <xiexiuqi@huawei.com> - 6.12.0-0.0.0.1
+- upgrade to v6.12
+
+* Sat Jan 14 2023 Xie XiuQi <xiexiuqi@huawei.com> - 6.1.0-1.0.0.1
+- package init based on upstream v6.1
