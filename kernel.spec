@@ -1,5 +1,5 @@
 %define with_signmodules  1
-%define with_kabichk 1
+%define with_kabichk 0
 
 # Default without toolchain_clang
 %bcond_with toolchain_clang
@@ -120,11 +120,6 @@ Source9001: guards
 Source9002: series.conf
 Source9998: patches.tar.bz2
 %endif
-
-Patch0001: 0001-riscv-kernel.patch
-Patch0002: 0002-cpupower-clang-compile-support.patch
-Patch0003: 0003-x86_energy_perf_policy-clang-compile-support.patch
-Patch0004: 0004-turbostat-clang-compile-support.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -357,13 +352,9 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 
 # riscv-kernel patch
 %ifarch riscv64
-%patch0001 -p1
 %endif
 
 %if "%toolchain" == "clang"
-%patch0002 -p1
-%patch0003 -p1
-%patch0004 -p1
 %endif
 
 find . \( -name "*.orig" -o -name "*~" \) -exec rm -f {} \; >/dev/null

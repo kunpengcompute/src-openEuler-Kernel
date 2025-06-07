@@ -1,4 +1,2 @@
 <multibuild>
-  <flavor>raspberrypi-kernel</flavor>
-  <flavor>haoc-kernel</flavor>
 </multibuild>
