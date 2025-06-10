@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       266
+%global devel_release       267
 %global maintenance_release .0.0
-%global pkg_release         .169
+%global pkg_release         .170
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,200 @@ fi
 %endif
 
 %changelog
+* Tue Jun 10 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-267.0.0.170
+- !16640  IMA: use real_inode to get the i_version
+- !16558 [OLK-5.10] PCI/P2PDMA: Add Zhaoxin Zhaoxin bridges to the whitelist
+- !16555 [OLK-5.10] PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- !16197 mm:fix return handling of cow_user_page
+- !16618  SELinux: Add check for the user data passed to kcalloc in hashtab_init
+- IMA: use real_inode to get the i_version
+- mm:fix return handling of cow_user_page
+- !16584  tracing: Fix oob write in trace_seq_to_buffer()
+- !16625  Backport SMC-D feature
+- net: Fix kabi broken
+- net/smc: enable the smc-lo on the x86 and arm64 platforms
+- net/smc: use the correct ndev to find pnetid by pnetid table
+- s390/ism: add release function for struct device
+- net/smc: fix data error when recvmsg with MSG_PEEK flag
+- net/smc: delete pointless divide by one
+- net/smc: check return value of sock_recvmsg when draining clc data
+- net/smc: check smcd_v2_ext_offset when receiving proposal msg
+- net/smc: check v2_ext_offset/eid_cnt/ism_gid_cnt when receiving proposal msg
+- net/smc: check sndbuf_space again after NOSPACE flag is set in smc_poll
+- net/smc: protect link down work from execute after lgr freed
+- net/smc: fix LGR and link use-after-free issue
+- net/smc: Fix lookup of netdev by using ib_device_get_netdev()
+- net/smc: Fix searching in list of known pnetids in smc_pnet_add_pnetid
+- net/smc: Fix memory leak when using percpu refs
+- net/smc: Address spelling errors
+- net/smc: Use static_assert() to check struct sizes
+- net/smc: add the max value of fallback reason count
+- net/smc: remove unused input parameters in smcr_new_buf_create
+- net/smc: remove redundant code in smc_connect_check_aclc
+- net/smc: remove the fallback in __smc_connect
+- net/smc: remove unreferenced header in smc_loopback.h file
+- net/smc: avoid overwriting when adjusting sock bufsizes
+- net/smc: set rmb's SG_MAX_SINGLE_ALLOC limitation only when CONFIG_ARCH_NO_SG_CHAIN is defined
+- Revert "net/smc: Tune the maximum size of virtually contiguous sndbufs or RMBs for SMC-R"
+- net/smc: fix neighbour and rtable leak in smc_ib_find_route()
+- net/smc: implement DMB-merged operations of loopback-ism
+- net/smc: adapt cursor update when sndbuf and peer DMB are merged
+- net/smc: {at|de}tach sndbuf to peer DMB if supported
+- net/smc: add operations to merge sndbuf with peer DMB
+- net/smc: register loopback-ism into SMC-D device list
+- net/smc: ignore loopback-ism when dumping SMC-D devices
+- net/smc: mark optional smcd_ops and check for support when called
+- net/smc: implement DMB-related operations of loopback-ism
+- net/smc: implement ID-related operations of loopback-ism
+- net/smc: introduce loopback-ism for SMC intra-OS shortcut
+- net/smc: decouple ism_client from SMC-D DMB registration
+- net/smc: Avoid -Wflex-array-member-not-at-end warnings
+- net/smc: make smc_hash_sk/smc_unhash_sk static
+- net: smc: fix spurious error message from __sock_release()
+- net/smc: change the term virtual ISM to Emulated-ISM
+- net/smc: fix incorrect SMC-D link group matching logic
+- net/smc: manage system EID in SMC stack instead of ISM driver
+- net/smc: disable SEID on non-s390 archs where virtual ISM may be used
+- net/smc: support extended GID in SMC-D lgr netlink attribute
+- net/smc: compatible with 128-bits extended GID of virtual ISM device
+- net/smc: define a reserved CHID range for virtual ISM devices
+- net/smc: introduce virtual ISM device support feature
+- net/smc: support SMCv2.x supplemental features negotiation
+- net/smc: unify the structs of accept or confirm message for v1 and v2
+- net/smc: introduce sub-functions for smc_clc_send_confirm_accept()
+- net/smc: rename some 'fce' to 'fce_v2x' for clarity
+- net/smc: fix missing byte order conversion in CLC handshake
+- net/smc: remove unneeded atomic operations in smc_tx_sndbuf_nonempty
+- s390/ism: ism driver implies smc protocol
+- net/smc: fix dangling sock under state SMC_APPFINCLOSEWAIT
+- net/smc: return the right falback reason when prefix checks fail
+- net/smc: fix smc clc failed issue when netdevice not in init_net
+- net/smc: Fix dependency of SMC on ISM
+- net/smc: Extend SMCR v2 linkgroup netlink attribute
+- net/smc: support max links per lgr negotiation in clc handshake
+- net/smc: support max connections per lgr negotiation
+- net/smc: support smc v2.x features validate
+- net/smc: add vendor unique experimental options area in clc handshake
+- net/smc: support smc release version negotiation in clc handshake
+- net/smc: Remove unused function declarations
+- s390/ism: Do not unregister clients with registered DMBs
+- s390/ism: Fix and simplify add()/remove() callback handling
+- s390/ism: Fix locking for forwarding of IRQs and events to clients
+- smc: Drop smc_sendpage() in favour of smc_sendmsg() + MSG_SPLICE_PAGES
+- s390/ism: Fix trying to free already-freed IRQ by repeated ism_dev_exit()
+- net/smc: Don't use RMBs not mapped to new link in SMCRv2 ADD LINK
+- net/smc: Scan from current RMB list when no position specified
+- net/smc: Reset connection when trying to use SMCRv2 fails.
+- smc: Fix use-after-free in tcp_write_timer_handler().
+- net/smc: Use percpu ref for wr tx reference
+- net/smc: Introduce explicit check for v2 support
+- net/smc: Fix device de-init sequence
+- net/smc: fix potential panic dues to unprotected smc_llc_srv_add_link()
+- net/smc: reduce unnecessary blocking in smcr_lgr_reg_rmbs()
+- net/smc: De-tangle ism and smc device initialization
+- s390/ism: Consolidate SMC-D-related code
+- net/smc: Separate SMC-D and ISM APIs
+- net/smc: Register SMC-D as ISM client
+- net/ism: Add new API for client registration
+- s390/ism: Introduce struct ism_dmb
+- net/smc: Terminate connections prior to device removal
+- net/smc: Fix an error code in smc_lgr_create()
+- net/smc: Support SO_REUSEPORT
+- net/smc: Pass on DMBE bit mask in IRQ handler
+- s390/ism: Cleanups
+- net/smc: Eliminate struct smc_ism_position
+- net/smc: set ini->smcrv2.ib_dev_v2 to NULL if SMC-Rv2 is unavailable
+- net/smc: Fix af_ops of child socket pointing to released memory
+- net/smc: use memcpy instead of snprintf to avoid out of bounds read
+- net/smc: Fix cleanup when register ULP fails
+- net/smc: return ETIMEDOUT when smc_connect_clc() timeout
+- net/smc: Limit backlog connections
+- net/smc: Remove unused function declaration
+- net/smc: Resolve the race between SMC-R link access and clear
+- net/smc: Resolve the race between link group access and termination
+- net/smc: Reset conn->lgr when link group registration fails
+- net/smc: add comments for smc_link_{usable|sendable}
+- net/smc: remove redundant re-assignment of pointer link
+- net/smc: Introduce TCP ULP support
+- net/smc: Print net namespace in log
+- net/smc: Introduce net namespace support for linkgroup
+- net/smc: Use the bitmap API when applicable
+- net/smc: Clean up local struct sock variables
+- net: make sock_inuse_add() available
+- net: inline sock_prot_inuse_add()
+- net/smc: stop links when their GID is removed
+- net/smc: add netlink support for SMC-Rv2
+- net/smc: extend LLC layer for SMC-Rv2
+- net/smc: add v2 support to the work request layer
+- net/smc: retrieve v2 gid from IB device
+- net/smc: add v2 format of CLC decline message
+- net/smc: add listen processing for SMC-Rv2
+- net/smc: add SMC-Rv2 connection establishment
+- net/smc: prepare for SMC-Rv2 connection
+- net/smc: save stack space and allocate smc_init_info
+- net/smc: add generic netlink support for system EID
+- net/smc: keep static copy of system EID
+- net/smc: add support for user defined EIDs
+- net/smc: no need to flush smcd_dev's event_wq before destroying it
+- net/smc: avoid possible duplicate dmb unregistration
+- net/smc: Remove redundant assignment to rc
+- net: smc: Remove repeated struct declaration
+- net/smc: Use active link of the connection
+- net/smc: use helper smc_conn_abort() in listen processing
+- net: smc: convert tasklets to use new tasklet_setup() API
+- net/smc: improve return codes for SMC-Dv2
+- Revert "anolis: net/smc: Resolve the race between link group access and termination"
+- Revert "anolis: net/smc: Resolve the race between SMC-R link access and clear"
+- Revert "anolis: net/smc: delay RDMA resource release until connecitons freed"
+- Revert "net/smc: Rename 'llc_conf_mutex' variable to 'llc_conf_lock' in struct smc_link_group"
+- Revert "net/smc: Add size match for smc_buf_get_slot"
+- Partially revert 'net/smc: Clear memory when release and reuse buffer'
+- !16581  module: ensure that kobject_put() is safe for module type kobjects
+- SELinux: Add check for the user data passed to kcalloc in hashtab_init
+- !16566 [OLK-5.10]:update patches for sw64 architecture
+- !16468 [OLK-5.10] iommu: Fix RMRR and ACPI direct mappings by using pci_dev instead of pn_dev
+- !16561 platform/x86/intel-uncore-freq: Add efficiency latency control and other fix for 5.10
+- !16552  media: venus: hfi_parser: refactor hfi packet parsing logic
+- !16340 drivers: update Yunsilicon drivers to version 2412GA
+- !16551  soc: samsung: exynos-chipid: Add NULL pointer check in exynos_chipid_probe()
+- !16575  cgroup/cpuset-v1: Add missing support for cpuset_v2_mode
+- PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- PCI/P2PDMA: Add Zhaoxin Zhaoxin bridges to the whitelist
+- !16589  ipc: fix to protect IPCS lookups using RCU
+- !16572  sched: Support NUMA parallel scheduling for multiple processes
+- ipc: fix to protect IPCS lookups using RCU
+- tracing: Fix compilation warning on arm32
+- tracing: Fix oob write in trace_seq_to_buffer()
+- module: ensure that kobject_put() is safe for module type kobjects
+- cgroup/cpuset-v1: Add missing support for cpuset_v2_mode
+- sched: Support NUMA parallel scheduling for multiple processes
+- !16553  net/oenetcls: introduce oenetcls for network optimization
+- !16568  vp_vdpa: fix the crash in hot unplug with vp_vdpa
+- vp_vdpa: fix the crash in hot unplug with vp_vdpa
+- sw64: sort arch/sw64/Kconfig
+- sw64: disable EFFICIENT_UNALIGNED_ACCESS for C3B
+- sw64: optimize unaligned access
+- sw64: termios: implement BOTHER, IBSHIFT and termios2
+- sw64: ftrace: No need to save original function's temporary registers
+- sw64: mm: adjust userspace memory layout
+- sw64: cpufreq: fix the frequency returned by cpufreq_driver->get()
+- sw64: remove redundant qspinlock.h from Kbuild
+- net/oenetcls: introduce oenetcls for network optimization
+- media: venus: hfi_parser: refactor hfi packet parsing logic
+- soc: samsung: exynos-chipid: Add NULL pointer check in exynos_chipid_probe()
+- platform/x86/intel-uncore-freq: Add efficiency latency control to sysfs interface
+- platform/x86/intel-uncore-freq: Add support for efficiency latency control
+- platform/x86/intel-uncore-freq: Do not present separate package-die domain
+- platform/x86/intel-uncore-freq: Use generic helpers for current frequency
+- platform/x86/intel-uncore-freq: Rename the sysfs helper macro names
+- platform/x86/intel-uncore-freq: Get rid of uncore_read_freq driver API
+- platform/x86/intel-uncore-freq: Use uncore_index with read_control_freq
+- platform/x86/intel-uncore-freq: Get rid of magic min_max argument
+- platform/x86/intel-uncore-freq: Get rid of magic values
+- platform/x86/intel-uncore-freq: Re-arrange bit masks
+- iommu: Fix RMRR and ACPI direct mappings by using pci_dev instead of pn_dev
+- drivers: update Yunsilicon drivers to version 2412GA
+
 * Tue Jun 03 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-266.0.0.169
 - !16219  cachefiles: Fix non-taking of sb_writers around set/removexattr
 - !16444 powercap: intel_rapl_tpmi: backport 2 rapl tpmi update and fix from upstream6.12
