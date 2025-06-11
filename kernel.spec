@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       95
+%global devel_release       96
 %global maintenance_release .0.0
-%global pkg_release         .88
+%global pkg_release         .89
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,73 @@ fi
 %endif
 
 %changelog
+* Wed Jun 11 2025 Li Nan <linan122@huawei.com> - 6.6.0-96.0.0.89
+- !16670  mm/mm_spe.c: remove redundant checks and debug prints in mm_spe probe
+- !16668  Remove useless file
+- mm/mm_spe.c: remove redundant checks and debug prints in mm_spe probe
+- Remove useless file
+- !15819 [OLK-6.6]drm/phytium: Fix some Bugs in Phytium Display Engine
+- !16627  fix move_pages return value
+- !16620  close_files(): don't bother with xchg()
+- !16604  pds_core: remove write-after-free of client_id
+- !16434  ksmbd: fix use-after-free in ksmbd_session_rpc_open
+- !16585  tracing: Fix oob write in trace_seq_to_buffer()
+- mm/migrate: convert add_page_for_migration() from follow_page() to folio_walk
+- mm/pagewalk: fix usage of pmd_leaf()/pud_leaf() without present check
+- mm/pagewalk: introduce folio_walk_start() + folio_walk_end()
+- mm: introduce vma_pgtable_walk_{begin|end}()
+- mm/migrate: use folio_likely_mapped_shared() in add_page_for_migration()
+- !16537  md: fix mddev uaf while iterating all_mddevs list
+- !16538  md/raid10: wait barrier before returning discard request with REQ_NOWAIT
+- !16494  scsi: st: Fix array overflow in st_setup()
+- !16582  module: ensure that kobject_put() is safe for module type kobjects
+- !16605  iio: imu: st_lsm6dsx: fix possible lockup in st_lsm6dsx_read_tagged_fifo
+- !16606  CVE-2024-58100
+- close_files(): don't bother with xchg()
+- !16609 migration: update status after RAS error
+- !16586  dlm: prevent NPD when writing a positive value to event_done
+- !16580  dm-flakey: Fix memory corruption in optional corrupt_bio_byte feature
+- bpf: Fix kabi breakage for changes_pkt_data in struct bpf_prog_aux
+- bpf: fix null dereference when computing changes_pkt_data of prog w/o subprogs
+- bpf: check changes_pkt_data property for extension programs
+- iio: imu: st_lsm6dsx: fix possible lockup in st_lsm6dsx_read_tagged_fifo
+- pds_core: remove write-after-free of client_id
+- !16571  Fix erofs fid overflow
+- !16574  cgroup/cpuset-v1: Add missing support for cpuset_v2_mode
+- !16550  media: venus: hfi_parser: refactor hfi packet parsing logic
+- !16549  soc: samsung: exynos-chipid: Add NULL pointer check in exynos_chipid_probe()
+- !16600  ftrace: Fix preemption accounting for stacktrace trigger command
+- !16596  powerpc/crash: Fix non-smp kexec preparation
+- !16562 platform/x86/intel-uncore-freq: Add efficiency latency control and other fix for 6.6
+- !16593  vxlan: vnifilter: Fix unlocked deletion of default FDB entry
+- finally take no_llseek out
+- migration: update status after RAS error
+- ftrace: Fix preemption accounting for stacktrace trigger command
+- powerpc/crash: Fix non-smp kexec preparation
+- !16588  ipc: fix to protect IPCS lookups using RCU
+- vxlan: vnifilter: Fix unlocked deletion of default FDB entry
+- ipc: fix to protect IPCS lookups using RCU
+- dlm: prevent NPD when writing a positive value to event_done
+- tracing: Fix compilation warning on arm32
+- tracing: Fix oob write in trace_seq_to_buffer()
+- module: ensure that kobject_put() is safe for module type kobjects
+- dm-flakey: Fix memory corruption in optional corrupt_bio_byte feature
+- !16492  arm64/watchdog: fix watchdog failure in low power scenarios
+- cgroup/cpuset-v1: Add missing support for cpuset_v2_mode
+- erofs: fix file handle encoding for 64-bit NIDs
+- exportfs: define FILEID_INO64_GEN* file handle types
+- media: venus: hfi_parser: refactor hfi packet parsing logic
+- soc: samsung: exynos-chipid: Add NULL pointer check in exynos_chipid_probe()
+- md/raid10: wait barrier before returning discard request with REQ_NOWAIT
+- md: fix mddev uaf while iterating all_mddevs list
+- platform/x86/intel-uncore-freq: Add efficiency latency control to sysfs interface
+- platform/x86/intel-uncore-freq: Add support for efficiency latency control
+- platform/x86/intel-uncore-freq: Do not present separate package-die domain
+- scsi: st: Fix array overflow in st_setup()
+- arm64/watchdog: fix watchdog failure in low power scenarios
+- drm/phytium: Fix some Bugs in Phytium Display Engine
+- ksmbd: fix use-after-free in ksmbd_session_rpc_open
+
 * Wed Jun 04 2025 Li Nan <linan122@huawei.com> - 6.6.0-95.0.0.88
 - !16482 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.69-6.6.70 LTS Conflicts Patches
 - !16211 [OLK-6.6] Fix CVE-2025-22028
