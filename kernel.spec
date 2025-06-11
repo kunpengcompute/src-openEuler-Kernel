@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2506.1.0
+%global hulkrelease 2506.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0330
+Release: %{hulkrelease}.0331
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,22 @@ fi
 %endif
 
 %changelog
+
+* Wed Jun 11 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.2.0.0331
+- !16577  capabilities: fix undefined behavior in bit shift for CAP_TO_MASK
+- !16306 [openEuler-1.0-LTS] scsi: libsas: Abort all in-flight requests when device is gone
+- !16583  module: ensure that kobject_put() is safe for module type kobjects
+- !16598  vgacon: Add check for vc_origin address range in vgacon_scroll()
+- !16616  pci:vga fix race condition in vga_arb_write
+- !16495  dm crypt: add cond_resched() to dmcrypt_write()
+- !16540  scsi: target: Fix WRITE_SAME No Data Buffer crash
+- pci:vga fix race condition in vga_arb_write
+- vgacon: Add check for vc_origin address range in vgacon_scroll()
+- module: ensure that kobject_put() is safe for module type kobjects
+- capabilities: fix undefined behavior in bit shift for CAP_TO_MASK
+- scsi: target: Fix WRITE_SAME No Data Buffer crash
+- scsi: libsas: Abort all in-flight requests when device is gone
+- dm crypt: add cond_resched() to dmcrypt_write()
 
 * Wed Jun 04 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.1.0.0330
 - !16548  mm/vmscan: don't try to reclaim hwpoison folio
