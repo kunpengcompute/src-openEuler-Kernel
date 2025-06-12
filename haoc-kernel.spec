@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       94
+%global devel_release       96
 %global maintenance_release .0.0
-%global pkg_release         .80
+%global pkg_release         .81
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1096,6 +1096,8 @@ fi
 %endif
 
 %changelog
+* Thu Jun 12 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-96.0.0.81
+- update HAOC to 6.6.0-96.0.0
 * Fri May 30 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-94.0.0.80
 - update HAOC to 6.6.0-94.0.0
 * Tue May 21 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-92.0.0.79
