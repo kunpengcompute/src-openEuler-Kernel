@@ -1,6 +1,6 @@
-From 30dc6318d635b255370eb1de5e41c11a2e3698ea Mon Sep 17 00:00:00 2001
+From aca936a05123ef66606c7c32afcde3d14e30ba4c Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Thu, 5 Jun 2025 09:52:02 +0800
+Date: Thu, 12 Jun 2025 11:02:33 +0800
 Subject: [PATCH] rt1
 
 ---
@@ -169,9 +169,10 @@ Subject: [PATCH] rt1
  kernel/time/timer.c                           |   11 +-
  kernel/trace/trace.c                          |    2 +
  kernel/trace/trace_output.c                   |   16 +-
+ mm/pagewalk.c                                 |   10 +-
  net/core/dev.c                                |   39 +-
  net/core/skbuff.c                             |    7 +-
- 167 files changed, 5014 insertions(+), 1508 deletions(-)
+ 168 files changed, 5021 insertions(+), 1511 deletions(-)
  create mode 100644 kernel/printk/nbcon.c
 
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
@@ -15302,7 +15303,7 @@ index 63a8ce717..b3fbe97d1 100644
  
  /*
 diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
-index ab67908a3..5cb4ce318 100644
+index 028fcec26..897343f8e 100644
 --- a/kernel/trace/trace.c
 +++ b/kernel/trace/trace.c
 @@ -2727,6 +2727,8 @@ unsigned int tracing_gen_ctx_irq_test(unsigned int irqs_status)
@@ -15350,6 +15351,41 @@ index 70ba85714..64a96c2d5 100644
  	case TRACE_FLAG_PREEMPT_RESCHED:
  		need_resched = 'p';
  		break;
+diff --git a/mm/pagewalk.c b/mm/pagewalk.c
+index e439cf74f..bdc233ee1 100644
+--- a/mm/pagewalk.c
++++ b/mm/pagewalk.c
+@@ -5,7 +5,7 @@
+ #include <linux/hugetlb.h>
+ #include <linux/swap.h>
+ #include <linux/swapops.h>
+-
++#include <linux/mm.h>
+ /*
+  * We want to know the real level where a entry is located ignoring any
+  * folding of levels which may be happening. For example if p4d is folded then
+@@ -818,7 +818,9 @@ struct folio *folio_walk_start(struct folio_walk *fw,
+ 		} else if (pmd_present(pmd) && !pmd_leaf(pmd)) {
+ 			spin_unlock(ptl);
+ 			goto pte_table;
+-		} else if (pmd_present(pmd)) {
++		} 
++#ifdef CONFIG_TRANSPARENT_HUGEPAGE
++		else if (pmd_present(pmd)) {
+ 			page = vm_normal_page_pmd(vma, addr, pmd);
+ 			if (page) {
+ 				goto found;
+@@ -828,7 +830,9 @@ struct folio *folio_walk_start(struct folio_walk *fw,
+ 				expose_page = false;
+ 				goto found;
+ 			}
+-		} else if ((flags & FW_MIGRATION) &&
++		} 
++#endif
++		else if ((flags & FW_MIGRATION) &&
+ 			   is_pmd_migration_entry(pmd)) {
+ 			swp_entry_t entry = pmd_to_swp_entry(pmd);
+ 
 diff --git a/net/core/dev.c b/net/core/dev.c
 index 00a8200d7..87b77b0ff 100644
 --- a/net/core/dev.c
