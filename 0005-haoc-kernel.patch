@@ -1,7 +1,7 @@
-From 3bf5e37adb8313c508d5a26e03fdafe44c9aae39 Mon Sep 17 00:00:00 2001
+From f35b7a1be06e94ffe8ca3b414c347943622360e3 Mon Sep 17 00:00:00 2001
 From: Liu Zhehui <liuzhh@zgclab.edu.cn>
-Date: Fri, 30 May 2025 06:10:51 +0000
-Subject: [PATCH] Update HAOC to 6.6.0-94.0.0
+Date: Thu, 12 Jun 2025 02:46:09 +0000
+Subject: [PATCH] Update HAOC to 6.6.0-96.0.0
 
 ---
  Makefile                                      |    7 +
@@ -22800,7 +22800,7 @@ index 36b89a933310..63d5d9f66cb4 100644
  
  
 diff --git a/include/linux/bpf.h b/include/linux/bpf.h
-index 8853a032cd26..d38482ed8974 100644
+index 5d3f5fb86d02..d1a537ebdcdc 100644
 --- a/include/linux/bpf.h
 +++ b/include/linux/bpf.h
 @@ -304,6 +304,17 @@ struct bpf_map {
@@ -22821,7 +22821,7 @@ index 8853a032cd26..d38482ed8974 100644
  
  	KABI_USE(1, atomic64_t sleepable_refcnt)
  	KABI_USE(2, const struct btf_type *attach_func_proto)
-@@ -1584,6 +1595,13 @@ struct bpf_prog {
+@@ -1585,6 +1596,13 @@ struct bpf_prog {
  					    const struct bpf_insn *insn);
  	struct bpf_prog_aux	*aux;		/* Auxiliary fields */
  	struct sock_fprog_kern	*orig_prog;	/* Original BPF program */
@@ -23186,7 +23186,7 @@ index 938d7ecfb495..057252aacc13 100644
  /*
   * the userspace interface
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index b974880cf283..38a04972cf9f 100644
+index d24d6115a9bf..2b4f8fc0e19d 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
 @@ -32,6 +32,11 @@
@@ -25912,7 +25912,7 @@ index 000000000000..93d8c4977820
 +}
 \ No newline at end of file
 diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
-index 70f2d270fbb5..b9fc648757bb 100644
+index 5592b836c44c..dc79dca21854 100644
 --- a/kernel/bpf/verifier.c
 +++ b/kernel/bpf/verifier.c
 @@ -32,6 +32,10 @@
@@ -25950,7 +25950,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  	if (meta.release_regno) {
  		err = -EINVAL;
  		/* This can only be set for PTR_TO_STACK, as CONST_PTR_TO_DYNPTR cannot
-@@ -16519,7 +16533,7 @@ static int propagate_liveness(struct bpf_verifier_env *env,
+@@ -16520,7 +16534,7 @@ static int propagate_liveness(struct bpf_verifier_env *env,
  		return -EFAULT;
  	}
  	/* Propagate read liveness of registers... */
@@ -25959,7 +25959,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  	for (frame = 0; frame <= vstate->curframe; frame++) {
  		parent = vparent->frame[frame];
  		state = vstate->frame[frame];
-@@ -17127,15 +17141,30 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17128,15 +17142,30 @@ static int do_check(struct bpf_verifier_env *env)
  	bool pop_log = !(env->log.level & BPF_LOG_LEVEL2);
  	struct bpf_verifier_state *state = env->cur_state;
  	struct bpf_insn *insns = env->prog->insnsi;
@@ -25990,7 +25990,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  
  		/* reset current history entry on each new instruction */
  		env->cur_hist_ent = NULL;
-@@ -17228,6 +17257,16 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17229,6 +17258,16 @@ static int do_check(struct bpf_verifier_env *env)
  		sanitize_mark_insn_seen(env);
  		prev_insn_idx = env->insn_idx;
  
@@ -26007,7 +26007,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  		if (class == BPF_ALU || class == BPF_ALU64) {
  			err = check_alu_op(env, insn);
  			if (err)
-@@ -17269,8 +17308,17 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17270,8 +17309,17 @@ static int do_check(struct bpf_verifier_env *env)
  				err = check_atomic(env, env->insn_idx, insn);
  				if (err)
  					return err;
@@ -26025,7 +26025,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  			}
  
  			if (BPF_MODE(insn->code) != BPF_MEM || insn->imm != 0) {
-@@ -17374,7 +17422,12 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17375,7 +17423,12 @@ static int do_check(struct bpf_verifier_env *env)
  					env->insn_idx += insn->off + 1;
  				else
  					env->insn_idx += insn->imm + 1;
@@ -26038,7 +26038,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  
  			} else if (opcode == BPF_EXIT) {
  				if (BPF_SRC(insn->code) != BPF_K ||
-@@ -17414,7 +17467,11 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17415,7 +17468,11 @@ static int do_check(struct bpf_verifier_env *env)
  					if (err)
  						return err;
  					do_print_state = true;
@@ -26050,7 +26050,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  				}
  
  				err = check_return_code(env);
-@@ -17431,7 +17488,11 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17432,7 +17489,11 @@ static int do_check(struct bpf_verifier_env *env)
  					break;
  				} else {
  					do_print_state = true;
@@ -26062,7 +26062,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  				}
  			} else {
  				err = check_cond_jmp_op(env, insn, &env->insn_idx);
-@@ -17457,12 +17518,52 @@ static int do_check(struct bpf_verifier_env *env)
+@@ -17458,12 +17519,52 @@ static int do_check(struct bpf_verifier_env *env)
  				verbose(env, "invalid BPF_LD mode\n");
  				return -EINVAL;
  			}
@@ -26115,7 +26115,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  	}
  
  	return 0;
-@@ -17917,6 +18018,168 @@ static int resolve_pseudo_ldimm64(struct bpf_verifier_env *env)
+@@ -17918,6 +18019,168 @@ static int resolve_pseudo_ldimm64(struct bpf_verifier_env *env)
  	return 0;
  }
  
@@ -26284,7 +26284,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  /* drop refcnt of maps used by the rejected program */
  static void release_maps(struct bpf_verifier_env *env)
  {
-@@ -17983,6 +18246,26 @@ static void adjust_insn_aux_data(struct bpf_verifier_env *env,
+@@ -17984,6 +18247,26 @@ static void adjust_insn_aux_data(struct bpf_verifier_env *env,
  	vfree(old_data);
  }
  
@@ -26311,7 +26311,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  static void adjust_subprog_starts(struct bpf_verifier_env *env, u32 off, u32 len)
  {
  	int i;
-@@ -18016,12 +18299,21 @@ static struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 of
+@@ -18017,12 +18300,21 @@ static struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 of
  {
  	struct bpf_prog *new_prog;
  	struct bpf_insn_aux_data *new_data = NULL;
@@ -26333,7 +26333,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  	}
  
  	new_prog = bpf_patch_insn_single(env->prog, off, patch, len);
-@@ -18034,11 +18326,22 @@ static struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 of
+@@ -18035,11 +18327,22 @@ static struct bpf_prog *bpf_patch_insn_data(struct bpf_verifier_env *env, u32 of
  		return NULL;
  	}
  	adjust_insn_aux_data(env, new_data, new_prog, off, len);
@@ -26356,7 +26356,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  static int adjust_subprog_starts_after_remove(struct bpf_verifier_env *env,
  					      u32 off, u32 cnt)
  {
-@@ -18694,6 +18997,10 @@ static int jit_subprogs(struct bpf_verifier_env *env)
+@@ -18695,6 +18998,10 @@ static int jit_subprogs(struct bpf_verifier_env *env)
  		func[i]->aux->name[0] = 'F';
  		func[i]->aux->stack_depth = env->subprog_info[i].stack_depth;
  		func[i]->jit_requested = 1;
@@ -26367,7 +26367,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  		func[i]->blinding_requested = prog->blinding_requested;
  		func[i]->aux->kfunc_tab = prog->aux->kfunc_tab;
  		func[i]->aux->kfunc_btf_tab = prog->aux->kfunc_btf_tab;
-@@ -20524,6 +20831,12 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
+@@ -20535,6 +20842,12 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
  	len = (*prog)->len;
  	env->insn_aux_data =
  		vzalloc(array_size(sizeof(struct bpf_insn_aux_data), len));
@@ -26380,7 +26380,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  	ret = -ENOMEM;
  	if (!env->insn_aux_data)
  		goto err_free_env;
-@@ -20615,6 +20928,48 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
+@@ -20626,6 +20939,48 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
  
  	if (ret == 0 && bpf_prog_is_offloaded(env->prog->aux))
  		ret = bpf_prog_offload_finalize(env);
@@ -26429,7 +26429,7 @@ index 70f2d270fbb5..b9fc648757bb 100644
  
  skip_full_check:
  	kvfree(env->explored_states);
-@@ -20736,5 +21091,8 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
+@@ -20747,5 +21102,8 @@ int bpf_check(struct bpf_prog **prog, union bpf_attr *attr, bpfptr_t uattr, __u3
  	vfree(env->insn_aux_data);
  err_free_env:
  	kvfree(env);
@@ -28282,7 +28282,7 @@ index ce06b2884789..a039c7a50ec5 100644
  void __init __iomem *
  early_ioremap(resource_size_t phys_addr, unsigned long size)
 diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index 1e51f063ff93..83e31544dbb6 100644
+index 7045b7b7ac4a..ea43d55898fb 100644
 --- a/mm/huge_memory.c
 +++ b/mm/huge_memory.c
 @@ -40,6 +40,10 @@
@@ -28372,7 +28372,7 @@ index 24c809379274..4539eb8e7cce 100644
 +}
 +#endif
 diff --git a/mm/memory.c b/mm/memory.c
-index abc7f1645831..ac51605813b7 100644
+index c76a1dae75d9..9613583e3b11 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
 @@ -80,6 +80,11 @@
@@ -28395,7 +28395,7 @@ index abc7f1645831..ac51605813b7 100644
  	src_pte = pte_offset_map_nolock(src_mm, src_pmd, addr, &src_ptl);
  	if (!src_pte) {
  		pte_unmap_unlock(dst_pte, dst_ptl);
-@@ -6854,12 +6860,20 @@ bool ptlock_alloc(struct ptdesc *ptdesc)
+@@ -6854,13 +6860,21 @@ bool ptlock_alloc(struct ptdesc *ptdesc)
  	ptl = kmem_cache_alloc(page_ptl_cachep, GFP_KERNEL);
  	if (!ptl)
  		return false;
@@ -28416,6 +28416,7 @@ index abc7f1645831..ac51605813b7 100644
 +	#endif
  }
  #endif
+ 
 diff --git a/mm/mmap.c b/mm/mmap.c
 index 59f410c03f2b..765d2e10dc38 100644
 --- a/mm/mmap.c
