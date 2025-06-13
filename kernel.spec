@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       96
+%global devel_release       97
 %global maintenance_release .0.0
-%global pkg_release         .101
+%global pkg_release         .102
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,24 @@ fi
 %endif
 
 %changelog
+* Fri Jun 13 2025 Li Nan <linan122@huawei.com> - 6.6.0-97.0.0.102
+- !16653 [OLK-6.6] Revert "USB: xHCI: fix resume issue of some ZHAOXIN hosts"
+- !16699  mm: provide vm_normal_(page|folio)_pmd() with CONFIG_PGTABLE_HAS_HUGE_LEAVES
+- mm: provide vm_normal_(page|folio)_pmd() with CONFIG_PGTABLE_HAS_HUGE_LEAVES
+- !16686 v2  Soft domain improves and bugfixes
+- sched: Fix might sleep in atomic section issue
+- sched: Consider task affinity in wake_soft_domain()
+- sched: Fix soft domain group memleak
+- sched: Rework cpu.soft_domain_nr_cpu
+- sched: Add cmdline sched_soft_domain switch for soft domain feature
+- !16639  arm64/mpam: Add MPAM manual
+- !16651  iommu/arm-smmu-v3: Fix global-out-of-bounds access in arm_smmu_group_get_mpam()
+- Revert "USB: xHCI: fix resume issue of some ZHAOXIN hosts"
+- iommu/arm-smmu-v3: Fix global-out-of-bounds access in arm_smmu_group_get_mpam()
+- fs/resctrl: Prevent idle RMIDs from not being released in time from limbo
+- arm64/mpam: Update the chip condition judgment in resctrl_arch_would_mbm_overflow()
+- arm64/mpam: Add MPAM manual
+
 * Wed Jun 11 2025 Li Nan <linan122@huawei.com> - 6.6.0-96.0.0.101
 - !16670  mm/mm_spe.c: remove redundant checks and debug prints in mm_spe probe
 - !16668  Remove useless file
