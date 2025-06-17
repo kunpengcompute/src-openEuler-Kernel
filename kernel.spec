@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       267
+%global devel_release       268
 %global maintenance_release .0.0
-%global pkg_release         .170
+%global pkg_release         .171
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,56 @@ fi
 %endif
 
 %changelog
+* Tue Jun 17 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-268.0.0.171
+- !16710 v10  arm64: Support xcall prefetch
+- !16615  pci:vga fix race condition in vga_arb_write
+- !16715 [OLK-5.10] Add HGSC_CERT_IMPORT ioctl interface for Hygon CPUs.
+- !16713  usb: cdc-acm: Check control transfer buffer size before access
+- crypto: ccp: Implement CSV_HGSC_CERT_IMPORT ioctl command
+- usb: cdc-acm: Check control transfer buffer size before access
+- !16664  Fix watchdog false positive problem
+- config: Enable FAST_SYSCALL/IRQ and XCALL_PREFETCH by default
+- xcall: Add tracepoints for different prefetching stages
+- eventpoll: Add /proc/xcall/cpu_list for performance tuning
+- eventpoll: Add /proc/xcall/prefetch dir for performance tuning
+- eventpoll: Support xcall async prefetch
+- arm64: Introduce xcall prefetch enable interface
+- arm64: Reserve a kabi in task_struct exclusively for xcall
+- arm64: Refactor the xcall proc code
+- arm64: revert kpti bypass
+- arm64: Add debugfs dir for xint
+- arm64: Introduce Xint software solution
+- arm64: Faster SVC exception handler with xcall
+- arm64: Introduce xcall a faster svc exception handling
+- !16676  KVM: Explicitly verify target vCPU is online in kvm_get_vcpu()
+- !16687 drivers:misc:sdma-dae: sdma fix uncorrect sleep time
+- !16677  mm: slub: add __GFP_NOWARN when allocations with GFP_NOWAIT
+- !16693  arm64: uaccess: avoid blocking within critical sections
+- arm64: uaccess: avoid blocking within critical sections
+- !16539  scsi: target: Fix WRITE_SAME No Data Buffer crash
+- !16681  CVE-2023-53039
+- drivers:misc:sdma-dae: sdma fix uncorrect sleep time
+- HID: intel-ish-hid: ipc: Fix dev_err usage with uninitialized dev->devc
+- HID: intel-ish-hid: ipc: Fix potential use-after-free in work function
+- devm-helpers: Add resource managed version of work init
+- workqueue: Add resource managed version of delayed work init
+- !15244 Add support for Hygon family 18h model 8h
+- !16647 iommu: smmuv3: Not print information of SMMU 0x10 event
+- !16659 【OLK-5.10】Support PSPCCP/NTBCCP identification for Hygon 2th、C86-3G and C86-4G
+- mm: slub: add __GFP_NOWARN when allocations with GFP_NOWAIT
+- KVM: Explicitly verify target vCPU is online in kvm_get_vcpu()
+- watchdog: fix the SOFTLOCKUP_DETECTOR=n case
+- watchdog: fix watchdog may detect false positive of softlockup
+- crypto: ccp: Add support to detect CCP devices on Hygon 4th CPUs
+- crypto: ccp: Add support to detect CCP devices on Hygon 2nd and 3rd CPUs
+- crypto: ccp: Don't check tee support on Hygon platform
+- crypto: ccp: Introduce hygon specific interface to support driver
+- iommu: smmuv3: Not print information of SMMU 0x10 event
+- pci:vga fix race condition in vga_arb_write
+- scsi: target: Fix WRITE_SAME No Data Buffer crash
+- EDAC/amd64: Add support for Hygon family 18h model 8h
+- x86/amd_nb: Add support for Hygon family 18h model 8h
+
 * Tue Jun 10 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-267.0.0.170
 - !16640  IMA: use real_inode to get the i_version
 - !16558 [OLK-5.10] PCI/P2PDMA: Add Zhaoxin Zhaoxin bridges to the whitelist
