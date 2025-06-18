@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       96
+%global devel_release       98
 %global maintenance_release .0.0
-%global pkg_release         .89
+%global pkg_release         .90
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,104 @@ fi
 %endif
 
 %changelog
+* Wed Jun 18 2025 Li Nan <linan122@huawei.com> - 6.6.0-98.0.0.90
+- !16740  KVM: arm64: check if IPIV is enabled in BIOS
+- !16737  drivers/perf: hisi: Add events and rename event "cycle" for pa_pmu
+- KVM: arm64: check if IPIV is enabled in BIOS
+- drivers/perf: hisi: Add events and rename event "cycle" for pa_pmu
+- !16694  RDMA/hns: Fix double destruction of rsv_qp
+- !16730  uacce: removal of the Shared Memory Feature for Queues
+- !16727  perf: Remove unstable events for uncore L3C PMU
+- !16732  drivers/perf: hisi: Fixes the incorrect bitmask limit for the CPA event sysfs interface
+- !16728  drivers/perf: hisi: Add cacheable option for L3C PMU
+- !16724  drivers/perf: hisi: Clarifying event names and fix event ID for pa_pmu
+- !16723  perf iostat: hisi: Fix port range retrival
+- !16729  arm64: Fix unmet direct dependencies for DEBUG_FEATURE_BYPASS
+- drivers/perf: hisi: Fixes the incorrect bitmask limit for the CPA event sysfs interface
+- crypto: hisilicon/qm - check whether the input parameters and device PF match
+- uacce: removal of the Shared Memory Feature for Queues
+- arm64: Fix unmet direct dependencies for DEBUG_FEATURE_BYPASS
+- !16721 cpufreq: CPPC: Don't warn on failing to read perf counters on offline cpus
+- drivers/perf: hisi: Add cacheable option for L3C PMU
+- perf: Remove unstable events for uncore L3C PMU
+- drivers/perf: hisi: Clarifying event names and fix event ID for pa_pmu
+- perf iostat: hisi: Fix port range retrival
+- !16701  Add HiSilicon uncore frequency scaling driver
+- !16712 crypto: hisilicon - support algorithm fallback v2
+- arm64: topology: Setup amu fie when cpu hotplugging
+- cpufreq: CPPC: Fix error handling in cppc_scale_freq_workfn()
+- cpufreq: CPPC: Don't warn on failing to read perf counters on offline cpus
+- topology: Set capacity_freq_ref in all cases
+- arm64/amu: Use capacity_ref_freq() to set AMU ratio
+- cpufreq/cppc: Set the frequency used for computing the capacity
+- energy_model: Use a fixed reference frequency
+- cpufreq/schedutil: Use a fixed reference frequency
+- cpufreq: Use the fixed and coherent frequency for scaling capacity
+- !16717  Fix issues of nfs mounting
+- !16714 v2  Fix file content inconsistency issue and incorporate subsequent fix patches
+- sched/topology: Add a new arch_scale_freq_ref() method
+- !16696  KVM: arm64: Check whether GICv4.0 is enabled
+- nfs: ignore SB_RDONLY when remounting nfs
+- nfs: clear SB_RDONLY before getting superblock
+- vfs: generate FS_CREATE before FS_OPEN when ->atomic_open used.
+- NFS: abort nfs_atomic_open_v23 if name is too long.
+- NFS: add atomic_open for NFSv3 to handle O_TRUNC correctly.
+- !16680  Fix the problem of NFS client mount read/write permission failure
+- crypto: hisilicon/qm - check the value obtained from the hardware
+- crypto: hisilicon/hpre - support the hpre algorithm fallback
+- crypto: hisilicon - implement full backlog support for sec
+- uacce: add queue lock for uacce_get_ss_dma
+- uacce: use WARN_ON_ONCE instead of WARN_ON
+- !16705  fs/resctrl: Fix return value in rdtgroup_pseudo_locked_in_hierarchy()
+- !16691 v3  Rewrite smt interference account logic
+- !16662  Fix watchdog false positive problem
+- !16711  af_unix: Read 0 bytes with MSG_PEEK loops if last skb is OOB
+- af_unix: Read 0 bytes with MSG_PEEK loops if last skb is OOB
+- fs/resctrl: Fix return value in rdtgroup_pseudo_locked_in_hierarchy()
+- !16287 Update the watchdog period according to real CPU frequency
+- !16679  fs/resctrl: L2_MON does not support the limbo mechanism
+- openeuler_defconfig: Enable devfreq and hisi_uncore_freq by default
+- PM / devfreq: Add HiSilicon uncore frequency scaling driver
+- PM / devfreq: Allow devfreq driver to add custom sysfs ABIs
+- PM / devfreq: Check governor before using governor->name
+- PM / devfreq: Remove redundant devfreq_get_freq_range() calling in devfreq_add_device()
+- PM / devfreq: Limit max_freq with scaling_min_freq
+- PM / devfreq: governor: Replace sscanf() with kstrtoul() in set_freq_store()
+- mailbox: pcc: Refactor and simplify check_and_ack()
+- mailbox: pcc: Always map the shared memory communication address
+- mailbox: pcc: Refactor error handling in irq handler into separate function
+- mailbox: pcc: Use acpi_os_ioremap() instead of ioremap()
+- mailbox: pcc: Return early if no GAS register from pcc_mbox_cmd_complete_check
+- mailbox: pcc: Drop unnecessary endianness conversion of pcc_hdr.flags
+- !16653 [OLK-6.6] Revert "USB: xHCI: fix resume issue of some ZHAOXIN hosts"
+- !16699  mm: provide vm_normal_(page|folio)_pmd() with CONFIG_PGTABLE_HAS_HUGE_LEAVES
+- mm: provide vm_normal_(page|folio)_pmd() with CONFIG_PGTABLE_HAS_HUGE_LEAVES
+- KVM: arm64: Check whether GICv4.0 is enabled
+- RDMA/hns: Fix double destruction of rsv_qp
+- interference: Rewrite smt interference account logic
+- interference: Fix the compilation warning of sched_task_is_throttled()
+- !16686 v2  Soft domain improves and bugfixes
+- sched: Fix might sleep in atomic section issue
+- sched: Consider task affinity in wake_soft_domain()
+- sched: Fix soft domain group memleak
+- sched: Rework cpu.soft_domain_nr_cpu
+- sched: Add cmdline sched_soft_domain switch for soft domain feature
+- !16639  arm64/mpam: Add MPAM manual
+- Revert "nfs: ignore SB_RDONLY when mounting nfs"
+- Revert "nfs: pass flags to second superblock"
+- Revert "nfs: fix the loss of superblock's initialized flags"
+- !16651  iommu/arm-smmu-v3: Fix global-out-of-bounds access in arm_smmu_group_get_mpam()
+- fs/resctrl: L2_MON does not support the limbo mechanism
+- watchdog: fix the SOFTLOCKUP_DETECTOR=n case
+- watchdog: fix watchdog may detect false positive of softlockup
+- Revert "USB: xHCI: fix resume issue of some ZHAOXIN hosts"
+- iommu/arm-smmu-v3: Fix global-out-of-bounds access in arm_smmu_group_get_mpam()
+- fs/resctrl: Prevent idle RMIDs from not being released in time from limbo
+- arm64/mpam: Update the chip condition judgment in resctrl_arch_would_mbm_overflow()
+- arm64/watchdog_hld: Add a cpufreq notifier for update watchdog thresh
+- watchdog/perf: Provide function for adjusting the event period
+- arm64/mpam: Add MPAM manual
+
 * Wed Jun 11 2025 Li Nan <linan122@huawei.com> - 6.6.0-96.0.0.89
 - !16670  mm/mm_spe.c: remove redundant checks and debug prints in mm_spe probe
 - !16668  Remove useless file
