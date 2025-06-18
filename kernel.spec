@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2506.2.0
+%global hulkrelease 2506.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0331
+Release: %{hulkrelease}.0332
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,10 @@ fi
 %endif
 
 %changelog
+
+* Wed Jun 18 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.3.0.0332
+- !16650  mm/vmscan: fix hwpoisoned THP handling in shrink_page_list
+- mm/vmscan: fix hwpoisoned THP handling in shrink_page_list
 
 * Wed Jun 11 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.2.0.0331
 - !16577  capabilities: fix undefined behavior in bit shift for CAP_TO_MASK
