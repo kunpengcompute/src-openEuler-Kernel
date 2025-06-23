@@ -39,7 +39,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global debuginfodir /usr/lib/debug
 
 %global upstream_version    6.12
-%global upstream_sublevel   0
+%global upstream_sublevel   33
 %global devel_release       0
 %global maintenance_release .0.0
 %global pkg_release         .1
@@ -60,7 +60,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global openeuler_minor     %{?_openeuler_minor} %{?!_openeuler_minor: 0}
 %endif
 
-%define with_debuginfo 0
+%define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
 %global _missing_build_ids_terminate_build 1
 %global _no_recompute_build_ids 1
@@ -390,7 +390,7 @@ perl -p -i -e "s/^OPENEULER_RELEASE.*/OPENEULER_RELEASE = \"%{release}\"/" Makef
 ## make linux
 make mrproper %{_smp_mflags}
 
-cp $RPM_SOURCE_DIR/kernel-%{upstream_version}.%{upstream_sublevel}-%{_host_cpu}.config arch/%{Arch}/configs/openeuler_defconfig
+cp $RPM_SOURCE_DIR/kernel-%{upstream_version}.0-%{_host_cpu}.config arch/%{Arch}/configs/openeuler_defconfig
 
 %if %{with_64kb}
 sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_4K_PAGES.*/CONFIG_ARM64_64K_PAGES=y/'
@@ -1076,6 +1076,10 @@ fi
 %endif
 
 %changelog
+* Wed Jun 18 2025 laokz <zhangkai@iscas.ac.cn> - 6.12.33-0.0.0.1
+- upgrade to upstream v6.12.33
+- reset %with_debuginfo
+
 * Sat Jun 07 2025 Xie XiuQi <xiexiuqi@huawei.com> - 6.12.0-0.0.0.1
 - upgrade to v6.12
 
