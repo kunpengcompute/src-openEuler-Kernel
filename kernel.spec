@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       268
+%global devel_release       269
 %global maintenance_release .0.0
-%global pkg_release         .171
+%global pkg_release         .172
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,74 @@ fi
 %endif
 
 %changelog
+* Tue Jun 24 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-269.0.0.172
+- !16578  ext4: ignore xattrs past end
+- !11993 [22.03-LTS-SP3] bcache: call force_wake_up_gc() if necessary in check_should_bypass()
+- !11994 [OLK-5.10] bcache: allow allocator to invalidate bucket in gc
+- !16749  arm64: xcall: Fix GPR touch as the original step
+- !16774  bpf: Fix prog_array_map_poke_run map poke update
+- !16406 locking/qspinlock: Micro-optimize pending state waiting for unlock
+- bpf: Fix prog_array_map_poke_run map poke update
+- !16768  RDMA/hns: Get messgae length of ack_req from FW
+- RDMA/hns: Get messgae length of ack_req from FW
+- !16750 v2  add-exec-ebpf-v3
+- !16758  objtool, media: dib8000: Prevent divide-by-zero in dib8000_set_dds()
+- !16706  OLK-5.10 Bperf
+- !16735 [OLK-5.10]:update patches for sw64 architecture
+- objtool, media: dib8000: Prevent divide-by-zero in dib8000_set_dds()
+- sched/ebpf: Add helper to set prefer cpumask for the task
+- sched/ebpf: Add bpf_sched_cfs_exec_set_cpumask hook
+- arm64: xcall: Fix GPR touch as the original step
+- sw64: irqchip: update effective affinity for PINTC
+- sw64: irqchip: add support for PINTC on all NUMA nodes
+- sw64: ioremap: fix IO interfaces
+- sw64: cpufreq: optimize the granularity of cpufreq
+- sw64: ftrace: remove temporary registers left in context saving
+- sw64: kvm: fix undefined compile issues for kvm module
+- sw64: pintc: fix guest pintc init
+- sw64: set module region to the 2GB space below vmalloc area
+- Fix type mismatch between struct perf_cpu and integer operations
+- perf test shell stat_bpf_counters: Fix test on Intel
+- perf stat: Fix error check for bpf_program__attach
+- perf stat: Fix error return code in bperf__load()
+- perf build: Properly guard libbpf includes
+- perf stat: Separate bperf from bpf_profiler
+- perf docs: Document bpf event modifier
+- perf stat: Fix handling of unsupported cgroup events when using BPF counters
+- bpf: Add rcu_read_lock in bpf_get_current_[ancestor_]cgroup_id() helpers
+- perf test: Use sqrtloop workload to test bperf event
+- perf test stat_bpf_counter.sh: Stabilize the test results
+- perf test bpf-counters: Add test for BPF event modifier
+- perf test: Add a shell test for 'perf stat --bpf-counters' new option
+- perf stat: Fix incorrect display of bperf when event count is 0
+- perf stat: Increase perf_attr_map entries
+- perf stat: Support inherit events during fork() for bperf
+- perf stat: Fix BPF program section name
+- perf bpf_skel: Do not use typedef to avoid error on old clang
+- perf bpf: Fix building perf with BUILD_BPF_SKEL=1 by default in more distros
+- perf stat: Enable BPF counter with --for-each-cgroup
+- perf bpf_counter: Move common functions to bpf_counter.h
+- perf tools: Add cgroup_is_v2() helper
+- perf tools: Add read_cgroup_id() function
+- perf stat: Introduce bpf_counter_ops->disable()
+- perf stat: Introduce ':b' modifier
+- perf stat: Introduce config stat.bpf-counter-events
+- perf bpf: check perf_attr_map is compatible with the perf binary
+- perf util: Move bpf_perf definitions to a libperf header
+- perf stat: Measure 't0' and 'ref_time' after enable_counters()
+- perf stat: Introduce 'bperf' to share hardware PMCs with BPF
+- perf stat: Enable counting events for BPF programs
+- perf build: Support build BPF skeletons with perf
+- bpftool: Add Makefile target bootstrap
+- perf tools: Add 'cgroup-switches' software event
+- perf core: Add PERF_COUNT_SW_CGROUP_SWITCHES event
+- perf core: Factor out __perf_sw_event_sched
+- bpf: Allow bpf_get_current_ancestor_cgroup_id for tracing
+- ext4: ignore xattrs past end
+- locking/qspinlock: Micro-optimize pending state waiting for unlock
+- bcache: allow allocator to invalidate bucket in gc
+- bcache: call force_wake_up_gc() if necessary in check_should_bypass()
+
 * Tue Jun 17 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-268.0.0.171
 - !16710 v10  arm64: Support xcall prefetch
 - !16615  pci:vga fix race condition in vga_arb_write
