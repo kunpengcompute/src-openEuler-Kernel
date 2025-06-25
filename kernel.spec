@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2506.3.0
+%global hulkrelease 2506.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0332
+Release: %{hulkrelease}.0333
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,15 @@ fi
 %endif
 
 %changelog
+
+* Wed Jun 25 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.4.0.0333
+- !16754  video: fbdev: amba-clcd: Fix refcount leak bugs
+- !16704  ima: prevent concurrent list operations in ima_lsm_update_rules
+- video: fbdev: amba-clcd: Fix refcount leak bugs
+- !16554 [openEuler-1.0-LTS] PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- PCI: Add ACS quirk for more Zhaoxin Root Ports
+- ima: prevent concurrent list operations in ima_lsm_update_rules
 
 * Wed Jun 18 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.3.0.0332
 - !16650  mm/vmscan: fix hwpoisoned THP handling in shrink_page_list
