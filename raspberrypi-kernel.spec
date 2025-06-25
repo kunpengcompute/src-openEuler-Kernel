@@ -2,13 +2,13 @@
 
 %global KernelVer %{version}-%{release}.raspi.%{_target_cpu}
 
-%global hulkrelease 92.0.0
+%global hulkrelease 98.0.0
 
 %global debug_package %{nil}
 
 Name:	 raspberrypi-kernel
 Version: 6.6.0
-Release: %{hulkrelease}.14
+Release: %{hulkrelease}.15
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -281,6 +281,10 @@ fi
 /usr/src/kernels/%{KernelVer}-*
 
 %changelog
+* Mon Jun 23 2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-98.0.0.15
+- update kernel version to openEuler 6.6.0-98.0.0
+- update Raspberry Pi patch, last commit (bba53a117a4a5c29da892962332ff1605990e17a): dts: rp1: Don't use DMA with UARTs
+
 * Wed May 21 2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-92.0.0.14
 - update kernel version to openEuler 6.6.0-92.0.0
 

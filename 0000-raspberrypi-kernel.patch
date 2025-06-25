@@ -1,4 +1,4 @@
-From 4a1a71fabd20f5b6ac434fd15fedcb0f5ff2bf3f Mon Sep 17 00:00:00 2001
+From 8f30e6896461a08bf66c9a9b3a3ccb48a8c15ef3 Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
 Date: Wed, 21 May 2025 18:38:17 +0800
 Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
@@ -17,7 +17,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  .../display/panel/ilitek,ili9881c.yaml        |    2 +
  .../bindings/display/panel/panel-dsi.yaml     |  118 +
  .../bindings/display/panel/panel-simple.yaml  |    4 +
- .../devicetree/bindings/gpu/brcm,bcm-v3d.yaml |    1 +
+ .../devicetree/bindings/gpu/brcm,bcm-v3d.yaml |    7 +-
  .../bindings/hwmon/microchip,emc2305.yaml     |   54 +
  .../bindings/media/bcm2835-unicam.txt         |   85 +
  .../devicetree/bindings/media/i2c/ad5398.txt  |   20 +
@@ -114,7 +114,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  .../broadcom/bcm283x-rpi-i2c0mux_0_44.dtsi    |    4 +
  arch/arm/boot/dts/broadcom/bcm283x.dtsi       |    8 +-
  arch/arm/boot/dts/overlays/Makefile           |  355 +
- arch/arm/boot/dts/overlays/README             | 5669 +++++++++++++
+ arch/arm/boot/dts/overlays/README             | 5672 +++++++++++++
  .../arm/boot/dts/overlays/act-led-overlay.dts |   28 +
  .../dts/overlays/adafruit-st7735r-overlay.dts |   83 +
  .../boot/dts/overlays/adafruit18-overlay.dts  |   55 +
@@ -322,7 +322,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  arch/arm/boot/dts/overlays/ov64a40.dtsi       |   34 +
  arch/arm/boot/dts/overlays/ov7251-overlay.dts |   77 +
  arch/arm/boot/dts/overlays/ov7251.dtsi        |   28 +
- arch/arm/boot/dts/overlays/ov9281-overlay.dts |   88 +
+ arch/arm/boot/dts/overlays/ov9281-overlay.dts |  102 +
  arch/arm/boot/dts/overlays/ov9281.dtsi        |   26 +
  arch/arm/boot/dts/overlays/overlay_map.dts    |  518 ++
  .../arm/boot/dts/overlays/papirus-overlay.dts |   84 +
@@ -456,7 +456,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  .../vc4-kms-dpi-hyperpixel2r-overlay.dts      |  114 +
  .../vc4-kms-dpi-hyperpixel4-overlay.dts       |   57 +
  .../vc4-kms-dpi-hyperpixel4sq-overlay.dts     |   36 +
- .../overlays/vc4-kms-dpi-panel-overlay.dts    |   69 +
+ .../overlays/vc4-kms-dpi-panel-overlay.dts    |   73 +
  arch/arm/boot/dts/overlays/vc4-kms-dpi.dtsi   |  111 +
  .../overlays/vc4-kms-dsi-7inch-overlay.dts    |  121 +
  .../overlays/vc4-kms-dsi-generic-overlay.dts  |  106 +
@@ -536,7 +536,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  .../dts/broadcom/bcm2712-rpi-cm5l-cm5io.dts   |    5 +
  .../boot/dts/broadcom/bcm2712-rpi-cm5l.dtsi   |   21 +
  arch/arm64/boot/dts/broadcom/bcm2712-rpi.dtsi |  475 ++
- arch/arm64/boot/dts/broadcom/bcm2712.dtsi     | 1306 +++
+ arch/arm64/boot/dts/broadcom/bcm2712.dtsi     | 1307 +++
  .../boot/dts/broadcom/bcm2712d0-rpi-5-b.dts   |  107 +
  arch/arm64/boot/dts/broadcom/rp1.dtsi         | 1323 +++
  arch/arm64/boot/dts/overlays                  |    1 +
@@ -654,14 +654,14 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  drivers/gpu/drm/rp1/rp1-vec/vec_regs.h        | 1420 ++++
  drivers/gpu/drm/tiny/ili9486.c                |    1 -
  drivers/gpu/drm/v3d/v3d_bo.c                  |   12 +-
- drivers/gpu/drm/v3d/v3d_debugfs.c             |  258 +-
- drivers/gpu/drm/v3d/v3d_drv.c                 |   37 +
- drivers/gpu/drm/v3d/v3d_drv.h                 |   67 +
- drivers/gpu/drm/v3d/v3d_gem.c                 |   57 +
- drivers/gpu/drm/v3d/v3d_irq.c                 |   55 +-
+ drivers/gpu/drm/v3d/v3d_debugfs.c             |  260 +-
+ drivers/gpu/drm/v3d/v3d_drv.c                 |  119 +-
+ drivers/gpu/drm/v3d/v3d_drv.h                 |   89 +-
+ drivers/gpu/drm/v3d/v3d_gem.c                 |   84 +-
+ drivers/gpu/drm/v3d/v3d_irq.c                 |   57 +-
  drivers/gpu/drm/v3d/v3d_mmu.c                 |    2 -
- drivers/gpu/drm/v3d/v3d_regs.h                |   51 +-
- drivers/gpu/drm/v3d/v3d_sched.c               |  180 +-
+ drivers/gpu/drm/v3d/v3d_regs.h                |   77 +-
+ drivers/gpu/drm/v3d/v3d_sched.c               |  203 +-
  drivers/gpu/drm/vc4/Makefile                  |    4 +-
  drivers/gpu/drm/vc4/tests/vc4_mock.c          |   65 +-
  drivers/gpu/drm/vc4/tests/vc4_mock.h          |   28 +-
@@ -762,7 +762,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  drivers/media/i2c/imx290.c                    |   89 +-
  drivers/media/i2c/imx296.c                    |  164 +-
  drivers/media/i2c/imx415.c                    |  442 +-
- drivers/media/i2c/imx477.c                    | 2387 ++++++
+ drivers/media/i2c/imx477.c                    | 2420 ++++++
  drivers/media/i2c/imx500.c                    | 3227 ++++++++
  drivers/media/i2c/imx519.c                    | 2146 +++++
  drivers/media/i2c/imx708.c                    | 2116 +++++
@@ -1267,7 +1267,7 @@ Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-92.0.0)
  sound/soc/soc-core.c                          |   14 +-
  sound/usb/card.c                              |    8 +-
  sound/usb/quirks.c                            |    2 +
- 1263 files changed, 256191 insertions(+), 4758 deletions(-)
+ 1263 files changed, 256412 insertions(+), 4782 deletions(-)
  create mode 100644 Documentation/admin-guide/media/bcm2835-isp.rst
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.dot
  create mode 100644 Documentation/admin-guide/media/raspberrypi-pisp-be.rst
@@ -2588,7 +2588,7 @@ index 25b4589d4a58..209e8475b0a5 100644
        - innolux,at070tn92
          # Innolux G070ACE-L01 7" WVGA (800x480) TFT LCD panel
 diff --git a/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml b/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml
-index dae55b8a267b..97c9afe7b4f8 100644
+index dae55b8a267b..5dee0f617307 100644
 --- a/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml
 +++ b/Documentation/devicetree/bindings/gpu/brcm,bcm-v3d.yaml
 @@ -16,6 +16,7 @@ properties:
@@ -2599,6 +2599,25 @@ index dae55b8a267b..97c9afe7b4f8 100644
        - brcm,2711-v3d
        - brcm,7268-v3d
        - brcm,7278-v3d
+@@ -26,14 +27,16 @@ properties:
+       - description: core0 register (required)
+       - description: GCA cache controller register (if GCA controller present)
+       - description: bridge register (if no external reset controller)
++      - description: SMS register (if SMS controller present)
+     minItems: 2
+ 
+   reg-names:
+     items:
+       - const: hub
+       - const: core0
+-      - enum: [ bridge, gca ]
+-      - enum: [ bridge, gca ]
++      - enum: [ bridge, gca, sms ]
++      - enum: [ bridge, gca, sms ]
++      - enum: [ bridge, gca, sms ]
+     minItems: 2
+ 
+   interrupts:
 diff --git a/Documentation/devicetree/bindings/hwmon/microchip,emc2305.yaml b/Documentation/devicetree/bindings/hwmon/microchip,emc2305.yaml
 new file mode 100644
 index 000000000000..efdc3cecb03d
@@ -12505,10 +12524,10 @@ index 000000000000..272717f6d01d
 +clean-files	:= *.dtbo
 diff --git a/arch/arm/boot/dts/overlays/README b/arch/arm/boot/dts/overlays/README
 new file mode 100644
-index 000000000000..820af14f58cf
+index 000000000000..564bc366f99c
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/README
-@@ -0,0 +1,5669 @@
+@@ -0,0 +1,5672 @@
 +Introduction
 +============
 +
@@ -16081,6 +16100,9 @@ index 000000000000..820af14f58cf
 +                                Compute Module (CSI0, i2c_vc, and cam0_reg).
 +        arducam                 Slow down the regulator for slow Arducam
 +                                modules.
++        clk-continuous          Switch to continuous mode on the CSI clock lane,
++                                which increases the maximum frame rate slightly.
++                                Appears not to work on Pi3.
 +
 +
 +Name:   papirus
@@ -36122,10 +36144,10 @@ index 000000000000..561fed1db837
 +};
 diff --git a/arch/arm/boot/dts/overlays/ov9281-overlay.dts b/arch/arm/boot/dts/overlays/ov9281-overlay.dts
 new file mode 100644
-index 000000000000..b574aacd063c
+index 000000000000..28b8cb538aa3
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/ov9281-overlay.dts
-@@ -0,0 +1,88 @@
+@@ -0,0 +1,102 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +// Definitions for OV9281 camera module on VC I2C bus
 +/dts-v1/;
@@ -36192,6 +36214,20 @@ index 000000000000..b574aacd063c
 +		};
 +	};
 +
++	fragment@6 {
++		target = <&csi_ep>;
++		__overlay__ {
++			clock-noncontinuous;
++		};
++	};
++
++	fragment@7 {
++		target = <&cam_endpoint>;
++		__overlay__ {
++			clock-noncontinuous;
++		};
++	};
++
 +	__overrides__ {
 +		rotation = <&cam_node>,"rotation:0";
 +		orientation = <&cam_node>,"orientation:0";
@@ -36203,7 +36239,7 @@ index 000000000000..b574aacd063c
 +		       <&cam_node>, "avdd-supply:0=",<&cam0_reg>,
 +		       <&reg_frag>, "target:0=",<&cam0_reg>;
 +		arducam = <0>, "+5";
-+
++		clk-continuous = <0>, "-6-7";
 +	};
 +};
 +
@@ -39660,7 +39696,7 @@ index 000000000000..c17556e91105
 +};
 diff --git a/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
 new file mode 100644
-index 000000000000..cfd9fe37e108
+index 000000000000..6b9ac9bcf6b8
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-poe-overlay.dts
 @@ -0,0 +1,154 @@
@@ -39811,7 +39847,7 @@ index 000000000000..cfd9fe37e108
 +		poe_fan_temp2_hyst =	<&trip2>,"hysteresis:0";
 +		poe_fan_temp3 =		<&trip3>,"temperature:0";
 +		poe_fan_temp3_hyst =	<&trip3>,"hysteresis:0";
-+		i2c =			<0>, "+5+6",
++		i2c =			<0>, "+7+8",
 +					<&fwpwm>,"status=disabled",
 +					<&i2c_bus>,"status=okay",
 +					<&poe_mfd>,"status=okay",
@@ -39820,7 +39856,7 @@ index 000000000000..cfd9fe37e108
 +};
 diff --git a/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts b/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts
 new file mode 100644
-index 000000000000..54deda2f18c3
+index 000000000000..494af0c2a20a
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/rpi-poe-plus-overlay.dts
 @@ -0,0 +1,49 @@
@@ -39854,7 +39890,7 @@ index 000000000000..54deda2f18c3
 +	};
 +
 +	__overrides__ {
-+		i2c =	<0>, "+5+6",
++		i2c =	<0>, "+7+8",
 +			<&fwpwm>,"status=disabled",
 +			<&rpi_poe_power_supply>,"status=disabled",
 +			<&i2c_bus>,"status=okay",
@@ -43273,7 +43309,7 @@ index 000000000000..1006d5fe9e06
 +};
 diff --git a/arch/arm/boot/dts/overlays/sx150x-overlay.dts b/arch/arm/boot/dts/overlays/sx150x-overlay.dts
 new file mode 100644
-index 000000000000..1d1069345da2
+index 000000000000..191ccd5f9eca
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/sx150x-overlay.dts
 @@ -0,0 +1,1706 @@
@@ -44960,7 +44996,7 @@ index 000000000000..1d1069345da2
 +		sx1507-1-3E-int-gpio = <0>,"+67+99",  <&sx150x_1_3E_pins>,"brcm,pins:0", <&sx1507_1_3E>,"interrupts:0";
 +		sx1507-0-3F-int-gpio = <0>,"+68+100", <&sx150x_0_3F_pins>,"brcm,pins:0", <&sx1507_0_3F>,"interrupts:0";
 +		sx1507-1-3F-int-gpio = <0>,"+69+101", <&sx150x_1_3F_pins>,"brcm,pins:0", <&sx1507_1_3F>,"interrupts:0";
-+		sx1507-0-70-int-gpio = <0>,"+60+102", <&sx150x_0_70_pins>,"brcm,pins:0", <&sx1507_0_70>,"interrupts:0";
++		sx1507-0-70-int-gpio = <0>,"+70+102", <&sx150x_0_70_pins>,"brcm,pins:0", <&sx1507_0_70>,"interrupts:0";
 +		sx1507-1-70-int-gpio = <0>,"+71+103", <&sx150x_1_70_pins>,"brcm,pins:0", <&sx1507_1_70>,"interrupts:0";
 +		sx1507-0-71-int-gpio = <0>,"+72+104", <&sx150x_0_71_pins>,"brcm,pins:0", <&sx1507_0_71>,"interrupts:0";
 +		sx1507-1-71-int-gpio = <0>,"+73+105", <&sx150x_1_71_pins>,"brcm,pins:0", <&sx1507_1_71>,"interrupts:0";
@@ -46773,10 +46809,10 @@ index 000000000000..700046348ecf
 +};
 diff --git a/arch/arm/boot/dts/overlays/vc4-kms-dpi-panel-overlay.dts b/arch/arm/boot/dts/overlays/vc4-kms-dpi-panel-overlay.dts
 new file mode 100644
-index 000000000000..ee9e2e8fd246
+index 000000000000..a0fe8f810e01
 --- /dev/null
 +++ b/arch/arm/boot/dts/overlays/vc4-kms-dpi-panel-overlay.dts
-@@ -0,0 +1,69 @@
+@@ -0,0 +1,73 @@
 +/*
 + * vc4-kms-dpi-panel-overlay.dts
 + * Support for any predefined DPI panel.
@@ -46821,24 +46857,28 @@ index 000000000000..ee9e2e8fd246
 +			pinctrl-0 = <&dpi_18bit_gpio0>;
 +		};
 +	};
++#if 0
 +	fragment@92 {
 +		target = <&dpi>;
 +		__dormant__  {
 +			pinctrl-0 = <&dpi_gpio0>;
 +		};
 +	};
++#endif
 +	fragment@93 {
 +		target = <&dpi>;
 +		__dormant__  {
 +			pinctrl-0 = <&dpi_16bit_cpadhi_gpio0>;
 +		};
 +	};
++#if 0
 +	fragment@94 {
 +		target = <&dpi>;
 +		__dormant__  {
 +			pinctrl-0 = <&dpi_16bit_gpio0>;
 +		};
 +	};
++#endif
 +
 +	__overrides__ {
 +		at056tn53v1 = <0>, "+0+90";
@@ -57156,7 +57196,7 @@ index 000000000000..74d420fef8a7
 +};
 diff --git a/arch/arm64/boot/dts/broadcom/bcm2712-rpi-500.dts b/arch/arm64/boot/dts/broadcom/bcm2712-rpi-500.dts
 new file mode 100644
-index 000000000000..1862e55fa1d2
+index 000000000000..f543ff64200d
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2712-rpi-500.dts
 @@ -0,0 +1,142 @@
@@ -57169,7 +57209,7 @@ index 000000000000..1862e55fa1d2
 +};
 +
 +&pwr_key {
-+	debounce-interval = <400>;
++	debounce-interval = <0>;
 +};
 +
 +&gio {
@@ -58685,10 +58725,10 @@ index 000000000000..2317c2d86e88
 +};
 diff --git a/arch/arm64/boot/dts/broadcom/bcm2712.dtsi b/arch/arm64/boot/dts/broadcom/bcm2712.dtsi
 new file mode 100644
-index 000000000000..b1edcf6d1465
+index 000000000000..ac5eb0f7b98d
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/bcm2712.dtsi
-@@ -0,0 +1,1306 @@
+@@ -0,0 +1,1307 @@
 +// SPDX-License-Identifier: GPL-2.0
 +#include <dt-bindings/interrupt-controller/arm-gic.h>
 +#include <dt-bindings/soc/bcm2835-pm.h>
@@ -59913,8 +59953,9 @@ index 000000000000..b1edcf6d1465
 +		v3d: v3d@2000000 {
 +			compatible = "brcm,2712-v3d";
 +			reg = <0x10 0x02000000  0x0 0x4000>,
-+			      <0x10 0x02008000  0x0 0x6000>;
-+			reg-names = "hub", "core0";
++			      <0x10 0x02008000  0x0 0x6000>,
++			      <0x10 0x02030800  0x0 0x0700>;
++			reg-names = "hub", "core0", "sms";
 +
 +			power-domains = <&pm BCM2835_POWER_DOMAIN_GRAFX_V3D>;
 +			resets = <&pm BCM2835_RESET_V3D>;
@@ -60110,7 +60151,7 @@ index 000000000000..d06536bc7592
 +};
 diff --git a/arch/arm64/boot/dts/broadcom/rp1.dtsi b/arch/arm64/boot/dts/broadcom/rp1.dtsi
 new file mode 100644
-index 000000000000..15e770a63c55
+index 000000000000..ca54ca16a806
 --- /dev/null
 +++ b/arch/arm64/boot/dts/broadcom/rp1.dtsi
 @@ -0,0 +1,1323 @@
@@ -60181,9 +60222,9 @@ index 000000000000..15e770a63c55
 +			interrupts = <RP1_INT_UART0 IRQ_TYPE_LEVEL_HIGH>;
 +			clocks = <&rp1_clocks RP1_CLK_UART &rp1_clocks RP1_PLL_SYS_PRI_PH>;
 +			clock-names = "uartclk", "apb_pclk";
-+			dmas = <&rp1_dma RP1_DMA_UART0_TX>,
-+			       <&rp1_dma RP1_DMA_UART0_RX>;
-+			dma-names = "tx", "rx";
++			// dmas = <&rp1_dma RP1_DMA_UART0_TX>,
++			//        <&rp1_dma RP1_DMA_UART0_RX>;
++			// dma-names = "tx", "rx";
 +			pinctrl-names = "default";
 +			arm,primecell-periphid = <0x00341011>;
 +			uart-has-rtscts;
@@ -90033,7 +90074,7 @@ index 8b3229a37c6d..99aac01e2bbb 100644
  	drm_gem_object_put(gem_obj);
  	return 0;
 diff --git a/drivers/gpu/drm/v3d/v3d_debugfs.c b/drivers/gpu/drm/v3d/v3d_debugfs.c
-index 330669f51fa7..b338dec2b68c 100644
+index 330669f51fa7..c041f3a247da 100644
 --- a/drivers/gpu/drm/v3d/v3d_debugfs.c
 +++ b/drivers/gpu/drm/v3d/v3d_debugfs.c
 @@ -6,75 +6,90 @@
@@ -90070,30 +90111,30 @@ index 330669f51fa7..b338dec2b68c 100644
 -	REGDEF(V3D_MMU_VIO_ADDR),
 -	REGDEF(V3D_MMU_VIO_ID),
 -	REGDEF(V3D_MMU_DEBUG_INFO),
-+	REGDEF(33, 42, V3D_HUB_AXICFG),
-+	REGDEF(33, 71, V3D_HUB_UIFCFG),
-+	REGDEF(33, 71, V3D_HUB_IDENT0),
-+	REGDEF(33, 71, V3D_HUB_IDENT1),
-+	REGDEF(33, 71, V3D_HUB_IDENT2),
-+	REGDEF(33, 71, V3D_HUB_IDENT3),
-+	REGDEF(33, 71, V3D_HUB_INT_STS),
-+	REGDEF(33, 71, V3D_HUB_INT_MSK_STS),
++	REGDEF(V3D_GEN_33, V3D_GEN_42, V3D_HUB_AXICFG),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_UIFCFG),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_IDENT0),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_IDENT1),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_IDENT2),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_IDENT3),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_INT_STS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_HUB_INT_MSK_STS),
 +
-+	REGDEF(33, 71, V3D_MMU_CTL),
-+	REGDEF(33, 71, V3D_MMU_VIO_ADDR),
-+	REGDEF(33, 71, V3D_MMU_VIO_ID),
-+	REGDEF(33, 71, V3D_MMU_DEBUG_INFO),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_MMU_CTL),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_MMU_VIO_ADDR),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_MMU_VIO_ID),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_MMU_DEBUG_INFO),
 +
-+	REGDEF(71, 71, V3D_V7_GMP_STATUS),
-+	REGDEF(71, 71, V3D_V7_GMP_CFG),
-+	REGDEF(71, 71, V3D_V7_GMP_VIO_ADDR),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_GMP_STATUS),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_GMP_CFG),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_GMP_VIO_ADDR),
  };
  
  static const struct v3d_reg_def v3d_gca_reg_defs[] = {
 -	REGDEF(V3D_GCA_SAFE_SHUTDOWN),
 -	REGDEF(V3D_GCA_SAFE_SHUTDOWN_ACK),
-+	REGDEF(33, 33, V3D_GCA_SAFE_SHUTDOWN),
-+	REGDEF(33, 33, V3D_GCA_SAFE_SHUTDOWN_ACK),
++	REGDEF(V3D_GEN_33, V3D_GEN_33, V3D_GCA_SAFE_SHUTDOWN),
++	REGDEF(V3D_GEN_33, V3D_GEN_33, V3D_GCA_SAFE_SHUTDOWN_ACK),
  };
  
  static const struct v3d_reg_def v3d_core_reg_defs[] = {
@@ -90121,30 +90162,30 @@ index 330669f51fa7..b338dec2b68c 100644
 -	REGDEF(V3D_ERR_FDBGB),
 -	REGDEF(V3D_ERR_FDBGS),
 -	REGDEF(V3D_ERR_STAT),
-+	REGDEF(33, 71, V3D_CTL_IDENT0),
-+	REGDEF(33, 71, V3D_CTL_IDENT1),
-+	REGDEF(33, 71, V3D_CTL_IDENT2),
-+	REGDEF(33, 71, V3D_CTL_MISCCFG),
-+	REGDEF(33, 71, V3D_CTL_INT_STS),
-+	REGDEF(33, 71, V3D_CTL_INT_MSK_STS),
-+	REGDEF(33, 71, V3D_CLE_CT0CS),
-+	REGDEF(33, 71, V3D_CLE_CT0CA),
-+	REGDEF(33, 71, V3D_CLE_CT0EA),
-+	REGDEF(33, 71, V3D_CLE_CT1CS),
-+	REGDEF(33, 71, V3D_CLE_CT1CA),
-+	REGDEF(33, 71, V3D_CLE_CT1EA),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_IDENT0),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_IDENT1),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_IDENT2),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_MISCCFG),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_INT_STS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CTL_INT_MSK_STS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT0CS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT0CA),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT0EA),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT1CS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT1CA),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_CLE_CT1EA),
 +
-+	REGDEF(33, 71, V3D_PTB_BPCA),
-+	REGDEF(33, 71, V3D_PTB_BPCS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_PTB_BPCA),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_PTB_BPCS),
 +
-+	REGDEF(33, 41, V3D_GMP_STATUS),
-+	REGDEF(33, 41, V3D_GMP_CFG),
-+	REGDEF(33, 41, V3D_GMP_VIO_ADDR),
++	REGDEF(V3D_GEN_33, V3D_GEN_41, V3D_GMP_STATUS),
++	REGDEF(V3D_GEN_33, V3D_GEN_41, V3D_GMP_CFG),
++	REGDEF(V3D_GEN_33, V3D_GEN_41, V3D_GMP_VIO_ADDR),
 +
-+	REGDEF(33, 71, V3D_ERR_FDBGO),
-+	REGDEF(33, 71, V3D_ERR_FDBGB),
-+	REGDEF(33, 71, V3D_ERR_FDBGS),
-+	REGDEF(33, 71, V3D_ERR_STAT),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_ERR_FDBGO),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_ERR_FDBGB),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_ERR_FDBGS),
++	REGDEF(V3D_GEN_33, V3D_GEN_71, V3D_ERR_STAT),
  };
  
  static const struct v3d_reg_def v3d_csd_reg_defs[] = {
@@ -90156,22 +90197,22 @@ index 330669f51fa7..b338dec2b68c 100644
 -	REGDEF(V3D_CSD_CURRENT_CFG4),
 -	REGDEF(V3D_CSD_CURRENT_CFG5),
 -	REGDEF(V3D_CSD_CURRENT_CFG6),
-+	REGDEF(41, 71, V3D_CSD_STATUS),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG0),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG1),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG2),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG3),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG4),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG5),
-+	REGDEF(41, 41, V3D_CSD_CURRENT_CFG6),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG0),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG1),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG2),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG3),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG4),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG5),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG6),
-+	REGDEF(71, 71, V3D_V7_CSD_CURRENT_CFG7),
++	REGDEF(V3D_GEN_41, V3D_GEN_71, V3D_CSD_STATUS),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG0),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG1),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG2),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG3),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG4),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG5),
++	REGDEF(V3D_GEN_41, V3D_GEN_41, V3D_CSD_CURRENT_CFG6),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG0),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG1),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG2),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG3),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG4),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG5),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG6),
++	REGDEF(V3D_GEN_71, V3D_GEN_71, V3D_V7_CSD_CURRENT_CFG7),
  };
  
  static int v3d_v3d_debugfs_regs(struct seq_file *m, void *unused)
@@ -90244,7 +90285,7 @@ index 330669f51fa7..b338dec2b68c 100644
  		   str_yes_no(ident1 & V3D_HUB_IDENT1_WITH_TFU));
 -	seq_printf(m, "TSY:        %s\n",
 -		   str_yes_no(ident1 & V3D_HUB_IDENT1_WITH_TSY));
-+	if (v3d->ver <= 42) {
++	if (v3d->ver <= V3D_GEN_42) {
 +		seq_printf(m, "TSY:        %s\n",
 +			   str_yes_no(ident1 & V3D_HUB_IDENT1_WITH_TSY));
 +	}
@@ -90259,11 +90300,11 @@ index 330669f51fa7..b338dec2b68c 100644
 -			   (ident2 & V3D_IDENT2_BCG_INT) != 0);
 -		seq_printf(m, "  Override TMU: %d\n",
 -			   (misccfg & V3D_MISCCFG_OVRTMUOUT) != 0);
-+		if (v3d->ver <= 42) {
++		if (v3d->ver <= V3D_GEN_42) {
 +			seq_printf(m, "  BCG int:      %d\n",
 +				   (ident2 & V3D_IDENT2_BCG_INT) != 0);
 +		}
-+		if (v3d->ver < 40) {
++		if (v3d->ver < V3D_GEN_41) {
 +			seq_printf(m, "  Override TMU: %d\n",
 +				   (misccfg & V3D_MISCCFG_OVRTMUOUT) != 0);
 +		}
@@ -90360,11 +90401,13 @@ index 330669f51fa7..b338dec2b68c 100644
  static int v3d_measure_clock(struct seq_file *m, void *unused)
  {
  	struct drm_debugfs_entry *entry = m->private;
-@@ -212,8 +312,10 @@ static int v3d_measure_clock(struct seq_file *m, void *unused)
+@@ -211,9 +311,11 @@ static int v3d_measure_clock(struct seq_file *m, void *unused)
+ 	int core = 0;
  	int measure_ms = 1000;
  
- 	if (v3d->ver >= 40) {
-+		int cycle_count_reg = v3d->ver < 71 ?
+-	if (v3d->ver >= 40) {
++	if (v3d->ver >= V3D_GEN_41) {
++		int cycle_count_reg = v3d->ver < V3D_GEN_71 ?
 +			V3D_PCTR_CYCLE_COUNT : V3D_V7_PCTR_CYCLE_COUNT;
  		V3D_CORE_WRITE(core, V3D_V4_PCTR_0_SRC_0_3,
 -			       V3D_SET_FIELD(V3D_PCTR_CYCLE_COUNT,
@@ -90382,10 +90425,17 @@ index 330669f51fa7..b338dec2b68c 100644
  
  void
 diff --git a/drivers/gpu/drm/v3d/v3d_drv.c b/drivers/gpu/drm/v3d/v3d_drv.c
-index ffbbe9d527d3..1258a47cce34 100644
+index ffbbe9d527d3..ee09db3d8dd6 100644
 --- a/drivers/gpu/drm/v3d/v3d_drv.c
 +++ b/drivers/gpu/drm/v3d/v3d_drv.c
-@@ -23,6 +23,9 @@
+@@ -17,12 +17,16 @@
+ #include <linux/dma-mapping.h>
+ #include <linux/io.h>
+ #include <linux/module.h>
++#include <linux/of.h>
+ #include <linux/of_platform.h>
+ #include <linux/platform_device.h>
+ #include <linux/reset.h>
  
  #include <drm/drm_drv.h>
  #include <drm/drm_managed.h>
@@ -90395,15 +90445,64 @@ index ffbbe9d527d3..1258a47cce34 100644
  #include <uapi/drm/v3d_drm.h>
  
  #include "v3d_drv.h"
-@@ -186,6 +189,7 @@ static const struct drm_driver v3d_drm_driver = {
+@@ -85,7 +89,7 @@ static int v3d_get_param_ioctl(struct drm_device *dev, void *data,
+ 		args->value = 1;
+ 		return 0;
+ 	case DRM_V3D_PARAM_SUPPORTS_PERFMON:
+-		args->value = (v3d->ver >= 40);
++		args->value = (v3d->ver >= V3D_GEN_41);
+ 		return 0;
+ 	case DRM_V3D_PARAM_SUPPORTS_MULTISYNC_EXT:
+ 		args->value = 1;
+@@ -186,13 +190,44 @@ static const struct drm_driver v3d_drm_driver = {
  };
  
  static const struct of_device_id v3d_of_match[] = {
-+	{ .compatible = "brcm,2712-v3d" },
- 	{ .compatible = "brcm,2711-v3d" },
- 	{ .compatible = "brcm,7268-v3d" },
- 	{ .compatible = "brcm,7278-v3d" },
-@@ -203,6 +207,8 @@ map_regs(struct v3d_dev *v3d, void __iomem **regs, const char *name)
+-	{ .compatible = "brcm,2711-v3d" },
+-	{ .compatible = "brcm,7268-v3d" },
+-	{ .compatible = "brcm,7278-v3d" },
++	{ .compatible = "brcm,2711-v3d", .data = (void *)V3D_GEN_42 },
++	{ .compatible = "brcm,2712-v3d", .data = (void *)V3D_GEN_71 },
++	{ .compatible = "brcm,7268-v3d", .data = (void *)V3D_GEN_33 },
++	{ .compatible = "brcm,7278-v3d", .data = (void *)V3D_GEN_41 },
+ 	{},
+ };
+ MODULE_DEVICE_TABLE(of, v3d_of_match);
+ 
++static void
++v3d_idle_sms(struct v3d_dev *v3d)
++{
++	if (v3d->ver < V3D_GEN_71)
++		return;
++
++	V3D_SMS_WRITE(V3D_SMS_TEE_CS, V3D_SMS_CLEAR_POWER_OFF);
++
++	if (wait_for((V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_TEE_CS),
++				    V3D_SMS_STATE) == V3D_SMS_IDLE), 100)) {
++		DRM_ERROR("Failed to power up SMS\n");
++	}
++
++	v3d_reset_sms(v3d);
++}
++
++static void
++v3d_power_off_sms(struct v3d_dev *v3d)
++{
++	if (v3d->ver < V3D_GEN_71)
++		return;
++
++	V3D_SMS_WRITE(V3D_SMS_TEE_CS, V3D_SMS_POWER_OFF);
++
++	if (wait_for((V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_TEE_CS),
++				    V3D_SMS_STATE) == V3D_SMS_POWER_OFF_STATE), 100)) {
++		DRM_ERROR("Failed to power off SMS\n");
++	}
++}
++
+ static int
+ map_regs(struct v3d_dev *v3d, void __iomem **regs, const char *name)
+ {
+@@ -203,8 +238,11 @@ map_regs(struct v3d_dev *v3d, void __iomem **regs, const char *name)
  static int v3d_platform_drm_probe(struct platform_device *pdev)
  {
  	struct device *dev = &pdev->dev;
@@ -90411,26 +90510,92 @@ index ffbbe9d527d3..1258a47cce34 100644
 +	struct device_node *node;
  	struct drm_device *drm;
  	struct v3d_dev *v3d;
++	enum v3d_gen gen;
  	int ret;
-@@ -256,6 +262,34 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+ 	u32 mmu_debug;
+ 	u32 ident1;
+@@ -218,6 +256,9 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+ 
+ 	platform_set_drvdata(pdev, drm);
+ 
++	gen = (enum v3d_gen)of_device_get_match_data(dev);
++	v3d->ver = gen;
++
+ 	ret = map_regs(v3d, &v3d->hub_regs, "hub");
+ 	if (ret)
+ 		return ret;
+@@ -226,17 +267,40 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		return ret;
+ 
++	if (v3d->ver >= V3D_GEN_71) {
++		ret = map_regs(v3d, &v3d->sms_regs, "sms");
++		if (ret)
++			return ret;
++	}
++
++	v3d->clk = devm_clk_get_optional(dev, NULL);
++	if (IS_ERR(v3d->clk))
++		return dev_err_probe(dev, PTR_ERR(v3d->clk), "Failed to get V3D clock\n");
++
++	ret = clk_prepare_enable(v3d->clk);
++	if (ret) {
++		dev_err(&pdev->dev, "Couldn't enable the V3D clock\n");
++		return ret;
++	}
++
++	v3d_idle_sms(v3d);
++
+ 	mmu_debug = V3D_READ(V3D_MMU_DEBUG_INFO);
+ 	mask = DMA_BIT_MASK(30 + V3D_GET_FIELD(mmu_debug, V3D_MMU_PA_WIDTH));
+ 	ret = dma_set_mask_and_coherent(dev, mask);
+ 	if (ret)
+-		return ret;
++		goto clk_disable;
+ 
+ 	v3d->va_width = 30 + V3D_GET_FIELD(mmu_debug, V3D_MMU_VA_WIDTH);
+ 
+ 	ident1 = V3D_READ(V3D_HUB_IDENT1);
+ 	v3d->ver = (V3D_GET_FIELD(ident1, V3D_HUB_IDENT1_TVER) * 10 +
+ 		    V3D_GET_FIELD(ident1, V3D_HUB_IDENT1_REV));
++	/* Make sure that the V3D tech version retrieved from the HW is equal
++	 * to the one advertised by the device tree.
++	 */
++	WARN_ON(v3d->ver != gen);
++
+ 	v3d->cores = V3D_GET_FIELD(ident1, V3D_HUB_IDENT1_NCORES);
+ 	WARN_ON(v3d->cores > 1); /* multicore not yet implemented */
+ 
+@@ -245,28 +309,54 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+ 		ret = PTR_ERR(v3d->reset);
+ 
+ 		if (ret == -EPROBE_DEFER)
+-			return ret;
++			goto clk_disable;
+ 
+ 		v3d->reset = NULL;
+ 		ret = map_regs(v3d, &v3d->bridge_regs, "bridge");
+ 		if (ret) {
+ 			dev_err(dev,
+ 				"Failed to get reset control or bridge regs\n");
+-			return ret;
++			goto clk_disable;
  		}
  	}
  
-+	v3d->clk = devm_clk_get(dev, NULL);
-+	if (IS_ERR_OR_NULL(v3d->clk)) {
-+		if (PTR_ERR(v3d->clk) != -EPROBE_DEFER)
-+			dev_err(dev, "Failed to get clock (%ld)\n", PTR_ERR(v3d->clk));
-+		return PTR_ERR(v3d->clk);
-+	}
-+
+-	if (v3d->ver < 41) {
 +	node = rpi_firmware_find_node();
-+	if (!node)
-+		return -EINVAL;
++	if (!node) {
++		ret = -EINVAL;
++		goto clk_disable;
++	}
 +
 +	firmware = rpi_firmware_get(node);
 +	of_node_put(node);
-+	if (!firmware)
-+		return -EPROBE_DEFER;
++	if (!firmware) {
++		ret = -EPROBE_DEFER;
++		goto clk_disable;
++	}
 +
 +	v3d->clk_up_rate = rpi_firmware_clk_get_max_rate(firmware,
 +							 RPI_FIRMWARE_V3D_CLK_ID);
@@ -90444,10 +90609,24 @@ index ffbbe9d527d3..1258a47cce34 100644
 +	v3d->clk_down_rate =
 +		(clk_get_rate(clk_get_parent(v3d->clk)) / (1 << 4)) + 10000;
 +
- 	if (v3d->ver < 41) {
++	if (v3d->ver < V3D_GEN_41) {
  		ret = map_regs(v3d, &v3d->gca_regs, "gca");
  		if (ret)
-@@ -281,6 +315,9 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+-			return ret;
++			goto clk_disable;
+ 	}
+ 
+ 	v3d->mmu_scratch = dma_alloc_wc(dev, 4096, &v3d->mmu_scratch_paddr,
+ 					GFP_KERNEL | __GFP_NOWARN | __GFP_ZERO);
+ 	if (!v3d->mmu_scratch) {
+ 		dev_err(dev, "Failed to allocate MMU scratch page\n");
+-		return -ENOMEM;
++		ret = -ENOMEM;
++		goto clk_disable;
+ 	}
+ 
+ 	ret = v3d_gem_init(drm);
+@@ -281,6 +371,9 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
  	if (ret)
  		goto irq_disable;
  
@@ -90457,8 +90636,28 @@ index ffbbe9d527d3..1258a47cce34 100644
  	return 0;
  
  irq_disable:
+@@ -289,6 +382,8 @@ static int v3d_platform_drm_probe(struct platform_device *pdev)
+ 	v3d_gem_destroy(drm);
+ dma_free:
+ 	dma_free_wc(dev, 4096, v3d->mmu_scratch, v3d->mmu_scratch_paddr);
++clk_disable:
++	clk_disable_unprepare(v3d->clk);
+ 	return ret;
+ }
+ 
+@@ -303,6 +398,10 @@ static void v3d_platform_drm_remove(struct platform_device *pdev)
+ 
+ 	dma_free_wc(v3d->drm.dev, 4096, v3d->mmu_scratch,
+ 		    v3d->mmu_scratch_paddr);
++
++	v3d_power_off_sms(v3d);
++
++	clk_disable_unprepare(v3d->clk);
+ }
+ 
+ static struct platform_driver v3d_platform_driver = {
 diff --git a/drivers/gpu/drm/v3d/v3d_drv.h b/drivers/gpu/drm/v3d/v3d_drv.h
-index 7f664a4b2a75..c59bc83bcfc0 100644
+index 7f664a4b2a75..9ba77f1980ef 100644
 --- a/drivers/gpu/drm/v3d/v3d_drv.h
 +++ b/drivers/gpu/drm/v3d/v3d_drv.h
 @@ -19,8 +19,23 @@ struct reset_control;
@@ -90530,9 +90729,32 @@ index 7f664a4b2a75..c59bc83bcfc0 100644
  /* Performance monitor object. The perform lifetime is controlled by userspace
   * using perfmon related ioctls. A perfmon can be attached to a submit_cl
   * request, and when this is the case, HW perf counters will be activated just
-@@ -76,6 +129,12 @@ struct v3d_dev {
+@@ -62,20 +115,34 @@ struct v3d_perfmon {
+ 	u64 values[];
+ };
+ 
++enum v3d_gen {
++	V3D_GEN_33 = 33,
++	V3D_GEN_41 = 41,
++	V3D_GEN_42 = 42,
++	V3D_GEN_71 = 71,
++};
++
+ struct v3d_dev {
+ 	struct drm_device drm;
+ 
+ 	/* Short representation (e.g. 33, 41) of the V3D tech version
+ 	 * and revision.
+ 	 */
+-	int ver;
++	enum v3d_gen ver;
+ 	bool single_irq_line;
+ 
+ 	void __iomem *hub_regs;
+ 	void __iomem *core_regs[3];
  	void __iomem *bridge_regs;
  	void __iomem *gca_regs;
++	void __iomem *sms_regs;
  	struct clk *clk;
 +	struct delayed_work clk_down_work;
 +	unsigned long clk_up_rate, clk_down_rate;
@@ -90543,7 +90765,7 @@ index 7f664a4b2a75..c59bc83bcfc0 100644
  	struct reset_control *reset;
  
  	/* Virtual and DMA addresses of the single shared page table. */
-@@ -141,6 +200,8 @@ struct v3d_dev {
+@@ -141,6 +208,8 @@ struct v3d_dev {
  		u32 num_allocated;
  		u32 pages_allocated;
  	} bo_stats;
@@ -90552,7 +90774,32 @@ index 7f664a4b2a75..c59bc83bcfc0 100644
  };
  
  static inline struct v3d_dev *
-@@ -238,6 +299,11 @@ struct v3d_job {
+@@ -152,7 +221,7 @@ to_v3d_dev(struct drm_device *dev)
+ static inline bool
+ v3d_has_csd(struct v3d_dev *v3d)
+ {
+-	return v3d->ver >= 41;
++	return v3d->ver >= V3D_GEN_41;
+ }
+ 
+ #define v3d_to_pdev(v3d) to_platform_device((v3d)->drm.dev)
+@@ -209,6 +278,15 @@ to_v3d_fence(struct dma_fence *fence)
+ #define V3D_GCA_READ(offset) readl(v3d->gca_regs + offset)
+ #define V3D_GCA_WRITE(offset, val) writel(val, v3d->gca_regs + offset)
+ 
++#define V3D_SMS_IDLE				0x0
++#define V3D_SMS_ISOLATING_FOR_RESET		0xa
++#define V3D_SMS_RESETTING			0xb
++#define V3D_SMS_ISOLATING_FOR_POWER_OFF	0xc
++#define V3D_SMS_POWER_OFF_STATE		0xd
++
++#define V3D_SMS_READ(offset) readl(v3d->sms_regs + (offset))
++#define V3D_SMS_WRITE(offset, val) writel(val, v3d->sms_regs + (offset))
++
+ #define V3D_CORE_READ(core, offset) readl(v3d->core_regs[core] + offset)
+ #define V3D_CORE_WRITE(core, offset, val) writel(val, v3d->core_regs[core] + offset)
+ 
+@@ -238,6 +316,11 @@ struct v3d_job {
  	 */
  	struct v3d_perfmon *perfmon;
  
@@ -90564,7 +90811,15 @@ index 7f664a4b2a75..c59bc83bcfc0 100644
  	/* Callback for the freeing of the job on refcount going to 0. */
  	void (*free)(struct kref *ref);
  };
-@@ -402,6 +468,7 @@ void v3d_mmu_remove_ptes(struct v3d_bo *bo);
+@@ -382,6 +465,7 @@ int v3d_wait_bo_ioctl(struct drm_device *dev, void *data,
+ 		      struct drm_file *file_priv);
+ void v3d_job_cleanup(struct v3d_job *job);
+ void v3d_job_put(struct v3d_job *job);
++void v3d_reset_sms(struct v3d_dev *v3d);
+ void v3d_reset(struct v3d_dev *v3d);
+ void v3d_invalidate_caches(struct v3d_dev *v3d);
+ void v3d_clean_caches(struct v3d_dev *v3d);
+@@ -402,6 +486,7 @@ void v3d_mmu_remove_ptes(struct v3d_bo *bo);
  /* v3d_sched.c */
  int v3d_sched_init(struct v3d_dev *v3d);
  void v3d_sched_fini(struct v3d_dev *v3d);
@@ -90573,7 +90828,7 @@ index 7f664a4b2a75..c59bc83bcfc0 100644
  /* v3d_perfmon.c */
  void v3d_perfmon_get(struct v3d_perfmon *perfmon);
 diff --git a/drivers/gpu/drm/v3d/v3d_gem.c b/drivers/gpu/drm/v3d/v3d_gem.c
-index 2e94ce788c71..cf9016a0f3ea 100644
+index 2e94ce788c71..483c6408df60 100644
 --- a/drivers/gpu/drm/v3d/v3d_gem.c
 +++ b/drivers/gpu/drm/v3d/v3d_gem.c
 @@ -4,6 +4,7 @@
@@ -90632,17 +90887,91 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  static void
  v3d_init_core(struct v3d_dev *v3d, int core)
  {
+@@ -27,7 +69,7 @@ v3d_init_core(struct v3d_dev *v3d, int core)
+ 	 * type.  If you want the default behavior, you can still put
+ 	 * "2" in the indirect texture state's output_type field.
+ 	 */
+-	if (v3d->ver < 40)
++	if (v3d->ver < V3D_GEN_41)
+ 		V3D_CORE_WRITE(core, V3D_CTL_MISCCFG, V3D_MISCCFG_OVRTMUOUT);
+ 
+ 	/* Whenever we flush the L2T cache, we always want to flush
 @@ -47,6 +89,9 @@ v3d_init_hw_state(struct v3d_dev *v3d)
  static void
  v3d_idle_axi(struct v3d_dev *v3d, int core)
  {
-+	if (v3d->ver >= 71)
++	if (v3d->ver >= V3D_GEN_71)
 +		return;
 +
  	V3D_CORE_WRITE(core, V3D_GMP_CFG, V3D_GMP_CFG_STOP_REQ);
  
  	if (wait_for((V3D_CORE_READ(core, V3D_GMP_STATUS) &
-@@ -318,6 +363,7 @@ static void
+@@ -60,7 +105,7 @@ v3d_idle_axi(struct v3d_dev *v3d, int core)
+ static void
+ v3d_idle_gca(struct v3d_dev *v3d)
+ {
+-	if (v3d->ver >= 41)
++	if (v3d->ver >= V3D_GEN_41)
+ 		return;
+ 
+ 	V3D_GCA_WRITE(V3D_GCA_SAFE_SHUTDOWN, V3D_GCA_SAFE_SHUTDOWN_EN);
+@@ -106,6 +151,22 @@ v3d_reset_v3d(struct v3d_dev *v3d)
+ 	v3d_init_hw_state(v3d);
+ }
+ 
++void
++v3d_reset_sms(struct v3d_dev *v3d)
++{
++	if (v3d->ver < V3D_GEN_71)
++		return;
++
++	V3D_SMS_WRITE(V3D_SMS_REE_CS, V3D_SET_FIELD(0x4, V3D_SMS_STATE));
++
++	if (wait_for(!(V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_REE_CS),
++				     V3D_SMS_STATE) == V3D_SMS_ISOLATING_FOR_RESET) &&
++		     !(V3D_GET_FIELD(V3D_SMS_READ(V3D_SMS_REE_CS),
++				     V3D_SMS_STATE) == V3D_SMS_RESETTING), 100)) {
++		DRM_ERROR("Failed to wait for SMS reset\n");
++	}
++}
++
+ void
+ v3d_reset(struct v3d_dev *v3d)
+ {
+@@ -121,6 +182,7 @@ v3d_reset(struct v3d_dev *v3d)
+ 		v3d_idle_axi(v3d, 0);
+ 
+ 	v3d_idle_gca(v3d);
++	v3d_reset_sms(v3d);
+ 	v3d_reset_v3d(v3d);
+ 
+ 	v3d_mmu_set_page_table(v3d);
+@@ -134,13 +196,13 @@ v3d_reset(struct v3d_dev *v3d)
+ static void
+ v3d_flush_l3(struct v3d_dev *v3d)
+ {
+-	if (v3d->ver < 41) {
++	if (v3d->ver < V3D_GEN_41) {
+ 		u32 gca_ctrl = V3D_GCA_READ(V3D_GCA_CACHE_CTRL);
+ 
+ 		V3D_GCA_WRITE(V3D_GCA_CACHE_CTRL,
+ 			      gca_ctrl | V3D_GCA_CACHE_CTRL_FLUSH);
+ 
+-		if (v3d->ver < 33) {
++		if (v3d->ver < V3D_GEN_33) {
+ 			V3D_GCA_WRITE(V3D_GCA_CACHE_CTRL,
+ 				      gca_ctrl & ~V3D_GCA_CACHE_CTRL_FLUSH);
+ 		}
+@@ -153,7 +215,7 @@ v3d_flush_l3(struct v3d_dev *v3d)
+ static void
+ v3d_invalidate_l2c(struct v3d_dev *v3d, int core)
+ {
+-	if (v3d->ver > 32)
++	if (v3d->ver >= V3D_GEN_33)
+ 		return;
+ 
+ 	V3D_CORE_WRITE(core, V3D_CTL_L2CACTL,
+@@ -318,6 +380,7 @@ static void
  v3d_job_free(struct kref *ref)
  {
  	struct v3d_job *job = container_of(ref, struct v3d_job, refcount);
@@ -90650,7 +90979,7 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  	int i;
  
  	if (job->bo) {
-@@ -329,6 +375,8 @@ v3d_job_free(struct kref *ref)
+@@ -329,6 +392,8 @@ v3d_job_free(struct kref *ref)
  	dma_fence_put(job->irq_fence);
  	dma_fence_put(job->done_fence);
  
@@ -90659,7 +90988,7 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  	if (job->perfmon)
  		v3d_perfmon_put(job->perfmon);
  
-@@ -415,6 +463,7 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
+@@ -415,6 +480,7 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
  	job = *container;
  	job->v3d = v3d;
  	job->free = free;
@@ -90667,7 +90996,7 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  
  	ret = drm_sched_job_init(&job->base, &v3d_priv->sched_entity[queue],
  				 v3d_priv);
-@@ -448,6 +497,7 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
+@@ -448,6 +514,7 @@ v3d_job_init(struct v3d_dev *v3d, struct drm_file *file_priv,
  			goto fail_deps;
  	}
  
@@ -90675,7 +91004,7 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  	kref_init(&job->refcount);
  
  	return 0;
-@@ -1031,6 +1081,13 @@ v3d_gem_init(struct drm_device *dev)
+@@ -1031,6 +1098,13 @@ v3d_gem_init(struct drm_device *dev)
  	if (ret)
  		return ret;
  
@@ -90690,7 +91019,7 @@ index 2e94ce788c71..cf9016a0f3ea 100644
  	 * treat 0 as special, such as the occlusion query counters
  	 * where 0 means "disabled".
 diff --git a/drivers/gpu/drm/v3d/v3d_irq.c b/drivers/gpu/drm/v3d/v3d_irq.c
-index b2d59a168697..3c6fb8062ac5 100644
+index b2d59a168697..40df57bbbf47 100644
 --- a/drivers/gpu/drm/v3d/v3d_irq.c
 +++ b/drivers/gpu/drm/v3d/v3d_irq.c
 @@ -14,21 +14,23 @@
@@ -90756,8 +91085,8 @@ index b2d59a168697..3c6fb8062ac5 100644
  	}
  
 -	if (intsts & V3D_INT_CSDDONE) {
-+	if ((v3d->ver < 71 && (intsts & V3D_INT_CSDDONE)) ||
-+	    (v3d->ver >= 71 && (intsts & V3D_V7_INT_CSDDONE))) {
++	if ((v3d->ver < V3D_GEN_71 && (intsts & V3D_INT_CSDDONE)) ||
++	    (v3d->ver >= V3D_GEN_71 && (intsts & V3D_V7_INT_CSDDONE))) {
  		struct v3d_fence *fence =
  			to_v3d_fence(v3d->csd_job->base.irq_fence);
 +		v3d->gpu_queue_stats[V3D_CSD].last_exec_end = local_clock();
@@ -90769,7 +91098,7 @@ index b2d59a168697..3c6fb8062ac5 100644
  	 * always-allowed mode.
  	 */
 -	if (intsts & V3D_INT_GMPV)
-+	if (v3d->ver < 71 && (intsts & V3D_INT_GMPV))
++	if (v3d->ver < V3D_GEN_71 && (intsts & V3D_INT_GMPV))
  		dev_err(v3d->drm.dev, "GMP violation\n");
  
  	/* V3D 4.2 wires the hub and core IRQs together, so if we &
@@ -90781,7 +91110,7 @@ index b2d59a168697..3c6fb8062ac5 100644
  
  		trace_v3d_tfu_irq(&v3d->drm, fence->seqno);
  
-@@ -189,6 +196,7 @@ v3d_hub_irq(int irq, void *arg)
+@@ -189,15 +196,17 @@ v3d_hub_irq(int irq, void *arg)
  			"GMP",
  		};
  		const char *client = "?";
@@ -90789,7 +91118,10 @@ index b2d59a168697..3c6fb8062ac5 100644
  
  		V3D_WRITE(V3D_MMU_CTL, V3D_READ(V3D_MMU_CTL));
  
-@@ -198,6 +206,7 @@ v3d_hub_irq(int irq, void *arg)
+-		if (v3d->ver >= 41) {
++		if (v3d->ver >= V3D_GEN_41) {
+ 			axi_id = axi_id >> 5;
+ 			if (axi_id < ARRAY_SIZE(v3d41_axi_ids))
  				client = v3d41_axi_ids[axi_id];
  		}
  
@@ -90805,7 +91137,7 @@ index b2d59a168697..3c6fb8062ac5 100644
 +		status = IRQ_HANDLED;
 +	}
 +
-+	if (v3d->ver >= 71 && intsts & V3D_V7_HUB_INT_GMPV) {
++	if (v3d->ver >= V3D_GEN_71 && intsts & V3D_V7_HUB_INT_GMPV) {
 +		dev_err(v3d->drm.dev, "GMP Violation\n");
  		status = IRQ_HANDLED;
  	}
@@ -90863,7 +91195,7 @@ index 166d4a88daee..e36ec3343b06 100644
   * superpage bit set.
   */
 diff --git a/drivers/gpu/drm/v3d/v3d_regs.h b/drivers/gpu/drm/v3d/v3d_regs.h
-index 3663e0d6bf76..9fbcbfedaae1 100644
+index 3663e0d6bf76..3493016d8fe5 100644
 --- a/drivers/gpu/drm/v3d/v3d_regs.h
 +++ b/drivers/gpu/drm/v3d/v3d_regs.h
 @@ -57,6 +57,7 @@
@@ -91088,8 +91420,39 @@ index 3663e0d6bf76..9fbcbfedaae1 100644
  # define V3D_CSD_CURRENT_ID0_WG_Z_MASK                 V3D_MASK(31, 16)
  # define V3D_CSD_CURRENT_ID0_WG_Z_SHIFT                16
  # define V3D_CSD_CURRENT_ID0_WG_Y_MASK                 V3D_MASK(15, 0)
+@@ -496,4 +543,30 @@
+ # define V3D_ERR_VPAERGS                               BIT(1)
+ # define V3D_ERR_VPAEABB                               BIT(0)
+ 
++#define V3D_SMS_REE_CS                                 0x00000
++#define V3D_SMS_TEE_CS                                 0x00400
++# define V3D_SMS_INTERRUPT                             BIT(31)
++# define V3D_SMS_POWER_OFF                             BIT(30)
++# define V3D_SMS_CLEAR_POWER_OFF                       BIT(29)
++# define V3D_SMS_LOCK                                  BIT(28)
++# define V3D_SMS_CLEAR_LOCK                            BIT(27)
++# define V3D_SMS_SVP_MODE_EXIT                         BIT(26)
++# define V3D_SMS_CLEAR_SVP_MODE_EXIT                   BIT(25)
++# define V3D_SMS_SVP_MODE_ENTER                        BIT(24)
++# define V3D_SMS_CLEAR_SVP_MODE_ENTER                  BIT(23)
++# define V3D_SMS_THEIR_MODE_EXIT                       BIT(22)
++# define V3D_SMS_THEIR_MODE_ENTER                      BIT(21)
++# define V3D_SMS_OUR_MODE_EXIT                         BIT(20)
++# define V3D_SMS_CLEAR_OUR_MODE_EXIT                   BIT(19)
++# define V3D_SMS_SEQ_PC_MASK                           V3D_MASK(16, 10)
++# define V3D_SMS_SEQ_PC_SHIFT                          10
++# define V3D_SMS_HUBCORE_STATUS_MASK                   V3D_MASK(9, 8)
++# define V3D_SMS_HUBCORE_STATUS_SHIFT                  8
++# define V3D_SMS_NEW_MODE_MASK                         V3D_MASK(7, 6)
++# define V3D_SMS_NEW_MODE_SHIFT                        6
++# define V3D_SMS_OLD_MODE_MASK                         V3D_MASK(5, 4)
++# define V3D_SMS_OLD_MODE_SHIFT                        4
++# define V3D_SMS_STATE_MASK                            V3D_MASK(3, 0)
++# define V3D_SMS_STATE_SHIFT                           0
++
+ #endif /* V3D_REGS_H */
 diff --git a/drivers/gpu/drm/v3d/v3d_sched.c b/drivers/gpu/drm/v3d/v3d_sched.c
-index 06238e6d7f5c..3f79e4113cc7 100644
+index 06238e6d7f5c..acf1ccaf61f7 100644
 --- a/drivers/gpu/drm/v3d/v3d_sched.c
 +++ b/drivers/gpu/drm/v3d/v3d_sched.c
 @@ -19,6 +19,7 @@
@@ -91215,7 +91578,21 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  static struct dma_fence *v3d_bin_job_run(struct drm_sched_job *sched_job)
  {
  	struct v3d_bin_job *job = to_bin_job(sched_job);
-@@ -107,6 +216,7 @@ static struct dma_fence *v3d_bin_job_run(struct drm_sched_job *sched_job)
+@@ -80,8 +189,12 @@ static struct dma_fence *v3d_bin_job_run(struct drm_sched_job *sched_job)
+ 	struct dma_fence *fence;
+ 	unsigned long irqflags;
+ 
+-	if (unlikely(job->base.base.s_fence->finished.error))
++	if (unlikely(job->base.base.s_fence->finished.error)) {
++		spin_lock_irqsave(&v3d->job_lock, irqflags);
++		v3d->bin_job = NULL;
++		spin_unlock_irqrestore(&v3d->job_lock, irqflags);
+ 		return NULL;
++	}
+ 
+ 	/* Lock required around bin_job update vs
+ 	 * v3d_overflow_mem_work().
+@@ -107,6 +220,7 @@ static struct dma_fence *v3d_bin_job_run(struct drm_sched_job *sched_job)
  	trace_v3d_submit_cl(dev, false, to_v3d_fence(fence)->seqno,
  			    job->start, job->end);
  
@@ -91223,7 +91600,19 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  	v3d_switch_perfmon(v3d, &job->base);
  
  	/* Set the current and end address of the control list.
-@@ -158,6 +268,7 @@ static struct dma_fence *v3d_render_job_run(struct drm_sched_job *sched_job)
+@@ -134,8 +248,10 @@ static struct dma_fence *v3d_render_job_run(struct drm_sched_job *sched_job)
+ 	struct drm_device *dev = &v3d->drm;
+ 	struct dma_fence *fence;
+ 
+-	if (unlikely(job->base.base.s_fence->finished.error))
++	if (unlikely(job->base.base.s_fence->finished.error)) {
++		v3d->render_job = NULL;
+ 		return NULL;
++	}
+ 
+ 	v3d->render_job = job;
+ 
+@@ -158,6 +274,7 @@ static struct dma_fence *v3d_render_job_run(struct drm_sched_job *sched_job)
  	trace_v3d_submit_cl(dev, true, to_v3d_fence(fence)->seqno,
  			    job->start, job->end);
  
@@ -91231,16 +91620,34 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  	v3d_switch_perfmon(v3d, &job->base);
  
  	/* XXX: Set the QCFG */
-@@ -171,6 +282,8 @@ static struct dma_fence *v3d_render_job_run(struct drm_sched_job *sched_job)
+@@ -171,6 +288,8 @@ static struct dma_fence *v3d_render_job_run(struct drm_sched_job *sched_job)
  	return fence;
  }
  
-+#define V3D_TFU_REG(name) ((v3d->ver < 71) ? V3D_TFU_ ## name : V3D_V7_TFU_ ## name)
++#define V3D_TFU_REG(name) ((v3d->ver < V3D_GEN_71) ? V3D_TFU_ ## name : V3D_V7_TFU_ ## name)
 +
  static struct dma_fence *
  v3d_tfu_job_run(struct drm_sched_job *sched_job)
  {
-@@ -190,20 +303,23 @@ v3d_tfu_job_run(struct drm_sched_job *sched_job)
+@@ -179,31 +298,40 @@ v3d_tfu_job_run(struct drm_sched_job *sched_job)
+ 	struct drm_device *dev = &v3d->drm;
+ 	struct dma_fence *fence;
+ 
++	if (unlikely(job->base.base.s_fence->finished.error)) {
++		v3d->tfu_job = NULL;
++		return NULL;
++	}
++
++	v3d->tfu_job = job;
++
+ 	fence = v3d_fence_create(v3d, V3D_TFU);
+ 	if (IS_ERR(fence))
+ 		return NULL;
+ 
+-	v3d->tfu_job = job;
+ 	if (job->base.irq_fence)
+ 		dma_fence_put(job->base.irq_fence);
+ 	job->base.irq_fence = dma_fence_get(fence);
  
  	trace_v3d_submit_tfu(dev, to_v3d_fence(fence)->seqno);
  
@@ -91261,11 +91668,11 @@ index 06238e6d7f5c..3f79e4113cc7 100644
 +	V3D_WRITE(V3D_TFU_REG(ICA), job->args.ica);
 +	V3D_WRITE(V3D_TFU_REG(IUA), job->args.iua);
 +	V3D_WRITE(V3D_TFU_REG(IOA), job->args.ioa);
-+	if (v3d->ver >= 71)
++	if (v3d->ver >= V3D_GEN_71)
 +		V3D_WRITE(V3D_V7_TFU_IOC, job->args.v71.ioc);
 +	V3D_WRITE(V3D_TFU_REG(IOS), job->args.ios);
 +	V3D_WRITE(V3D_TFU_REG(COEF0), job->args.coef[0]);
-+	if (v3d->ver >= 71 || (job->args.coef[0] & V3D_TFU_COEF0_USECOEF)) {
++	if (v3d->ver >= V3D_GEN_71 || (job->args.coef[0] & V3D_TFU_COEF0_USECOEF)) {
 +		V3D_WRITE(V3D_TFU_REG(COEF1), job->args.coef[1]);
 +		V3D_WRITE(V3D_TFU_REG(COEF2), job->args.coef[2]);
 +		V3D_WRITE(V3D_TFU_REG(COEF3), job->args.coef[3]);
@@ -91276,16 +91683,21 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  
  	return fence;
  }
-@@ -215,7 +331,7 @@ v3d_csd_job_run(struct drm_sched_job *sched_job)
+@@ -215,7 +343,12 @@ v3d_csd_job_run(struct drm_sched_job *sched_job)
  	struct v3d_dev *v3d = job->base.v3d;
  	struct drm_device *dev = &v3d->drm;
  	struct dma_fence *fence;
 -	int i;
 +	int i, csd_cfg0_reg, csd_cfg_reg_count;
++
++	if (unlikely(job->base.base.s_fence->finished.error)) {
++		v3d->csd_job = NULL;
++		return NULL;
++	}
  
  	v3d->csd_job = job;
  
-@@ -231,12 +347,15 @@ v3d_csd_job_run(struct drm_sched_job *sched_job)
+@@ -231,12 +364,15 @@ v3d_csd_job_run(struct drm_sched_job *sched_job)
  
  	trace_v3d_submit_csd(dev, to_v3d_fence(fence)->seqno);
  
@@ -91294,8 +91706,8 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  
 -	for (i = 1; i <= 6; i++)
 -		V3D_CORE_WRITE(0, V3D_CSD_QUEUED_CFG0 + 4 * i, job->args.cfg[i]);
-+	csd_cfg0_reg = v3d->ver < 71 ? V3D_CSD_QUEUED_CFG0 : V3D_V7_CSD_QUEUED_CFG0;
-+	csd_cfg_reg_count = v3d->ver < 71 ? 6 : 7;
++	csd_cfg0_reg = v3d->ver < V3D_GEN_71 ? V3D_CSD_QUEUED_CFG0 : V3D_V7_CSD_QUEUED_CFG0;
++	csd_cfg_reg_count = v3d->ver < V3D_GEN_71 ? 6 : 7;
 +	for (i = 1; i <= csd_cfg_reg_count; i++)
 +		V3D_CORE_WRITE(0, csd_cfg0_reg + 4 * i, job->args.cfg[i]);
  	/* CFG0 write kicks off the job. */
@@ -91304,7 +91716,7 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  
  	return fence;
  }
-@@ -247,7 +366,10 @@ v3d_cache_clean_job_run(struct drm_sched_job *sched_job)
+@@ -247,7 +383,10 @@ v3d_cache_clean_job_run(struct drm_sched_job *sched_job)
  	struct v3d_job *job = to_v3d_job(sched_job);
  	struct v3d_dev *v3d = job->v3d;
  
@@ -91315,17 +91727,17 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  
  	return NULL;
  }
-@@ -336,7 +458,8 @@ v3d_csd_job_timedout(struct drm_sched_job *sched_job)
+@@ -336,7 +475,8 @@ v3d_csd_job_timedout(struct drm_sched_job *sched_job)
  {
  	struct v3d_csd_job *job = to_csd_job(sched_job);
  	struct v3d_dev *v3d = job->base.v3d;
 -	u32 batches = V3D_CORE_READ(0, V3D_CSD_CURRENT_CFG4);
-+	u32 batches = V3D_CORE_READ(0, (v3d->ver < 71 ? V3D_CSD_CURRENT_CFG4 :
++	u32 batches = V3D_CORE_READ(0, (v3d->ver < V3D_GEN_71 ? V3D_CSD_CURRENT_CFG4 :
 +							V3D_V7_CSD_CURRENT_CFG4));
  
  	/* If we've made progress, skip reset and let the timer get
  	 * rearmed.
-@@ -385,8 +508,18 @@ v3d_sched_init(struct v3d_dev *v3d)
+@@ -385,8 +525,18 @@ v3d_sched_init(struct v3d_dev *v3d)
  	int hw_jobs_limit = 1;
  	int job_hang_limit = 0;
  	int hang_limit_ms = 500;
@@ -91344,7 +91756,7 @@ index 06238e6d7f5c..3f79e4113cc7 100644
  	ret = drm_sched_init(&v3d->queue[V3D_BIN].sched,
  			     &v3d_bin_sched_ops,
  			     hw_jobs_limit, job_hang_limit,
-@@ -440,9 +573,20 @@ void
+@@ -440,9 +590,20 @@ void
  v3d_sched_fini(struct v3d_dev *v3d)
  {
  	enum v3d_queue q;
@@ -117532,10 +117944,10 @@ index 3f00172df3cc..7affead11d22 100644
  	for (i = 0; i < ARRAY_SIZE(imx415_clk_params); ++i) {
 diff --git a/drivers/media/i2c/imx477.c b/drivers/media/i2c/imx477.c
 new file mode 100644
-index 000000000000..317f9adf9f6b
+index 000000000000..5a08724990ed
 --- /dev/null
 +++ b/drivers/media/i2c/imx477.c
-@@ -0,0 +1,2387 @@
+@@ -0,0 +1,2420 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * A V4L2 driver for Sony IMX477 cameras.
@@ -117707,12 +118119,18 @@ index 000000000000..317f9adf9f6b
 +	IMX477_LINK_FREQ_450MHZ,
 +	IMX477_LINK_FREQ_453MHZ,
 +	IMX477_LINK_FREQ_456MHZ,
++	IMX477_LINK_FREQ_459MHZ,
++	IMX477_LINK_FREQ_462MHZ,
++	IMX477_LINK_FREQ_498MHZ,
 +};
 +
 +static const s64 link_freqs[] = {
 +	[IMX477_LINK_FREQ_450MHZ] = 450000000,
 +	[IMX477_LINK_FREQ_453MHZ] = 453000000,
 +	[IMX477_LINK_FREQ_456MHZ] = 456000000,
++	[IMX477_LINK_FREQ_459MHZ] = 459000000,
++	[IMX477_LINK_FREQ_462MHZ] = 462000000,
++	[IMX477_LINK_FREQ_498MHZ] = 498000000,
 +};
 +
 +/* 450MHz is the nominal "default" link frequency */
@@ -117731,6 +118149,21 @@ index 000000000000..317f9adf9f6b
 +	{0x030F, 0x98},
 +};
 +
++static const struct imx477_reg link_459Mhz_regs[] = {
++	{0x030E, 0x00},
++	{0x030F, 0x99},
++};
++
++static const struct imx477_reg link_462Mhz_regs[] = {
++	{0x030E, 0x00},
++	{0x030F, 0x9a},
++};
++
++static const struct imx477_reg link_498Mhz_regs[] = {
++	{0x030E, 0x00},
++	{0x030F, 0xa6},
++};
++
 +static const struct imx477_reg_list link_freq_regs[] = {
 +	[IMX477_LINK_FREQ_450MHZ] = {
 +		.regs = link_450Mhz_regs,
@@ -117743,6 +118176,18 @@ index 000000000000..317f9adf9f6b
 +	[IMX477_LINK_FREQ_456MHZ] = {
 +		.regs = link_456Mhz_regs,
 +		.num_of_regs = ARRAY_SIZE(link_456Mhz_regs)
++	},
++	[IMX477_LINK_FREQ_459MHZ] = {
++		.regs = link_459Mhz_regs,
++		.num_of_regs = ARRAY_SIZE(link_459Mhz_regs)
++	},
++	[IMX477_LINK_FREQ_462MHZ] = {
++		.regs = link_462Mhz_regs,
++		.num_of_regs = ARRAY_SIZE(link_462Mhz_regs)
++	},
++	[IMX477_LINK_FREQ_498MHZ] = {
++		.regs = link_498Mhz_regs,
++		.num_of_regs = ARRAY_SIZE(link_498Mhz_regs)
 +	},
 +};
 +
