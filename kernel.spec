@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       269
+%global devel_release       270
 %global maintenance_release .0.0
-%global pkg_release         .172
+%global pkg_release         .173
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,84 @@ fi
 %endif
 
 %changelog
+* Wed Jul 02 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-270.0.0.173
+- !16892 v5  HiSock Redirect Framework
+- !16872  nvme-tcp: fix potential memory corruption in nvme_tcp_recv_pdu()
+- !16887  bpf: fix potential 32-bit overflow when accessing ARRAY map element
+- samples/bpf: Add HiSock Redirect sample
+- openeuler_defconfig: Enable CONFIG_HISOCK
+- bpf: Add bpf_ext_memcpy extension helper for arm64
+- arm64: insn: Add some opcodes to instruction decoder
+- bpf: Add bpf_change_skb_dev helper
+- bpf: Add bpf_set_ingress_dst helper
+- bpf: Add hisock_xdp_buff wrapper for xdp_buff
+- bpf: Add bpf_get_ingress_dst helper
+- bpf: Add HISOCK_EGRESS hook on network egress path
+- bpf: Add BPF_PROG_TYPE_HISOCK prog type
+- bpf: Add XDP_HISOCK_REDIRECT action
+- bpf: Add CONFIG_HISOCK
+- bpf: fix potential 32-bit overflow when accessing ARRAY map element
+- !16798 Add GM Driver Support for Hygon platform（Cryptographic Coprocessor，OLK-5.10)
+- !16860  arm64: kaslr: fix nokaslr cmdline parsing
+- nvme-tcp: fix potential memory corruption in nvme_tcp_recv_pdu()
+- !16816  CVE-2024-26798
+- !15234 Add support edac for hygon family 18h model 10h
+- arm64: kaslr: fix nokaslr cmdline parsing
+- !16849 v4  Introduce soft domain v4
+- sched: Fix might sleep in atomic section issue
+- sched: Balance newly task to soft domain
+- config: Configurate CONFIG_SCHED_SOFT_DOMAIN
+- sched: Add cmdline sched_soft_domain switch for soft domain feature
+- sched: fair: Disable numa migrate for soft domian task
+- sched: fair: Select idle cpu in soft domain
+- sched: Attach task group to soft domain
+- sched: topology: Build soft domain for LLC
+- !16847  net/oenetcls: Support cluster sched
+- !16840  A small fix for ftrace preemption count
+- !16841  ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- net/oenetcls: Support cluster sched
+- !16826  fs/ntfs3: Fix NULL deref in ntfs_update_mftmirr
+- !16785  ALSA: pcm: Fix race of buffer access at PCM OSS layer
+- ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- ftrace: Fix preemption accounting for stacktrace trigger command
+- ftrace: Fix preemption accounting for stacktrace filter command
+- fs/ntfs3: Fix NULL deref in ntfs_update_mftmirr
+- !15238 Add LS and IF mce types for Hygon family 18h model 7h
+- !15239 Add IOAPIC support for Hygon family 18h model 10h
+- !16819  nfsd: don't ignore the return code of svc_proc_register()
+- nfsd: don't ignore the return code of svc_proc_register()
+- fbcon: always restore the old font data in fbcon_do_set_font()
+- fbdev: fbcon: release buffer when fbcon_do_set_font() failed
+- fbdev: fbcon: Properly revert changes when vc_resize() failed
+- !16786  Fix CVE-2022-50230
+- !16801 v4  add soft quota
+- sched: Fix kabi broken in struct task_group and struct cfs_rq
+- sched: More flexible use of CPU quota when CPU is idle
+- !16794  eventpoll: Fix soft lockup in xcall_read()
+- crypto: hct: update hct driver to support both guest and host.
+- crypto: hct: provides hygon crypto technology ccp device driver.
+- crypto: ccp: support sm2 on Hygon generation 4th CPU
+- crypto: ccp: remove repeated sm4-hs mode
+- crypto: ccp: Process multiple VQ commands once for SM4/SM4-CTR ccp.
+- crypto: ccp: Process multiple VQ commands once for SM3 ccp.
+- crypto: ccp: Modify value of COMMANDS_PER_QUEUE from 16 to 8192.
+- crypto: ccp: fix bug that SM2 encryption of long data causes kernel crash
+- crypto: ccp: fix sm2 test failed in testmgr because of missing DER coding
+- crypto: ccp: Fix a problem that vq thread may stuck when do multi process test.
+- crypto: ccp: Only handle interrupts by completion.
+- crypto: ccp: It prompt ILLEGAL_MEM_ADDR when using PSPCCP.
+- crypto: ccp: Support SM4 algorithm for hygon ccp.
+- crypto: ccp: Support SM3 algorithm for hygon ccp.
+- crypto: ccp: Support SM2 algorithm for hygon ccp.
+- eventpoll: Fix soft lockup in xcall_read()
+- arm64: set UXN on swapper page tables
+- ALSA: pcm: Fix race of buffer access at PCM OSS layer
+- iommu/hygon: Add support for Hygon family 18h model 10h IOAPIC
+- EDAC/mce_amd: Add LS and IF mce types for Hygon family 18h model 7h
+- EDAC/amd64: Get correct memory type for Hygon family 18h model 10h
+- EDAC/amd64: Check if umc channel is enabled for Hygon family 18h model 10h
+- x86/amd_nb: Add helper function to identify Hygon family 18h model 10h
+
 * Tue Jun 24 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-269.0.0.172
 - !16578  ext4: ignore xattrs past end
 - !11993 [22.03-LTS-SP3] bcache: call force_wake_up_gc() if necessary in check_should_bypass()
