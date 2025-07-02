@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       98
+%global devel_release       99
 %global maintenance_release .0.0
-%global pkg_release         .103
+%global pkg_release         .104
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,156 @@ fi
 %endif
 
 %changelog
+* Wed Jul 02 2025 Li Nan <linan122@huawei.com> - 6.6.0-99.0.0.104
+- !16556 [OLK-6.6] PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- !16559 mm: mincore: use pte_batch_hint() to batch process large folios
+- !16689 mm/madvise: batch tlb flushes for MADV_DONTNEED and MADV_FREE
+- !16426 FIX CVE-2025-40014
+- !16601 add virtcca capability and kae vf interface
+- !16866 v2  mempolicy: optimize queue_folios_pte_range by PTE batching
+- !16865  pci:vga fix race condition in vga_arb_write
+- !16770 [OLK-6.6] Intel: Backport to fix QuickAssist Technology(QAT) in-tree driver from v6.10 to v6.16
+- !16773  mm:userswap: change VM_USWAP_BIT to bit 61
+- !16820 v2  Fix some smmu bugs
+- !16803  CVE-2025-38060
+- !16828  orangefs: Do not truncate file size
+- !16812 perf hisi-ptt: Fix memory leak in lseek failure handling
+- !16827  btrfs: correct the order of prelim_ref arguments in btrfs__prelim_ref
+- !16775 [OLK-6.6]fix enfs bug
+- !16861  arm64: kaslr: fix nokaslr cmdline parsing
+- mempolicy: optimize queue_folios_pte_range by PTE batching
+- !16804  HID: uclogic: Add NULL check in uclogic_input_configured()
+- !16806  vhost-scsi: protect vq->log_used with vq->mutex
+- !14552 [OLK-6.6]Arm64:KVM: Auto get the virtual_dev irq bypass's devid
+- !16573  Backport 6.6.64-6.6.72 LTS
+- !16757  objtool, media: dib8000: Prevent divide-by-zero in dib8000_set_dds()
+- !16756  mm: pcp: increase pcp->free_count threshold to trigger free_high
+- pci:vga fix race condition in vga_arb_write
+- !16656  merge CVE patches into OLK-6.6
+- !16512  perf/x86/intel: Only check the group flag for X86 leader
+- !16617  SELinux: Add check for the user data passed to kcalloc in hashtab_init
+- !16748  arm64: xcall: Fix GPR touch as the original step
+- !16778  drm/radeon: fix uninitialized size issue in radeon_vce_cs_parse()
+- !16848  tracing: probes: Fix a possible race in trace_probe_log APIs
+- !16842  ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- !16837  ftrace: Fix preemption accounting for stacktrace filter command
+- !16845  bpf: Avoid __bpf_prog_ret0_warn when jit fails
+- !16652 v2  CVE-2025-37948
+- !16791  ALSA: pcm: Fix race of buffer access at PCM OSS layer
+- arm64: kaslr: fix nokaslr cmdline parsing
+- !16851  drm/amd/display: Increase block_sequence array size
+- drm/amd/display: Increase block_sequence array size
+- tracing: probes: Fix a possible race in trace_probe_log APIs
+- bpf: Avoid __bpf_prog_ret0_warn when jit fails
+- ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- ftrace: Fix preemption accounting for stacktrace filter command
+- orangefs: Do not truncate file size
+- btrfs: correct the order of prelim_ref arguments in btrfs__prelim_ref
+- iommu/arm-smmu-v3: Fix the problematic platform detection logic
+- iommu/arm-smmu-v3: Fix the extra atc tlb flush
+- fix review issue
+- vhost-scsi: protect vq->log_used with vq->mutex
+- perf hisi-ptt: Fix memory leak in lseek failure handling
+- HID: uclogic: Add NULL check in uclogic_input_configured()
+- bpf: abort verification if env->cur_state->loop_entry != NULL
+- bpf: copy_verifier_state() should copy 'loop_entry' field
+- ALSA: pcm: Fix race of buffer access at PCM OSS layer
+- fix enfs bug
+- drm/radeon: fix uninitialized size issue in radeon_vce_cs_parse()
+- mm:userswap: change VM_USWAP_BIT to bit 61
+- crypto: qat - switch to standard pattern for PCI IDs
+- crypto: qat - remove BITS_IN_DWORD()
+- crypto: qat - remove initialization in device class
+- crypto: qat - add shutdown handler to qat_c3xxx
+- crypto: qat - remove redundant prototypes in qat_c3xxx
+- crypto: qat - add shutdown handler to qat_c62x
+- crypto: qat - remove redundant prototypes in qat_c62x
+- crypto: qat - add shutdown handler to qat_dh895xcc
+- crypto: qat - remove redundant prototypes in qat_dh895xcc
+- crypto: qat - add shutdown handler to qat_420xx
+- crypto: qat - add shutdown handler to qat_4xxx
+- crypto: qat - Remove dst_null support
+- crypto: qat - remove access to parity register for QAT GEN4
+- crypto: qat - set parity error mask for qat_420xx
+- crypto: qat - optimize allocations for fw authentication
+- crypto: qat - remove redundant FW image size check
+- crypto: qat - remove unused members in suof structure
+- crypto: qat - introduce fuse array
+- crypto: qat - add macro to write 64-bit values to registers
+- crypto: qat - refactor service parsing logic
+- crypto: qat - do not export adf_cfg_services
+- crypto: qat - reorder objects in qat_common Makefile
+- crypto: qat - fix object goals in Makefiles
+- crypto: qat - set command ids as reserved
+- crypto: drivers - Use str_enable_disable-like helpers
+- vfio/qat: fix overflow check in qat_vf_resume_write()
+- crypto: qat - Fix missing destroy_workqueue in adf_init_aer()
+- crypto: qat - Fix typo "accelaration"
+- crypto: qat - Constify struct pm_status_row
+- crypto: qat - remove unused adf_devmgr_get_first
+- lib/string_choices: Add str_up_down() helper
+- crypto: qat - Remove trailing space after 
+- crypto: qat - fix "Full Going True" macro definition
+- crypto: qat - Use static_assert() to check struct sizes
+- crypto: qat - allow disabling SR-IOV VFs
+- crypto: qat - ensure correct order in VF restarting handler
+- crypto: qat - fix recovery flow for VFs
+- crypto: qat - disable IOV in adf_dev_stop()
+- crypto: qat - preserve ADF_GENERAL_SEC
+- crypto: qat - initialize user_input.lock for rate_limiting
+- crypto: qat - make adf_ctl_class constant
+- crypto: qat - Fix typo
+- crypto: qat - fix linking errors when PCI_IOV is disabled
+- objtool, media: dib8000: Prevent divide-by-zero in dib8000_set_dds()
+- mm: pcp: increase pcp->free_count threshold to trigger free_high
+- mm: page_alloc: remove redundant READ_ONCE
+- arm64: xcall: Fix GPR touch as the original step
+- mm/madvise: handle madvise_lock() failure during race unwinding
+- mm/madvise: batch tlb flushes for MADV_DONTNEED[_LOCKED]
+- mm/memory: split non-tlb flushing part from zap_page_range_single()
+- mm/madvise: batch tlb flushes for MADV_FREE
+- mm/madvise: define and use madvise_behavior struct for madvise_do_behavior()
+- mm/madvise: remove len parameter of madvise_do_behavior()
+- mm/madvise: remove redundant mmap_lock operations from process_madvise()
+- mm/madvise: split out madvise() behavior execution
+- mm/madvise: split out madvise input validity check
+- mm/madvise: split out mmap locking operations for madvise()
+- mm/madvise: unrestrict process_madvise() for current process
+- mm/madvise: don't perform madvise VMA walk for MADV_POPULATE_(READ|WRITE)
+- crypto: iaa - Fix potential use after free bug
+- mm/migrate_device: don't add folio to be freed to LRU in migrate_device_finalize()
+- mm: migrate_device: use more folio in migrate_device_finalize()
+- Revert "remoteproc: core: Clear table_sz when rproc_shutdown"
+- remoteproc: core: Clear table_sz when rproc_shutdown
+- jfs: fix slab-out-of-bounds read in ea_get()
+- tpm: do not start chip while suspended
+- KVM: arm64: Tear down vGIC on failed vCPU creation
+- drm/nouveau: Fix WARN_ON in nouveau_fence_context_kill()
+- arm64: proton-pack: Add new CPUs 'k' values for branch mitigation
+- arm64: bpf: Only mitigate cBPF programs loaded by unprivileged users
+- arm64: bpf: Add BHB mitigation to the epilogue for cBPF programs
+- arm64: proton-pack: Expose whether the branchy loop k value
+- arm64: proton-pack: Expose whether the platform is mitigated by firmware
+- arm64: insn: Add support for encoding DSB
+- arm64: errata: Add missing sentinels to Spectre-BHB MIDR arrays
+- arm64: errata: Add newer ARM cores to the spectre_bhb_loop_affected() lists
+- arm64: cputype: Add MIDR_CORTEX_A76AE
+- arm64: errata: Add KRYO 2XX/3XX/4XX silver cores to Spectre BHB safe list
+- arm64: errata: Assume that unknown CPUs _are_ vulnerable to Spectre BHB
+- arm64: errata: Add QCOM_KRYO_4XX_GOLD to the spectre_bhb_k24_list
+- add virtcca capability and kae vf interface
+- SELinux: Add check for the user data passed to kcalloc in hashtab_init
+- PCI: Supplement ACS quirk for more Zhaoxin Root Ports
+- seq_buf: Make DECLARE_SEQ_BUF() usable
+- seq_buf: Introduce DECLARE_SEQ_BUF and seq_buf_str()
+- mm: mincore: use pte_batch_hint() to batch process large folios
+- perf/x86/intel: Only check the group flag for X86 leader
+- objtool, spi: amd: Fix out-of-bounds stack access in amd_set_spi_freq()
+- irqchip/gic-v3-its: Init reserved rsv_devid_pools use pci bus info
+- irqchip/gic-v3-its: Move build_devid_pools from its to acpi iort init
+- irqchip/gic-v3-its: Add ACPI_IORT as VIRT_PLAT_DEV's dependency
+- acpi/iort: Add func to get used deviceid bitmap
+
 * Wed Jun 18 2025 Li Nan <linan122@huawei.com> - 6.6.0-98.0.0.103
 - !16740  KVM: arm64: check if IPIV is enabled in BIOS
 - !16737  drivers/perf: hisi: Add events and rename event "cycle" for pa_pmu
