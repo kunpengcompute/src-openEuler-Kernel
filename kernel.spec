@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2506.4.0
+%global hulkrelease 2507.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0333
+Release: %{hulkrelease}.0334
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,40 @@ fi
 %endif
 
 %changelog
+
+* Wed Jul 02 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.1.0.0334
+- !16854  ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- !16802  tty: vt: initialize unicode screen buffer
+- !16856  ipvs: fix WARNING in ip_vs_app_net_cleanup()
+- ipvs: fix WARNING in ip_vs_app_net_cleanup()
+- ftrace: Fix UAF when lookup kallsym after ftrace disabled
+- !16846  Fix CVE-2025-38058
+- !16835  erspan: do not use skb_mac_header() in ndo_start_xmit()
+- __legitimize_mnt(): check for MNT_SYNC_UMOUNT should be under mount_lock
+- do_umount(): add missing barrier before refcount checks in sync case
+- !16834  kcm: close race conditions on sk_receive_queue
+- !16833  qed/qed_sriov: guard against NULL derefs from qed_iov_get_vf_info
+- !16832  net: usb: smsc95xx: Limit packet length to skb->len
+- !16831  CVE-2023-53125
+- erspan: do not use skb_mac_header() in ndo_start_xmit()
+- kcm: close race conditions on sk_receive_queue
+- qed/qed_sriov: guard against NULL derefs from qed_iov_get_vf_info
+- net: usb: smsc95xx: Limit packet length to skb->len
+- net: usb: smsc75xx: Move packet length check to prevent kernel panic in skb_pull
+- net: usb: smsc75xx: Limit packet length to skb->len
+- !16823  hidraw:·fix·memory·leak·in·hidraw_release
+- HID: hidraw: fix a problem of memory leak in hidraw_release()
+- HID: hidraw: fix memory leak in hidraw_release()
+- !16811  ARM: OMAP2+: display: Fix refcount leak bug
+- !16796  spmi: trace: fix stack-out-of-bound access in SPMI tracing functions
+- !16810  CVE-2022-50080
+- ARM: OMAP2+: display: Fix refcount leak bug
+- !16800  media: pvrusb2: fix memory leak in pvr_probe
+- tee: fix compiler warning in tee_shm_register()
+- tee: add overflow check in register_shm_helper()
+- tty: vt: initialize unicode screen buffer
+- media: pvrusb2: fix memory leak in pvr_probe
+- spmi: trace: fix stack-out-of-bound access in SPMI tracing functions
 
 * Wed Jun 25 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2506.4.0.0333
 - !16754  video: fbdev: amba-clcd: Fix refcount leak bugs
