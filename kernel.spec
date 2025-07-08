@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       270
+%global devel_release       271
 %global maintenance_release .0.0
-%global pkg_release         .173
+%global pkg_release         .174
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,80 @@ fi
 %endif
 
 %changelog
+* Tue Jul 08 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-271.0.0.174
+- !17015 [OLK-5.10]:update patches for sw64 architecture
+- !16751 [OLK-5.10] iommu: Add support for ACPI device direct mapping
+- !12159 Add the spidev.ko to OLK-5.10
+- !16992  selinux: ignore unknown extended permissions
+- !15235 correct address translation for Hygon family 18h model 4h~10h
+- sw64: kvm: save the virtual address of irqs_pending in vcpucb
+- sw64: delete useless I/O access in VM and emulator
+- sw64: kvm: fix perf kvm support for CORE4
+- sw64: pci: remove zx200 dma mask reset
+- sw64: fix for executing syscall(-1)
+- sw64: acpi: select HAVE_ACPI_APEI when ACPI is set
+- sw64: pci: add base address of devmn
+- sw64: adjust the notrace in the code
+- !16776  cachefiles: Fix the potential ABBA deadlock issue
+- selinux: ignore unknown extended permissions
+- !16970  Fix CVE-2025-38170
+- !16966  net: openvswitch: Fix the dead loop of MPLS parse
+- !16965  dma-buf: insert memory barrier before updating num_fences
+- arm64/fpsimd: Discard stale CPU state when handling SME traps
+- net: openvswitch: Fix the dead loop of MPLS parse
+- EDAC/amd64: Get intlv_num_dies from F0x60 for Hygon family 18h model 6h
+- dma-buf: insert memory barrier before updating num_fences
+- !16937 [OLK-5.10]:sw64: perf unwind: Do not put libunwind-sw_64 in FEATURE_TESTS_BASIC
+- !16944 xhci: Limit time spent with xHC interrupts disabled during bus resume
+- !15224 Add set_guest_pat_wb parameter to enhance performance for non-passthrough application scenarios
+- !16934 [OLK-5.10] PCIe Synchronous OLK-6.6 modified to OLK-6.6
+- !16935 [OLK-5.10] Add gpio-hisi softdepend
+- xhci: Limit time spent with xHC interrupts disabled during bus resume
+- xhci: add helpers for enabling and disabling interrupters
+- iommu: Add support for ACPI device direct mapping
+- !16909  mm/hugetlb: fix incorrect gfp flag for mempolicy MPOL_PREFERRED_MANY
+- !16916  Backport mainline patches
+- !16914  net: fix slab-use-after-free read in decode_session6
+- sw64: perf unwind: Do not put libunwind-sw_64 in FEATURE_TESTS_BASIC
+- Add gpio-hisi softdepend
+- PCI/DPC: Ignore Surprise Down error on hot removal
+- hwtracing: hisi_ptt: Check duplicate filters before allocation
+- hwtracing: hisi_ptt: Initialize the filter sysfs attribute when allocation
+- EDAC/amd64: Use u16 for some umc variables for Hygon family 18h model 4h
+- EDAC/amd64: Fix the calculation of cs id for Hygon family 18h model 4h
+- EDAC/amd64: Separate the address translation function for hygon family 18h model 4h
+- !16899  libnvdimm/labels: Fix divide error in nd_label_data_init()
+- !16901  uprobes: check anon before compound when unregister
+- net: virtio: Fix kabi broken
+- net: test for not too small csum_start in virtio_net_hdr_to_skb()
+- net: add more sanity check in virtio_net_hdr_to_skb()
+- net: fix crash when config small gso_max_size/gso_ipv4_max_size
+- net: fix slab-use-after-free read in decode_session6
+- !15236 Get the correct instance id calculation for Hygon family 18h model 6h~10h
+- !15658 [OLK-5.10] perf/x86/uncore: Add DF PMU support for Hygon family 18h model 8h
+- !16795 [OLK-5.10] Print secure features when running on Hygon CPUs
+- mm/hugetlb: fix incorrect gfp flag for mempolicy MPOL_PREFERRED_MANY
+- uprobes: check anon before compound when unregister
+- libnvdimm/labels: Fix divide error in nd_label_data_init()
+- !16752  nfs: handle failure of nfs_get_lock_context in unlock path
+- x86/cpufeatures: Add CSV3 CPU feature
+- x86/cpufeatures: Add CPUID_8C86_0000_EDX CPUID leaf
+- x86/cpu: Detect memory encryption features on Hygon CPUs
+- KVM: SVM: Print Hygon CSV support info if support is detected
+- crypto: ccp: Print Hygon CSV API version when CSV support is detected
+- x86/mm: Print CSV info into the kernel log
+- x86/config: Set CONFIG_HYGON_CSV by default
+- x86/mm: Provide a Kconfig entry to build the HYGON memory encryption support into the kernel
+- Documentation/arch/x86: Add HYGON secure virtualization description
+- cachefiles: Fix the potential ABBA deadlock issue
+- nfs: handle failure of nfs_get_lock_context in unlock path
+- KVM: x86/svm: Add hygon_set_guest_pat_wb parameter for non-passthrough application scenarios
+- perf/x86/uncore: Add DF PMU support for Hygon family 18h model 8h
+- EDAC/amd64: Get instance id for Hygon family 18h model 10h
+- EDAC/amd64: Calculate instance id for hygon family 18h model 7h
+- EDAC/amd64: Fix the calculation of instance id for Hygon family 18h model 6h
+- Open the CONFIG for spidev.ko
+
 * Wed Jul 02 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-270.0.0.173
 - !16892 v5  HiSock Redirect Framework
 - !16872  nvme-tcp: fix potential memory corruption in nvme_tcp_recv_pdu()
