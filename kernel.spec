@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2507.1.0
+%global hulkrelease 2507.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0334
+Release: %{hulkrelease}.0335
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,100 @@ fi
 %endif
 
 %changelog
+
+* Wed Jul 09 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.2.0.0335
+- !17017  ipvlan: Fix out-of-bounds caused by unclear skb->cb in I2e mode
+- !17018 v2  bnxt_en: Fix out-of-bound memcpy() during ethtool -w
+- !16962  firmware: arm_scpi: Ensure scpi_info is not assigned if the probe fails
+- !16945  scsi: storvsc: Remove WQ_MEM_RECLAIM from storvsc_error_wq
+- !17021  dm raid: fix address sanitizer warning in raid_status
+- dm raid: fix address sanitizer warning in raid_status
+- !17005  sch_htb: Fix CVE-2025-37932
+- bnxt_en: Fix out-of-bound memcpy() during ethtool -w
+- ipvlan: Fix out-of-bounds caused by unclear skb->cb in I2e mode
+- !16941 v2  dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+- sch_htb: make htb_deactivate() idempotent
+- sch_htb: make htb_qlen_notify() idempotent
+- !16987  PCI/GPU: fix hard lockup in vga_arb_release
+- !16974  iavf: Fix reset error handling
+- !16975  RDMA/rxe: Fix error unwind in rxe_create_qp()
+- !16976  RDMA/rxe: Fix slab-use-after-free Read in rxe_queue_cleanup bug
+- !16978  usbnet: Fix linkwatch use-after-free on disconnect
+- !16979  RDMA/hfi1: fix potential memory leak in setup_base_ctxt()
+- PCI/GPU: fix hard lockup in vga_arb_release
+- !16980  arm64: cacheinfo: Fix incorrect assignment of signed error value to unsigned fw_level
+- !16923  PM: hibernate: defer device probing when resuming from hibernation
+- arm64: cacheinfo: Fix incorrect assignment of signed error value to unsigned fw_level
+- RDMA/hfi1: fix potential memory leak in setup_base_ctxt()
+- usbnet: Fix linkwatch use-after-free on disconnect
+- RDMA/rxe: Fix slab-use-after-free Read in rxe_queue_cleanup bug
+- RDMA/rxe: Fix error unwind in rxe_create_qp()
+- iavf: Fix reset error handling
+- !16953  usb: host: ohci-ppc-of: Fix refcount leak bug
+- !16955  dm raid: fix address sanitizer warning in raid_resume
+- !16928  net: mdio: fix undefined behavior in bit shift for __mdiobus_register
+- !16929  tipc: fix the msg->req tlv len check in tipc_nl_compat_name_table_dump_header
+- !16960  wifi: cfg80211: fix memory leak in query_regdb_file()
+- !16961  CVE-2022-49871
+- firmware: arm_scpi: Ensure scpi_info is not assigned if the probe fails
+- net: tun: call napi_schedule_prep() to ensure we own a napi
+- net: tun: Fix memory leaks of napi_get_frags
+- wifi: cfg80211: fix memory leak in query_regdb_file()
+- dm raid: fix address sanitizer warning in raid_resume
+- !16913  drm/amd/display: clear optc underflow before turn off odm clock
+- usb: host: ohci-ppc-of: Fix refcount leak bug
+- !16910  KVM: SVM: Don't BUG if userspace injects an interrupt with GIF=0
+- !16931  md: call __md_stop_writes in md_stop
+- !16930  md-raid10: fix KASAN warning
+- scsi: storvsc: Remove WQ_MEM_RECLAIM from storvsc_error_wq
+- dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+- !16506  ipvs: fix WARNING in __ip_vs_cleanup_batch()
+- !16505  net: sched: Fix use after free in red_enqueue()
+- !16917  nfs: handle failure of nfs_get_lock_context in unlock path
+- md: call __md_stop_writes in md_stop
+- md-raid10: fix KASAN warning
+- tipc: fix the msg->req tlv len check in tipc_nl_compat_name_table_dump_header
+- net: mdio: fix undefined behavior in bit shift for __mdiobus_register
+- !16920  net: atlantic: fix aq_vec index out of range error
+- !16921  net: tunnels: annotate lockless accesses to dev->needed_headroom
+- PM: hibernate: defer device probing when resuming from hibernation
+- !16907  crypto: algif_hash - fix double free in hash_accept
+- net: tunnels: annotate lockless accesses to dev->needed_headroom
+- !16890  sched, cpuset: Fix dl_cpu_busy() panic due to empty cs->cpus_allowed
+- !16889  scsi: qla2xxx: Fix crash due to stale SRB access around I/O timeouts
+- net: atlantic: fix aq_vec index out of range error
+- !16876  hulk-4.19-fix-CVE-2022-49989
+- nfs: handle failure of nfs_get_lock_context in unlock path
+- !16904  wifi: mac80211: Fix UAF in ieee80211_scan_rx()
+- !16888  drm/radeon: fix potential buffer overflow in ni_set_mc_special_registers()
+- drm/amd/display: clear optc underflow before turn off odm clock
+- KVM: SVM: Don't BUG if userspace injects an interrupt with GIF=0
+- !16824  cifs: fix small mempool leak in SMB2_negotiate()
+- !16825  smb: client: Fix use-after-free in cifs_fill_dirent
+- crypto: algif_hash - fix double free in hash_accept
+- !16900  regulator: of: Fix refcount leak bug in of_get_regulation_constraints()
+- wifi: mac80211: Fix UAF in ieee80211_scan_rx()
+- regulator: of: Fix refcount leak bug in of_get_regulation_constraints()
+- !16869  vt: Clear selection before changing the font
+- !16873  mtd: maps: Fix refcount leak in ap_flash_init
+- !16871  ALSA: bcd2000: Fix a UAF bug on the error path of probing
+- !16878  wifi: mac80211: Don't finalize CSA in IBSS mode if state is disconnected
+- !16867  drivers:md:fix a potential use-after-free bug
+- sched, cpuset: Fix dl_cpu_busy() panic due to empty cs->cpus_allowed
+- scsi: qla2xxx: Fix crash due to stale SRB access around I/O timeouts
+- drm/radeon: fix potential buffer overflow in ni_set_mc_special_registers()
+- wifi: mac80211: Don't finalize CSA in IBSS mode if state is disconnected
+- xen/privcmd: fix error exit of privcmd_ioctl_dm_op()
+- xen/privcmd: Corrected error handling path
+- mtd: maps: Fix refcount leak in ap_flash_init
+- ALSA: bcd2000: Fix a UAF bug on the error path of probing
+- vt: Clear selection before changing the font
+- drivers:md:fix a potential use-after-free bug
+- smb: client: Reset all search buffer pointers when releasing buffer
+- smb: client: Fix use-after-free in cifs_fill_dirent
+- cifs: fix small mempool leak in SMB2_negotiate()
+- ipvs: fix WARNING in __ip_vs_cleanup_batch()
+- net: sched: Fix use after free in red_enqueue()
 
 * Wed Jul 02 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.1.0.0334
 - !16854  ftrace: Fix UAF when lookup kallsym after ftrace disabled
