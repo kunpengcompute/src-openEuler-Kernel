@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       271
+%global devel_release       272
 %global maintenance_release .0.0
-%global pkg_release         .174
+%global pkg_release         .175
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,35 @@ fi
 %endif
 
 %changelog
+* Wed Jul 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-272.0.0.175
+- !17048  RDMA/hns: Stability and Security Fixes and Improvements
+- !16839 Add gpio-hisi softdepend
+- !16852 net: hns3: fix a use of uninitialized variable problem
+- !16918 [OLK-5.10] io_uring: Support forcing sq thread to be idle and woken up by hrtimer
+- !17037  iio: light: opt3001: fix deadlock due to concurrent flag access
+- !16855 ptp: hisi: the print of element in ptp need protected by lock
+- !16881 net: hns3: fix kernel crash when uninstalling driver
+- RDMA/hns: Fix double destruction of rsv_qp
+- RDMA/hns: Fix address information leakage of DCA memory
+- RDMA/hns: Fix scc_param failed logic judgments
+- RDMA/hns: Fix congestion control algorithm parameter range
+- RDMA/hns: Fix accessing invalid dip_ctx during destroying QP
+- RDMA/hns: Use __free_page() to free pages allocated with alloc_page()
+- RDMA/hns: Fix divide-by-zero error in dca debugfs
+- RDMA/hns: Fix descriptions of stars api
+- RDMA/hns: Fix poe memory leak in error flow
+- RDMA/hns: Fix accessing uninitialized resources
+- RDMA/hns: Add check between dca_min_size and dca_max_size
+- io_uring: Support forcing sq thread to be idle and woken up by hrtimer
+- iio: light: opt3001: fix deadlock due to concurrent flag access
+- net: hns3: fix kernel crash when uninstalling driver
+- ptp: hisi: the print of element in ptp need protected by lock
+- ptp: hisi: fix list not delete problem
+- net: hns3: fix a use of uninitialized variable problem
+- net: hns3: avoid unnecessary checking when unmap buffer
+- net: hns3: disable interrupt when ptp init failed
+- Add gpio-hisi softdepend
+
 * Tue Jul 08 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-271.0.0.174
 - !17015 [OLK-5.10]:update patches for sw64 architecture
 - !16751 [OLK-5.10] iommu: Add support for ACPI device direct mapping
