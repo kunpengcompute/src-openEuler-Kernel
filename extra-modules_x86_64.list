@@ -1,4 +1,3 @@
-drivers/bluetooth/btmtk.ko
 drivers/hid/i2c-hid/i2c-hid-acpi.ko
 drivers/hid/i2c-hid/i2c-hid.ko
 drivers/net/wireless/marvell/mwl8k.ko
