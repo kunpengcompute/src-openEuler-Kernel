@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2507.2.0
+%global hulkrelease 2507.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0335
+Release: %{hulkrelease}.0336
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,23 @@ fi
 %endif
 
 %changelog
+
+* Wed Jul 16 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.3.0.0336
+- !17108  arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !17113  Bluetooth: btrtl: Prevent potential NULL dereference
+- Bluetooth: btrtl: Prevent potential NULL dereference
+- arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !17057  media: cxusb: no longer judge rbuf when the write fails
+- !17073  Revert "dm-bufio: don't schedule in atomic context"
+- Revert "dm-bufio: don't schedule in atomic context"
+- !17046 v2  net: Fix CVE-2025-38000
+- media: cxusb: no longer judge rbuf when the write fails
+- sch_cbq: make cbq_qlen_notify() idempotent
+- net/sched: Always pass notifications when child class becomes empty
+- sch_hfsc: Fix qlen accounting bug when using peek in hfsc_enqueue()
+- sch_qfq: make qfq_qlen_notify() idempotent
+- sch_hfsc: make hfsc_qlen_notify() idempotent
+- sch_drr: make drr_qlen_notify() idempotent
 
 * Wed Jul 09 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.2.0.0335
 - !17017  ipvlan: Fix out-of-bounds caused by unclear skb->cb in I2e mode
