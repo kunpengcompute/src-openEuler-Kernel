@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       272
+%global devel_release       273
 %global maintenance_release .0.0
-%global pkg_release         .174
+%global pkg_release         .175
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,33 @@ fi
 %endif
 
 %changelog
+* Tue Jul 15 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-273.0.0.175
+- !17045  arm64: Fix a typo in xcall_init_task()
+- !17105  arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !17099  arm64: exec: add mcs support for prepare_binprm
+- arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !17104  hugetlb: drain pcp for movable zone before alloc
+- !16949  media: uvcvideo: Remove dangling pointers
+- hugetlb: drain pcp for movable zone before alloc
+- arm64: exec: add mcs support for prepare_binprm
+- iov_iter: add copy_mc_page_to_kvec_iter
+- !16927  nfs: Clean up /proc/net/rpc/nfs when nfs_fs_proc_net_init() fails.
+- !16761  cifs: fix mount deadlock by avoiding super block iteration in DFS reconnect
+- !16429 CVE-2025-21855
+- !17050 EDAC/amd64: Fix the check build warning info in hygon_umc_normaddr_to_sysaddr()
+- !17058  media: cxusb: no longer judge rbuf when the write fails
+- !16943  KVM: x86/mmu: Treat NX as a valid SPTE bit for NPT
+- media: cxusb: no longer judge rbuf when the write fails
+- ibmvnic: Don't reference skb after sending to VIOS
+- !17002  net_sched: red: fix a race in __red_change()
+- EDAC/amd64: Fix the check build warning info in hygon_umc_normaddr_to_sysaddr()
+- arm64: Fix a typo in xcall_init_task()
+- net_sched: red: fix a race in __red_change()
+- media: uvcvideo: Remove dangling pointers
+- KVM: x86/mmu: Treat NX as a valid SPTE bit for NPT
+- nfs: Clean up /proc/net/rpc/nfs when nfs_fs_proc_net_init() fails.
+- cifs: fix mount deadlock by avoiding super block iteration in DFS reconnect
+
 * Wed Jul 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-272.0.0.174
 - !17048  RDMA/hns: Stability and Security Fixes and Improvements
 - !16839 Add gpio-hisi softdepend
