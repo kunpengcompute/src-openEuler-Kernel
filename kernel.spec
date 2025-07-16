@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       100
+%global devel_release       101
 %global maintenance_release .0.0
-%global pkg_release         .106
+%global pkg_release         .107
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,72 @@ fi
 %endif
 
 %changelog
+* Wed Jul 16 2025 Li Nan <linan122@huawei.com> - 6.6.0-101.0.0.107
+- !17041 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.70-6.6.72 LTS Conflicts Patches
+- !17126  EDAC/skx_common: Fix general protection fault
+- !17136  xcall xint 644
+- modify xcall proc file permissions to 640
+- modify xint proc file permissions to 640
+- !17070  arm64/mpam: Add quirk for MPAM MSMON_MBWU monitor NRDY bit
+- !17106  arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !17120 v3  mm: batched unmap lazyfree large folios
+- EDAC/skx_common: Fix general protection fault
+- mm/rmap: fix potential out-of-bounds page table access during batched unmap
+- mm: avoid splitting pmd for lazyfree pmd-mapped THP in try_to_unmap
+- mm: support batched unmap for lazyfree large folios during reclamation
+- mm: support tlbbatch flush for a range of PTEs
+- mm: set folio swapbacked iff folios are dirty in try_to_unmap_one
+- !16998  arm64/mpam: Fix L2 monitor issue under CDP mode
+- !17107  CVE-2025-38322
+- !16947 [OLK-6.6] Fix patches for X2avic to backport for OLK-6.6
+- !17092  drm/amd/display: Fix && vs || typos
+- perf/x86/intel: Fix crash in icl_update_topdown_event()
+- perf/x86/intel: Avoid disable PMU if !cpuc->enabled in sample read
+- perf/x86/intel: Apply static call for drain_pebs
+- arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
+- !16884  fs: Backport four namespace fix patches
+- !17094  config: Set TSM_REPORTS=m and ARM_CCA_GUEST=m
+- config: Set TSM_REPORTS=m and ARM_CCA_GUEST=m
+- drm/amd/display: Fix && vs || typos
+- !17071  usb: dwc3: gadget: check that event count does not exceed event buffer length
+- !17068  mcb: fix a double free bug in chameleon_parse_gdd()
+- !17062  bnxt_en: Mask the bd_cnt field in the TX BD properly
+- !16956 v3  config: Enable CONFIG_VIRT_DRIVERS
+- !16950 perf: Add support for SPE Data Source packet on HiSilicon HIP12
+- usb: dwc3: gadget: check that event count does not exceed event buffer length
+- arm64/mpam: Add quirk for MPAM MSMON_MBWU monitor NRDY bit
+- mcb: fix a double free bug in chameleon_parse_gdd()
+- bnxt_en: Mask the bd_cnt field in the TX BD properly
+- !17055  bpf lts backport
+- !17054  bpf verifier fixes
+- !17049  platform/x86: dell_rbu: Fix list usage
+- !17059  media: cxusb: no longer judge rbuf when the write fails
+- !16462 fix  CVE-2025-22101
+- media: cxusb: no longer judge rbuf when the write fails
+- bpf: Improve check_raw_mode_ok test for MEM_UNINIT-tagged types
+- bpf: Fix bpf_strtol and bpf_strtoul helpers for 32bit
+- selftests/bpf: Add tests with stack ptr register in conditional jmp
+- bpf: Do not include stack ptr register in precision backtracking bookkeeping
+- selftests/bpf: precision tracking test for BPF_NEG and BPF_END
+- platform/x86: dell_rbu: Fix list usage
+- fs/Kconfig: make hugetlbfs a menuconfig
+- workqueue: Update lock debugging code
+- memblock: use numa_valid_node() helper to check for invalid node ID
+- perf mem: Count L2 HITM for c2c statistic
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- arm64: cputype: Add cputype definition for HIP12
+- Revert "perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12"
+- arm64/mpam: Fix L2 monitor issue under CDP mode
+- KVM: x86: Fix a comment inside __kvm_set_or_clear_apicv_inhibit()
+- config: Enable CONFIG_VIRT_DRIVERS
+- KVM: x86: Only set APICV_INHIBIT_REASON_ABSENT if APICv is enabled
+- iommu/amd: Do not flush IRTE when only updating isRun and destination fields
+- clone_private_mnt(): make sure that caller has CAP_SYS_ADMIN in the right userns
+- do_change_type(): refuse to operate on unmounted/not ours mounts
+- fix propagation graph breakage by MOVE_MOUNT_SET_GROUP move_mount(2)
+- path_overmount(): avoid false negatives
+- net: libwx: fix Tx L4 checksum
+
 * Wed Jul 16 2025 Li Ping <1477412247@qq.com> - 6.6.0-100.0.0.106
 - btusb: move btmtk module from extra to main kernel modules
   * Fixes dependency issue where btusb.ko required symbols from btmtk.ko
