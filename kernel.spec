@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       100
 %global maintenance_release .0.0
-%global pkg_release         .105
+%global pkg_release         .106
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,13 @@ fi
 %endif
 
 %changelog
+* Wed Jul 16 2025 Li Ping <1477412247@qq.com> - 6.6.0-100.0.0.106
+- btusb: move btmtk module from extra to main kernel modules
+  * Fixes dependency issue where btusb.ko required symbols from btmtk.ko
+    (btmtk_setup_firmware*, btmtk_set_bdaddr, etc.)
+  * Resolves depmod warnings during kernel installation
+  * Original issue seen with kernel-6.6.0-100.0.0.105.oe2403sp2.x86_64
+
 * Wed Jul 09 2025 Li Nan <linan122@huawei.com> - 6.6.0-100.0.0.105
 - !17003  net_sched: red: fix a race in __red_change()
 - !16747  LoongArch: Fix bugs in huge_pte_offset/__alloc_pages_slowpath/iommu
