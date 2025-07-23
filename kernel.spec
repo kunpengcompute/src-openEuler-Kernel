@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2507.3.0
+%global hulkrelease 2507.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0336
+Release: %{hulkrelease}.0337
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,12 @@ fi
 %endif
 
 %changelog
+
+* Wed Jul 23 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2507.4.0.0337
+- !17221  net/sched: Abort __tc_modify_qdisc if parent class does not exist
+- net/sched: Abort __tc_modify_qdisc if parent class does not exist
+- !17147  jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
+- jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
 
 * Wed Jul 16 2025 chenyi <chenyi211@huawei.com> - 4.19.90-2507.3.0.0336
 - !17108  arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
