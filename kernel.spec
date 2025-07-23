@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       101
+%global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .107
+%global pkg_release         .108
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,183 @@ fi
 %endif
 
 %changelog
+* Wed Jul 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-102.0.0.108
+- !17076  smb: client: fix use-after-free in crypt_message when using async crypto
+- !17102  smb: client: fix use-after-free in cifs_oplock_break
+- !17240  some fix for spe hotcold
+- !17159 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.72-6.6.75 LTS Conflicts Patches
+- !17206  driver core: Use kasprintf() instead of fixed buffer formatting
+- mm_monitor/mm_spe: Embed boost events within SPE packets
+- mm_monitor/mm_spe: Fix SPE boost enablement and continuation handling
+- !17161  olk-6.6-backport-bugfix-for-dynamic-affinity
+- !17150  HID: usbhid: Eliminate recurrent out-of-bounds bug in usbhid_parse()
+- !17153  f2fs: prevent kernel warning due to negative i_nlink from corrupted image
+- !17154  media: vivid: Change the siize of the composing
+- !17238 v2  net: Fix kabi breakage for defer_free_list in struct net
+- !17237 RDMA/hns: Fix HW configurations not cleared in error flow
+- net: Fix kabi breakage for defer_free_list in struct net
+- RDMA/hns: Fix HW configurations not cleared in error flow
+- RDMA/hns: Fix -Wframe-larger-than issue
+- RDMA/hns: Drop GFP_NOWARN
+- RDMA/hns: Fix accessing uninitialized resources
+- RDMA/hns: Remove redundant hnae3.h in bond and sysfs
+- RDMA/hns: Use __free_page() to free pages allocated with alloc_page()
+- RDMA/hns: Fix divide-by-zero error in dca debugfs
+- RDMA/hns: Add check between dca_min_size and dca_max_size
+- RDMA/hns: Get messgae length of ack_req from FW
+- !17229 net: hns3: fix spelling mistake "reg_um" -&gt; "reg_num"
+- !17032  fbcon: Make sure modelist not set on unregistered console
+- !16958  scsi: target: iscsi: Fix timeout on deleted connection
+- net: hns3: fix spelling mistake "reg_um" -> "reg_num"
+- net: hns3: add complete parentheses for some macros
+- net: hns3: use hns3_get_ops() helper to reduce the unnecessary middle layer conversion
+- net: hns3: use hns3_get_ae_dev() helper to reduce the unnecessary middle layer conversion
+- net: hns3: delete redundant address before the array
+- net: hns3: clear hns alarm: comparison of integer expressions of different signedness
+- net: hns3: add \n at the end when print msg
+- Revert "net: hns3: add \n at the end when print msg"
+- !17201 net: hns3: reduce stack usage in hclge_dbg_dump_tm_pri()
+- !17215  net_sched: sch_sfq: fix a potential crash on gso_skb handling
+- !17214  netfilter: nf_set_pipapo_avx2: fix initial map fill
+- !17213  net: fix udp gso skb_segment after pull from frag_list
+- !17212  ice: fix Tx scheduler error handling in XDP callback
+- !17207  net: pktgen: fix access outside of user given buffer in pktgen_thread_write()
+- !17200  xen-netfront: handle NULL returned by xdp_convert_buff_to_frame()
+- !17199  tipc: fix NULL pointer dereference in tipc_mon_reinit_self()
+- !17198  bpf: consider that tail calls invalidate packet pointers
+- !17197  net: stmmac: Fix accessing freed irq affinity_hint
+- !17196  mptcp: fix NULL pointer in can_accept_new_subflow
+- !17194  tipc: fix memory leak in tipc_link_xmit
+- !17193  net: dsa: mv88e6xxx: avoid unregistering devlink regions which were never registered
+- !17192  cxgb4: fix memory leak in cxgb4_init_ethtool_filters() error path
+- !17184  sctp: add mutual exclusion in proc_sctp_do_udp_port()
+- !17181  net: fix NULL pointer dereference in l3mdev_l3_rcv
+- !17101  jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
+- !17191  net: mctp: Set SOCK_RCU_FREE
+- !17190  usbnet:fix NPE during rx_complete
+- !17189  net: ibmveth: make veth_pool_store stop hanging
+- !17188  arcnet: Add NULL check in com20020pci_probe()
+- !17187  net: fix geneve_opt length integer overflow
+- !17186  udp: Fix memory accounting leak.
+- !17185  net: mvpp2: Prevent parser TCAM memory corruption
+- !17182  net: Remove RTNL dance for SIOCBRADDIF and SIOCBRDELIF.
+- !17179  net: dsa: free routing table on probe failure
+- !17178  sctp: detect and prevent references to a freed transport in sendmsg
+- !17177  net_sched: hfsc: Fix a UAF vulnerability in class handling
+- !17176  net_sched: hfsc: Fix a potential UAF in hfsc_dequeue() too
+- !17175  net: dsa: mv88e6xxx: fix -ENOENT when deleting VLANs and MST is unsupported
+- !17174  net: dsa: clean up FDB, MDB, VLAN entries on unbind
+- !17172  xsk: fix an integer overflow in xp_create_and_assign_umem()
+- !17171  net: atm: fix use after free in lec_send()
+- !17170  eth: bnxt: fix truesize for mb-xdp-pass case
+- net_sched: sch_sfq: fix a potential crash on gso_skb handling
+- netfilter: nf_set_pipapo_avx2: fix initial map fill
+- net: fix udp gso skb_segment after pull from frag_list
+- ice: fix Tx scheduler error handling in XDP callback
+- net: pktgen: fix access outside of user given buffer in pktgen_thread_write()
+- !17016 [OLK-6.6]:update patches for sw64 architecture
+- driver core: Use kasprintf() instead of fixed buffer formatting
+- !17074  ext4: only dirty folios when data journaling regular files
+- !16951  wifi: ath9k_htc: Abort software beacon handling if disabled
+- net: hns3: reduce stack usage in hclge_dbg_dump_tm_pri()
+- net: hns3: Resolved the issue that the debugfs query result is inconsistent.
+- Revert "net: hns3: Resolved the issue that the debugfs query result is inconsistent."
+- net: hns3: initialize reset_timer before hclgevf_misc_irq_init()
+- Revert "net: hns3: initialize reset_timer before hclgevf_misc_irq_init()"
+- net: hns3: Use ARRAY_SIZE() to improve readability
+- Revert "net: hns3: fix spelling mistake "reg_um" -> "reg_num""
+- xen-netfront: handle NULL returned by xdp_convert_buff_to_frame()
+- tipc: fix NULL pointer dereference in tipc_mon_reinit_self()
+- bpf: consider that tail calls invalidate packet pointers
+- net: stmmac: Fix accessing freed irq affinity_hint
+- mptcp: fix NULL pointer in can_accept_new_subflow
+- tipc: fix memory leak in tipc_link_xmit
+- net: dsa: mv88e6xxx: avoid unregistering devlink regions which were never registered
+- cxgb4: fix memory leak in cxgb4_init_ethtool_filters() error path
+- net: mctp: Set SOCK_RCU_FREE
+- usbnet:fix NPE during rx_complete
+- net: ibmveth: make veth_pool_store stop hanging
+- arcnet: Add NULL check in com20020pci_probe()
+- net: fix geneve_opt length integer overflow
+- !16850 [OLK-6.6] Backport TDX HLT/SAFE-HLT fix
+- udp: Fix memory accounting leak.
+- net: mvpp2: Prevent parser TCAM memory corruption
+- sctp: add mutual exclusion in proc_sctp_do_udp_port()
+- net: Remove RTNL dance for SIOCBRADDIF and SIOCBRDELIF.
+- net: fix NULL pointer dereference in l3mdev_l3_rcv
+- net: dsa: free routing table on probe failure
+- sctp: detect and prevent references to a freed transport in sendmsg
+- net_sched: hfsc: Fix a UAF vulnerability in class handling
+- net_sched: hfsc: Fix a potential UAF in hfsc_dequeue() too
+- net: dsa: mv88e6xxx: fix -ENOENT when deleting VLANs and MST is unsupported
+- net: dsa: clean up FDB, MDB, VLAN entries on unbind
+- !17137 [olk 6.6] net: hibmcge: backport some feature patches
+- xsk: fix an integer overflow in xp_create_and_assign_umem()
+- net: atm: fix use after free in lec_send()
+- eth: bnxt: fix truesize for mb-xdp-pass case
+- !17156  v3:add perpcu stock for kmem
+- scsi: ufs: core: Set default runtime/system PM levels before ufshcd_hba_init()
+- libfs: Fix simple_offset_rename_exchange()
+- shmem: Fix shmem_rename2()
+- mac802154: check local interfaces before deleting sdata list
+- hfs: Sanity check the root record
+- !17109 efi: efi_get_memory_map -- increase map headroom
+- !17148  Bluetooth: MGMT: Protect mgmt_pending list with its own lock
+- sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
+- sched/dynamic_affinity: fix CI test alway select prefer_cpu problem
+- sched/dynamic_affinity: fix preffered_cpu offline problem
+- sched/fair: reset idlest_cpu if not meet the conditions for preferred CPU
+- memcg: add stock for kmem [un]charging
+- memcg: add CONFIG_MEMCG_KMEM_STOCK
+- scsi: ufs: core: Honor runtime/system PM levels if set by host controller drivers
+- selftests: tc-testing: reduce rshift value
+- media: vivid: Change the siize of the composing
+- f2fs: prevent kernel warning due to negative i_nlink from corrupted image
+- !17124  crypto: algif_hash - fix double free in hash_accept
+- HID: usbhid: Eliminate recurrent out-of-bounds bug in usbhid_parse()
+- Bluetooth: MGMT: Protect mgmt_pending list with its own lock
+- net: hibmcge: configure FIFO thresholds according to the MAC controller documentation
+- net: hibmcge: adjust the burst len configuration of the MAC controller to improve TX performance.
+- net: hibmcge: support scenario without PHY
+- net: phy: fixed_phy: constify status argument where possible
+- net: phy: fixed_phy: remove irq argument from fixed_phy_register
+- efi/libstub: Bump up EFI_MMAP_NR_SLACK_SLOTS to 32
+- net: phy: fixed_phy: remove irq argument from fixed_phy_add
+- net: phy: fixed_phy: remove fixed_phy_register_with_gpiod
+- !17140 v2  Cgroup-Based Interference Statistics followup
+- interference: Add distribution histogram support
+- interference: Use hardware timer counter
+- interference: Add mutex interference track support
+- interference: Add spinlock interference track support
+- interference: Add cgroup_ifs_enter/leave_lock helper
+- interference: Disable irq track when irqtime disabled
+- sw64: delete useless I/O access in VM and emulator
+- sw64: kvm: fix perf kvm support
+- sw64: Kconfig: enable HAS_IOPORT by default
+- sw64: pci: remove zx200 dma mask reset
+- sw64: fix for executing syscall(-1)
+- sw64: acpi: select HAVE_ACPI_APEI when ACPI is set
+- sw64: pci: add base address of devmn
+- sw64: adjust the notrace in the code
+- crypto: algif_hash - fix double free in hash_accept
+- smb: client: fix use-after-free in cifs_oplock_break
+- jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
+- smb: client: fix use-after-free in crypt_message when using async crypto
+- ext4: only dirty folios when data journaling regular files
+- Fix kabi for TDX halt/safe-halt
+- fbcon: Make sure modelist not set on unregistered console
+- sw64: irqchip: update effective affinity for PINTC
+- sw64: irqchip: add support for PINTC on all NUMA nodes
+- sw64: cpufreq: optimize the granularity of cpufreq
+- sw64: ftrace: restore the register storing direct call address
+- sw64: kvm: fix undefined compile issues for kvm module
+- sw64: pintc: fix guest pintc init
+- sw64: set module region to the 2GB space below vmalloc area
+- scsi: target: iscsi: Fix timeout on deleted connection
+- wifi: ath9k_htc: Abort software beacon handling if disabled
+- x86/tdx: Fix arch_safe_halt() execution for TDX VMs
+- x86/paravirt: Move halt paravirt calls under CONFIG_PARAVIRT
+
 * Wed Jul 16 2025 Li Nan <linan122@huawei.com> - 6.6.0-101.0.0.107
 - !17041 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.70-6.6.72 LTS Conflicts Patches
 - !17126  EDAC/skx_common: Fix general protection fault
