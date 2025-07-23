@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       273
+%global devel_release       274
 %global maintenance_release .0.0
-%global pkg_release         .175
+%global pkg_release         .176
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,52 @@ fi
 %endif
 
 %changelog
+* Tue Jul 22 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-274.0.0.176
+- !17195  smb: client: fix use-after-free in crypt_message when using async crypto
+- !17239 【OLK 5.10】some bugfixes and cleanups for hns3 driver
+- !17077  smb: client: fix use-after-free in cifs_oplock_break
+- !17242  ima: prevent concurrent list operations in ima_lsm_update_rules
+- ima: prevent concurrent list operations in ima_lsm_update_rules
+- net: hns3: Change the function return type from int to bool
+- !17232 soc: hisilicon: kunpeng_hccs: Fix incorrect log information
+- !17233  hugeltb: Fix null ptr exception during drain movable pcp
+- soc: hisilicon: kunpeng_hccs: Fix incorrect log information
+- net: hns3: defer calling ptp_clock_register()
+- net: hns3: fix an interrupt residual problem
+- hugeltb: Fix null ptr exception during drain movable pcp
+- net: hns3: store rx VLAN tag offload state for VF
+- !17204 v2  CVE-2022-49961
+- !16809  vhost-scsi: protect vq->log_used with vq->mutex
+- !16885  fs: Backport two namespace fix patches
+- !17158  arm64/mpam: Use an IPI instead of task_work_add() to update MPAM sysreg
+- selftests/bpf: Add regression test for pruning fix
+- bpf: Do mark_chain_precision for ARG_CONST_ALLOC_SIZE_OR_ZERO
+- !17146  jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
+- !17173  wifi: ath9k_htc: Abort software beacon handling if disabled
+- !16942  ext4: fix slab-out-of-bounds in ext4_mb_find_good_group_avg_frag_lists()
+- smb: client: fix use-after-free in crypt_message when using async crypto
+- wifi: ath9k_htc: Abort software beacon handling if disabled
+- !17149  Bluetooth: MGMT: Protect mgmt_pending list with its own lock
+- arm64/mpam: Only inform the CPUs running tasks of the group
+- arm64/mpam: Fix the potential deadlock when updating the rmid
+- arm64/mpam: Fix task CLOSID/RMID update race
+- arm64/mpam: Apply READ_ONCE/WRITE_ONCE to task_struct.{rmid,closid}
+- arm64/mpam: Use an IPI instead of task_work_add() to update MPAM sysreg
+- !17123  crypto: algif_hash - fix double free in hash_accept
+- Bluetooth: MGMT: Protect mgmt_pending list with its own lock
+- jbd2: fix data-race and null-ptr-deref in jbd2_journal_dirty_metadata()
+- !17125  EDAC/skx_common: Fix general protection fault
+- !17131  modify xcall xint proc file permissions
+- modify xcall proc file permissions to 640
+- modify xint proc file permissions to 640
+- EDAC/skx_common: Fix general protection fault
+- crypto: algif_hash - fix double free in hash_accept
+- smb: client: fix use-after-free in cifs_oplock_break
+- ext4: fix slab-out-of-bounds in ext4_mb_find_good_group_avg_frag_lists()
+- clone_private_mnt(): make sure that caller has CAP_SYS_ADMIN in the right userns
+- do_change_type(): refuse to operate on unmounted/not ours mounts
+- vhost-scsi: protect vq->log_used with vq->mutex
+
 * Tue Jul 15 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-273.0.0.175
 - !17045  arm64: Fix a typo in xcall_init_task()
 - !17105  arm64/ptrace: Fix stack-out-of-bounds read in regs_get_kernel_stack_nth()
