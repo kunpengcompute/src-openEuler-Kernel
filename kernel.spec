@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       102
+%global devel_release       103
 %global maintenance_release .0.0
-%global pkg_release         .94
+%global pkg_release         .95
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,78 @@ fi
 %endif
 
 %changelog
+* Tue Jul 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-103.0.0.95
+- !17341 v7  arm64: Add hardware xcall framework support
+- !17336  fs/resctrl: Enqueue mon_event_count() forcefully for MPAM
+- !17308  arm64: Fix guest app segment fault when disable_sdei_nmi_watchdog
+- arm64: Add hardware xcall framework support
+- arm64: Reserve a kabi in task_struct exclusively for xcall
+- arm64: Refactor the xcall proc code
+- !17259  mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- !17335 ROH: fix security issues and eliminate redundancies
+- ROH: fix security issues and eliminate redundancies
+- arm64/mpam: Ensure the err variable is initialized
+- fs/resctrl: Enqueue mon_event_count() forcefully for MPAM
+- !17261 Fixed the wrong debugfs node name in hisi_spi debugfs initialization
+- !17296  nvmet-tcp: don't restore null sk_state_change
+- !17299  dmaengine: idxd: fix memory leak in error handling path of idxd_alloc
+- !17310  usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- !17305  CVE-2025-38264
+- !17303  sched/fair: Only increment deadline once on yield
+- !17266 unify log function usage of enfs
+- arm64: Fix guest app segment fault when disable_sdei_nmi_watchdog
+- nvme-tcp: sanitize request list handling
+- llist: add interface to check if a node is on a list.
+- !17255  inspector: hold module refcnt when cpu inspector is running
+- !17291  libbpf: Fix null pointer dereference in btf_dump__free on allocation failure
+- sched/fair: Only increment deadline once on yield
+- nfs/enfs: use enfs_log_error() instead of pr_err() in enfs
+- nfs/enfs: use enfs_log_info() instead of pr_info() in enfs
+- nfs/enfs: cleanups in enfs/shard_route.c
+- nfs/enfs: use enfs_log_debug() instead of pr_debug() to debug enfs
+- nfs/enfs: remove unused code in enfs/dns_internal.h
+- nfs/enfs: use enfs_log_debug() instead of dfprintk() to debug enfs
+- nfs: use dfprintk() to debug enfs
+- !17262 v2  ifs: Defer cgroup ifs enable
+- !17287  i40e: fix MMIO write access to an invalid page in i40e_clear_hw
+- dmaengine: idxd: fix memory leak in error handling path of idxd_alloc
+- nvmet-tcp: don't restore null sk_state_change
+- libbpf: Fix null pointer dereference in btf_dump__free on allocation failure
+- !17275  fs: export anon_inode_make_secure_inode() and fix secretmem LSM bypass
+- i40e: fix MMIO write access to an invalid page in i40e_clear_hw
+- !17273  atm: Revert atm_account_tx() if copy_from_iter_full() fails.
+- fs: export anon_inode_make_secure_inode() and fix secretmem LSM bypass
+- atm: Revert atm_account_tx() if copy_from_iter_full() fails.
+- !17246 MPTCP UPTREAM PART25
+- ifs: Defer cgroup ifs enable
+- Fixed the wrong debugfs node name in hisi_spi debugfs initialization
+- mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- inspector: hold module refcnt when cpu inspector is running
+- selftests: mptcp: join: validate event numbers(part 2)
+- selftests: mptcp: pm_nl_ctl: remove re-definition
+- selftests: mptcp: join: simplify checksum_tests
+- selftests: mptcp: join: mute errors when ran in the background
+- selftests: mptcp: join: specify host being checked
+- selftests: mptcp: join: more explicit check name
+- selftests: mptcp: join: validate MPJ SYN TX MIB counters
+- selftests: mptcp: join: one line for join check
+- selftests: mptcp: join: reduce join_nr params
+- mptcp: MIB counters for sent MP_JOIN
+- mptcp: pm: reduce entries iterations on connect
+- mptcp: pm: fix backup support in signal endpoints
+- mptcp: pm: rename helpers linked to 'flush'
+- mptcp: Remove unused declaration mptcp_sockopt_sync()
+- !17250  arm64/mpam: Fix incorrect CPU-to-partid binding under CDP mode
+- !17253  mm: fix uprobe pte be overwritten when expanding vma
+- !16602 【OLK-6.6】修复虚拟机下使用海光TKM功能可能返回TKM_UNSUPPORTED_CMD错误
+- !16797 【OLK-6.6】修复psp_mutex_lock_timeout超时触发soft lockup警告的问题
+- mm: fix uprobe pte be overwritten when expanding vma
+- arm64/mpam: Fix incorrect CPU-to-partid binding under CDP mode
+- arm64/mpam: Fix typo in resctrl_arch_set_cdp_enabled()
+- drivers/crypto/ccp: fix soft lockup warning in psp_mutex_lock_timeout()
+- crypto: ccp: fix The high priority queue changes cmd_id of the queued elements
+
 * Tue Jul 22 2025 Li Nan <linan122@huawei.com> - 6.6.0-102.0.0.94
 - !17076  smb: client: fix use-after-free in crypt_message when using async crypto
 - !17102  smb: client: fix use-after-free in cifs_oplock_break
