@@ -38,14 +38,14 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 %global debuginfodir /usr/lib/debug
 
-%global upstream_version    6.12
-%global upstream_sublevel   33
-%global devel_release       0
+%global upstream_version    6.6
+%global upstream_sublevel   0
+%global devel_release       102
 %global maintenance_release .0.0
 %global pkg_release         .1
 
 %global openeuler_lts       0
-%global openeuler_major     0
+%global openeuler_major     2509
 %global openeuler_minor     0
 
 #
@@ -112,10 +112,6 @@ Source200: mkgrub-menu-aarch64.sh
 
 Source2000: cpupower.service
 Source2001: cpupower.config
-
-Source3000: kernel-6.12.0-aarch64.config
-Source3001: kernel-6.12.0-x86_64.config
-Source3002: kernel-6.12.0-riscv64.config
 
 %if 0%{?with_patch}
 Source9000: apply-patches
@@ -389,8 +385,6 @@ perl -p -i -e "s/^OPENEULER_RELEASE.*/OPENEULER_RELEASE = \"%{release}\"/" Makef
 
 ## make linux
 make mrproper %{_smp_mflags}
-
-cp $RPM_SOURCE_DIR/kernel-%{upstream_version}.0-%{_host_cpu}.config arch/%{Arch}/configs/openeuler_defconfig
 
 %if %{with_64kb}
 sed -i arch/arm64/configs/openeuler_defconfig -e 's/^CONFIG_ARM64_4K_PAGES.*/CONFIG_ARM64_64K_PAGES=y/'
@@ -1076,12 +1070,8 @@ fi
 %endif
 
 %changelog
-* Wed Jun 18 2025 laokz <zhangkai@iscas.ac.cn> - 6.12.33-0.0.0.1
-- upgrade to upstream v6.12.33
-- reset %with_debuginfo
-
-* Sat Jun 07 2025 Xie XiuQi <xiexiuqi@huawei.com> - 6.12.0-0.0.0.1
-- upgrade to v6.12
+* Tue Jul 29 2025 Tengda Wu <wutengda2@huawei.com> - 6.6.0-102.0.0.1
+- package change based on openEuler kernel 6.6.0-102.0.0
 
 * Sat Jan 14 2023 Xie XiuQi <xiexiuqi@huawei.com> - 6.1.0-1.0.0.1
 - package init based on upstream v6.1
