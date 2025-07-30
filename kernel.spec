@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       274
+%global devel_release       275
 %global maintenance_release .0.0
-%global pkg_release         .177
+%global pkg_release         .178
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,82 @@ fi
 %endif
 
 %changelog
+* Tue Jul 29 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-275.0.0.178
+- !17327  perf: Revert to requiring CAP_SYS_ADMIN for uprobes
+- perf: Revert to requiring CAP_SYS_ADMIN for uprobes
+- !17252 ROH:fix security issues and eliminate redundancies
+- !17241 gpiolib: Get rid of ARCH_NR_GPIOS
+- !17010  perf: Fix sample vs do_exit()
+- !17256 Fixed the wrong debugfs node name in hisi_spi debugfs initialization
+- ROH:fix security issues and eliminate redundancies
+- !17311  usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- !15469  scsi: lpfc: Fix null pointer dereference after failing to issue FLOGI and PLOGI
+- !17283  fs/writeback: bail out if there is no more inodes for IO and queued once
+- usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- !17306  atm: Release atm_dev_mutex after removing procfs in atm_dev_deregister().
+- !17297  scsi: qla2xxx: Fix crash due to stale SRB access around I/O timeouts
+- !17298  dmaengine: idxd: fix memory leak in error handling path of idxd_alloc
+- !17300  jfs: add check read-only before txBeginAnon() call
+- !16386 v5  Fix x2apic enablement and allow more CPUs, clean up I/OAPIC and MSI bitfields
+- atm: Release atm_dev_mutex after removing procfs in atm_dev_deregister().
+- !17288 RDMA/hns: Support querying DIP SCC context
+- jfs: add check read-only before txBeginAnon() call
+- dmaengine: idxd: fix memory leak in error handling path of idxd_alloc
+- scsi: qla2xxx: Fix crash due to stale SRB access around I/O timeouts
+- !17285  libbpf: Fix null pointer dereference in btf_dump__free on allocation failure
+- !16746 [OLK-5.10] backport important bugfix for nvme driver from upstream linux-5.10.y
+- RDMA/hns: Support querying DIP SCC context
+- libbpf: Fix null pointer dereference in btf_dump__free on allocation failure
+- fs/writeback: bail out if there is no more inodes for IO and queued once
+- !17279 RDMA/hns: Remove MW support
+- RDMA/hns: Remove MW support
+- RDMA/hns: Drop GFP_NOWARN
+- RDMA/hns: Fix -Wframe-larger-than issue
+- RDMA/hns: Fix HW resources are not cleared in error flow
+- RDMA/hns: Fix remove debugfs after device has been unregistered
+- RDMA/hns: Add trace for MR/MTR attribute dumping
+- RDMA/hns: Add trace for WQE dumping
+- RDMA/hns: Add trace for CMDQ dumping
+- RDMA/hns: Add trace for AEQE dumping
+- RDMA/hns: Include hnae3.h in hns_roce_hw_v2.h
+- RDMA/hns: Inappropriate format characters cleanup
+- RDMA/hns: Add trace for flush CQE
+- !17258  mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- Fixed the wrong debugfs node name in hisi_spi debugfs initialization
+- mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- gpiolib: Get rid of never false gpio_is_valid() calls
+- perf: Fix sample vs do_exit()
+- nvmet-tcp: don't restore null sk_state_change
+- x86/hyperv: Enable 15-bit APIC ID if the hypervisor supports it
+- iommu/amd: Keep track of amd_iommu_irq_remap state
+- iommu/amd: Stop irq_remapping_select() matching when remapping is disabled
+- iommu/hyper-v: Remove I/O-APIC ID check from hyperv_irq_remapping_select()
+- x86/ioapic: Correct the PCI/ISA trigger type selection
+- x86/ioapic: Use I/O-APIC ID for finding irqdomain, not index
+- x86/kvm: Enable 15-bit extension when KVM_FEATURE_MSI_EXT_DEST_ID detected
+- iommu/hyper-v: Disable IRQ pseudo-remapping if 15 bit APIC IDs are available
+- x86/apic: Support 15 bits of APIC ID in MSI where available
+- x86/ioapic: Handle Extended Destination ID field in RTE
+- iommu/vt-d: Simplify intel_irq_remapping_select()
+- x86: Kill all traces of irq_remapping_get_irq_domain()
+- x86/ioapic: Use irq_find_matching_fwspec() to find remapping irqdomain
+- x86/hpet: Use irq_find_matching_fwspec() to find remapping irqdomain
+- iommu/hyper-v: Implement select() method on remapping irqdomain
+- iommu/vt-d: Implement select() method on remapping irqdomain
+- iommu/amd: Implement select() method on remapping irqdomain
+- x86/apic: Add select() method on vector irqdomain
+- genirq/irqdomain: Implement get_name() method on irqchip fwnodes
+- x86/ioapic: Generate RTE directly from parent irqchip's MSI message
+- x86/ioapic: Cleanup IO/APIC route entry structs
+- x86/io_apic: Cleanup trigger/polarity helpers
+- x86/msi: Remove msidef.h
+- x86/pci/xen: Use msi_msg shadow structs
+- x86/kvm: Use msi_msg shadow structs
+- PCI: vmd: Use msi_msg shadow structs
+- x86/hpet: Move MSI support into hpet.c
+- x86/devicetree: Fix the ioapic interrupt type table
+- scsi: lpfc: Fix null pointer dereference after failing to issue FLOGI and PLOGI
+
 * Tue Jul 22 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-274.0.0.177
 - !17195  smb: client: fix use-after-free in crypt_message when using async crypto
 - !17239 【OLK 5.10】some bugfixes and cleanups for hns3 driver
