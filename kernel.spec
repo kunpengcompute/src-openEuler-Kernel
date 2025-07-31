@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2507.4.0
+%global hulkrelease 2507.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0337
+Release: %{hulkrelease}.0338
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,22 @@ fi
 %endif
 
 %changelog
+
+* Wed Jul 30 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2507.5.0.0338
+- !17008  perf: Fix sample vs do_exit()
+- !17313  usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- !17302  fs/writeback: bail out if there is no more inodes for IO and queued once
+- usb: typec: altmodes/displayport: do not index invalid pin_assignments
+- fs/writeback: bail out if there is no more inodes for IO and queued once
+- !17097  smb: client: fix use-after-free in cifs_oplock_break
+- !17129  ipc: fix to protect IPCS lookups using RCU
+- !17130  fbdev: core: fbcvt: avoid division by 0 in fb_cvt_hperiod()
+- !17263  mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- mpls: Use rcu_dereference_rtnl() in mpls_route_input_rcu().
+- fbdev: core: fbcvt: avoid division by 0 in fb_cvt_hperiod()
+- ipc: fix to protect IPCS lookups using RCU
+- smb: client: fix use-after-free in cifs_oplock_break
+- perf: Fix sample vs do_exit()
 
 * Wed Jul 23 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2507.4.0.0337
 - !17221  net/sched: Abort __tc_modify_qdisc if parent class does not exist
