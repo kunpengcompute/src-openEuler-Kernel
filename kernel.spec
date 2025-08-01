@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .1
+%global pkg_release         .2
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -598,9 +598,7 @@ popd
 install -m 644 .config $RPM_BUILD_ROOT/boot/config-%{KernelVer}
 install -m 644 System.map $RPM_BUILD_ROOT/boot/System.map-%{KernelVer}
 
-%if 0%{?with_kabichk}
 gzip -c9 < Module.symvers > $RPM_BUILD_ROOT/boot/symvers-%{KernelVer}.gz
-%endif
 
 mkdir -p $RPM_BUILD_ROOT%{_sbindir}
 install -m 755 %{SOURCE200} $RPM_BUILD_ROOT%{_sbindir}/mkgrub-menu-%{version}-%{devel_release}%{?maintenance_release}%{?pkg_release}.sh
@@ -961,9 +959,7 @@ fi
 %ifarch aarch64 riscv64
 /boot/dtb-*
 %endif
-%if 0%{?with_kabichk}
 /boot/symvers-*
-%endif
 /boot/System.map-*
 /boot/vmlinuz-*
 %ghost /boot/initramfs-%{KernelVer}.img
@@ -1070,6 +1066,9 @@ fi
 %endif
 
 %changelog
+* Thu Jul 31 2025 Li Nan <linan122@huawei.com> - 6.6.0-102.0.0.2
+- Update kabicheck to fix build POSTTRANS scriptlet error
+
 * Tue Jul 29 2025 Tengda Wu <wutengda2@huawei.com> - 6.6.0-102.0.0.1
 - package change based on openEuler kernel 6.6.0-102.0.0
 
