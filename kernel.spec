@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .2
+%global pkg_release         .3
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -109,6 +109,8 @@ Source21: Module.kabi_x86_64
 %endif
 
 Source200: mkgrub-menu-aarch64.sh
+Source300: extra-modules_x86_64.list
+Source301: extra-modules_aarch64.list
 
 Source2000: cpupower.service
 Source2001: cpupower.config
@@ -226,6 +228,15 @@ Obsoletes: %{name}-tools-libs-devel
 %description tools-devel
 This package contains the development files for the tools/ directory from
 the kernel source.
+
+%ifarch x86_64 aarch64
+%package extra-modules
+Summary: Extra kernel modules to match the kernel
+AutoReqProv: no
+Provides: kernel-extra-modules = %{version}-%{release}
+%description extra-modules
+This package contains optional modules that may be dynamically loaded but not needed for base system operation.
+%endif
 
 %if %{with_perf}
 %package -n perf
@@ -612,8 +623,31 @@ install -m 755 %{SOURCE200} $RPM_BUILD_ROOT%{_sbindir}/mkgrub-menu-%{version}-%{
 # deal with module, if not kdump
 %{make} ARCH=%{Arch} INSTALL_MOD_PATH=$RPM_BUILD_ROOT modules_install KERNELRELEASE=%{KernelVer} mod-fw=
 ######## to collect ko to module.filelist about netwoking. block. drm. modesetting ###############
+# 1. Generates extra-module.list by:
+#    - Processing predefined extra-modules_%{_target_cpu}.list
+# 2. Creates core-module.list by comparing installed modules with extra modules
+# Final output: Generates kernel-modules-filelist (core) and kernel-extra-modules-filelist
+# for RPM package specification, while ensuring proper path mapping to /lib/modules/%{KernelVer}/
+
 pushd $RPM_BUILD_ROOT/lib/modules/%{KernelVer}
+%ifnarch x86_64 aarch64
 find -type f -name "*.ko" >modnames
+%else
+sed 's!^!kernel/!; s!\.ko$!!' %{_sourcedir}/extra-modules_%{_target_cpu}.list > modules-extra.list
+
+find -type f -name "*.ko" | sort >modnames
+
+grep -vFf modules-extra.list modnames > modules-core.list || true
+
+sed -e 's!^\.\/kernel/!/lib/modules/%{KernelVer}/kernel/!; s!\.ko$!.ko.xz!' \
+  modules-core.list > %{_builddir}/%{name}-%{version}/kernel-modules-filelist
+
+if [ -s modules-extra.list ]; then
+    sed 's!^kernel/!!; s!$!.ko.xz!; s!^!/lib/modules/%{KernelVer}/kernel/!' modules-extra.list > %{_builddir}/%{name}-%{version}/kernel-extra-modules-filelist
+else
+    echo "%ghost /nonexistent/dummy/file" > %{_builddir}/%{name}-%{version}/kernel-extra-modules-filelist
+fi
+%endif
 
 # mark modules executable so that strip-to-file can strip them
 xargs --no-run-if-empty chmod u+x < modnames
@@ -654,6 +688,9 @@ grep -E -v \
   modinfo && exit 1
 
 rm -f modinfo modnames drivers.undef
+%ifarch x86_64 aarch64
+rm -f modules-extra.list modules-core.list modules.list
+%endif
 
 for i in alias alias.bin builtin.bin ccwmap dep dep.bin ieee1394map inputmap isapnpmap ofmap pcimap seriomap symbols symbols.bin usbmap
 do
@@ -952,7 +989,11 @@ fi
 /sbin/ldconfig
 %systemd_postun cpupower.service
 
+%ifnarch x86_64 aarch64
 %files
+%else
+%files -f kernel-modules-filelist
+%endif
 %defattr (-, root, root)
 %doc
 /boot/config-*
@@ -965,10 +1006,20 @@ fi
 %ghost /boot/initramfs-%{KernelVer}.img
 /boot/.vmlinuz-*.hmac
 /etc/ld.so.conf.d/*
+%ifnarch x86_64 aarch64
 /lib/modules/%{KernelVer}/
+%else
+/lib/modules/%{KernelVer}/vdso/
+/lib/modules/%{KernelVer}/modules.*
+%endif
 %exclude /lib/modules/%{KernelVer}/source
 %exclude /lib/modules/%{KernelVer}/build
 %{_sbindir}/mkgrub-menu*.sh
+
+%ifarch x86_64 aarch64
+%files extra-modules -f kernel-extra-modules-filelist
+%defattr(-,root,root)
+%endif
 
 %files devel
 %defattr (-, root, root)
@@ -1066,6 +1117,13 @@ fi
 %endif
 
 %changelog
+* Tue Aug 12 2025 Liu Wang <1823363429@qq.com> - 6.6.0-102.0.0.3
+- Split kernel modules into kernel-extra-modules subpackage
+- Prioritizes core kmod (networking/drm/block/modesetting) in main kernel package
+- All extra modules and their dependencies are isolated to kernel-extra-modules
+- Added module-filelist generation scripts for both packages
+- Updated post-install scripts to handle extra modules dependency
+
 * Thu Jul 31 2025 Li Nan <linan122@huawei.com> - 6.6.0-102.0.0.2
 - Update kabicheck to fix build POSTTRANS scriptlet error
 
