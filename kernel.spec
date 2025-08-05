@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       275
+%global devel_release       276
 %global maintenance_release .0.0
-%global pkg_release         .177
+%global pkg_release         .178
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,100 @@ fi
 %endif
 
 %changelog
+* Tue Aug 05 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-276.0.0.178
+- !16940 v2  dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+- !17315  ovl: fix general protection fault in security_inode_getattr
+- !17425  net: stmmac: make sure that ptp_rate is not 0 before configuring EST
+- !17424  bcache: fix NULL pointer in cache_set_flush()
+- !17433  ACPICA: Refuse to evaluate a method if arguments are missing
+- !17417  drm/dp_mst: Fix MST sideband message body length check
+- !17418  drm/dp_mst: Ensure mst_primary pointer is valid in drm_dp_mst_handle_up_req()
+- !17407  usb: net: sierra: check for no status endpoint
+- !17429  drm/v3d: Disable interrupts before resetting the GPU
+- !17292 [OLK 5.10] AMD Turin and auto IBRS patches backport
+- ACPICA: Refuse to evaluate a method if arguments are missing
+- drm/v3d: Disable interrupts before resetting the GPU
+- !17394  selftests/tracing: Fix false failure of subsystem event test
+- net: stmmac: make sure that ptp_rate is not 0 before configuring EST
+- bcache: fix NULL pointer in cache_set_flush()
+- drm/dp_mst: Ensure mst_primary pointer is valid in drm_dp_mst_handle_up_req()
+- drm/dp_mst: Fix MST sideband message body length check
+- usb: net: sierra: check for no status endpoint
+- !17389  CVE-2025-21702
+- !17388  ipvlan: ensure network headers are in skb linear part
+- !17383  net/sched: act_ct: fix ref leak when switching zones
+- !17382  net: annotate races around sk->sk_bound_dev_if
+- !17381  net: sched: Disallow replacing of child qdisc from one parent to another
+- !17377  net: sched: fix ets qdisc OOB Indexing
+- !17379  bnxt_en: Set DMA unmap len correctly for XDP_REDIRECT
+- selftests/tracing: Fix false failure of subsystem event test
+- pfifo_tail_enqueue: Drop new packet when sch->limit == 0
+- net_sched: sch_fifo: implement lockless __fifo_dump()
+- ipvlan: ensure network headers are in skb linear part
+- net/sched: act_ct: fix ref leak when switching zones
+- net: annotate races around sk->sk_bound_dev_if
+- !17359 [OLK 5.10] AMD HSMP driver support patches backport
+- net: sched: Disallow replacing of child qdisc from one parent to another
+- !17374  RDMA/mlx5: Initialize obj_event->obj_sub_list before xa_insert
+- !17365  atm: clip: Fix infinite recursive call of clip_push().
+- bnxt_en: Set DMA unmap len correctly for XDP_REDIRECT
+- net: sched: fix ets qdisc OOB Indexing
+- !17347  calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- !17373  drm/amd/display: Add null pointer check for get_first_active_display()
+- RDMA/mlx5: Initialize obj_event->obj_sub_list before xa_insert
+- !17370  ext4: inline: fix len overflow in ext4_prepare_inline_data
+- drm/amd/display: Add null pointer check for get_first_active_display()
+- ext4: inline: fix len overflow in ext4_prepare_inline_data
+- atm: clip: Fix infinite recursive call of clip_push().
+- !17350  scsi: lpfc: Use memcpy() for BIOS version
+- platform/x86/amd/hsmp: Check HSMP support on AMD family of processors
+- platform/x86/amd/hsmp: switch to use device_add_groups()
+- platform/x86/amd/hsmp: Change devm_kzalloc() to devm_kcalloc()
+- platform/x86/amd/hsmp: Remove extra parenthesis and add a space
+- platform/x86/amd/hsmp: Check num_sockets against MAX_AMD_SOCKETS
+- platform/x86/amd/hsmp: Non-ACPI support for AMD F1A_M00~0Fh
+- platform/x86/amd/hsmp: Add support for ACPI based probing
+- platform/x86/amd/hsmp: Restructure sysfs group creation
+- platform/x86/amd/hsmp: Move dev from platdev to hsmp_socket
+- platform/x86/amd/hsmp: Define a struct to hold mailbox regs
+- platform/x86/amd/hsmp: Create static func to handle platdev
+- platform/x86/amd/hsmp: Cache pci_dev in struct hsmp_socket
+- platform/x86/amd/hsmp: Move hsmp_test to probe
+- platform/x86/amd/hsmp: Fix iomem handling
+- platform/x86/amd/hsmp: improve the error log
+- platform/x86/amd/hsmp: add support for metrics tbl
+- platform/x86/amd/hsmp: create plat specific struct
+- platform/x86: Move AMD platform drivers to separate directory
+- !17344 v2  eventpoll: Fix return fixed cpu bug in set_prefetch_numa_cpu()
+- tools headers x86 cpufeatures: Sync with the kernel sources
+- KVM: x86: Fix clang -Wimplicit-fallthrough in do_host_cpuid()
+- KVM: x86: work around QEMU issue with synthetic CPUID leaves
+- KVM: x86: Propagate the AMD Automatic IBRS feature to the guest
+- x86/cpu, kvm: Add the SMM_CTL MSR not present feature
+- x86/cpu, kvm: Add the Null Selector Clears Base feature
+- x86/cpu, kvm: Move X86_FEATURE_LFENCE_RDTSC to its native leaf
+- x86/cpu, kvm: Add the NO_NESTED_DATA_BP feature
+- KVM: x86: Move open-coded CPUID leaf 0x80000021 EAX bit propagation code
+- x86/bugs: Don't fill RSB on context switch with eIBRS
+- x86/bugs: Don't fill RSB on VMEXIT with eIBRS+retpoline
+- x86/bugs: Fix RSB clearing in indirect_branch_prediction_barrier()
+- x86/bugs: Move the X86_FEATURE_USE_IBPB check into callers
+- x86/mm: Refactor cond_ibpb() to support other use cases
+- KVM: x86: Advertise that the SMM_CTL MSR is not supported
+- KVM: x86: synthesize CPUID leaf 0x80000021h if useful
+- KVM: x86: skip host CPUID call for hypervisor leaves
+- KVM: x86: add support for CPUID leaf 0x80000021
+- x86/bugs: Use SBPB in write_ibpb() if applicable
+- x86/asm: Add _ASM_RIP() macro for x86-64 (%rip) suffix
+- x86/asm: Have the __ASM_FORM macros handle commas in arguments
+- x86/cpu/amd: Fix workaround for erratum 1054
+- x86/microcode/AMD: Fix out-of-bounds on systems with CPU-less NUMA nodes
+- scsi: lpfc: Use memcpy() for BIOS version
+- calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- eventpoll: Fix return fixed cpu bug in set_prefetch_numa_cpu()
+- ovl: fix general protection fault in security_inode_getattr
+- dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+
 * Tue Jul 29 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-275.0.0.177
 - !17327  perf: Revert to requiring CAP_SYS_ADMIN for uprobes
 - perf: Revert to requiring CAP_SYS_ADMIN for uprobes
