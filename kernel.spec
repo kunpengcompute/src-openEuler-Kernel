@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       103
+%global devel_release       104
 %global maintenance_release .0.0
-%global pkg_release         .95
+%global pkg_release         .96
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,187 @@ fi
 %endif
 
 %changelog
+* Wed Aug 06 2025 Li Nan <linan122@huawei.com> - 6.6.0-104.0.0.96
+- !17385 mptcp: pm: only set fullmesh for subflow endp
+- !17445  xdp: Reset bpf_redirect_info before running a xdp's BPF prog.
+- !17444  Backport mainline patch
+- !17395  Squashfs: check return result of sb_min_blocksize
+- xdp: Reset bpf_redirect_info before running a xdp's BPF prog.
+- bonding: check xdp prog when set bond mode
+- bonding: return detailed error when loading native XDP fails
+- !17436  i2c/designware: Fix an initialization issue
+- !17432  ACPICA: Refuse to evaluate a method if arguments are missing
+- !17421  ACPICA: fix acpi operand cache leak in dswstate.c
+- !17422  soc: aspeed: Add NULL check in aspeed_lpc_enable_snoop()
+- !17423  net: stmmac: make sure that ptp_rate is not 0 before configuring EST
+- !17301  fs/nfs/read: fix double-unlock bug in nfs_return_empty_folio()
+- !17304  nfsd: nfsd4_spo_must_allow() must check this is a v4 compound request
+- !17331  dm-bufio: fix sched in atomic context
+- !17413  CVE-2025-37957
+- !17412 v3  livepatch: support for super-long symbol repositioning
+- !16933  virtio_ring: Fix data race by tagging event_triggered as racy for KCSAN
+- !16932  dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+- !17430  drm/v3d: Disable interrupts before resetting the GPU
+- i2c/designware: Fix an initialization issue
+- !17254 irqchip/gic-v3-its: Remove DevID Pool's restriction
+- !17406  usb: net: sierra: check for no status endpoint
+- ACPICA: Refuse to evaluate a method if arguments are missing
+- drm/v3d: Disable interrupts before resetting the GPU
+- !17393  selftests/tracing: Fix false failure of subsystem event test
+- net: stmmac: make sure that ptp_rate is not 0 before configuring EST
+- soc: aspeed: Add NULL check in aspeed_lpc_enable_snoop()
+- ACPICA: fix acpi operand cache leak in dswstate.c
+- KVM: SVM: Forcibly leave SMM mode on SHUTDOWN interception
+- KVM: SVM: Update SEV-ES shutdown intercepts with more metadata
+- livepatch: support for super-long symbol repositioning
+- usb: net: sierra: check for no status endpoint
+- !17380  bnxt_en: Set DMA unmap len correctly for XDP_REDIRECT
+- mptcp: pm: only set fullmesh for subflow endp
+- !17115  xfs: fix attr inactive issue
+- Squashfs: check return result of sb_min_blocksize
+- selftests/tracing: Fix false failure of subsystem event test
+- !17390  ipvlan: Fix out-of-bound bugs in ipvlan_xmit_mode_l2e()
+- !17387  ipvlan: ensure network headers are in skb linear part
+- ipvlan: Fix out-of-bound bugs in ipvlan_xmit_mode_l2e()
+- !17205 fix some panic bugs and memory leak bugs of enfs
+- ipvlan: ensure network headers are in skb linear part
+- !17271 LoongArch: KVM: Solve the problem of starting up the upstream qemu
+- !17251 migration: update status after RAS error
+- !17278 nvme: update firmware version after commit
+- !17330  livepatch: fix insn length check
+- irqchip/gic-v3-its: Remove DevID Pool's restriction
+- !17372  drm/amd/display: Add null pointer check for get_first_active_display()
+- !17349  bnxt: properly flush XDP redirect lists
+- !17375  RDMA/mlx5: Initialize obj_event->obj_sub_list before xa_insert
+- bnxt_en: Set DMA unmap len correctly for XDP_REDIRECT
+- !17367  fd/proc: modify xcall proc file permissions to 640
+- !17346  calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- !17222  fs: Add additional checks for block devices during mount
+- !17168  xfrm: state: fix out-of-bounds read during lookup
+- RDMA/mlx5: Initialize obj_event->obj_sub_list before xa_insert
+- !17141 CVE-2025-37992：net_sched: Flush gso_skb list too during -&gt;change()
+- !17364  net: usb: lan78xx: fix WARN in __netif_napi_del_locked on disconnect
+- !17167  eth: bnxt: always recalculate features after XDP clearing, fix null-deref
+- !17371  ext4: inline: fix len overflow in ext4_prepare_inline_data
+- !17362  ucounts: fix mq_perf test error.
+- drm/amd/display: Add null pointer check for get_first_active_display()
+- ext4: inline: fix len overflow in ext4_prepare_inline_data
+- fd/proc: modify xcall proc file permissions to 640
+- !17361  scsi: lpfc: Use memcpy() for BIOS version
+- !17360  net: Fix CVE-2025-21884
+- !17356  serial: jsm: fix NPE during jsm_uart_port_init
+- net: usb: lan78xx: fix WARN in __netif_napi_del_locked on disconnect
+- ucounts: fix mq_perf test error.
+- scsi: lpfc: Use memcpy() for BIOS version
+- net: better track kernel sockets lifetime
+- net: Add net_passive_inc() and net_passive_dec().
+- !17269 MPTCP UPTREAM PART26
+- !17358  serial: mctrl_gpio: split disable_ms into sync and no_sync APIs
+- !17322  Fix CVE-2025-38424
+- serial: mctrl_gpio: split disable_ms into sync and no_sync APIs
+- !17342  tls: always refresh the queue when reading sock
+- !17343  Fix WARN in perf_cgroup_switch()
+- !17080  serial: Fix potential null-ptr-deref in mlb_usio_probe()
+- !17351  mm/dynamic_pool: Fix free_huge_pages undefflow problem
+- !17319  mm/dpool: do not use uninitialized variable
+- serial: jsm: fix NPE during jsm_uart_port_init
+- nfs/enfs: remove unnecessary shard_should_stop in shard_route.c
+- mm/dynamic_pool: Fix free_huge_pages undefflow problem
+- !17345 net: hns3: use seq_file for files in tx_bd_info/ and rx_bd_info/ in debugfs
+- bnxt: properly flush XDP redirect lists
+- calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- net: hns3: use seq_file for files in tx_bd_info/ and rx_bd_info/ in debugfs
+- net: hns3: use seq_file for files in common/ of hclge layer
+- net: hns3: use seq_file for files in fd/ in debugfs
+- !17328  perf: Revert to requiring CAP_SYS_ADMIN for uprobes
+- perf/core: Fix the WARN_ON_ONCE is out of lock protected region
+- perf/core: Fix WARN in perf_cgroup_switch()
+- !17324  video: screen_info: Relocate framebuffers behind PCI bridges
+- tls: always refresh the queue when reading sock
+- nvme-host: fix the updating of the firmware version
+- nvme: update firmware version after commit
+- net: hns3: use seq_file for files in reg/ in debugfs
+- net: hns3: use seq_file for files in mac_list/ in debugfs
+- net: hns3: use seq_file for files in tm/ in debugfs
+- net: hns3: use seq_file for files in common/ of hns3 layer
+- net: hns3: use seq_file for files in queue/ in debugfs
+- net: hns3: clean up the build warning in debugfs by use seq file
+- net: hns3: remove tx spare info from debugfs.
+- net: hns3: use string choices helper
+- dm-bufio: fix sched in atomic context
+- livepatch: fix insn length check
+- perf: Revert to requiring CAP_SYS_ADMIN for uprobes
+- video: screen_info: Relocate framebuffers behind PCI bridges
+- LoongArch: KVM: Enhance the robustness of extioi
+- perf/core: Fix WARN in perf_sigtrap()
+- perf: Fix sample vs do_exit()
+- mm/dpool: do not use uninitialized variable
+- mptcp: sysctl: blackhole timeout: avoid using current->nsproxy
+- mptcp: blackhole only if 1st SYN retrans w/o MPC is accepted
+- doc: mptcp: sysctl: blackhole_timeout is per-netns
+- mptcp: sysctl: avail sched: remove write access
+- mptcp: remove unneeded lock when listing scheds
+- nfs/enfs: remove enfs_uuid_debug in shard_route.c
+- nfs/enfs: remove usage of list_entry_is_head() in shard_route.c
+- sunrpc: remove redundant rpc_task_release_xprt() of enfs
+- nfs/enfs: remove judgement about enfs_option in nfs_multipath_client_info_init()
+- nfs/enfs: remove nfs_multipath_client_info_free_work()
+- nfs/enfs: fix typos in shard_route.c
+- nfs/enfs: remove unused functions in shard_route.c
+- nfs/enfs: make some functions static in shard_route.c
+- nfs/enfs: introduce DEFINE_PARSE_FH_FUNC to define parse_fh()
+- nfs/enfs: fix memory leak when free view_table
+- nfs/enfs: use DEFINE_CLEAR_LIST_FUNC to define enfs_clear_shard_view()
+- nfs/enfs: introduce DEFINE_CLEAR_LIST_FUNC to define enfs_clear_fs_info()
+- nfs/enfs: fix memory leak in enfs_delete_fs_info()
+- nfs/enfs: fix double free of multipath_client_info
+- nfs/enfs: fix null-ptr-deref in shard_update_work()
+- nfsd: nfsd4_spo_must_allow() must check this is a v4 compound request
+- fs/nfs/read: fix double-unlock bug in nfs_return_empty_folio()
+- LoongArch: KVM: Solve the problem of starting up the upstream qemu
+- drivers/iommu: Fix the initialization failure issue of the iommu module
+- LoongArch: KVM: Fix the extioi simulation error
+- netlink: specs: mptcp: fix port endianness
+- mptcp: disable active MPTCP in case of blackhole
+- mptcp: include inet_common in mib.h
+- mptcp: move mptcp_pm_gen.h's include
+- mptcp: remove unnecessary else statements
+- mptcp: prefer strscpy over strcpy
+- mptcp: add net.mptcp.available_schedulers
+- mptcp: sockopt: info: stop early if no buffer
+- mptcp: fallback to TCP after SYN+MPC drops
+- mptcp: export mptcp_subflow_early_fallback()
+- selftests: mptcp: connect: remove duplicated spaces in TAP output
+- selftests: mptcp: diag: remove trailing whitespace
+- selftests: mptcp: test last time mptcp_info
+- mptcp: add last time fields in mptcp_info
+- selftests: mptcp: reset the last TS before the first test
+- selftests: mptcp: netlink: drop disable=SC2086
+- selftests: mptcp: ip_mptcp option for more scripts
+- selftests: mptcp: use pm_nl endpoint ops
+- selftests: mptcp: export pm_nl endpoint ops
+- selftests: mptcp: join: update endpoint ops
+- selftests: mptcp: netlink: add change_address helper
+- selftests: mptcp: add {get,format}_endpoint(s) helpers
+- selftests: mptcp: netlink: add 'limits' helpers
+- selftests: mptcp: add tc check for check_tools
+- selftests: mptcp: connect: remote time in TAP output
+- selftests: mptcp: lib: add time per subtests in TAP output
+- migration: update status after RAS error
+- Revert "migration: update status after RAS error"
+- fs: Add additional checks for block devices during mount
+- xfrm: state: fix out-of-bounds read during lookup
+- eth: bnxt: always recalculate features after XDP clearing, fix null-deref
+- net_sched: Flush gso_skb list too during ->change()
+- xfs: handle attr node/leaf blocks atomically during inactive
+- xfs: factor out xfs_attr3_leaf_init
+- xfs: factor out xfs_da3_node_entry_remove
+- Revert "xfs: factor out __xfs_da3_node_read()"
+- Revert "xfs: atomic drop extent entries when inactiving attr"
+- serial: Fix potential null-ptr-deref in mlb_usio_probe()
+- virtio_ring: Fix data race by tagging event_triggered as racy for KCSAN
+- dm: fix unconditional IO throttle caused by REQ_PREFLUSH
+
 * Tue Jul 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-103.0.0.95
 - !17341 v7  arm64: Add hardware xcall framework support
 - !17336  fs/resctrl: Enqueue mon_event_count() forcefully for MPAM
