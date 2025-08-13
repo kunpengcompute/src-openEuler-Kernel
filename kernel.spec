@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2507.5.0
+%global hulkrelease 2508.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0338
+Release: %{hulkrelease}.0339
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,42 @@ fi
 %endif
 
 %changelog
+
+* Wed Aug 13 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.1.0.0339
+- !17509 v2  ext4: add bounds checking in get_max_inline_xattr_value_size()
+- ext4: add bounds checking in get_max_inline_xattr_value_size()
+- !17482  mm: Fix possible deadlock in console_trylock_spinning
+- mm: Fix possible deadlock in console_trylock_spinning
+- !17456  md/raid1: Fix stack memory use after return in raid1_reshape
+- !17460 v2  net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- !17448  vsock/vmci: Clear the vmci transport packet properly when initializing it
+- net: vlan: Fix kabi breakage of struct vlan_info
+- net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- md/raid1: Fix stack memory use after return in raid1_reshape
+- !17397  Squashfs: check return result of sb_min_blocksize
+- vsock/vmci: Clear the vmci transport packet properly when initializing it
+- !17314  ovl: fix general protection fault in security_inode_getattr
+- !17420  bcache: fix NULL pointer in cache_set_flush()
+- !17431  ACPICA: Refuse to evaluate a method if arguments are missing
+- !17409  usb: net: sierra: check for no status endpoint
+- !17426 EDAC/amd64: Fix the calculation of umc base for Hygon family 18h model 4h
+- !17392  atm: clip: Fix infinite recursive call of clip_push().
+- ACPICA: Refuse to evaluate a method if arguments are missing
+- EDAC/amd64: Fix the calculation of umc base for Hygon family 18h model 4h
+- bcache: fix NULL pointer in cache_set_flush()
+- usb: net: sierra: check for no status endpoint
+- Squashfs: check return result of sb_min_blocksize
+- !17040  net: ch9200: fix uninitialised access during mii_nway_restart
+- atm: clip: Fix infinite recursive call of clip_push().
+- !17348  calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- !17369  ext4: inline: fix len overflow in ext4_prepare_inline_data
+- !17220  Fix the race of lock/unlock and open for nfs
+- ext4: inline: fix len overflow in ext4_prepare_inline_data
+- calipso: Fix null-ptr-deref in calipso_req_{set,del}attr().
+- ovl: fix general protection fault in security_inode_getattr
+- nfs: do not unlock when no lock is held
+- nfs: fix the race of lock/unlock and open
+- net: ch9200: fix uninitialised access during mii_nway_restart
 
 * Wed Jul 30 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2507.5.0.0338
 - !17008  perf: Fix sample vs do_exit()
