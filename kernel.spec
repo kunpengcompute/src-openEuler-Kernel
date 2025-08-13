@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       276
+%global devel_release       277
 %global maintenance_release .0.0
-%global pkg_release         .178
+%global pkg_release         .179
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,41 @@ fi
 %endif
 
 %changelog
+* Wed Aug 13 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-277.0.0.179
+- !17505  CVE-2024-58237
+- !17504  net_sched: hfsc: Fix a potential UAF in hfsc_dequeue() too
+- !17503  sctp: detect and prevent references to a freed transport in sendmsg
+- !17461 drivers:misc:sdma-dae: fix incorrect debugfs print
+- !17506 ROH: fix variable type inconsistency issue
+- !17437 [OLK-5.10]:update patches for sw64 architecture
+- ROH: fix variable type inconsistency issue
+- bpf: consider that tail calls invalidate packet pointers
+- bpf: refactor bpf_helper_changes_pkt_data to use helper number
+- net_sched: hfsc: Fix a potential UAF in hfsc_dequeue() too
+- sctp: detect and prevent references to a freed transport in sendmsg
+- !17486  net: atm: fix use after free in lec_send()
+- !17485  vlan: enforce underlying device type
+- !17484  net: gso: fix ownership in __udp_gso_segment
+- net: atm: fix use after free in lec_send()
+- vlan: enforce underlying device type
+- net: gso: fix ownership in __udp_gso_segment
+- !17466  arm-smmu-v3: adjust ecmdq log level
+- drivers:misc:sdma-dae: fix incorrect debugfs print
+- arm-smmu-v3: adjust ecmdq log level
+- !17457 v2  posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- sw64: ptrace: return -EIO in invalid PEEKUSR/POKEUSR requests
+- sw64: kvm: fix compile error of kvm.ko
+- sw64: kvm: remove the duplicated Kconfig selection of KVM
+- sw64: cpuidle: add dedicated driver
+- sw64: crypto: implement crc32 assembly optimization
+- sw64: efi: remove meaningless code from asm/efi.h
+- sw64: cpufreq: using PLL0 to provide clock for idle cores
+- sw64: kvm: enable dirty log gradually in small chunks for core4
+- sw64: fix guest kdump function
+- sw64: use wait/complete for smp boot
+- sw64: fix sw64_rrk_store() wrap handling
+
 * Tue Aug 05 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-276.0.0.178
 - !16940 v2  dm: fix unconditional IO throttle caused by REQ_PREFLUSH
 - !17315  ovl: fix general protection fault in security_inode_getattr
