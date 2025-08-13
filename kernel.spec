@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       104
+%global devel_release       105
 %global maintenance_release .0.0
-%global pkg_release         .96
+%global pkg_release         .97
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,111 @@ fi
 %endif
 
 %changelog
+* Wed Aug 13 2025 Li Nan <linan122@huawei.com> - 6.6.0-105.0.0.97
+- !17513  sched-ebpf-add-for-exec-init
+- !17487  arm64/mpam: Support partial-core boot for MPAM
+- !16844  LeapIOraid: add device and support fw log
+- sched/bpf: Fix kabi breakage for including sched bpf header file
+- sched/ebpf: Add kfunc to set the preferred NUMA node for the task
+- sched/ebpf: Add bpf_sched_cfs_exec_set_cpumask hook
+- !17512  CVE-2025-21868
+- !17498  sched: Support NUMA parallel scheduling for multiple processes
+- !17508  Huawei iBMA: Added support for Hi1712 Chip
+- hv_netvsc: Preserve contiguous PFN grouping in the page buffer array
+- net: use __GENKSYMS__ to revert the kabi change
+- net: allow small head cache usage with large MAX_SKB_FRAGS values
+- Huawei iBMA: Added support for Hi1712 Chip
+- !17501 net: hibmcge: fix rtnl deadlock issue
+- net: hibmcge: fix rtnl deadlock issue
+- net: hibmcge: fix the division by zero issue
+- net: hibmcge: fix the np_link_fail error reporting issue
+- !17459 ROH: fix variable type inconsistency issue
+- sched: Support NUMA parallel scheduling for multiple processes
+- !17183  rtnetlink: Allocate vfinfo size for VF GUIDs when supported
+- !17180  atm: Fix NULL pointer dereference
+- !16807 Support RME feature for CCA host
+- !17488  arm64/mpam: Set 1 as the minimum setting value for CMAX
+- arm64/mpam: Set 1 as the minimum setting value for CMAX
+- arm64/mpam: Support partial-core boot for MPAM
+- !17440  sdei_watchdog: use lockup_detector_retry_init() to init sdei watchdog
+- VirtCCA: Compatible with virtcca macro definitions
+- CCA: Fix cca kabi conflict
+- VirtCCA: Modify openeuler_defconfig
+- Reapply "VirtCCA: cvm support UEFI boot"
+- VirtCCA: Adapt virtcca operations by cca_base.
+- VirtCCA: Adapt realm operations by cca_base.
+- VirtCCA: Add CCA base operations.
+- [v8-43-43]KVM: arm64: Allow activating realms
+- [v8-42-43]KVM: arm64: Expose KVM_ARM_VCPU_REC to user space
+- [v8-40-43]arm64: RME: Provide accurate register list
+- [v8-39-43]arm64: RME: Provide register list for unfinalized RME RECs
+- [v8-38-43]rm64: RME: Configure max SVE vector length for a Realm
+- [v8-37-43]arm64: RME: Propagate max SVE vector length from RMM
+- [v8-36-43]arm64: RME: Initialize PMCR.N with number counter supported by RMM
+- [v8-35-43]arm64: RME: Set breakpoint parameters through  SET_ONE_REG
+- [v8-34-43]arm64: RME: Propagate number of breakpoints and watchpoints to userspace
+- [v8-33-43]arm64: RME: Hide KVM_CAP_READONLY_MEM for realm guests
+- [v8-32-43]arm64: rme: Enable PMU support with a realm guest
+- [backport]KVM: arm64: PMU: Introduce helpers to set the guest's PMU
+- [backport]KVM: arm64: PMU: Allow userspace to limit PMCR_EL0.N for the guest
+- !17463  crypto: hisilicon/qm - clear the memory before enabling the device
+- [backport]KVM: arm64: PMU: Set PMCR_EL0.N for vCPU  based  on the  associated PMU
+- [v8-31-43]arm_pmu: Provide a mechanism for disabling the physical  IRQ
+- [v8-30-43]arm64: RME: Prevent Device mappings for Realms
+- [v8-29-43]arm64: RME: Always use 4k pages for realms
+- [v8-28-43]arm64: RME: Allow checking SVE on VM instance
+- [v8-27-43]arm64: RME: support RSI_HOST_CALL
+- [v8-26-43]arm64: RME: allow userspace to inject aborts
+- [v8-25-43]arm64: Don't expose stolen time for realm guests
+- [v8-24-43]KVM: arm64: WARN on injected undef exceptions
+- [v8-23-43]KVM: arm64: Handle Realm PSCI requests
+- [v8-22-43]KVM: arm64: Validate register access for a Realm VM
+- [v8-21-43]KVM: arm64: Handle realm VCPU load
+- [v8-20-43]arm64: RME: Runtime faulting of memory
+- [backport]KVM: arm64: Move pagetable definitions to common header
+- [backport]rme: populate guest memory region without guest_memfd
+- [v8-19-43]arm64: RME: Allow populating initial contents
+- [v8-18-43]KVM: arm64: Handle realm MMIO emulation
+- [v8-17-43]arm64: RME: Handle RMI_EXIT_RIPAS_CHANGE
+- [v8-16-43]arm64: RME: Handle realm enter/exit
+- [v8-15-43]arm64: RME: Allow VMM to set RIPAS
+- [backport]KVM: Add member to struct kvm_gfn_range to indicate private/shared
+- [v8-14-43]KVM: arm64: Support timers in realm RECs
+- [v8-13-43]arm64: RME: Support for the VGIC in realms
+- [backport]KVM: arm64: Force GICv3 trap activation when no irqchip  is configured on VHE
+- [v8-12-43]KVM: arm64: vgic: Provide helper for number of list registers
+- [v8-11-43]arm64: RME: Allocate/free RECs to match vCPUs
+- [backport]KVM: arm64: Add generic check for system-supported vCPU features
+- !17467  arm-smmu-v3: adjust ecmdq log level
+- arm-smmu-v3: adjust ecmdq log level
+- crypto: hisilicon/qm - clear the memory before enabling the device
+- [v8-10-43]arm64: RME: RTT tear down
+- [v8-09-43]KVM: arm64: Allow passing machine type in KVM creation
+- [v8-08-43]kvm: arm64: Don't expose debug capabilities for realm  guests
+- [v8-07-43]arm64: RME: ioctls to create and configure  realms
+- [v8-06-43]arm64: RME: Define the user ABI
+- [v8-05-43]arm64: RME: Check for RME support at KVM init
+- [v8-04-43]arm64: RME: Add wrappers for RMI calls
+- [v8-03-43]arm64: RME: Add SMC definitions for calling the RMM
+- [v8-02-43]arm64: RME: Handle Granule Protection Faults (GPFs)
+- [v8-01-43]kvm: arm64: Include kvm_emulate.h in kvm/arm_psci.h
+- Revert "kvm: add virtcca cvm host feature"
+- Revert "VirtCCA: cvm support UEFI boot"
+- Revert "pmu: enable pmu phys irq inject for cvm"
+- !16720 [OLK-6.6] Not print information of SMMU 0x10 event and add phytium PS24080 SoC platform judgement
+- !17458 v2  posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- ROH: fix variable type inconsistency issue
+- !17441 net: hibmcge: support for statistics of reset failures
+- !17435 arm64/mm: Optimize loop to reduce redundant operations of contpte_ptep_get
+- posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- net: hibmcge: support for statistics of reset failures
+- sdei_watchdog: use lockup_detector_retry_init() to init sdei watchdog
+- arm64/mm: Optimize loop to reduce redundant operations of contpte_ptep_get
+- rtnetlink: Allocate vfinfo size for VF GUIDs when supported
+- atm: Fix NULL pointer dereference
+- LeapIOraid: add device and support fw log
+- iommu: smmuv3: Not print information of SMMU 0x10 event
+
 * Wed Aug 06 2025 Li Nan <linan122@huawei.com> - 6.6.0-104.0.0.96
 - !17385 mptcp: pm: only set fullmesh for subflow endp
 - !17445  xdp: Reset bpf_redirect_info before running a xdp's BPF prog.
