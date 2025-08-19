@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .3
+%global pkg_release         .4
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -121,6 +121,8 @@ Source9001: guards
 Source9002: series.conf
 Source9998: patches.tar.bz2
 %endif
+
+Patch0001: 0001-Support-RME-feature-for-CCA-host.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -359,6 +361,9 @@ Applypatches()
 
 Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %endif
+
+# Arm CCA patch
+%patch0001 -p1
 
 # riscv-kernel patch
 %ifarch riscv64
@@ -1117,6 +1122,9 @@ fi
 %endif
 
 %changelog
+* Fri Aug 15 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.4
+- Support RME feature for CCA host
+
 * Tue Aug 12 2025 Liu Wang <1823363429@qq.com> - 6.6.0-102.0.0.3
 - Split kernel modules into kernel-extra-modules subpackage
 - Prioritizes core kmod (networking/drm/block/modesetting) in main kernel package
