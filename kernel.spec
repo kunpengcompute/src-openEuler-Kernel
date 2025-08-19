@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   33
 %global devel_release       0
 %global maintenance_release .0.0
-%global pkg_release         .1
+%global pkg_release         .2
 
 %global openeuler_lts       0
 %global openeuler_major     0
@@ -363,10 +363,6 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 find . \( -name "*.orig" -o -name "*~" \) -exec rm -f {} \; >/dev/null
 find . -name .gitignore -exec rm -f {} \; >/dev/null
 
-%if 0%{?with_signmodules}
-    cp %{SOURCE11} certs/.
-%endif
-
 %if 0%{?with_source}
 # Copy directory backup for kernel-source
 cp -a ../linux-%{KernelVer} ../linux-%{KernelVer}-source
@@ -389,6 +385,10 @@ perl -p -i -e "s/^OPENEULER_RELEASE.*/OPENEULER_RELEASE = \"%{release}\"/" Makef
 
 ## make linux
 make mrproper %{_smp_mflags}
+
+%if 0%{?with_signmodules}
+    cp %{SOURCE11} certs/.
+%endif
 
 cp $RPM_SOURCE_DIR/kernel-%{upstream_version}.0-%{_host_cpu}.config arch/%{Arch}/configs/openeuler_defconfig
 
@@ -1076,6 +1076,9 @@ fi
 %endif
 
 %changelog
+*Tue Aug 19 2025 yuelg <yuelg@chinaunicom.cn> - 6.12.33-0.0.0.2
+- adjust copying x509.genkey to be after mrproper
+
 * Wed Jun 18 2025 laokz <zhangkai@iscas.ac.cn> - 6.12.33-0.0.0.1
 - upgrade to upstream v6.12.33
 - reset %with_debuginfo
