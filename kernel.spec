@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2508.1.0
+%global hulkrelease 2508.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0339
+Release: %{hulkrelease}.0340
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,15 @@ fi
 %endif
 
 %changelog
+
+* Wed Aug 20 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.2.0.0340
+- !17478 EDAC/amd64: Do not warn when removing instances
+- EDAC/amd64: Do not warn when removing instances
+- !17552 [openEuler-1.0-LTS] Revert "scsi: hisi_sas: fix a issue related to timer of internal IO and SMP IO"
+- !17535  net/sched: sch_qfq: Fix CVE-2025-38477
+- Revert "scsi: hisi_sas: fix a issue related to timer of internal IO and SMP IO"
+- net/sched: sch_qfq: Avoid triggering might_sleep in atomic context in qfq_delete_class
+- net/sched: sch_qfq: Fix race condition on qfq_aggregate
 
 * Wed Aug 13 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.1.0.0339
 - !17509 v2  ext4: add bounds checking in get_max_inline_xattr_value_size()
