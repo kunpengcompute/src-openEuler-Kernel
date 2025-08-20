@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       105
+%global devel_release       106
 %global maintenance_release .0.0
-%global pkg_release         .97
+%global pkg_release         .98
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,115 @@ fi
 %endif
 
 %changelog
+* Tue Aug 19 2025 Li Nan <linan122@huawei.com> - 6.6.0-106.0.0.98
+- !17565  Enhance soft hwpoison handling and injection
+- !17569  drm/vkms: Fix use after free and double free on init error
+- drm/vkms: Fix use after free and double free on init error
+- !17564  bpf: Reject %p% format string in bprintf-like helpers
+- !17510 PM / devfreq: Add HiSilicon uncore frequency scaling driver
+- !17547  net_sched: drr: Fix double list add in class with netem as child qdisc
+- !17556  filemap: move prefaulting out of hot write path
+- mm/memory-failure: send SIGBUS in the event of thp split fail
+- mm/memory-failure: move hwpoison_filter() higher up
+- mm/memory-failure: improve memory failure action_result messages
+- mm/madvise: add MF_ACTION_REQUIRED to madvise(MADV_HWPOISON)
+- mm/memory-failure: try to send SIGBUS even if unmap failed
+- PM / devfreq: Add HiSilicon uncore frequency scaling driver
+- !17529 mm: optimize mremap() by PTE batching
+- !17481  HID: core: fix __hid_request when no report ID is used
+- bpf: Reject %p% format string in bprintf-like helpers
+- !17495 v2  mm/mem_sampling: preserve kernel subsystem SPE state across perf sampling
+- !17546  net_sched: qfq: Fix double list add in class with netem as child qdisc
+- !17542  net: sch: Fix CVE-2025-37798
+- !17538  wifi: at76c50x: fix use after free access in at76_disconnect
+- !17537  net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- !17553 RDMA/hns: Fix dip entries leak on devices newer than hip09
+- filemap: move prefaulting out of hot write path
+- RDMA/hns: Fix dip entries leak on devices newer than hip09
+- RDMA/hns: Fix querying wrong SCC context for DIP algorithm
+- !17479 fix some bugs of enfs
+- !17530  sched/psi: change permissions of /proc/pressure/stat
+- net_sched: drr: Fix double list add in class with netem as child qdisc
+- net_sched: qfq: Fix double list add in class with netem as child qdisc
+- mm/mremap: avoid expensive folio lookup on mremap folio pte batch
+- codel: remove sch->q.qlen check before qdisc_tree_reduce_backlog()
+- sch_htb: make htb_deactivate() idempotent
+- sch_htb: make htb_qlen_notify() idempotent
+- sch_drr: make drr_qlen_notify() idempotent
+- sch_hfsc: make hfsc_qlen_notify() idempotent
+- sch_qfq: make qfq_qlen_notify() idempotent
+- sch_ets: make est_qlen_notify() idempotent
+- wifi: at76c50x: fix use after free access in at76_disconnect
+- net: vlan: Fix kabi breakage of struct vlan_info
+- net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- sched/psi: change permissions of /proc/pressure/stat
+- mm: optimize mremap() by PTE batching
+- !17526 v7  High Performance Container Resource View Isolation -- Stage 2
+- !17515 gpiolib: Get rid of never false gpio_is_valid() calls
+- mm: call pointers to ptes as ptep
+- !17519  CVE-2025-38473
+- !17524  CVE-2025-38375
+- !17517  CVE-2025-38251
+- !17523  CVE-2025-38211
+- samples/bpf: Add iterator program for meminfo
+- bpf-rvi: Add bpf_x86_direct_pages kfunc
+- bpf-rvi: Add bpf_mem_vmalloc_{used,total} kfunc
+- bpf-rvi: Add bpf_mem_commit_limit & bpf_mem_committed kfunc
+- bpf-rvi: Add bpf_mem_percpu kfunc
+- bpf-rvi: Add bpf_mem_failure kfunc
+- bpf-rvi: Add bpf_hugetlb_report_meminfo kfunc
+- bpf-rvi: Add bpf_mem_{total,free}cma kfunc
+- bpf-rvi: Add bpf_mem_{file_{hugepage,pmdmapped},kreclaimable} kfunc
+- samples/bpf: Add iterator program for stat
+- bpf-rvi: stat: Add stat iterator target
+- bpf-rvi: Add kstat_ & kcpustat_ kfuncs
+- bpf-rvi: Add cpu runqueue related kfuncs
+- bpf-rvi: Add stat-related misc kfuncs
+- bpf-rvi: Add bpf_seq_file_append() kfunc
+- samples/bpf: Add iterator program for swaps
+- bpf-rvi: Add bpf_page_counter_read() kfunc
+- bpf-rvi: Add bpf_si_memswinfo() kfunc
+- samples/bpf: Add iterator program for uptime
+- bpf-rvi: cpuacct: Add bpf_task_ca_cpuusage() kfunc
+- samples/bpf: Add iterator program for loadavg
+- bpf-rvi: pidns: Add for_each_task_in_pidns and loadavg-related kfuncs
+- bpf-rvi: pidns: Calculate loadavg for each pid namespace
+- samples/bpf: Add iterator program for partitions
+- bpf-rvi: block: Look up /dev in reaper's fs->root and filter partitions
+- bpf-rvi: block: Add partitions iterator target
+- samples/bpf: Add iterator program for diskstats
+- bpf-rvi: blk-cgroup: Add bpf_blkcg_get_dev_iostat() kfunc
+- bpf-rvi: block: Add diskstats iterator target
+- samples/bpf: Add iterator program for cpuinfo_arm64
+- bpf-rvi: arm64: Add bpf_arch_flags kunc for arm64
+- bpf-rvi: arm64: Add cpuinfo_arm64 iterator target
+- bpf-rvi: arm64: Add bpf_arm64_cpu_have_feature() kfunc
+- bpf-rvi: cpuacct: Add task_cpuacct()
+- bpf-rvi: cpuacct: Add bpf_cpuacct_kcpustat_cpu_fetch kfunc
+- bpf-rvi: proc: add bpf_get_{idle,iowait}_time kfunc
+- bpf-rvi: cgroup: Add cgroup_rstat_flush_atomic() kfunc
+- bpf-rvi: Add bpf_mem_cgroup_from_task() kfunc
+- bpf-rvi: cpuset: Fix missing of return for !tsk in task_effective_cpumask()
+- virtio-net: ensure the received length does not exceed allocated size
+- RDMA/iwcm: Fix use-after-free of work objects after cm_id destruction
+- Bluetooth: Fix null-ptr-deref in l2cap_sock_resume_cb()
+- nfs/enfs: make some functions static in enfs_multipath_client.c
+- nfs/enfs: remove enfs_init() and enfs_fini()
+- nfs/enfs: format get_ip_to_str() in shard_route.c
+- nfs/enfs: unlock uniformly at the end of function in shard_route.c
+- nfs/enfs: support debugging ip and dns list
+- nfs/enfs: fix error when showing dns list
+- nfs/enfs: fix alignment between struct rpc_clnt and rpc_clnt_reserve
+- nfs/enfs: set CONFIG_SUNRPC_ENFS=y by default
+- nfs/enfs: fix memory leak of shard_view_ctrl when removing nfs module
+- atm: clip: prevent NULL deref in clip_push()
+- gpiolib: Get rid of never false gpio_is_valid() calls
+- Revert "PM / devfreq: Add HiSilicon uncore frequency scaling driver"
+- mm/mem_sampling: preserve kernel subsystem SPE state across perf sampling
+- HID: core: do not bypass hid_hw_raw_request
+- HID: core: ensure __hid_request reserves the report ID as the first byte
+- HID: core: ensure the allocated report buffer can contain the reserved report ID
+
 * Wed Aug 13 2025 Li Nan <linan122@huawei.com> - 6.6.0-105.0.0.97
 - !17513  sched-ebpf-add-for-exec-init
 - !17487  arm64/mpam: Support partial-core boot for MPAM
