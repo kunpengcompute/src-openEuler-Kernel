@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       277
+%global devel_release       278
 %global maintenance_release .0.0
-%global pkg_release         .180
+%global pkg_release         .181
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,57 @@ fi
 %endif
 
 %changelog
+* Tue Aug 19 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-278.0.0.181
+- !17568  comedi: aio_iiro_16: Fix bit shift out of bounds
+- !17545  net_sched: drr: Fix double list add in class with netem as child qdisc
+- comedi: aio_iiro_16: Fix bit shift out of bounds
+- !17566  hugelb: do not sleep during spinlock hugetlb_lock
+- hugelb: do not sleep during spinlock hugetlb_lock
+- !17480  HID: core: fix __hid_request when no report ID is used
+- !17554  arm64: mm: fix EFI_BUFFER_TOO_SMALL problem for MemoryOnChipMode
+- arm64: mm: fix EFI_BUFFER_TOO_SMALL problem for MemoryOnChipMode
+- !17544  net_sched: qfq: Fix double list add in class with netem as child qdisc
+- !17543  net: sch: Fix CVE-2025-37798
+- !17539  wifi: at76c50x: fix use after free access in at76_disconnect
+- !17536  net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- !17532  sched: Fix sched tunable parameter range overflow
+- !15064  arm64: mm: Update PBHA related variable name
+- net_sched: drr: Fix double list add in class with netem as child qdisc
+- net_sched: qfq: Fix double list add in class with netem as child qdisc
+- codel: remove sch->q.qlen check before qdisc_tree_reduce_backlog()
+- sch_ets: make est_qlen_notify() idempotent
+- sch_qfq: make qfq_qlen_notify() idempotent
+- sch_hfsc: make hfsc_qlen_notify() idempotent
+- sch_drr: make drr_qlen_notify() idempotent
+- sch_htb: make htb_deactivate() idempotent
+- sch_htb: make htb_qlen_notify() idempotent
+- wifi: at76c50x: fix use after free access in at76_disconnect
+- net: vlan: Fix kabi breakage of struct vlan_info
+- net: vlan: fix VLAN 0 refcount imbalance of toggling filtering during runtime
+- !17531 RDMA/hns: Fix dip entries leak on devices newer than hip09
+- sched: Fix sched tunable parameter range overflow
+- !17494 v2  kernfs performance optimization
+- RDMA/hns: Fix dip entries leak on devices newer than hip09
+- !17527  PCI/ASPM: Fix link state exit during switch upstream function removal
+- !17525  fix CVE-2022-49623
+- PCI/ASPM: Fix link state exit during switch upstream function removal
+- !17522  CVE-2025-38180
+- powerpc/xive/spapr: correct bitmap allocation size
+- powerpc/xive: Add some error handling code to 'xive_spapr_init()'
+- net: atm: fix /proc/net/atm/lec handling
+- net: atm: add lec_mutex
+- kernfs: don't create a negative dentry if inactive node exists
+- kernfs: also call kernfs_set_rev() for positive dentry
+- kernfs: dont call d_splice_alias() under kernfs node lock
+- kernfs: use i_lock to protect concurrent inode updates
+- kernfs: switch kernfs to use an rwsem
+- kernfs: use VFS negative dentry caching
+- kernfs: add a revision to identify directory node changes
+- HID: core: do not bypass hid_hw_raw_request
+- HID: core: ensure __hid_request reserves the report ID as the first byte
+- HID: core: ensure the allocated report buffer can contain the reserved report ID
+- arm64: mm: Update PBHA related variable name
+
 * Wed Aug 13 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-277.0.0.180
 - !17505  CVE-2024-58237
 - !17504  net_sched: hfsc: Fix a potential UAF in hfsc_dequeue() too
