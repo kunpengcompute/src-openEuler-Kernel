@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       278
+%global devel_release       279
 %global maintenance_release .0.0
-%global pkg_release         .181
+%global pkg_release         .182
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,82 @@ fi
 %endif
 
 %changelog
+* Tue Aug 26 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-279.0.0.182
+- !17745  trace/fgraph: Fix the warning caused by missing unregister notifier
+- !17726  perf/core: Don't leak AUX buffer refcount on allocation failure
+- !17675  ftrace: Also allocate and copy hash for reading of filter files
+- !17670  ftrace: Fix potential warning in trace_printk_seq during ftrace_dump
+- !15618  partitions: mac: fix handling of bogus partition table
+- trace/fgraph: Fix the warning caused by missing unregister notifier
+- !17723  mm/dpool: mark dpool hugetlb page as dirty in free_huge_page()
+- !17727  CVE-2025-38465
+- !17454  md/raid1: Fix stack memory use after return in raid1_reshape
+- !17452  blk-mq: don't touch ->tagset in blk_mq_get_sq_hctx
+- netlink: avoid infinite retry looping in netlink_unicast()
+- netlink: make sure we allow at least one dump skb
+- netlink: Fix rmem check in netlink_broadcast_deliver().
+- netlink: Fix wraparounds of sk->sk_rmem_alloc.
+- perf/core: Don't leak AUX buffer refcount on allocation failure
+- mm/dpool: mark dpool hugetlb page as dirty in free_huge_page()
+- !17631  perf/core: Exit early on perf_mmap() fail
+- ftrace: Also allocate and copy hash for reading of filter files
+- ftrace: Fix potential warning in trace_printk_seq during ftrace_dump
+- !17603  two bugfix for arm64 support HVO
+- !17657  selftests/bpf: Add remaining ASSERT_xxx() variants
+- selftests/bpf: Add remaining ASSERT_xxx() variants
+- !17614  xfrm: state: fix out-of-bounds read during lookup
+- !17626  Fix CVE-2025-37780
+- !17627  Fix CVE-2024-58069
+- !17624  rtnetlink: Allocate vfinfo size for VF GUIDs when supported
+- !17623  net_sched: hfsc: Fix a UAF vulnerability in class handling
+- !17622  tipc: fix null-ptr-deref when acquiring remote ip of ethernet bearer
+- !17621  CVE-2025-38052
+- !17619  tipc: Fix use-after-free in tipc_conn_close().
+- !17620  net: clear the dst when changing skb protocol
+- !17618  net_sched: sch_sfq: fix a potential crash on gso_skb handling
+- !17617  net: fix udp gso skb_segment after pull from frag_list
+- !17616  atm: Fix NULL pointer dereference
+- !17615  udp: Fix memory accounting leak.
+- !17613  macsec: fix UAF bug for real_dev
+- !17612  vfio/pci: Properly hide first-in-list PCIe extended capability
+- perf/core: Exit early on perf_mmap() fail
+- rtc: pcf85063: fix potential OOB write in PCF85063 NVMEM read
+- isofs: Prevent the use of too small fid
+- rtnetlink: Allocate vfinfo size for VF GUIDs when supported
+- net_sched: hfsc: Fix a UAF vulnerability in class handling
+- tipc: fix null-ptr-deref when acquiring remote ip of ethernet bearer
+- net: tipc: fix refcount warning in tipc_aead_encrypt
+- net/tipc: fix slab-use-after-free Read in tipc_aead_encrypt_done
+- net: clear the dst when changing skb protocol
+- tipc: Fix use-after-free in tipc_conn_close().
+- net_sched: sch_sfq: fix a potential crash on gso_skb handling
+- net: fix udp gso skb_segment after pull from frag_list
+- atm: Fix NULL pointer dereference
+- udp: Fix memory accounting leak.
+- xfrm: state: fix out-of-bounds read during lookup
+- macsec: fix UAF bug for real_dev
+- vfio/pci: Properly hide first-in-list PCIe extended capability
+- !17376 net_sched: Flush gso_skb list too during ->change()
+- !17576  net/sched: Fix CVE-2025-37890
+- arm64: mm: HVO: fix deadlock in split vmemmap pmd
+- mm: HVO: fix hard lockup in split_vmemmap_huge_pmd under x86
+- !17581  tracing: Add down_write(trace_event_sem) when adding trace event
+- !17580  iio: adc: ti-ads8688: fix information leak in triggered buffer
+- tracing: Add down_write(trace_event_sem) when adding trace event
+- !17579 v2  two cve fix
+- iio: adc: ti-ads8688: fix information leak in triggered buffer
+- vfio/platform: check the bounds of read/write syscalls
+- powerpc/mm/fault: Fix kfence page fault reporting
+- net/sched: ets: use old 'nbands' while purging unused classes
+- net/sched: Always pass notifications when child class becomes empty
+- net_sched: hfsc: Address reentrant enqueue adding class to eltree twice
+- sch_hfsc: Fix qlen accounting bug when using peek in hfsc_enqueue()
+- net_sched: hfsc: Fix a UAF vulnerability in class with netem as child qdisc
+- md/raid1: Fix stack memory use after return in raid1_reshape
+- blk-mq: don't touch ->tagset in blk_mq_get_sq_hctx
+- net_sched: Flush gso_skb list too during ->change()
+- partitions: mac: fix handling of bogus partition table
+
 * Tue Aug 19 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-278.0.0.181
 - !17568  comedi: aio_iiro_16: Fix bit shift out of bounds
 - !17545  net_sched: drr: Fix double list add in class with netem as child qdisc
