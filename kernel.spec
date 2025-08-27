@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2508.2.0
+%global hulkrelease 2508.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0340
+Release: %{hulkrelease}.0341
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,21 @@ fi
 %endif
 
 %changelog
+
+* Wed Aug 27 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.3.0.0341
+- !17764  mm/smaps: fix race between smaps_hugetlb_range and migration
+- mm/smaps: fix race between smaps_hugetlb_range and migration
+- !17736 v2  mm/dpool: mark dpool hugetlb page as dirty in free_huge_page()
+- !17684  HID: core: do not bypass hid_hw_raw_request
+- mm/dpool: mark dpool hugetlb page as dirty in free_huge_page()
+- !17732  CVE-2025-38180
+- net: atm: fix /proc/net/atm/lec handling
+- net: atm: add lec_mutex
+- !17607  drm/sched: Increment job count before swapping tail spsc queue
+- HID: core: do not bypass hid_hw_raw_request
+- drm/sched: Increment job count before swapping tail spsc queue
+- !17562  sched: Fix sched tunable parameter range overflow
+- sched: Fix sched tunable parameter range overflow
 
 * Wed Aug 20 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.2.0.0340
 - !17478 EDAC/amd64: Do not warn when removing instances
