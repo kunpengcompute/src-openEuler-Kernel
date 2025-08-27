@@ -41,8 +41,8 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_version    6.6
 %global upstream_sublevel   0
 %global devel_release       102
-%global maintenance_release .4.0
-%global pkg_release         .54
+%global maintenance_release .0.0
+%global pkg_release         .3
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -652,7 +652,7 @@ sed -e 's!^\.\/kernel/!/lib/modules/%{KernelVer}/kernel/!; s!\.ko$!.ko.xz!' \
   modules-core.list > %{_builddir}/kernel-%{version}/kernel-modules-filelist
 
 if [ -s modules-extra.list ]; then
-    sed -e 's!^\.\/kernel/!/lib/modules/%{KernelVer}/kernel/!; s!\.ko$!.ko.xz!' modules-extra.list > %{_builddir}/kernel-%{version}/kernel-extra-modules-filelist
+    sed 's!^kernel/!!; s!$!.ko.xz!; s!^!/lib/modules/%{KernelVer}/kernel/!' modules-extra.list > %{_builddir}/kernel-%{version}/kernel-extra-modules-filelist
 else
     echo "%ghost /nonexistent/dummy/file" > %{_builddir}/kernel-%{version}/kernel-extra-modules-filelist
 fi
@@ -1141,5 +1141,6 @@ fi
 
 * Sat Jan 14 2023 Xie XiuQi <xiexiuqi@huawei.com> - 6.1.0-1.0.0.1
 - package init based on upstream v6.1
-* Thu Mar 13 2025 Hang Huang <hanghuang@hust.edu.cn> - 6.6.0-102.4.0.54
+
+* Thu Mar 13 2025 Hang Huang <hanghuang@hust.edu.cn> - 6.6.0-102.0.0
 - vk: introduce vkernel
