@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       106
+%global devel_release       107
 %global maintenance_release .0.0
-%global pkg_release         .112
+%global pkg_release         .113
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,164 @@ fi
 %endif
 
 %changelog
+* Wed Aug 27 2025 Li Nan <linan122@huawei.com> - 6.6.0-107.0.0.113
+- !17744  trace/fgraph: Fix the warning caused by missing unregister notifier
+- !17737 soc cache: Fix incorrect error path of ioctl
+- !17660  cgroup/cpuset: Support dynamic affinity feature
+- !17293 [OLK-6.6] backport important bugfix for Broadcom BCM57414 nic driver from upstream linux-6.6.y
+- !17747  fix some CVE
+- !17751  iBMA: Fix veth soft lockup by adding DMA-pre-readl sync
+- !17730  arm64/entry: Mask DAIF in cpu_switch_to(), call_on_irq_stack()
+- !16545  KVM: arm64: fix memory leak in TLBI
+- iBMA: Fix veth soft lockup by adding DMA-pre-readl sync
+- !17716  hrtimers: Update new CPU's next event in hrtimers_cpu_dying()
+- !17669  ftrace: Fix potential warning in trace_printk_seq during ftrace_dump
+- !17674  ftrace: Also allocate and copy hash for reading of filter files
+- !17725  perf/core: Don't leak AUX buffer refcount on allocation failure
+- usb: xhci: Fix invalid pointer dereference in Etron workaround
+- thunderbolt: Do not double dequeue a configuration request
+- powerpc/powernv/memtrace: Fix out of bounds issue in memtrace mmap
+- mm: memory-failure: update ttu flag inside unmap_poisoned_folio
+- Bluetooth: btnxpuart: Fix kernel panic during FW release
+- !17592  ice: add NULL check in eswitch lag check
+- trace/fgraph: Fix the warning caused by missing unregister notifier
+- !17720  crypto: lzo - Fix compression buffer overrun
+- !17719  spi: spi-imx: Add check for spi_imx_setupxfer()
+- !17687  ipmi:msghandler: Fix potential memory corruption in ipmi_create_user()
+- soc cache: Fix incorrect error path of ioctl
+- soc cache: Fix incorrect size validation
+- soc cache: Enforce maintain type check
+- !17683 v2  Fix for bpf samples and selftests
+- !17724  mm/dpool: mark dpool hugetlb page as dirty in free_huge_folio()
+- !17438 [OLK-6.6]:update patches for sw64 architecture
+- !17652  wifi: mac80211: Set n_channels after allocating struct cfg80211_scan_request
+- !17728  CVE-2025-38006
+- !17677 v2  Fix static check warning reported by coccinelle
+- !17633  dmaengine: idxd: Check availability of workqueue allocated by idxd wq driver before using
+- !17455  raid10: cleanup memleak at raid10_make_request
+- !17453  md/raid1: Fix stack memory use after return in raid1_reshape
+- arm64/entry: Mask DAIF in cpu_switch_to(), call_on_irq_stack()
+- net: mctp: Don't access ifa_index when missing
+- mctp: no longer rely on net->dev_index_head[]
+- perf/core: Don't leak AUX buffer refcount on allocation failure
+- mm/dpool: mark dpool hugetlb page as dirty in free_huge_folio()
+- !17606  drm/sched: Increment job count before swapping tail spsc queue
+- !17671  bpf-rvi: pidns: fix null-pointer-derefence in pidns_update_load_tasks
+- crypto: lzo - Fix compression buffer overrun
+- spi: spi-imx: Add check for spi_imx_setupxfer()
+- hrtimers: Update new CPU's next event in hrtimers_cpu_dying()
+- !17632  perf/core: Exit early on perf_mmap() fail
+- ipmi:msghandler: Fix potential memory corruption in ipmi_create_user()
+- samples/bpf: Move bpf_rvi_* progs to bpf_rvi directory
+- selftests/bpf: fix perf_event link info name_len assertion
+- Revert "selftests/bpf: Use bpf_link__destroy in fill_link_info tests"
+- Revert "selftests/bpf: Add cookies check for perf_event fill_link_info test"
+- Revert "selftests/bpf: fix perf_event link info name_len assertion"
+- !17650 net: phy: motorcomm: Add support for PHY LEDs on YT8521
+- !17634  HID: pidff: Fix null pointer dereference in pidff_find_fields
+- ACPI / MPAM: Fix wrong IS_ERR() check in _parse_table()
+- hiroce3: Use IS_ERR() to check the return value of kthread_run()
+- ftrace: Also allocate and copy hash for reading of filter files
+- bpf-rvi: pidns: fix null-pointer-derefence in pidns_update_load_tasks
+- !17642  tipc: fix null-ptr-deref when acquiring remote ip of ethernet bearer
+- !17641  net: clear the dst when changing skb protocol
+- !17653  wifi: iwlwifi: fix debug actions order
+- !17651  wifi: mt76: disable napi on driver removal
+- !17647  CVE-2025-38052
+- ftrace: Fix potential warning in trace_printk_seq during ftrace_dump
+- cgroup/cpuset: Support dynamic affinity feature
+- !17646  sunrpc: handle SVC_GARBAGE during svc auth processing as auth error
+- !17648  CVE-2025-37920
+- !17643  net: Fix TOCTOU issue in sk_is_readable()
+- !17644  bridge: mcast: Fix use-after-free during router port configuration
+- !17645  CVE-2025-38465
+- !17600  two bugfix for arm64 support HVO
+- !17649  Fix CVE-2025-21839
+- !17628  Fix CVE-2025-37780
+- !17629  Fix CVE-2025-37767
+- !17637  netfilter: flowtable: account for Ethernet header in nf_flow_pppoe_proto()
+- !17638  tcp: Correct signedness in skb remaining space calculation
+- !17639  tipc: Fix use-after-free in tipc_conn_close().
+- !17640  seg6: Fix validation of nexthop addresses
+- wifi: iwlwifi: fix debug actions order
+- wifi: mac80211: Set n_channels after allocating struct cfg80211_scan_request
+- wifi: mt76: disable napi on driver removal
+- net: phy: motorcomm: Add support for PHY LEDs on YT8521
+- !17608  mm/util: make memdup_user_nul() similar to memdup_user()
+- net: hns3: change the function return type from int to bool
+- KVM: x86: Load DR6 with guest value only before entering .vcpu_run() loop
+- xsk: Fix kabi broken
+- xsk: Fix race condition in AF_XDP generic RX path
+- net: tipc: fix refcount warning in tipc_aead_encrypt
+- net/tipc: fix slab-use-after-free Read in tipc_aead_encrypt_done
+- sunrpc: handle SVC_GARBAGE during svc auth processing as auth error
+- netlink: avoid infinite retry looping in netlink_unicast()
+- netlink: make sure we allow at least one dump skb
+- netlink: Fix rmem check in netlink_broadcast_deliver().
+- netlink: Fix wraparounds of sk->sk_rmem_alloc.
+- bridge: mcast: Fix use-after-free during router port configuration
+- net: Fix TOCTOU issue in sk_is_readable()
+- tipc: fix null-ptr-deref when acquiring remote ip of ethernet bearer
+- net: clear the dst when changing skb protocol
+- seg6: Fix validation of nexthop addresses
+- tipc: Fix use-after-free in tipc_conn_close().
+- tcp: Correct signedness in skb remaining space calculation
+- netfilter: flowtable: account for Ethernet header in nf_flow_pppoe_proto()
+- HID: pidff: Fix null pointer dereference in pidff_find_fields
+- dmaengine: idxd: Check availability of workqueue allocated by idxd wq driver before using
+- !17597 Delete PHYTIUM_CPU_PART_FTC862 macro
+- perf/core: Exit early on perf_mmap() fail
+- drm/amd/pm/swsmu/smu13/smu_v13_0: Prevent division by zero
+- isofs: Prevent the use of too small fid
+- !17307  scsi: megaraid_sas: Fix invalid node index
+- !17309  irqchip/gic-v2m: Prevent use after free of gicv2m_get_fwnode()
+- mm/util: make memdup_user_nul() similar to memdup_user()
+- drm/sched: Increment job count before swapping tail spsc queue
+- !17575  net/sched: Fix CVE-2025-37890
+- arm64: mm: HVO: fix deadlock in split vmemmap pmd
+- mm: HVO: fix hard lockup in split_vmemmap_huge_pmd under x86
+- cputype: phytium: Delete PHYTIUM_CPU_PART_FTC862 macro
+- ice: add NULL check in eswitch lag check
+- !16528 [OLK-6.6] dma: phytium: Add PSWIOTLB mechanism to improve DMA performance
+- !17570  tracing: Add down_write(trace_event_sem) when adding trace event
+- net/sched: ets: use old 'nbands' while purging unused classes
+- net/sched: Always pass notifications when child class becomes empty
+- net_sched: hfsc: Address reentrant enqueue adding class to eltree twice
+- sch_hfsc: Fix qlen accounting bug when using peek in hfsc_enqueue()
+- net_sched: hfsc: Fix a UAF vulnerability in class with netem as child qdisc
+- tracing: Add down_write(trace_event_sem) when adding trace event
+- sw64: ptrace: return -EIO in invalid PEEKUSR/POKEUSR requests
+- sw64: kvm: fix missing kvm_unregister_perf_callbacks
+- sw64: kvm: fix compile error of kvm.ko
+- sw64: kvm: remove the duplicated Kconfig selection of KVM
+- sw64: cpuidle: add dedicated driver
+- sw64: fix missing characters for sw64_rrk
+- sw64: selftests/net: add sw64 support for io_uring_zerocopy_tx
+- sw64: crypto: implement crc32 assembly optimization
+- sw64: efi: remove meaningless code from asm/efi.h
+- sw64: fix incorrect macro definitions for sw64 in bpf_tracing.h
+- sw64: cpufreq: using PLL0 to provide clock for idle cores
+- sw64: kvm: save the virtual address of irqs_pending in vcpucb
+- sw64: kvm: fix undefined error with ftrace disabled
+- raid10: cleanup memleak at raid10_make_request
+- md/raid1: Fix stack memory use after return in raid1_reshape
+- sw64: kvm: enable dirty log gradually in small chunks for core4
+- sw64: fix guest kdump function
+- sw64: ftrace: add HAVE_DYNAMIC_FTRACE_WITH_ARGS support
+- sw64: use wait/complete for smp boot
+- sw64: fix sw64_rrk_store() wrap handling
+- irqchip/gic-v2m: Prevent use after free of gicv2m_get_fwnode()
+- scsi: megaraid_sas: Fix invalid node index
+- bnxt: properly flush XDP redirect lists
+- dma: phyitum: enable CONFIG_PHYTIUM_ERRATUM_FT3386
+- dma: Fix kabi breakage due to "dma: pswiotlb: Move platform-identification to cpu errata"
+- dma: pswiotlb: Move platform-identification to cpu errata
+- dma: pswiotlb: Move pswiotlb dma functions behind dma_map_ops
+- dma: phyitum: enable CONFIG_PSWIOTLB
+- dma: Fix kabi breakage due to "dma: phytium: Add PSWIOTLB mechanism to improve DMA performance"
+- dma: phytium: Add PSWIOTLB mechanism to improve DMA performance
+- KVM: arm64: fix memory leak in TLBI
+
 * Tue Aug 19 2025 Li Nan <linan122@huawei.com> - 6.6.0-106.0.0.112
 - !17565  Enhance soft hwpoison handling and injection
 - !17569  drm/vkms: Fix use after free and double free on init error
