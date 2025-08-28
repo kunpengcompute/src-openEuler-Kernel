@@ -1,0 +1,2599 @@
+From 33e028dab0ab890ac0707550cc42425f575d4e4a Mon Sep 17 00:00:00 2001
+From: Liu Zhehui <liuzhh@zgclab.edu.cn>
+Date: Thu, 28 Aug 2025 15:31:03 +0800
+Subject: [PATCH] Squashed commit of the following:
+
+commit f8a44552eb17f5b7802e91a3be9ec5e8c591adec
+Author: Liu Zhehui <liuzhh@zgclab.edu.cn>
+Date:   Mon Mar 17 21:33:32 2025 +0800
+
+    haoc: add support for versions lower than ARMv8.1-a
+
+    community inclusion
+    category: bugfix
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBSGVE
+
+    --------------------------------
+
+    add support for versions lower than ARMv8.1-a
+
+    Fixes: 8d2e6d1bb690 ("HAOC: Add support for AArch64 Isolated Execution Environment(IEE).")
+    Signed-off-by: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
+    Signed-off-by: Liu Zhehui <liuzhh@zgclab.edu.cn>
+
+commit e86874fcfd42677bc983e2cee5b0beede7e58dea
+Author: liuzh <liuzhh@zgclab.edu.cn>
+Date:   Sun Mar 16 02:06:26 2025 +0000
+
+    haoc: fix memory recognization issue
+
+    community inclusion
+    category: bugfix
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBTMTU
+
+    --------------------------------
+
+    add support for large memory (more than 1TB) in HAOC-ARM64 IEE.
+
+    Fixes: 8d2e6d1bb690 ("haoc: add support for lagre memory")
+    Signed-off-by: liuzh <liuzhh@zgclab.edu.cn>
+
+commit 7008fd0780cdd41c0d553bdab0212fa08b0ecd3b
+Author: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
+Date:   Wed Mar 5 12:22:15 2025 +0800
+
+    HAOC: Add ARM64 kernel command line support to switch IEE on\off.
+
+    community inclusion
+    category: feature
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBQKOW
+
+    -----------------------------------
+
+    Use kernel command line parameter "haoc" to control if HAOC should
+    be enabled on ARM64.
+
+    Signed-off-by: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
+    Signed-off-by: Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
+    Signed-off-by: Liu Zhehui <liuzhh@zgclab.edu.cn>
+
+commit fe749e19c1018911d018e5c8d04b12c18a9a1b13
+Author: Shu Hang <shuh2023@zgclab.edu.cn>
+Date:   Tue Mar 4 14:57:26 2025 +0800
+
+    HAOC: Add kernel command line support for x86 IEE.
+
+    community inclusion
+    category: feature
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBQKOW
+
+    -----------------------------------
+
+    Use kernel command line haoc to control if HAOC should be enabled.
+    eg: haoc=on to enable haoc protection.
+
+    Signed-off-by: Shu Hang <shuh2023@zgclab.edu.cn>
+    Signed-off-by: Hu Bing <hubing2023@zgclab.edu.cn>
+    Signed-off-by: Liu Zhehui <liuzhh@zgclab.edu.cn>
+
+commit a03dc005fa43ae57c1d609ba31ac1a48672efbb3
+Author: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
+Date:   Thu Feb 27 11:10:19 2025 +0800
+
+    HAOC: Add support for AArch64 Isolated Execution Environment(IEE).
+
+    community inclusion
+    category: feature
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBQKOW
+
+    -----------------------------------
+
+    The base framework of HAOC. Could isolate kernel critical data and
+    enforce all write access made and verified in IEE APIs.
+    Needs hardware support FEAT_HPDS.
+
+    Signed-off-by: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
+    Signed-off-by: Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
+    Signed-off-by: Liu Zhehui <liuzhh@zgclab.edu.cn>
+
+commit 90e6b171263d3ac0d570c41ab05080cf993574af
+Author: Shu Hang <shuh2023@zgclab.edu.cn>
+Date:   Wed Feb 26 18:44:10 2025 +0800
+
+    HAOC: Add support for x86 Isolated Execution Environment
+
+    community inclusion
+    category: feature
+    bugzilla: https://gitee.com/openeuler/kernel/issues/IBQKOW
+
+    -------------------------------------------------
+
+    Support Isolated Execution Environment for x86.
+    IEE depends on CR0.wp
+
+    Signed-off-by: Shu Hang <shuh2023@zgclab.edu.cn>
+    Signed-off-by: Hu Bing <<hubing2023@zgclab.edu.cn>
+    Signed-off-by: Liu Zhehui <liuzhh@zgclab.edu.cn>
+---
+ arch/arm64/Kconfig                       |   2 +
+ arch/arm64/configs/openeuler_defconfig   |   6 +
+ arch/arm64/include/asm/haoc/haoc-def.h   |  26 ++
+ arch/arm64/include/asm/haoc/haoc.h       |  18 +
+ arch/arm64/include/asm/haoc/iee-access.h |  25 ++
+ arch/arm64/include/asm/haoc/iee-asm.h    |  31 ++
+ arch/arm64/include/asm/haoc/iee-func.h   |  17 +
+ arch/arm64/include/asm/haoc/iee-init.h   |  20 +
+ arch/arm64/include/asm/haoc/iee-mmu.h    |  23 +
+ arch/arm64/include/asm/haoc/iee.h        |  72 +++
+ arch/arm64/kernel/Makefile               |   1 +
+ arch/arm64/kernel/entry-common.c         |   4 +
+ arch/arm64/kernel/entry.S                |  26 ++
+ arch/arm64/kernel/haoc/Kconfig           |  18 +
+ arch/arm64/kernel/haoc/Makefile          |   3 +
+ arch/arm64/kernel/haoc/haoc.c            |  24 +
+ arch/arm64/kernel/haoc/iee/Makefile      |   2 +
+ arch/arm64/kernel/haoc/iee/iee-func.c    | 318 +++++++++++++
+ arch/arm64/kernel/haoc/iee/iee-gate.S    |  98 +++++
+ arch/arm64/kernel/haoc/iee/iee-init.c    |  78 ++++
+ arch/arm64/kernel/haoc/iee/iee-mmu.c     | 539 +++++++++++++++++++++++
+ arch/arm64/kernel/haoc/iee/iee.c         |  32 ++
+ arch/arm64/kernel/smp.c                  |  11 +
+ arch/arm64/kernel/vmlinux.lds.S          |  12 +
+ arch/arm64/mm/context.c                  |  44 ++
+ arch/arm64/mm/mmu.c                      |  29 ++
+ arch/x86/Kconfig                         |   4 +
+ arch/x86/include/asm/haoc/haoc-def.h     |  21 +
+ arch/x86/include/asm/haoc/haoc.h         |  20 +
+ arch/x86/include/asm/haoc/iee-access.h   |  50 +++
+ arch/x86/include/asm/haoc/iee-func.h     |  16 +
+ arch/x86/include/asm/haoc/iee.h          |  34 ++
+ arch/x86/kernel/Makefile                 |   1 +
+ arch/x86/kernel/asm-offsets.c            |   7 +
+ arch/x86/kernel/cpu/common.c             |  17 +
+ arch/x86/kernel/haoc/Makefile            |   2 +
+ arch/x86/kernel/haoc/haoc.c              |  19 +
+ arch/x86/kernel/haoc/iee/Makefile        |   2 +
+ arch/x86/kernel/haoc/iee/iee-func.c      |  20 +
+ arch/x86/kernel/haoc/iee/iee-gate.S      |  73 +++
+ arch/x86/kernel/haoc/iee/iee-init.c      | 165 +++++++
+ arch/x86/kernel/haoc/iee/iee.c           |  32 ++
+ arch/x86/mm/init_64.c                    |  13 +
+ 43 files changed, 1975 insertions(+)
+ create mode 100644 arch/arm64/include/asm/haoc/haoc-def.h
+ create mode 100644 arch/arm64/include/asm/haoc/haoc.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee-access.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee-asm.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee-func.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee-init.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee-mmu.h
+ create mode 100644 arch/arm64/include/asm/haoc/iee.h
+ create mode 100644 arch/arm64/kernel/haoc/Kconfig
+ create mode 100644 arch/arm64/kernel/haoc/Makefile
+ create mode 100644 arch/arm64/kernel/haoc/haoc.c
+ create mode 100644 arch/arm64/kernel/haoc/iee/Makefile
+ create mode 100644 arch/arm64/kernel/haoc/iee/iee-func.c
+ create mode 100644 arch/arm64/kernel/haoc/iee/iee-gate.S
+ create mode 100644 arch/arm64/kernel/haoc/iee/iee-init.c
+ create mode 100644 arch/arm64/kernel/haoc/iee/iee-mmu.c
+ create mode 100644 arch/arm64/kernel/haoc/iee/iee.c
+ create mode 100644 arch/x86/include/asm/haoc/haoc-def.h
+ create mode 100644 arch/x86/include/asm/haoc/haoc.h
+ create mode 100644 arch/x86/include/asm/haoc/iee-access.h
+ create mode 100644 arch/x86/include/asm/haoc/iee-func.h
+ create mode 100644 arch/x86/include/asm/haoc/iee.h
+ create mode 100644 arch/x86/kernel/haoc/Makefile
+ create mode 100644 arch/x86/kernel/haoc/haoc.c
+ create mode 100644 arch/x86/kernel/haoc/iee/Makefile
+ create mode 100644 arch/x86/kernel/haoc/iee/iee-func.c
+ create mode 100644 arch/x86/kernel/haoc/iee/iee-gate.S
+ create mode 100644 arch/x86/kernel/haoc/iee/iee-init.c
+ create mode 100644 arch/x86/kernel/haoc/iee/iee.c
+
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index 5422d1502fd6..93ec4181dac3 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -2717,3 +2717,5 @@ source "drivers/acpi/Kconfig"
+ 
+ source "arch/arm64/kvm/Kconfig"
+ 
++source "arch/arm64/kernel/haoc/Kconfig"
++
+diff --git a/arch/arm64/configs/openeuler_defconfig b/arch/arm64/configs/openeuler_defconfig
+index 3cfff0701479..04a5030638ca 100644
+--- a/arch/arm64/configs/openeuler_defconfig
++++ b/arch/arm64/configs/openeuler_defconfig
+@@ -793,6 +793,12 @@ CONFIG_ARCH_VCPU_STAT=y
+ CONFIG_VIRT_VTIMER_IRQ_BYPASS=y
+ CONFIG_CPU_MITIGATIONS=y
+ 
++#
++# Hardware Assisted OS Compartmentalization(HAOC)
++#
++CONFIG_IEE=y
++# end of Hardware Assisted OS Compartmentalization(HAOC)
++
+ #
+ # General architecture-dependent options
+ #
+diff --git a/arch/arm64/include/asm/haoc/haoc-def.h b/arch/arm64/include/asm/haoc/haoc-def.h
+new file mode 100644
+index 000000000000..2e2bf2161f8e
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/haoc-def.h
+@@ -0,0 +1,26 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_HAOC_DEF_H
++#define _LINUX_HAOC_DEF_H
++
++/* Place the enum entries in the order corresponding to iee_funcs array. */
++enum {
++	IEE_OP_MEMSET,
++	IEE_FLAG_END
++};
++
++/* The entry gate of all IEE APIs. The first parameter must be a valid
++ * IEE function index.
++ */
++extern unsigned long long iee_rw_gate(int flag, ...);
++
++#define __iee_code		__section(".iee.text")
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/haoc.h b/arch/arm64/include/asm/haoc/haoc.h
+new file mode 100644
+index 000000000000..97f4194137d1
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/haoc.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_HAOC_H
++#define _LINUX_HAOC_H
++
++#include <linux/types.h>
++#include <linux/mm.h>
++
++void _iee_memset(unsigned long __unused, void *ptr, int data, size_t n);
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee-access.h b/arch/arm64/include/asm/haoc/iee-access.h
+new file mode 100644
+index 000000000000..27b2b5082908
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee-access.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_ACCESS_H
++#define _LINUX_IEE_ACCESS_H
++
++#include <asm/haoc/haoc-def.h>
++#include <asm/haoc/iee.h>
++
++/* An example of IEE API. */
++static inline void iee_memset(void *ptr, int data, size_t n)
++{
++	if (haoc_enabled)
++		iee_rw_gate(IEE_OP_MEMSET, ptr, data, n);
++	else
++		memset(ptr, data, n);
++}
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee-asm.h b/arch/arm64/include/asm/haoc/iee-asm.h
+new file mode 100644
+index 000000000000..554c46bea2c2
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee-asm.h
+@@ -0,0 +1,31 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_ASM_H
++#define _LINUX_IEE_ASM_H
++
++#include <asm/pgtable-hwdef.h>
++
++#define BAD_ELR_EL1	0
++#define BAD_TCR_EL1 1
++
++#define ASID_BIT		(UL(1) << 48)
++
++#ifdef CONFIG_UNMAP_KERNEL_AT_EL0
++#define IEE_ASID			0xfffe
++#else
++#define IEE_ASID			0xffff
++#endif
++#define IEE_ASM_ASID		(UL(IEE_ASID) << 48)
++
++#define TCR_HPD1		(UL(1) << 42)
++#define TCR_A1			(UL(1) << 22)
++#define IEE_TCR_MASK		(~(TCR_HD | TCR_E0PD1 | TCR_T0SZ_MASK))
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee-func.h b/arch/arm64/include/asm/haoc/iee-func.h
+new file mode 100644
+index 000000000000..61495de7d921
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee-func.h
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_ASM_FUNC_H
++#define _LINUX_IEE_ASM_FUNC_H
++
++extern void put_pages_into_iee(unsigned long addr, int order);
++extern void set_iee_page(unsigned long addr, int order);
++extern void unset_iee_page(unsigned long addr, int order);
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee-init.h b/arch/arm64/include/asm/haoc/iee-init.h
+new file mode 100644
+index 000000000000..31467199c11a
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee-init.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_INIT_H
++#define _LINUX_IEE_INIT_H
++
++#define NO_BLOCK_MAPPINGS	BIT(0)
++#define NO_CONT_MAPPINGS	BIT(1)
++#define NO_EXEC_MAPPINGS	BIT(2)	/* assumes FEAT_HPDS is not used */
++
++extern char iee_init_data_begin[];
++extern char iee_init_data_end[];
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee-mmu.h b/arch/arm64/include/asm/haoc/iee-mmu.h
+new file mode 100644
+index 000000000000..9fe5d95225f0
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee-mmu.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_MMU_H
++#define _LINUX_IEE_MMU_H
++
++extern phys_addr_t __init early_iee_stack_alloc(int order);
++extern void __iee_create_pgd_mapping_locked(pgd_t *pgdir, phys_addr_t phys,
++				 unsigned long virt, phys_addr_t size,
++				 pgprot_t prot,
++				 phys_addr_t (*pgtable_alloc)(int),
++				 int flags);
++extern void __init iee_init_mappings(pgd_t *pgdp);
++extern void __init init_early_iee_data(void);
++extern void __init early_iee_data_cache_init(void);
++
++#endif
+diff --git a/arch/arm64/include/asm/haoc/iee.h b/arch/arm64/include/asm/haoc/iee.h
+new file mode 100644
+index 000000000000..1b3b1cbe070f
+--- /dev/null
++++ b/arch/arm64/include/asm/haoc/iee.h
+@@ -0,0 +1,72 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_H
++#define _LINUX_IEE_H
++
++#include <linux/mm.h>
++#include <linux/types.h>
++#include <asm/haoc/iee-func.h>
++
++extern unsigned long iee_tcr;
++extern unsigned long kernel_tcr;
++extern bool iee_init_done;
++extern bool haoc_enabled;
++
++#define IEE_OFFSET 0x400000000000
++#define IEE_DATA_ORDER (PMD_SHIFT - PAGE_SHIFT)
++
++#define __phys_to_iee(x)	(__phys_to_virt(x) | IEE_OFFSET)
++#define __virt_to_iee(x)	(((u64)x) | IEE_OFFSET)
++#define __kimg_to_iee(x)	(__phys_to_iee(__pa_symbol(x)))
++#define __page_to_iee(x)	(__phys_to_iee(page_to_phys(x)))
++
++#define __iee_to_virt(x)	(((u64)x) & ~IEE_OFFSET)
++#define __iee_to_phys(x)	(__pa(__iee_to_virt(x)))
++
++/* Support conversion from both kernel and linear addresses. */
++#define __ptr_to_iee(x)	({		\
++	typeof(x) __val;			\
++	if (__is_lm_address((u64)x))	\
++		__val = ((typeof(x))(__virt_to_iee((u64)x)));	\
++	else						\
++		__val = ((typeof(x))(__kimg_to_iee((u64)x)));	\
++	__val;						\
++})
++
++#define SET_UPAGE(x)	__pgprot(pgprot_val(x) | PTE_USER)
++#define SET_PPAGE(x)	__pgprot(pgprot_val(x) & (~PTE_USER))
++#define SET_INVALID(x)	__pgprot(pgprot_val(x) & (~PTE_VALID))
++#define SET_NG(x)	__pgprot(pgprot_val(x) | PTE_NG)
++
++#define PGD_APTABLE_RO	(_AT(pudval_t, 1) << 62)
++#define PGD_APTABLE		(_AT(pudval_t, 1) << 61)
++#define PGD_PXNTABLE	(_AT(pudval_t, 1) << 59)
++#define PGD_UXNTABLE	(_AT(pudval_t, 1) << 60)
++
++#define TCR_HPD1		(UL(1) << 42)
++
++void iee_init_mappings(pgd_t *pgdp);
++void iee_init_post(void);
++void iee_stack_init(void);
++void iee_init_tcr(void);
++void iee_setup_asid(void);
++
++#define IEE_STACK_ORDER	0x3
++#define IEE_STACK_SIZE	(PAGE_SIZE << IEE_STACK_ORDER)
++
++#define IEE_CHECK(condition) do {	\
++	if (unlikely(condition))	\
++		panic("IEE check failed on %s.", __func__);	\
++} while (0)
++
++extern void arm64_enter_nmi(struct pt_regs *regs);
++extern const char *esr_get_class_string(unsigned long esr);
++
++#endif
+diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
+index 3d404a2cc961..1a7d12f6cf15 100644
+--- a/arch/arm64/kernel/Makefile
++++ b/arch/arm64/kernel/Makefile
+@@ -36,6 +36,7 @@ obj-y			:= debug-monitors.o entry.o irq.o fpsimd.o		\
+ 			   syscall.o proton-pack.o idreg-override.o idle.o	\
+ 			   patching.o rsi.o
+ 
++obj-$(CONFIG_IEE)				+= haoc/
+ obj-$(CONFIG_AARCH32_EL0)		+= binfmt_elf32.o sys32.o signal32.o			\
+ 					   sys_compat.o
+ obj-$(CONFIG_AARCH32_EL0)		+= sigreturn32.o
+diff --git a/arch/arm64/kernel/entry-common.c b/arch/arm64/kernel/entry-common.c
+index a90231346751..5e08a3ac6add 100644
+--- a/arch/arm64/kernel/entry-common.c
++++ b/arch/arm64/kernel/entry-common.c
+@@ -214,7 +214,11 @@ static __always_inline void fast_enter_from_user_mode(struct pt_regs *regs)
+  * mode. Before this function is called it is not safe to call regular kernel
+  * code, instrumentable code, or any code which may trigger an exception.
+  */
++#ifdef CONFIG_IEE
++void noinstr arm64_enter_nmi(struct pt_regs *regs)
++#else
+ static void noinstr arm64_enter_nmi(struct pt_regs *regs)
++#endif
+ {
+ 	regs->lockdep_hardirqs = lockdep_hardirqs_enabled();
+ 
+diff --git a/arch/arm64/kernel/entry.S b/arch/arm64/kernel/entry.S
+index 117be8a7d529..2ed35edb9a6d 100644
+--- a/arch/arm64/kernel/entry.S
++++ b/arch/arm64/kernel/entry.S
+@@ -28,6 +28,29 @@
+ #include <asm/thread_info.h>
+ #include <asm/asm-uaccess.h>
+ #include <asm/unistd.h>
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee-asm.h>
++#endif
++
++#ifdef CONFIG_IEE
++/* IEE code shall not be interrupted. */
++	.macro iee_elr_check
++	ldr x1, =__iee_code_start
++	cmp x1, x22			/* ELR_EL1 was stored in x22 on kernel entry. */
++	b.hi 114f
++	ldr x2, =__iee_code_end
++	cmp x2, x22
++	b.lo 114f
++	/* ELR check fail */
++	mov	x0, sp
++	mov	x1, #BAD_ELR_EL1
++	mrs	x2, esr_el1
++	mov x3, x22
++	bl	iee_bad_mode
++	ASM_BUG()
++114:
++	.endm
++#endif
+ 
+ 	.macro	clear_gp_regs
+ 	.irp	n,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29
+@@ -766,6 +789,9 @@ SYM_CODE_START_LOCAL(el\el\ht\()_\regsize\()_\label)
+ 	.endif
+ #endif
+ 	kernel_entry \el, \regsize
++#ifdef CONFIG_IEE
++	iee_elr_check
++#endif
+ 	mov	x0, sp
+ 	bl	el\el\ht\()_\regsize\()_\label\()_handler
+ 	.if \el == 0
+diff --git a/arch/arm64/kernel/haoc/Kconfig b/arch/arm64/kernel/haoc/Kconfig
+new file mode 100644
+index 000000000000..ea5af75f8ec1
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/Kconfig
+@@ -0,0 +1,18 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# Hardware assisted os compartmentalization(Haoc) configuration
++#
++menu "Hardware Assisted OS Compartmentalization(HAOC)"
++
++config IEE
++	bool "Isolated Execution Environment Framework(IEE)"
++	help
++		Support for Isolated Execution Environment Framework. Foundation of HAOC.
++		Could isolate kernel critical data and enforce all write access made and
++		verified in IEE APIs.
++		Needs hardware support FEAT_HPDS.
++	depends on ARM64_4K_PAGES
++	depends on ARM64_VA_BITS_48
++	def_bool y
++
++endmenu # HAOC
+diff --git a/arch/arm64/kernel/haoc/Makefile b/arch/arm64/kernel/haoc/Makefile
+new file mode 100644
+index 000000000000..5d0716e2d750
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0
++obj-y += haoc.o
++obj-y += iee/
+\ No newline at end of file
+diff --git a/arch/arm64/kernel/haoc/haoc.c b/arch/arm64/kernel/haoc/haoc.c
+new file mode 100644
+index 000000000000..0eea6746b620
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/haoc.c
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/haoc.h>
++
++typedef void (*iee_func)(void);
++
++/*
++ * Register IEE handler functions here.
++ * IEE gate would find out the specific handler function inside this array
++ * using the index that iee_rw_gate() gives, so the arrangement of these
++ * IEE functions should correspond one-to-one with the enum entries in haoc-def.h,
++ * such as IEE_OP_MEMSET to call _iee_memset().
++ */
++iee_func iee_funcs[] = {
++	(iee_func)_iee_memset,
++	NULL
++};
+diff --git a/arch/arm64/kernel/haoc/iee/Makefile b/arch/arm64/kernel/haoc/iee/Makefile
+new file mode 100644
+index 000000000000..cce1d1d59616
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0
++obj-$(CONFIG_IEE) += iee.o iee-gate.o iee-init.o iee-func.o iee-mmu.o
+\ No newline at end of file
+diff --git a/arch/arm64/kernel/haoc/iee/iee-func.c b/arch/arm64/kernel/haoc/iee/iee-func.c
+new file mode 100644
+index 000000000000..d22f872201f6
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/iee-func.c
+@@ -0,0 +1,318 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/haoc-def.h>
++#include <asm/haoc/iee.h>
++#include <asm/tlbflush.h>
++#include <asm/pgalloc.h>
++
++static inline bool iee_support_pmd_block(unsigned long addr, unsigned int order)
++{
++	u64 end = addr + (PAGE_SIZE << order);
++
++	return ((addr | end) & ~PMD_MASK) == 0;
++}
++
++static inline bool iee_support_cont_pte(unsigned long addr, unsigned int order)
++{
++	u64 end = addr + (PAGE_SIZE << order);
++
++	return ((addr | end) & ~CONT_PTE_MASK) == 0;
++}
++
++/* Would clear continuous bits or split pmd block descriptors if needed. */
++static void iee_may_split_pmd(pud_t *pudp, unsigned long addr, unsigned int order)
++{
++	pmd_t *pmdp = pmd_offset(pudp, addr);
++
++	if (!pmd_leaf(*pmdp))
++		return;
++
++	/* Handling cont mapping for pmd blocks. */
++	if ((pmd_val(*pmdp) & PTE_CONT)) {
++		/* Get the beginning of cont mapping. */
++		pmd_t *cont_pmdp = pmd_offset(pudp, addr & CONT_PMD_MASK);
++
++		for (int i = 0; i < CONT_PMDS; i++) {
++			set_pmd(cont_pmdp, __pmd(pmd_val(*cont_pmdp) & ~PTE_CONT));
++			cont_pmdp++;
++		}
++	}
++
++	/* May split Block Descriptor. */
++	if (!iee_support_pmd_block(addr, order)) {
++		struct page *page = pmd_page(*pmdp);
++		pte_t *pgtable = pte_alloc_one_kernel(&init_mm);
++
++		if (!pgtable)
++			panic("Alloc pgtable error.\n");
++
++		{
++			/* Iterate on the new page table. */
++			pte_t *ptep = pgtable;
++
++			/* Try to support continuous mappings on pte. */
++			for (int i = 0; i < PTRS_PER_PMD; i++, ptep++) {
++				pte_t entry;
++				pgprot_t pgprot = PAGE_KERNEL;
++
++				pgprot = __pgprot(pgprot_val(pgprot) | PTE_CONT);
++
++				entry = mk_pte(page + i, pgprot);
++				set_pte(ptep, entry);
++			}
++		}
++
++		/* Ensure that this pmd hasn't be splited by other threads. */
++		spinlock_t *ptl = pmd_lock(&init_mm, pmdp);
++
++		if (pmd_leaf(READ_ONCE(*pmdp))) {
++			/* for sync. */
++			smp_wmb();
++			pmd_populate_kernel(&init_mm, pmdp, pgtable);
++			pgtable = NULL;
++		}
++		spin_unlock(ptl);
++
++		if (pgtable)
++			pte_free_kernel(&init_mm, pgtable);
++	}
++}
++
++/* Modify linear and IEE mappings of each address at the same time to avoid
++ * synchronization problems.
++ */
++static void iee_set_sensitive_pte(pte_t *lm_ptep, pte_t *iee_ptep, int order,
++				int use_block_pmd)
++{
++	int i;
++
++	if (use_block_pmd) {
++		pmd_t pmd = __pmd(pte_val(READ_ONCE(*lm_ptep)));
++
++		pmd = __pmd((pmd_val(pmd) | PMD_SECT_RDONLY) & ~PTE_DBM);
++		WRITE_ONCE(*lm_ptep, __pte(pmd_val(pmd)));
++		for (i = 0; i < (1 << order); i++) {
++			pte_t pte = READ_ONCE(*iee_ptep);
++
++			pte = __pte(pte_val(pte) | PTE_VALID);
++			WRITE_ONCE(*iee_ptep, pte);
++			iee_ptep++;
++		}
++	} else {
++		for (i = 0; i < (1 << order); i++) {
++			pte_t pte = READ_ONCE(*lm_ptep);
++
++			pte = __pte((pte_val(pte) | PTE_RDONLY) & ~PTE_DBM);
++			WRITE_ONCE(*lm_ptep, pte);
++			pte = READ_ONCE(*iee_ptep);
++			pte = __pte(pte_val(pte) | PTE_VALID);
++			WRITE_ONCE(*iee_ptep, pte);
++			lm_ptep++;
++			iee_ptep++;
++		}
++	}
++	dsb(ishst);
++	isb();
++}
++
++static void iee_unset_sensitive_pte(pte_t *lm_ptep, pte_t *iee_ptep, int order, int use_block_pmd)
++{
++	int i;
++
++	if (use_block_pmd) {
++		pmd_t pmd = __pmd(pte_val(READ_ONCE(*lm_ptep)));
++
++		pmd = __pmd(pmd_val(pmd) | PTE_DBM);
++		WRITE_ONCE(*lm_ptep, __pte(pmd_val(pmd)));
++		for (i = 0; i < (1 << order); i++) {
++			pte_t pte = READ_ONCE(*iee_ptep);
++
++			pte = __pte(pte_val(pte) & ~PTE_VALID);
++			WRITE_ONCE(*iee_ptep, pte);
++			iee_ptep++;
++		}
++	} else {
++		for (i = 0; i < (1 << order); i++) {
++			pte_t pte = READ_ONCE(*lm_ptep);
++
++			pte = __pte(pte_val(pte) | PTE_DBM);
++			WRITE_ONCE(*lm_ptep, pte);
++			pte = READ_ONCE(*iee_ptep);
++			pte = __pte(pte_val(pte) & ~PTE_VALID);
++			WRITE_ONCE(*iee_ptep, pte);
++			lm_ptep++;
++			iee_ptep++;
++		}
++	}
++	dsb(ishst);
++	isb();
++}
++
++/* Only support address range smaller then one PMD block. */
++void put_pages_into_iee_block(unsigned long addr, int order)
++{
++	pgd_t *pgdir = swapper_pg_dir;
++	pgd_t *pgdp = pgd_offset_pgd(pgdir, addr);
++	p4d_t *p4dp = p4d_offset(pgdp, addr);
++	pud_t *pudp = pud_offset(p4dp, addr);
++	pmd_t *pmdp;
++	pte_t *lm_ptep;
++	pte_t *iee_ptep;
++	unsigned long iee_addr;
++	int use_block_pmd = 0;
++
++	/* Split pmd block if needed. */
++	iee_may_split_pmd(pudp, addr, order);
++
++	pmdp = pmd_offset(pudp, addr);
++
++	use_block_pmd = pmd_leaf(READ_ONCE(*pmdp));
++
++	if (use_block_pmd)
++		lm_ptep = (pte_t *)pmdp;
++	else
++		lm_ptep = pte_offset_kernel(pmdp, addr);
++
++	// Handling cont mapping.
++	if (((1 << order) < CONT_PTES) && (pte_val(*lm_ptep) & PTE_CONT)) {
++		// The beginning of cont mapping.
++		int i;
++		pte_t *ptep = pte_offset_kernel(pmdp, addr & CONT_PTE_MASK);
++
++		if (order < CONFIG_ARM64_CONT_PTE_SHIFT) {
++			for (i = 0; i < CONT_PTES; i++) {
++				set_pte(ptep, __pte(pte_val(*ptep) & ~PTE_CONT));
++				ptep++;
++			}
++		}
++	}
++
++	iee_addr = ((unsigned long)addr | IEE_OFFSET);
++	pgdp = pgd_offset_pgd(pgdir, iee_addr);
++	p4dp = p4d_offset(pgdp, iee_addr);
++	pudp = pud_offset(p4dp, iee_addr);
++	pmdp = pmd_offset(pudp, iee_addr);
++	iee_ptep = pte_offset_kernel(pmdp, iee_addr);
++	/* Valid the IEE mappings of these pages to enable IEE access. */
++	iee_set_sensitive_pte(lm_ptep, iee_ptep, order, use_block_pmd);
++	flush_tlb_kernel_range(addr, addr+PAGE_SIZE*(1 << order));
++	isb();
++}
++
++/*
++ * Put the given pages into IEE by enforcing RO protection of their linear
++ * mappings and setting the IEE addresses valid.
++ *
++ * @addr: The start linear address of pages to be protected.
++ * @order: The effected address size would be (1 << order) pages.
++ */
++void put_pages_into_iee(unsigned long addr, int order)
++{
++	unsigned long end = addr + (PAGE_SIZE << order);
++
++	if (addr & IEE_OFFSET)
++		return;
++
++	/* Split the address range if needed. */
++	if (order < IEE_DATA_ORDER)
++		put_pages_into_iee_block(addr, order);
++	else {
++		if (addr != ALIGN(addr, PMD_SIZE))
++			panic("IEE: Invalid input addr 0x%lx order %d for %s",
++					addr, order, __func__);
++		while (addr < end) {
++			put_pages_into_iee_block(addr, IEE_DATA_ORDER);
++			addr += PMD_SIZE;
++		}
++	}
++}
++
++/* The reverse operation of put_pages_into_iee().
++ * Call this function when you are returning pages back to kernel.
++ */
++void remove_pages_from_iee(unsigned long addr, int order)
++{
++	pgd_t *pgdir = swapper_pg_dir;
++	pgd_t *pgdp = pgd_offset_pgd(pgdir, addr);
++	p4d_t *p4dp = p4d_offset(pgdp, addr);
++	pud_t *pudp = pud_offset(p4dp, addr);
++	pmd_t *pmdp = pmd_offset(pudp, addr);
++	pte_t *lm_ptep;
++	pte_t *iee_ptep;
++	unsigned long iee_addr;
++	int use_block_pmd = 0;
++
++	// Use Block Descriptor.
++	if (pmd_leaf(*pmdp)) {
++		use_block_pmd = 1;
++		lm_ptep = (pte_t *)pmdp;
++	} else
++		lm_ptep = pte_offset_kernel(pmdp, addr);
++
++	iee_addr = ((unsigned long)addr | IEE_OFFSET);
++	pgdp = pgd_offset_pgd(pgdir, iee_addr);
++	p4dp = p4d_offset(pgdp, iee_addr);
++	pudp = pud_offset(p4dp, iee_addr);
++	pmdp = pmd_offset(pudp, iee_addr);
++	iee_ptep = pte_offset_kernel(pmdp, iee_addr);
++	iee_unset_sensitive_pte(lm_ptep, iee_ptep, order, use_block_pmd);
++	flush_tlb_kernel_range(addr, addr+PAGE_SIZE*(1 << order));
++	flush_tlb_kernel_range(iee_addr, iee_addr+PAGE_SIZE*(1 << order));
++	isb();
++}
++
++/* See put_pages_into_iee(). */
++void set_iee_page(unsigned long addr, int order)
++{
++	put_pages_into_iee(addr, order);
++}
++
++/* See remove_pages_from_iee(). */
++void unset_iee_page(unsigned long addr, int order)
++{
++	remove_pages_from_iee(addr, order);
++}
++
++#include <asm/ptrace.h>
++#include <asm/system_misc.h>
++#include <asm/daifflags.h>
++
++static char *handler[] = {
++	"ELR_EL1",
++	"TCR_EL1",
++};
++
++/* Print out the reason of IEE panics. Called when IEE check failed. */
++asmlinkage void notrace iee_bad_mode(struct pt_regs *regs, int reason,
++		unsigned int esr, unsigned long info)
++{
++	arm64_enter_nmi(regs);
++
++	console_verbose();
++
++	pr_crit("IEE : Bad mode in %s check detected on CPU%d, code 0x%08x -- %s\n",
++		handler[reason], smp_processor_id(), esr,
++		esr_get_class_string(esr));
++
++	__show_regs(regs);
++	local_daif_mask();
++
++	switch (reason) {
++	case 0:
++		pr_crit("IEE: Bad ELR_EL1 0x%llx\n", (u64)info);
++		break;
++	case 1:
++		pr_crit("IEE: Bad TCR_EL1 0x%llx\n", (u64)info);
++		break;
++	}
++
++	panic("bad mode");
++}
++
+diff --git a/arch/arm64/kernel/haoc/iee/iee-gate.S b/arch/arm64/kernel/haoc/iee/iee-gate.S
+new file mode 100644
+index 000000000000..8ea8545a7f4f
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/iee-gate.S
+@@ -0,0 +1,98 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <linux/linkage.h>
++#include <asm/bug.h>
++#include <asm/assembler.h>
++#include <asm/haoc/iee-asm.h>
++SYM_FUNC_START(iee_rw_gate)
++    /* save daif, close irq  */
++    mrs x13, daif
++	msr daifset, #0x2
++    isb
++    /* save lr */
++	stp	x29, x30, [sp, #-16]!
++	bl iee_protected_rw_gate
++    /* restore lr */
++    ldp	x29, x30, [sp], #16
++    /* restore daif */
++	msr daif, x13
++    ret
++SYM_FUNC_END(iee_rw_gate)
++
++	.pushsection ".iee.text", "ax"
++
++.global iee_tcr_mask
++iee_tcr_mask:
++	.quad IEE_TCR_MASK
++
++.global iee_tcr
++iee_tcr:
++	.quad 0
++
++.global kernel_tcr
++kernel_tcr:
++	.quad 0
++
++.global __iee_code_start
++__iee_code_start:
++
++SYM_FUNC_START(iee_protected_rw_gate)
++	/* entry gate */
++	mrs x12, tcr_el1
++	orr x12, x12, #TCR_HPD1
++	orr x12, x12, #TCR_A1
++	msr tcr_el1, x12
++	isb
++	/* Check TCR */
++	ldr x9, iee_tcr
++	ldr x10, iee_tcr_mask
++	and x12, x12, x10
++	cmp x9, x12
++	b.ne 1f
++
++	/* Switch to iee stack by per cpu ptr. */
++	ldr_this_cpu x9, iee_cpu_stack_ptr, x10
++	mov x14, sp
++	mov sp, x9
++
++	stp x13, x14, [sp, #-16]!
++	/* call iee func */
++	adrp x12, iee_funcs
++    add x12, x12, x0, lsl #3
++    ldr x12, [x12, #:lo12:iee_funcs]
++	stp x29, x30, [sp, #-16]!
++    blr x12
++	ldp x29, x30, [sp], #16
++	/* Switch to kernel stack */
++	ldp x13, x14, [sp], #16
++	mov sp, x14
++	/* exit gate */
++	mrs x12, tcr_el1
++	bic x12, x12, #TCR_HPD1
++	bic x12, x12, #TCR_A1
++	msr tcr_el1, x12
++	isb
++	/* Check TCR */
++	ldr x9, kernel_tcr
++	ldr x10, iee_tcr_mask
++	and x12, x12, x10
++	cmp x9, x12
++	b.ne 1f
++	ret
++1:
++	mov	x0, sp
++	mov	x1, #BAD_TCR_EL1
++	mrs	x2, esr_el1
++	mrs x3, tcr_el1
++	bl	iee_bad_mode
++	ASM_BUG()
++SYM_FUNC_END(iee_protected_rw_gate)
++
++	.popsection
+diff --git a/arch/arm64/kernel/haoc/iee/iee-init.c b/arch/arm64/kernel/haoc/iee/iee-init.c
+new file mode 100644
+index 000000000000..1f341424654e
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/iee-init.c
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/iee.h>
++#include <linux/memblock.h>
++#include <asm/cpufeature.h>
++#include <asm/haoc/iee-mmu.h>
++#include <asm/haoc/iee-asm.h>
++
++__aligned(PAGE_SIZE) DEFINE_PER_CPU(u64*[(PAGE_SIZE/8)],
++				iee_cpu_stack_ptr);
++
++bool __ro_after_init iee_init_done;
++bool __ro_after_init haoc_enabled;
++
++/* Allocate pages from IEE data pool to use as per-cpu IEE stack. */
++static void __init iee_stack_alloc(void)
++{
++	int cpu;
++
++	for_each_possible_cpu(cpu) {
++		u64 *cpu_stack_ptr = (u64 *)(SHIFT_PERCPU_PTR(iee_cpu_stack_ptr,
++				__per_cpu_offset[cpu]));
++		u64 *new_pages  = __va(early_iee_stack_alloc(IEE_STACK_ORDER));
++
++		*cpu_stack_ptr = __virt_to_iee((u64)new_pages + IEE_STACK_SIZE);
++	}
++
++	flush_tlb_all();
++}
++
++/* Setup TCR for this cpu and move ASID from ttbr1 to ttbr0 */
++void iee_setup_asid(void)
++{
++	unsigned long asid, ttbr0, ttbr1;
++
++	ttbr1 = read_sysreg(ttbr1_el1);
++	asid = FIELD_GET(TTBR_ASID_MASK, ttbr1);
++	ttbr0 = read_sysreg(ttbr0_el1) | FIELD_PREP(TTBR_ASID_MASK, asid);
++	ttbr1 |= FIELD_PREP(TTBR_ASID_MASK, IEE_ASID);
++	write_sysreg(ttbr1, ttbr1_el1);
++	write_sysreg(ttbr0, ttbr0_el1);
++	write_sysreg(read_sysreg(tcr_el1) & ~TCR_A1, tcr_el1);
++	isb();
++
++	/* Flush tlb to enable IEE. */
++	local_flush_tlb_all();
++}
++
++void __init iee_init_post(void)
++{
++	if (!haoc_enabled)
++		return;
++
++	iee_setup_asid();
++
++	iee_init_done = true;
++}
++
++void __init iee_stack_init(void)
++{
++	if (!haoc_enabled)
++		return;
++
++	iee_stack_alloc();
++}
++
++static int __init parse_haoc_enabled(char *str)
++{
++	return kstrtobool(str, &haoc_enabled);
++}
++early_param("haoc", parse_haoc_enabled);
+diff --git a/arch/arm64/kernel/haoc/iee/iee-mmu.c b/arch/arm64/kernel/haoc/iee/iee-mmu.c
+new file mode 100644
+index 000000000000..db6b46984de2
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/iee-mmu.c
+@@ -0,0 +1,539 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <linux/mm.h>
++#include <linux/memblock.h>
++#include <linux/mutex.h>
++#include <linux/hugetlb.h>
++#include <asm/pgalloc.h>
++#include <asm/pgtable.h>
++#include <asm/haoc/iee.h>
++#include <asm/haoc/iee-asm.h>
++#include <asm/haoc/iee-init.h>
++
++#define IEE_EARLY_BLOCK_NR	64
++
++struct iee_block {
++	phys_addr_t start;
++	unsigned int order;
++};
++
++struct iee_early_alloc {
++	phys_addr_t begin;
++	phys_addr_t end;
++	int pos;
++	struct iee_block blocks[IEE_EARLY_BLOCK_NR];
++	int curr_block_nr;
++	char *name;
++};
++
++static struct iee_early_alloc iee_stack = {
++	.name = "iee_stack",
++	.curr_block_nr = -1
++};
++
++static DEFINE_MUTEX(fixmap_lock);
++
++__aligned(PAGE_SIZE) DECLARE_PER_CPU(u64*[(PAGE_SIZE/8)],
++				iee_cpu_stack_ptr);
++
++/* reserve 8 pages for iee init stack. */
++__aligned(IEE_STACK_SIZE) __initdata u64 iee_init_stack[IEE_STACK_SIZE/8];
++
++/* Setup global values used in verifications of TCR_EL1 to protect IEE switch gate.
++ * Use fixmap functions as these globals are put inside IEE text section.
++ */
++void __init iee_init_tcr(void)
++{
++	unsigned long ptr = (unsigned long)(fix_to_virt(FIX_PTE));
++
++	__set_fixmap(FIX_PTE, __pa_symbol(&kernel_tcr), FIXMAP_PAGE_NORMAL);
++	ptr += (unsigned long)(&kernel_tcr) & (PAGE_SIZE - 1);
++	*((u64 *)ptr) = read_sysreg(tcr_el1) & IEE_TCR_MASK;
++	clear_fixmap(FIX_PTE);
++	ptr = (unsigned long)(fix_to_virt(FIX_PTE));
++	__set_fixmap(FIX_PTE, __pa_symbol(&iee_tcr), FIXMAP_PAGE_NORMAL);
++	ptr += (unsigned long)(&iee_tcr) & (PAGE_SIZE - 1);
++	*((u64 *)ptr) = kernel_tcr | TCR_HPD1 | TCR_A1;
++	clear_fixmap(FIX_PTE);
++}
++
++static void __init iee_setup_bootcpu_stack(void)
++{
++	u64 *cpu_stack_ptr = (u64 *)(SHIFT_PERCPU_PTR(iee_cpu_stack_ptr,
++				__per_cpu_offset[0]));
++
++	/* Simply use kernel image address here. */
++	*cpu_stack_ptr = (u64)(&iee_init_stack) + IEE_STACK_SIZE;
++}
++
++/* Allocate memory block for iee early data pool. */
++static phys_addr_t __init iee_mem_pool_early_alloc(struct iee_early_alloc *cache,
++							unsigned int order)
++{
++	phys_addr_t phys = 0;
++	void *ptr;
++	int i;
++	unsigned long block_size = (PAGE_SIZE << (order));
++	/* Try smaller block if alloc failed. */
++	while (!phys && order >= IEE_DATA_ORDER) {
++		phys = memblock_phys_alloc_range(block_size,
++					block_size, 0, MEMBLOCK_ALLOC_NOLEAKTRACE);
++		if (!phys) {
++			order--;
++			block_size = (PAGE_SIZE << (order));
++		}
++	}
++
++	if (!phys)
++		panic("Failed to allocate %s page\n", cache->name);
++
++	/*
++	 * The FIX_{PGD,PUD,PMD} slots may be in active use, but the FIX_PTE
++	 * slot will be free, so we can (ab)use the FIX_PTE slot to initialise
++	 * any level of table.
++	 */
++	for (i = 0; i < (1 << (order)); i++) {
++		ptr = pte_set_fixmap(phys + i * PAGE_SIZE);
++
++		memset(ptr, 0, PAGE_SIZE);
++
++		/*
++		 * Implicit barriers also ensure the zeroed page is visible to the page
++		 * table walker
++		 */
++		pte_clear_fixmap();
++	}
++
++	cache->begin = phys;
++	cache->end = phys + block_size;
++	/* Reset curr free page position. */
++	cache->pos = 0;
++	cache->curr_block_nr++;
++	if (cache->curr_block_nr > IEE_EARLY_BLOCK_NR)
++		panic("IEE: early data too large.");
++	/* Record allocated blocks before IEE initialization finishied. */
++	cache->blocks[cache->curr_block_nr].start = phys;
++	cache->blocks[cache->curr_block_nr].order = order;
++	return phys;
++}
++
++/* Prepare one block for each early page pool. */
++void __init early_iee_data_cache_init(void)
++{
++	if (!haoc_enabled)
++		return;
++
++	iee_mem_pool_early_alloc(&iee_stack, IEE_DATA_ORDER);
++}
++
++phys_addr_t __init iee_early_alloc(struct iee_early_alloc *cache,
++					int order)
++{
++	phys_addr_t phys;
++	phys_addr_t expand_phys;
++	unsigned int block_order, expand_order;
++
++redo:
++	if ((cache->begin + cache->pos * PAGE_SIZE + (PAGE_SIZE << order))
++				<= cache->end) {
++		phys = cache->begin + cache->pos * PAGE_SIZE;
++		cache->pos += (1 << order);
++	} else {
++		/* Use current order to expand. */
++		expand_order = cache->blocks[cache->curr_block_nr].order;
++		expand_phys = iee_mem_pool_early_alloc(cache, expand_order);
++
++		/* Put the expanded memory into IEE if late enough. */
++		block_order = cache->blocks[cache->curr_block_nr].order;
++		if (iee_init_done)
++			put_pages_into_iee((unsigned long)__va(expand_phys), block_order);
++		goto redo;
++	}
++	return phys;
++}
++
++/* Allocate IEE Stack from the reserved page pool.
++ * @order: The allocated size is (1 << order) pages.
++ *
++ * RETURNS:
++ * the start of physical address of allocated pages.
++ */
++phys_addr_t __init early_iee_stack_alloc(int order)
++{
++	return iee_early_alloc(&iee_stack, order);
++}
++
++static phys_addr_t __init early_pgtable_alloc(int shift)
++{
++	phys_addr_t phys;
++	void *ptr;
++
++	phys = memblock_phys_alloc_range(PAGE_SIZE, PAGE_SIZE, 0,
++					 MEMBLOCK_ALLOC_NOLEAKTRACE);
++	if (!phys)
++		panic("Failed to allocate page table page\n");
++
++	/*
++	 * The FIX_{PGD,PUD,PMD} slots may be in active use, but the FIX_PTE
++	 * slot will be free, so we can (ab)use the FIX_PTE slot to initialise
++	 * any level of table.
++	 */
++	ptr = pte_set_fixmap(phys);
++
++	memset(ptr, 0, PAGE_SIZE);
++
++	/*
++	 * Implicit barriers also ensure the zeroed page is visible to the page
++	 * table walker
++	 */
++	pte_clear_fixmap();
++
++	return phys;
++}
++
++static void iee_init_pte(pmd_t *pmdp, unsigned long addr, unsigned long end,
++		     phys_addr_t phys, pgprot_t prot)
++{
++	pte_t *ptep;
++
++	ptep = pte_set_fixmap_offset(pmdp, addr);
++	do {
++		pte_t old_pte = __ptep_get(ptep);
++
++		__set_pte(ptep, pfn_pte(__phys_to_pfn(phys), prot));
++
++		/*
++		 * After the PTE entry has been populated once, we
++		 * only allow updates to the permission attributes.
++		 */
++		IEE_CHECK(!pgattr_change_is_safe(pte_val(old_pte),
++					      pte_val(__ptep_get(ptep))));
++
++		phys += PAGE_SIZE;
++	} while (ptep++, addr += PAGE_SIZE, addr != end);
++
++	pte_clear_fixmap();
++}
++
++static void iee_alloc_init_cont_pte(pmd_t *pmdp, unsigned long addr,
++				unsigned long end, phys_addr_t phys,
++				pgprot_t prot,
++				phys_addr_t (*pgtable_alloc)(int),
++				int flags)
++{
++	unsigned long next;
++	pmd_t pmd = READ_ONCE(*pmdp);
++
++	IEE_CHECK(pmd_sect(pmd));
++	if (pmd_none(pmd)) {
++		pmdval_t pmdval = PMD_TYPE_TABLE | PMD_TABLE_UXN | PMD_TABLE_AF;
++		phys_addr_t pte_phys;
++
++		if (flags & NO_EXEC_MAPPINGS)
++			pmdval |= PMD_TABLE_PXN;
++		IEE_CHECK(!pgtable_alloc);
++		pte_phys = pgtable_alloc(PAGE_SHIFT);
++		__pmd_populate(pmdp, pte_phys, pmdval);
++		pmd = READ_ONCE(*pmdp);
++	}
++	IEE_CHECK(pmd_bad(pmd));
++
++	do {
++		pgprot_t __prot = prot;
++
++		next = pte_cont_addr_end(addr, end);
++
++		/* use a contiguous mapping if the range is suitably aligned */
++		if ((((addr | next | phys) & ~CONT_PTE_MASK) == 0) &&
++		    (flags & NO_CONT_MAPPINGS) == 0)
++			__prot = __pgprot(pgprot_val(prot) | PTE_CONT);
++
++		iee_init_pte(pmdp, addr, next, phys, __prot);
++
++		phys += next - addr;
++	} while (addr = next, addr != end);
++}
++
++static void iee_init_pmd(pud_t *pudp, unsigned long addr, unsigned long end,
++		     phys_addr_t phys, pgprot_t prot,
++		     phys_addr_t (*pgtable_alloc)(int), int flags)
++{
++	unsigned long next;
++	pmd_t *pmdp;
++
++	pmdp = pmd_set_fixmap_offset(pudp, addr);
++	do {
++		pmd_t old_pmd = READ_ONCE(*pmdp);
++
++		next = pmd_addr_end(addr, end);
++
++		/* try section mapping first */
++		if (((addr | next | phys) & ~PMD_MASK) == 0 &&
++		    (flags & NO_BLOCK_MAPPINGS) == 0) {
++			pmd_set_huge(pmdp, phys, prot);
++
++			/*
++			 * After the PMD entry has been populated once, we
++			 * only allow updates to the permission attributes.
++			 */
++			IEE_CHECK(!pgattr_change_is_safe(pmd_val(old_pmd),
++						      READ_ONCE(pmd_val(*pmdp))));
++		} else {
++			iee_alloc_init_cont_pte(pmdp, addr, next, phys, prot,
++					    pgtable_alloc, flags);
++
++			IEE_CHECK(pmd_val(old_pmd) != 0 &&
++			       pmd_val(old_pmd) != READ_ONCE(pmd_val(*pmdp)));
++		}
++		phys += next - addr;
++	} while (pmdp++, addr = next, addr != end);
++
++	pmd_clear_fixmap();
++}
++
++static void iee_alloc_init_cont_pmd(pud_t *pudp, unsigned long addr,
++				unsigned long end, phys_addr_t phys,
++				pgprot_t prot,
++				phys_addr_t (*pgtable_alloc)(int), int flags)
++{
++	unsigned long next;
++	pud_t pud = READ_ONCE(*pudp);
++
++	/*
++	 * Check for initial section mappings in the pgd/pud.
++	 */
++	IEE_CHECK(pud_sect(pud));
++	if (pud_none(pud)) {
++		pudval_t pudval = PUD_TYPE_TABLE | PUD_TABLE_UXN | PUD_TABLE_AF;
++		phys_addr_t pmd_phys;
++
++		if (flags & NO_EXEC_MAPPINGS)
++			pudval |= PUD_TABLE_PXN;
++		IEE_CHECK(!pgtable_alloc);
++		pmd_phys = pgtable_alloc(PMD_SHIFT);
++		__pud_populate(pudp, pmd_phys, pudval);
++		pud = READ_ONCE(*pudp);
++	}
++	IEE_CHECK(pud_bad(pud));
++
++	do {
++		pgprot_t __prot = prot;
++
++		next = pmd_cont_addr_end(addr, end);
++
++		/* use a contiguous mapping if the range is suitably aligned */
++		if ((((addr | next | phys) & ~CONT_PMD_MASK) == 0) &&
++		    (flags & NO_CONT_MAPPINGS) == 0)
++			__prot = __pgprot(pgprot_val(prot) | PTE_CONT);
++
++		iee_init_pmd(pudp, addr, next, phys, __prot, pgtable_alloc, flags);
++
++		phys += next - addr;
++	} while (addr = next, addr != end);
++}
++
++static void iee_alloc_init_pud(pgd_t *pgdp, unsigned long addr, unsigned long end,
++			   phys_addr_t phys, pgprot_t prot,
++			   phys_addr_t (*pgtable_alloc)(int),
++			   int flags)
++{
++	unsigned long next;
++	pud_t *pudp;
++	p4d_t *p4dp = p4d_offset(pgdp, addr);
++	p4d_t p4d = READ_ONCE(*p4dp);
++
++	if (p4d_none(p4d)) {
++		p4dval_t p4dval = P4D_TYPE_TABLE | P4D_TABLE_UXN | P4D_TABLE_AF;
++		phys_addr_t pud_phys;
++
++		if (flags & NO_EXEC_MAPPINGS)
++			p4dval |= P4D_TABLE_PXN;
++		IEE_CHECK(!pgtable_alloc);
++		pud_phys = pgtable_alloc(PUD_SHIFT);
++		__p4d_populate(p4dp, pud_phys, p4dval);
++		p4d = READ_ONCE(*p4dp);
++	}
++	IEE_CHECK(p4d_bad(p4d));
++
++	pudp = pud_set_fixmap_offset(p4dp, addr);
++	do {
++		pud_t old_pud = READ_ONCE(*pudp);
++
++		next = pud_addr_end(addr, end);
++
++		iee_alloc_init_cont_pmd(pudp, addr, next, phys, prot,
++					    pgtable_alloc, flags);
++
++		IEE_CHECK(pud_val(old_pud) != 0 &&
++			       pud_val(old_pud) != READ_ONCE(pud_val(*pudp)));
++		phys += next - addr;
++	} while (pudp++, addr = next, addr != end);
++
++	pud_clear_fixmap();
++}
++
++/* This function is almost the same with __create_pgd_mapping_locked()
++ * but not permitting block descriptors larger than pmd block to simplify
++ * page table opeartions like splitting blocks.
++ */
++void __iee_create_pgd_mapping_locked(pgd_t *pgdir, phys_addr_t phys,
++					unsigned long virt, phys_addr_t size,
++					pgprot_t prot,
++					phys_addr_t (*pgtable_alloc)(int),
++					int flags)
++{
++	unsigned long addr, end, next;
++	pgd_t *pgdp = pgd_offset_pgd(pgdir, virt);
++
++	/*
++	 * If the virtual and physical address don't have the same offset
++	 * within a page, we cannot map the region as the caller expects.
++	 */
++	if (WARN_ON((phys ^ virt) & ~PAGE_MASK))
++		return;
++
++	phys &= PAGE_MASK;
++	addr = virt & PAGE_MASK;
++	end = PAGE_ALIGN(virt + size);
++
++	do {
++		next = pgd_addr_end(addr, end);
++		iee_alloc_init_pud(pgdp, addr, next, phys, prot, pgtable_alloc,
++			       flags);
++		phys += next - addr;
++	} while (pgdp++, addr = next, addr != end);
++}
++
++/* Mark the pgd entry of IEE address ranges with APTable to setup isolation. */
++static void __init __create_pgd_mapping_for_iee_locked(pgd_t *pgdir, phys_addr_t phys,
++				 unsigned long virt, phys_addr_t size,
++				 pgprot_t prot,
++				 phys_addr_t (*pgtable_alloc)(int),
++				 int flags)
++{
++	unsigned long addr, end, next;
++	pgd_t *pgdp = pgd_offset_pgd(pgdir, virt);
++	p4d_t *p4dp;
++	p4d_t p4d;
++
++	/*
++	 * If the virtual and physical address don't have the same offset
++	 * within a page, we cannot map the region as the caller expects.
++	 */
++	if (WARN_ON((phys ^ virt) & ~PAGE_MASK))
++		return;
++
++	phys &= PAGE_MASK;
++	addr = virt & PAGE_MASK;
++	end = PAGE_ALIGN(virt + size);
++
++	do {
++		next = pgd_addr_end(addr, end);
++		p4dp = p4d_offset(pgdp, addr);
++		p4d = READ_ONCE(*p4dp);
++		if (!p4d_none(p4d) && !(p4d_val(p4d) & PGD_APTABLE_RO)) {
++			phys += next - addr;
++			continue;
++		}
++		iee_alloc_init_pud(pgdp, addr, next, phys, prot, pgtable_alloc,
++			       flags);
++
++		/* Set APTable RO on pgd entries of IEE mappings to prevent kernel access
++		 * when TCR.HPD1 == 0.
++		 */
++		p4d = READ_ONCE(*p4dp);
++		__p4d_populate(p4dp, __p4d_to_phys(p4d), (PGD_APTABLE_RO | PGD_PXNTABLE |
++				PGD_UXNTABLE | PUD_TYPE_TABLE));
++
++		phys += next - addr;
++	} while (pgdp++, addr = next, addr != end);
++}
++
++static void __create_pgd_mapping_for_iee(pgd_t *pgdir, phys_addr_t phys,
++				 unsigned long virt, phys_addr_t size,
++				 pgprot_t prot,
++				 phys_addr_t (*pgtable_alloc)(int),
++				 int flags)
++{
++	mutex_lock(&fixmap_lock);
++	__create_pgd_mapping_for_iee_locked(pgdir, phys, virt, size, prot,
++				    pgtable_alloc, flags);
++	mutex_unlock(&fixmap_lock);
++}
++
++static void __init __map_memblock_for_iee(pgd_t *pgdp, phys_addr_t start,
++				  phys_addr_t end, pgprot_t prot, int flags)
++{
++	__create_pgd_mapping_for_iee(pgdp, start, __phys_to_iee(start), end - start,
++			     prot, early_pgtable_alloc, flags);
++}
++
++/*
++ * First function in IEE initialization. Create IEE linear mappings inside
++ * kernel address space to access the protected objects.
++ */
++void __init iee_init_mappings(pgd_t *pgdp)
++{
++	phys_addr_t start, end;
++	int flags = NO_EXEC_MAPPINGS;
++	u64 i;
++
++	/* Check if haoc is enabled by kernel parameter. */
++	if (!haoc_enabled) {
++		pr_info("HAOC is disabled by kernel command line.");
++		return;
++	}
++
++	/* Check if hardware supports IEE. */
++	if (!cpuid_feature_extract_unsigned_field(read_cpuid(ID_AA64MMFR1_EL1),
++						ID_AA64MMFR1_EL1_HPDS_SHIFT)) {
++		pr_err("Architecture doesn't support HPDS, please disable CONFIG_IEE.\n");
++		haoc_enabled = false;
++		return;
++	}
++	else
++		pr_info("HAOC: ARM64 hardware support detected.");
++
++	/*
++	 *  Not allowing block or continuous mappings on IEE for faster page
++	 *  attribution modification.
++	 */
++	flags |= NO_BLOCK_MAPPINGS | NO_CONT_MAPPINGS;
++
++	/* map all the memory banks non-executable but invalid on iee addresses. */
++	for_each_mem_range(i, &start, &end) {
++		if (start >= end)
++			break;
++		__map_memblock_for_iee(pgdp, start, end, SET_NG(SET_INVALID(PAGE_KERNEL)),
++					flags);
++	}
++
++	iee_init_tcr();
++	iee_setup_bootcpu_stack();
++}
++
++static void prot_iee_early_data_cache(struct iee_early_alloc *cache)
++{
++	int block_nr = cache->curr_block_nr + 1;
++
++	for (int j = 0; j < block_nr; j++) {
++		put_pages_into_iee((unsigned long)__va(cache->blocks[j].start),
++				cache->blocks[j].order);
++	}
++}
++
++/* Put early allocated pages into IEE. */
++void __init init_early_iee_data(void)
++{
++	if (!haoc_enabled)
++		return;
++
++	prot_iee_early_data_cache(&iee_stack);
++}
+diff --git a/arch/arm64/kernel/haoc/iee/iee.c b/arch/arm64/kernel/haoc/iee/iee.c
+new file mode 100644
+index 000000000000..4cc21671e1c2
+--- /dev/null
++++ b/arch/arm64/kernel/haoc/iee/iee.c
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Lyu Jinglin <lvjl2022@zgclab.edu.cn>
++ *          Zhang Shiyang <zhangsy2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/iee.h>
++#include <asm/haoc/haoc-def.h>
++
++/* This is an example of iee handler function.
++ * The first Parameter must be reserved, and later parameters shall be the same
++ * with outer API like iee_memset();
++ */
++#pragma GCC push_options
++#pragma GCC optimize("O0")
++void __iee_code _iee_memset(unsigned long __unused, void *ptr, int data, size_t n)
++{
++	/* Maybe you need to verify the input parameters first. */
++	char *_ptr;
++
++	/* Write the page by IEE address of the input pointer as the address it
++	 * points to shall be already read-only to prevent kernel access.
++	 */
++	_ptr = __ptr_to_iee((char *)ptr);
++
++	while (n--)
++		*_ptr++ = data;
++}
++#pragma GCC pop_options
+diff --git a/arch/arm64/kernel/smp.c b/arch/arm64/kernel/smp.c
+index 50f6576f1b31..fc4208bd0fbd 100644
+--- a/arch/arm64/kernel/smp.c
++++ b/arch/arm64/kernel/smp.c
+@@ -52,6 +52,9 @@
+ #include <asm/tlbflush.h>
+ #include <asm/ptrace.h>
+ #include <asm/virt.h>
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#endif
+ 
+ #include <trace/events/ipi.h>
+ 
+@@ -209,6 +212,10 @@ asmlinkage notrace void secondary_start_kernel(void)
+ 	mmgrab(mm);
+ 	current->active_mm = mm;
+ 
++#ifdef CONFIG_IEE
++	if (haoc_enabled)
++		iee_setup_asid();
++#endif
+ 	/*
+ 	 * TTBR0 is only used for the identity mapping at this stage. Make it
+ 	 * point to zero page to avoid speculatively fetching new entries.
+@@ -464,6 +471,10 @@ void __init smp_prepare_boot_cpu(void)
+ 	kasan_init_hw_tags();
+ 	/* Init percpu seeds for random tags after cpus are set up. */
+ 	kasan_init_sw_tags();
++#ifdef CONFIG_IEE
++	extern void iee_stack_init(void);
++	iee_stack_init();
++#endif
+ }
+ 
+ /*
+diff --git a/arch/arm64/kernel/vmlinux.lds.S b/arch/arm64/kernel/vmlinux.lds.S
+index d4353741f331..b6997820f870 100644
+--- a/arch/arm64/kernel/vmlinux.lds.S
++++ b/arch/arm64/kernel/vmlinux.lds.S
+@@ -123,6 +123,17 @@ jiffies = jiffies_64;
+ #define TRAMP_TEXT
+ #endif
+ 
++#ifdef CONFIG_IEE
++#define IEE_TEXT \
++	. = ALIGN(PAGE_SIZE);				\
++	__iee_code_start = .;       \
++	*(.iee.text)				        \
++	. = ALIGN(PAGE_SIZE);				\
++	__iee_code_end = .;
++#else
++#define IEE_TEXT
++#endif
++
+ #ifdef CONFIG_UNWIND_TABLES
+ #define UNWIND_DATA_SECTIONS				\
+ 	.eh_frame : {					\
+@@ -181,6 +192,7 @@ SECTIONS
+ 			LOCK_TEXT
+ 			KPROBES_TEXT
+ 			HYPERVISOR_TEXT
++			IEE_TEXT
+ 			*(.gnu.warning)
+ 	}
+ 
+diff --git a/arch/arm64/mm/context.c b/arch/arm64/mm/context.c
+index b2ac06246327..52eb87b474d6 100644
+--- a/arch/arm64/mm/context.c
++++ b/arch/arm64/mm/context.c
+@@ -16,6 +16,10 @@
+ #include <asm/mmu_context.h>
+ #include <asm/smp.h>
+ #include <asm/tlbflush.h>
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#include <asm/haoc/iee-asm.h>
++#endif
+ 
+ static u32 asid_bits;
+ static DEFINE_RAW_SPINLOCK(cpu_asid_lock);
+@@ -360,6 +364,29 @@ void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
+ 	if (IS_ENABLED(CONFIG_ARM64_SW_TTBR0_PAN))
+ 		ttbr0 |= FIELD_PREP(TTBR_ASID_MASK, asid);
+ 
++#ifdef CONFIG_IEE
++	if (iee_init_done) {
++		/*
++		 * IEE requires the reserved ASID stored in TTBR1 and User ASID stored
++		 * in TTBR0 to support ASID switch by changing TCR.A1.
++		 */
++		ttbr0 &= ~TTBR_ASID_MASK;
++		ttbr0 |= FIELD_PREP(TTBR_ASID_MASK, asid);
++
++		cpu_set_reserved_ttbr0_nosync();
++		write_sysreg(ttbr0, ttbr0_el1);
++		isb();
++	} else {
++		/* Set ASID in TTBR1 since TCR.A1 is set */
++		ttbr1 &= ~TTBR_ASID_MASK;
++		ttbr1 |= FIELD_PREP(TTBR_ASID_MASK, asid);
++
++		cpu_set_reserved_ttbr0_nosync();
++		write_sysreg(ttbr1, ttbr1_el1);
++		write_sysreg(ttbr0, ttbr0_el1);
++		isb();
++	}
++#else
+ 	/* Set ASID in TTBR1 since TCR.A1 is set */
+ 	ttbr1 &= ~TTBR_ASID_MASK;
+ 	ttbr1 |= FIELD_PREP(TTBR_ASID_MASK, asid);
+@@ -368,6 +395,7 @@ void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
+ 	write_sysreg(ttbr1, ttbr1_el1);
+ 	write_sysreg(ttbr0, ttbr0_el1);
+ 	isb();
++#endif
+ 	post_ttbr_update_workaround();
+ }
+ 
+@@ -379,6 +407,12 @@ static int asids_update_limit(void)
+ 		num_available_asids /= 2;
+ 		if (pinned_asid_map)
+ 			set_kpti_asid_bits(pinned_asid_map);
++#ifdef CONFIG_IEE
++		if (haoc_enabled && pinned_asid_map) {
++			__set_bit(ctxid2asid(IEE_ASID), pinned_asid_map);
++			__set_bit(ctxid2asid(IEE_ASID | ASID_BIT), pinned_asid_map);
++		}
++#endif
+ 	}
+ 	/*
+ 	 * Expect allocation after rollover to fail if we don't have at least
+@@ -417,6 +451,16 @@ static int asids_init(void)
+ 	 */
+ 	if (IS_ENABLED(CONFIG_UNMAP_KERNEL_AT_EL0))
+ 		set_kpti_asid_bits(asid_map);
++#ifdef CONFIG_IEE
++	if (haoc_enabled) {
++		#ifdef CONFIG_UNMAP_KERNEL_AT_EL0
++		__set_bit(ctxid2asid(IEE_ASID | ASID_BIT), asid_map);
++		__set_bit(ctxid2asid(IEE_ASID | ASID_BIT), pinned_asid_map);
++		#endif
++		__set_bit(ctxid2asid(IEE_ASID), asid_map);
++		__set_bit(ctxid2asid(IEE_ASID), pinned_asid_map);
++	}
++#endif
+ 	return 0;
+ }
+ early_initcall(asids_init);
+diff --git a/arch/arm64/mm/mmu.c b/arch/arm64/mm/mmu.c
+index 89f0c925ba37..73fb695b759b 100644
+--- a/arch/arm64/mm/mmu.c
++++ b/arch/arm64/mm/mmu.c
+@@ -41,6 +41,10 @@
+ #include <asm/pgalloc.h>
+ #include <asm/kfence.h>
+ #include <asm/set_memory.h>
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#include <asm/haoc/iee-mmu.h>
++#endif
+ 
+ #define NO_BLOCK_MAPPINGS	BIT(0)
+ #define NO_CONT_MAPPINGS	BIT(1)
+@@ -402,8 +406,17 @@ static void __create_pgd_mapping(pgd_t *pgdir, phys_addr_t phys,
+ 				 int flags)
+ {
+ 	mutex_lock(&fixmap_lock);
++	#ifdef CONFIG_IEE
++	if (haoc_enabled)
++		__iee_create_pgd_mapping_locked(pgdir, phys, virt, size, prot,
++				pgtable_alloc, flags);
++	else
++		__create_pgd_mapping_locked(pgdir, phys, virt, size, prot,
++				pgtable_alloc, flags);
++	#else
+ 	__create_pgd_mapping_locked(pgdir, phys, virt, size, prot,
+ 				    pgtable_alloc, flags);
++	#endif
+ 	mutex_unlock(&fixmap_lock);
+ }
+ 
+@@ -800,20 +813,36 @@ void __init paging_init(void)
+ 
+ 	idmap_t0sz = 63UL - __fls(__pa_symbol(_end) | GENMASK(VA_BITS_MIN - 1, 0));
+ 
++	#ifdef CONFIG_IEE
++	early_iee_data_cache_init();
++	#endif
++
+ 	map_kernel(pgdp);
+ 	map_mem(pgdp);
+ 
++	#ifdef CONFIG_IEE
++	iee_init_mappings(pgdp);
++	#endif
++
+ 	pgd_clear_fixmap();
+ 
+ 	cpu_replace_ttbr1(lm_alias(swapper_pg_dir), init_idmap_pg_dir);
+ 	init_mm.pgd = swapper_pg_dir;
+ 
++	#ifdef CONFIG_IEE
++	init_early_iee_data();
++	#endif
++
+ 	memblock_phys_free(__pa_symbol(init_pg_dir),
+ 			   __pa_symbol(init_pg_end) - __pa_symbol(init_pg_dir));
+ 
+ 	memblock_allow_resize();
+ 
+ 	create_idmap();
++
++	#ifdef CONFIG_IEE
++	iee_init_post();
++	#endif
+ }
+ 
+ #ifdef CONFIG_MEMORY_HOTPLUG
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index e8c26aae7057..c41da747dc00 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -1550,6 +1550,10 @@ config AMD_MEM_ENCRYPT
+ 	  This requires an AMD processor that supports Secure Memory
+ 	  Encryption (SME).
+ 
++config IEE
++	depends on X86_64
++	def_bool y
++
+ # Common NUMA Features
+ config NUMA
+ 	bool "NUMA Memory Allocation and Scheduler Support"
+diff --git a/arch/x86/include/asm/haoc/haoc-def.h b/arch/x86/include/asm/haoc/haoc-def.h
+new file mode 100644
+index 000000000000..55b5d37ff762
+--- /dev/null
++++ b/arch/x86/include/asm/haoc/haoc-def.h
+@@ -0,0 +1,21 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_HAOC_DEF_H
++#define _LINUX_HAOC_DEF_H
++
++enum {
++	IEE_OP_MEMCPY,
++	IEE_OP_MEMSET,
++	IEE_OP_SET_FREEPTR,
++	IEE_OP_TEST_CLEAR_BIT,
++	IEE_FLAG_END
++};
++
++#endif
+diff --git a/arch/x86/include/asm/haoc/haoc.h b/arch/x86/include/asm/haoc/haoc.h
+new file mode 100644
+index 000000000000..e6d1193c4f1a
+--- /dev/null
++++ b/arch/x86/include/asm/haoc/haoc.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_HAOC_H
++#define _LINUX_HAOC_H
++
++#include <linux/types.h>
++
++void _iee_memcpy(unsigned long __unused, void *dst, void *src, size_t n);
++void _iee_memset(unsigned long __unused, void *ptr, int data, size_t n);
++void _iee_set_freeptr(unsigned long __unused, void **pptr, void *ptr);
++unsigned long _iee_test_and_clear_bit(unsigned long __unused,
++					long nr, unsigned long *addr);
++#endif
+diff --git a/arch/x86/include/asm/haoc/iee-access.h b/arch/x86/include/asm/haoc/iee-access.h
+new file mode 100644
+index 000000000000..de0168e821a9
+--- /dev/null
++++ b/arch/x86/include/asm/haoc/iee-access.h
+@@ -0,0 +1,50 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_ACCESS_H
++#define _LINUX_IEE_ACCESS_H
++
++#include <asm/haoc/iee.h>
++#include <asm/haoc/haoc-def.h>
++
++extern unsigned long long iee_rw_gate(int flag, ...);
++
++static inline void iee_memcpy(void *dst, const void *src, size_t n)
++{
++	if (haoc_enabled)
++		iee_rw_gate(IEE_OP_MEMCPY, dst, src, n);
++	else
++		memcpy(dst, src, n);
++}
++
++static inline void iee_memset(void *ptr, int data, size_t n)
++{
++	if (haoc_enabled)
++		iee_rw_gate(IEE_OP_MEMSET, ptr, data, n);
++	else
++		memset(ptr, data, n);
++}
++
++static inline void iee_set_freeptr(void **pptr, void *ptr)
++{
++	if (haoc_enabled)
++		iee_rw_gate(IEE_OP_SET_FREEPTR, pptr, ptr);
++	else
++		*pptr = ptr;
++}
++
++static inline unsigned long iee_test_and_clear_bit(long nr, unsigned long *addr)
++{
++	if (haoc_enabled)
++		return iee_rw_gate(IEE_OP_TEST_CLEAR_BIT, nr, addr);
++	else
++		return test_and_clear_bit(nr, addr);
++}
++
++#endif
+diff --git a/arch/x86/include/asm/haoc/iee-func.h b/arch/x86/include/asm/haoc/iee-func.h
+new file mode 100644
+index 000000000000..42455aa11615
+--- /dev/null
++++ b/arch/x86/include/asm/haoc/iee-func.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_FUNC_H
++#define _LINUX_IEE_FUNC_H
++
++extern void set_iee_page(unsigned long addr, unsigned int order);
++extern void unset_iee_page(unsigned long addr, unsigned int order);
++
++#endif  /* _LINUX_IEE_FUNC_H */
+diff --git a/arch/x86/include/asm/haoc/iee.h b/arch/x86/include/asm/haoc/iee.h
+new file mode 100644
+index 000000000000..899013c4d433
+--- /dev/null
++++ b/arch/x86/include/asm/haoc/iee.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#ifndef _LINUX_IEE_H
++#define _LINUX_IEE_H
++
++#include <linux/percpu.h>
++
++extern unsigned long IEE_OFFSET;
++#define __iee_pa(x) (__pa(x - IEE_OFFSET))
++#define __phys_to_iee(x) ((void *)(__va(x) + IEE_OFFSET))
++#define __page_to_phys(x) (page_to_pfn(x) << PAGE_SHIFT)
++#define __page_to_iee(x) ((unsigned long)(__phys_to_iee(__page_to_phys(x))))
++#define __slab_to_iee(x) (__page_to_iee(folio_page(slab_folio(x), 0)))
++#define __addr_to_iee(x) (__phys_to_iee(__pa(x)))
++
++#define IEE_DATA_ORDER (PMD_SHIFT - PAGE_SHIFT)
++#define IEE_STACK_ORDER 0
++struct iee_stack {
++	void *stack;
++};
++
++DECLARE_PER_CPU(struct iee_stack, iee_stacks);
++
++extern void *alloc_low_pages(unsigned int num);
++extern void iee_init(void);
++extern bool haoc_enabled;
++#endif
+diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
+index 2b86fa2d8c64..9e3688b9d2a2 100644
+--- a/arch/x86/kernel/Makefile
++++ b/arch/x86/kernel/Makefile
+@@ -164,3 +164,4 @@ ifeq ($(CONFIG_X86_64),y)
+ endif
+ 
+ obj-$(CONFIG_HYGON_CSV)			+= csv.o
++obj-$(CONFIG_IEE)				+= haoc/
+diff --git a/arch/x86/kernel/asm-offsets.c b/arch/x86/kernel/asm-offsets.c
+index 50383bc46dd7..acb79f30cede 100644
+--- a/arch/x86/kernel/asm-offsets.c
++++ b/arch/x86/kernel/asm-offsets.c
+@@ -25,6 +25,9 @@
+ #include <xen/interface/xen.h>
+ #endif
+ 
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#endif
+ #ifdef CONFIG_X86_32
+ # include "asm-offsets_32.c"
+ #else
+@@ -127,4 +130,8 @@ static void __used common(void)
+ 	OFFSET(ARIA_CTX_rounds, aria_ctx, rounds);
+ #endif
+ 
++#ifdef CONFIG_IEE
++	/* Offset for fields in iee_stack */
++	OFFSET(IEE_STACK, iee_stack, stack);
++#endif
+ }
+diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
+index 8bb0d2bd8f2c..dcd40a5a8525 100644
+--- a/arch/x86/kernel/cpu/common.c
++++ b/arch/x86/kernel/cpu/common.c
+@@ -65,6 +65,9 @@
+ #include <asm/set_memory.h>
+ #include <asm/traps.h>
+ #include <asm/sev.h>
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#endif
+ 
+ #include "cpu.h"
+ 
+@@ -595,6 +598,20 @@ static __always_inline void setup_cet(struct cpuinfo_x86 *c)
+ 	if (!IS_ENABLED(CONFIG_X86_CET))
+ 		return;
+ 
++#ifdef CONFIG_IEE
++	if (haoc_enabled) {
++		/*
++		 * NOTE: IEE relies on CR0.WP (Write Protection).
++		 * According to Intel SDM Vol.3(Section 2.5):
++		 * This flag must be set before software can set CR4.CET,
++		 * and it cannot be cleared as long as CR4.CET = 1.
++		 * Therefore, IEE does not enable CET during kernel boot.
++		 */
++		pr_info("CET disabled because of the contradiction with IEE");
++		return;
++	}
++#endif
++
+ 	kernel_ibt = HAS_KERNEL_IBT && cpu_feature_enabled(X86_FEATURE_IBT);
+ 	user_shstk = cpu_feature_enabled(X86_FEATURE_SHSTK) &&
+ 		     IS_ENABLED(CONFIG_X86_USER_SHADOW_STACK);
+diff --git a/arch/x86/kernel/haoc/Makefile b/arch/x86/kernel/haoc/Makefile
+new file mode 100644
+index 000000000000..a0238a3ff515
+--- /dev/null
++++ b/arch/x86/kernel/haoc/Makefile
+@@ -0,0 +1,2 @@
++obj-y += haoc.o
++obj-y += iee/
+diff --git a/arch/x86/kernel/haoc/haoc.c b/arch/x86/kernel/haoc/haoc.c
+new file mode 100644
+index 000000000000..4676f3c0454e
+--- /dev/null
++++ b/arch/x86/kernel/haoc/haoc.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/haoc.h>
++
++typedef void (*iee_func)(void);
++iee_func iee_funcs[] = {
++	(iee_func)_iee_memcpy,
++	(iee_func)_iee_memset,
++	(iee_func)_iee_set_freeptr,
++	(iee_func)_iee_test_and_clear_bit,
++	NULL
++};
+diff --git a/arch/x86/kernel/haoc/iee/Makefile b/arch/x86/kernel/haoc/iee/Makefile
+new file mode 100644
+index 000000000000..f0f41ed33ce4
+--- /dev/null
++++ b/arch/x86/kernel/haoc/iee/Makefile
+@@ -0,0 +1,2 @@
++obj-y += iee-gate.o iee-init.o iee.o iee-func.o
++ccflags-y += -I$(srctree)/mm
+diff --git a/arch/x86/kernel/haoc/iee/iee-func.c b/arch/x86/kernel/haoc/iee/iee-func.c
+new file mode 100644
+index 000000000000..7b669401c624
+--- /dev/null
++++ b/arch/x86/kernel/haoc/iee/iee-func.c
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#include <linux/set_memory.h>
++
++void set_iee_page(unsigned long addr, unsigned int order)
++{
++	set_memory_ro(addr, 1 << order);
++}
++
++void unset_iee_page(unsigned long addr, unsigned int order)
++{
++	set_memory_rw(addr, 1 << order);
++}
+diff --git a/arch/x86/kernel/haoc/iee/iee-gate.S b/arch/x86/kernel/haoc/iee/iee-gate.S
+new file mode 100644
+index 000000000000..8d945acd214e
+--- /dev/null
++++ b/arch/x86/kernel/haoc/iee/iee-gate.S
+@@ -0,0 +1,73 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#include <linux/linkage.h>
++#include <asm/asm-offsets.h>
++#include <asm/percpu.h>
++#include <asm/processor-flags.h>
++#include <asm/asm.h>
++
++#define X86_CR4_SMEP_SMAP (X86_CR4_SMEP | X86_CR4_SMAP)
++
++/*
++ * scratch_reg would be changed,
++ * caller should dertimine if scratch_reg should be saved and restored.
++ */
++.macro DISABLE_WP scratch_reg:req
++	/* Disable write protection*/
++	movq %cr0, %\scratch_reg
++	andq $(~X86_CR0_WP), %\scratch_reg
++	movq %\scratch_reg, %cr0
++.endm
++
++.macro ENABLE_WP scratch_reg:req
++	/* Enable write protection */
++	movq %cr0, %\scratch_reg
++1:
++	orq $X86_CR0_WP, %\scratch_reg
++	movq %\scratch_reg, %cr0
++	testq $X86_CR0_WP, %\scratch_reg
++	je 1b
++.endm
++
++/*
++ * IEE memory access gate.
++ * Kernel calls the gate to modify IEE-protected memory.
++ */
++
++SYM_FUNC_START(iee_rw_gate)
++	/* save Interrupt flag */
++	pushfq
++	/* close irq*/
++	cli
++
++	pushq %r12
++
++	DISABLE_WP r12
++
++	/* switch to iee stack */
++	movq %rsp, %r12
++	movq PER_CPU_VAR(iee_stacks) + IEE_STACK, %rsp
++
++	/* call iee func */
++	leaq iee_funcs(%rip), %rax
++	call *(%rax, %rdi, 8)
++
++	/* switch to kernel stack */
++	movq %r12, %rsp
++
++	ENABLE_WP r12
++
++	popq %r12
++
++	/* restore irq*/
++	popfq
++
++	jmp __x86_return_thunk  /* ret */
++SYM_FUNC_END(iee_rw_gate)
+diff --git a/arch/x86/kernel/haoc/iee/iee-init.c b/arch/x86/kernel/haoc/iee/iee-init.c
+new file mode 100644
+index 000000000000..358ad8433bc5
+--- /dev/null
++++ b/arch/x86/kernel/haoc/iee/iee-init.c
+@@ -0,0 +1,165 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#include <linux/types.h>
++#include <linux/memblock.h>
++#include <linux/init.h>
++#include <linux/gfp.h>
++#include <asm/set_memory.h>
++#include <asm/haoc/iee.h>
++#include <asm/pgalloc.h>
++
++/* IEE_OFFSET = pgtable_l5_enabled() ? 0x40000000000000 : 0x200000000000; */
++unsigned long IEE_OFFSET = 0x200000000000;
++bool iee_init_done;
++DEFINE_PER_CPU(struct iee_stack, iee_stacks);
++
++static void __init _iee_mapping_populate_pud(pud_t *pud, unsigned long addr, unsigned long end)
++{
++	void *p;
++	pmd_t *pmd;
++	unsigned long pmd_next;
++	phys_addr_t phys;
++	pgprot_t pgprot_shadow_pmd;
++
++	addr = ALIGN_DOWN(addr, PMD_SIZE);
++	phys = __iee_pa(addr);
++	pgprot_shadow_pmd = __pgprot(pgprot_val(PAGE_KERNEL_LARGE) & (~__RW) & (~___D));
++
++	if (pud_none(*pud)) {
++		p = alloc_low_pages(1);
++		pud_populate(&init_mm, pud, p);
++	}
++
++	pmd = pmd_offset(pud, addr);
++	do {
++		pmd_next = pmd_addr_end(addr, end);
++		set_pmd(pmd, __pmd(phys | pgprot_val(pgprot_shadow_pmd)));
++		phys += pmd_next - addr;
++	} while (pmd++, addr = pmd_next, addr != end);
++}
++
++static void __init _iee_mapping_populate_p4d(p4d_t *p4d, unsigned long addr, unsigned long end)
++{
++	void *p;
++	pud_t *pud;
++	unsigned long pud_next;
++
++	if (p4d_none(*p4d)) {
++		p = alloc_low_pages(1);
++		p4d_populate(&init_mm, p4d, p);
++	}
++
++	pud = pud_offset(p4d, addr);
++	do {
++		pud_next = pud_addr_end(addr, end);
++		pr_info("IEE: iee_populate_pud(%#010lx, %#010lx)\n",
++			addr, pud_next);
++		_iee_mapping_populate_pud(pud, addr, pud_next);
++	} while (pud++, addr = pud_next, addr != end);
++}
++
++static void __init _iee_mapping_populate_pgd(pgd_t *pgd, unsigned long addr, unsigned long end)
++{
++	void *p;
++	p4d_t *p4d;
++	unsigned long p4d_next;
++
++	if (pgd_none(*pgd)) {
++		p = alloc_low_pages(1);
++		pgd_populate(&init_mm, pgd, p);
++	}
++
++	p4d = p4d_offset(pgd, addr);
++	do {
++		p4d_next = p4d_addr_end(addr, end);
++		pr_info("IEE: iee_populate_p4d(%#010lx, %#010lx)\n",
++			addr, p4d_next);
++		_iee_mapping_populate_p4d(p4d, addr, p4d_next);
++	} while (p4d++, addr = p4d_next, addr != end);
++}
++
++static void __init _iee_init_mapping(phys_addr_t start_paddr, phys_addr_t end_paddr)
++{
++	unsigned long addr = (unsigned long)__phys_to_iee(start_paddr);
++	unsigned long end = (unsigned long)__phys_to_iee(end_paddr);
++	unsigned long pgd_next;
++
++	pgd_t *pgd = pgd_offset_k(addr);
++
++	spin_lock(&pgd_lock);
++	do {
++		pgd_next = pgd_addr_end(addr, end);
++		pr_info("IEE: iee_populate_pgd(%#010lx, %#010lx)\n",
++			addr, pgd_next);
++		_iee_mapping_populate_pgd(pgd, addr, pgd_next);
++	} while (pgd++, addr = pgd_next, addr != end);
++	spin_unlock(&pgd_lock);
++}
++
++static void __init _iee_mapping_init(void)
++{
++	struct memblock_region *r;
++	unsigned long start_pfn, end_pfn;
++	phys_addr_t start_paddr, end_paddr;
++	unsigned long nr_pages = 0;
++
++	for_each_mem_region(r) {
++		start_pfn = memblock_region_memory_base_pfn(r);
++		end_pfn = memblock_region_memory_end_pfn(r);
++
++		start_paddr = PFN_PHYS(start_pfn);
++		end_paddr = PFN_PHYS(end_pfn);
++
++		nr_pages += end_pfn - start_pfn;
++
++		pr_info("IEE: mapping iee mapping [mem %#010lx-%#010lx]\n",
++			(unsigned long)start_paddr, (unsigned long)end_paddr);
++
++		_iee_init_mapping(start_paddr, end_paddr);
++	}
++	pr_info("IEE: IEE shadow mapping init done");
++}
++
++static void __init _iee_stack_init(void)
++{
++	int cpu;
++	struct iee_stack *iee_stack;
++	void *stack_base;
++	struct page *page;
++
++	for_each_possible_cpu(cpu) {
++		stack_base = (void *)page_address(alloc_pages(GFP_KERNEL, IEE_STACK_ORDER));
++		iee_stack = per_cpu_ptr(&iee_stacks, cpu);
++		page = alloc_pages(GFP_KERNEL, IEE_STACK_ORDER);
++		iee_stack->stack = (void *)page_address(page) + PAGE_SIZE * (1 << IEE_STACK_ORDER);
++		pr_info("IEE: cpu %d, iee_stack 0x%lx", cpu, (unsigned long)iee_stack->stack);
++		set_memory_ro((unsigned long)stack_base, (1 << IEE_STACK_ORDER));
++	}
++}
++
++static void __init _iee_offset_init(void)
++{
++	if (pgtable_l5_enabled())
++		IEE_OFFSET = 0x40000000000000;
++}
++
++void __init iee_init(void)
++{
++	_iee_offset_init();
++	_iee_mapping_init();
++	_iee_stack_init();
++}
++
++bool __ro_after_init haoc_enabled;
++static int __init parse_haoc_enabled(char *str)
++{
++	return kstrtobool(str, &haoc_enabled);
++}
++early_param("haoc", parse_haoc_enabled);
+diff --git a/arch/x86/kernel/haoc/iee/iee.c b/arch/x86/kernel/haoc/iee/iee.c
+new file mode 100644
+index 000000000000..35c54c3352ac
+--- /dev/null
++++ b/arch/x86/kernel/haoc/iee/iee.c
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * HAOC feature support
++ *
++ * Copyright (C) 2025 ZGCLAB
++ * Authors: Shu Hang <shuh2023@zgclab.edu.cn>
++ *          Hu Bing <hubing2023@zgclab.edu.cn>
++ */
++
++#include <asm/haoc/iee.h>
++
++void _iee_memcpy(unsigned long __unused, void *dst, void *src, size_t n)
++{
++	memcpy(dst, src, n);
++}
++
++void _iee_memset(unsigned long __unused, void *ptr, int data, size_t n)
++{
++	memset(ptr, data, n);
++}
++
++void _iee_set_freeptr(unsigned long __unused, void **pptr, void *ptr)
++{
++	*pptr = ptr;
++}
++
++unsigned long _iee_test_and_clear_bit(unsigned long __unused, long nr, unsigned long *addr)
++{
++	kcsan_mb();
++	instrument_atomic_read_write(addr + BIT_WORD(nr), sizeof(long));
++	return arch_test_and_clear_bit(nr, addr);
++}
+diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
+index aa69353da49f..553900dd59b5 100644
+--- a/arch/x86/mm/init_64.c
++++ b/arch/x86/mm/init_64.c
+@@ -56,6 +56,9 @@
+ #include <asm/setup.h>
+ #include <asm/ftrace.h>
+ 
++#ifdef CONFIG_IEE
++#include <asm/haoc/iee.h>
++#endif
+ #include "mm_internal.h"
+ 
+ #include "ident_map.c"
+@@ -1355,6 +1358,16 @@ void __init mem_init(void)
+ 	if (get_gate_vma(&init_mm))
+ 		kclist_add(&kcore_vsyscall, (void *)VSYSCALL_ADDR, PAGE_SIZE, KCORE_USER);
+ 
++	#ifdef CONFIG_IEE
++	/*
++	 * Split the linear mapping region of the kernel address space into two equally-sized parts.
++	 * The lower region retains the original linear mapping.
++	 * The upper region becomes the IEE linear mapping area.
++	 * Note that the IEE mapping region is mapped with read-only permissions.
++	 */
++	if (haoc_enabled)
++		iee_init();
++	#endif
+ 	preallocate_vmalloc_pages();
+ }
+ 
+-- 
+2.49.0
+
