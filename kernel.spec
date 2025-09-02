@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       279
+%global devel_release       280
 %global maintenance_release .0.0
-%global pkg_release         .181
+%global pkg_release         .182
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,100 @@ fi
 %endif
 
 %changelog
+* Tue Sep 02 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-280.0.0.182
+- !17849 [OLK-5.10]:update patches for sw64 architecture
+- !17852  cpufreq: Init policy->rwsem before it may be possibly used
+- sw64: fix for userspace asking for syscall(-1)
+- sw64: update junzhang default config file
+- sw64: kvm: introduce pmd_thp_or_huge for PMD hugepage checking
+- sw64: add cross-page check in software unaligned write handling
+- sw64: ptrace: fail system calls on invalid address access in PEEKUSR
+- sw64: ptrace: fix a bug in return value handling in PEEKUSR AND POKEUSR
+- !17738  CVE-2024-53216 && CVE-2024-56558
+- cpufreq: Init policy->rwsem before it may be possibly used
+- !17801  page_pool: Fix use-after-free in page_pool_recycle_in_ring
+- !17799  iwlwifi: Add missing check for alloc_ordered_workqueue
+- !17817  vmci: Prevent the dispatching of uninitialized payloads
+- !17680 Add Model specific EPP adjustment support for EMR/SPR/GNR
+- !17667 cpufreq: intel_pstate: Add Granite Rapids support in no-HWP mode
+- !17682 Add TPMI RAPL PMU support for GNR/CWF and later Intel Xeon machines
+- !17664 intel_pstate support OOB mode for EMR/GNR/SRF/CWF
+- !17662 platform/x86: ISST: Add Clearwater Forest to support list
+- !17820  mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
+- mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
+- !17767 RDMA/hns: Fix bond not cleared when the configuration becomes invalid
+- !17806  pinmux: fix race causing mux_owner NULL with active mux_usecount
+- !17805  f2fs: fix to avoid out-of-boundary access in devs.path
+- vmci: Prevent the dispatching of uninitialized payloads
+- pinmux: fix race causing mux_owner NULL with active mux_usecount
+- f2fs: fix to avoid out-of-boundary access in devs.path
+- !17795  perf/core: Prevent VMA split of buffer mappings
+- !17316 [OLK-5.10] backport the follow important bugfix for nvme driver from upstream linux-5.10.y
+- !17791  ipv6: mcast: extend RCU protection in igmp6_send()
+- page_pool: Fix use-after-free in page_pool_recycle_in_ring
+- page_pool: fix inconsistency for page_pool_ring_[un]lock()
+- net: page_pool: use in_softirq() instead
+- iwlwifi: Add missing check for alloc_ordered_workqueue
+- !17573 ROH: Add crc_err_cnt and retry_cnt mib statistics
+- perf/core: Prevent VMA split of buffer mappings
+- !17773  thunderbolt: Do not double dequeue a configuration request
+- !17793 v2  fix some CVEs
+- KVM: x86: Reset IRTE to host control if *new* route isn't postable
+- rapidio: fix an API misues when rio_add_net() fails
+- filemap: avoid truncating 64-bit offset to 32 bits
+- drm/amdgpu: Fix potential NULL pointer dereference in atomctrl_get_smc_sclk_range_table
+- drm/amd/display: Fix memory leak
+- scsi: ufs: bsg: Set bsg_queue to NULL after removal
+- ipv6: mcast: extend RCU protection in igmp6_send()
+- !17759  CVE-2025-37834
+- !17749  mm/hugetlb: fix huge_pmd_unshare() vs GUP-fast race
+- !17688  netfilter: fix CVE-2022-49622
+- !17698  netfilter: nft_tunnel: fix geneve_opt type confusion addition
+- !17686  net: ieee802154: do not leave a dangling sk pointer in ieee802154_create()
+- !17710  bnxt_en: Fix out-of-bound memcpy() during ethtool -w
+- !17765  mm/smaps: fix race between smaps_hugetlb_range and migration
+- !17740  Fix trace may OOB when trace_get_user failed
+- !17743  i2c: qup: jump out of the loop in case of timeout
+- thunderbolt: Do not double dequeue a configuration request
+- RDMA/hns: Fix bond not cleared when the configuration becomes invalid
+- mm/smaps: fix race between smaps_hugetlb_range and migration
+- mm/vmscan: fix hwpoisoned large folio handling in shrink_folio_list
+- mm/vmscan: don't try to reclaim hwpoison folio
+- mm/hugetlb: fix huge_pmd_unshare() vs GUP-fast race
+- i2c: qup: jump out of the loop in case of timeout
+- tracing: Limit access to parser->buffer when trace_get_user failed
+- tracing: Remove unneeded goto out logic
+- nfsd: fix UAF when access ex_uuid or ex_stats
+- SUNRPC: no need get cache ref when protected by rcu
+- nfsd: no need get cache ref when protected by rcu
+- SUNRPC: introduce cache_check_rcu to help check in rcu context
+- nfsd: Revert "nfsd: release svc_expkey/svc_export with rcu_work"
+- nfsd: release svc_expkey/svc_export with rcu_work
+- SUNRPC: make sure cache entry active before cache_show
+- nfsd: make sure exp active before svc_export_show
+- platform/x86: ISST: Add Clearwater Forest to support list
+- powercap: intel_rapl_tpmi: Enable PMU support
+- powercap: intel_rapl: Introduce APIs for PMU support
+- powercap: intel_rapl: Sort header files
+- cpufreq: intel_pstate: Add Granite Rapids support in no-HWP mode
+- cpufreq: intel_pstate: Update Balance-performance EPP for Granite Rapids
+- cpufreq: intel_pstate: Update Balance performance EPP for Emerald Rapids
+- cpufreq: intel_pstate: Allow model specific EPPs
+- bitfield: add FIELD_PREP_CONST()
+- cpufreq: intel_pstate: Adjust balance_performance EPP for Sapphire Rapids
+- cpufreq: intel_pstate: Update EPP for AlderLake mobile
+- cpufreq: intel_pstate: Support Clearwater Forest OOB mode
+- cpufreq: intel_pstate: Support Granite Rapids and Sierra Forest OOB mode
+- cpufreq: intel_pstate: Support Emerald Rapids OOB mode
+- bnxt_en: Fix out-of-bound memcpy() during ethtool -w
+- netfilter: nft_tunnel: fix geneve_opt type confusion addition
+- selftests: netfilter: add test case for nf trace infrastructure
+- netfilter: nf_tables: fix crash when nf_trace is enabled
+- netfilter: nf_tables: avoid skb access on nf_stolen
+- net: ieee802154: do not leave a dangling sk pointer in ieee802154_create()
+- ROH: Add crc_err_cnt and retry_cnt mib statistics
+- nvme-tcp: fix premature queue removal and I/O failover
+
 * Tue Aug 26 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-279.0.0.181
 - !17745  trace/fgraph: Fix the warning caused by missing unregister notifier
 - !17726  perf/core: Don't leak AUX buffer refcount on allocation failure
