@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2508.3.0
+%global hulkrelease 2509.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0341
+Release: %{hulkrelease}.0342
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,27 @@ fi
 %endif
 
 %changelog
+
+* Wed Sep 03 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.1.0.0342
+- !17822  iwlwifi: Add missing check for alloc_ordered_workqueue
+- !17814  crypto: ccp - Fix crash when rebind ccp device for ccp.ko
+- !17819  jbd2: prevent softlockup in jbd2_log_do_checkpoint()
+- !17829  ipv6: reject malicious packets in ipv6_gso_segment()
+- !17827  net/packet: fix a race in packet_set_ring() and packet_notifier()
+- !17828  vsock: Do not allow binding to VMADDR_PORT_ANY
+- ipv6: reject malicious packets in ipv6_gso_segment()
+- vsock: Do not allow binding to VMADDR_PORT_ANY
+- net/packet: fix a race in packet_set_ring() and packet_notifier()
+- iwlwifi: Add missing check for alloc_ordered_workqueue
+- jbd2: prevent softlockup in jbd2_log_do_checkpoint()
+- !17812  net: bridge: fix soft lockup in br_multicast_query_expired()
+- crypto: ccp - Fix crash when rebind ccp device for ccp.ko
+- net: bridge: fix soft lockup in br_multicast_query_expired()
+- !17528  clone_private_mnt(): make sure that caller has CAP_SYS_ADMIN in the right userns
+- !17761  Fix oob when trace_get_user failed
+- tracing: Limit access to parser->buffer when trace_get_user failed
+- tracing: Remove unneeded goto out logic
+- clone_private_mnt(): make sure that caller has CAP_SYS_ADMIN in the right userns
 
 * Wed Aug 27 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2508.3.0.0341
 - !17764  mm/smaps: fix race between smaps_hugetlb_range and migration
