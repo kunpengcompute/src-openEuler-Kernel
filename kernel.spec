@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .4
+%global pkg_release         .5
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -123,6 +123,7 @@ Source9998: patches.tar.bz2
 %endif
 
 Patch0001: 0001-Support-RME-feature-for-CCA-host.patch
+Patch0002: 0001-riscv-kernel.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -367,6 +368,7 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 
 # riscv-kernel patch
 %ifarch riscv64
+%patch0002 -p1
 %endif
 
 %if "%toolchain" == "clang"
@@ -1122,6 +1124,11 @@ fi
 %endif
 
 %changelog
+* Mon Aug 18 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-102.0.0.5
+- RISC-V kernel upgrade to 6.6.0-102.0.0
+- Add support for Spacemit K1, Sophgo SG2044
+- Backport ACPI support and features for RISC-V
+
 * Fri Aug 15 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.4
 - Support RME feature for CCA host
 
