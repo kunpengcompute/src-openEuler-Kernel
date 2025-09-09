@@ -1,0 +1,142 @@
+From c4397f694137b09d44d86d719171c2200a47dbad Mon Sep 17 00:00:00 2001
+From: Reiji Watanabe <reijiw@google.com>
+Date: Fri, 20 Oct 2023 21:40:42 +0000
+Subject: [PATCH] [backport]KVM: arm64: Select default PMU in KVM_ARM_VCPU_INIT
+ handler
+
+mainline inclusion
+from mainline-v6.7-rc1
+commit 427733579744ef22ee6d0da9907560d79d937458
+category: bugfix
+bugzilla: https://gitee.com/openeuler/kernel/issues/ICWPIF
+Reference: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=427733579744ef22ee6d0da9907560d79d937458
+
+--------------------------------
+
+Future changes to KVM's sysreg emulation will rely on having a valid PMU
+instance to determine the number of implemented counters (PMCR_EL0.N).
+This is earlier than when userspace is expected to modify the vPMU
+device attributes, where the default is selected today.
+
+Select the default PMU when handling KVM_ARM_VCPU_INIT such that it is
+available in time for sysreg emulation.
+
+Reviewed-by: Sebastian Ott <sebott@redhat.com>
+Co-developed-by: Marc Zyngier <maz@kernel.org>
+Signed-off-by: Marc Zyngier <maz@kernel.org>
+Signed-off-by: Reiji Watanabe <reijiw@google.com>
+Signed-off-by: Raghavendra Rao Ananta <rananta@google.com>
+Link: https://lore.kernel.org/r/20231020214053.2144305-3-rananta@google.com
+[Oliver: rewrite changelog]
+Signed-off-by: Oliver Upton <oliver.upton@linux.dev>
+Signed-off-by: Xu Raoqing <xuraoqing@huawei.com>
+---
+ arch/arm64/kvm/arm.c      | 19 +++++++++++++++++++
+ arch/arm64/kvm/pmu-emul.c | 16 ++++------------
+ include/kvm/arm_pmu.h     |  5 +++++
+ 3 files changed, 28 insertions(+), 12 deletions(-)
+
+diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+index 01a3651a7395..ed0c3c022842 100644
+--- a/arch/arm64/kvm/arm.c
++++ b/arch/arm64/kvm/arm.c
+@@ -1604,6 +1604,21 @@ static bool kvm_vcpu_init_changed(struct kvm_vcpu *vcpu,
+ 	return !bitmap_equal(vcpu->arch.features, &features, KVM_VCPU_MAX_FEATURES);
+ }
+ 
++static int kvm_setup_vcpu(struct kvm_vcpu *vcpu)
++{
++	struct kvm *kvm = vcpu->kvm;
++	int ret = 0;
++
++	/*
++	 * When the vCPU has a PMU, but no PMU is set for the guest
++	 * yet, set the default one.
++	 */
++	if (kvm_vcpu_has_pmu(vcpu) && !kvm->arch.arm_pmu)
++		ret = kvm_arm_set_default_pmu(kvm);
++
++	return ret;
++}
++
+ static int __kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
+ 				 const struct kvm_vcpu_init *init)
+ {
+@@ -1619,6 +1634,10 @@ static int __kvm_vcpu_set_target(struct kvm_vcpu *vcpu,
+ 
+ 	bitmap_copy(vcpu->arch.features, &features, KVM_VCPU_MAX_FEATURES);
+ 
++	ret = kvm_setup_vcpu(vcpu);
++	if (ret)
++		goto out_unlock;
++
+ 	/* Now we know what it is, we can reset it. */
+ 	ret = kvm_reset_vcpu(vcpu);
+ 	if (ret) {
+diff --git a/arch/arm64/kvm/pmu-emul.c b/arch/arm64/kvm/pmu-emul.c
+index ac7ffa5f007b..7f4acb4361a5 100644
+--- a/arch/arm64/kvm/pmu-emul.c
++++ b/arch/arm64/kvm/pmu-emul.c
+@@ -742,10 +742,9 @@ static struct arm_pmu *kvm_pmu_probe_armpmu(void)
+ 	 * It is still necessary to get a valid cpu, though, to probe for the
+ 	 * default PMU instance as userspace is not required to specify a PMU
+ 	 * type. In order to uphold the preexisting behavior KVM selects the
+-	 * PMU instance for the core where the first call to the
+-	 * KVM_ARM_VCPU_PMU_V3_CTRL attribute group occurs. A dependent use case
+-	 * would be a user with disdain of all things big.LITTLE that affines
+-	 * the VMM to a particular cluster of cores.
++	 * PMU instance for the core during vcpu init. A dependent use
++	 * case would be a user with disdain of all things big.LITTLE that
++	 * affines the VMM to a particular cluster of cores.
+ 	 *
+ 	 * In any case, userspace should just do the sane thing and use the UAPI
+ 	 * to select a PMU type directly. But, be wary of the baggage being
+@@ -919,7 +918,7 @@ static void kvm_arm_set_pmu(struct kvm *kvm, struct arm_pmu *arm_pmu)
+  * where vCPUs can be scheduled on any core but the guest
+  * counters could stop working.
+  */
+-static int kvm_arm_set_default_pmu(struct kvm *kvm)
++int kvm_arm_set_default_pmu(struct kvm *kvm)
+ {
+ 	struct arm_pmu *arm_pmu = kvm_pmu_probe_armpmu();
+ 
+@@ -990,13 +989,6 @@ int kvm_arm_pmu_v3_set_attr(struct kvm_vcpu *vcpu, struct kvm_device_attr *attr)
+ 	if (vcpu->arch.pmu.created)
+ 		return -EBUSY;
+ 
+-	if (!kvm->arch.arm_pmu) {
+-		int ret = kvm_arm_set_default_pmu(kvm);
+-
+-		if (ret)
+-			return ret;
+-	}
+-
+ 	switch (attr->attr) {
+ 	case KVM_ARM_VCPU_PMU_V3_IRQ: {
+ 		int __user *uaddr = (int __user *)(long)attr->addr;
+diff --git a/include/kvm/arm_pmu.h b/include/kvm/arm_pmu.h
+index 295c726d11cd..6906a7b77911 100644
+--- a/include/kvm/arm_pmu.h
++++ b/include/kvm/arm_pmu.h
+@@ -103,6 +103,7 @@ void kvm_vcpu_pmu_resync_el0(void);
+ })
+ 
+ u8 kvm_arm_pmu_get_pmuver_limit(void);
++int kvm_arm_set_default_pmu(struct kvm *kvm);
+ u8 kvm_arm_pmu_get_max_counters(struct kvm *kvm);
+ u64 kvm_pmu_evtyper_mask(struct kvm *kvm);
+ 
+@@ -184,6 +185,10 @@ static inline u64 kvm_pmu_evtyper_mask(struct kvm *kvm)
+ 	return 0;
+ }
+ static inline void kvm_vcpu_pmu_resync_el0(void) {}
++static inline int kvm_arm_set_default_pmu(struct kvm *kvm)
++{
++	return -ENODEV;
++}
+ 
+ static inline u8 kvm_arm_pmu_get_max_counters(struct kvm *kvm)
+ {
+-- 
+2.43.0
+
