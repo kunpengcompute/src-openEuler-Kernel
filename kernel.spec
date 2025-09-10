@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       108
+%global devel_release       109
 %global maintenance_release .0.0
-%global pkg_release         .111
+%global pkg_release         .112
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,115 @@ fi
 %endif
 
 %changelog
+* Wed Sep 10 2025 Li Nan <linan122@huawei.com> - 6.6.0-109.0.0.112
+- !17945  Fix CVE-2025-38687
+- !17936  padata: Fix pd UAF once and for all
+- !17879 sched: apply custom cpu range for idle cpu
+- comedi: fix race between polling and detaching
+- !17937  clk: davinci: Add NULL check in davinci_lpsc_clk_register()
+- clk: davinci: Add NULL check in davinci_lpsc_clk_register()
+- padata: Fix pd UAF once and for all
+- !17853 v3  arm64: Fix actlr_el1 can not set problem in guest
+- !17882  CVE-2025-38502
+- !17922  x86/sgx: Prevent attempts to reclaim poisoned pages
+- !17923  media: vidtv: Terminating the subsequent process of initialization failure
+- !17924 [backport]KVM: arm64: Select default PMU in KVM_ARM_VCPU_INIT handler
+- !17913  Bluetooth: hci_sync: fix double free in 'hci_discovery_filter_clear()'
+- !17915  arm64/mpam: Half the number of RMIDs for all resources under CDP mode
+- [backport]KVM: arm64: Select default PMU in KVM_ARM_VCPU_INIT handler
+- media: vidtv: Terminating the subsequent process of initialization failure
+- x86/sgx: Prevent attempts to reclaim poisoned pages
+- !17848 [OLK-6.6]:update patches for sw64 architecture
+- !17731  arm64/mpam: Add mb_only boot option
+- !17911  CVE-2025-38305
+- !17244  Fix netns reference count issue
+- !17914 virtCCA CoDA: Expose I/O hook interfaces.
+- virtCCA CoDA: Expose I/O hook interfaces.
+- arm64/mpam: Half the number of RMIDs for all resources under CDP mode
+- Bluetooth: hci_sync: fix double free in 'hci_discovery_filter_clear()'
+- ptp: fix breakage after ptp_vclock_in_use() rework
+- ptp: remove ptp->n_vclocks check logic in ptp_vclock_in_use()
+- !17868  scsi: Remove scsi device no_start_on_resume flag
+- !17866  md: make rdev_addable usable for rcu mode
+- !17865  scsi: core: ufs: Fix a hang in the error handler
+- !17842 [OLK-6.6] Fix CVE-2025-37924
+- !17836 [OLK-6.6] Fix CVE-2025-38312
+- !17902 [OLK-6.6] perf/zhaoxin/uncore: Enhance uncore support and fix related bugs
+- !17880 [OLK-6.6] backport important bugfix for lpfc driver from upstream linux-6.6.y
+- perf/zhaoxin/uncore: Enhance uncore support and fix related bugs
+- !17890  LeapIOraid: fix strscpy size argument
+- !17892  pptp: Fix skb length handling and error path in pptp_xmit()
+- !17815 v2  ext4: better scalability for ext4 block allocation
+- pptp: fix pptp_xmit() error path
+- pptp: ensure minimal skb length in pptp_xmit()
+- LeapIOraid: fix strscpy size argument
+- !17883  net/mlx5e: Remove skb secpath if xfrm state is not found
+- net/mlx5e: Remove skb secpath if xfrm state is not found
+- Fix kabi breakage for bpf_map by using KABI_BROKEN_REPLACE and KABI_FILL_HOLE.
+- bpf: Fix oob access in cgroup local storage
+- bpf: Move cgroup iterator helpers to bpf.h
+- bpf: Move bpf map owner out of common struct
+- bpf: Add cookie object to bpf maps
+- sched: apply custom cpu range for idle cpu
+- !17756 [OLK-6.6] Provide host-side administrators/users with real-time access to the usage status of CSV3 CMA memory.
+- !17846  VMCI: fix race between vmci_host_setup_notify and vmci_ctx_unset_notify
+- !17442  scsi: target: Fix NULL pointer dereference in core_scsi3_decode_spec_i_port()
+- scsi: lpfc: Check for hdwq null ptr when cleaning up lpfc_vport structure
+- !17813  net/mlx5: Check device memory pointer before usage
+- scsi: fix kabi broken for no_start_on_resume flag in struct scsi_device
+- scsi: Remove scsi device no_start_on_resume flag
+- md: make rdev_addable usable for rcu mode
+- scsi: core: ufs: Fix a hang in the error handler
+- sw64: fix for userspace asking for syscall(-1)
+- sw64: update junzhang default config file
+- sw64: kvm: introduce pmd_thp_or_huge for PMD hugepage checking
+- sw64: add cross-page check in software unaligned write handling
+- sw64: ptrace: fail system calls on invalid address access in PEEKUSR
+- sw64: ptrace: fix a bug in return value handling in PEEKUSR AND POKEUSR
+- sw64: perf: Add support for get_cpuid_str function
+- sw64: kvm: use read/write spin lock for KVM MMU
+- sw64: rethook: fix a bug in rethook_trampoline
+- sw64: perf unwind: Do not put libunwind-sw_64 in FEATURE_TESTS_BASIC
+- arm64: Fix actlr_el1 can not set problem in guest
+- VMCI: fix race between vmci_host_setup_notify and vmci_ctx_unset_notify
+- ksmbd: fix use-after-free in kerberos authentication
+- ksmbd: Fix dangling pointer in krb_authenticate
+- fbdev: core: fbcvt: avoid division by 0 in fb_cvt_hperiod()
+- ext4: fix potential null deref in ext4_mb_init()
+- ext4: implement linear-like traversal across order xarrays
+- ext4: refactor choose group to scan group
+- ext4: open coding repeated check in next_linear_group
+- ext4: use correct criteria name instead stale integer number in comment
+- ext4: remove unused parameter ngroup in ext4_mb_choose_next_group_*()
+- ext4: convert free groups order lists to xarrays
+- ext4: factor out ext4_mb_scan_group()
+- ext4: factor out ext4_mb_might_prefetch()
+- ext4: keep "prefetch_grp" and "nr" consistent
+- ext4: remove unused ext4_allocation_context::ac_groups_considered
+- ext4: factor out __ext4_mb_scan_group()
+- ext4: convert EXT4_B2C(sbi->s_stripe) users to EXT4_NUM_B2C
+- ext4: fallback to complex scan if aligned scan doesn't work
+- ext4: fix largest free orders lists corruption on mb_optimize_scan switch
+- ext4: fix zombie groups in average fragment size lists
+- ext4: merge freed extent with existing extents before insertion
+- ext4: convert sbi->s_mb_free_pending to atomic_t
+- ext4: make running and commit transaction have their own freed_data_list
+- ext4: fix typo in CR_GOAL_LEN_SLOW comment
+- ext4: get rid of some obsolete EXT4_MB_HINT flags
+- ext4: utilize multiple global goals to reduce contention
+- ext4: remove unnecessary s_md_lock on update s_mb_last_group
+- ext4: remove unnecessary s_mb_last_start
+- ext4: separate stream goal hits from s_bal_goals for better tracking
+- Revert "ext4: move mb_last_[group|start] to ext4_inode_info"
+- ext4: add ext4_try_lock_group() to skip busy groups
+- net/mlx5: Check device memory pointer before usage
+- x86/csv: Add function to get free size of CSV3 CMA
+- arm64/mpam: Add mb_only boot option
+- scsi: target: Fix NULL pointer dereference in core_scsi3_decode_spec_i_port()
+- smb: client: fix netns refcount leak after net_passive changes
+- Revert "smb: client: fix TCP timers deadlock after rmmod"
+- Revert "smb: client: Fix netns refcount imbalance causing leaks and use-after-free"
+
 * Wed Sep 03 2025 Li Nan <linan122@huawei.com> - 6.6.0-108.0.0.111
 - !17835 v2  perf/aux: Fix pending disable flow when the AUX ring buffer overruns
 - !17856  sdei_watchdog: add percpu flag to fix sdei watchdog state in lpi mode
