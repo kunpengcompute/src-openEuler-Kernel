@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2509.1.0
+%global hulkrelease 2509.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0342
+Release: %{hulkrelease}.0343
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,23 @@ fi
 %endif
 
 %changelog
+
+* Wed Sep 10 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.4.0.0343
+- !17935  ftrace: Also allocate and copy hash for reading of filter files
+- ftrace: Also allocate and copy hash for reading of filter files
+- !17920  x86/smp: ignore reboot IPI when stopping_cpu contains value
+- x86/smp: ignore reboot IPI when stopping_cpu contains value
+- !17905 [openEuler-1.0-LTS] perf/zhaoxin/uncore: Enhance uncore support and fix related
+- perf/zhaoxin/uncore: Enhance uncore support and fix related bugs
+- !17891  wifi: mac80211: reject TDLS operations when station is not associated
+- !17873  blk-cgroup: Use cond_resched() when destroy blkgs
+- wifi: mac80211: reject TDLS operations when station is not associated
+- !17878  Fix CVE-2025-38498
+- !17843  NFSv4: Fail mounts if the lease setup times out
+- use uniform permission checks for all mount propagation changes
+- do_change_type(): refuse to operate on unmounted/not ours mounts
+- blk-cgroup: Use cond_resched() when destroy blkgs
+- NFSv4: Fail mounts if the lease setup times out
 
 * Wed Sep 03 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.1.0.0342
 - !17822  iwlwifi: Add missing check for alloc_ordered_workqueue
