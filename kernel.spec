@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       280
+%global devel_release       281
 %global maintenance_release .0.0
-%global pkg_release         .183
+%global pkg_release         .184
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,35 @@ fi
 %endif
 
 %changelog
+* Tue Sep 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-281.0.0.184
+- !17933  CVE-2025-38502
+- bpf: Fix updating attached freplace prog in prog_array map
+- bpf: Resolve fext program type when checking map compatibility
+- Fix kabi breakage for bpf_map by using KABI_FILL_HOLE and KABI_EXTEND
+- bpf: Fix oob access in cgroup local storage
+- bpf: Move cgroup iterator helpers to bpf.h
+- bpf: Move bpf map owner out of common struct
+- bpf: Add cookie object to bpf maps
+- bpf: generalise tail call map compatibility check
+- !17904 [OLK-5.5] perf/zhaoxin/uncore: Enhance uncore support and fix related bugs
+- !16636 [OLK-5.10] dma: phytium: Add PSWIOTLB mechanism to improve DMA performance
+- !17912  net/mlx5: Check device memory pointer before usage
+- net/mlx5: Check device memory pointer before usage
+- !17885 [OLK-5.10] backport important bugfix for lpfc driver from upstream linux-5.10.y
+- perf/zhaoxin/uncore: Enhance uncore support and fix related bugs
+- !17867  scsi: core: ufs: Fix a hang in the error handler
+- scsi: lpfc: Fix link down processing to address NULL pointer dereference
+- scsi: lpfc: Check for hdwq null ptr when cleaning up lpfc_vport structure
+- !17443  scsi: target: Fix NULL pointer dereference in core_scsi3_decode_spec_i_port()
+- scsi: core: ufs: Fix a hang in the error handler
+- dma: phyitum: enable CONFIG_PHYTIUM_ERRATUM_FT3386
+- dma: pswiotlb: Move platform-identification to cpu errata
+- dma: pswiotlb: Move pswiotlb dma functions behind dma_map_ops
+- dma: Fix kabi breakage due to "dma: phytium: Add PSWIOTLB mechanism to improve DMA performance"
+- dma: phyitum: enable CONFIG_PSWIOTLB
+- dma: phytium: Add PSWIOTLB mechanism to improve DMA performance
+- scsi: target: Fix NULL pointer dereference in core_scsi3_decode_spec_i_port()
+
 * Tue Sep 02 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-280.0.0.183
 - !17849 [OLK-5.10]:update patches for sw64 architecture
 - !17852  cpufreq: Init policy->rwsem before it may be possibly used
