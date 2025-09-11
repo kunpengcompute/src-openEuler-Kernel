@@ -1,0 +1,201 @@
+From 192295a637e9f4d8f76664a508b299595724f204 Mon Sep 17 00:00:00 2001
+From: Steven Price <steven.price@arm.com>
+Date: Tue, 9 Sep 2025 20:40:23 +0800
+Subject: [PATCH 1/2] arm64: RME: Introduce kvm_rec_pre_enter() called before
+ entering an atomic section
+
+community inclusion
+category: bugfix
+bugzilla: https://gitee.com/openeuler/kernel/issues/ICX7FX?from=project-issue
+
+Reference: https://patchew.org/linux/20250820145606.180644-1-steven.price@arm.com/20250820145606.180644-17-steven.price@arm.com
+
+--------------------------------
+
+Entering a realm is done using a SMC call to the RMM. On exit the
+exit-codes need to be handled slightly differently to the normal KVM
+path so define our own functions for realm enter/exit and hook them
+in if the guest is a realm guest.
+
+Fixes: a9b2e8a67446 ("[v8-16-43]arm64: RME: Handle realm enter/exit")
+Signed-off-by: Steven Price <steven.price@arm.com>
+Reviewed-by: Gavin Shan <gshan@redhat.com>
+
+---
+Changes since v8 patch:
+ * Introduce kvm_rec_pre_enter() called before entering an atomic
+   section to handle operations that might require memory allocation
+   (specifically completing a RIPAS change introduced in a later patch).
+ * Updates to align with upstream changes to hpfar_el2 which now (ab)uses
+   HPFAR_EL2_NS as a valid flag.
+ * Fix exit reason when racing with PSCI shutdown to return
+   KVM_EXIT_SHUTDOWN rather than KVM_EXIT_UNKNOWN.
+
+Backport cca-v10 changes from v8 for bugfix
+
+Signed-off-by: houmingyong <houmingyong@huawei.com>
+---
+ arch/arm64/include/asm/cca_base.h |  2 ++
+ arch/arm64/include/asm/kvm_rme.h  |  1 +
+ arch/arm64/kvm/arm.c              |  3 +++
+ arch/arm64/kvm/cca_base.c         |  7 +++++++
+ arch/arm64/kvm/rme-exit.c         | 10 ++++++++--
+ arch/arm64/kvm/rme.c              | 27 ++++++++++++++++++++++-----
+ 6 files changed, 43 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm64/include/asm/cca_base.h b/arch/arm64/include/asm/cca_base.h
+index 22dbf2e68738..dda255aeb760 100644
+--- a/arch/arm64/include/asm/cca_base.h
++++ b/arch/arm64/include/asm/cca_base.h
+@@ -19,6 +19,7 @@ struct cca_operations {
+ 	int (*enable_cap)(struct kvm *kvm, struct kvm_enable_cap *cap);
+ 	int (*init_realm_vm)(struct kvm *kvm);
+ 	int (*realm_vm_enter)(struct kvm_vcpu *vcpu);
++	int (*realm_vm_pre_enter)(struct kvm_vcpu *vcpu);
+ 	int (*realm_vm_exit)(struct kvm_vcpu *vcpu, int ret);
+ 	void (*init_sel2_hypervisor)(void);
+ 	int (*psci_complete)(struct kvm_vcpu *calling, struct kvm_vcpu *target,
+@@ -45,6 +46,7 @@ int kvm_realm_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap);
+ void kvm_init_rme(void);
+ 
+ int kvm_rec_enter(struct kvm_vcpu *vcpu);
++int kvm_rec_pre_enter(struct kvm_vcpu *vcpu);
+ int handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_ret);
+ 
+ int kvm_init_realm_vm(struct kvm *kvm);
+diff --git a/arch/arm64/include/asm/kvm_rme.h b/arch/arm64/include/asm/kvm_rme.h
+index 568537f96da5..55c4e7b2dcf8 100644
+--- a/arch/arm64/include/asm/kvm_rme.h
++++ b/arch/arm64/include/asm/kvm_rme.h
+@@ -108,6 +108,7 @@ int _kvm_create_rec(struct kvm_vcpu *vcpu);
+ void _kvm_destroy_rec(struct kvm_vcpu *vcpu);
+ 
+ int _kvm_rec_enter(struct kvm_vcpu *vcpu);
++int _kvm_rec_pre_enter(struct kvm_vcpu *vcpu);
+ int _handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_status);
+ 
+ void kvm_realm_unmap_range(struct kvm *kvm,
+diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+index ed0c3c022842..d7511196e607 100644
+--- a/arch/arm64/kvm/arm.c
++++ b/arch/arm64/kvm/arm.c
+@@ -1262,6 +1262,9 @@ int kvm_arch_vcpu_ioctl_run(struct kvm_vcpu *vcpu)
+ 		if (ret > 0)
+ 			ret = check_vcpu_requests(vcpu);
+ 
++		if (ret > 0 && vcpu_is_rec(vcpu))
++			ret = kvm_rec_pre_enter(vcpu);
++
+ 		/*
+ 		 * Preparing the interrupts to be injected also
+ 		 * involves poking the GIC, which must be done in a
+diff --git a/arch/arm64/kvm/cca_base.c b/arch/arm64/kvm/cca_base.c
+index 19999d4a8a06..ad80b0ea3cf7 100644
+--- a/arch/arm64/kvm/cca_base.c
++++ b/arch/arm64/kvm/cca_base.c
+@@ -76,6 +76,13 @@ int kvm_rec_enter(struct kvm_vcpu *vcpu)
+ 	return 0;
+ }
+ 
++int kvm_rec_pre_enter(struct kvm_vcpu *vcpu)
++{
++	if (g_cca_operations[cca_cvm_type]->realm_vm_pre_enter)
++		return g_cca_operations[cca_cvm_type]->realm_vm_pre_enter(vcpu);
++	return 0;
++}
++
+ int handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_ret)
+ {
+ 	if (g_cca_operations[cca_cvm_type]->realm_vm_exit)
+diff --git a/arch/arm64/kvm/rme-exit.c b/arch/arm64/kvm/rme-exit.c
+index 83ca2c271f1a..abe13350d118 100644
+--- a/arch/arm64/kvm/rme-exit.c
++++ b/arch/arm64/kvm/rme-exit.c
+@@ -154,7 +154,7 @@ int _handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_ret)
+ 	 * the VCPU as a result of KVM's PSCI handling.
+ 	 */
+ 	if (status == RMI_ERROR_REALM && index == 1) {
+-		vcpu->run->exit_reason = KVM_EXIT_UNKNOWN;
++		vcpu->run->exit_reason = KVM_EXIT_SHUTDOWN;
+ 		return 0;
+ 	}
+ 
+@@ -163,7 +163,8 @@ int _handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_ret)
+ 
+ 	vcpu->arch.fault.esr_el2 = rec->run->exit.esr;
+ 	vcpu->arch.fault.far_el2 = rec->run->exit.far;
+-	vcpu->arch.fault.hpfar_el2 = rec->run->exit.hpfar;
++	/* HPFAR_EL2 is only valid for RMI_EXIT_SYNC */
++	vcpu->arch.fault.hpfar_el2 = 0;
+ 
+ 	update_arch_timer_irq_lines(vcpu);
+ 
+@@ -172,6 +173,11 @@ int _handle_rec_exit(struct kvm_vcpu *vcpu, int rec_run_ret)
+ 
+ 	switch (rec->run->exit.exit_reason) {
+ 	case RMI_EXIT_SYNC:
++	/*
++	 * HPFAR_EL2_NS is hijacked to indicate a valid HPFAR value,
++	 * see __get_fault_info()
++	 */
++	vcpu->arch.fault.hpfar_el2 = rec->run->exit.hpfar;
+ 		return rec_exit_handlers[esr_ec](vcpu);
+ 	case RMI_EXIT_IRQ:
+ 	case RMI_EXIT_FIQ:
+diff --git a/arch/arm64/kvm/rme.c b/arch/arm64/kvm/rme.c
+index 9095a1573ecb..69bb3c74f89b 100644
+--- a/arch/arm64/kvm/rme.c
++++ b/arch/arm64/kvm/rme.c
+@@ -1469,11 +1469,23 @@ static void kvm_complete_ripas_change(struct kvm_vcpu *vcpu)
+ 		base = top_ipa;
+ 	} while (top_ipa < top);
+ }
+-
+-int _kvm_rec_enter(struct kvm_vcpu *vcpu)
++/*
++ * _kvm_rec_pre_enter - Complete operations before entering a REC
++ *
++ * Some operations require work to be completed before entering a realm. That
++ * work may require memory allocation so cannot be done in the kvm_rec_enter()
++ * call.
++ *
++ * Return: 1 if we should enter the guest
++ *	   0 if we should exit to userspace
++ *	   < 0 if we should exit to userspace, where the return value indicates
++ *	   an error
++ */
++int _kvm_rec_pre_enter(struct kvm_vcpu *vcpu)
+ {
+ 	struct realm_rec *rec = vcpu->arch.rec;
+-
++	if (kvm_realm_state(vcpu->kvm) != REALM_STATE_ACTIVE)
++		return -EINVAL;
+ 	switch (rec->run->exit.exit_reason) {
+ 	case RMI_EXIT_HOST_CALL:
+ 	case RMI_EXIT_PSCI:
+@@ -1485,8 +1497,12 @@ int _kvm_rec_enter(struct kvm_vcpu *vcpu)
+ 		break;
+ 	}
+ 
+-	if (kvm_realm_state(vcpu->kvm) != REALM_STATE_ACTIVE)
+-		return -EINVAL;
++	return 1;
++}
++
++int _kvm_rec_enter(struct kvm_vcpu *vcpu)
++{
++	struct realm_rec *rec = vcpu->arch.rec;
+ 
+ 	return rmi_rec_enter(virt_to_phys(rec->rec_page),
+ 			     virt_to_phys(rec->run));
+@@ -1707,6 +1723,7 @@ static struct cca_operations armcca_operations = {
+ 	.enable_cap = _kvm_realm_enable_cap,
+ 	.init_realm_vm = _kvm_init_realm_vm,
+ 	.realm_vm_enter = _kvm_rec_enter,
++	.realm_vm_pre_enter = _kvm_rec_pre_enter,
+ 	.realm_vm_exit = _handle_rec_exit,
+ 	.init_sel2_hypervisor = _kvm_init_rme,
+ 	.psci_complete = _realm_psci_complete,
+-- 
+2.43.0
+

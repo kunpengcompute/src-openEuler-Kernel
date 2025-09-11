@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .6
+%global pkg_release         .7
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -125,6 +125,8 @@ Source9998: patches.tar.bz2
 Patch0001: 0001-Support-RME-feature-for-CCA-host.patch
 Patch0002: 0001-riscv-kernel.patch
 Patch0003: 0007-backport-KVM-arm64-Select-default-PMU-in-KVM_ARM_VCP.patch
+Patch0004: 0008-arm64-RME-Introduce-kvm_rec_pre_enter-called-before-.patch
+Patch0005: 0009-arm64-RME-handle-RIPAS-changes-before-kvm_rec_enter.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -367,6 +369,8 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 # Arm CCA patch
 %patch0001 -p1
 %patch0003 -p1
+%patch0004 -p1
+%patch0005 -p1
 
 # riscv-kernel patch
 %ifarch riscv64
@@ -1126,6 +1130,9 @@ fi
 %endif
 
 %changelog
+* Thu Sep 11 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.7
+- fix realm exit error
+
 * Mon Sep 08 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.6
 - Backport Select default PMU in KVM_ARM_VCPU_INIT to fix set pmu counters failed
 
