@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .7
+%global pkg_release         .8
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -127,6 +127,7 @@ Patch0002: 0001-riscv-kernel.patch
 Patch0003: 0007-backport-KVM-arm64-Select-default-PMU-in-KVM_ARM_VCP.patch
 Patch0004: 0008-arm64-RME-Introduce-kvm_rec_pre_enter-called-before-.patch
 Patch0005: 0009-arm64-RME-handle-RIPAS-changes-before-kvm_rec_enter.patch
+Patch0006: 0001-drm-phytium-Fix-Phytium-DRM-build-fail.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -375,6 +376,11 @@ Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 # riscv-kernel patch
 %ifarch riscv64
 %patch0002 -p1
+%endif
+
+# phytium patch
+%ifarch aarch64 x86_64
+%patch0006 -p1
 %endif
 
 %if "%toolchain" == "clang"
@@ -1130,6 +1136,9 @@ fi
 %endif
 
 %changelog
+* Mon Sep 15 2025 Jiakun Shuai <shuaijiakun1288@phytium.com.cn> - 6.6.0-102.0.0.8
+- drm/phytium: Fix make allmodconfig build fail
+
 * Thu Sep 11 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.7
 - fix realm exit error
 
