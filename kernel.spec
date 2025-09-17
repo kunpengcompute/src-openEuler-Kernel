@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       109
+%global devel_release       110
 %global maintenance_release .0.0
-%global pkg_release         .112
+%global pkg_release         .113
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,91 @@ fi
 %endif
 
 %changelog
+* Wed Sep 17 2025 Li Nan <linan122@huawei.com> - 6.6.0-110.0.0.113
+- !18015 arm64: cca_base: On the Adaptation of CCA and virtCCA.
+- arm64: cca_base: On the Adaptation of CCA and virtCCA.
+- !18017  pNFS: Fix uninited ptr deref in block/scsi layout
+- pNFS: Fix uninited ptr deref in block/scsi layout
+- !18000  gfs2: Validate i_depth for exhash directories
+- !17997  hv_netvsc: Fix panic during namespace deletion with VF
+- !17947  migration/hisilicon: some bugfix
+- !17919  nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
+- gfs2: Validate i_depth for exhash directories
+- hv_netvsc: Fix panic during namespace deletion with VF
+- !17985  Updates of HiSilicon Uncore L3C PMU
+- !17977  media: dvb-frontends: w7090p: fix null-ptr-deref in w7090p_tuner_write_serpar and w7090p_tuner_read_serpar
+- !17987 virtCCA CoDA: Prevent secure PFs/VFs load or probe native drivers.
+- virtCCA CoDA: Prevent secure PFs/VFs load or probe native drivers.
+- Documentation: hisi-pmu: Add introduction to HiSilicon V3 PMU
+- Documentation: hisi-pmu: Fix of minor format error
+- drivers/perf: hisi: Add support for L3C PMU v3
+- !17974 iommu: Fix the incorrect exception process of the failed memory allocation
+- !17983  fix oenetcls bugs
+- net/oenetcls: clean resource when init ntuple/flow fail
+- net/oenetcls: use workqueue for ntuple cfg
+- net/oenetcls: remove oenetcls trace hook
+- net/oenetcls: use raw_smp_processor_id() instead of smp_processor_id()
+- !17898 enfs: fix some bugs and optimize performance
+- media: dvb-frontends: w7090p: fix null-ptr-deref in w7090p_tuner_write_serpar and w7090p_tuner_read_serpar
+- !17976  LoongArch: BPF: Fix jump offset calculation in tailcall
+- iommu: Fix the incorrect exception process of the failed memory allocation
+- LoongArch: BPF: Fix jump offset calculation in tailcall
+- !17602 [OLK-6.6] drm/phytium: Fix make allmodconfig build fail
+- !17792 virtCCA: Improve cvm performance.
+- !17869 [OLK-6.6]Backport upstream CC Measurement support in the efi libstub
+- !17862 [OLK-6.6]Hygon: Support RTMR and Attestation that includes RTMR for Hygon CSV3 VM
+- !17946 mm/shmem, swap: bugfix and improvement of mTHP swap in
+- !17969  arm64/mpam: Add quirk for cmax and cmin
+- !17967  sched: Fix sched_numa_find_nth_cpu() if mask offline
+- !17955 arm64: RME: handle RIPAS changes before kvm_rec_enter
+- arm64: RME: handle RIPAS changes before kvm_rec_enter
+- arm64: RME: Introduce kvm_rec_pre_enter() called before entering an atomic section
+- !17962  tools/mpam: Add MPAM dynamic adjustment and sampling scripts
+- arm64/mpam: Add quirk for cmax and cmin
+- !17940  net/tls: fix kernel panic when alloc_page failed
+- !17941  OLK-6.6-fix-CVE-2025-38147
+- sched: Fix sched_numa_find_nth_cpu() if mask offline
+- tools/mpam: Add MPAM dynamic adjustment and sampling scripts
+- !17939  pinctrl: qcom: msm: mark certain pins as invalid for interrupts
+- hisi_acc_vfio_pci: update device driver status
+- migration: resolve duplicate migration states
+- migration: fix VF reset timeout issue
+- migration: bugfix live migration function without VF device driver
+- mm/shmem, swap: fix major fault counting
+- mm/shmem, swap: rework swap entry and index calculation for large swapin
+- mm/shmem, swap: simplify swapin path and result handling
+- mm/shmem, swap: never use swap cache and readahead for SWP_SYNCHRONOUS_IO
+- mm/shmem, swap: tidy up swap entry splitting
+- mm/shmem, swap: tidy up THP swapin checks
+- mm/shmem, swap: avoid redundant Xarray lookup during swapin
+- mm/shmem, swap: improve cached mTHP handling and fix potential hang
+- mm/shmem, swap: fix softlockup with mTHP swapin
+- Add IPI direct inject method for virtCCA CVM.
+- Improve virtCCA CVM vtimer irq inject method.
+- Add poll method for nfs for virtCCA CVM.
+- calipso: unlock rcu before returning -EAFNOSUPPORT
+- calipso: Don't call calipso functions for AF_INET sk.
+- net/tls: fix kernel panic when alloc_page failed
+- pinctrl: qcom: msm: mark certain pins as invalid for interrupts
+- nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
+- nfs/enfs: remove duplicate definitions
+- nfs/enfs: fix some cleanup issues
+- nfs/enfs: fix finding root uuid issue
+- nfs/enfs: introduce is_enfs_debug()
+- nfs/enfs: get rpc procedure number from rpc_procinfo in get_uuid_from_task()
+- sunrpc: do not set enfs transport in rpc_task_set_client()
+- efi/libstub: Add get_event_log() support for CC platforms
+- efi/libstub: Measure into CC protocol if TCG2 protocol is absent
+- efi/libstub: Add Confidential Computing (CC) measurement typedefs
+- efi/tpm: Use symbolic GUID name from spec for final events table
+- efi/libstub: Use TPM event typedefs from the TCG PC Client spec
+- virt: csv-guest: Add support for extended attestation aware request in the CSV3 guest
+- virt: csv-guest: Implement CSV RTMR ioctl interfaces
+- virt: csv-guest: Introduce CSV RTMR uapi interface
+- x86/csv: Introduce RTMR interfaces
+- Add dynamic wfx trap method for virtCCA CVM.
+- drm/phytium: Fix Phytium DRM build fail
+
 * Wed Sep 10 2025 Li Nan <linan122@huawei.com> - 6.6.0-109.0.0.112
 - !17945  Fix CVE-2025-38687
 - !17936  padata: Fix pd UAF once and for all
