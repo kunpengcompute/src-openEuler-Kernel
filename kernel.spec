@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2509.4.0
+%global hulkrelease 2509.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0343
+Release: %{hulkrelease}.0344
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,24 @@ fi
 %endif
 
 %changelog
+
+* Wed Sep 17 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.5.0.0344
+- !8566 [openEuler-1.0-LTS] Update a series of xhci-related Zhaoxin patches
+- !18002  gfs2: Validate i_depth for exhash directories
+- !17998  fix CVE-2025-38449
+- gfs2: Validate i_depth for exhash directories
+- drm: fix kabi for struct drm_framebuffer
+- drm/gem: Acquire references on GEM handles for framebuffers
+- drm/print: introduce new struct drm_device based WARN* macros
+- xhci: Add ZHAOXIN xHCI host U1/U2 feature support
+- Revert "xhci: Add Zhaoxin xHCI LPM U1/U2 feature support"
+- xhci: Show ZHAOXIN xHCI root hub speed correctly
+- Revert "xhci: Show Zhaoxin XHCI root hub speed correctly"
+- Revert "xhci: Fix a logic issue when display Zhaoxin XHCI root hub speed"
+- xhci: Fix TRB prefetch issue of ZHAOXIN hosts
+- Revert "xhci: fix issue of cross page boundary in TRB prefetch"
+- xhci: Fix resume issue of some ZHAOXIN hosts
+- Revert "xhci: fix issue with resume from system Sx state"
 
 * Wed Sep 10 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.4.0.0343
 - !17935  ftrace: Also allocate and copy hash for reading of filter files
