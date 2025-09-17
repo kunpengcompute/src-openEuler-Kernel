@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       281
+%global devel_release       282
 %global maintenance_release .0.0
-%global pkg_release         .184
+%global pkg_release         .185
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,14 @@ fi
 %endif
 
 %changelog
+* Tue Sep 16 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-282.0.0.185
+- !17999  gfs2: Validate i_depth for exhash directories
+- !17970  nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
+- gfs2: Validate i_depth for exhash directories
+- !17995  media: dvb-frontends: w7090p: fix null-ptr-deref in w7090p_tuner_write_serpar and w7090p_tuner_read_serpar
+- media: dvb-frontends: w7090p: fix null-ptr-deref in w7090p_tuner_write_serpar and w7090p_tuner_read_serpar
+- nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
+
 * Tue Sep 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-281.0.0.184
 - !17933  CVE-2025-38502
 - bpf: Fix updating attached freplace prog in prog_array map
