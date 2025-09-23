@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       102
 %global maintenance_release .0.0
-%global pkg_release         .5
+%global pkg_release         .9
 
 %global openeuler_lts       0
 %global openeuler_major     2509
@@ -89,7 +89,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 Name:	 haoc-kernel
 Version: %{upstream_version}.%{upstream_sublevel}
 Release: %{devel_release}%{?maintenance_release}%{?pkg_release}
-Summary: Linux Kernel with HAOC
+Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
 Source0: kernel.tar.gz
@@ -123,7 +123,12 @@ Source9998: patches.tar.bz2
 %endif
 
 Patch0001: 0001-Support-RME-feature-for-CCA-host.patch
-Patch0005: 0005-haoc-kernel.patch
+Patch0002: 0001-riscv-kernel.patch
+Patch0003: 0007-backport-KVM-arm64-Select-default-PMU-in-KVM_ARM_VCP.patch
+Patch0004: 0008-arm64-RME-Introduce-kvm_rec_pre_enter-called-before-.patch
+Patch0005: 0009-arm64-RME-handle-RIPAS-changes-before-kvm_rec_enter.patch
+Patch0006: 0001-drm-phytium-Fix-Phytium-DRM-build-fail.patch
+Patch0007: 0005-haoc-kernel.patch
 
 #BuildRequires:
 BuildRequires: module-init-tools, patch >= 2.5.4, bash >= 2.03, tar
@@ -326,7 +331,7 @@ package or when debugging this package.\
 %endif
 
 %prep
-%setup -q -n kernel-%{version} -c
+%setup -q -n %{name}-%{version} -c
 
 %if 0%{?with_patch}
 tar -xjf %{SOURCE9998}
@@ -363,14 +368,23 @@ Applypatches()
 Applypatches series.conf %{_builddir}/kernel-%{version}/linux-%{KernelVer}
 %endif
 
+# HAOC patch
+%patch0007 -p1
+
 # Arm CCA patch
 %patch0001 -p1
-
-# HAOC patch
+%patch0003 -p1
+%patch0004 -p1
 %patch0005 -p1
 
 # riscv-kernel patch
 %ifarch riscv64
+%patch0002 -p1
+%endif
+
+# phytium patch
+%ifarch aarch64 x86_64
+%patch0006 -p1
 %endif
 
 %if "%toolchain" == "clang"
@@ -1126,8 +1140,22 @@ fi
 %endif
 
 %changelog
-* Wed Aug 28 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-102.0.0.5
+* Tue Sep 16 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-102.0.0.9
 - Add HAOC IEE for openEuler-25.09
+* Mon Sep 15 2025 Jiakun Shuai <shuaijiakun1288@phytium.com.cn> - 6.6.0-102.0.0.8
+- drm/phytium: Fix make allmodconfig build fail
+
+* Thu Sep 11 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.7
+- fix realm exit error
+
+* Mon Sep 08 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.6
+- Backport Select default PMU in KVM_ARM_VCPU_INIT to fix set pmu counters failed
+
+* Mon Aug 18 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-102.0.0.5
+- RISC-V kernel upgrade to 6.6.0-102.0.0
+- Add support for Spacemit K1, Sophgo SG2044
+- Backport ACPI support and features for RISC-V
+
 * Fri Aug 15 2025 Hou Mingyong<houmingyong@huawei.com> - 6.6.0-102.0.0.4
 - Support RME feature for CCA host
 
