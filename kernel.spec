@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       110
+%global devel_release       111
 %global maintenance_release .0.0
-%global pkg_release         .102
+%global pkg_release         .103
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,59 @@ fi
 %endif
 
 %changelog
+* Tue Sep 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-111.0.0.103
+- !17932 [OLK-6.6] add support for WangXun 10G/25G/40G
+- !17665 cpufreq: intel_pstate: Support Clearwater Forest OOB mode
+- !17663 platform/x86: ISST: Add Clearwater Forest to support list
+- !17668 cpufreq: intel_pstate: Add Granite Rapids support in no-HWP mode
+- !17681 cpufreq: intel_pstate: Update Balance-performance EPP for Granite Rapids
+- !17468 [Intel-SIG] backporting KVM: x86: Advertise AVX10.1 CPUID to userspace
+- !17571 [OLK-6.6] Intel-SIG: Add new Intel CPU# definition
+- !18024  trace/fgraph: Fix error handling
+- !18061  net: bridge: fix soft lockup in br_multicast_query_expired()
+- !18026  vsock/virtio: Validate length in packet header before skb_put()
+- !18088  net/oenetcls: Fix crash when removing module
+- net/oenetcls: Fix crash when removing module
+- !18071  media: dvb-frontends: dib7090p: fix null-ptr-deref in dib7090p_rw_on_apb()
+- media: dvb-frontends: dib7090p: fix null-ptr-deref in dib7090p_rw_on_apb()
+- net: bridge: fix soft lockup in br_multicast_query_expired()
+- !18054 arm64 kvm: On the Adaptation of CCA and virtCCA.
+- arm64 kvm: On the Adaptation of CCA and virtCCA.
+- !17972  arm64/mpam: Add quirk for L3 CSU counters
+- !18016  media: uvcvideo: Fix 1-byte out-of-bounds read in uvc_parse_format()
+- !16579 Do not shatter hugezeropage on wp-fault
+- !17839 [OLK-6.6] Fix CVE-2025-37838
+- !17887 [OLK-6.6] Fix CVE-2025-38637
+- !17889 [OLK-6.6] Fix CVE-2025-37840
+- !17850 [OLK-6.6] Fix CVE-2025-38173
+- !17854 [OLK-6.6] Fix CVE-2025-38143
+- !17861 [OLK-6.6] Fix CVE-2025-38194
+- vsock/virtio: Validate length in packet header before skb_put()
+- trace/fgraph: Fix error handling
+- media: uvcvideo: Fix 1-byte out-of-bounds read in uvc_parse_format()
+- jffs2: check that raw node were preallocated before writing summary
+- net_sched: skbprio: Remove overly strict queue assertions
+- crypto: marvell/cesa - Handle zero-length skcipher requests
+- mtd: rawnand: brcmnand: fix PM resume warning
+- HSI: ssi_protocol: Fix use after free vulnerability in ssi_protocol Driver Due to Race Condition
+- backlight: pm8941: Add NULL check in wled_configure()
+- arm64/mpam: Add quirk for L3 CSU counters
+- x86/cpu/vfm: Fix x86_vfm kabi
+- x86/cpu/vfm: Update arch/x86/include/asm/intel-family.h
+- x86/cpu/vfm: Add/initialize x86_vfm field to struct cpuinfo_x86
+- x86/cpu: Add model number for another Intel Arrow Lake mobile processor
+- net: wangxun: txgbe: add support for wangxun 10G/25G/40G
+- net: wangxun: remove wangxun txgbe inbox drivers
+- platform/x86: ISST: Add Clearwater Forest to support list
+- cpufreq: intel_pstate: Support Clearwater Forest OOB mode
+- cpufreq: intel_pstate: Support Granite Rapids and Sierra Forest OOB mode
+- cpufreq: intel_pstate: Support Emerald Rapids OOB mode
+- cpufreq: intel_pstate: Add Granite Rapids support in no-HWP mode
+- cpufreq: intel_pstate: Update Balance-performance EPP for Granite Rapids
+- KVM: x86: Advertise AVX10.1 CPUID to userspace
+- mm: allocate THP on hugezeropage wp-fault
+- mm: abstract THP allocation
+
 * Wed Sep 17 2025 Li Nan <linan122@huawei.com> - 6.6.0-110.0.0.102
 - !18015 arm64: cca_base: On the Adaptation of CCA and virtCCA.
 - arm64: cca_base: On the Adaptation of CCA and virtCCA.
