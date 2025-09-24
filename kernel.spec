@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2509.5.0
+%global hulkrelease 2509.6.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0344
+Release: %{hulkrelease}.0345
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,16 @@ fi
 %endif
 
 %changelog
+
+* Wed Sep 24 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.6.0.0345
+- !18098  drivers: serial: jsm: fix some leaks in probe
+- !18074  tpm: tpm_crb: Add the missed acpi_put_table() to fix memory leak
+- !18085  Fix CVE-2022-50343
+- !18022  ALSA: usb-audio: Validate UAC3 power domain descriptors, too
+- drivers: serial: jsm: fix some leaks in probe
+- rapidio: fix possible name leaks when rio_add_device() fails
+- tpm: tpm_crb: Add the missed acpi_put_table() to fix memory leak
+- ALSA: usb-audio: Validate UAC3 power domain descriptors, too
 
 * Wed Sep 17 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.5.0.0344
 - !8566 [openEuler-1.0-LTS] Update a series of xhci-related Zhaoxin patches
