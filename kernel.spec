@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       282
+%global devel_release       283
 %global maintenance_release .0.0
-%global pkg_release         .184
+%global pkg_release         .185
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,18 @@ fi
 %endif
 
 %changelog
+* Wed Sep 24 2025 Li Nan <linan122@huawei.com> - 5.10.0-283.0.0.185
+- !18068  net: bridge: fix soft lockup in br_multicast_query_expired()
+- !18025  trace/fgraph: Fix error handling
+- !18100  Fix CVE-2022-50255
+- !18102  bpf: Fix memleak due to fentry attach failure
+- bpf: Fix memleak due to fentry attach failure
+- tracing: Have the user copy of synthetic event address use correct context
+- tracing: Fix reading strings from synthetic events
+- tracing: Move duplicate code of trace_kprobe/eprobe.c into header
+- net: bridge: fix soft lockup in br_multicast_query_expired()
+- trace/fgraph: Fix error handling
+
 * Tue Sep 16 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-282.0.0.184
 - !17999  gfs2: Validate i_depth for exhash directories
 - !17970  nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
