@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2509.6.0
+%global hulkrelease 2510.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0345
+Release: %{hulkrelease}.0346
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,69 @@ fi
 %endif
 
 %changelog
+
+* Thu Oct 09 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.1.0.0346
+- !17921  nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
+- !18255  scsi: qla2xxx: Pointer may be dereferenced
+- !18257  udf: Do not update file length for failed writes to inline files
+- !18261  drm/radeon: Fix integer overflow in radeon_cs_parser_init
+- !18174  fix CVE-2022-50384 and CVE-2022-50249
+- !18252  mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- drm/radeon: Fix integer overflow in radeon_cs_parser_init
+- udf: Do not update file length for failed writes to inline files
+- scsi: qla2xxx: Pointer may be dereferenced
+- !18163  x86/MCE: Always save CS register on AMD Zen IF Poison errors
+- mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18185  crypto: cavium - prevent integer overflow loading firmware
+- !18113  wifi: brcmfmac: fix use-after-free bug in brcmf_netdev_start_xmit()
+- !18198  drm/radeon: Add the missed acpi_put_table() to fix memory leak
+- !18187  media: uvcvideo: Handle cameras with invalid descriptors
+- !18134  wifi: rtlwifi: Fix global-out-of-bounds bug in _rtl8812ae_phy_set_txpower_limit()
+- !18181  udf: Fix uninitialized array access for some pathnames
+- !18139  ALSA: hda: Fix Oops by 9.1 surround channel names
+- !18141  sched/core: Fix potential deadlock on rq lock
+- !18121  nfsd: call op_release, even when op_func returns an error
+- !18148  rbd: avoid use-after-free in do_rbd_add() when rbd_dev_create() fails
+- !18158  firewire: net: fix use after free in fwnet_finish_incoming_packet()
+- !18109  recordmcount: Fix memory leaks in the uwrite function
+- drm/radeon: Add the missed acpi_put_table() to fix memory leak
+- media: uvcvideo: Handle cameras with invalid descriptors
+- crypto: cavium - prevent integer overflow loading firmware
+- !18136  sched/fair: Don't balance task to its current running CPU
+- !18137  VMCI: check context->notify_page after call to get_user_pages_fast() to avoid GPF
+- udf: Fix uninitialized array access for some pathnames
+- staging: vme_user: Fix possible UAF in tsi148_dma_list_add
+- memory: of: Fix refcount leak bug in of_get_ddr_timings()
+- !18142  Bluetooth: hci_sysfs: Fix attempting to call device_add multiple times
+- x86/MCE: Always save CS register on AMD Zen IF Poison errors
+- firewire: net: fix use after free in fwnet_finish_incoming_packet()
+- !18135  wifi: ath9k: verify the expected usb_endpoints are present
+- !18108  tee: fix NULL pointer dereference in tee_shm_put
+- !18069  fs: writeback: fix use-after-free in __mark_inode_dirty()
+- !18065  btrfs: fix BUG_ON condition in btrfs_cancel_balance
+- !18132  Bluetooth: hci_{ldisc,serdev}: check percpu_init_rwsem() failure
+- rbd: avoid use-after-free in do_rbd_add() when rbd_dev_create() fails
+- Bluetooth: hci_sysfs: Fix attempting to call device_add multiple times
+- sched/core: Fix potential deadlock on rq lock
+- ALSA: hda: Fix Oops by 9.1 surround channel names
+- VMCI: check context->notify_page after call to get_user_pages_fast() to avoid GPF
+- sched/fair: Don't balance task to its current running CPU
+- wifi: ath9k: verify the expected usb_endpoints are present
+- wifi: rtlwifi: Fix global-out-of-bounds bug in _rtl8812ae_phy_set_txpower_limit()
+- !18125  mm: vmscan: fix page cache limit work condition
+- Bluetooth: hci_{ldisc,serdev}: check percpu_init_rwsem() failure
+- !18042  scsi: target: iscsi: Fix a race condition between login_work and the login thread
+- !18039  ata: ahci: Match EM_MAX_SLOTS with SATA_PMP_MAX_PORTS
+- mm: vmscan: fix page cache limit work condition
+- nfsd: call op_release, even when op_func returns an error
+- wifi: brcmfmac: fix use-after-free bug in brcmf_netdev_start_xmit()
+- recordmcount: Fix memory leaks in the uwrite function
+- tee: fix NULL pointer dereference in tee_shm_put
+- fs: writeback: fix use-after-free in __mark_inode_dirty()
+- btrfs: fix BUG_ON condition in btrfs_cancel_balance
+- scsi: target: iscsi: Fix a race condition between login_work and the login thread
+- ata: ahci: Match EM_MAX_SLOTS with SATA_PMP_MAX_PORTS
+- nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
 
 * Wed Sep 24 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2509.6.0.0345
 - !18098  drivers: serial: jsm: fix some leaks in probe
