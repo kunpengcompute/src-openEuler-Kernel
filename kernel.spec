@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       283
+%global devel_release       284
 %global maintenance_release .0.0
-%global pkg_release         .185
+%global pkg_release         .186
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,48 @@ fi
 %endif
 
 %changelog
+* Thu Oct 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-284.0.0.186
+- !18283 RDMA/hns: Fix wrong WQE data when QP wraps around
+- !18262  net: dsa: Avoid cross-chip syncing of VLAN filtering
+- !17990 perf: backport community patches
+- !18229  net: ch9200: fix uninitialised access during mii_nway_restart
+- RDMA/hns: Fix wrong WQE data when QP wraps around
+- net: dsa: Avoid cross-chip syncing of VLAN filtering
+- !18251  mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18162  x86/MCE: Always save CS register on AMD Zen IF Poison errors
+- mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- net: ch9200: fix uninitialised access during mii_nway_restart
+- perf: Always feature test reallocarray
+- perf comm str: Avoid sort during insert
+- perf comm: Fix comm_str__put() for reference count checking
+- perf comm: Add reference count checking to 'struct comm_str'
+- libperf rc_check: Make implicit enabling work for GCC
+- libperf rc_check: Enable implicitly with sanitizers
+- libperf: Add reference count checking macros
+- !18122  nfsd: call op_release, even when op_func returns an error
+- !18126  scsi: target: iscsi: Fix a race condition between login_work and the login thread
+- !17610 net: ravb: Fix missing rtnl lock in suspend/resume path
+- !17876 fs/ntfs3: cancle set bad inode after removing name fails
+- !17927 spufs: fix a leak on spufs_new_file() failure
+- !17929 bus: fsl-mc: fix double-free on mc_dev
+- !18138  VMCI: check context->notify_page after call to get_user_pages_fast() to avoid GPF
+- !18155  ARM: rockchip: fix kernel hang during smp initialization
+- x86/MCE: Always save CS register on AMD Zen IF Poison errors
+- ARM: rockchip: fix kernel hang during smp initialization
+- !18112  tee: fix NULL pointer dereference in tee_shm_put
+- !18070  fs: writeback: fix use-after-free in __mark_inode_dirty()
+- !18099  nfsd: replace wait_on_bit by wait_on_bit_acquire in nfsd_file_acquire
+- VMCI: check context->notify_page after call to get_user_pages_fast() to avoid GPF
+- scsi: target: iscsi: Fix a race condition between login_work and the login thread
+- nfsd: call op_release, even when op_func returns an error
+- tee: fix NULL pointer dereference in tee_shm_put
+- nfsd: replace wait_on_bit by wait_on_bit_acquire in nfsd_file_acquire
+- fs: writeback: fix use-after-free in __mark_inode_dirty()
+- bus: fsl-mc: fix double-free on mc_dev
+- spufs: fix a leak on spufs_new_file() failure
+- fs/ntfs3: cancle set bad inode after removing name fails
+- net: ravb: Fix missing rtnl lock in suspend/resume path
+
 * Wed Sep 24 2025 Li Nan <linan122@huawei.com> - 5.10.0-283.0.0.185
 - !18068  net: bridge: fix soft lockup in br_multicast_query_expired()
 - !18025  trace/fgraph: Fix error handling
