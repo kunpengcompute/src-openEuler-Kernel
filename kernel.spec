@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       111
+%global devel_release       112
 %global maintenance_release .0.0
-%global pkg_release         .117
+%global pkg_release         .118
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,225 @@ fi
 %endif
 
 %changelog
+* Wed Oct 15 2025 Li Nan <linan122@huawei.com> - 6.6.0-112.0.0.118
+- !18320  workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
+- !18336  soc cache: support L3 cache lock in framework
+- !18352  net/oenetcls: Fix memleak when clean flow table
+- !18306  vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18342  tracing: Silence warning when chunk allocation fails in trace_pid_write
+- net/oenetcls: Fix memleak when clean flow table
+- tracing: Silence warning when chunk allocation fails in trace_pid_write
+- !18331  ACPI/IORT: Fix memory leak in iort_rmr_alloc_sids()
+- !18330  cpufreq: Initialize cpufreq-based invariance before subsys
+- soc cache: L3 cache lockdown support for HiSilicon SoC
+- soc cache: support L3 cache lock in framework
+- ACPI/IORT: Fix memory leak in iort_rmr_alloc_sids()
+- cpufreq: Initialize cpufreq-based invariance before subsys
+- !18275 [OLK-6.6] Optimized the kernel driver of HYGON trusted functions
+- !18322  Fix CVE-2025-39715
+- !18293  CVE-2025-39886
+- !18290  vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- parisc: Revise gateway LWS calls to probe user read access
+- workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
+- vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18286 mm: shmem: fix the strategy for the tmpfs 'huge=' options
+- !18282 v2: shmem cleanup
+- bpf: Tell memcg to use allow_spinning=false path in bpf_timer_init()
+- memcg: skip cgroup_file_notify if spinning is not allowed
+- !18291  CVE-2025-39844
+- !18031 Introduce fwctl subystem framework
+- x86/mm/64: define ARCH_PAGE_TABLE_SYNC_MASK and arch_sync_kernel_mappings()
+- mm: introduce and use {pgd,p4d}_populate_kernel()
+- mm: move page table sync declarations to linux/pgtable.h
+- vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- !18280  samples/bpf: fix cpuinfo_arm64 prog load issue
+- crypto: ccp: optimize PSP driver code logic to reduce modifications to native code
+- crypto: ccp: add "tdm_guard" as kernel and module parameter
+- crypto: ccp: optimize TDM kernel driver
+- mm: shmem: fix the strategy for the tmpfs 'huge=' options
+- docs: update THP documentation to clarify sysfs "never" setting
+- mm: shmem: drop the unnecessary folio_nr_pages()
+- mm: shmem: use 'folio' for shmem_partial_swap_usage()
+- samples/bpf: fix cpuinfo_arm64 prog load issue
+- !18264  memory tiers: use default_dram_perf_ref_source in log message
+- !18259  cgroup: split cgroup_destroy_wq into 3 workqueues
+- !18231  ipv6: Fix memleak of nhc_pcpu_rth_output in fib_check_nh_v6_gw().
+- !18230  net: ch9200: fix uninitialised access during mii_nway_restart
+- !18227  i40e: Fix potential invalid access when MAC list is empty
+- memory tiers: use default_dram_perf_ref_source in log message
+- !18250  mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18253  samples/bpf: Fix print issue in bpf_rvi_diskstats
+- !18234  samples/bpf: Fix print issue in dump_partitions()
+- cgroup: split cgroup_destroy_wq into 3 workqueues
+- fwctl: Fix repeated device word in log message
+- fwctl: Add documentation
+- fwctl: FWCTL_RPC to execute a Remote Procedure Call to device firmware
+- taint: Add TAINT_FWCTL
+- fwctl: FWCTL_INFO to return basic information about the device
+- fwctl: Basic ioctl dispatch for the character device
+- fwctl: Add basic structure for a class subsystem with a cdev
+- samples/bpf: Fix print issue in bpf_rvi_diskstats
+- mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18173  usb: core: config: Prevent OOB read in SS endpoint companion parsing
+- samples/bpf: Fix print issue in dump_partitions()
+- ipv6: Fix memleak of nhc_pcpu_rth_output in fib_check_nh_v6_gw().
+- net: ch9200: fix uninitialised access during mii_nway_restart
+- i40e: Fix potential invalid access when MAC list is empty
+- !18179  Implement disable/enable for (delayed) work
+- !18038 v3  arm64: Do not enable hardware xcall/xint in guest temporarily
+- !18195  arm64/mpam: Update MB hardlimit and priority default value forcely
+- !17636 [OLK-6.6] [Intel-SIG] crypto: iaa - Remove potential infinite loop in check_completion()
+- !17858 [OLK-6.6] [Intel-SIG] Enable FLR for IDXD halt
+- !17994 perf: backport community patches
+- !18183  CVE-2025-38725
+- arm64/mpam: Update MB hardlimit and priority default value forcely
+- dmaengine: idxd: Enable Function Level Reset (FLR) for halt
+- dmaengine: idxd: Refactor halt handler
+- dmaengine: idxd: Add idxd_device_config_save() and idxd_device_config_restore() helpers
+- dmaengine: idxd: Binding and unbinding IDXD device and driver
+- dmaengine: idxd: Add idxd_pci_probe_alloc() helper
+- bitmap: Define a cleanup function for bitmaps
+- !15977 use refcount+RCU method to implement lockless slab shrink
+- !18166  Updates of HiSilicon Uncore L3C PMU
+- net: usb: asix_devices: Fix PHY address mask in MDIO bus initialization
+- net: usb: asix_devices: add phy_mask for ax88772 mdio bus
+- !18156  ARM: rockchip: fix kernel hang during smp initialization
+- workqueue: Fix UBSAN 'subtraction overflow' error in shift_and_mask()
+- workqueue: Implement disable/enable for (delayed) work items
+- workqueue: Preserve OFFQ bits in cancel[_sync] paths
+- workqueue: Make @flags handling consistent across set_work_data() and friends
+- workqueue: Remove clear_work_data()
+- workqueue: Factor out work_grab_pending() from __cancel_work_sync()
+- workqueue: Clean up enum work_bits and related constants
+- workqueue: Introduce work_cancel_flags
+- workqueue: Rename __cancel_work_timer() to __cancel_timer_sync()
+- mm: add KABI_* macros to preserve KABI
+- mm: shrinker add a copyright notice
+- mm: shrinker: convert shrinker_rwsem to mutex
+- mm: shrinker: hold write lock to reparent shrinker nr_deferred
+- mm: shrinker: make memcg slab shrink lockless
+- mm: shrinker: make global slab shrink lockless
+- mm: shrinker: rename {prealloc|unregister}_memcg_shrinker() to shrinker_memcg_{alloc|remove}()
+- mm: shrinker: add a secondary array for shrinker_info::{map, nr_deferred}
+- mm: shrinker: remove old APIs
+- mm: shrinker: vmalloc.c: use the new shrinker kAPI
+- fs: super: dynamically allocate the s_shrink
+- zsmalloc: dynamically allocate the mm-zspool shrinker
+- xfs: dynamically allocate the xfs-qm shrinker
+- xfs: dynamically allocate the xfs-inodegc shrinker
+- xfs: dynamically allocate the xfs-buf shrinker
+- nfsd: dynamically allocate the nfsd-reply shrinker
+- nfsd: dynamically allocate the nfsd-client shrinker
+- jbd2,ext4: dynamically allocate the jbd2-journal shrinker
+- ext4: dynamically allocate the ext4-es shrinker
+- mbcache: dynamically allocate the mbcache shrinker
+- virtio_balloon: dynamically allocate the virtio-balloon shrinker
+- vmw_balloon: dynamically allocate the vmw-balloon shrinker
+- bcache: dynamically allocate the md-bcache shrinker
+- md/raid5: dynamically allocate the md-raid5 shrinker
+- dm zoned: dynamically allocate the dm-zoned-meta shrinker
+- dm: dynamically allocate the dm-bufio shrinker
+- drm/panfrost: dynamically allocate the drm-panfrost shrinker
+- drm/msm: dynamically allocate the drm-msm_gem shrinker
+- drm/i915: dynamically allocate the i915_gem_mm shrinker
+- mm: workingset: dynamically allocate the mm-shadow shrinker
+- sunrpc: dynamically allocate the sunrpc_cred shrinker
+- mm: thp: dynamically allocate the thp-related shrinkers
+- rcu: dynamically allocate the rcu-kfree shrinker
+- rcu: dynamically allocate the rcu-lazy shrinker
+- ubifs: dynamically allocate the ubifs-slab shrinker
+- quota: dynamically allocate the dquota-cache shrinker
+- nfsd: dynamically allocate the nfsd-filecache shrinker
+- nfs: dynamically allocate the nfs-acl shrinker
+- NFSv4.2: dynamically allocate the nfs-xattr shrinkers
+- gfs2: dynamically allocate the gfs2-qd shrinker
+- gfs2: dynamically allocate the gfs2-glock shrinker
+- f2fs: dynamically allocate the f2fs-shrinker
+- erofs: dynamically allocate the erofs-shrinker
+- xenbus/backend: dynamically allocate the xen-backend shrinker
+- drm/ttm: dynamically allocate the drm-ttm_pool shrinker
+- binder: dynamically allocate the android-binder shrinker
+- kvm: mmu: dynamically allocate the x86-mmu shrinker
+- mm: shrinker: add infrastructure for dynamically allocating shrinker
+- drm/ttm: introduce pool_shrink_rwsem
+- mm: shrinker: remove redundant shrinker_rwsem in debugfs operations
+- mm: vmscan: move shrinker-related code into a separate file
+- mm: move some shrinker-related function declarations to mm/internal.h
+- x86/boot: Compile boot code with -std=gnu11 too
+- usb: core: config: Prevent OOB read in SS endpoint companion parsing
+- !17949 crypto: hisilicon - some bugfix
+- !18144  Backport fs/pipe performance optimization patches
+- !17961 usb: gadget: configfs: Fix OOB read on empty string write
+- !17960 drm/amd/pp: Fix potential NULL pointer dereference in atomctrl_initial…
+- !17958 jfs: Prevent copying of nlink with value 0 from disk inode
+- !17957 fs/ntfs3: Fix a couple integer overflows on 32bit systems
+- !17956 drm/tegra: Fix a possible null pointer dereference
+- !17954 mtd: spinand: fix memory leak of ECC engine conf
+- !17953 regulator: gpio: Fix the out-of-bounds access to drvdata::gpiods
+- !17952 rose: fix dangling neighbour pointers in rose_rt_device_down()
+- Documentation: hisi-pmu: Add introduction to HiSilicon V3 PMU
+- Documentation: hisi-pmu: Fix of minor format error
+- drivers/perf: hisi: Add support for L3C PMU v3
+- Revert "drivers/perf: hisi: Add support for L3C PMU v3"
+- Revert "Documentation: hisi-pmu: Fix of minor format error"
+- Revert "Documentation: hisi-pmu: Add introduction to HiSilicon V3 PMU"
+- !17973 enfs: recreate shard info when re-adding enfs module
+- !18114  tee: fix NULL pointer dereference in tee_shm_put
+- ARM: rockchip: fix kernel hang during smp initialization
+- !18133  iommu/arm-smmu-qcom: Add SM6115 MDSS compatible
+- fs/pipe: use spinlock in pipe_read() only if there is a watch_queue
+- fs/pipe: remove unnecessary spinlock from pipe_write()
+- !18129 soc: hisilicon: kunpeng_hccs: Fix incorrect log information
+- iommu/arm-smmu-qcom: Add SM6115 MDSS compatible
+- !18073  HID: asus: fix UAF via HID_CLAIMED_INPUT validation
+- !18118  samples/bpf: Fix print issue in dump_swaps()
+- soc: hisilicon: kunpeng_hccs: Fix incorrect log information
+- !18123  arm64/mpam: Add quirk for hisi cpbm_wd field
+- !18041  fs/smb: Fix inconsistent refcnt update
+- arm64/mpam: Add quirk for hisi cpbm_wd field
+- samples/bpf: Fix print issue in dump_swaps()
+- tee: fix NULL pointer dereference in tee_shm_put
+- nfs/enfs: remove duplicate EOPNOTSUPP definition
+- nfs/enfs: remove enfs_tp_common.h
+- nfs/enfs: remove ping_execute_workq_lock
+- nfs/enfs: remove lookupcache_workq_lock
+- nfs/enfs: remove redundant flush_workqueue() before destroy_workqueue()
+- nfs/enfs: return more nuanced error in NfsExtendProcInfoExtendEncode() and NfsExtendProcInfoExtendDecode()
+- nfs/enfs: handle error returned by NfsExtendProcInfoExtendEncode()
+- nfs/enfs: fix possible null-ptr-deref in exten_call.c
+- nfs/enfs: free memory uniformly at the end of function in exten_call.c
+- nfs/enfs: fix possible memory leak in exten_call.c
+- nfs/enfs: reload config when re-adding enfs module
+- nfs/enfs: recreate shard info when re-adding enfs module
+- HID: asus: fix UAF via HID_CLAIMED_INPUT validation
+- usb: gadget: configfs: Fix OOB read on empty string write
+- drm/amd/pp: Fix potential NULL pointer dereference in atomctrl_initialize_mc_reg_table
+- jfs: Prevent copying of nlink with value 0 from disk inode
+- fs/ntfs3: Fix a couple integer overflows on 32bit systems
+- drm/tegra: Fix a possible null pointer dereference
+- mtd: spinand: fix memory leak of ECC engine conf
+- regulator: gpio: Fix the out-of-bounds access to drvdata::gpiods
+- rose: fix dangling neighbour pointers in rose_rt_device_down()
+- fs/smb: Fix inconsistent refcnt update
+- arm64: Do not enable hardware xcall/xint in guest temporarily
+- perf: Always feature test reallocarray
+- perf comm str: Avoid sort during insert
+- crypto: hisilicon - use kcalloc() instead of kzalloc()
+- crypto: hisilicon/zip - enable literal length in stream mode compression
+- crypto: hisilicon - check the sva module status while enabling or disabling address prefetch
+- crypto: hisilicon - re-enable address prefetch after device resuming
+- crypto: hisilicon/zip - remove unnecessary validation for high-performance mode configurations
+- crypto: hisilicon/sec2 - implement full backlog mode for sec
+- Revert "crypto: hisilicon/sec2 - fix memory use-after-free issue"
+- Revert "crypto: hisilicon/sec2 - fix for gcm spec check"
+- crypto: hisilicon - Use fine grained DMA mapping direction
+- Revert "crypto: hisilicon - implement full backlog support for sec"
+- crypto: hisilicon/qm - replace devm_kzalloc with devm_kcalloc
+- crypto: hisilicon/qm - remove sizeof(char)
+- perf comm: Fix comm_str__put() for reference count checking
+- perf comm: Add reference count checking to 'struct comm_str'
+- crypto: iaa - Remove potential infinite loop in check_completion()
+
 * Tue Sep 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-111.0.0.117
 - !17932 [OLK-6.6] add support for WangXun 10G/25G/40G
 - !17665 cpufreq: intel_pstate: Support Clearwater Forest OOB mode
