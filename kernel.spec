@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       111
+%global devel_release       112
 %global maintenance_release .0.0
-%global pkg_release         .114
+%global pkg_release         .115
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,72 @@ fi
 %endif
 
 %changelog
+* Wed Oct 15 2025 Li Nan <linan122@huawei.com> - 6.6.0-112.0.0.115
+- !18320  workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
+- !18336  soc cache: support L3 cache lock in framework
+- !18352  net/oenetcls: Fix memleak when clean flow table
+- !18306  vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18342  tracing: Silence warning when chunk allocation fails in trace_pid_write
+- net/oenetcls: Fix memleak when clean flow table
+- tracing: Silence warning when chunk allocation fails in trace_pid_write
+- !18331  ACPI/IORT: Fix memory leak in iort_rmr_alloc_sids()
+- !18330  cpufreq: Initialize cpufreq-based invariance before subsys
+- soc cache: L3 cache lockdown support for HiSilicon SoC
+- soc cache: support L3 cache lock in framework
+- ACPI/IORT: Fix memory leak in iort_rmr_alloc_sids()
+- cpufreq: Initialize cpufreq-based invariance before subsys
+- !18275 [OLK-6.6] Optimized the kernel driver of HYGON trusted functions
+- !18322  Fix CVE-2025-39715
+- !18293  CVE-2025-39886
+- !18290  vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- parisc: Revise gateway LWS calls to probe user read access
+- workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
+- vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18286 mm: shmem: fix the strategy for the tmpfs 'huge=' options
+- !18282 v2: shmem cleanup
+- bpf: Tell memcg to use allow_spinning=false path in bpf_timer_init()
+- memcg: skip cgroup_file_notify if spinning is not allowed
+- !18291  CVE-2025-39844
+- !18031 Introduce fwctl subystem framework
+- x86/mm/64: define ARCH_PAGE_TABLE_SYNC_MASK and arch_sync_kernel_mappings()
+- mm: introduce and use {pgd,p4d}_populate_kernel()
+- mm: move page table sync declarations to linux/pgtable.h
+- vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- !18280  samples/bpf: fix cpuinfo_arm64 prog load issue
+- crypto: ccp: optimize PSP driver code logic to reduce modifications to native code
+- crypto: ccp: add "tdm_guard" as kernel and module parameter
+- crypto: ccp: optimize TDM kernel driver
+- mm: shmem: fix the strategy for the tmpfs 'huge=' options
+- docs: update THP documentation to clarify sysfs "never" setting
+- mm: shmem: drop the unnecessary folio_nr_pages()
+- mm: shmem: use 'folio' for shmem_partial_swap_usage()
+- samples/bpf: fix cpuinfo_arm64 prog load issue
+- !18264  memory tiers: use default_dram_perf_ref_source in log message
+- !18259  cgroup: split cgroup_destroy_wq into 3 workqueues
+- !18231  ipv6: Fix memleak of nhc_pcpu_rth_output in fib_check_nh_v6_gw().
+- !18230  net: ch9200: fix uninitialised access during mii_nway_restart
+- !18227  i40e: Fix potential invalid access when MAC list is empty
+- memory tiers: use default_dram_perf_ref_source in log message
+- !18250  mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18253  samples/bpf: Fix print issue in bpf_rvi_diskstats
+- !18234  samples/bpf: Fix print issue in dump_partitions()
+- cgroup: split cgroup_destroy_wq into 3 workqueues
+- fwctl: Fix repeated device word in log message
+- fwctl: Add documentation
+- fwctl: FWCTL_RPC to execute a Remote Procedure Call to device firmware
+- taint: Add TAINT_FWCTL
+- fwctl: FWCTL_INFO to return basic information about the device
+- fwctl: Basic ioctl dispatch for the character device
+- fwctl: Add basic structure for a class subsystem with a cdev
+- samples/bpf: Fix print issue in bpf_rvi_diskstats
+- mm/memory-failure: fix VM_BUG_ON_PAGE(PagePoisoned(page)) when unpoison memory
+- !18173  usb: core: config: Prevent OOB read in SS endpoint companion parsing
+- samples/bpf: Fix print issue in dump_partitions()
+- ipv6: Fix memleak of nhc_pcpu_rth_output in fib_check_nh_v6_gw().
+- net: ch9200: fix uninitialised access during mii_nway_restart
+- i40e: Fix potential invalid access when MAC list is empty
+- usb: core: config: Prevent OOB read in SS endpoint companion parsing
+
 * Tue Sep 23 2025 Li Nan <linan122@huawei.com> - 6.6.0-111.0.0.114
 - !17932 [OLK-6.6] add support for WangXun 10G/25G/40G
 - !17665 cpufreq: intel_pstate: Support Clearwater Forest OOB mode
