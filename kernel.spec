@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2510.1.0
+%global hulkrelease 2510.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0346
+Release: %{hulkrelease}.0347
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,57 @@ fi
 %endif
 
 %changelog
+
+* Wed Oct 15 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.2.0.0347
+- !18323  platform/x86: mxm-wmi: fix memleak in mxm_wmi_call_mx[ds|mx
+- !18329  umount performance fix
+- !18347  Add Huawei Intelligent Network Card Driver: hinic3
+- !18349  vme: Fix error not catched in fake_init()
+- vme: Fix error not catched in fake_init()
+- Add Huawei Intelligent Network Card Driver: hinic3
+- !18066  NFSD: Protect against send buffer overflow in NFSv2 READ
+- !18337  drm/i915/gvt: fix vgpu debugfs clean in remove
+- !18332  kobject: Add sanity check for kset->kobj.ktype in kset_register()
+- drm/i915/gvt: fix vgpu debugfs clean in remove
+- kobject: Add sanity check for kset->kobj.ktype in kset_register()
+- do_make_slave(): choose new master sanely
+- change_mnt_propagation(): do_make_slave() is a no-op unless IS_MNT_SHARED()
+- change_mnt_propagation() cleanups, step 1
+- !18115  media: az6007: Fix null-ptr-deref in az6007_i2c_xfer()
+- !18318  CVE-2023-53254
+- !18317  scsi: fcoe: Fix transport not deattached when fcoe_if_init() fails
+- !18302  mmc: rtsx_usb_sdmmc: fix return value check of mmc_add_host()
+- platform/x86: mxm-wmi: fix memleak in mxm_wmi_call_mx[ds|mx]()
+- drivers: base: cacheinfo: Fix shared_cpu_map changes in event of CPU hotplug
+- cacheinfo: Fix shared_cpu_map to handle shared caches at different levels
+- scsi: fcoe: Fix transport not deattached when fcoe_if_init() fails
+- mmc: rtsx_usb_sdmmc: fix return value check of mmc_add_host()
+- !18176  fix race between memory offline and UCE handling
+- !18175  watchdog: Fix kmemleak in watchdog_cdev_register
+- !18111  mmc: vub300: fix return value check of mmc_add_host()
+- !18145  PNP: fix name memory leak in pnp_alloc_dev()
+- !18285  Bluetooth: L2CAP: Fix user-after-free
+- Bluetooth: L2CAP: Fix user-after-free
+- !18193 v3  fix CVE-2025-38709
+- !18008  scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
+- !18274  wifi: mwifiex: Fix OOB and integer underflow when rx packets
+- !18238  wifi: mac80211: fix invalid drv_sta_pre_rcu_remove calls for non-uploaded sta
+- !18239  wifi: mac80211: fix memory leak in ieee80211_if_add()
+- wifi: mwifiex: Fix oob check condition in mwifiex_process_rx_packet
+- wifi: mwifiex: Fix missed return in oob checks failed path
+- wifi: mwifiex: Fix OOB and integer underflow when rx packets
+- wifi: mac80211: fix memory leak in ieee80211_if_add()
+- wifi: mac80211: fix invalid drv_sta_pre_rcu_remove calls for non-uploaded sta
+- loop: Avoid updating block size under exclusive owner
+- block: use bd_prepare_to_claim directly in the loop driver
+- mm/memory_hotplug: fix hwpoisoned large folio handling in do_migrate_range()
+- hwpoison, memory_hotplug: lock folio before unmap hwpoisoned folio
+- watchdog: Fix kmemleak in watchdog_cdev_register
+- PNP: fix name memory leak in pnp_alloc_dev()
+- media: az6007: Fix null-ptr-deref in az6007_i2c_xfer()
+- mmc: vub300: fix return value check of mmc_add_host()
+- NFSD: Protect against send buffer overflow in NFSv2 READ
+- scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
 
 * Thu Oct 09 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.1.0.0346
 - !17921  nfsd: handle get_client_locked() failure in nfsd4_setclientid_confirm()
