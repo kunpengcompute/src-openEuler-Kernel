@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       284
+%global devel_release       285
 %global maintenance_release .0.0
-%global pkg_release         .187
+%global pkg_release         .188
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,62 @@ fi
 %endif
 
 %changelog
+* Tue Oct 14 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-285.0.0.188
+- !18305  vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18278  sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
+- !18067  NFSD: Protect against send buffer overflow in NFSv2 READ
+- !18335  x86/paravirt: Fix build due to __text_gen_insn() backport
+- !18043 [OLK-5.10] Add SEV-ES hypervisor support
+- x86/paravirt: Fix build due to __text_gen_insn() backport
+- vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
+- !18052  fix oenetcls bugs
+- sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
+- KVM: SVM: Add Hygon CSV2 detection for confidential computing support
+- KVM: x86: Revert "KVM: x86: Mark GPRs dirty when written"
+- KVM: SVM: Unconditionally sync GPRs to GHCB on VMRUN of SEV-ES guest
+- KVM: SVM: Add support for booting APs in an SEV-ES guest
+- KVM: SVM: fix 32-bit compilation
+- KVM: SVM: Add AP_JUMP_TABLE support in prep for AP booting
+- KVM: SVM: Provide support to launch and run an SEV-ES guest
+- KVM: SVM: Provide an updated VMRUN invocation for SEV-ES guests
+- KVM: SVM: Provide support for SEV-ES vCPU loading
+- KVM: SVM: Provide support for SEV-ES vCPU creation/loading
+- KVM: SVM: Update ASID allocation to support SEV-ES guests
+- KVM: SVM: Set the encryption mask for the SVM host save area
+- KVM: SVM: Add NMI support for an SEV-ES guest
+- KVM: SVM: Guest FPU state save/restore not needed for SEV-ES guest
+- KVM: SVM: Do not report support for SMM for an SEV-ES guest
+- KVM: x86: Update __get_sregs() / __set_sregs() to support SEV-ES
+- KVM: SVM: Add support for CR8 write traps for an SEV-ES guest
+- KVM: SVM: Add support for CR4 write traps for an SEV-ES guest
+- KVM: SVM: Add support for CR0 write traps for an SEV-ES guest
+- KVM: SVM: Add support for EFER write traps for an SEV-ES guest
+- KVM: SVM: Support string IO operations for an SEV-ES guest
+- KVM: SVM: Support MMIO for an SEV-ES guest
+- KVM: SVM: Create trace events for VMGEXIT MSR protocol processing
+- KVM: SVM: Create trace events for VMGEXIT processing
+- KVM: SVM: Add support for SEV-ES GHCB MSR protocol function 0x100
+- KVM: SVM: Add support for SEV-ES GHCB MSR protocol function 0x004
+- KVM: SVM: Add support for SEV-ES GHCB MSR protocol function 0x002
+- KVM: SVM: Add initial support for a VMGEXIT VMEXIT
+- KVM: SVM: Prepare for SEV-ES exit handling in the sev.c file
+- KVM: SVM: Cannot re-initialize the VMCB after shutdown with SEV-ES
+- KVM: SVM: Do not allow instruction emulation under SEV-ES
+- KVM: SVM: Prevent debugging under SEV-ES
+- KVM: SVM: Add required changes to support intercepts under SEV-ES
+- KVM: x86: introduce complete_emulated_msr callback
+- KVM: x86: use kvm_complete_insn_gp in emulating RDMSR/WRMSR
+- KVM: x86: remove bogus #GP injection
+- KVM: x86: Mark GPRs dirty when written
+- KVM: SVM: Add support for the SEV-ES VMSA
+- KVM: SVM: Add GHCB accessor functions for retrieving fields
+- KVM: SVM: Add support for SEV-ES capability in KVM
+- NFSD: Protect against send buffer overflow in NFSv2 READ
+- net/oenetcls: use workqueue for ntuple cfg
+- net/oenetcls: remove oenetcls trace hook
+- net/oenetcls: use raw_smp_processor_id() instead of smp_processor_id()
+- net/oenetcls: Fix oecls_numa_info_table memleak
+
 * Thu Oct 09 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-284.0.0.187
 - !18283 RDMA/hns: Fix wrong WQE data when QP wraps around
 - !18262  net: dsa: Avoid cross-chip syncing of VLAN filtering
