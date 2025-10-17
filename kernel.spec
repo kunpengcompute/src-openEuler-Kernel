@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       112
 %global maintenance_release .0.0
-%global pkg_release         .115
+%global pkg_release         .116
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,13 @@ fi
 %endif
 
 %changelog
+* Fri Oct 17 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-112.0.0.116
+- RISC-V kernel upgrade to 6.6.0-112.0.0
+- Sync patches from the rvck-olk repository, including:
+  ACPI, IOMMU drivers;
+  Key RISC-V extensions support;
+  Add support for K1, SG2044, and DP1000.
+
 * Wed Oct 15 2025 Li Nan <linan122@huawei.com> - 6.6.0-112.0.0.115
 - !18320  workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
 - !18336  soc cache: support L3 cache lock in framework
