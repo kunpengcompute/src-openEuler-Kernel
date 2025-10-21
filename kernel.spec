@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       112
+%global devel_release       113
 %global maintenance_release .0.0
-%global pkg_release         .104
+%global pkg_release         .105
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,142 @@ fi
 %endif
 
 %changelog
+* Tue Oct 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-113.0.0.105
+- !18464  i40e: add max boundary check for VF filters
+- !18433  dmaengine: qcom: bam_dma: Fix DT error handling for num-channels/ees
+- !18256     Add EDAC basic support and RRL enhancement for CWF/SRF/GNR/GNR-D
+- !18254 Add IFS support for ClearWater Forest
+- !18455  KVM: arm64: vgic-v4: Restore pending state on host userspace write
+- !18289 Expand scope of khugepaged anonymous collapse
+- !18324 arm64: Enable vmalloc-huge with ptdump
+- !18419  sched/core: Add sched_change_qos_group() in sched_cgroup_fork()
+- i40e: add max boundary check for VF filters
+- !18151  ext4: do not BUG when INLINE_DATA_FL lacks system.data xattr
+- !18152  fs/buffer: fix use-after-free when call bh_read() helper
+- !18312  ext4: preserve SB_I_VERSION on remount
+- !18313  fs: quota: create dedicated workqueue for quota_release_work
+- !18311  ext4: fix an off-by-one issue during moving extents
+- !17401  fscrypt: Don't use problematic non-inline crypto engines
+- KVM: arm64: vgic-v4: Restore pending state on host userspace write
+- !18237  fuse: support sysfs api for flush and
+- !18422  net/hinic3: Modify driver version
+- dmaengine: qcom: bam_dma: Fix DT error handling for num-channels/ees
+- !18425  Fix CVE-2025-39989
+- !18427  i40e: fix idx validation in config queues msg
+- i40e: fix idx validation in config queues msg
+- x86/mce: use is_copy_from_user() to determine copy-from-user context
+- x86/extable: Remove unused fixup type EX_TYPE_COPY
+- net/hinic3: Modify driver version
+- !18414 Fix add define COMPAT_ELF_HWCAP3
+- !18406  pcmcia: Add error handling for add_interval() in do_validate_mem()
+- sched/core: Add sched_change_qos_group() in sched_cgroup_fork()
+- !18401  Bluetooth: btrtl: Prevent potential NULL dereference
+- !18241 ras: ACPI: HED: Always initialize before evged
+- Fix add define COMPAT_ELF_HWCAP3
+- !17928 bus: fsl-mc: fix double-free on mc_dev
+- !17908 fix CVE-2025-38630
+- !18224 fix CVE-2025-38624
+- !17871 f2fs: fix to trigger foreground gc during f2fs_map_blocks() in lfs mode
+- !17877 fs/ntfs3: cancle set bad inode after removing name fails
+- !17909 fix CVE-2025-38555
+- !17872 f2fs: fix to avoid panic in f2fs_evict_inode
+- !17760 Fix CVE-2025-38414
+- !17611 net: ravb: Fix missing rtnl lock in suspend/resume path
+- !17859 f2fs: fix to bail out in get_new_segment()
+- !17354 net/atm/resources: Release atm_dev_mutex after removing procfs in atm_…
+- !18032 [OLK-6.6] Fix CVE-2025-37897
+- !18030 [OLK-6.6] Fix CVE-2025-37914
+- !18037 [OLK-6.6] Fix CVE-2025-37917
+- !18036 [OLK-6.6] Fix CVE-2025-37922
+- !18035 [OLK-6.6] Fix CVE-2025-37935
+- !18034 [OLK-6.6] Fix CVE-2025-37931
+- !18033 [OLK-6.6] Fix CVE-2025-37901
+- !18028 [OLK-6.6] Fix CVE-2025-37987
+- !18027 [OLK-6.6] Fix CVE-2025-37983
+- !17807 Add workaround for HIP09/HIP10/HIP10C/HIP12 erratum 162100803/162200807/162400807/165010802
+- pcmcia: Add error handling for add_interval() in do_validate_mem()
+- !18326 [OLK-6.6] Support Hygon TKM (Trusted Key Management) Guest live migration
+- !18199  block: avoid possible overflow for chunk_sectors check in blk_stack_limits()
+- !18131  loop: Avoid updating block size under exclusive owner
+- !18006  scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
+- !18402  kernel/sys.c: fix the racy usage of task_lock(tsk->group_leader) in sys_prlimit64() paths
+- !18249 enfs: add new path state PM_STATE_UNSTABLE
+- kernel/sys.c: fix the racy usage of task_lock(tsk->group_leader) in sys_prlimit64() paths
+- Bluetooth: btrtl: Prevent potential NULL dereference
+- nfs/enfs: cleanups in pm_set_path_state()
+- nfs/enfs: prefer normal rpc transport over unstable one
+- nfs/enfs: introduce reconnect time KUnit tests
+- nfs/enfs: set PM_STATE_UNSTABLE if path is unstable
+- nfs/enfs: introduce enum PM_STATE_UNSTABLE
+- !18357  *** OLK-6.6-fix-CVE-2025-39787 ***
+- !18374  locking/qspinlock: Fix CNA NUMA node setup before numa_store_cpu_info()
+- !18362  umount performance fix
+- locking/qspinlock: Fix CNA NUMA node setup before numa_store_cpu_info()
+- do_make_slave(): choose new master sanely
+- change_mnt_propagation(): do_make_slave() is a no-op unless IS_MNT_SHARED()
+- change_mnt_propagation() cleanups, step 1
+- soc: qcom: mdt_loader: Deal with zero e_shentsize
+- soc: qcom: mdt_loader: Fix error return values in mdt_header_valid()
+- soc: qcom: mdt_loader: Ensure we don't read past the ELF header
+- crypto: ccp: ensure kvm_bind_vtkm is only executed once for csv guest
+- crypto: ccp: support vtkm live migration
+- arm64: Enable vmalloc-huge with ptdump
+- arm64: Restrict pagetable teardown to avoid false warning
+- fs: quota: create dedicated workqueue for quota_release_work
+- ext4: preserve SB_I_VERSION on remount
+- ext4: fix an off-by-one issue during moving extents
+- mm: drop all references of writable and SCAN_PAGE_RO
+- mm: enable khugepaged anonymous collapse on non-writable regions
+- khugepaged: pass folio instead of head page to trace events
+- ras: ACPI: HED: Always initialize before evged
+- fuse: fix issues in fuse_resend_pqueue() implementation
+- fuse: Introduce sysfs API for resend pending requests
+- fuse: Introduce sysfs API for flushing pending requests
+- PCI: pnv_php: Clean up allocated IRQs on unplug
+- block: avoid possible overflow for chunk_sectors check in blk_stack_limits()
+- EDAC/{skx_common,i10nm}: Use scnprintf() for safer buffer handling
+- EDAC/i10nm: Add Intel Granite Rapids-D support
+- EDAC/i10nm: Fix the bitwise operation between variables of different sizes
+- EDAC/{skx_common,i10nm}: Add RRL support for Intel Granite Rapids server
+- EDAC/{skx_common,i10nm}: Refactor show_retry_rd_err_log()
+- EDAC/{skx_common,i10nm}: Refactor enable_retry_rd_err_log()
+- EDAC/{skx_common,i10nm}: Structure the per-channel RRL registers
+- EDAC/i10nm: Explicitly set the modes of the RRL register sets
+- EDAC/{i10nm,skx,skx_common}: Support UV systems
+- EDAC/i10nm: Add Intel Clearwater Forest server support
+- EDAC/{skx_common,i10nm}: Remove the AMAP register for determing DDR5
+- EDAC/{skx_common,skx,i10nm}: Move the common debug code to skx_common
+- EDAC/{skx_common,i10nm}: Fix the loss of saved RRL for HBM pseudo channel 0
+- EDAC/{skx_common,i10nm}: Fix some missing error reports on Emerald Rapids
+- EDAC/i10nm: Add Intel Grand Ridge micro-server support
+- platform/x86/intel/ifs: Add Clearwater Forest to CPU support list
+- fs/buffer: fix use-after-free when call bh_read() helper
+- ext4: do not BUG when INLINE_DATA_FL lacks system.data xattr
+- loop: Avoid updating block size under exclusive owner
+- openeuler_defconfig: Add CONFIG_HISILICON_ERRATUM_162100803
+- irqchip/gicv3-its: Add workaround for HIP09/HIP10/HIP10C/HIP12 erratum 162100803/162200807/162400807/165010802
+- net/atm/resources: Release atm_dev_mutex after removing procfs in atm_dev_deregister().
+- net: ethernet: mtk-star-emac: fix spinlock recursion issues on rx/tx poll
+- book3s64/radix : Align section vmemmap start address to PAGE_SIZE
+- net: ethernet: mtk_eth_soc: fix SER panic with 4GB+ RAM
+- btrfs: adjust subpage bit start based on sectorsize
+- irqchip/qcom-mpm: Prevent crash when trying to handle non-wake GPIOs
+- wifi: plfxlc: Remove erroneous assert in plfxlc_mac_release
+- net_sched: ets: Fix double list add in class with netem as child qdisc
+- pds_core: Prevent possible adminq overflow/stuck condition
+- qibfs: fix _another_ leak
+- scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
+- bus: fsl-mc: fix double-free on mc_dev
+- usb: gadget : fix use-after-free in composite_dev_cleanup()
+- fbdev: imxfb: Check fb_add_videomode to prevent null-ptr-deref
+- fs/ntfs3: cancle set bad inode after removing name fails
+- f2fs: fix to bail out in get_new_segment()
+- net: ravb: Fix missing rtnl lock in suspend/resume path
+- wifi: ath12k: fix GCC_GCC_PCIE_HOT_RST definition for WCN7850
+- f2fs: fix to trigger foreground gc during f2fs_map_blocks() in lfs mode
+- f2fs: fix to avoid panic in f2fs_evict_inode
+- fscrypt: Don't use problematic non-inline crypto engines
+
 * Wed Oct 15 2025 Li Nan <linan122@huawei.com> - 6.6.0-112.0.0.104
 - !18320  workqueue: Fix kabi broken of enum WORK_OFFQ_POOL_SHIFT
 - !18336  soc cache: support L3 cache lock in framework
