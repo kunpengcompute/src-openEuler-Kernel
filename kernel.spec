@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       285
+%global devel_release       286
 %global maintenance_release .0.0
-%global pkg_release         .187
+%global pkg_release         .188
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,42 @@ fi
 %endif
 
 %changelog
+* Tue Oct 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-286.0.0.188
+- !18480  KVM: arm64: vgic-v4: Restore pending state on host userspace write
+- KVM: arm64: vgic-v4: Restore pending state on host userspace write
+- !18463 scsi/hifc: Fix rport dev loss tmo flag and function parameter check err
+- !18150  CVE-2022-50306
+- !18314  fs: quota: create dedicated workqueue for quota_release_work
+- !17400  fscrypt: Don't use problematic non-inline crypto engines
+- scsi/hifc: Fix rport dev loss tmo flag and function parameter check err
+- !15216  Fix kfree mismatch reported by cocci
+- !18424  net/hinic3: Modify driver version
+- net/hinic3: Modify driver version
+- !18202  blk-mq: fix NULL dereference on q->elevator in blk_mq_elv_switch_none
+- !18200  block: avoid possible overflow for chunk_sectors check in blk_stack_limits()
+- !18197 v2  loop: Avoid updating block size under exclusive owner
+- !18007  scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
+- !17991  CVE-2025-39697
+- !18361  umount performance fix
+- !18353  net/oenetcls: Fix memleak when clean flow table
+- do_make_slave(): choose new master sanely
+- change_mnt_propagation(): do_make_slave() is a no-op unless IS_MNT_SHARED()
+- change_mnt_propagation() cleanups, step 1
+- net/oenetcls: Fix memleak when clean flow table
+- fs: quota: create dedicated workqueue for quota_release_work
+- blk-mq: fix NULL dereference on q->elevator in blk_mq_elv_switch_none
+- block: avoid possible overflow for chunk_sectors check in blk_stack_limits()
+- loop: Avoid updating block size under exclusive owner
+- ext4: use ext4_fc_tl_mem in fast-commit replay path
+- ext4: fix potential out of bound read in ext4_fc_replay_scan()
+- ext4: factor out ext4_fc_get_tl()
+- ext4: introduce EXT4_FC_TAG_BASE_LEN helper
+- scsi: libiscsi: Initialize iscsi_conn->dd_data only if memory is allocated
+- NFS: Fix a race when updating an existing write
+- nfs: fold nfs_page_group_lock_subrequests into nfs_lock_and_join_requests
+- fscrypt: Don't use problematic non-inline crypto engines
+- Fix kfree mismatch reported by cocci
+
 * Tue Oct 14 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-285.0.0.187
 - !18305  vxlan: Fix NPD in {arp,neigh}_reduce() when using nexthop objects
 - !18278  sched/dynamic_affinity: Calculate cpu capacity in real time when realtime tasks are running on this cpu
