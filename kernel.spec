@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2510.2.0
+%global hulkrelease 2510.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0347
+Release: %{hulkrelease}.0348
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,66 @@ fi
 %endif
 
 %changelog
+
+* Wed Oct 22 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.3.0.0348
+- !18072  CVE-2023-53431
+- !18469  e1000e: fix heap overflow in e1000_set_eeprom
+- !18396  scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+- !18380  iommu/amd: Fix pci device refcount leak in ppr_notifier()
+- !18379  Fix CVE-2022-50494
+- !18468 scsi/hifc: Fix rport dev loss tmo flag and function parameter check err
+- e1000e: fix heap overflow in e1000_set_eeprom
+- scsi/hifc: Fix rport dev loss tmo flag and function parameter check err
+- !18315  fs: quota: create dedicated workqueue for quota_release_work
+- !18399  scsi: qla4xxx: Add length check when parsing nlattrs
+- !18359  CVE-2022-50341
+- !18210  drivers/md/md-bitmap: check the return value of md_bitmap_get_counter()
+- !18209  md/raid10: fix null-ptr-deref of mreplace in raid10_sync_request
+- !18208  fix CVE-2023-53357
+- !18207  md/raid10: fix wrong setting of max_corr_read_errors
+- !18206  nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
+- !18205  md/raid10: prevent soft lockup while flush writes
+- !18204  md/raid10: fix leak of 'r10bio->remaining' for recovery
+- !18203  md: Replace snprintf with scnprintf
+- !18408  udf: Do not bother merging very long extents
+- !18373  mmc: vub300: fix warning - do not call blocking ops when !TASK_RUNNING
+- !18377  clk: samsung: Fix memory leak in _samsung_clk_register_pll()
+- !18333  scsi: qla2xxx: Wait for io return on terminate rport
+- !17992  NFS: Fix a race when updating an existing write
+- !18394  ALSA: ac97: fix possible memory leak in snd_ac97_dev_register()
+- udf: Do not bother merging very long extents
+- !18375  Enable Huawei Intelligent Network Card Driver: hinic3
+- scsi: qla4xxx: Add length check when parsing nlattrs
+- scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+- ALSA: ac97: fix possible memory leak in snd_ac97_dev_register()
+- iommu/amd: Fix pci device refcount leak in ppr_notifier()
+- thermal: intel_powerclamp: Use first online CPU as control_cpu
+- thermal: intel_powerclamp: Use get_cpu() instead of smp_processor_id() to avoid crash
+- clk: samsung: Fix memory leak in _samsung_clk_register_pll()
+- Enable Huawei Intelligent Network Card Driver: hinic3
+- mmc: vub300: fix warning - do not call blocking ops when !TASK_RUNNING
+- !18340  binfmt_misc: fix shift-out-of-bounds in check_special_flags
+- !18355  fix CVE-2023-53560
+- cifs: Remove duplicated include in cifsglob.h
+- cifs: fix oops during encryption
+- tracing/histograms: Return an error if we fail to add histogram to hist_vars list
+- tracing/histograms: Add histograms to hist_vars if they have referenced variables
+- binfmt_misc: fix shift-out-of-bounds in check_special_flags
+- scsi: qla2xxx: Wait for io return on terminate rport
+- fs: quota: create dedicated workqueue for quota_release_work
+- drivers/md/md-bitmap: check the return value of md_bitmap_get_counter()
+- md/raid10: fix null-ptr-deref of mreplace in raid10_sync_request
+- md: fix resync softlockup when bitmap size is less than array size
+- md/bitmap: md_bitmap_get_counter returns wrong blocks
+- md/raid10: check slab-out-of-bounds in md_bitmap_get_counter
+- md/raid10: fix wrong setting of max_corr_read_errors
+- nbd: Fix hung when signal interrupts nbd_start_device_ioctl()
+- md/raid10: prevent soft lockup while flush writes
+- md/raid10: fix leak of 'r10bio->remaining' for recovery
+- md: Replace snprintf with scnprintf
+- scsi: ses: Handle enclosure with just a primary component gracefully
+- scsi: ses: Don't attach if enclosure has no components
+- NFS: Fix a race when updating an existing write
 
 * Wed Oct 15 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.2.0.0347
 - !18323  platform/x86: mxm-wmi: fix memleak in mxm_wmi_call_mx[ds|mx
