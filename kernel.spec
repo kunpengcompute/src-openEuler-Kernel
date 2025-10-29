@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2510.3.0
+%global hulkrelease 2510.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0348
+Release: %{hulkrelease}.0349
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,84 @@ fi
 %endif
 
 %changelog
+
+* Wed Oct 29 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.4.0.0349
+- !18619  notifiers: Add oops check in blocking_notifier_call_chain()
+- !18595  Fix CVE-2023-53719
+- !18618  CVE-2023-53648
+- !18590  mtd: Fix device name leak when register device failed in add_mtd_device()
+- !18601  xhci: Remove device endpoints from bandwidth list when freeing the device
+- !18582  media: v4l2-mem2mem: add lock to protect parameter num_rdy
+- notifiers: Add oops check in blocking_notifier_call_chain()
+- ALSA: ac97: Fix possible error value of *rac97
+- ALSA: ac97: Fix possible NULL dereference in snd_ac97_mixer
+- !18607  wifi: mwifiex: avoid possible NULL skb pointer dereference
+- !18603  Bluetooth: L2CAP: Fix use-after-free
+- wifi: mwifiex: avoid possible NULL skb pointer dereference
+- !18575  CVE-2023-53153
+- !18581  net/tunnel: wait until all sk_user_data reader finish before releasing the sock
+- !18580  sctp: fix a potential overflow in sctp_ifwdtsn_skip
+- !18578  sctp: check send stream number after wait_for_sndbuf
+- !18577  CVE-2023-53148
+- !18576  wifi: brcmfmac: Fix potential stack-out-of-bounds in brcmf_c_preinit_dcmds()
+- !18574  sctp: handle the error returned from sctp_auth_asoc_init_active_key
+- !18573  igb: Do not free q_vector unless new one was allocated
+- Bluetooth: L2CAP: Fix use-after-free
+- !18600  mm/slub: avoid accessing metadata when pointer is invalid in object_err()
+- !18599  scsi: qla4xxx: Prevent a potential error pointer dereference
+- xhci: Remove device endpoints from bandwidth list when freeing the device
+- !18551  posix-timers: Ensure timer ID search-loop limit is valid
+- mm/slub: avoid accessing metadata when pointer is invalid in object_err()
+- scsi: qla4xxx: Prevent a potential error pointer dereference
+- drivers: fix a typo in the kernel doc for devm_platform_ioremap_resource()
+- serial: arc_uart: fix of_iomap leak in `arc_serial_probe`
+- drivers: provide devm_platform_ioremap_resource()
+- mtd: Fix device name leak when register device failed in add_mtd_device()
+- !18543  CVE-2023-53567
+- !18529  drm/radeon: free iio for atombios when driver shutdown
+- media: v4l2-mem2mem: add lock to protect parameter num_rdy
+- net/tunnel: wait until all sk_user_data reader finish before releasing the sock
+- sctp: fix a potential overflow in sctp_ifwdtsn_skip
+- sctp: check send stream number after wait_for_sndbuf
+- igb: Do not bring the device up after non-fatal error
+- igb: Fix igb_down hung on surprise removal
+- wifi: brcmfmac: Fix potential stack-out-of-bounds in brcmf_c_preinit_dcmds()
+- wifi: cfg80211: Partial revert "wifi: cfg80211: Fix use after free for wext"
+- wifi: cfg80211: Fix use after free for wext
+- sctp: handle the error returned from sctp_auth_asoc_init_active_key
+- igb: Do not free q_vector unless new one was allocated
+- !18499  posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- !18454  usb: host: xhci: Fix potential memory leak in xhci_alloc_stream_info()
+- !18366  squashfs: add more sanity checks
+- !18240  efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+- !18491  CVE-2023-53515
+- posix-timers: Ensure timer ID search-loop limit is valid
+- spi: qup: Don't skip cleanup in remove's error path
+- spi: qup: fix PM reference leak in spi_qup_remove()
+- drm/radeon: free iio for atombios when driver shutdown
+- !18429  bcache: Fix __bch_btree_node_alloc to make the failure behavior consistent
+- !18426  dm integrity: call kmem_cache_destroy() in dm_integrity_init() error path
+- !18416  ubi: ubi_wl_put_peb: Fix infinite loop when wear-leveling work failed
+- !18418  CVE-2023-53271
+- !18420  CVE-2023-53265
+- posix-cpu-timers: fix race between handle_posix_cpu_timers() and posix_cpu_timer_del()
+- virtio-mmio: fix memory leak of vm_dev
+- virtio-mmio: don't break lifecycle of vm_dev
+- usb: host: xhci: Fix potential memory leak in xhci_alloc_stream_info()
+- bcache: Fix __bch_btree_node_alloc to make the failure behavior consistent
+- dm integrity: call kmem_cache_destroy() in dm_integrity_init() error path
+- ubi: Fix failure attaching when vid_hdr offset equals to (sub)page size
+- ubi: ensure that VID header offset + VID header size <= alloc, size
+- ubi: Fix unreferenced object reported by kmemleak in ubi_resize_volume()
+- ubi: Fix use-after-free when volume resizing failed
+- ubi: ubi_wl_put_peb: Fix infinite loop when wear-leveling work failed
+- Squashfs: fix handling and sanity checking of xattr_ids count
+- squashfs: fix xattr id and id lookup sanity checks
+- squashfs: fix inode lookup sanity checks
+- squashfs: add more sanity checks in inode lookup
+- squashfs: add more sanity checks in xattr id lookup
+- squashfs: add more sanity checks in id lookup
+- efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
 
 * Wed Oct 22 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.3.0.0348
 - !18072  CVE-2023-53431
