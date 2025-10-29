@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       286
+%global devel_release       287
 %global maintenance_release .0.0
-%global pkg_release         .189
+%global pkg_release         .190
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,51 @@ fi
 %endif
 
 %changelog
+* Tue Oct 28 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-287.0.0.190
+- !18584  hisi: l0: update device name from hisi_l0 to hisi_soc_cache_mgmt
+- !18537  posix-timers: Ensure timer ID search-loop limit is valid
+- hisi: l0: update device name from hisi_l0 to hisi_soc_cache_mgmt
+- !18549  i40e: fix idx validation in config queues msg
+- i40e: fix idx validation in config queues msg
+- !18534 [OLK-5.10]:update patches for sw64 architecture
+- !18530 drivers:misc:sdma-dae: optimize kernel code
+- posix-timers: Ensure timer ID search-loop limit is valid
+- drivers:misc:sdma-dae: optimize kernel code
+- sw64: fix the condition for enabling hw_una_enabled
+- sw64: add trap related macros
+- sw64: add missing memory clobbers
+- sw64: optimize ipi handling
+- sw64: Add inline find_next_set/and/clear_bit()
+- sw64: optimize asid clearation
+- sw64: update cflags for new compiler
+- sw64: enable -relax when CONFIG_FUNCTION_TRACER=y
+- sw64: efi: fix compile error when CONFIG_EFI=n
+- sw64: powercap: fix misuse of an uninitialized temporary variable
+- sw64: powercap: increase the interval of polling mode
+- sw64: powercap: fix Kconfig dependency for SW64_POWERCAP
+- sw64: powercap: avoid checking meaningless target freq
+- sw64: irqchip: update effective affinity for INTx
+- sw64: msi: fix affinity change of managed irq
+- sw64: use orig_r0 as syscall nr
+- sw64: revert ioremap() to __va() in ioport_map()
+- sw64: fix unresolved reference error when close pci
+- sw64: kvm: add the C4 kvm_regs structure to uapi kvm.h
+- !18487 RDMA/hns: Fix more wrong WQE data cases when QP wraps around
+- !18514  tracing: probes: Fix a possible race in trace_probe_log APIs
+- tracing: probes: Fix a possible race in trace_probe_log APIs
+- !18512  iio: adc: at91: call input_free_device() on allocated iio_dev
+- iio: adc: at91: call input_free_device() on allocated iio_dev
+- !18490 v2  Add some bugfix for l0.
+- hisi: l0: fix security risks for l0
+- hisi: l3t: use readl_poll_timeout_atomic to wait reg op finish
+- hisi: l3t: fix l3t unlock order
+- hisi: l3t: fix conflict between HISI050 and HISI021
+- !18397  scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+- !18470  e1000e: fix heap overflow in e1000_set_eeprom
+- RDMA/hns: Fix more wrong WQE data cases when QP wraps around
+- e1000e: fix heap overflow in e1000_set_eeprom
+- scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+
 * Tue Oct 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-286.0.0.189
 - !18480  KVM: arm64: vgic-v4: Restore pending state on host userspace write
 - KVM: arm64: vgic-v4: Restore pending state on host userspace write
