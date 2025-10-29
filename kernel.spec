@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       113
+%global devel_release       114
 %global maintenance_release .0.0
-%global pkg_release         .117
+%global pkg_release         .118
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,277 @@ fi
 %endif
 
 %changelog
+* Wed Oct 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-114.0.0.118
+- !18640 v3  Errata management for VM Live migration
+- !18638  CVE-2025-39982
+- !18564  perf: arm_spe: Prevent overflow in PERF_IDX2OFF()
+- !18639 net: hns3: fix null pointer in debugfs issue
+- KVM: arm64: fix kvm kabi conflict
+- smccc: kvm_guest: Align with DISCOVER_IMPL_CPUS ABI
+- smccc: kvm_guest: Fix kernel builds for 32 bit arm
+- smccc/kvm_guest: Enable errata based on implementation CPUs
+- arm64: Make  _midr_in_range_list() an exported function
+- KVM: arm64: Introduce KVM_REG_ARM_VENDOR_HYP_BMAP_2
+- KVM: arm64: Specify hypercall ABI for retrieving target implementations
+- arm64: Modify _midr_range() functions to read MIDR/REVIDR internally
+- KVM: arm64: Allow userspace to change the implementation ID registers
+- KVM: arm64: Load VPIDR_EL2 with the VM's MIDR_EL1 value
+- KVM: arm64: Maintain per-VM copy of implementation ID regs
+- KVM: arm64: Set HCR_EL2.TID1 unconditionally
+- Bluetooth: hci_event: Fix UAF in hci_acl_create_conn_sync
+- !18624 tools headers arm64: Sync arm64's cputype.h with the kernel sources
+- !18622 support mempool feature
+- net: hns3: fix null pointer in debugfs issue
+- net: hns3: avoid bitwise copy during RX buffer replace leg when page pool enabled
+- net: hns3: fixed vf get max channels bug
+- net: hns3: `req_autoneg` for fiber is initialized to `support_autoneg` instead of OFF.
+- net: hns3: use user configure after hardware reset when using kernel PHY.
+- net: hns3: Return error code when function fails.
+- net: hns3: using the num_tqps to check whether tqp_index is out of range when vf get ring info from mbx
+- net: hns3: using the num_tqps in the vf driver to apply for resources
+- net: hns3: add support to query tc map info of VF queues
+- net: hns3: merge rss tc configuration
+- net: hns3: add ieee_setmaxrate and ieee_getmaxrate support for pf
+- !18550  cpu/SMT: recover global num_threads after disable smt switch fail
+- !18589 net: hibmcge: support pci_driver.shutdown()
+- !18579  regulator: core: fix NULL dereference on unbind due to stale coupling data
+- !18415  sdei_watchdog: Add CPU_PM_ENTER_FAILED handling in sdei_watchdog_pm_notifier
+- !18593  crypto: essiv - Check ssize for decryption and in-place encryption
+- tools headers arm64: Sync arm64's cputype.h with the kernel sources
+- tools headers arm64: Sync arm64's cputype.h with the kernel sources
+- tools/include: Sync arm64 headers with the kernel sources
+- tools/include: Sync arm64 asm/cputype.h with the kernel sources
+- openeuler_defconfig: enable CONFIG_PFN_RANGE_ALLOC by default
+- mm/pfn_range_alloc: check if folio is hwpoisoned in pfn_range_free
+- mm/pfn_range_alloc: add a interface to show borrowable physical range
+- mm/pfn_range_alloc: support update cachable attribue of linear mapping
+- mm/pfn_range_alloc: introduce set_linear_mapping_invalid
+- mm/pfn_range_alloc: introduce hugetlb_pool_alloc_size
+- mm/pfn_range_alloc: add tracepoint for hugetlb_pool_alloc and hugetlb_pool_free
+- mm/pfn_range_alloc: add tracepoint for pfn_range_alloc and pfn_range_free
+- mm/pfn_range_alloc: support allocate and free from hugetlb pool
+- mm/pfn_range_alloc: add interfaces to alloc/free for drivers
+- mm/pfn_range_alloc: reserve memory for each node
+- mm/contig_alloc: fix alloc_contig_range when __GFP_COMP and order < MAX_ORDER
+- mm: page_alloc: speed up fallbacks in rmqueue_bulk()
+- mm/page_alloc: clarify should_claim_block() commentary
+- mm/page_alloc: clarify terminology in migratetype fallback code
+- mm/page_alloc: add some detailed comments in can_steal_fallback
+- mm: page_alloc: remove remnants of unlocked migratetype updates
+- mm: page_alloc: don't steal single pages from biggest buddy
+- mm/page_alloc: don't call pfn_to_page() on possibly non-existent PFN in split_large_buddy()
+- mm/page_alloc: forward the gfp flags from alloc_contig_range() to post_alloc_hook()
+- mm/page_alloc: sort out the alloc_contig_range() gfp flags mess
+- mm/page_alloc: make __alloc_contig_migrate_range() static
+- mm/page_isolation: don't pass gfp flags to isolate_single_pageblock()
+- mm/contig_alloc: support __GFP_COMP
+- mm: remove unused has_isolate_pageblock
+- mm: page_alloc: simpify page del and expand
+- mm: remove migration for HugePage in isolate_single_pageblock()
+- mm/page_alloc: keep track of free highatomic
+- mm: page_alloc: fix highatomic typing in multi-block buddies
+- mm: page_alloc: batch vmstat updates in expand()
+- mm: page_alloc: change move_freepages() to __move_freepages_block()
+- mm: page_alloc: consolidate free page accounting
+- mm: page_isolation: prepare for hygienic freelists
+- mm: page_alloc: set migratetype inside move_freepages()
+- mm: page_alloc: close migratetype race between freeing and stealing
+- mm: page_alloc: fix freelist movement during block conversion
+- mm: page_alloc: fix move_freepages_block() range error
+- mm: page_alloc: move free pages when converting block during isolation
+- mm: page_alloc: fix up block types when merging compatible blocks
+- mm: page_alloc: optimize free_unref_folios()
+- mm: page_alloc: remove pcppage migratetype caching
+- mm: page_alloc: simplify __free_pages_ok()
+- mm/page_alloc: remove unnecessary next_page in break_down_buddy_pages
+- mm/page_alloc: remove unnecessary check in break_down_buddy_pages
+- !18608  mm: fix __count_zid_vm_events when CONFIG_ZONE_EXTMEM is enabled
+- !18588 add memory ras feature support
+- mm: add memory reclaim notifier
+- mm: fix __count_zid_vm_events when CONFIG_ZONE_EXTMEM is enabled
+- panic: add notifier call before other cpu shutdown
+- !18592  Make ID reg writable
+- crypto: essiv - Check ssize for decryption and in-place encryption
+- KVM: arm64: use KABI_EXTEND to revert struct kvm kabi change
+- KVM: arm64: Make AA64PFR1_EL1.NMI writeable
+- KVM: arm64: Expose S1PIE to guests
+- KVM: arm64: Sanitise ID_AA64MMFR3_EL1
+- KVM: arm64: Do not allow ID_AA64MMFR0_EL1.ASIDbits to be overridden
+- KVM: arm64: Make ID_AA64MMFR1_EL1.{HCX, TWED} writable from userspace
+- KVM: arm64: Remove duplicated AA64MMFR1_EL1 XNX
+- KVM: arm64: Make the L1Ip feature bits in CTR_EL0 writable from userspace
+- KVM: arm64: rename functions for invariant sys regs
+- KVM: arm64: show writable masks for feature registers
+- KVM: arm64: Treat CTR_EL0 as a VM feature ID register
+- KVM: arm64: Add helper for writing ID regs
+- KVM: arm64: Use read-only helper for reading VM ID registers
+- KVM: arm64: Only reset vCPU-scoped feature ID regs once
+- KVM: arm64: Reset VM feature ID regs from kvm_reset_sys_regs()
+- KVM: arm64: Rename is_id_reg() to imply VM scope
+- KVM: arm64: Disable MPAM visibility by default and ignore VMM writes
+- KVM: arm64: Make the exposed feature bits in AA64DFR0_EL1 writable from userspace
+- KVM: arm64: Document vCPU feature selection UAPIs
+- KVM: arm64: Allow userspace to change ID_AA64ZFR0_EL1
+- KVM: arm64: Allow userspace to change ID_AA64PFR0_EL1
+- KVM: arm64: Allow userspace to change ID_AA64MMFR{0-2}_EL1
+- KVM: arm64: Allow userspace to change ID_AA64ISAR{0-2}_EL1
+- KVM: arm64: Bump up the default KVM sanitised debug version to v8p8
+- KVM: arm64: Reject attempts to set invalid debug arch version
+- KVM: arm64: Advertise selected DebugVer in DBGDIDR.Version
+- KVM: arm64: Use guest ID register values for the sake of emulation
+- KVM: arm64: Document KVM_ARM_GET_REG_WRITABLE_MASKS
+- KVM: arm64: Allow userspace to get the writable masks for feature ID registers
+- net: hibmcge: support pci_driver.shutdown()
+- net: hibmcge: select FIXED_PHY
+- !18568 support NUMA.remote feature
+- !18498  serial: 8250: fix panic due to PSLVERR
+- regulator: core: fix NULL dereference on unbind due to stale coupling data
+- !18409 crypto: hisilicon - support for new ZIP features
+- !18545  HID: multitouch: fix slab out-of-bounds access in mt_report_fixup()
+- !18563  arm64/mpam: Fix L2 MBWU monitor multiplexing issue
+- mm/numa_remote: add kernel doc for numa remote feature
+- mm/numa_remote: extend cmdline numa_remote to limit the max number of remote node
+- mm: memory-failure: use kill_accessing_process() in ghes
+- mm: memory-failure: remove task_struct from kill_accessing_process()
+- mm/memory-failure: fix infinite UCE for VM_PFNMAP pfn
+- mm/hwpoison: do not send SIGBUS to processes with recovered clean pages
+- arm64: configs: enable NUMA_REMOTE by default
+- mm/numa_remote: enable oom_kill_cpuless_numa_allocating_task when numa_remote is enabled
+- mm/oom_kill: kill current in OOM when binding to cpu-less nodes
+- mm/numa_rmeote: add preonline interface for each memory device
+- mm/numa_remote: add pre-online count in meminfo
+- mm/numa_remote: add sysfs to distinguish whether a remote node
+- mm/numa_remote: introduce hugetlb_nowatermark mode for remote node
+- mm/numa_remote: undo isolation of remote memory asynchronously
+- mm/numa_remote: introduce pre-online mode to support hotplug unready memory
+- mm/numa_remote: introduce nofallback mode for remote node
+- mm/numa_remote: support to set node distance
+- mm/numa_remote: support to hotplug/hotremove remote memory
+- mm/numa_remote: prepare numa node for remote memory
+- mm/memory_hotplug: support to hotplug memory on ZONE_EXTMEM
+- mm/hugetlb: fix folio is still mapped when deleted
+- perf: arm_spe: Prevent overflow in PERF_IDX2OFF()
+- arm64/mpam: Fix L2 MBWU monitor multiplexing issue
+- !18559  arm64/mpam: Fix MBWU monitor overflow handling
+- !18544  fs/resctrl: Re-allocate rmid for the monitor when migrating across control groups
+- !18536  arm-smmu-v3: add 'HIP10C' for 162100602 errata
+- !18130 Net: nebula_matrix: set nebula_matrix driver to a newer state
+- !16777 RNPGBE: NET: Fix dmesg 'unknow speed' show when 1000M
+- arm64/mpam: Print MPAM register operation for debug
+- arm64/mpam: Fix MBWU monitor overflow handling
+- cpu/SMT: recover global num_threads after disable smt switch fail
+- HID: multitouch: fix slab out-of-bounds access in mt_report_fixup()
+- fs/resctrl: Re-allocate rmid for the monitor when migrating across control groups
+- !17676 [OLK-6.6] Backported patches of Transient Scheduler Attacks (TSA)
+- arm-smmu-v3: add 'HIP10C' for 162100602 errata
+- !18533 [OLK-6.6]:update patches for sw64 architecture
+- !18516  arm64: Add support for HIP09 Spectre-BHB mitigation
+- !18457  arm64: add cnp verification on Hisilicon erratum 162100125
+- !18513  Fix CVE-2025-39679
+- !18531  arm/syscalls: mark syscall invocation as likely in
+- !11635  arm64/cpufeatures/kvm: Add ARMv8.9 FEAT_ECBHB bits in ID_AA64MMFR1 register
+- !18507 Fix wrong CPU aff3 conversion between  MPIDR and SYS_LSUDVMBM_EL2
+- sw64: add CONFIG_DEBUG_WW_MUTEX_SLOWPATH=y to defconfig
+- sw64: fix the condition for enabling hw_una_enabled
+- sw64: efi: fix compile error when CONFIG_EFI=n
+- sw64: powercap: fix misuse of an uninitialized temporary variable
+- sw64: powercap: increase the interval of polling mode
+- sw64: powercap: fix Kconfig dependency for SW64_POWERCAP
+- sw64: powercap: avoid checking meaningless target freq
+- sw64: smp: fix unaligned access before trap_init()
+- sw64: irqchip: update effective affinity for INTx
+- sw64: msi: fix affinity change of managed irq
+- sw64: use orig_r0 as syscall nr
+- sw64: revert ioremap() to __va() in ioport_map()
+- sw64: fix unresolved reference error when close pci
+- sw64: kvm: add the C4 kvm_regs structure to uapi kvm.h
+- arm/syscalls: mark syscall invocation as likely in invoke_syscall
+- !18517  media: rc: fix races with imon_disconnect()
+- !18327 net: ubl: add CONFIG_UB_UBL definition and UBL interface
+- !18488 RDMA/hns: Fix wrong WQE data when QP wraps around
+- KVM: hisi_virt: tlbi: Fix wrong CPU aff3 conversion between MPIDR and SYS_LSUDVMBM_EL2
+- media: rc: fix races with imon_disconnect()
+- arm64: Add support for HIP09 Spectre-BHB mitigation
+- drm/nouveau/nvif: Fix potential memory leak in nvif_vmm_ctor().
+- !18495  CVE-2025-39967
+- !18258  perf: arm_pmuv3: Factor out PMCCNTR_EL0 use conditions and Don't use PMCCNTR_EL0 on SMT cores
+- serial: 8250: fix panic due to PSLVERR
+- fbcon: Fix OOB access in font allocation
+- fbcon: fix integer overflow in fbcon_do_set_font
+- !16738 perf vendor events arm64: Add N2, V2, N3, V3 events/metrics
+- !18385  e1000e: fix heap overflow in e1000_set_eeprom
+- !18395  scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+- config: enable CONFIG_MITIGATION_TSA and CONFIG_KVM_HYPERV by default on x86
+- x86/cpu: Shorten CPU matching macro
+- platform/x86/intel/ifs: Switch to new Intel CPU model defines
+- x86/microcode/AMD: Handle the case of no BIOS microcode
+- KVM: SVM: Advertise TSA CPUID bits to guests
+- tools headers: Sync x86 headers with the kernel source
+- x86/microcode/AMD: Fix __apply_microcode_amd()'s return value
+- x86/microcode/AMD: Add some forgotten models to the SHA check
+- x86/CPU/AMD: Terminate the erratum_1386_microcode array
+- x86/microcode/AMD: Split load_microcode_amd()
+- x86/microcode/AMD: Pay attention to the stepping dynamically
+- KVM: x86: hyper-v: Remove unused inline function kvm_hv_free_pa_page()
+- x86/microcode/intel: Set new revision only after a successful update
+- x86/platform/atom: Switch to new Intel CPU model defines
+- x86/process: Move the buffer clearing before MONITOR
+- x86/microcode/AMD: Add TSA microcode SHAs
+- x86/microcode/AMD: Load only SHA256-checksummed patches
+- x86/microcode/AMD: Add get_patch_level()
+- x86/microcode/AMD: Merge early_apply_microcode() into its single callsite
+- x86/microcode/AMD: Remove unused save_microcode_in_initrd_amd() declarations
+- x86/microcode/AMD: Remove ret local var in early_apply_microcode()
+- x86/microcode/AMD: Use the family,model,stepping encoded in the patch ID
+- x86/microcode/AMD: Avoid -Wformat warning with clang-15
+- x86/microcode/AMD: Have __apply_microcode_amd() return bool
+- x86/microcode/AMD: Flush patch buffer mapping after application
+- x86/microcode: Rework early revisions reporting
+- x86/bugs: Add a Transient Scheduler Attacks mitigation
+- x86/bugs: Rename MDS machinery to something more generic
+- x86/idle: Use MONITOR and MWAIT mnemonics in <asm/mwait.h>
+- KVM: x86: Swap incoming guest CPUID into vCPU before massaging in KVM_SET_CPUID2
+- KVM: x86: Explicitly do runtime CPUID updates "after" initial setup
+- KVM: x86: Rename kvm_cpu_cap_mask() to kvm_cpu_cap_init()
+- x86/cpu: Expose only stepping min/max interface
+- x86/cpu: Introduce new microcode matching helper
+- cpufreq: intel_pstate: Switch to new Intel CPU model defines
+- cpufreq: Switch to new Intel CPU model defines
+- EDAC/skx: Switch to new Intel CPU model defines
+- EDAC/i10nm: Switch to new Intel CPU model defines
+- x86/aperfmperf: Switch to new Intel CPU model defines
+- x86/apic: Switch to new Intel CPU model defines
+- x86/bugs: Switch to new Intel CPU model defines
+- x86/CPU/AMD: Improve the erratum 1386 workaround
+- cpufreq: intel_pstate: Update default EPPs for Meteor Lake
+- cpufreq: intel_pstate: Update hybrid scaling factor for Meteor Lake
+- KVM: x86: Make Hyper-V emulation optional
+- KVM: nVMX: Split off helper for emulating VMCLEAR on Hyper-V eVMCS
+- KVM: VMX: Split off hyperv_evmcs.{ch}
+- net: ubl: add CONFIG_UB_UBL definition and UBL interface
+- RDMA/hns: Fix wrong WQE data when QP wraps around
+- arm64: add cnp verification on Hisilicon erratum 162100125
+- net:nebula-matrix:Add S1000 SNIC driver support
+- sdei_watchdog: Add CPU_PM_ENTER_FAILED handling in sdei_watchdog_pm_notifier
+- crypto: hisilicon/qm - clear all VF configurations in the hardware
+- Revert "crypto: hisilicon/qm - fix vfs_num error"
+- crypto: hisilicon/qm - invalidate queues in use
+- Revert "crypto: hisilicon/qm - invalidate queues in use"
+- Revert "crypto: hisilicon/qm - clear the memory before enabling the device"
+- crypto: hisilicon/zip - add hashjoin, gather, and UDMA data move features
+- crypto: hisilicon/zip - add lz4 and lz77_only to algorithm sysfs
+- crypto: hisilicon/sec2 - Fix false-positive warning of uninitialised qp_ctx
+- scsi: target: target_core_configfs: Add length check to avoid buffer overflow
+- e1000e: fix heap overflow in e1000_set_eeprom
+- perf: arm_pmuv3: Don't use PMCCNTR_EL0 on SMT cores
+- perf: arm_pmuv3: Factor out PMCCNTR_EL0 use conditions
+- RNPGBE: NET: Fix dmesg 'unknow speed' show when 1000M
+- perf vendor events arm64: Add V3 events/metrics
+- perf vendor events arm64: Add N3 events/metrics
+- perf vendor events arm64: Add FUJITSU-MONAKA PMU event
+- perf vendor events arm64: Update N2/V2 events from source
+- arm64/cpufeatures/kvm: Add ARMv8.9 FEAT_ECBHB bits in ID_AA64MMFR1 register
+
 * Tue Oct 21 2025 Li Nan <linan122@huawei.com> - 6.6.0-113.0.0.117
 - !18464  i40e: add max boundary check for VF filters
 - !18433  dmaengine: qcom: bam_dma: Fix DT error handling for num-channels/ees
