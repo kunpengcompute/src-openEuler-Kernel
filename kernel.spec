@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       115
 %global maintenance_release .0.0
-%global pkg_release         .119
+%global pkg_release         .120
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,13 @@ fi
 %endif
 
 %changelog
+* Wed Nov 05 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-115.0.0.120
+- RISC-V kernel upgrade to 6.6.0-115.0.0
+- Remove CI-related file changes
+- riscv: Backport steal-time support for RISC-V
+- riscv: RISC-V SBI debug console extension support
+- riscv: Add support for kernel mode vector
+
 * Wed Nov 05 2025 Li Nan <linan122@huawei.com> - 6.6.0-115.0.0.119
 - !18713 iommu: Enabling Broadcast TLB Maintenance (BTM) for UMMU on ARM64
 - iommu: Fix kabi breakage due to opening KVM_PINNED_VMID
