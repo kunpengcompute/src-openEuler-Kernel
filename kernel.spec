@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       287
+%global devel_release       288
 %global maintenance_release .0.0
-%global pkg_release         .190
+%global pkg_release         .191
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,46 @@ fi
 %endif
 
 %changelog
+* Wed Nov 05 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-288.0.0.191
+- !18738  fs: udf: fix OOB read in lengthAllocDescs handling
+- !2934 e1000e: Add support for the next LOM generation
+- !18783  padata: Reset next CPU when reorder sequence wraps around
+- !18737 [OLK-5.10] backport important bugfix for mpt3sas driver from upstream linux-5.10.y
+- !18743 [OLK-5.10] backport important bugfix for lpfc driver from upstream linux-5.10.y
+- padata: Reset next CPU when reorder sequence wraps around
+- !18722  dm array: fix releasing a faulty array block twice in dm_array_cursor_end
+- !14672 IXIC:add phytium ixic d2000 driver
+- !18729  perf: arm_spe: Prevent overflow in PERF_IDX2OFF()
+- !18728  *** CVE-2025-39973 ***
+- scsi: lpfc: Fix buffer free/clear order in deferred receive path
+- fs: udf: fix OOB read in lengthAllocDescs handling
+- scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
+- perf: arm_spe: Prevent overflow in PERF_IDX2OFF()
+- i40e: add validation for ring_len param
+- i40e: increase max descriptors for XL710
+- !13242 [OLK-5.10] openeuler_defconfig: clean up invalid kernel configurations
+- dm array: fix releasing a faulty array block twice in dm_array_cursor_end
+- !18687 v2  net/oenetcls: Balancing softirq to improve performance
+- !18686  tracing: Fix race condition in kprobe initialization causing NULL pointer dereference
+- !18018 Rate-limit the logging of dirty-page and SPECTRE_V2 messages
+- !18378 sched/fair: remove qos_reweight logic under non-SMP scenario
+- net/oenetcls: Balancing softirq to improve performance
+- tracing: Fix race condition in kprobe initialization causing NULL pointer dereference
+- !18663  perf test bpf: Address error about non-null argument for epoll_pwait 2nd arg
+- !18628  tracing: dynevent: Add a missing lockdown check on dynevent
+- perf test bpf: Address error about non-null argument for epoll_pwait 2nd arg
+- !18617  Fix CVE-2025-39993
+- tracing: dynevent: Add a missing lockdown check on dynevent
+- media: rc: fix races with imon_disconnect()
+- media: imon: grab lock earlier in imon_ir_change_protocol()
+- media: imon: Fix race getting ictx->lock
+- openeuler_defconfig: clean up invalid kernel configurations
+- sched/fair: remove qos_reweight logic under non-SMP scenario
+- Rate-limit the logging of dirty-page and SPECTRE_V2 messages
+- IXIC:add phytium ixic d2000 driver
+- IXIC:add phytium ixic d2000 DT binding docs
+- e1000e: Add support for the next LOM generation
+
 * Tue Oct 28 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-287.0.0.190
 - !18584  hisi: l0: update device name from hisi_l0 to hisi_soc_cache_mgmt
 - !18537  posix-timers: Ensure timer ID search-loop limit is valid
