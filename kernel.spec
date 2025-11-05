@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2510.4.0
+%global hulkrelease 2511.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0349
+Release: %{hulkrelease}.0350
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,86 @@ fi
 %endif
 
 %changelog
+
+* Wed Nov 05 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.1.0.0350
+- !18795  *** fix CVE-2023-53454 ***
+- HID: multitouch: Add NULL check in mt_input_configured
+- HID: multitouch: Correct devm device reference for hidinput input_dev name
+- !18787  misc: tifm: fix possible memory leak in tifm_7xx1_switch_media()
+- misc: tifm: fix possible memory leak in tifm_7xx1_switch_media()
+- !18776  tty: vt: Fix vc_origin buffer copy overflow in fbcon_prepare_logo()
+- tty: vt: Fix vc_origin buffer copy overflow in fbcon_prepare_logo()
+- !18759  wifi: ath9k: hif_usb: fix memory leak of remain_skbs
+- !18757  fix CVE-2023-53675
+- !18754  scsi: target: iscsi: Fix buffer overflow in lio_target_nacl_info_show()
+- !18727  fbdev: Fix out-of-bounds issue in sys_fillrect()
+- !18734  drm/radeon: Fix PCI device refcount leak in radeon_atrm_get_bios()
+- wifi: ath9k: hif_usb: fix memory leak of remain_skbs
+- scsi: ses: Fix possible desc_ptr out-of-bounds accesses
+- Revert "scsi: ses: fix slab-out-of-bounds in ses_enclosure_data_process"
+- !18749  wifi: brcmfmac: cfg80211: Pass the PMK in binary instead of hex
+- scsi: target: iscsi: Fix buffer overflow in lio_target_nacl_info_show()
+- !18740  *** CVE-2023-53199 ***
+- wifi: brcmfmac: cfg80211: Pass the PMK in binary instead of hex
+- !18731  *** CVE-2023-53446 ***
+- !18730  wifi: ath9k: Fix potential stack-out-of-bounds write in ath9k_wmi_rsp_callback()
+- !18724  *** CVE-2023-53185 ***
+- !18460  blk-mq: use quiesced elevator switch when reinitializing queues
+- !18726 v2  ext4: avoid crash when inline data creation follows DIO write
+- !18417  cifs: Fix warning and UAF when destroy the MR list
+- wifi: ath9k: use proper statements in conditionals
+- wifi: ath9k: hif_usb: clean up skbs if ath9k_hif_usb_rx_stream() fails
+- ath9k: htc: clean up statistics macros
+- ath9k: Fix out-of-bound memcpy in ath9k_hif_usb_rx_stream
+- ath9k: hif_usb: simplify if-if to if-else
+- !18725  ipvs: Defer ip_vs_ftp unregister during netns cleanup
+- drm/radeon: Fix PCI device refcount leak in radeon_atrm_get_bios()
+- !18698  i40e: add validation for ring_len param
+- !18697  wifi: brcmfmac: Fix potential shift-out-of-bounds in brcmf_fw_alloc_request()
+- !18693  wifi: brcmfmac: ensure CLM version is null-terminated to prevent stack-out-of-bounds
+- PCI/ASPM: Fix link state exit during switch upstream function removal
+- PCI/ASPM: Disable ASPM on MFD function removal to avoid use-after-free
+- wifi: ath9k: Fix potential stack-out-of-bounds write in ath9k_wmi_rsp_callback()
+- fbdev: Fix out-of-bounds issue in sys_fillrect()
+- ext4: avoid crash when inline data creation follows DIO write
+- ipvs: Defer ip_vs_ftp unregister during netns cleanup
+- ath9k: Fix potential out of bounds in ath9k_htc_txcompletion_cb()
+- wifi: ath9k: don't allow to overwrite ENDPOINT0 attributes
+- ath9k: Fix use-after-free Write in ath9k_htc_rx_msg
+- !18717  drm/mipi-dsi: Detach devices when removing the host
+- !18716  scsi: storvsc: Fix handling of virtual Fibre Channel timeouts
+- !18715  net: hns: fix possible memory leak in hnae_ae_register()
+- !18714  net: sched: cls_u32: Undo tcf_bind_filter if u32_replace_hw_knode
+- !18707 v2  xfrm: fix slab-use-after-free in decode_session6
+- !18712  can: peak_usb: fix shift-out-of-bounds issue
+- drm/mipi-dsi: Detach devices when removing the host
+- scsi: storvsc: Fix handling of virtual Fibre Channel timeouts
+- net: hns: fix possible memory leak in hnae_ae_register()
+- net: sched: cls_u32: Undo tcf_bind_filter if u32_replace_hw_knode
+- can: peak_usb: fix shift-out-of-bounds issue
+- xfrm: fix slab-use-after-free in decode_session6
+- i40e: add validation for ring_len param
+- wifi: brcmfmac: Fix potential shift-out-of-bounds in brcmf_fw_alloc_request()
+- wifi: brcmfmac: ensure CLM version is null-terminated to prevent stack-out-of-bounds
+- !18688  PCI/sysfs: Prohibit unaligned access to I/O port on non-x86
+- PCI/sysfs: Prohibit unaligned access to I/O port on non-x86
+- !18657  ALSA: usb-audio: Fix potential memory leaks
+- !18658  iommu/vt-d: Clean up si_domain in the init_dmars() error path
+- !18269  can: bcm: bcm_tx_setup(): fix KMSAN uninit-value in vfs_write
+- iommu/vt-d: Clean up si_domain in the init_dmars() error path
+- ALSA: usb-audio: Fix potential memory leaks
+- !18643  wifi: brcmfmac: fix potential memory leak in brcmf_netdev_start_xmit()
+- !18642  tipc: fix a null-ptr-deref in tipc_topsrv_accept
+- !18641  tipc: fix an information leak in tipc_topsrv_kern_subscr
+- !18623  *** SUBJECT HERE ***
+- wifi: brcmfmac: fix potential memory leak in brcmf_netdev_start_xmit()
+- tipc: fix a null-ptr-deref in tipc_topsrv_accept
+- tipc: fix an information leak in tipc_topsrv_kern_subscr
+- udf: Detect system inodes linked into directory hierarchy
+- udf: Preserve link count of system files
+- blk-mq: use quiesced elevator switch when reinitializing queues
+- cifs: Fix warning and UAF when destroy the MR list
+- can: bcm: bcm_tx_setup(): fix KMSAN uninit-value in vfs_write
 
 * Wed Oct 29 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2510.4.0.0349
 - !18619  notifiers: Add oops check in blocking_notifier_call_chain()
