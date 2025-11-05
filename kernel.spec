@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       114
+%global devel_release       115
 %global maintenance_release .0.0
-%global pkg_release         .92
+%global pkg_release         .93
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,225 @@ fi
 %endif
 
 %changelog
+* Wed Nov 05 2025 Li Nan <linan122@huawei.com> - 6.6.0-115.0.0.93
+- !18713 iommu: Enabling Broadcast TLB Maintenance (BTM) for UMMU on ARM64
+- iommu: Fix kabi breakage due to opening KVM_PINNED_VMID
+- vfio: Fix kabi breakage due to closing VFIO_CONTAINER
+- iommu: Pass in kvm pointer to domain_alloc_user
+- iommufd: Associate kvm pointer to iommufd ctx
+- KVM: arm64: Introduce support to pin VMIDs
+- KVM: Add generic infrastructure to support pinned VMIDs
+- !18695 PCI: Run quirk_huawei_pcie_sva() before arm_smmu_probe_device()
+- !18761 net: hns3: the multi-tcs VF can be configured only when the interface is down
+- !18735  KVM: arm64: Prevent access to vCPU events before init
+- !18598 arm64/watchdog_hld: Add a cpufreq notifier for update watchdog thresh
+- net: hns3: the multi-tcs VF can be configured only when the interface is down
+- net: hns3: remap vf's queue and qset when vport start
+- net: hns3: support dpdk using vf multiple tcs
+- net: hns3: add support for vf get dscp configuration from pf
+- net: hns3: add support for vf multiple tcs
+- !18597 iommu/ummu-core: Add ummu-core framework.
+- !18316  jbd2: prevent softlockup in jbd2_log_do_checkpoint()
+- KVM: arm64: Prevent access to vCPU events before init
+- !18421 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.84-6.6.85 LTS Patches
+- !18702  i40e: fix idx validation in i40e_validate_queue_map
+- !18699  *** CVE-2025-39973 ***
+- !18649  tty: n_gsm: Don't block input queue by waiting MSC
+- PCI: Run quirk_huawei_pcie_sva() before arm_smmu_probe_device()
+- iommu/ummu-core: core interfaces for ummu drivers
+- iommu/ummu-core: impl ioctl interface for /dev/ummu device
+- iommu/ummu-core: add pseudo Token Dev for Token ID abstraction
+- iommu/ummu-core: add UMMU Token ID operation interfaces
+- iommu/ummu-core: add UMMU EID operation interfaces
+- iommu/ummu-core: support IOVA on demand mapping
+- iommu/ummu-core: get iova_domain from iommu_domain
+- !18659  ptp: Add a upper bound on max_vclocks
+- !18680  futex: Prevent use-after-free during requeue-PI
+- !18683  qed: Don't collect too many protection override GRC elements
+- !18682  i40e: fix validation of VF state in get resources
+- !18681  i40e: fix input validation logic for action_meta
+- !18679  cnic: Fix use-after-free bugs in cnic_delete_task
+- !18668  openvswitch: Fix unsafe attribute parsing in output_userspace()
+- !18267  CVE-2025-39832
+- !18705  mm: fix compilation error due to MAX_PAGE_ORDER isn't declared
+- arm64/watchdog_hld: Add a cpufreq notifier for update watchdog thresh
+- watchdog/perf: Provide function for adjusting the event period
+- Revert "watchdog/perf: Provide function for adjusting the event period"
+- Revert "arm64/watchdog_hld: Add a cpufreq notifier for update watchdog thresh"
+- !18690 [OLK-6.6] Fix CVE-2025-38290
+- !18672 [OLK-6.6] Fix CVE-2025-38286
+- !17950 net: atm: add lec_mutex
+- iommu/ummu-core: introduce UMMU-CORE, basic configs
+- iommu/ummu-core: support iommu ksva mode
+- iommu/ummu-core: introduce iommu sva permission operation
+- iommu/ummu-core: introduce iommu_sva_bind_isolated interface
+- iommu/ummu-core: add the user invalidation type in iommufd file
+- iommu/ummu-core: iommu_dev new min_pasids attribute
+- mm: fix compilation error due to MAX_PAGE_ORDER isn't declared
+- i40e: fix idx validation in i40e_validate_queue_map
+- i40e: add validation for ring_len param
+- i40e: increase max descriptors for XL710
+- !18372 sched/fair: remove qos_reweight logic under non-SMP scenario
+- !18423 ext4: disambiguate the return value of ext4_dio_write_end_io()
+- !18328 [OLK-6.6] fix txgbe link fec issues and  enhance hot reset mechanism
+- wifi: ath12k: fix node corruption in ar->arvifs list
+- !18662 net: hibmcge: fix the inappropriate netif_device_detach()
+- !18605 net: ubl: add depend to ARM64 and remove config in x86
+- qed: Don't collect too many protection override GRC elements
+- i40e: fix validation of VF state in get resources
+- i40e: fix input validation logic for action_meta
+- futex: Prevent use-after-free during requeue-PI
+- cnic: Fix use-after-free bugs in cnic_delete_task
+- !18666  bpf-rvi: block: fix memleak issue in bpf_show_partitions_start()
+- !18270  Bluetooth: Fix use-after-free in l2cap_sock_cleanup_listen()
+- !18271  libceph: fix invalid accesses to ceph_connection_v1_info
+- !18272  CVE-2025-39889
+- !18273  ppp: fix memory leak in pad_compress_skb
+- !18268  RDMA: hfi1: fix possible divide-by-zero in find_hw_thread_mask()
+- openvswitch: Fix unsafe attribute parsing in output_userspace()
+- pinctrl: at91: Fix possible out-of-boundary access
+- !18646  tracing: Fix race condition in kprobe initialization causing NULL pointer dereference
+- !18630  tracing: dynevent: Add a missing lockdown check on dynevent
+- bpf-rvi: block: fix memleak issue in bpf_show_partitions_start()
+- iommu/ummu-core: New ub bus added to the iommu framework
+- !18525 ub: add UBUS and UBFI driver framework
+- !18486  ACPI: pfr_update: Fix the driver update version check
+- !18363  comedi: pcl726: Prevent invalid irq number
+- net: hibmcge: fix the inappropriate netif_device_detach()
+- net: hibmcge: remove unnecessary check for np_link_fail in scenarios without phy.
+- net: hibmcge: fix rx buf avl irq is not re-enabled in irq_handle issue
+- ptp: Add a upper bound on max_vclocks
+- tty: n_gsm: Don't block input queue by waiting MSC
+- tracing: Fix race condition in kprobe initialization causing NULL pointer dereference
+- tracing: dynevent: Add a missing lockdown check on dynevent
+- ub:ubus: Supports decoder event processing
+- ub:ubus: Support for sending decoder commands
+- ub:ubus: Support for range table mapping and unmapping functions
+- ub:ubus: Support for page-range table address mapping and unmapping
+- ub:ubus: Support for Bus EID-UPI Table Configuration
+- ub:ubus: Support for UB Character Device Driver
+- ub:ubus: Support UBUS RAS capability
+- ub:ubus: Creating and deleting ub decoder page table mappings
+- ub:ubus: Adding a ue Creation Destruction Mechanism
+- ub:ubus: Enable the ub decoder device support
+- ub:ubus: Add UBUS RAS framework
+- ub:ubus: Support configuration of device information interface
+- ub:ubus: Support for enabling and disabling ue
+- ub:ubus: Add MSI capability for UBUS driver
+- ub:ubus: Add UBUS MSI basic functions
+- ub:ubus: Support UBUS Interrupt framework
+- ub:ubus: Add UBUS capability interfaces
+- ub:ubus: Support device level and port level reset
+- ub:ubus: Support for multiple mue enablement
+- ub:ubus: Support UB device enabling basic interface
+- ub:ubus: Supports device enumeration.
+- ub:ubus: Support for UB Bus Controller Enumeration
+- ub:ubus: Support for shortest path routing configuration
+- ub:ubus: Supports network address configuration and querying
+- ub:ubus: Support enumeration topology query commands
+- ub:ubus: Add UBUS resource space basic functions
+- ub:ubus: Add UBUS resource space framework
+- ub:ubus: Support for UB bus enumeration message initialization
+- ub:ubus: Support for UB routing table configuration function
+- ub:ubus: Add CNA allocate and free interfaces by kernel
+- ub:ubus: Add EID allocate and free interfaces by kernel
+- ub:ubus: Support cc configuration and query
+- ub:ubus: Supporting the UB Shared Port Function
+- ub:ubus: Support for UB port sysfs attribute files
+- ub:ubus: Support Ubus read/write configuration functions
+- ub:ubus: Support for UB Bus Port Management Framework
+- ub:ubus: Add Ubus setting configuration space function
+- ub:ubus: Support for UB Bus DMA Configuration Function
+- ub:ubfi: ubfi driver create ubc device
+- ub:ubus: Support for ubus messaging communication framework
+- ub:ubus: add ubus controller framework
+- ub:ubfi: ubfi driver parse ubc information from ubrt
+- ub:ubus: Support UB Bus Attribute Group
+- ub:ubfi: Support ub firmware interface basic functions
+- ub:ubus: Support for ub bus driver framework
+- net: ubl: add depend to ARM64 and remove config in x86
+- net: ubl: modify the description in Kconfig of UB
+- ACPI: pfr_update: Fix the driver update version check
+- net: txgbe: fix invoke hot reset multi times unexpectedly
+- net: txgbe: fix race condition when recover or close/suspend
+- net: txgbe: fix fec mode issues
+- net: txgbe: set pf promisc and vlan cannot receive packets
+- net: txgbe: fix 25G link issues
+- net: txgbe: change default tx queue depth
+- net: txgbe: fix i2c issues
+- net: txgbe: fix can't read rx_pb_n_pxoff
+- ext4: disambiguate the return value of ext4_dio_write_end_io()
+- net: lwtunnel: disable BHs when required
+- netfilter: nft_counter: Use u64_stats_t for statistic.
+- wifi: iwlwifi: mvm: ensure offloading TID queue exists
+- wifi: iwlwifi: support BIOS override for 5G9 in CA also in LARI version 8
+- arm64: dts: rockchip: fix u2phy1_host status for NanoPi R4S
+- mptcp: Fix data stream corruption in the address announcement
+- drm/amd/display: Use HW lock mgr for PSR1 when only one eDP
+- drm/amd/display: should support dmub hw lock on Replay
+- drm/amdgpu: Fix JPEG video caps max size for navi1x and raven
+- drm/amdgpu: Fix MPEG2, MPEG4 and VC1 video caps max size
+- drm/sched: Fix fence reference count leak
+- batman-adv: Ignore own maximum aggregation size during RX
+- efi/libstub: Avoid physical address 0x0 when doing random allocation
+- ARM: shmobile: smp: Enforce shmobile_smp_* alignment
+- ARM: dts: imx6qdl-apalis: Fix poweroff on Apalis iMX6
+- mm: fix error handling in __filemap_get_folio() with FGP_NOWAIT
+- mmc: atmel-mci: Add missing clk_disable_unprepare()
+- mmc: sdhci-brcmstb: add cqhci suspend/resume to PM ops
+- arm64: dts: rockchip: fix pinmux of UART0 for PX30 Ringneck on Haikou
+- arm64: dts: freescale: imx8mm-verdin-dahlia: add Microphone Jack to sound card
+- arm64: dts: freescale: imx8mp-verdin-dahlia: add Microphone Jack to sound card
+- accel/qaic: Fix integer overflow in qaic_validate_req()
+- regulator: dummy: force synchronous probing
+- riscv: dts: starfive: Fix a typo in StarFive JH7110 pin function definitions
+- drm/v3d: Don't run jobs that have errors flagged in its fence
+- can: flexcan: disable transceiver during system PM
+- can: flexcan: only change CAN state when link up in system PM
+- can: ucan: fix out of bound read in strscpy() source
+- can: rcar_canfd: Fix page entries in the AFL list
+- i2c: omap: fix IRQ storms
+- net/neighbor: add missing policy for NDTPA_QUEUE_LENBYTES
+- net: lwtunnel: fix recursion loops
+- ipv6: Set errno after ip_fib_metrics_init() in ip6_route_info_create().
+- ARM: davinci: da850: fix selecting ARCH_DAVINCI_DA8XX
+- accel/qaic: Fix possible data corruption in BOs > 2G
+- Bluetooth: hci_event: Fix connection regression between LE and non-LE adapters
+- RDMA/bnxt_re: Avoid clearing VLAN_ID mask in modify qp path
+- ARM: dts: bcm2711: Don't mark timer regs unconfigured
+- ARM: OMAP1: select CONFIG_GENERIC_IRQ_CHIP
+- RDMA/bnxt_re: Add missing paranthesis in map_qp_id_to_tbl_indx
+- arm64: dts: rockchip: Remove undocumented sdmmc property from lubancat-1
+- ARM: dts: bcm2711: PL011 UARTs are actually r1p5
+- soc: imx8m: Unregister cpufreq and soc dev in cleanup path
+- soc: imx8m: Use devm_* to simplify probe failure handling
+- soc: imx8m: Remove global soc_uid
+- xfrm_output: Force software GSO only in tunnel mode
+- xfrm: fix tunnel mode TX datapath in packet offload mode
+- arm64: dts: freescale: tqma8mpql: Fix vqmmc-supply
+- firmware: imx-scu: fix OF node leak in .probe()
+- net: txgbe: fix bond port rate is unknown when linkup
+- net: txgbe: fix VF multicast address removal not taking effect
+- net: txgbe: fix missing PFC mask configuration on AML
+- net: txgbe: fix pktgen cannot stop
+- sched/fair: remove qos_reweight logic under non-SMP scenario
+- comedi: pcl726: Prevent invalid irq number
+- jbd2: prevent softlockup in jbd2_log_do_checkpoint()
+- ppp: fix memory leak in pad_compress_skb
+- Bluetooth: hci_event: Fix not using key encryption size when its known
+- Bluetooth: L2CAP: Fix not checking l2cap_chan security level
+- Bluetooth: l2cap: Check encryption key size on incoming connection
+- libceph: fix invalid accesses to ceph_connection_v1_info
+- Bluetooth: Fix use-after-free in l2cap_sock_cleanup_listen()
+- RDMA: hfi1: fix possible divide-by-zero in find_hw_thread_mask()
+- net/mlx5: Fix lockdep assertion on sync reset unload event
+- net/mlx5: Add support for sync reset using hot reset
+- net/mlx5: Add device cap for supporting hot reset in sync reset flow
+- net/mlx5: Reload auxiliary drivers on fw_activate
+- net: txgbe: fix DAC cable link down
+- net: txgbe: fix display of supports Wake-on in the ethtool
+- net: atm: add lec_mutex
+
 * Fri Oct 31 2025 Li Nan <linan122@huawei.com> - 6.6.0-114.0.0.92
 - !18640 v3  Errata management for VM Live migration
 - !18638  CVE-2025-39982
