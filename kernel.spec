@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       115
 %global maintenance_release .0.0
-%global pkg_release         .107
+%global pkg_release         .108
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,9 @@ fi
 %endif
 
 %changelog
+* Wed Nov 05 2025 Li Nan <linan122@huawei.com> - 6.6.0-115.0.0.108
+- Fix conflict of 0012 KABI Patch
+
 * Wed Nov 05 2025 Li Nan <linan122@huawei.com> - 6.6.0-115.0.0.107
 - !18713 iommu: Enabling Broadcast TLB Maintenance (BTM) for UMMU on ARM64
 - iommu: Fix kabi breakage due to opening KVM_PINNED_VMID
