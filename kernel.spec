@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       115
+%global devel_release       116
 %global maintenance_release .0.0
-%global pkg_release         .94
+%global pkg_release         .95
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,93 @@ fi
 %endif
 
 %changelog
+* Fri Nov 07 2025 Li Nan <linan122@huawei.com> - 6.6.0-116.0.0.95
+- !18848 net:nebula-matrix:fix compile err
+- net:nebula-matrix:fix compile err
+- !18810 ub: ubase: support for advanced functions
+- !18758  nbd: restrict sockets to TCP and UDP
+- !18407 net:Add a new protocol family definition AF_UB to support UB Memory based Socket(UMS)
+- !18839  rseq: Protect event mask against membarrier IPI
+- ub: ubase: support for activate/deactivate dev interface
+- ub: ubase: pf supports debugfs query port/vl current.
+- ub: ubase: adds the function to get ub port stats for unic and other aux driver
+- ub: ubase: support pre-alloc 2M pages.
+- ub: ubase: support ras function
+- ub: ubase: Support to port reset
+- ub: ubase: Added QoS and traffic management debugging features
+- ub: ubase: Support reset count information statistics.
+- ub: ubase: Support for ELR and entity reset.
+- ub: ubase: Provide an entity_list query interface.
+- ub: ubase: support create and delete UM TP/TPG
+- ub: ubase: Support to config and query the sl scheduling mode and weight in ETS and TM modes.
+- ub: ubase: support querying sl information in initialization phase
+- ub: ubase: Supports for ctrl queue management.
+- rseq: Protect event mask against membarrier IPI
+- !18820 [OLK-6.6] backport important bugfix for lpfc driver from upstream linux-6.6.y
+- !18817 [OLK-6.6] backport important bugfix for mpt3sas driver from upstream linux-6.6.y
+- scsi: lpfc: Fix buffer free/clear order in deferred receive path
+- !18800 net: hibmcge: support pagepool for rx
+- scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
+- !18745  *** Mainline PATCH backport ***
+- !18807  smb: client: fix wrong index reference in smb2_compound_op()
+- !18711  Bluetooth: hci_conn: Use disable_delayed_work_sync
+- !17268  LoongArch: fix nvme/megaraid/stmmac/uprobe/rtc/kdump problems
+- !18500 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.82-6.6.83 LTS Conflicts Patches
+- ub: ubase: adds the function that query oor caps
+- ub: ubase: Support for virtual register and unregister.
+- ub: ubase: Add trace events to aeqe and ceqe.
+- ub: ubase: Add the cmdq trace event print at the ubase layer.
+- ub: ubase: Support for timer/ext_dtb buffer management.
+- !18784  padata: Reset next CPU when reorder sequence wraps around
+- !18806 perf: fix ddrc redundant value set
+- !18802  KVM: x86: Don't (re)check L1 intercepts when completing userspace I/O
+- !18739  fs: udf: fix OOB read in lengthAllocDescs handling
+- !18710 ub: ubase: Add support of base driver for ub network
+- smb: client: fix wrong index reference in smb2_compound_op()
+- ub: ubase: Support for public Context memory allocation and release.
+- ub: ubase: support for cdma auxiliary device
+- ub: ubase: support for complete event process
+- ub: ubase: support for async event process
+- ub: ubase: add interrupt management framework and misc handler
+- ub: ubase: add function to query device resource
+- ub: ubase: add the function that query ueid
+- ub: ubase: support debugfs public interface.
+- ub: ubase: support for command process
+- ub: ubase: add support of ubase driver for ub network
+- perf: fix ddrc redundant value set
+- KVM: x86: Don't (re)check L1 intercepts when completing userspace I/O
+- net: hibmcge: support pagepool for rx
+- net: hibmcge: reduce packet drop under stress testing
+- padata: Reset next CPU when reorder sequence wraps around
+- nbd: restrict sockets to TCP and UDP
+- x86/umip: Fix decoding of register forms of 0F 01 (SGDT and SIDT aliases)
+- x86/umip: Check that the instruction opcode is at least two bytes
+- PM: sleep: core: Clear power.must_resume in noirq suspend error path
+- ACPI: TAD: Add missing sysfs_remove_group() for ACPI_TAD_RT
+- ACPI: processor: idle: Fix memory leak when register cpuidle device failed
+- fs: udf: fix OOB read in lengthAllocDescs handling
+- net: Add a new protocol family AF_UB
+- Bluetooth: hci_conn: Use disable_delayed_work_sync
+- selftests: net: test for lwtunnel dst ref loops
+- arm64: dts: rockchip: fix pinmux of UART5 for PX30 Ringneck on Haikou
+- arm64: dts: rockchip: Move uart5 pin configuration to px30 ringneck SoM
+- net: ipv6: fix dst ref loop in ila lwtunnel
+- net: ipv6: fix missing dst ref drop in ila lwtunnel
+- arm64: dts: rockchip: add rs485 support on uart5 of px30-ringneck-haikou
+- arm64: hugetlb: Fix huge_ptep_get_and_clear() for non-present ptes
+- NFS: fix nfs_release_folio() to not deadlock via kcompactd writeback
+- net: stmmac: dwmac-loongson: Set correct {tx,rx}_fifo_size
+- LoongArch: Support mem=<size> kernel parameter
+- LoongArch: Reserve the EFI memory map region
+- LoongArch: Add debugfs entries to switch SFB/TSO state
+- LoongArch: uprobes: Remove redundant code about resume_era
+- LoongArch: uprobes: Remove user_{en,dis}able_single_step()
+- LoongArch: fix access mode of 7A2000 acpi gpio.
+- LoongArch: configs: enable zstd compressed firmware support
+- Loongarch: configs: Make EFI RTC built-in for correct vmcore timestamps
+- megaraid: Add udelay to avoid data error caused by dma sequence
+- nvme: Add udelay to avoid data error caused by dma sequence
+
 * Wed Nov 05 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-115.0.0.94
 - RISC-V kernel upgrade to 6.6.0-115.0.0
 - Remove CI-related file changes
