@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       288
+%global devel_release       289
 %global maintenance_release .0.0
-%global pkg_release         .190
+%global pkg_release         .191
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,77 @@ fi
 %endif
 
 %changelog
+* Tue Nov 11 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-289.0.0.191
+- !18365 [OLK-5.10]Support request attestation report from CSV guest
+- !14859 net :stmmac add support for Phytium GMAC controller
+- !18665 [OLK-5.10] Fix repeated VM vcpu hotplug causing Qemu to abort
+- !9490 [OLK-5.10]RNPVF: NET: Fix os crash while enable sriov for rnp
+- !17396  Squashfs: check return result of sb_min_blocksize
+- !18430 [Intel-SIG] CWF PMU legacy support including core/uncore/event and their fixes
+- !18808  net/oenetcls: Add mode 2 for rps numa affinity
+- !18864  net/oenetcls: work around l0 cache
+- net/oenetcls: work around l0 cache
+- net: stmmac: Add Phytium GMAC glue layer
+- !18746  mainline patch backport
+- net/oenetcls: Add mode 2 for rps numa affinity
+- KVM: SVM: Enable SEV/SEV-ES functionality by default (when supported)
+- driver/virt/coco: Add HYGON CSV Guest dirver.
+- KVM: x86: Support VM_ATTESTATION hypercall
+- KVM: SVM: Append "_enabled" to module-scoped SEV/SEV-ES control variables
+- KVM: SVM: Move SEV module params/variables to sev.c
+- x86/sev: Drop redundant and potentially misleading 'sev_enabled'
+- x86/umip: Fix decoding of register forms of 0F 01 (SGDT and SIDT aliases)
+- x86/umip: Check that the instruction opcode is at least two bytes
+- PM: sleep: core: Clear power.must_resume in noirq suspend error path
+- ACPI: TAD: Add missing sysfs_remove_group() for ACPI_TAD_RT
+- ACPI: processor: idle: Fix memory leak when register cpuidle device failed
+- KVM: x86: Explicitly do runtime CPUID updates "after" initial setup
+- KVM: x86: Use actual kvm_cpuid.base for clearing KVM_FEATURE_PV_UNHALT
+- KVM: x86: Introduce __kvm_get_hypervisor_cpuid() helper
+- KVM: x86: Don't adjust guest's CPUID.0x12.1 (allowed SGX enclave XFRM)
+- KVM: VMX: Don't rely _only_ on CPUID to enforce XCR0 restrictions for ECREATE
+- KVM: x86/cpuid: generalize kvm_update_kvm_cpuid_base() and also capture limit
+- KVM: x86: Add dedicated helper to get CPUID entry with significant index
+- KVM: x86: Move lookup of indexed CPUID leafs to helper
+- KVM: x86: Check .flags in kvm_cpuid_check_equal() too
+- KVM: x86: Free kvm_cpuid_entry2 array on post-KVM_RUN KVM_SET_CPUID{,2}
+- KVM: x86: Move CPUID.(EAX=0x12,ECX=1) mangling to __kvm_update_cpuid_runtime()
+- KVM: x86: Partially allow KVM_SET_CPUID{,2} after KVM_RUN
+- KVM: x86: Do runtime CPUID update before updating vcpu->arch.cpuid_entries
+- cpuid: kvm_find_kvm_cpuid_features() should be declared 'static'
+- KVM: x86: Make sure KVM_CPUID_FEATURES really are KVM_CPUID_FEATURES
+- KVM: x86: Add helper to consolidate core logic of SET_CPUID{2} flows
+- KVM: x86: Swap order of CPUID entry "index" vs. "significant flag" checks
+- KVM: x86: Allow guest to set EFER.NX=1 on non-PAE 32-bit kernels
+- KVM: x86: add guest_cpuid_is_intel
+- perf/x86/intel: Add PMU support for Clearwater Forest
+- x86/cpu: Update Intel Family comments
+- perf/x86/intel: Fix event constraints for LNC
+- perf/x86/intel: Fix bitmask of OCR and FRONTEND events for LNC
+- perf/x86/intel/ds: Add PEBS format 6
+- perf mem: Fix printing PERF_MEM_LVLNUM_{L2_MHB|MSC}
+- tools/include: Sync uapi/linux/perf.h with the kernel sources
+- perf/x86/intel: Support new data source for Lunar Lake
+- perf/x86/intel: Rename model-specific pebs_latency_data functions
+- perf/x86: Add Lunar Lake and Arrow Lake support
+- perf/x86/intel: Correct incorrect 'or' operation for PMU capabilities
+- perf/x86/intel: Fix broken fixed event constraints extension
+- perf/x86/intel: Add common intel_pmu_init_hybrid()
+- perf/x86/intel: Clean up the hybrid CPU type handling code
+- perf/x86/intel: Apply the common initialization code for ADL
+- perf/x86/intel: Factor out the initialization code for ADL e-core
+- perf/x86/intel: Factor out the initialization code for SPR
+- perf/x86/intel: Use the common uarch name for the shared functions
+- perf/x86/intel/uncore: Support customized MMIO map size
+- perf/x86/intel/uncore: Support MSR portal for discovery tables
+- perf/x86/intel/uncore: Add Clearwater Forest support
+- perf vendor events: Add Clearwaterforest events
+- perf/x86/intel/uncore: Support more units on Granite Rapids
+- perf/x86/intel/uncore: Clean up func_id
+- Squashfs: check return result of sb_min_blocksize
+- dt-bindings: net: Add bindings for Phytium GMAC
+- RNPVF: NET: Fix core-dump while enable sriov for rnp
+
 * Wed Nov 05 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-288.0.0.190
 - !18738  fs: udf: fix OOB read in lengthAllocDescs handling
 - !2934 e1000e: Add support for the next LOM generation
