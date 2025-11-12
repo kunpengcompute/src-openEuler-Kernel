@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2511.1.0
+%global hulkrelease 2511.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0350
+Release: %{hulkrelease}.0351
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,14 @@ fi
 %endif
 
 %changelog
+
+* Wed Nov 12 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.2.0.0351
+- !18884  Revert "fbdev: Fix out-of-bounds issue in sys_fillrect()"
+- Revert "fbdev: Fix out-of-bounds issue in sys_fillrect()"
+- !18811  net: usbnet: Fix WARNING in usbnet_start_xmit/usb_submit_urb
+- net: usbnet: Fix WARNING in usbnet_start_xmit/usb_submit_urb
+- !18736  fs: udf: fix OOB read in lengthAllocDescs handling
+- fs: udf: fix OOB read in lengthAllocDescs handling
 
 * Wed Nov 05 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.1.0.0350
 - !18795  *** fix CVE-2023-53454 ***
