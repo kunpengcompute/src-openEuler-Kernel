@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       115
+%global devel_release       117
 %global maintenance_release .0.0
-%global pkg_release         .121
+%global pkg_release         .122
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,268 @@ fi
 %endif
 
 %changelog
+* Wed Nov 12 2025 Li Nan <linan122@huawei.com> - 6.6.0-117.0.0.122
+- !17926 spufs: fix a leak on spufs_new_file() failure
+- !18393 platform/x86: dell-wmi-sysman: Avoid buffer overflow in current_password_store()
+- !18389 regulator: max20086: Fix refcount leak in max20086_parse_regulators_dt()
+- !18381 f2fs: zone: fix to avoid inconsistence in between SIT and SSA
+- !18370 dmaengine: ti: Add NULL check in udma_probe()
+- !18674 jfs: fix array-index-out-of-bounds read in add_missing_indices
+- !18438 jfs: Fix null-ptr-deref in jfs_ioc_trim
+- !18435 ksmbd: fix null pointer dereference in destroy_previous_session
+- !18434 tty: serial: uartlite: register uart driver in init
+- !18404 mm/damon/sysfs-schemes: free old damon_sysfs_scheme_filter-&gt;memcg_path on write
+- !18799 [OLK-6.6] Fix CVE-2025-38336
+- !18798 [OLK-6.6] Fix CVE-2025-38335
+- !18793 [OLK-6.6] Fix CVE-2025-38275
+- !18789 [OLK-6.6] Fix CVE-2025-38274
+- !18786 [OLK-6.6] Fix CVE-2025-38300
+- !18781 [OLK-6.6] Fix CVE-2025-38295
+- !18778 [OLK-6.6] Fix CVE-2025-38293
+- !18777 [OLK-6.6] Fix CVE-2025-38292
+- !18849 urma: introduce ubcore main module.
+- !18842 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.85-6.6.86 LTS Patches
+- !18484 btf: Avoid weak external references
+- !18921  blk-ioinf: introduce inflight-based IO QoS controller
+- blk-rq-qos: fix kabi broken in struct rq_qos
+- blk-mq: fix kabi broken in struct request
+- openeuler_defconfig: Enable CONFIG_BLK_CGROUP_IOINFLIGHT
+- blk-io-hierarchy: support new bio based stage ioinf
+- blk-ioinf: support percentile latency QoS for oneline workloads
+- blk-ioinf: dynamically adjust inflight limit to balance workloads
+- blk-ioinf: add rqos/inflight/stat debufs interface
+- blk-ioinf: introduce inflight-based IO QoS controller
+- !18863 drivers/perf: hisi: Add support for HiSilicon MN PMU driver
+- !18885 ub: ubase: Fix some compile warnings&fix pages free problem
+- !18910  um: virtio_uml: Fix use-after-free after put_device in probe
+- !18902  i2c: cros-ec-tunnel: defer probe if parent EC is not present
+- urma: introduce ubcore main module.
+- um: virtio_uml: Fix use-after-free after put_device in probe
+- ub: ubase: Fix some compile warnings
+- !18894  some bugfixes for NUMA.remote
+- i2c: cros-ec-tunnel: defer probe if parent EC is not present
+- !18723 GMEM: General Memory Management
+- !18852 vfio:ubus: Support Virtual Function I/O  of UBUS
+- !18788 ub: Support new features for UBUS
+- !18701 ubios_uvb: support uvb driver
+- mm/numa_remote: check if memory block is preonlined when undoing fake-online
+- mm/numa_remote: fix restoring to preonline when failing to offline from preonline
+- mm/numa_remote: fix memory leak of struct memory_block
+- !18840 v2  Backport some memory policy feature and bugfix from mainline
+- ub: ubase: Fix the problem that free pages when ubase driver destroy TA context
+- ubios_uvb: support CIS framework receive function
+- ubios_uvb: support CIS framework send function
+- ubios_uvb: support parse ubios information by dtb
+- ubios_uvb: support UBIOS object description specification parse
+- vfio:ubus: support obtaining and configuring function entity information in user mode
+- vfio:ubus: Support configuration for function entity interrupt
+- vfio:ubus: Support access to function entity resource space
+- vfio:ubus: Init vfio ub config space 1 perm and port perm bits during module init
+- vfio:ubus: Init vfio ub config space 0 perm bits during module init
+- vfio:ubus: Init vfio ub configuration space
+- vfio:ubus: Support ub vfio config read and write
+- vfio:ubus: Support for vfio ubus driver framework
+- ub:ubus: Support UBUS driver host probe and remove
+- ub:ubus: Add configuration and resource sysfs interfaces
+- ub:ubus: Add basic System Filesystem attributes
+- ub:ubus: Support processing protocol link messages
+- ub:ubus: Support hotplug processing main workflow
+- ub:ubus: Support for device enumeration during the hotplug phase
+- ub:ubus: Support for slot register configuration
+- ub:ubus: Support hotplug service driver
+- ub:ubus: Add generic ub component driver
+- ub:ubus: Add ub service driver framework
+- ub:ubus: Add new UBUS pool device interfaces
+- ub:ubus: Support UBUS pool devices register
+- ub:ubfi: register ubc usi domain
+- ub:ubus: Support for ub device resource space registration
+- ub:ubus: Add UBUS receive message framework
+- ub:ubus: Support device binding and unbinding bus instance
+- ub:ubus: Support for static cluster bus instance
+- ub:ubus: Support for dynamic bus instance
+- ub:ubus: Support for bus instance framework
+- ub:ubus: Support handle device link up and link down
+- ub:ubus: Support enumerate port and route set/clear for port
+- ub:ubus: Support route modify/delete function
+- !18750 iommu/ummu: Add ummu driver basic capabilities.
+- iommu/ummu: Add UMMU cache flush interfaces
+- iommu/ummu: Support UMMU event handling
+- iommu/ummu: Support UMMU global error handling
+- iommu/ummu: Support UMMU command queue
+- iommu/ummu: Support UMMU device
+- !18748 ub: ubfi: Support ummu node in ubfi
+- !18804 drivers/perf: hisi: Support UMMU pmu
+- !18855  mm: do not install PMD mappings when handling a COW fault
+- !18848 net:nebula-matrix:fix compile err
+- drivers/perf: hisi: Add support for HiSilicon MN PMU driver
+- drivers/perf: hisi: Add support for HiSilicon NoC PMU
+- Revert "drivers/perf: hisi: Add support for HiSilicon NoC PMU"
+- Revert "drivers/perf: hisi: Add support for HiSilicon MN PMU driver"
+- ub: ubfi: Parsing ummu node in the ubrt table
+- net:nebula-matrix:fix compile err
+- mm: do not install PMD mappings when handling a COW fault
+- urma: implement workqueue management for ubcore module.
+- urma: implement topology information management for ubcore module.
+- urma: implement hash table utilities for ubcore module.
+- !18810 ub: ubase: support for advanced functions
+- urma: implement log module for ubcore subsystem.
+- gmem: open CONFIG_GMEM for arm64 and x86
+- mm: implement hmemcpy API
+- mm: implement hmadvise API
+- mm: support mmap/unmap peer-shared memory area
+- gmem: add gmem stat
+- gmem: support pin/unpin device memory
+- gmem: support swapping heterogeneous memory
+- gmem: implement page faulting for peer-shared vma
+- gmem: implement allocating/deallocating peer-shared vma.
+- gmem: introduce hnode for free peer-shared free page management
+- gmem: introduce vm_object for managing hetergoneous memory mapping
+- gmem: prepare config, boot parameter, vma flag and basic GMEM related structs
+- !18758  nbd: restrict sockets to TCP and UDP
+- !18407 net:Add a new protocol family definition AF_UB to support UB Memory based Socket(UMS)
+- !18839  rseq: Protect event mask against membarrier IPI
+- wifi: ath12k: fix invalid access to memory
+- serial: 8250_dma: terminate correct DMA in tx_dma_flush()
+- memstick: rtsx_usb_ms: Fix slab-use-after-free in rtsx_usb_ms_drv_remove
+- net: usb: usbnet: restore usb%d name exception for local mac addresses
+- net: usb: qmi_wwan: add Telit Cinterion FE990B composition
+- net: usb: qmi_wwan: add Telit Cinterion FN990B composition
+- tty: serial: fsl_lpuart: disable transmitter before changing RS485 related registers
+- tty: serial: 8250: Add Brainboxes XC devices
+- tty: serial: 8250: Add some more device IDs
+- counter: microchip-tcb-capture: Fix undefined counter channel state on probe
+- counter: stm32-lptimer-cnt: fix error handling when enabling
+- ALSA: hda/realtek: Support mute LED on HP Laptop 15s-du3xxx
+- mm/page_alloc: fix memory accept before watermarks gets initialized
+- drm/amd/display: Don't write DP_MSTM_CTRL after LT
+- drm/dp_mst: Add a helper to queue a topology probe
+- drm/dp_mst: Factor out function to queue a topology probe work
+- ARM: Remove address checking for MMUless devices
+- ARM: 9351/1: fault: Add "cut here" line for prefetch aborts
+- ARM: 9350/1: fault: Implement copy_from_kernel_nofault_allowed()
+- HID: hid-plantronics: Add mic mute mapping and generalize quirks
+- ALSA: usb-audio: Add quirk for Plantronics headsets to fix control names
+- mm/mempolicy: count MPOL_WEIGHTED_INTERLEAVE to "interleave_hit"
+- mm/mempolicy: fix memory leaks in weighted interleave sysfs
+- mempolicy: clean up minor dead code in queue_pages_test_walk()
+- mm/mempolicy: protect task interleave functions with tsk->mems_allowed_seq
+- mm/mempolicy: introduce MPOL_WEIGHTED_INTERLEAVE for weighted interleaving
+- mm/mempolicy: refactor a read-once mechanism into a function for re-use
+- mm/mempolicy: implement the sysfs-based weighted_interleave interface
+- mempolicy: migration attempt to match interleave nodes
+- mempolicy: mmap_lock is not needed while migrating folios
+- mempolicy: alloc_pages_mpol() for NUMA policy without vma
+- kernfs: drop shared NUMA mempolicy hooks
+- mempolicy: remove confusing MPOL_MF_LAZY dead code
+- mempolicy: mpol_shared_policy_init() without pseudo-vma
+- mempolicy trivia: use pgoff_t in shared mempolicy tree
+- mempolicy trivia: slightly more consistent naming
+- mempolicy trivia: delete those ancient pr_debug()s
+- mempolicy: fix migrate_pages(2) syscall return nr_failed
+- Revert "mm/mempolicy.c: fix the out-of-bounds access issue in mpol_parse_str"
+- ub: ubase: support for activate/deactivate dev interface
+- ub: ubase: pf supports debugfs query port/vl current.
+- ub: ubase: adds the function to get ub port stats for unic and other aux driver
+- ub: ubase: support pre-alloc 2M pages.
+- ub: ubase: support ras function
+- ub: ubase: Support to port reset
+- ub: ubase: Added QoS and traffic management debugging features
+- ub: ubase: Support reset count information statistics.
+- ub: ubase: Support for ELR and entity reset.
+- ub: ubase: Provide an entity_list query interface.
+- ub: ubase: support create and delete UM TP/TPG
+- ub: ubase: Support to config and query the sl scheduling mode and weight in ETS and TM modes.
+- ub: ubase: support querying sl information in initialization phase
+- ub: ubase: Supports for ctrl queue management.
+- rseq: Protect event mask against membarrier IPI
+- !18820 [OLK-6.6] backport important bugfix for lpfc driver from upstream linux-6.6.y
+- !18817 [OLK-6.6] backport important bugfix for mpt3sas driver from upstream linux-6.6.y
+- scsi: lpfc: Fix buffer free/clear order in deferred receive path
+- !18800 net: hibmcge: support pagepool for rx
+- scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
+- !18745  *** Mainline PATCH backport ***
+- !18807  smb: client: fix wrong index reference in smb2_compound_op()
+- !18711  Bluetooth: hci_conn: Use disable_delayed_work_sync
+- !17268  LoongArch: fix nvme/megaraid/stmmac/uprobe/rtc/kdump problems
+- !18500 [openEuler-24.03-LTS][linux-6.6.y sync] Backport 6.6.82-6.6.83 LTS Conflicts Patches
+- ub: ubase: adds the function that query oor caps
+- ub: ubase: Support for virtual register and unregister.
+- ub: ubase: Add trace events to aeqe and ceqe.
+- ub: ubase: Add the cmdq trace event print at the ubase layer.
+- ub: ubase: Support for timer/ext_dtb buffer management.
+- !18784  padata: Reset next CPU when reorder sequence wraps around
+- !18806 perf: fix ddrc redundant value set
+- !18802  KVM: x86: Don't (re)check L1 intercepts when completing userspace I/O
+- !18739  fs: udf: fix OOB read in lengthAllocDescs handling
+- !18710 ub: ubase: Add support of base driver for ub network
+- smb: client: fix wrong index reference in smb2_compound_op()
+- ub: ubase: Support for public Context memory allocation and release.
+- ub: ubase: support for cdma auxiliary device
+- ub: ubase: support for complete event process
+- ub: ubase: support for async event process
+- ub: ubase: add interrupt management framework and misc handler
+- ub: ubase: add function to query device resource
+- ub: ubase: add the function that query ueid
+- ub: ubase: support debugfs public interface.
+- ub: ubase: support for command process
+- ub: ubase: add support of ubase driver for ub network
+- perf: fix ddrc redundant value set
+- drivers/perf: hisi: Add the sysfs interface to configure pmu mpam
+- drivers/perf: hisi: Implement ummu-pmu driver.
+- KVM: x86: Don't (re)check L1 intercepts when completing userspace I/O
+- net: hibmcge: support pagepool for rx
+- net: hibmcge: reduce packet drop under stress testing
+- ata: pata_via: Force PIO for ATAPI devices on VT6415/VT6330
+- Input: gpio-keys - fix a sleep while atomic with PREEMPT_RT
+- phy: qcom-qmp-usb: Fix an NULL vs IS_ERR() bug
+- fpga: fix potential null pointer deref in fpga_mgr_test_img_load_sgt()
+- padata: Reset next CPU when reorder sequence wraps around
+- crypto: sun8i-ce-cipher - fix error handling in sun8i_ce_cipher_prepare()
+- perf/amlogic: Replace smp_processor_id() with raw_smp_processor_id() in meson_ddr_pmu_create()
+- wifi: ath11k: fix node corruption in ar->arvifs list
+- nbd: restrict sockets to TCP and UDP
+- x86/umip: Fix decoding of register forms of 0F 01 (SGDT and SIDT aliases)
+- x86/umip: Check that the instruction opcode is at least two bytes
+- PM: sleep: core: Clear power.must_resume in noirq suspend error path
+- ACPI: TAD: Add missing sysfs_remove_group() for ACPI_TAD_RT
+- ACPI: processor: idle: Fix memory leak when register cpuidle device failed
+- fs: udf: fix OOB read in lengthAllocDescs handling
+- net: Add a new protocol family AF_UB
+- Bluetooth: hci_conn: Use disable_delayed_work_sync
+- jfs: fix array-index-out-of-bounds read in add_missing_indices
+- platform/x86: dell-wmi-sysman: Avoid buffer overflow in current_password_store()
+- regulator: max20086: Fix refcount leak in max20086_parse_regulators_dt()
+- regulator: max20086: fix invalid memory access
+- dmaengine: ti: Add NULL check in udma_probe()
+- selftests: net: test for lwtunnel dst ref loops
+- arm64: dts: rockchip: fix pinmux of UART5 for PX30 Ringneck on Haikou
+- arm64: dts: rockchip: Move uart5 pin configuration to px30 ringneck SoM
+- net: ipv6: fix dst ref loop in ila lwtunnel
+- net: ipv6: fix missing dst ref drop in ila lwtunnel
+- arm64: dts: rockchip: add rs485 support on uart5 of px30-ringneck-haikou
+- arm64: hugetlb: Fix huge_ptep_get_and_clear() for non-present ptes
+- NFS: fix nfs_release_folio() to not deadlock via kcompactd writeback
+- btf: Avoid weak external references
+- vmlinux: Avoid weak reference to notes section
+- kallsyms: Avoid weak references for kallsyms symbols
+- jfs: Fix null-ptr-deref in jfs_ioc_trim
+- ksmbd: fix null pointer dereference in destroy_previous_session
+- tty: serial: uartlite: register uart driver in init
+- mm/damon/sysfs-schemes: free old damon_sysfs_scheme_filter->memcg_path on write
+- f2fs: zone: fix to avoid inconsistence in between SIT and SSA
+- spufs: fix a leak on spufs_new_file() failure
+- net: stmmac: dwmac-loongson: Set correct {tx,rx}_fifo_size
+- LoongArch: Support mem=<size> kernel parameter
+- LoongArch: Reserve the EFI memory map region
+- LoongArch: Add debugfs entries to switch SFB/TSO state
+- LoongArch: uprobes: Remove redundant code about resume_era
+- LoongArch: uprobes: Remove user_{en,dis}able_single_step()
+- LoongArch: fix access mode of 7A2000 acpi gpio.
+- LoongArch: configs: enable zstd compressed firmware support
+- Loongarch: configs: Make EFI RTC built-in for correct vmcore timestamps
+- megaraid: Add udelay to avoid data error caused by dma sequence
+- nvme: Add udelay to avoid data error caused by dma sequence
+
 * Wed Nov 05 2025 Li Nan <linan122@huawei.com> - 6.6.0-115.0.0.121
 - !18713 iommu: Enabling Broadcast TLB Maintenance (BTM) for UMMU on ARM64
 - iommu: Fix kabi breakage due to opening KVM_PINNED_VMID
