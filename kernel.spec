@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       289
+%global devel_release       290
 %global maintenance_release .0.0
-%global pkg_release         .192
+%global pkg_release         .193
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,73 @@ fi
 %endif
 
 %changelog
+* Tue Nov 18 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-290.0.0.193
+- !19001 [OLK-5.10] Support Trusted computing(TC) feature for hygon CPU
+- !19011 [OLK-5.10] : Backport the upstream SEV-ES 32-bit boot path support and other updates
+- !19017 [OLK-5.10] Fix CVE-2025-39757
+- !18860 KVM: arm64: Deactivate the spurious vtimer interrupt
+- KVM: arm64: Deactivate the spurious vtimer interrupt
+- x86/efi: Restore Firmware IDT before calling ExitBootServices()
+- x86/sev-es: Replace open-coded hlt-loops with sev_es_terminate()
+- x86/boot/compressed/64: Add CPUID sanity check to 32-bit boot-path
+- x86/boot/compressed/64: Add 32-bit boot #VC handler
+- x86/boot/compressed/64: Setup IDT in startup_32 boot path
+- x86/boot/compressed/64: Reload CS in startup_32
+- x86/boot/compressed/64: Cleanup exception handling before booting kernel
+- x86/sev-es: Split vc_decode_insn()
+- x86/sev-es: Remove subtraction of res variable
+- !18989  zcopy: A zero-copy data transfer mechanism
+- ALSA: usb-audio: Validate UAC3 cluster segment descriptors
+- !18951  Backport kunpeng920G to OLK-5.10
+- crypto: ccp: Add config to openeuler_defconfig
+- crypto: ccp: add new pci device id for HYGON C86-4G
+- crypto: ccp: Remove the dependency of the psp_do_cmd() interface on SEV devices
+- crypto: ccp - Don't initialize SEV support without the SEV feature
+- linux: tcm: add Hygon TCM2 driver
+- linux: tpm: add Hygon TPM2 driver
+- crypto: tdm: Support dynamic protection for SCT and IDT by HYGON TDM
+- crypto: tdm: Add Hygon TDM driver
+- crypto: ccp: Add another mailbox interrupt support for PSP sending command to X86
+- crypto: ccp: Add a new interface for X86 sending command to PSP
+- !18873  mm: introduce memalloc_flags_{save,restore}
+- zcopy: enable ZCOPY module
+- zcopy: Add ZCOPY documentation
+- zcopy: Add debug inerface dump_pagetable
+- zcopy: Add tracepoint for PageAttach
+- zcopy: Extend PMD trans hugepage mapping ability
+- zcopy: Introduce the pageattach interface
+- zcopy: Initialize zcopy module
+- iommu/iova: Put free_iova_mem() outside of spinlock iova_rbtree_lock
+- iommu: avoid taking iova_rbtree_lock twice
+- dma-mapping: benchmark: Add support for multi-pages map/unmap
+- iommu/arm-smmu-v3: Add a check to avoid invalid iotlb sync
+- !18890  ntb_hw_switchtec: Fix shift-out-of-bounds in switchtec_ntb_mw_set_trans
+- !18883  slimbus: messaging: Free transaction ID in delayed interrupt scenario
+- !18392 Add EDAC basic support and RRL enhancement for CWF/SRF/GNR/GNR-D for 5.10
+- !18878  wakeup kswapd during node_reclaim
+- ntb_hw_switchtec: Fix shift-out-of-bounds in switchtec_ntb_mw_set_trans
+- slimbus: messaging: Free transaction ID in delayed interrupt scenario
+- mm: node_reclaim: add wakeup kswapd mode
+- mm: vmscan: wakeup kswapd during node_reclaim
+- arm64/numa: Make node reclaim distance adjustment always available
+- mm: introduce memalloc_flags_{save,restore}
+- EDAC/{skx_common,i10nm}: Use scnprintf() for safer buffer handling
+- EDAC/i10nm: Add Intel Granite Rapids-D support
+- EDAC/i10nm: Fix the bitwise operation between variables of different sizes
+- EDAC/{skx_common,i10nm}: Add RRL support for Intel Granite Rapids server
+- EDAC/{skx_common,i10nm}: Refactor show_retry_rd_err_log()
+- EDAC/{skx_common,i10nm}: Refactor enable_retry_rd_err_log()
+- EDAC/{skx_common,i10nm}: Structure the per-channel RRL registers
+- EDAC/i10nm: Explicitly set the modes of the RRL register sets
+- EDAC/{i10nm,skx,skx_common}: Support UV systems
+- EDAC/i10nm: Add Intel Clearwater Forest server support
+- EDAC/{skx_common,i10nm}: Remove the AMAP register for determing DDR5
+- EDAC/{skx_common,i10nm}: Fix the loss of saved RRL for HBM pseudo channel 0
+- EDAC/{skx_common,i10nm}: Fix some missing error reports on Emerald Rapids
+- EDAC/i10nm: Add Intel Grand Ridge micro-server support
+- memblock tests: fix implicit declaration of function 'numa_valid_node'
+- memblock: use numa_valid_node() helper to check for invalid node ID
+
 * Tue Nov 11 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-289.0.0.192
 - !18365 [OLK-5.10]Support request attestation report from CSV guest
 - !14859 net :stmmac add support for Phytium GMAC controller
