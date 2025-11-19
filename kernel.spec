@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2511.2.0
+%global hulkrelease 2511.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0351
+Release: %{hulkrelease}.0352
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,13 @@ fi
 %endif
 
 %changelog
+
+* Wed Nov 19 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.3.0.0352
+- !19025  scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
+- scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
+- !18973  Fix CVE-2025-39964
+- crypto: af_alg - Fix incorrect boolean values in af_alg_ctx
+- crypto: af_alg - Disallow concurrent writes in af_alg_sendmsg
 
 * Wed Nov 12 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.2.0.0351
 - !18884  Revert "fbdev: Fix out-of-bounds issue in sys_fillrect()"
