@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       290
+%global devel_release       291
 %global maintenance_release .0.0
-%global pkg_release         .193
+%global pkg_release         .194
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,19 @@ fi
 %endif
 
 %changelog
+* Fri Nov 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-291.0.0.194
+- !19062  mm: proc: use per_vma mmap_lock for vma traversal.
+- !19002  usb: dwc3: gadget: check that event count does not exceed event buffer length
+- !19102  Fix CVE-2025-40123
+- selftests/bpf: Add test case for different expected_attach_type
+- bpf: Enforce expected_attach_type for tailcall compatibility
+- !19094  zcopy: Remove the dump_pagetable interface
+- zcopy: Remove the dump_pagetable interface
+- !19042  EDAC/i10nm: Skip DIMM enumeration on a disabled memory controller
+- mm: proc: use per_vma mmap_lock for vma traversal.
+- EDAC/i10nm: Skip DIMM enumeration on a disabled memory controller
+- usb: dwc3: gadget: check that event count does not exceed event buffer length
+
 * Tue Nov 18 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-290.0.0.193
 - !19001 [OLK-5.10] Support Trusted computing(TC) feature for hygon CPU
 - !19011 [OLK-5.10] : Backport the upstream SEV-ES 32-bit boot path support and other updates
