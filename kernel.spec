@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2511.3.0
+%global hulkrelease 2511.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0352
+Release: %{hulkrelease}.0353
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,10 @@ fi
 %endif
 
 %changelog
+
+* Wed Nov 26 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.4.0.0353
+- !19055  scsi: ses: Fix possible addl_desc_ptr out-of-bounds accesses
+- scsi: ses: Fix possible addl_desc_ptr out-of-bounds accesses
 
 * Wed Nov 19 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.3.0.0352
 - !19025  scsi: mpt3sas: Fix crash in transport port remove by using ioc_info()
