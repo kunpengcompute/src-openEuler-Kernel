@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       291
+%global devel_release       292
 %global maintenance_release .0.0
-%global pkg_release         .194
+%global pkg_release         .195
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,68 @@ fi
 %endif
 
 %changelog
+* Tue Nov 25 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-292.0.0.195
+- !19225  bpf: Fix metadata_dst leak __bpf_redirect_neigh_v{4,6}
+- !19241  CVE-2025-40168
+- smc: Use __sk_dst_get() and dst_dev_rcu() in smc_clc_prfx_match().
+- net: Add locking to protect skb->dev access in ip_output
+- !19036 [OLK-5.10] Optimize Zhaoxin CPU Temp Monitoring During Suspend/Resume
+- !18986 [OLK-5.10] USB: Fix ehci infinite suspend-resume loop issue in zhaoxin
+- !18985 [OLK-5.10] USB: hcd-pci: Avoid modifying UHCI driver_data when bound to non-native drivers
+- !18982 [OLK-5.10] crypto: zhaoxin - Update Kconfig dependencies and defaults
+- !19059 [OLK-5.10] perf/zhaoxin/core: Tailor FMS for KH-50000
+- !18866 [OLK-5.10] Fix CVE-2025-39766
+- !19004 [OLK-5.10]Fix CVE-2025-39751
+- !18816  CVE-2025-22121
+- !8955 [OLK-5.10] Revert "xhci: Adjust the UHCI Controllers bit value"
+- !9152 [OLK-5.10] x86/mce: Set bios_cmci_threshold for CMCI threshold
+- !15328 [OLK-5.10] PCI/MSI: Set device flag indicating only 32-bit MSI support
+- bpf: Fix metadata_dst leak __bpf_redirect_neigh_v{4,6}
+- !13848 [OLK-5.10] cpufreq: acpi-cpufreq: Zhaoxin: fix incorrect max-freq issue
+- !19040 [OLK-5.10] KVM: x86: allow CPUID 0xC000_0000 to proceed on Zhaoxin CPUs
+- !19169  crypto: essiv - Check ssize for decryption and in-place encryption
+- !9110 [OLK-5.10] Update cputemp driver with using the same MSR uniformly
+- !8973 [OLK-5.10] Driver for Zhaoxin I2C controller
+- !8972 [OLK-5.10] x86/acpi/cstate: Add MWAIT Cx support for Zhaoxin CPUs
+- !8971 [OLK-5.10] Turning off Zhaoxin ahci controller runtime pm
+- !9134 [OLK-5.10] hwrng: add Zhaoxin rng driver base on rep_xstore instruction
+- !19164  cpufreq: intel_pstate: Fix object lifecycle issue in update_qos_request()
+- crypto: essiv - Check ssize for decryption and in-place encryption
+- !18720 [Hygon][5.10][EDAC] The width of hash value is 2 bits for Hygon family 18h model 6h processors
+- cpufreq: intel_pstate: Fix object lifecycle issue in update_qos_request()
+- !18586 [Hygon][5.10][Bugfix] Bug fix for EDAC address translation on hygon family 18h model 4h
+- !19029 openeuler_defconfig: enable CONFIG_PAGE_CACHE_LIMIT for x86/arm64
+- Optimize Zhaoxin CPU Temp Monitoring During Suspend/Resume
+- Optimize VIA CPU Temp Monitoring During Suspend/Resume
+- hwmon: zhaoxin-cputemp: Update for KH-50000
+- perf/zhaoxin/core: Tailor FMS for KH-50000
+- KVM: x86: allow CPUID 0xC000_0000 to proceed on Zhaoxin CPUs
+- openeuler_defconfig: enable CONFIG_PAGE_CACHE_LIMIT for x86/arm64
+- ALSA: hda/ca0132: Fix buffer overflow in add_tuning_control
+- USB: Fix ehci infinite suspend-resume loop issue in zhaoxin
+- Revert "EHCI: Clear wakeup signal locked in S0 state when device plug in"
+- USB: hcd-pci: Avoid modifying UHCI driver_data when bound to non-native drivers
+- crypto: zhaoxin - Update Kconfig dependencies and defaults
+- crypto: zhaoxin/padlock-sha - Update CPU matching
+- crypto: zhaoxin/padlock-aes: Update CPU matching
+- crypto: zhaoxin-aes: Rename paes_last_cword to zx_paes_last_cword
+- net/sched: Make cake_enqueue return NET_XMIT_CN when past buffer_limit
+- EDAC/amd64: The width of hash value is 2 bits for Hygon family 18h model 6h processors
+- EDAC/amd64: Correct the address translation for hygon family 18h model 4h
+- ext4: Restore the deleted check paths of the xattr.
+- ext4: fix out-of-bound read in ext4_xattr_inode_dec_ref_all()
+- ext4: introduce ITAIL helper
+- PCI/MSI: Set device flag indicating only 32-bit MSI support
+- configs: enable Zhaoxin I2C driver as module
+- i2c: Driver for Zhaoxin I2C controller
+- cpufreq: acpi-cpufreq: Zhaoxin: fix incorrect max-freq issue
+- Revert "xhci: Adjust the UHCI Controllers bit value"
+- x86/mce: Set bios_cmci_threshold for CMCI threshold
+- hwrng: add Zhaoxin rng driver base on rep_xstore instruction
+- Update cputemp driver with using the same MSR uniformly
+- Add MWAIT Cx support for Zhaoxin CPUs.
+- Turning off Zhaoxin ahci controller runtime pm
+
 * Fri Nov 21 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-291.0.0.194
 - !19062  mm: proc: use per_vma mmap_lock for vma traversal.
 - !19002  usb: dwc3: gadget: check that event count does not exceed event buffer length
