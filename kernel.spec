@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       122
+%global devel_release       123
 %global maintenance_release .0.0
-%global pkg_release         .99
+%global pkg_release         .100
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,58 @@ fi
 %endif
 
 %changelog
+* Thu Nov 27 2025 Li Nan <linan122@huawei.com> - 6.6.0-123.0.0.100
+- !19327 ub: ub_fwctl: add ub_fwctl driver-api documentation description
+- !19338 iommu/ummu: Fix UMMU documentation error
+- !19287 net: unic: Add support for uboe and ethernet related tools
+- !19337 ub: udma: Support retrieving the migr field.
+- ub: ub_fwctl: add ub_fwctl driver-api documentation description
+- iommu/ummu: Fix UMMU documentation error
+- !19332 ub: udma: add requirement about document and tp attr.
+- !19330 iommu/ummu: Add UMMU documentation description
+- ub: udma: Support retrieving the migr field.
+- !18794 【OLK-6.6】fix CVE-2025-39801
+- ub: udma: Support eid and guid updates.
+- ub: udma: bugfix for set and get tp attr.
+- !18453 [OLK-6.6] ALSA: HDA: Add Zhaoxin HDMI Controller and Codec support
+- !18483 [OLK-6.6] x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- iommu/ummu: Add UMMU-PMU devicetree file
+- iommu/ummu: Add UMMU devicetree file
+- iommu/ummu: Add UMMU documentation description
+- ub: udma: mask jetty context addr info.
+- ub: udma: add udma driver module doc.
+- ub: ubase: Remove non-cluster mode code
+- net: unic: Add support for uboe reset
+- net: unic: Add support for MAC statistics
+- net: unic: Add pause frame support.
+- net: unic: Add Priority Flow Control (PFC) support
+- net: unic: Add debugfs support for dumping MAC tables.
+- net: unic: Supports MAC filter, and allows users to add and delete MAC
+- net: unic: Add debugfs support for dumping vlan table
+- net: unic: Integrate valn filtering features with network device operations.
+- net: unic: Add valn filtering support.
+- net: unic: Add support for querying link diagnosis status
+- net: unic: Extend loopback test support to include external loopback modes
+- net: unic: Extend loopback test support to include serdes loopback modes.
+- net: unic: Add loopback test support.
+- net: unic: Add debugfs support for dumping hardware MAC tables.
+- net: unic: Add support for setting link speed, duplex, and autonegotiation via ethtool.
+- !19328 ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- !19264 ub: cdma: add CDMA userspace-api documentation description
+- ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- ub: cdma: add CDMA userspace-api documentation description
+- ub: cdma: add CDMA kernel driver design document specification
+- ub: cdma: add CDMA driver-api documentation description
+- !19305 ub:ubus: Add ubus and ubfi opensource document
+- !19320 urma: added functions for getting and setting TP attribute fields.
+- ub:ubus: Add ubus devicetree file
+- urma: added functions for getting and setting TP attribute fields.
+- ub:ubus: Add ubus and ubfi opensource document
+- usb: dwc3: Remove WARN_ON for device endpoint command timeouts
+- ALSA: HDA: Add Zhaoxin HDMI Controller and Codec support
+- x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- ALSA: HDA: Roll back the old version for consistency with the mainline
+
 * Thu Nov 27 2025 Li Nan <linan122@huawei.com> - 6.6.0-122.0.0.99
 - !19317 ub: ubase: Remove useless character '+'
 - ub: ubase: Remove useless character '+'
