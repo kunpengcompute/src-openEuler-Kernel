@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       123
+%global devel_release       124
 %global maintenance_release .0.0
-%global pkg_release         .100
+%global pkg_release         .101
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,30 @@ fi
 %endif
 
 %changelog
+* Sat Nov 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-124.0.0.101
+- !19152  Fix CVE-2025-39810 fix CVE-2025-39810
+- !19359 ub: hisi-ubus: Fix ub memory decoder create
+- !19346  sched: Fix race between yield_to() and try_to_wake_up()
+- ub: hisi-ubus: Fix ub memory decoder create
+- !19341 v7  bugfix for xcall2.0
+- sched: Fix race between yield_to() and try_to_wake_up()
+- !17661 kvm: Only enable shadow mode for ioeventfd and Align the lifecycle of …
+- !19334  bpf: Sync pending IRQ work before freeing ring buffer
+- xcall2.0: prefetch: introduce struct prefetch_mm_data
+- xcall2.0: Fix mem leak in proc_xcall_command
+- xcall2.0: add xcall_subdir_create help to create subdir below /proc/xcall
+- xcall2.0: prefetch: keep prefetch module name same with file name
+- xcall2.0: prefetch: fix value name typos in __do_sys_epoll_pwait
+- !19339  zcopy: Fix context switch within RCU read-side
+- !19300  Add Support for Disabling Hugetlb in soft_offline_page
+- zcopy: Fix context switch within RCU read-side error
+- bpf: Sync pending IRQ work before freeing ring buffer
+- kvm: Only enable shadow mode for ioeventfd and Align the lifecycle of KVM shadow with KVM
+- mm/memory-failure: support disabling soft offline for HugeTLB pages
+- mm/memory-failure: userspace controls soft-offlining pages
+- bnxt_en: Fix memory corruption when FW resources change during ifdown
+- bnxt_en: Fix possible crash after creating sw mqprio TCs
+
 * Thu Nov 27 2025 Li Nan <linan122@huawei.com> - 6.6.0-123.0.0.100
 - !19327 ub: ub_fwctl: add ub_fwctl driver-api documentation description
 - !19338 iommu/ummu: Fix UMMU documentation error
