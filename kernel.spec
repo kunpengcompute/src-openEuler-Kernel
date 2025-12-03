@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       292
+%global devel_release       293
 %global maintenance_release .0.0
-%global pkg_release         .195
+%global pkg_release         .196
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,136 @@ fi
 %endif
 
 %changelog
+* Wed Dec 03 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-293.0.0.196
+- !19413  Fix CVE-2025-39994
+- !19432  Revert "PCI/MSI: Set device flag indicating only 32-bit MSI support"
+- !19395  soc: qcom: socinfo: Avoid out of bounds read of serial number
+- !19396  Bluetooth: btmtksdio: fix use-after-free at btmtksdio_recv_event
+- !19394  usb: typec: ucsi: displayport: Fix NULL pointer access
+- !19380 [OLK-5.10] Fix CVE-2025-22107
+- !19387 [OLK-5.10] Fix CVE-2025-21945
+- !19375 [OLK-5.10] Fix CVE-2025-37899
+- Revert "PCI/MSI: Set device flag indicating only 32-bit MSI support"
+- !19408  smc: Use __sk_dst_get() and dst_dev_rcu() in in smc_clc_prfx_set().
+- !19407  CVE-2025-37786
+- !19406  sctp: Fix MAC comparison to be constant-time
+- media: tuner: xc5000: Fix use-after-free in xc5000_release
+- media: tunner: xc5000: Refactor firmware load
+- !19370 drivers:misc:sdma-dae: add channel depth info in debugfs
+- smc: Use __sk_dst_get() and dst_dev_rcu() in in smc_clc_prfx_set().
+- net: dsa: free routing table on probe failure
+- net: dsa: rename teardown_default_cpu to teardown_cpu_ports
+- sctp: Fix MAC comparison to be constant-time
+- !19379  mmc: core: use sysfs_emit() instead of sprintf()
+- !19221  NFSv4: Fix deadlock during the running of state manager
+- !19369  net/sched: sch_qfq: Fix CVE-2025-38477
+- !19255  efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+- !19246  dmaengine: ti: k3-udma: Add missing locking
+- !19217  sbitmap: fix infinite loop caused by negative wait_cnt
+- Bluetooth: btmtksdio: fix use-after-free at btmtksdio_recv_event
+- soc: qcom: socinfo: Avoid out of bounds read of serial number
+- usb: typec: ucsi: displayport: Fix NULL pointer access
+- !19363  Revert "scsi: libsas: Fix exp-attached device scan after probe failure scanned in again after probe failed"
+- ksmbd: fix use-after-free in smb2_lock
+- net: dsa: sja1105: fix kasan out-of-bounds warning in sja1105_table_delete_entry()
+- mmc: core: use sysfs_emit() instead of sprintf()
+- !19008 [OLK-5.10] ata: libata: disabling PhyRdy Change Interrupt based on actual LPM capability
+- ksmbd: fix use-after-free in session logoff
+- !18836  CVE-2025-37997
+- drivers:misc:sdma-dae: add channel depth info in debugfs
+- net/sched: sch_qfq: Avoid triggering might_sleep in atomic context in qfq_delete_class
+- net/sched: sch_qfq: Fix race condition on qfq_aggregate
+- Revert "scsi: libsas: Fix exp-attached device scan after probe failure scanned in again after probe failed"
+- !19351 fuse: fix compile warning when CONFIG_FUSE_FASTPATH=y
+- fuse: fix compile warning when CONFIG_FUSE_FASTPATH=y
+- !19345  sched: Fix race between yield_to() and try_to_wake_up()
+- !19340  mm: proc: fix compile warning when CONFIG_NUMA=n
+- !19347  Fixes of page cache limit
+- mm: Replace deferrable timer with delay timer for shrink worker
+- mm: Add page cache limit check before queueing shrink worker
+- sched: Fix race between yield_to() and try_to_wake_up()
+- !19333  bpf: Sync pending IRQ work before freeing ring buffer
+- !19335  drm/omap: fix misleading indentation in pixinc()
+- mm: proc: fix compile warning when CONFIG_NUMA=n
+- drm/omap: fix misleading indentation in pixinc()
+- bpf: Sync pending IRQ work before freeing ring buffer
+- !19304  Add Support for Disabling Hugetlb in soft_offline_page
+- !19309  Fix CVE-2025-40200
+- !19084 [OLK-5.10] x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- !9148 [OLK-5.10] x86/cpu: Remove pointless evaluation of x86_coreid_bits
+- !18967 [OLK-5.10] force use dma api when AMD SEV is actived
+- !18818 [OLK-5.10]:update patches for sw64 architecture
+- !19307  net: Netdev use RCU protection
+- Squashfs: reject negative file sizes in squashfs_read_inode()
+- Squashfs: add additional inode sanity checking
+- !19186  Squashfs: fix uninit-value in squashfs_get_parent
+- !19232  drm/vmwgfx: Fix Use-after-free in validation
+- !19259  scsi: ufs: core: Fix handling of lrbp->cmd
+- net: use dst_dev_rcu() in sk_setup_caps()
+- ipv4: use RCU protection in ip_dst_mtu_maybe_forward()
+- tls: Use __sk_dst_get() and dst_dev_rcu() in get_netdev_for_sock().
+- net: dst: Fix kabi-breakage for struct dst_entry
+- ipv4: start using dst_dev_rcu()
+- tcp_metrics: use dst_dev_net_rcu()
+- net: dst: introduce dst->dev_rcu
+- ipv4: use RCU protection in __ip_rt_update_pmtu()
+- net: dst: add four helpers to annotate data-races around dst->dev
+- !19299  pid: Add a judgment for ns null in pid_nr_ns
+- !19295  scsi: lpfc: Fix use-after-free KFENCE violation during sysfs firmware write
+- !19210  ACPI: video: Fix use-after-free in acpi_video_switch_brightness()
+- !19283  fix cves
+- mm/memory-failure: support disabling soft offline for HugeTLB pages
+- mm/memory-failure: userspace controls soft-offlining pages
+- pid: Add a judgment for ns null in pid_nr_ns
+- !19296  sched: Fix incorrect cluster mask
+- sched: Fix incorrect cluster mask
+- scsi: lpfc: Fix use-after-free KFENCE violation during sysfs firmware write
+- mm: zswap: fix crypto_free_acomp() deadlock in zswap_cpu_comp_dead()
+- mm/hugetlb: unshare page tables during VMA split, not before
+- hugetlb: unshare some PMDs when splitting VMAs
+- mm: zswap: move allocations during CPU init outside the lock
+- mm: zswap: properly synchronize freeing resources during CPU hotunplug
+- mm/zswap: change per-cpu mutex and buffer to per-acomp_ctx
+- media: davinci: vpif: Fix memory leak in probe error path
+- media: davinci: vpif: fix use-after-free on driver unbind
+- scsi: ufs: core: Fix handling of lrbp->cmd
+- efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+- dmaengine: ti: k3-udma: Add missing locking
+- drm/vmwgfx: Fix Use-after-free in validation
+- NFSv4: Fix deadlock during the running of state manager
+- ata: libata: disabling PhyRdy Change Interrupt based on actual LPM capability
+- ata: libata: disallow dev-initiated LPM transitions to unsupported states
+- Revert "ata: Add support for disabling PhyRdy Change Interrupt based on actual LPM capability"
+- Revert "ata: Add support for PxSCT.LPM set based on actual LPM capability"
+- sbitmap: fix infinite loop caused by negative wait_cnt
+- ACPI: video: Fix use-after-free in acpi_video_switch_brightness()
+- Squashfs: fix uninit-value in squashfs_get_parent
+- x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- virtio_ring: force use dma api when AMD SEV is actived
+- netfilter: ipset: Remove unused htable_bits in macro ahash_region
+- netfilter: ipset: fix region locking in hash types
+- sw64: paravirt: add pv steal time support in guest side
+- sw64: kvm: add pv steal time support
+- sw64: use ioremap to map IO address in functions like __get_cpu_nums()
+- sw64: move non-boot core's kernel page table enabling logic to hmcode
+- sw64: define run_mode_host_key as false
+- sw64: add memclear template and ____memclr_simd()
+- sw64: optimize simd version of copy/clear_page()
+- sw64: disallow users modifying PS in pt_regs
+- sw64: enable kernel page table
+- sw64: use ioremap to map IO address
+- sw64: map legacy I/O to K segment
+- sw64: setup early_ioremap
+- sw64: reset ATC for kvm
+- sw64: setup mapping for efi_mm
+- sw64: set protection for kernel page table
+- sw64: modify codes with fixmap
+- sw64: map the early and the final page table
+- sw64: add fixmap support
+- sw64: control CSR_INT_EN directly in host kernel
+- sw64: pci: remove redundant debug control
+- x86/cpu: Remove pointless evaluation of x86_coreid_bits
+
 * Tue Nov 25 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-292.0.0.195
 - !19225  bpf: Fix metadata_dst leak __bpf_redirect_neigh_v{4,6}
 - !19241  CVE-2025-40168
