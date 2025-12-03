@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2511.4.0
+%global hulkrelease 2512.1.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0353
+Release: %{hulkrelease}.0354
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,14 @@ fi
 %endif
 
 %changelog
+
+* Wed Dec 03 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.1.0.0354
+- !19381  net/sched: Abort __tc_modify_qdisc if parent is a clsact/ingress qdisc
+- net/sched: Abort __tc_modify_qdisc if parent is a clsact/ingress qdisc
+- !19298  pid: Add a judgment for ns null in pid_nr_ns
+- !19286  sched: Fix race between yield_to() and try_to_wake_up()
+- pid: Add a judgment for ns null in pid_nr_ns
+- sched: Fix race between yield_to() and try_to_wake_up()
 
 * Wed Nov 26 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2511.4.0.0353
 - !19055  scsi: ses: Fix possible addl_desc_ptr out-of-bounds accesses
