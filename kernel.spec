@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       121
+%global devel_release       125
 %global maintenance_release .0.0
-%global pkg_release         .111
+%global pkg_release         .112
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1130,6 +1130,215 @@ fi
 %endif
 
 %changelog
+* Wed Dec 03 2025 Li Nan <linan122@huawei.com> - 6.6.0-125.0.0.112
+- !17888 [OLK-6.6] Fix CVE-2025-37777
+- !19371  RDMA/rxe: Fix race in do_task() when draining
+- !19393  usb: typec: ucsi: displayport: Fix NULL pointer access
+- !19377 [OLK-6.6] Fix CVE-2025-23133
+- !18704 [OLK-6.6] Fix CVE-2024-58095
+- !19401  smb: client: fix crypto buffers in non-linear memory
+- !19323  nfsd: don't ignore the return code of svc_proc_register()
+- !19386  x86/mm: Check return value from memblock_phys_alloc_range()
+- !19433 urma: bugfix ubagg drivers refent error
+- urma: bugfix ubagg drivers refent error
+- !19391 urma: fixing ubcore hash table initialization failure.
+- !19263 [OLK-6.6]Fix CVE-2025-37861
+- !19253 [OLK-6.6] Fix CVE-2025-37973
+- !19252 [OLK-6.6] Fix CVE-2025-37972
+- !19251 [OLK-6.6] Fix CVE-2025-37956
+- !19374 [OLK-6.6] Fix CVE-2025-37899
+- !19402  sched: Fix incorrect cluster mask
+- !19414  xsched: fix compile error when CONFIG_XCU_SCHEDULER is disabled
+- !19398 v2  bugfix for xcall2.0
+- !19412  sunrpc: fix handling of server side tls alerts
+- !19409  smc: Use __sk_dst_get() and dst_dev_rcu() in in smc_clc_prfx_set().
+- !19405 [OLK-6.6]:update patches for sw64 architecture
+- xsched: fix compile error when CONFIG_XCU_SCHEDULER is disabled
+- !19266  __legitimize_mnt(): check for MNT_SYNC_UMOUNT should be under mount_lock
+- !19358  Fix CVE-2025-40016
+- sunrpc: fix handling of server side tls alerts
+- urma: fixing ubcore hash table initialization failure.
+- smc: Use __sk_dst_get() and dst_dev_rcu() in in smc_clc_prfx_set().
+- !19365  net/mlx5e: Harden uplink netdev access against device unbind
+- sw64: config: add initial openeuler_defconfig for sw64
+- sw64: fix compile error of pte_pgprot()
+- sw64: add missing definition of MAP_PEER_SHARED
+- sched: Fix incorrect cluster mask
+- smb: client: fix crypto buffers in non-linear memory
+- !19392  Fixes and cleanup of page cache limit
+- !18760  CVE-2025-38501
+- !19390 v3  xsched: add xsched_{set,get}attr syscall
+- xcall2.0: fix panic while detaching xcall found in DT case
+- xcall2.0: prefetch: fix access NULL ptr in __do_sys_epoll_pwait()
+- xcall2.0: prefetch: get prefetch_mm_data once in get_pfi()
+- !19311  nbd: fix uaf in nbd_genl_connect() error path
+- !19310  fs: writeback: fix use-after-free in __mark_inode_dirty()
+- !19256  efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+- !19237  nfsd: provide locking for v4_end_grace
+- !19247  dmaengine: ti: k3-udma: Add missing locking
+- !19220  NFSv4: Fix deadlock during the running of state manager
+- !19248  nfsd: Initialize ssc before laundromat_work to prevent NULL dereference
+- usb: typec: ucsi: displayport: Fix NULL pointer access
+- !19378 net: hibmcge: add support for pagepool on rx
+- mm: Add page cache limit check before queueing shrink worker
+- mm: Move vm_cache_limit_mbytes check to page_cache_over_limit()
+- mm: Replace deferrable timer with delay timer for shrink worker
+- !19388 [sync] PR-19363:  Revert "scsi: libsas: Fix exp-attached device scan after probe failure scanned in again after probe failed"
+- !19368  net/sched: Fix backlog accounting in qdisc_dequeue_internal
+- !19367  net/sched: sch_qfq: Fix CVE-2025-38477
+- !19366  i40e: fix IRQ freeing in i40e_vsi_request_irq_msix error path
+- !19364  ixgbevf: Fix CVE-2025-40104
+- xsched: add xsched_{set,get}attr syscall
+- Revert "scsi: libsas: Fix exp-attached device scan after probe failure scanned in again after probe failed"
+- x86/mm: Check return value from memblock_phys_alloc_range()
+- net: hibmcge: add support for pagepool on rx
+- net: hibmcge: reduce packet drop under stress testing
+- net: hibmcge: add support for tracepoint to dump some fields of rx_desc
+- Revert "net: hibmcge: reduce packet drop under stress testing"
+- Revert "net: hibmcge: support pagepool for rx"
+- wifi: ath11k: update channel list in reg notifier instead reg worker
+- !18451 RDMA/bnxt_re: Fix budget handling of notification queue
+- ksmbd: fix use-after-free in session logoff
+- !18837  CVE-2025-37997
+- !19361  media: b2c2: Fix use-after-free causing by irq_check_work in flexcop_pci_remove
+- RDMA/rxe: Fix race in do_task() when draining
+- !19353 ubcore: fix query route list by eid pair.
+- ubcore: fix query route list by eid pair.
+- net/sched: Fix backlog accounting in qdisc_dequeue_internal
+- net/sched: sch_qfq: Avoid triggering might_sleep in atomic context in qfq_delete_class
+- net/sched: sch_qfq: Fix race condition on qfq_aggregate
+- i40e: fix IRQ freeing in i40e_vsi_request_irq_msix error path
+- net/mlx5e: Harden uplink netdev access against device unbind
+- ixgbevf: fix mailbox API compatibility by negotiating supported features
+- ixgbevf: fix getting link speed data for E610 devices
+- ixgbevf: Add support for Intel(R) E610 device
+- PCI: Add PCI_VDEVICE_SUB helper macro
+- media: b2c2: Fix use-after-free causing by irq_check_work in flexcop_pci_remove
+- !19152  Fix CVE-2025-39810 fix CVE-2025-39810
+- !19359 ub: hisi-ubus: Fix ub memory decoder create
+- !19346  sched: Fix race between yield_to() and try_to_wake_up()
+- ub: hisi-ubus: Fix ub memory decoder create
+- media: uvcvideo: Use heuristic to find stream entity
+- media: uvcvideo: Mark invalid entities with id UVC_INVALID_ENTITY_ID
+- !19341 v7  bugfix for xcall2.0
+- sched: Fix race between yield_to() and try_to_wake_up()
+- !17661 kvm: Only enable shadow mode for ioeventfd and Align the lifecycle of …
+- !19334  bpf: Sync pending IRQ work before freeing ring buffer
+- xcall2.0: prefetch: introduce struct prefetch_mm_data
+- xcall2.0: Fix mem leak in proc_xcall_command
+- xcall2.0: add xcall_subdir_create help to create subdir below /proc/xcall
+- xcall2.0: prefetch: keep prefetch module name same with file name
+- xcall2.0: prefetch: fix value name typos in __do_sys_epoll_pwait
+- !19339  zcopy: Fix context switch within RCU read-side
+- !19300  Add Support for Disabling Hugetlb in soft_offline_page
+- !19327 ub: ub_fwctl: add ub_fwctl driver-api documentation description
+- !19338 iommu/ummu: Fix UMMU documentation error
+- !19287 net: unic: Add support for uboe and ethernet related tools
+- !19337 ub: udma: Support retrieving the migr field.
+- zcopy: Fix context switch within RCU read-side error
+- ub: ub_fwctl: add ub_fwctl driver-api documentation description
+- iommu/ummu: Fix UMMU documentation error
+- !19332 ub: udma: add requirement about document and tp attr.
+- !19330 iommu/ummu: Add UMMU documentation description
+- bpf: Sync pending IRQ work before freeing ring buffer
+- ub: udma: Support retrieving the migr field.
+- !18794 【OLK-6.6】fix CVE-2025-39801
+- ub: udma: Support eid and guid updates.
+- ub: udma: bugfix for set and get tp attr.
+- !18453 [OLK-6.6] ALSA: HDA: Add Zhaoxin HDMI Controller and Codec support
+- !18483 [OLK-6.6] x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- iommu/ummu: Add UMMU-PMU devicetree file
+- iommu/ummu: Add UMMU devicetree file
+- iommu/ummu: Add UMMU documentation description
+- ub: udma: mask jetty context addr info.
+- ub: udma: add udma driver module doc.
+- ub: ubase: Remove non-cluster mode code
+- net: unic: Add support for uboe reset
+- net: unic: Add support for MAC statistics
+- net: unic: Add pause frame support.
+- net: unic: Add Priority Flow Control (PFC) support
+- net: unic: Add debugfs support for dumping MAC tables.
+- net: unic: Supports MAC filter, and allows users to add and delete MAC
+- net: unic: Add debugfs support for dumping vlan table
+- net: unic: Integrate valn filtering features with network device operations.
+- net: unic: Add valn filtering support.
+- net: unic: Add support for querying link diagnosis status
+- net: unic: Extend loopback test support to include external loopback modes
+- net: unic: Extend loopback test support to include serdes loopback modes.
+- net: unic: Add loopback test support.
+- net: unic: Add debugfs support for dumping hardware MAC tables.
+- net: unic: Add support for setting link speed, duplex, and autonegotiation via ethtool.
+- !19328 ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- !19264 ub: cdma: add CDMA userspace-api documentation description
+- ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- kvm: Only enable shadow mode for ioeventfd and Align the lifecycle of KVM shadow with KVM
+- ub: cdma: add CDMA userspace-api documentation description
+- ub: cdma: add CDMA kernel driver design document specification
+- ub: cdma: add CDMA driver-api documentation description
+- !19305 ub:ubus: Add ubus and ubfi opensource document
+- !19320 urma: added functions for getting and setting TP attribute fields.
+- nfsd: don't ignore the return code of svc_proc_register()
+- ub:ubus: Add ubus devicetree file
+- urma: added functions for getting and setting TP attribute fields.
+- ub:ubus: Add ubus and ubfi opensource document
+- !19317 ub: ubase: Remove useless character '+'
+- ub: ubase: Remove useless character '+'
+- !18870 add sentry kmod
+- drivers/ub/sentry: add sentry_remote_reporter module
+- drivers/ub/sentry: add sentry_uvb_comm module
+- drivers/ub/sentry: add sentry_urma_comm module
+- drivers/ub/sentry: add sentry_reporter and sentry_msg_help
+- !19306  net: Netdev use RCU protection
+- !19290 urma: bugfix the issue of urma stream generation failure
+- nbd: fix uaf in nbd_genl_connect() error path
+- fs: writeback: fix use-after-free in __mark_inode_dirty()
+- !19292  blk-ioinf: accumulate total latency properly across sampling periods
+- !19230  drm/vmwgfx: Fix Use-after-free in validation
+- net: use dst_dev_rcu() in sk_setup_caps()
+- ipv4: use RCU protection in ip_dst_mtu_maybe_forward()
+- ipv6: use RCU in ip6_output()
+- tls: Use __sk_dst_get() and dst_dev_rcu() in get_netdev_for_sock().
+- net: dst: Fix kabi-breakage for struct dst_entry
+- ipv6: use RCU in ip6_xmit()
+- ipv4: start using dst_dev_rcu()
+- tcp_metrics: use dst_dev_net_rcu()
+- net: dst: introduce dst->dev_rcu
+- net: Add locking to protect skb->dev access in ip_output
+- net: dst: add four helpers to annotate data-races around dst->dev
+- urma: bugfix the issue of urma stream generation failure
+- acpi: provides acpi power notifier chain
+- mm/memory-failure: support disabling soft offline for HugeTLB pages
+- mm/memory-failure: userspace controls soft-offlining pages
+- blk-ioinf: accumulate total latency properly across sampling periods
+- RDMA/bnxt_re: Remove unusable nq variable
+- RDMA/bnxt_re: Fix budget handling of notification queue
+- __legitimize_mnt(): check for MNT_SYNC_UMOUNT should be under mount_lock
+- scsi: mpi3mr: Synchronous access b/w reset and tm thread for reply queue
+- efivarfs: Fix slab-out-of-bounds in efivarfs_d_compare
+- wifi: cfg80211: fix out-of-bounds access during multi-link element defragmentation
+- Input: mtk-pmic-keys - fix possible null pointer dereference
+- ksmbd: prevent rename with empty string
+- ksmbd: move leading slash check to smb2_get_name()
+- nfsd: Initialize ssc before laundromat_work to prevent NULL dereference
+- dmaengine: ti: k3-udma: Add missing locking
+- nfsd: provide locking for v4_end_grace
+- drm/vmwgfx: Fix Use-after-free in validation
+- NFSv4: Fix deadlock during the running of state manager
+- bnxt_en: Fix memory corruption when FW resources change during ifdown
+- bnxt_en: Fix possible crash after creating sw mqprio TCs
+- netfilter: ipset: Remove unused htable_bits in macro ahash_region
+- netfilter: ipset: fix region locking in hash types
+- usb: dwc3: Remove WARN_ON for device endpoint command timeouts
+- ksmbd: add max ip connections parameter
+- ksmbd: extend the connection limiting mechanism to support IPv6
+- ksmbd: limit repeated connections from clients with the same IP
+- jfs: add check read-only before txBeginAnon() call
+- ALSA: HDA: Add Zhaoxin HDMI Controller and Codec support
+- x86/hpet: Set dynamic IRQ feature for HPET for KH-50000
+- ALSA: HDA: Roll back the old version for consistency with the mainline
+- ksmbd: add free_transport ops in ksmbd connection
+- ksmbd: fix use-after-free in __smb2_lease_break_noti()
+
 * Wed Nov 26 2025 Li Nan <linan122@huawei.com> - 6.6.0-121.0.0.111
 - !19291  usbnet: Fix using smp_processor_id() in preemptible code warnings
 - !19191  Fix CVE-2025-40200
