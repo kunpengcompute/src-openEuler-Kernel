@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       126
 %global maintenance_release .0.0
-%global pkg_release         .102
+%global pkg_release         .103
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,12 @@ fi
 %endif
 
 %changelog
+* Thu Dec 04 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-126.0.0.103
+- RISC-V kernel upgrade to 6.6.0-126.0.0
+- Add support for LRW, DP1000
+- Add IOMMU related support
+- Backport mainline RISC-V features.
+
 * Thu Dec 04 2025 Li Nan <linan122@huawei.com> - 6.6.0-126.0.0.102
 - !19468 urma: Bugfix for ubcore_get_route_list implement
 - urma: Bugfix for ubcore_get_route_list implement
