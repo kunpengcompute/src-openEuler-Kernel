@@ -4,11 +4,13 @@
 
 %global hulkrelease 126.0.0
 
+%global __brp_python_bytecompile %{nil}
+
 %global debug_package %{nil}
 
 Name:	 raspberrypi-kernel
 Version: 6.6.0
-Release: %{hulkrelease}.15
+Release: %{hulkrelease}.16
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -42,6 +44,18 @@ ExclusiveOS: Linux
 %description
 The Linux Kernel image for RaspberryPi.
 
+%package headers
+Summary: Header files for the Linux kernel for use by glibc
+Obsoletes: glibc-kernheaders < 3.0-46
+Provides: glibc-kernheaders = 3.0-46
+Provides: kernel-headers = %{version}-%{release}
+
+%description headers
+raspberrypi-Kernel-headers includes the C header files that specify the interface
+between the Linux kernel and userspace libraries and programs. The header files
+define structures and constants that are needed for building most standard programs
+and are also needed for rebuilding the glibc package.
+
 %package devel
 Summary: Development package for building kernel modules to match the %{KernelVer} raspberrypi-kernel
 AutoReqProv: no
@@ -55,119 +69,65 @@ against the %{KernelVer} raspberrypi-kernel package.
 
 %prep
 %setup -q -n kernel-%{version} -c
-mv kernel linux-%{version}
-cp -a linux-%{version} linux-%{KernelVer}
+mv kernel linux-%{KernelVer}-v8
 
-cd linux-%{KernelVer}
+cd linux-%{KernelVer}-v8
 %patch0000 -p1
 
 find . \( -name "*.orig" -o -name "*~" \) -exec rm -f {} \; >/dev/null
 find . -name .gitignore -exec rm -f {} \; >/dev/null
 
+cp -a ../linux-%{KernelVer}-v8 ../linux-%{KernelVer}-2712
+
 %build
-cd linux-%{KernelVer}
-
+cd linux-%{KernelVer}-v8
 perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = -%{release}.raspi.%{_target_cpu}/" Makefile
+make ARCH=%{Arch} %{?_smp_mflags} bcm2711_defconfig
+make ARCH=%{Arch} %{?_smp_mflags} KERNELRELEASE=%{KernelVer}-v8
 
-make ARCH=%{Arch} %{?_smp_mflags} O=output/v8 bcm2711_defconfig
-
-make ARCH=%{Arch} %{?_smp_mflags} O=output/v8 KERNELRELEASE=%{KernelVer}-v8
-
-make ARCH=%{Arch} %{?_smp_mflags} O=output/2712 bcm2712_defconfig
-
-make ARCH=%{Arch} %{?_smp_mflags} O=output/2712 KERNELRELEASE=%{KernelVer}-2712
+cd ../linux-%{KernelVer}-2712
+perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = -%{release}.raspi.%{_target_cpu}/" Makefile
+make ARCH=%{Arch} %{?_smp_mflags} bcm2712_defconfig
+make ARCH=%{Arch} %{?_smp_mflags} KERNELRELEASE=%{KernelVer}-2712
 
 %install
-cd linux-%{KernelVer}
-
 ## install linux
 mkdir -p $RPM_BUILD_ROOT/boot
 rpi_version=("v8" "2712")
 for rpi in "${rpi_version[@]}"; do
-    pushd output/$rpi
+    pushd linux-%{KernelVer}-$rpi
     kernel_ver=%{KernelVer}-$rpi
     TargetImage=$(make -s image_name)
     make ARCH=%{Arch} INSTALL_MOD_PATH=$RPM_BUILD_ROOT modules_install KERNELRELEASE=$kernel_ver
+
     install -m 755 $TargetImage $RPM_BUILD_ROOT/boot/vmlinuz-$kernel_ver
     install -m 644 .config $RPM_BUILD_ROOT/boot/config-$kernel_ver
     install -m 644 System.map $RPM_BUILD_ROOT/boot/System.map-$kernel_ver
 
     rm -rf $RPM_BUILD_ROOT/lib/modules/$kernel_ver/source $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build
-    mkdir -p $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build
 
-    ############ to do collect devel file  #########
-    # 1. Makefile And Kconfig, .config sysmbol
-    # 2. scrpits dir
-    # 3. .h file
-    find -type f \( -name "Makefile*" -o -name "Kconfig*" \) -exec cp --parents {} $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build \;
-    for f in Module.symvers System.map Module.markers .config;do
-        test -f $f || continue
-        cp $f $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build
-    done
-
-    cp -a scripts $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build
-    if [ -d arch/%{Arch}/scripts ]; then
-        cp -a arch/%{Arch}/scripts $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/arch/%{_arch} || :
-    fi
-    if [ -f arch/%{Arch}/*lds ]; then
-        cp -a arch/%{Arch}/*lds $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/arch/%{_arch}/ || :
-    fi
-    find $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/scripts/ -name "*.o" -exec rm -rf {} \;
-
-    if [ -d arch/%{Arch}/include ]; then
-        cp -a --parents arch/%{Arch}/include $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/
-    fi
-    cp -a include $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/include
-
-    if [ -f arch/%{Arch}/kernel/module.lds ]; then
-        cp -a --parents arch/%{Arch}/kernel/module.lds $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/
-    fi
-
-    # module.lds is moved to scripts by commit 596b0474d3d9 in linux 5.10.
-    if [ -f scripts/module.lds ]; then
-        cp -a --parents scripts/module.lds $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/
-    fi
-
-    # copy objtool for raspberrypi-kernel-devel (needed for building external modules)
-    if grep -q CONFIG_STACK_VALIDATION=y .config; then
-        mkdir -p $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/tools/objtool
-        cp -a tools/objtool/objtool $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/tools/objtool
-    fi
-
-    popd
-
-    %ifarch aarch64
-        cp -a --parents arch/arm/include/asm $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/
-    %endif
-
-    # Make sure the Makefile and version.h have a matching timestamp so that
-    # external modules can be built
-    touch -r $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/Makefile $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/include/generated/uapi/linux/version.h
-    touch -r $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/.config $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/include/generated/autoconf.h
-    # for make prepare
-    if [ ! -f $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/include/config/auto.conf ];then
-        cp .config $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build/include/config/auto.conf
-    fi
-
-    mkdir -p %{buildroot}/usr/src/kernels
-    mv $RPM_BUILD_ROOT/lib/modules/$kernel_ver/build $RPM_BUILD_ROOT/usr/src/kernels/$kernel_ver
-
-    find $RPM_BUILD_ROOT/usr/src/kernels/$kernel_ver -name ".*.cmd" -exec rm -f {} \;
+    %define ksrcpath $RPM_BUILD_ROOT/usr/src/kernels/$kernel_ver
+    install -d %{ksrcpath}
+    make run-command LD=ld.bfd KBUILD_BUILD_VERSION=%{release} KBUILD_RUN_COMMAND="./scripts/package/install-extmod-build %{ksrcpath}"
 
     pushd $RPM_BUILD_ROOT/lib/modules/$kernel_ver
     ln -sf /usr/src/kernels/$kernel_ver build
     ln -sf build source
     popd
+    popd
 done
 
-pushd output/2712
+pushd linux-%{KernelVer}-2712
+make ARCH=%{Arch} INSTALL_HDR_PATH=$RPM_BUILD_ROOT/usr KBUILD_SRC= headers_install
+find $RPM_BUILD_ROOT/usr/include -name "\.*"  -exec rm -rf {} \;
+
 mkdir -p $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/overlays
 install -m 644 $(find arch/%{Arch}/boot/dts/broadcom/ -name "*.dtb") $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/
 install -m 644 $(find arch/%{Arch}/boot/dts/overlays/ -name "*.dtbo") $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/overlays/
 if ls arch/%{Arch}/boot/dts/overlays/*.dtb > /dev/null 2>&1; then
     install -m 644 $(find arch/%{Arch}/boot/dts/overlays/ -name "*.dtb") $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/overlays/
 fi
-install -m 644 ../../arch/%{Arch}/boot/dts/overlays/README $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/overlays/
+install -m 644 arch/%{Arch}/boot/dts/overlays/README $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/overlays/
 popd
 
 %postun
@@ -270,6 +230,16 @@ fi
 /boot/dtb-*
 /lib/modules/%{KernelVer}-v8
 /lib/modules/%{KernelVer}-2712
+%exclude /lib/modules/%{KernelVer}-v8/source
+%exclude /lib/modules/%{KernelVer}-v8/build
+%exclude /lib/modules/%{KernelVer}-2712/source
+%exclude /lib/modules/%{KernelVer}-2712/build
+
+%files headers
+%defattr (-, root, root)
+/usr/include/*
+%exclude %{_includedir}/cpufreq.h
+%exclude %{_includedir}/cpuidle.h
 
 %files devel
 %defattr (-, root, root)
@@ -281,6 +251,10 @@ fi
 /usr/src/kernels/%{KernelVer}-*
 
 %changelog
+* Mon Dec 8  2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-126.0.0.16
+- add sub package: raspberrypi-kernel-headers
+- fix file erros in raspberrypi-kernel-develchangel
+
 * Fri Dec 5  2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-126.0.0.15
 - upgrade to 6.6.0-126.0.0
 
