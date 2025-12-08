@@ -1,7 +1,7 @@
-From 648ce7b79261ca926f64dca9ba4bce10fcfb38a6 Mon Sep 17 00:00:00 2001
+From 21d1d321ac74a8414bcee66dc4594d920d63cb89 Mon Sep 17 00:00:00 2001
 From: Yafen <yafen@iscas.ac.cn>
 Date: Mon, 3 Nov 2025 10:51:54 +0800
-Subject: [PATCH] apply RPi patch of 5.6.78 (openEuler 6.6.0-124.0.0)
+Subject: [PATCH] apply RPi patch of 6.6.78 (openEuler 6.6.0-126.0.0)
 
 ---
  .../admin-guide/media/bcm2835-isp.rst         |  127 +
@@ -256928,10 +256928,10 @@ index 000000000000..cdc9963176e5
 +test_main();
 +0;
 diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
-index 0255ccea9136..96d3290a9a4b 100644
+index 23f77dc6dfe3..4bf261352665 100644
 --- a/drivers/usb/host/xhci-mem.c
 +++ b/drivers/usb/host/xhci-mem.c
-@@ -720,6 +720,14 @@ void xhci_setup_streams_ep_input_ctx(struct xhci_hcd *xhci,
+@@ -714,6 +714,14 @@ void xhci_setup_streams_ep_input_ctx(struct xhci_hcd *xhci,
  	ep_ctx->ep_info &= cpu_to_le32(~EP_MAXPSTREAMS_MASK);
  	ep_ctx->ep_info |= cpu_to_le32(EP_MAXPSTREAMS(max_primary_streams)
  				       | EP_HAS_LSA);
@@ -256946,7 +256946,7 @@ index 0255ccea9136..96d3290a9a4b 100644
  	ep_ctx->deq  = cpu_to_le64(stream_info->ctx_array_dma);
  }
  
-@@ -1404,6 +1412,7 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+@@ -1398,6 +1406,7 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
  	unsigned int ep_index;
  	struct xhci_ep_ctx *ep_ctx;
  	struct xhci_ring *ep_ring;
@@ -256954,7 +256954,7 @@ index 0255ccea9136..96d3290a9a4b 100644
  	unsigned int max_packet;
  	enum xhci_ring_type ring_type;
  	u32 max_esit_payload;
-@@ -1413,6 +1422,8 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+@@ -1407,6 +1416,8 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
  	unsigned int mult;
  	unsigned int avg_trb_len;
  	unsigned int err_count = 0;
@@ -256963,7 +256963,7 @@ index 0255ccea9136..96d3290a9a4b 100644
  
  	ep_index = xhci_get_endpoint_index(&ep->desc);
  	ep_ctx = xhci_get_ep_ctx(xhci, virt_dev->in_ctx, ep_index);
-@@ -1444,9 +1455,35 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
+@@ -1438,9 +1449,35 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
  
  	mult = xhci_get_endpoint_mult(udev, ep);
  	max_packet = usb_endpoint_maxp(&ep->desc);
@@ -257000,7 +257000,7 @@ index 0255ccea9136..96d3290a9a4b 100644
  	/* FIXME dig Mult and streams info out of ep companion desc */
  
  	/* Allow 3 retries for everything but isoc, set CErr = 3 */
-@@ -2249,16 +2286,18 @@ xhci_alloc_interrupter(struct xhci_hcd *xhci, gfp_t flags)
+@@ -2243,16 +2280,18 @@ xhci_alloc_interrupter(struct xhci_hcd *xhci, gfp_t flags)
  	struct xhci_interrupter *ir;
  	unsigned int num_segs;
  	int ret;
@@ -257024,7 +257024,7 @@ index 0255ccea9136..96d3290a9a4b 100644
  		xhci_warn(xhci, "Failed to allocate interrupter event ring\n");
  		kfree(ir);
 diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
-index 2a83547302c6..7e1952bbd827 100644
+index 029002027872..9ffefd67ea5a 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
 @@ -27,6 +27,8 @@
@@ -257036,8 +257036,8 @@ index 2a83547302c6..7e1952bbd827 100644
  /* Device for a quirk */
  #define PCI_VENDOR_ID_FRESCO_LOGIC		0x1b73
  #define PCI_DEVICE_ID_FRESCO_LOGIC_PDK		0x1000
-@@ -297,6 +299,16 @@ static int xhci_pci_reinit(struct xhci_hcd *xhci, struct pci_dev *pdev)
- 	return 0;
+@@ -307,6 +309,16 @@ static bool is_zhaoxin_cpu(void)
+ 	return false;
  }
  
 +static u32 xhci_vl805_get_fw_version(struct pci_dev *dev)
@@ -257053,7 +257053,7 @@ index 2a83547302c6..7e1952bbd827 100644
  static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  {
  	struct pci_dev                  *pdev = to_pci_dev(dev);
-@@ -482,9 +494,14 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
+@@ -492,9 +504,14 @@ static void xhci_pci_quirks(struct device *dev, struct xhci_hcd *xhci)
  			pdev->device == 0x3432)
  		xhci->quirks |= XHCI_BROKEN_STREAMS;
  
@@ -257070,10 +257070,10 @@ index 2a83547302c6..7e1952bbd827 100644
  
  	if (pdev->vendor == PCI_VENDOR_ID_ASMEDIA &&
 diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index 196765fc10d8..0fb79132c468 100644
+index 69fa64bfe865..4bbf9aab84e1 100644
 --- a/drivers/usb/host/xhci-ring.c
 +++ b/drivers/usb/host/xhci-ring.c
-@@ -507,6 +507,19 @@ void xhci_ring_ep_doorbell(struct xhci_hcd *xhci,
+@@ -505,6 +505,19 @@ void xhci_ring_ep_doorbell(struct xhci_hcd *xhci,
  
  	trace_xhci_ring_ep_doorbell(slot_id, DB_VALUE(ep_index, stream_id));
  
@@ -257093,7 +257093,7 @@ index 196765fc10d8..0fb79132c468 100644
  	writel(DB_VALUE(ep_index, stream_id), db_addr);
  	/* flush the write */
  	readl(db_addr);
-@@ -635,8 +648,11 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
+@@ -633,8 +646,11 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
  	struct xhci_ring *ep_ring;
  	struct xhci_command *cmd;
  	struct xhci_segment *new_seg;
@@ -257105,7 +257105,7 @@ index 196765fc10d8..0fb79132c468 100644
  	dma_addr_t addr;
  	u64 hw_dequeue;
  	bool cycle_found = false;
-@@ -674,7 +690,27 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
+@@ -672,7 +688,27 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
  	hw_dequeue = xhci_get_hw_deq(xhci, dev, ep_index, stream_id);
  	new_seg = ep_ring->deq_seg;
  	new_deq = ep_ring->dequeue;
@@ -257134,7 +257134,7 @@ index 196765fc10d8..0fb79132c468 100644
  
  	/*
  	 * We want to find the pointer, segment and cycle state of the new trb
-@@ -707,6 +743,15 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
+@@ -705,6 +741,15 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
  	} while (!cycle_found || !td_last_trb_found);
  
  deq_found:
@@ -257150,7 +257150,7 @@ index 196765fc10d8..0fb79132c468 100644
  
  	/* Don't update the ring cycle state for the producer (us). */
  	addr = xhci_trb_virt_to_dma(new_seg, new_deq);
-@@ -717,9 +762,9 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
+@@ -715,9 +760,9 @@ static int xhci_move_dequeue_past_td(struct xhci_hcd *xhci,
  	}
  
  	if ((ep->ep_state & SET_DEQ_PENDING)) {
@@ -257163,7 +257163,7 @@ index 196765fc10d8..0fb79132c468 100644
  	}
  
  	/* This function gets called from contexts where it cannot sleep */
-@@ -3690,6 +3735,48 @@ static int xhci_align_td(struct xhci_hcd *xhci, struct urb *urb, u32 enqd_len,
+@@ -3686,6 +3731,48 @@ static int xhci_align_td(struct xhci_hcd *xhci, struct urb *urb, u32 enqd_len,
  	return 1;
  }
  
@@ -257212,7 +257212,7 @@ index 196765fc10d8..0fb79132c468 100644
  /* This is very similar to what ehci-q.c qtd_fill() does */
  int xhci_queue_bulk_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
  		struct urb *urb, int slot_id, unsigned int ep_index)
-@@ -3846,6 +3933,8 @@ int xhci_queue_bulk_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
+@@ -3842,6 +3929,8 @@ int xhci_queue_bulk_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
  	}
  
  	check_trb_math(urb, enqd_len);
@@ -257221,7 +257221,7 @@ index 196765fc10d8..0fb79132c468 100644
  	giveback_first_trb(xhci, slot_id, ep_index, urb->stream_id,
  			start_cycle, start_trb);
  	return 0;
-@@ -3995,6 +4084,8 @@ int xhci_queue_ctrl_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
+@@ -3991,6 +4080,8 @@ int xhci_queue_ctrl_tx(struct xhci_hcd *xhci, gfp_t mem_flags,
  			/* Event on completion */
  			field | TRB_IOC | TRB_TYPE(TRB_STATUS) | ep_ring->cycle_state);
  
@@ -257353,7 +257353,7 @@ index e8df9d51cc45..33b0c71474ad 100644
  	.enable_device =	xhci_enable_device,
  	.update_hub_device =	xhci_update_hub_device,
 diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
-index 2ae0496b2063..72c426c23428 100644
+index 5af04c6acd0e..f4bf52f4681e 100644
 --- a/drivers/usb/host/xhci.h
 +++ b/drivers/usb/host/xhci.h
 @@ -492,6 +492,8 @@ struct xhci_ep_ctx {
