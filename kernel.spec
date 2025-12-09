@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       126
 %global maintenance_release .0.0
-%global pkg_release         .103
+%global pkg_release         .104
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,11 @@ fi
 %endif
 
 %changelog
+* Tue Dec 09 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-126.0.0.104
+- Bugfix: Fix duplicate RISC-V SBI firmware event name
+- Add lrw core JSON file with metric support
+- Add support for Spacemit K3
+
 * Thu Dec 04 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-126.0.0.103
 - RISC-V kernel upgrade to 6.6.0-126.0.0
 - Add support for LRW, DP1000
