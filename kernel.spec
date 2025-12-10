@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       293
+%global devel_release       294
 %global maintenance_release .0.0
-%global pkg_release         .196
+%global pkg_release         .197
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,96 @@ fi
 %endif
 
 %changelog
+* Wed Dec 10 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-294.0.0.197
+- !19384 [OLK-5.10] Fix CVE-2025-22039
+- !19543 [OLK-5.10] Fix CVE-2025-21968
+- !19534 [OLK-5.10] Fix CVE-2024-57911
+- !19606 [OLK-5.10] Fix CVE-2023-53466
+- drm/amd/display: Fix slab-use-after-free on hdcp_work
+- !19542 [OLK-5.10] Fix CVE-2022-49196
+- ksmbd: fix overflow in dacloffset bounds check
+- wifi: mt76: mt7915: fix memory leak in mt7915_mcu_exit
+- !19583  CVE-2023-53491 v3
+- !19578  net/oenetcls: Prioritize oenetcls hooks over rps
+- !19575  Bugfix for three issues
+- !19574  Bluetooth: hci_event: call disconnect callback before deleting conn
+- !19573  Bluetooth: Fix hci_suspend_sync crash
+- !19572  net/smc: fix UAF on smcsk after smc_listen_out()
+- !19571  i40e: remove read access to debugfs files
+- !19570  ipvs: Defer ip_vs_ftp unregister during netns cleanup
+- !19569  net/packet: fix a race in packet_set_ring() and packet_notifier()
+- !19567  vsock: Do not allow binding to VMADDR_PORT_ANY
+- !19566  ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- !19565  ipv6: reject malicious packets in ipv6_gso_segment()
+- start_kernel: use unreachable too fix __noreturn build warning
+- start_kernel: Add __no_stack_protector function attribute
+- net/oenetcls: Prioritize oenetcls hooks over rps
+- zcopy: Fix NULL pointer dereference while attach conflict with free
+- zcopy: Fix softlockup while attach PUD-SIZE page
+- zcopy: Fix invalid paging request while attach transhugepage to same addr
+- Bluetooth: hci_event: call disconnect callback before deleting conn
+- Bluetooth: Fix hci_suspend_sync crash
+- net/smc: fix UAF on smcsk after smc_listen_out()
+- i40e: remove read access to debugfs files
+- ipvs: Defer ip_vs_ftp unregister during netns cleanup
+- net/packet: fix a race in packet_set_ring() and packet_notifier()
+- vsock: Do not allow binding to VMADDR_PORT_ANY
+- ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- ipv6: reject malicious packets in ipv6_gso_segment()
+- !19522  vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- !19523  KVM: arm64: Prevent access to vCPU events before init
+- powerpc/pseries: Fix use after free in remove_phb_dynamic()
+- iio: dummy: iio_simply_dummy_buffer: fix information leak in triggered buffer
+- !19349 net:don't dump stack on queue timeout
+- KVM: arm64: Prevent access to vCPU events before init
+- vxlan: Fix NPD when refreshing an FDB entry with a nexthop object
+- !19450  ksmbd: fix use-after-free in smb_break_all_levII_oplock()
+- !19449  ksmbd: fix Preauh_HashValue race condition
+- !19498  mainline patch backport
+- timers: Fix NULL function pointer race in timer_shutdown_sync()
+- arm64: mte: Do not flag the zero page as PG_mte_tagged
+- net: don't dump stack on queue timeout
+- !19461  arm64: kdump: Skip kmemleak scan reserved memory for kdump
+- arm64: kdump: Skip kmemleak scan reserved memory for kdump
+- !19315 [OLK-5.10] Fix CVE-2024-57907
+- !19308 [OLK-5.10] Fix CVE-2025-21905
+- !18648 [OLK-5.10] Fix CVE-2025-38729
+- !19003 [OLK-5.10]Fix CVE-2025-38706
+- !19445  memory: tegra20-emc: fix an OF node reference bug in tegra_emc_find_node_by_ram_code()
+- ksmbd: fix use-after-free in smb_break_all_levII_oplock()
+- ksmbd: fix Preauh_HashValue race condition
+- !19443  CVE-2025-22022
+- memory: tegra20-emc: fix an OF node reference bug in tegra_emc_find_node_by_ram_code()
+- !19436 RDMA/hns: Fix a memory issue in roce bonding
+- usb: xhci: Apply the link chain quirk on NEC isoc endpoints
+- usb: xhci: move link chain bit quirk checks into one helper function.
+- !19418  iommu/amd: Fix potential buffer overflow in parse_ivrs_acpihid
+- !19428  Bluetooth: hci_core: Fix use-after-free in vhci_flush()
+- !19427  netfilter: nft_set_pipapo: clamp maximum map bucket size to INT_MAX
+- !19426  RDMA/core: Fix "KASAN: slab-use-after-free Read in ib_register_device" problem
+- !19425  net: openvswitch: fix nested key length validation in the set() action
+- !19424  net: ppp: Add bound checking for skb data on ppp_sync_txmung
+- !19431  memstick: rtsx_usb_ms: Fix slab-use-after-free in rtsx_usb_ms_drv_remove
+- !19420  vhost-scsi: Fix handling of multiple calls to vhost_scsi_set_endpoint
+- !19419  media: venus: hfi: add check to handle incorrect queue size
+- RDMA/hns: Fix a memory issue in roce bonding
+- RDMA/hns: Fix memory issues in roce reserve PD/CQ
+- RDMA/core: Reduce cond_resched() frequency in __ib_umem_release
+- RDMA/core: Prevent soft lockup during large user memory region cleanup
+- memstick: rtsx_usb_ms: Fix slab-use-after-free in rtsx_usb_ms_drv_remove
+- Bluetooth: hci_core: Fix use-after-free in vhci_flush()
+- netfilter: nft_set_pipapo: clamp maximum map bucket size to INT_MAX
+- RDMA/core: Fix "KASAN: slab-use-after-free Read in ib_register_device" problem
+- net: openvswitch: fix nested key length validation in the set() action
+- net: ppp: Add bound checking for skb data on ppp_sync_txmung
+- vhost-scsi: Fix handling of multiple calls to vhost_scsi_set_endpoint
+- media: venus: hfi: add check to handle incorrect queue size
+- iommu/amd: Fix potential buffer overflow in parse_ivrs_acpihid
+- iio: adc: rockchip_saradc: fix information leak in triggered buffer
+- wifi: iwlwifi: limit printed string from FW file
+- ASoC: core: Check for rtd == NULL in snd_soc_remove_pcm_runtime()
+- ALSA: usb-audio: Validate UAC3 power domain descriptors, too
+
 * Wed Dec 03 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-293.0.0.196
 - !19413  Fix CVE-2025-39994
 - !19432  Revert "PCI/MSI: Set device flag indicating only 32-bit MSI support"
