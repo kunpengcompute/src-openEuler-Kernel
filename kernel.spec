@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       125
+%global devel_release       127
 %global maintenance_release .0.0
-%global pkg_release         .124
+%global pkg_release         .125
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1087,6 +1087,207 @@ fi
 %endif
 
 %changelog
+* Wed Dec 10 2025 Li Nan <linan122@huawei.com> - 6.6.0-127.0.0.125
+- !19620 iommufd: Prevent ALIGN() overflow
+- !19608 ub: ub_fwctl: Modify TP/TA/SCC register query process.
+- !18634 [OLK-6.6]Fix CVE-2025-38706
+- iommufd: Prevent ALIGN() overflow
+- !19400  smb: client: fix mid_q_entry memleak leak with per-mid locking
+- !19601  net/packet: fix a race in packet_set_ring() and packet_notifier()
+- !19598  ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- !19597  ipv6: prevent infinite loop in rt6_nlmsg_size()
+- !19354 [OLK-6.6] Fix CVE-2025-37822
+- !19355 [OLK-6.6] Fix CVE-2025-38361
+- !19563 ub: cdma: fix the timing issue during flow-based deregistration.
+- !19585 crypto: hisilicon/trng - Fix the issue where TRNG cannot be used by multiple threads.
+- !19610 perf: Fix lastup for multi-CPU PG
+- !19609 urma: fixed process exiting uburma driver's private memory UAF
+- !19592  Fix incorrect use of cpuhp_remove_multi_state parameter
+- perf: Fix lastup for multi-CPU PG
+- urma: fixed process exiting uburma driver's private memory UAF
+- !19607 Revert "RDMA/hns: Fix mismatch exception rollback"
+- ub: cdma: modify the compatibility field according to the Linux KABI specification
+- ub: cdma: fix the timing issue during flow-based deregistration.
+- ub: cdma: fix kasan cdma jfae uaf
+- ub: cdma: modify log level about en information
+- ub: ub_fwctl: Modify TP/TA/SCC register query process.
+- Revert "RDMA/hns: Fix mismatch exception rollback"
+- !18664 [OLK-6.6] Fix CVE-2025-22039
+- net/packet: fix a race in packet_set_ring() and packet_notifier()
+- ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- ipv6: prevent infinite loop in rt6_nlmsg_size()
+- !19558 obmm: sync obmm default params value to sysfs.
+- !19560 obmm: set MAX Numa Distance to 255
+- !19589 ub:ubus: add active_mutex in ub_entity
+- soc cache: Add compilation config for hisi_soc_l3c
+- soc cache: Don't poll before removing all locks
+- soc cache: Drop redundant vm_pgoff
+- soc cache: fix walk page parameter and drop incorrect check
+- soc cache: Check address while walking pages
+- soc_cache: Fix component removal order to avoid race condition
+- soc cache: cleanup: Remove the redundant check of vm_pgoff
+- soc cache: cleanup: Change type of mnt_type
+- soc cache: cleanup: avoid tag addr from interfering range validation
+- soc cache: cleanup: move judgement of soc cache dev into lock protection
+- soc cache: cleanup: fix memory leakage on error path
+- soc_cache: Fix error code returning from hisi_soc_l3c_do_lock
+- soc_cache: Fix incorrect use of cpuhp_remove_multi_state parameter
+- soc cache: cleanup: replace dynamically allocated param with local variable
+- ub:ubus: add active_mutex in ub_entity
+- !19576  Bugfix for two issues
+- crypto: hisilicon/trng - support tfms sharing the device
+- crypto: hisilicon/trng - use DEFINE_MUTEX() and LIST_HEAD()
+- Revert "crypto: hisilicon/trng - support to obtain random numbers from soft algorithm"
+- Revert "crypto: hisilicon/trng - use DEFINE_MUTEX() for mutex lock"
+- !19557  Fix UAF issue for mfs
+- !19555 ub: bugfix of port, decoder and vfio
+- !19561 obmm: fix granu checking in mmap
+- zcopy: Fix softlockup while attach PUD-SIZE page
+- zcopy: Fix NULL pointer dereference while attach conflict with free
+- ub:unic Adaptation of the port reset interface
+- !19521 uvb: change dir name
+- !19532 net: hns3: add VLAN id validation before using
+- !19271  Squashfs: fix uninit-value in squashfs_get_parent
+- !19269  media: venus: Add a check for packet size after reading from shared memory
+- !19268  eventpoll: Fix semi-unbounded recursion
+- !19267  kernfs: Relax constraint in draining guard
+- !19552  KVM: arm64: Check the untrusted offset in FF-A memory share
+- !19551 add check ack_dono flag for reboot event
+- obmm: sync obmm default params value to module sysfs.
+- obmm: set MAX Numa Distance to 255
+- obmm: fix granu checking in mmap
+- ub:ubus adapt port local ras
+- vfio:ubus vfio-ub support ub entity enable
+- mfs: Fix UAF problem on event object when enable tracepoint
+- ub:ubus: fix bug of msg workqueue null
+- ub:hisi-ubus ub:hisi-ubus: Move the decoder's page table operations to hisi-ubus
+- add check ack_dono flag for reboot event
+- !19517 gmem: fix several issues
+- !19519  arm64/mpam: Reset mbwu_state while creating new monitor group
+- KVM: arm64: Check the untrusted offset in FF-A memory share
+- !19530  Fix unexpected behavior in resctrl mounting
+- !19520 ub: udma: bugfix related to init xa flags.
+- !19205 [OLK-6.6] Fix CVE-2025-39732
+- !19156 [OLK-6.6] Fix CVE-2025-39684
+- !19157 [OLK-6.6] Fix CVE-2025-39675
+- net: hns3: add VLAN id validation before using
+- !19526  mm/numa_remote: fix wild-memory-access in numa_remote_hugetlb_nowatermark
+- fs/resctrl: Prevent mounting with unsupported options
+- fs/resctrl: Fix resctrl mount options display in mount list
+- ub: udma: bugfix related to init xa flags.
+- ub: udma: bugfix for rx close.
+- mm/numa_remote: fix wild-memory-access in numa_remote_hugetlb_nowatermark
+- uvb: change dir name
+- !19507  Fix some memory policy bugfix
+- arm64/mpam: Need to reset MPAM component when umounting resctrl
+- arm64/mpam: Remove the redundant prev_val member variable
+- arm64/mpam: Reset mbwu_state while creating new monitor group
+- !19508 ub: ub_fwctl: Modify the problem of incorret data when querying entry
+- !19513  zcopy: fix two issues
+- zcopy: Fix Bad rss-counter state while non-mapping pages attach
+- zcopy: Fix null pointer dereference while attach transhugepage twice to same addr
+- ub: ub_fwctl: Modify the problem of incorret data when querying entry information
+- !19357 ubios_uvb: add msleep in poll thread
+- ubios_uvb: add check for uvb window buffer size
+- !19494  crypto: hisilicon - add reference counting to queues for tfm kernel reuse
+- !19475  task_work: Fix NMI race condition
+- mempolicy: restrict smart grid scheduling to vma_alloc_folio path
+- mempolicy: fix missing mmap_read_unlock() in error path
+- ubios_uvb: add check for cis message and senderid
+- !19486 [OLK-6.6] fix possible crash caused by null pointer when hct get page.
+- crypto: hisilicon/sec2 - support skcipher/aead fallback for hardware queue unavailable
+- crypto: hisilicon/hpre - support the hpre algorithm fallback
+- crypto: hisilicon/zip - support fallback for zip
+- crypto: hisilicon/qm - optimize device selection priority based on queue ref count and NUMA distance
+- crypto: hisilicon/qm - add reference counting to queues for tfm kernel reuse
+- crypto: hisilicon - consolidate qp creation and start in hisi_qm_alloc_qps_node
+- crypto: hisilicon/qm - centralize the sending locks of each module into qm
+- crypto: hisilicon/qm - enhance the configuration of req_type in queue attributes
+- Revert "crypto: hisilicon/hpre - support the hpre algorithm fallback"
+- crypto: hisilicon/hpre: extend tag field to 64 bits for better performance
+- crypto: hisilicon/sec - move backlog management to qp and store sqe in qp for callback
+- crypto: hisilicon/zip - adjust the way to obtain the req in the callback function
+- ubios_uvb: add msleep in poll thread
+- ccp/hct: fix possible crash caused by null pointer when hct get page.
+- task_work: Fix NMI race condition
+- !19468 urma: Bugfix for ubcore_get_route_list implement
+- urma: Bugfix for ubcore_get_route_list implement
+- !19329 hisi_acc_vfio_pci: adapt to new migration configuration
+- !19435 crypto: hisilicon/qm - fix incorrect judgment in qm_get_complete_eqe_num()
+- !19383 [OLK-6.6] backport important bugfix for Broadcom NIC driver from upstream linux-6.6.y
+- !19460  xsched: XCU Partition
+- !19316  Fix cves CVE-2025-40040 & CVE-2025-40058
+- !19447 net: hns3: remove VF multi-TC compat bit
+- xsched: add throttling statistics for xsched groups
+- xsched: fix task stall when quota is disabled
+- xsched: suppress excessive error logs during cgroup file retry
+- xsched: fix shares misaccounting when multiple tasks run in one cgroup
+- xsched: switch xcu cgroup subsystem from domain mode to thread mode
+- !19439 obmm: remove redundant code and fix log issues
+- !18481 [OLK-6.6] Add platform-specific quirks for ZX-200 device
+- !19085 scsi: mpi3mr: Add support for status reply descriptor
+- !19078 scsi: mpi3mr: Split off bus_reset function from host_reset
+- !19416  kernfs: Fix UAF in polling when open file is released
+- !19415  smb: client: fix race with concurrent opens in rename(2)
+- !19446  net/mlx5: Fix ECVF vports unload on shutdown flow
+- obmm: remove redundant code and fix log issues
+- !19441  rv: Use strings in da monitors tracepoints
+- !19411  CVE-2025-39697
+- !19442  CVE-2025-22022
+- net: hns3: remove VF multi-TC compat bit
+- net/mlx5: Fix ECVF vports unload on shutdown flow
+- usb: xhci: Apply the link chain quirk on NEC isoc endpoints
+- usb: xhci: move link chain bit quirk checks into one helper function.
+- !19429  net/sched: Abort __tc_modify_qdisc if parent class does not exist
+- rv: Use strings in da monitors tracepoints
+- !19438  drm/scheduler: signal scheduled fence when kill job
+- !19410  Fix CVE-2025-39994
+- drm/scheduler: signal scheduled fence when kill job
+- obmm: set up default mem allocator granule
+- crypto: hisilicon/qm - fix incorrect judgment in qm_get_complete_eqe_num()
+- crypto: hisilicon/qm - add missing default in switch in qm_vft_data_cfg
+- crypto: hisilicon/sgl - remove unnecessary checks for curr_hw_sgl error
+- crypto: hisilicon/qm - add concurrency protection for variable err_threshold
+- crypto: hisilicon/qm - add the save operation of eqe and aeqe
+- crypto: hisilicon/qm - restore original qos values
+- crypto: hisilicon/qm - Fix device reference leak in qm_get_qos_value
+- net/sched: Abort __tc_modify_qdisc if parent class does not exist
+- kernfs: Fix UAF in polling when open file is released
+- smb: client: fix race with concurrent opens in rename(2)
+- NFS: Fix a race when updating an existing write
+- nfs: fold nfs_page_group_lock_subrequests into nfs_lock_and_join_requests
+- media: tuner: xc5000: Fix use-after-free in xc5000_release
+- media: tunner: xc5000: Refactor firmware load
+- smb: client: fix mid_q_entry memleak leak with per-mid locking
+- bnxt_en: Fix a possible memory leak in bnxt_ptp_init
+- drm/amd/display: Check dce_hwseq before dereferencing it
+- riscv: uprobes: Add missing fence.i after building the XOL buffer
+- hisi_acc_vfio_pci: adapt to new migration configuration
+- crypto: hisilicon - qm updates BAR configuration
+- hisi_acc_vfio_pci: Fix reference leak in hisi_acc_vfio_debug_init
+- Revert "migration: update BAR space size"
+- Revert "migration: qm updates BAR configuration"
+- Revert "migration: adapt to new migration configuration"
+- iommu/vt-d: Disallow dirty tracking if incoherent page walk
+- mm/ksm: fix flag-dropping behavior in ksm_madvise
+- Squashfs: fix uninit-value in squashfs_get_parent
+- media: venus: Add a check for packet size after reading from shared memory
+- eventpoll: Fix semi-unbounded recursion
+- kernfs: Relax constraint in draining guard
+- ksmbd: fix overflow in dacloffset bounds check
+- wifi: ath11k: fix sleeping-in-atomic in ath11k_mac_op_set_bitrate_mask()
+- drm/amd/display: Add null pointer check in mod_hdcp_hdcp1_create_session()
+- comedi: Fix use of uninitialized memory in do_insn_ioctl() and do_insnlist_ioctl()
+- comedi: Fix initialization of data for instructions that write to subdevice
+- scsi: mpi3mr: Add support for status reply descriptor
+- scsi: mpi3mr: Split off bus_reset function from host_reset
+- gmem: remove reduntant interfaces and use proper mmap flag
+- gmem: gmem_reserve_vma should use vma_flag_clear to remove flag
+- gmem: remove inpropre BUG_ON in do_peer_shared_anonymous_page
+- gmem: hmemcpy should use dma for phy addr
+- Add platform-specific quirks for ZX-200 device
+- ASoC: core: Check for rtd == NULL in snd_soc_remove_pcm_runtime()
+
 * Wed Dec 03 2025 Li Nan <linan122@huawei.com> - 6.6.0-125.0.0.124
 - !17888 [OLK-6.6] Fix CVE-2025-37777
 - !19371  RDMA/rxe: Fix race in do_task() when draining
