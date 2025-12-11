@@ -1,5 +1,10 @@
+%ifarch sw_64
+%define with_signmodules  0
+%define with_kabichk 0
+%else
 %define with_signmodules  1
 %define with_kabichk 1
+%endif
 
 # Default without toolchain_clang
 %bcond_with toolchain_clang
@@ -42,7 +47,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       127
 %global maintenance_release .0.0
-%global pkg_release         .125
+%global pkg_release         .126
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -169,7 +174,7 @@ Provides: kernel-uname-r = %{KernelVer} kernel=%{KernelVer}
 
 Requires: dracut >= 001-7 grubby >= 8.28-2 initscripts >= 8.11.1-1 linux-firmware >= 20100806-2 module-init-tools >= 3.16-2
 
-ExclusiveArch: noarch aarch64 i686 x86_64 riscv64 ppc64le loongarch64
+ExclusiveArch: noarch aarch64 i686 x86_64 riscv64 ppc64le loongarch64 sw_64
 ExclusiveOS: Linux
 
 %if %{with_perf}
@@ -454,8 +459,14 @@ sed -i 's/CONFIG_LTO_NONE=y/# CONFIG_LTO_NONE is not set/' .config
 
 TargetImage=$(basename $(make -s image_name))
 
+%ifarch sw_64
+%{make} ARCH=%{Arch} %{?_smp_mflags}
+cp vmlinux ./arch/sw_64/boot/
+cp vmlinux ./arch/sw_64/boot/vmlinux.bin
+%else
 %{make} ARCH=%{Arch} $TargetImage %{?_smp_mflags}
 %{make} ARCH=%{Arch} modules %{?_smp_mflags}
+%endif
 
 %if 0%{?with_kabichk}
     chmod 0755 %{SOURCE18}
@@ -718,7 +729,7 @@ find $RPM_BUILD_ROOT/usr/include -name "\.*"  -exec rm -rf {} \;
 %endif
 
 # deal with vdso
-%ifnarch ppc64le
+%ifnarch ppc64le sw_64
 %{make} -s ARCH=%{Arch} INSTALL_MOD_PATH=$RPM_BUILD_ROOT vdso_install KERNELRELEASE=%{KernelVer}
 %endif
 if [ ! -s ldconfig-kernel.conf ]; then
@@ -906,6 +917,10 @@ if [ `uname -i` == "aarch64" ] &&
         [ -f /boot/EFI/grub2/grub.cfg ]; then
     /usr/bin/sh  %{_sbindir}/mkgrub-menu-%{version}-%{devel_release}%{?maintenance_release}%{?pkg_release}.sh %{version}-%{release}.aarch64  /boot/EFI/grub2/grub.cfg  remove
 fi
+if [ `uname -i` == "sw_64" ] &&
+        [ -f /boot/EFI/grub2/grub.cfg ]; then
+    /usr/bin/sh  %{_sbindir}/mkgrub-menu-%{version}-%{devel_release}%{?maintenance_release}%{?pkg_release}.sh %{version}-%{release}.aarch64  /boot/EFI/grub2/grub.cfg  remove
+fi
 
 %postun
 %{_sbindir}/new-kernel-pkg --rminitrd --rmmoddep --remove %{KernelVer} || exit $?
@@ -938,6 +953,9 @@ if [ `uname -i` == "loongarch64" ];then
 	[ "x${GRUB_CFG}" == "x" ] && [ -f /boot/efi/EFI/openEuler/grub.cfg ] && GRUB_CFG=/boot/efi/EFI/openEuler/grub.cfg
 	[ "x${GRUB_CFG}" != "x" ] && grub2-mkconfig -o ${GRUB_CFG}
 	grubby --set-default=/boot/vmlinuz-%{KernelVer}
+fi
+if [ `uname -i` == "sw_64" ];then
+        grub2-mkconfig -o /boot/efi/EFI/openEuler/grub.cfg
 fi
 if [ -x %{_sbindir}/weak-modules ]
 then
@@ -1087,6 +1105,9 @@ fi
 %endif
 
 %changelog
+* Thu Dec 11 2025 wuzx<wuzx1226@qq.com> - 6.6.0-127.0.0.126
+- Add sw64 support in kernel.spec
+
 * Wed Dec 10 2025 Li Nan <linan122@huawei.com> - 6.6.0-127.0.0.125
 - !19620 iommufd: Prevent ALIGN() overflow
 - !19608 ub: ub_fwctl: Modify TP/TA/SCC register query process.
