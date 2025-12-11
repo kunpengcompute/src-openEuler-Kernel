@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       126
+%global devel_release       128
 %global maintenance_release .0.0
-%global pkg_release         .104
+%global pkg_release         .105
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,242 @@ fi
 %endif
 
 %changelog
+* Thu Dec 11 2025 Li Nan <linan122@huawei.com> - 6.6.0-128.0.0.105
+- !19097 scsi: mpi3mr: Clear ioctl blocking flag for an unresponsive controller
+- !19095 scsi: mpi3mr: Set MPI request flags appropriately
+- !19092 scsi: mpi3mr: Replace deprecated strncpy() with assignments
+- !19086 scsi: mpi3mr: Fetch correct device dev handle for status reply descriptor
+- !19636  Some bugfixes for interference
+- !19639 ub: ubase: Fix spell error of month
+- ub: ubase: Fix spell error of month
+- !19637 ub: udma: bugfix related to print location.
+- !19637 ub: udma: bugfix related to print location.
+- !19638 ub:ubus: bugfix port reset in cluster mode
+- !19623 iommu/ummu: Fix the issue of uninitialized resources in logic_ummu_viommu
+- ub:ubus: bugfix port reset in cluster mode
+- ub:ubus: add hotplug capability check
+- ub:ubus: bugfix calltrace of killing qemu when rmmod hisi_ubus
+- ub: udma: bugfix related to print location.
+- iommu/ummu: Remove redundant CONFIG_UB_UBRT_PLAT_DEV and code
+- interference: Add version compatibility check between subsystem and cgroup
+- interference: Fix missing interference.stat file in v1 hierarchy
+- interference: Add fallback to sched_clock when TSC is unavailable
+- interference: Add dependency on CONFIG_SCHED_INFO to avoid build error
+- interference: Resolve arm32 build error by restricting IFS to x86/arm64
+- interference: Avoid null pointer dereference in cgroup_ifs_add_files
+- iommu/ummu-core: Duplicate EID are not allowed
+- iommu/ummu: Move tid_type attr to logic ummu
+- iommu/ummu: Fixing the issue of uninitialized resources in logic_ummu_viommu
+- !19634 crypto: hisilicon - some bugfix
+- !19628 ub:ubfi: Fix UBFI memory leak issue
+- !19616 ub: ubase&unic: Fix some bug finding in running the driver
+- !19553 perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- crypto: hisilicon - lower priority for hisilicon crypto implementations
+- crypto: hisilicon/zip - remove redundant callback validation and invocation in crypto_wait_req
+- crypto: hisilicon/zip - add algorithm check before soft tfm allocation
+- crypto: hisilicon/zip - fix a callback problem
+- crypto: hisilicon/qm - place the interrupt status interface after the PM usage counter
+- crypto: hisilicon/qm - increment PM usage counter when handling the aeq interrupt
+- crypto: hisilicon/sgl - fix inconsistent map/unmap direction issue
+- crypto: hisilicon/hpre - support curve25519 fallback for hardware queue unavailable
+- crypto: hisilicon - mask all error type when uninit
+- net: unic: Fixed the call trace issue triggered internally by the completion event interrupt
+- !19624  xsched: XCU Partition
+- !19621 ubagg: fix mismatched spin unlock.
+- iommu/ummu: Optimize chip generational compatibility feature
+- iommu/ummu: Fix VM multi-instance problem
+- !19620 iommufd: Prevent ALIGN() overflow
+- ubagg: fix mismatched spin unlock.
+- net: unic: Restore tx and rx stats when setting coalesce parameters
+- ub: ubase: obtain rc_max_cnt from MAMI
+- ub: ubase: fix a issue of udma device's eid deleted when stop rx stream and reset concurrently
+- ub: ubase: add opcode to query ub port_bitmap.
+- net: unic: Restore default queue count per tc when tc number changes.
+- ub: ubase: Fix the issue of mismatch between the ubase aeqe structure and the protocol.
+- ub: ubase: add ip_over_urma API for udma.
+- ub: ubase: optimize print format of fw_ver in debugfs.
+- ub: ubase: Fix the issue of deadlock by quantities of log in the ctrlq crq task.
+- ub: ubase: Remove non-cluster mode code.
+- net: unic: Resolve the bandwidth jitter problem
+- ub:ubfi: Fix UBFI memory leak issue
+- ub:ubus: Matt and MMIO judgments are not performed in cluster
+- ub:ubus: Delete ubc cfg0 config during cluster mode
+- ub:hisi-ubus: Fix ue reg/unreg without lock bug
+- xsched: fix infinite loop caused by invalid CFS group vruntime update
+- xsched: prevent race between enqueue_ctx and xsched_task_free
+- xsched: DEBUG log cleanup
+- xsched: fix divide-by-zero caused by u64 overflow in CFS shares weight calculation
+- xsched: prevent NULL deref by refcounting css and tracking offline state
+- xsched: fix hung_task caused by cgroup_file_show and xcg_mutex deadlock
+- xsched: fix concurrent modification NULL pointer dereference in xcu.sched_class
+- xsched: fix NULL pointer risk on attach entry allocation
+- xsched: refactor CFS per-XCU rq init/deinit paths
+- !19608 ub: ub_fwctl: Modify TP/TA/SCC register query process.
+- !18634 [OLK-6.6]Fix CVE-2025-38706
+- iommufd: Prevent ALIGN() overflow
+- !19400  smb: client: fix mid_q_entry memleak leak with per-mid locking
+- iommu/ummu: NO plbi for grant, config permq need dma_wmb
+- iommu/ummu: Fix compilation option configuration about CONFIG_ACPI
+- iommu/ummu: UMMU doesn't send tect sync after delete eid
+- iommu/ummu: Delete unnecessary commands
+- !19601  net/packet: fix a race in packet_set_ring() and packet_notifier()
+- !19598  ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- !19597  ipv6: prevent infinite loop in rt6_nlmsg_size()
+- !19354 [OLK-6.6] Fix CVE-2025-37822
+- !19355 [OLK-6.6] Fix CVE-2025-38361
+- !19563 ub: cdma: fix the timing issue during flow-based deregistration.
+- !19585 crypto: hisilicon/trng - Fix the issue where TRNG cannot be used by multiple threads.
+- !19610 perf: Fix lastup for multi-CPU PG
+- !19609 urma: fixed process exiting uburma driver's private memory UAF
+- !19592  Fix incorrect use of cpuhp_remove_multi_state parameter
+- perf: Fix lastup for multi-CPU PG
+- urma: fixed process exiting uburma driver's private memory UAF
+- !19607 Revert "RDMA/hns: Fix mismatch exception rollback"
+- ub: cdma: modify the compatibility field according to the Linux KABI specification
+- ub: cdma: fix the timing issue during flow-based deregistration.
+- ub: cdma: fix kasan cdma jfae uaf
+- ub: cdma: modify log level about en information
+- ub: ub_fwctl: Modify TP/TA/SCC register query process.
+- Revert "RDMA/hns: Fix mismatch exception rollback"
+- !18664 [OLK-6.6] Fix CVE-2025-22039
+- net/packet: fix a race in packet_set_ring() and packet_notifier()
+- ice: Fix a null pointer dereference in ice_copy_and_init_pkg()
+- ipv6: prevent infinite loop in rt6_nlmsg_size()
+- !19558 obmm: sync obmm default params value to sysfs.
+- !19560 obmm: set MAX Numa Distance to 255
+- !19589 ub:ubus: add active_mutex in ub_entity
+- soc cache: Add compilation config for hisi_soc_l3c
+- soc cache: Don't poll before removing all locks
+- soc cache: Drop redundant vm_pgoff
+- soc cache: fix walk page parameter and drop incorrect check
+- soc cache: Check address while walking pages
+- soc_cache: Fix component removal order to avoid race condition
+- soc cache: cleanup: Remove the redundant check of vm_pgoff
+- soc cache: cleanup: Change type of mnt_type
+- soc cache: cleanup: avoid tag addr from interfering range validation
+- soc cache: cleanup: move judgement of soc cache dev into lock protection
+- soc cache: cleanup: fix memory leakage on error path
+- soc_cache: Fix error code returning from hisi_soc_l3c_do_lock
+- soc_cache: Fix incorrect use of cpuhp_remove_multi_state parameter
+- soc cache: cleanup: replace dynamically allocated param with local variable
+- ub:ubus: add active_mutex in ub_entity
+- !19576  Bugfix for two issues
+- crypto: hisilicon/trng - support tfms sharing the device
+- crypto: hisilicon/trng - use DEFINE_MUTEX() and LIST_HEAD()
+- Revert "crypto: hisilicon/trng - support to obtain random numbers from soft algorithm"
+- Revert "crypto: hisilicon/trng - use DEFINE_MUTEX() for mutex lock"
+- !19557  Fix UAF issue for mfs
+- !19555 ub: bugfix of port, decoder and vfio
+- !19561 obmm: fix granu checking in mmap
+- zcopy: Fix softlockup while attach PUD-SIZE page
+- zcopy: Fix NULL pointer dereference while attach conflict with free
+- ub:unic Adaptation of the port reset interface
+- !19521 uvb: change dir name
+- !19532 net: hns3: add VLAN id validation before using
+- !19271  Squashfs: fix uninit-value in squashfs_get_parent
+- !19269  media: venus: Add a check for packet size after reading from shared memory
+- !19268  eventpoll: Fix semi-unbounded recursion
+- !19267  kernfs: Relax constraint in draining guard
+- !19552  KVM: arm64: Check the untrusted offset in FF-A memory share
+- !19551 add check ack_dono flag for reboot event
+- obmm: sync obmm default params value to module sysfs.
+- obmm: set MAX Numa Distance to 255
+- obmm: fix granu checking in mmap
+- ub:ubus adapt port local ras
+- vfio:ubus vfio-ub support ub entity enable
+- mfs: Fix UAF problem on event object when enable tracepoint
+- ub:ubus: fix bug of msg workqueue null
+- ub:hisi-ubus ub:hisi-ubus: Move the decoder's page table operations to hisi-ubus
+- add check ack_dono flag for reboot event
+- !19517 gmem: fix several issues
+- !19519  arm64/mpam: Reset mbwu_state while creating new monitor group
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- perf arm-spe: Backport perf_cpu_map__new_online_cpus()
+- perf arm-spe: Save per CPU information in metadata
+- perf arm-spe: Calculate meta data size
+- perf arm-spe: Define metadata header version 2
+- perf arm-spe: Prepare for adding data source packet implementations for other cores
+- perf arm-spe: Use old behavior when opening old SPE files
+- perf arm-spe: Set sample.addr to target address for instruction sample
+- perf color: Add printf format checking and resolve issues
+- perf arm-spe: Add Cortex CPUs to common data source encoding list
+- perf arm-spe: Add Neoverse-V2 to common data source encoding list
+- perf arm-spe: Remove the unused 'midr' field
+- perf arm-spe: Use metadata to decide the data source feature
+- perf arm-spe: Introduce arm_spe__is_homogeneous()
+- perf arm-spe: Dump metadata with version 2
+- perf arm-spe: Support metadata version 2
+- perf arm-spe: Rename the common data source encoding
+- perf arm-spe: Rename arm_spe__synth_data_source_generic()
+- KVM: arm64: Check the untrusted offset in FF-A memory share
+- !19530  Fix unexpected behavior in resctrl mounting
+- Revert "perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12"
+- !19520 ub: udma: bugfix related to init xa flags.
+- !19205 [OLK-6.6] Fix CVE-2025-39732
+- !19156 [OLK-6.6] Fix CVE-2025-39684
+- !19157 [OLK-6.6] Fix CVE-2025-39675
+- net: hns3: add VLAN id validation before using
+- !19526  mm/numa_remote: fix wild-memory-access in numa_remote_hugetlb_nowatermark
+- fs/resctrl: Prevent mounting with unsupported options
+- fs/resctrl: Fix resctrl mount options display in mount list
+- ub: udma: bugfix related to init xa flags.
+- ub: udma: bugfix for rx close.
+- mm/numa_remote: fix wild-memory-access in numa_remote_hugetlb_nowatermark
+- uvb: change dir name
+- !19507  Fix some memory policy bugfix
+- arm64/mpam: Need to reset MPAM component when umounting resctrl
+- arm64/mpam: Remove the redundant prev_val member variable
+- arm64/mpam: Reset mbwu_state while creating new monitor group
+- !19508 ub: ub_fwctl: Modify the problem of incorret data when querying entry
+- !19513  zcopy: fix two issues
+- zcopy: Fix Bad rss-counter state while non-mapping pages attach
+- zcopy: Fix null pointer dereference while attach transhugepage twice to same addr
+- ub: ub_fwctl: Modify the problem of incorret data when querying entry information
+- !19357 ubios_uvb: add msleep in poll thread
+- ubios_uvb: add check for uvb window buffer size
+- !19494  crypto: hisilicon - add reference counting to queues for tfm kernel reuse
+- !19475  task_work: Fix NMI race condition
+- mempolicy: restrict smart grid scheduling to vma_alloc_folio path
+- mempolicy: fix missing mmap_read_unlock() in error path
+- ubios_uvb: add check for cis message and senderid
+- !19486 [OLK-6.6] fix possible crash caused by null pointer when hct get page.
+- crypto: hisilicon/sec2 - support skcipher/aead fallback for hardware queue unavailable
+- crypto: hisilicon/hpre - support the hpre algorithm fallback
+- crypto: hisilicon/zip - support fallback for zip
+- crypto: hisilicon/qm - optimize device selection priority based on queue ref count and NUMA distance
+- crypto: hisilicon/qm - add reference counting to queues for tfm kernel reuse
+- crypto: hisilicon - consolidate qp creation and start in hisi_qm_alloc_qps_node
+- crypto: hisilicon/qm - centralize the sending locks of each module into qm
+- crypto: hisilicon/qm - enhance the configuration of req_type in queue attributes
+- Revert "crypto: hisilicon/hpre - support the hpre algorithm fallback"
+- crypto: hisilicon/hpre: extend tag field to 64 bits for better performance
+- crypto: hisilicon/sec - move backlog management to qp and store sqe in qp for callback
+- crypto: hisilicon/zip - adjust the way to obtain the req in the callback function
+- ubios_uvb: add msleep in poll thread
+- ccp/hct: fix possible crash caused by null pointer when hct get page.
+- task_work: Fix NMI race condition
+- scsi: mpi3mr: Clear ioctl blocking flag for an unresponsive controller
+- scsi: mpi3mr: Set MPI request flags appropriately
+- scsi: mpi3mr: Replace deprecated strncpy() with assignments
+- scsi: mpi3mr: Fetch correct device dev handle for status reply descriptor
+- smb: client: fix mid_q_entry memleak leak with per-mid locking
+- drm/amd/display: Check dce_hwseq before dereferencing it
+- riscv: uprobes: Add missing fence.i after building the XOL buffer
+- Squashfs: fix uninit-value in squashfs_get_parent
+- media: venus: Add a check for packet size after reading from shared memory
+- eventpoll: Fix semi-unbounded recursion
+- kernfs: Relax constraint in draining guard
+- ksmbd: fix overflow in dacloffset bounds check
+- wifi: ath11k: fix sleeping-in-atomic in ath11k_mac_op_set_bitrate_mask()
+- drm/amd/display: Add null pointer check in mod_hdcp_hdcp1_create_session()
+- comedi: Fix use of uninitialized memory in do_insn_ioctl() and do_insnlist_ioctl()
+- comedi: Fix initialization of data for instructions that write to subdevice
+- gmem: remove reduntant interfaces and use proper mmap flag
+- gmem: gmem_reserve_vma should use vma_flag_clear to remove flag
+- gmem: remove inpropre BUG_ON in do_peer_shared_anonymous_page
+- gmem: hmemcpy should use dma for phy addr
+- ASoC: core: Check for rtd == NULL in snd_soc_remove_pcm_runtime()
+
 * Tue Dec 09 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-126.0.0.104
 - Bugfix: Fix duplicate RISC-V SBI firmware event name
 - Add lrw core JSON file with metric support
