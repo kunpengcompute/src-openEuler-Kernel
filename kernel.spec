@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       128
 %global maintenance_release .0.0
-%global pkg_release         .105
+%global pkg_release         .106
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,12 @@ fi
 %endif
 
 %changelog
+* Fri Dec 12 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-128.0.0.106
+- RISC-V kernel upgrade to 6.6.0-128.0.0
+- Update Spacemit K3 DTS
+- Fix LTP test on TH1520
+- Enable CONFIG_ACPI_APEI
+
 * Thu Dec 11 2025 Li Nan <linan122@huawei.com> - 6.6.0-128.0.0.105
 - !19097 scsi: mpi3mr: Clear ioctl blocking flag for an unresponsive controller
 - !19095 scsi: mpi3mr: Set MPI request flags appropriately
