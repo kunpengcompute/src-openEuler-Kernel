@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       294
+%global devel_release       295
 %global maintenance_release .0.0
-%global pkg_release         .196
+%global pkg_release         .197
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,51 @@ fi
 %endif
 
 %changelog
+* Tue Dec 16 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-295.0.0.197
+- !19075 [OLK-5.10] Backport upstream bugfix or cleanup patches for SEV{-ES} - part1
+- KVM: x86: Always set kvm_run->if_flag
+- KVM: SEV: Add cond_resched() to loop in sev_clflush_pages()
+- KVM: SEV: WARN if SEV-ES is marked active but SEV is not
+- KVM: SEV-ES: Set guest_state_protected after VMSA update
+- !19046 [OLK-5.10] Backport the patch that allows guest access to the EFI confidential computing secret area
+- !19681  iommu/arm-smmu-v3-sva: Fix mm use-after-free
+- iommu/arm-smmu-v3-sva: Fix mm use-after-free
+- !18979 [OLK-5.10] ata: zhaoxin: update for rename symbols
+- !19065 [OLK-5.10] Add platform-specific quirks for ZX-200 device
+- !19664  Bluetooth: MGMT: Fix deadlock in mgmt_pending_lock
+- !19540  vfs: Don't leak disconnected dentries on umount
+- !19539  fs/proc: fix uaf in proc_readdir_de()
+- !19538  fs: Prevent file descriptor table allocations exceeding INT_MAX
+- !19537  Fix CVE-2025-40190
+- Bluetooth: MGMT: Fix deadlock in mgmt_pending_lock
+- !19651  CVE-2023-53254
+- drivers: base: cacheinfo: Fix shared_cpu_map changes in event of CPU hotplug
+- cacheinfo: Fix shared_cpu_map to handle shared caches at different levels
+- !19645  fbdev: bitblit: bound-check glyph index in bit_putcs*
+- fbdev: bitblit: bound-check glyph index in bit_putcs*
+- !19399  smb: client: fix mid_q_entry memleak leak with per-mid locking
+- efi: Add CONFIG_EFI_COCO_SECRET to openeuler_defconfig
+- efi: Fix kabi breakage of efi
+- docs: security: Add secrets/coco documentation
+- efi: Register efi_secret platform device if EFI secret area is declared
+- virt: Add efi_secret module to expose confidential computing secrets
+- efi: Save location of EFI confidential computing area
+- vfs: Don't leak disconnected dentries on umount
+- fs/proc: fix uaf in proc_readdir_de()
+- fs: Prevent file descriptor table allocations exceeding INT_MAX
+- ext4: guard against EA inode refcount underflow in xattr update
+- ext4: nested locking for xattr inode
+- smb: client: fix mid_q_entry memleak leak with per-mid locking
+- KVM: SEV: Acquire vcpu mutex when updating VMSA
+- x86/insn-eval: Make 0 a valid RIP for insn_get_effective_ip()
+- KVM: SVM: Free sev_asid_bitmap during init if SEV setup fails
+- KVM: SVM: Do not set sev->es_active until KVM_SEV_ES_INIT completes
+- KVM: SVM: Use online_vcpus, not created_vcpus, to iterate over vCPUs
+- x86/sev-es: Optimize __sev_es_ist_enter() for better readability
+- KVM: SVM: Update EFER software model on CR0 trap for SEV-ES
+- ata: zhaoxin: update for rename symbols
+- Add platform-specific quirks for ZX-200 device
+
 * Wed Dec 10 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-294.0.0.196
 - !19384 [OLK-5.10] Fix CVE-2025-22039
 - !19543 [OLK-5.10] Fix CVE-2025-21968
