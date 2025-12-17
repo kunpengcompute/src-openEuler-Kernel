@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       127
+%global devel_release       129
 %global maintenance_release .0.0
-%global pkg_release         .126
+%global pkg_release         .127
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,131 @@ fi
 %endif
 
 %changelog
+* Wed Dec 17 2025 Li Nan <linan122@huawei.com> - 6.6.0-129.0.0.127
+- !19657 xsched: simplify logging macros by removing redundant pr_fmt usage
+- !19702  XSched: List Corruption
+- !19617  Handling Kunpeng Chip ARM Spectre-BHB (CVE-2022-23960) Issue
+- xsched/cgroup: move list_del from css_free to css_offline to prevent corruption
+- xsched: protect group member list with xcu_lock to prevent corruption
+- !19696  i40e: remove read access to debugfs files
+- i40e: remove read access to debugfs files
+- !19674 obmm: bugfixes of log and race condition
+- !19644 obmm: suppport unaligned PMD mapping
+- !19683  xsched: prevent linked list corruption in RT priority updates
+- xsched: prevent linked list corruption in RT priority updates
+- obmm: Remove log pringts of physical address and kernelspace virtual address
+- obmm: Fix race condition between unexport and addr_query_by_pa
+- !19659 ubcore: fix route_list when no full match.
+- !19661 Packet throughput decreases with multiple jetty streams
+- xsched: simplify logging macros by removing redundant pr_fmt usage
+- xsched: Fix compilation by adding xsched_attr to syscalls.h
+- !19562 [OLK-6.6] virtcca: fix incorrect use of the percpu declare
+- ubcore: fix route_list when no full match.
+- obmm: display mmaped region's Pagesize
+- obmm: fix for PMD mapping
+- Packet throughput decreases with multiple jetty streams
+- virtcca: Add missing includes for DECLARE_PER_CPU
+- arm64: Add missing includes for mem_encrypt
+- !19647  fbdev: bitblit: bound-check glyph index in bit_putcs*
+- fbdev: bitblit: bound-check glyph index in bit_putcs*
+- !19097 scsi: mpi3mr: Clear ioctl blocking flag for an unresponsive controller
+- !19095 scsi: mpi3mr: Set MPI request flags appropriately
+- !19092 scsi: mpi3mr: Replace deprecated strncpy() with assignments
+- !19086 scsi: mpi3mr: Fetch correct device dev handle for status reply descriptor
+- !19636  Some bugfixes for interference
+- !19639 ub: ubase: Fix spell error of month
+- ub: ubase: Fix spell error of month
+- !19637 ub: udma: bugfix related to print location.
+- !19637 ub: udma: bugfix related to print location.
+- !19638 ub:ubus: bugfix port reset in cluster mode
+- !19623 iommu/ummu: Fix the issue of uninitialized resources in logic_ummu_viommu
+- ub:ubus: bugfix port reset in cluster mode
+- ub:ubus: add hotplug capability check
+- ub:ubus: bugfix calltrace of killing qemu when rmmod hisi_ubus
+- ub: udma: bugfix related to print location.
+- iommu/ummu: Remove redundant CONFIG_UB_UBRT_PLAT_DEV and code
+- interference: Add version compatibility check between subsystem and cgroup
+- interference: Fix missing interference.stat file in v1 hierarchy
+- interference: Add fallback to sched_clock when TSC is unavailable
+- interference: Add dependency on CONFIG_SCHED_INFO to avoid build error
+- interference: Resolve arm32 build error by restricting IFS to x86/arm64
+- interference: Avoid null pointer dereference in cgroup_ifs_add_files
+- iommu/ummu-core: Duplicate EID are not allowed
+- iommu/ummu: Move tid_type attr to logic ummu
+- iommu/ummu: Fixing the issue of uninitialized resources in logic_ummu_viommu
+- !19634 crypto: hisilicon - some bugfix
+- !19628 ub:ubfi: Fix UBFI memory leak issue
+- !19616 ub: ubase&unic: Fix some bug finding in running the driver
+- !19553 perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- crypto: hisilicon - lower priority for hisilicon crypto implementations
+- crypto: hisilicon/zip - remove redundant callback validation and invocation in crypto_wait_req
+- crypto: hisilicon/zip - add algorithm check before soft tfm allocation
+- crypto: hisilicon/zip - fix a callback problem
+- crypto: hisilicon/qm - place the interrupt status interface after the PM usage counter
+- crypto: hisilicon/qm - increment PM usage counter when handling the aeq interrupt
+- crypto: hisilicon/sgl - fix inconsistent map/unmap direction issue
+- crypto: hisilicon/hpre - support curve25519 fallback for hardware queue unavailable
+- crypto: hisilicon - mask all error type when uninit
+- net: unic: Fixed the call trace issue triggered internally by the completion event interrupt
+- !19624  xsched: XCU Partition
+- !19621 ubagg: fix mismatched spin unlock.
+- iommu/ummu: Optimize chip generational compatibility feature
+- iommu/ummu: Fix VM multi-instance problem
+- ubagg: fix mismatched spin unlock.
+- net: unic: Restore tx and rx stats when setting coalesce parameters
+- ub: ubase: obtain rc_max_cnt from MAMI
+- ub: ubase: fix a issue of udma device's eid deleted when stop rx stream and reset concurrently
+- ub: ubase: add opcode to query ub port_bitmap.
+- net: unic: Restore default queue count per tc when tc number changes.
+- ub: ubase: Fix the issue of mismatch between the ubase aeqe structure and the protocol.
+- ub: ubase: add ip_over_urma API for udma.
+- ub: ubase: optimize print format of fw_ver in debugfs.
+- ub: ubase: Fix the issue of deadlock by quantities of log in the ctrlq crq task.
+- ub: ubase: Remove non-cluster mode code.
+- net: unic: Resolve the bandwidth jitter problem
+- ub:ubfi: Fix UBFI memory leak issue
+- ub:ubus: Matt and MMIO judgments are not performed in cluster
+- ub:ubus: Delete ubc cfg0 config during cluster mode
+- ub:hisi-ubus: Fix ue reg/unreg without lock bug
+- xsched: fix infinite loop caused by invalid CFS group vruntime update
+- xsched: prevent race between enqueue_ctx and xsched_task_free
+- xsched: DEBUG log cleanup
+- xsched: fix divide-by-zero caused by u64 overflow in CFS shares weight calculation
+- xsched: prevent NULL deref by refcounting css and tracking offline state
+- xsched: fix hung_task caused by cgroup_file_show and xcg_mutex deadlock
+- xsched: fix concurrent modification NULL pointer dereference in xcu.sched_class
+- xsched: fix NULL pointer risk on attach entry allocation
+- xsched: refactor CFS per-XCU rq init/deinit paths
+- iommu/ummu: NO plbi for grant, config permq need dma_wmb
+- iommu/ummu: Fix compilation option configuration about CONFIG_ACPI
+- iommu/ummu: UMMU doesn't send tect sync after delete eid
+- iommu/ummu: Delete unnecessary commands
+- config: Disable unprivileged BPF syscall by default
+- arm64: Add support for TSV110 Spectre-BHB mitigation
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- perf arm-spe: Backport perf_cpu_map__new_online_cpus()
+- perf arm-spe: Save per CPU information in metadata
+- perf arm-spe: Calculate meta data size
+- perf arm-spe: Define metadata header version 2
+- perf arm-spe: Prepare for adding data source packet implementations for other cores
+- perf arm-spe: Use old behavior when opening old SPE files
+- perf arm-spe: Set sample.addr to target address for instruction sample
+- perf color: Add printf format checking and resolve issues
+- perf arm-spe: Add Cortex CPUs to common data source encoding list
+- perf arm-spe: Add Neoverse-V2 to common data source encoding list
+- perf arm-spe: Remove the unused 'midr' field
+- perf arm-spe: Use metadata to decide the data source feature
+- perf arm-spe: Introduce arm_spe__is_homogeneous()
+- perf arm-spe: Dump metadata with version 2
+- perf arm-spe: Support metadata version 2
+- perf arm-spe: Rename the common data source encoding
+- perf arm-spe: Rename arm_spe__synth_data_source_generic()
+- Revert "perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12"
+- scsi: mpi3mr: Clear ioctl blocking flag for an unresponsive controller
+- scsi: mpi3mr: Set MPI request flags appropriately
+- scsi: mpi3mr: Replace deprecated strncpy() with assignments
+- scsi: mpi3mr: Fetch correct device dev handle for status reply descriptor
+
 * Wed Dec 10 2025 Li Nan <linan122@huawei.com> - 6.6.0-127.0.0.126
 - !19620 iommufd: Prevent ALIGN() overflow
 - !19608 ub: ub_fwctl: Modify TP/TA/SCC register query process.
