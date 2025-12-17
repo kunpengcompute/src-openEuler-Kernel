@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2512.1.0
+%global hulkrelease 2512.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0354
+Release: %{hulkrelease}.0355
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,18 @@ fi
 %endif
 
 %changelog
+
+* Wed Dec 17 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.3.0.0355
+- !19658  mmc: core: Fix kernel panic when remove non-standard SDIO card
+- !19654  scsi: hpsa: Fix possible memory leak in hpsa_init_one()
+- !19535  fs/proc: fix uaf in proc_readdir_de()
+- mmc: core: Fix kernel panic when remove non-standard SDIO card
+- scsi: hpsa: Fix possible memory leak in hpsa_init_one()
+- !19646  fbdev: bitblit: bound-check glyph index in bit_putcs*
+- !19648  usb-storage: alauda: Fix uninit-value in alauda_check_media()
+- usb-storage: alauda: Fix uninit-value in alauda_check_media()
+- fbdev: bitblit: bound-check glyph index in bit_putcs*
+- fs/proc: fix uaf in proc_readdir_de()
 
 * Wed Dec 03 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.1.0.0354
 - !19381  net/sched: Abort __tc_modify_qdisc if parent is a clsact/ingress qdisc
