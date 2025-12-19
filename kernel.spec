@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       128
+%global devel_release       130
 %global maintenance_release .0.0
-%global pkg_release         .106
+%global pkg_release         .107
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,64 @@ fi
 %endif
 
 %changelog
+* Fri Dec 19 2025 Li Nan <linan122@huawei.com> - 6.6.0-130.0.0.107
+- !19680 LoongArch: Mask all interrupts during kexec/kdump
+- !19682 Loongarch: Enable CONFIG_RANDOMIZE_BASE default
+- !19738  xsched: move xsched types to user-accessible headers
+- !19717 obmm: Race condition fix, mmap rollback fix and export_user flag check.
+- xsched: move xsched types to user-accessible headers
+- obmm: Add FAST flag check for obmm_export_from_user
+- obmm: Rollback mmap_granu when mmap failed
+- !19735 add check ack msg and do sleep
+- add check ack msg and do sleep
+- !18003 [OLK-6.6] PCI: phytium: Add hotplug and hotreset workaround patch for phytium SoCs
+- Loongarch: Enable CONFIG_RANDOMIZE_BASE default
+- LoongArch: Mask all interrupts during kexec/kdump
+- !19714 drm/hisilicon/hibmc: fix PCIe 64-bit bar support
+- obmm: Fix race condition of region release and device release
+- !19688 ub: ubase: CtrlQ retry message uses the same seq
+- !19687 ub: udma: Bugfix related to crq event unregister.
+- !19641 ub:hisi-ubus: fix MUE unreg msg rsp time
+- !19677 ub: libcdma: add eid upi update response
+- drm/hisilicon/hibmc: fix PCIe 64-bit bar support
+- !19709  mm: try skipping pinned page before unmapping in migration
+- mm: try skipping pinned page before unmapping in migration
+- !19657 xsched: simplify logging macros by removing redundant pr_fmt usage
+- !19702  XSched: List Corruption
+- !19617  Handling Kunpeng Chip ARM Spectre-BHB (CVE-2022-23960) Issue
+- xsched/cgroup: move list_del from css_free to css_offline to prevent corruption
+- xsched: protect group member list with xcu_lock to prevent corruption
+- !19696  i40e: remove read access to debugfs files
+- i40e: remove read access to debugfs files
+- ub: udma: Bugfix related to crq event unregister.
+- !19674 obmm: bugfixes of log and race condition
+- !19644 obmm: suppport unaligned PMD mapping
+- ub:ubus: Change create device irq domain debug info
+- !19683  xsched: prevent linked list corruption in RT priority updates
+- ub: ubase: CtrlQ retry message uses the same seq
+- net: unic: Fix the calltrace caused by modifying queue parameters in the MUE scenario
+- xsched: prevent linked list corruption in RT priority updates
+- ub: cdma: add eid upi update response
+- obmm: Remove log pringts of physical address and kernelspace virtual address
+- obmm: Fix race condition between unexport and addr_query_by_pa
+- !19659 ubcore: fix route_list when no full match.
+- !19661 Packet throughput decreases with multiple jetty streams
+- xsched: simplify logging macros by removing redundant pr_fmt usage
+- xsched: Fix compilation by adding xsched_attr to syscalls.h
+- !19562 [OLK-6.6] virtcca: fix incorrect use of the percpu declare
+- ubcore: fix route_list when no full match.
+- obmm: display mmaped region's Pagesize
+- obmm: fix for PMD mapping
+- Packet throughput decreases with multiple jetty streams
+- virtcca: Add missing includes for DECLARE_PER_CPU
+- arm64: Add missing includes for mem_encrypt
+- !19647  fbdev: bitblit: bound-check glyph index in bit_putcs*
+- fbdev: bitblit: bound-check glyph index in bit_putcs*
+- ub:hisi-ubus: fix MUE unreg msg rsp time
+- config: Disable unprivileged BPF syscall by default
+- arm64: Add support for TSV110 Spectre-BHB mitigation
+- PCI: phytium: Add hotplug and hotreset workaround patch for phytium SoCs
+
 * Fri Dec 12 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-128.0.0.106
 - RISC-V kernel upgrade to 6.6.0-128.0.0
 - Update Spacemit K3 DTS
