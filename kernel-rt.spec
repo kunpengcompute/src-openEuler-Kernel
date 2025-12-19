@@ -43,7 +43,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       124
 %global maintenance_release .0.0
-%global pkg_release         .9
+%global pkg_release         .10
 %global rt_release          .rt47
 
 %define with_debuginfo 1
@@ -151,7 +151,7 @@ Provides: kernel-rt-uname-r = %{KernelVer} kernel-rt=%{KernelVer}
 
 Requires: dracut >= 001-7 grubby >= 8.28-2 initscripts >= 8.11.1-1 linux-firmware >= 20100806-2 module-init-tools >= 3.16-2
 
-ExclusiveArch: noarch aarch64 i686 x86_64 riscv64 ppc64le loongarch64
+ExclusiveArch: aarch64 i686 x86_64 ppc64le loongarch64
 ExclusiveOS: Linux
 
 %if %{with_perf}
@@ -1058,6 +1058,10 @@ fi
 %endif
 
 %changelog
+* Thu Dec  11  2025 laokz <zhangkai@iscas.ac.cn> - 6.6.0-124.0.0.10
+- remove riscv64 from ExclusiveArch(no current support).
+  This change prevents unnecessary builds on unsupported architectures.
+
 * Wed Dec  03  2025 zhangyu <zhangyu4@kylinos.cn> - 6.6.0-124.0.0.9
 - update kernel-rt version to 6.6.0-124.0.0.9
 

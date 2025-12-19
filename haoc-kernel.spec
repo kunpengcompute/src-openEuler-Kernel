@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       126
 %global maintenance_release .0.0
-%global pkg_release         .104
+%global pkg_release         .105
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -172,7 +172,7 @@ Provides: kernel-uname-r = %{KernelVer} kernel=%{KernelVer}
 
 Requires: dracut >= 001-7 grubby >= 8.28-2 initscripts >= 8.11.1-1 linux-firmware >= 20100806-2 module-init-tools >= 3.16-2
 
-ExclusiveArch: noarch aarch64 i686 x86_64 riscv64 ppc64le loongarch64
+ExclusiveArch: aarch64 i686 x86_64
 ExclusiveOS: Linux
 
 %if %{with_perf}
@@ -1142,6 +1142,11 @@ fi
 %endif
 
 %changelog
+* Thu Dec 11 2025 laokz <zhangkai@iscas.ac.cn> - 6.6.0-126.0.0.105
+- remove unsupported arches in ExclusiveArch:
+  - haoc-kernel: remove riscv64, ppc64le, loongarch64 (no current support)
+  This change prevents unnecessary builds on unsupported architectures.
+
 * Mon Dec 08 2025 Liu Zhehui <liuzhh@zgclab.edu.cn> - 6.6.0-126.0.0.104
 - update HAOC to 6.6.0-126.0.0
 
