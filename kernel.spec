@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       295
+%global devel_release       296
 %global maintenance_release .0.0
-%global pkg_release         .197
+%global pkg_release         .198
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,57 @@ fi
 %endif
 
 %changelog
+* Tue Dec 23 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-296.0.0.198
+- !19740 merge refs/pull/19740/head into OLK-5.10
+- !19764 merge patch-1766387978 into OLK-5.10
+- hisi: l3t: enable l3t with specific cpuid
+- !19705 [OLK-5.10]:update patches for sw64 architecture
+- !19090 [OLK-5.10] Backport upstream bugfix or cleanup patches for SEV/dma-direct
+- !19372  padata: Fix pd UAF once and for all
+- !19022 [OLK-5.10] Backport the upstream patches for fixes and cleanups to SEV-ES string I/O emulation
+- !19016 [Hygon] [OLK-5.10] [Bugfix] Fix memory bandwidth counter width for Hygon QoS
+- net: atlantic: fix fragment overflow handling in RX path
+- !19736  locking/rwsem: Optimize down_read_trylock() under highly contended case
+- locking/rwsem: Optimize down_read_trylock() under highly contended case
+- !19724  mm/mem_reliable: use percise count during limit check
+- mm/mem_reliable: use percise count during limit check
+- !19715 [OLK-5.10] backport important bugfix for nvme driver from upstream linux-5.10.y
+- !19614  NFSD: Fix crash in nfsd4_read_release()
+- !19140 [OLK-5.10] Add ccp-mdev feature into hygon ccp driver
+- nvme: nvme-fc: Ensure ->ioerr_work is cancelled in nvme_fc_delete_ctrl()
+- !19673  firewire: net: fix use after free in fwnet_finish_incoming_packet()
+- sw64: set PTBR_SYS before accessing vmalloc area
+- sw64: set execute permission for virtual machine's hmcode text section
+- sw64: fix simd version of copy/clear_page()
+- sw64: fix random mmap base range
+- firewire: net: fix use after free in fwnet_finish_incoming_packet()
+- NFSD: Fix crash in nfsd4_read_release()
+- crypto: ccp: add ccp-mdev functionality to the ccp module.
+- padata: Fix pd UAF once and for all
+- KVM: SVM: Don't apply SEV+SMAP workaround on code fetch or PT access
+- KVM: SVM: Inject #UD on attempted emulation for SEV guest w/o insn buffer
+- KVM: SVM: WARN if KVM attempts emulation on #UD or #GP for SEV guests
+- KVM: x86: Pass emulation type to can_emulate_instruction()
+- KVM: SVM: Explicitly require DECODEASSISTS to enable SEV support
+- KVM: SVM: Don't intercept #GP for SEV guests
+- swiotlb: do not zero buffer in set_memory_decrypted()
+- crypto: ccp - Add SEV_INIT rc error logging on init
+- dma-direct: always leak memory that can't be re-encrypted
+- dma-direct: factor out dma_set_{de,en}crypted helpers
+- KVM: x86: Don't WARN if userspace mucks with RCX during string I/O exit
+- KVM: SEV-ES: reduce ghcb_sa_len to 32 bits
+- KVM: SEV-ES: fix another issue with string I/O VMGEXITs
+- KVM: SEV-ES: go over the sev_pio_data buffer in multiple passes if needed
+- KVM: SEV-ES: keep INS functions together
+- KVM: x86: remove unnecessary arguments from complete_emulator_pio_in
+- KVM: x86: split the two parts of emulator_pio_in
+- KVM: SEV-ES: clean up kvm_sev_es_ins/outs
+- KVM: x86: leave vcpu->arch.pio.count alone in emulator_pio_in_out
+- KVM: SEV-ES: rename guest_ins_data to sev_pio_data
+- KVM: SEV-ES: fix length of string I/O
+- x86/sev-es: Do not unroll string I/O for SEV-ES guests
+- x86/resctrl: Fix memory bandwidth counter width for Hygon CPUs
+
 * Tue Dec 16 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-295.0.0.197
 - !19075 [OLK-5.10] Backport upstream bugfix or cleanup patches for SEV{-ES} - part1
 - KVM: x86: Always set kvm_run->if_flag
