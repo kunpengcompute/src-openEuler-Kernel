@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2512.3.0
+%global hulkrelease 2512.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0355
+Release: %{hulkrelease}.0356
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,15 @@ fi
 %endif
 
 %changelog
+
+* Wed Dec 24 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.4.0.0356
+- !19698 merge refs/pull/19698/head into openEuler-1.0-LTS
+- !19703  ppp: associate skb with a device at tx
+- !19699  ip6_vti: fix slab-use-after-free in decode_session6
+- ppp: associate skb with a device at tx
+- ip6_vti: fix slab-use-after-free in decode_session6
+- xfs: remove superfluous writeback mapping eof trimming
+- xfs: update fork seq counter on data fork changes
 
 * Wed Dec 17 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.3.0.0355
 - !19658  mmc: core: Fix kernel panic when remove non-standard SDIO card
