@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       132
 %global maintenance_release .0.0
-%global pkg_release         .109
+%global pkg_release         .110
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,12 @@ fi
 %endif
 
 %changelog
+* Fri Dec 26 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-132.0.0.110
+- riscv kernel upgrade to 6.6.0-132.0.0
+- Bugfix: iommu/riscv: Fix inconsistencies with the latest spec revision
+- Bugfix: riscv: acpi: avoid errors caused by probing DT devices when ACPI is used
+- Bugfix: Revert "drivers: Add ACPI support for thead-c900-aclint-sswi"
+
 * Fri Dec 26 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.109
 - !19477 iommu: set the default iommu-dma mode as non-strict
 - iommu: set the default iommu-dma mode as non-strict
