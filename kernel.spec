@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       131
+%global devel_release       132
 %global maintenance_release .0.0
-%global pkg_release         .108
+%global pkg_release         .109
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,10 @@ fi
 %endif
 
 %changelog
+* Fri Dec 26 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.109
+- !19477 iommu: set the default iommu-dma mode as non-strict
+- iommu: set the default iommu-dma mode as non-strict
+
 * Thu Dec 25 2025 Li Nan <linan122@huawei.com> - 6.6.0-131.0.0.108
 - !19760 ub:ubfi:skipped address of subtable 0 in ubrt
 - !19758 ub: udma: bugfix related to rx close.
