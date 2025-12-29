@@ -1,25 +1,25 @@
-From aaf0e5b79782b0928ffd7b0feec770f1961daf4d Mon Sep 17 00:00:00 2001
+From e6d52fbae46dae4ca07edbaa990c0d21f97de29c Mon Sep 17 00:00:00 2001
 From: zhangyu <zhangyu4@kylinos.cn>
-Date: Wed, 15 May 2024 11:38:14 +0800
-Subject: [PATCH] rt2
+Date: Mon, 29 Dec 2025 17:37:32 +0800
+Subject: [PATCH] 0002-modify-bcm2711_defconfig-for-rt-rpi-kernel
 
 ---
  arch/arm64/configs/bcm2711_defconfig | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/configs/bcm2711_defconfig b/arch/arm64/configs/bcm2711_defconfig
-index 6ac8c83f6..140cc175d 100644
+index 845dc739d..5387a07ed 100644
 --- a/arch/arm64/configs/bcm2711_defconfig
 +++ b/arch/arm64/configs/bcm2711_defconfig
 @@ -8,6 +8,7 @@ CONFIG_HIGH_RES_TIMERS=y
  CONFIG_BPF_SYSCALL=y
  CONFIG_BPF_JIT=y
  CONFIG_PREEMPT=y
-+CONFIG_PREEMPT_RT=y/
++CONFIG_PREEMPT_RT=y
  CONFIG_BSD_PROCESS_ACCT=y
  CONFIG_BSD_PROCESS_ACCT_V3=y
  CONFIG_TASKSTATS=y
-@@ -62,7 +63,7 @@ CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
+@@ -64,7 +65,7 @@ CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
  CONFIG_CPU_FREQ_GOV_SCHEDUTIL=y
  CONFIG_CPUFREQ_DT=y
  CONFIG_ARM_RASPBERRYPI_CPUFREQ=y
