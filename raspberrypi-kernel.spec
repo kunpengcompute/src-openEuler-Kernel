@@ -2,7 +2,7 @@
 
 %global KernelVer %{version}-%{release}.raspi.%{_target_cpu}
 
-%global hulkrelease 126.0.0
+%global hulkrelease 132.0.0
 
 %global __brp_python_bytecompile %{nil}
 
@@ -10,7 +10,7 @@
 
 Name:	 raspberrypi-kernel
 Version: 6.6.0
-Release: %{hulkrelease}.16
+Release: %{hulkrelease}.17
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -251,6 +251,9 @@ fi
 /usr/src/kernels/%{KernelVer}-*
 
 %changelog
+* Mon Dec 29 2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-132.0.0.17
+- upgrade to 6.6.0-132.0.0
+
 * Mon Dec 8  2025 Yafen Fang <yafen@iscas.ac.cn> - 6.6.0-126.0.0.16
 - add sub package: raspberrypi-kernel-headers
 - fix file erros in raspberrypi-kernel-develchangel
