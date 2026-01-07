@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2512.4.0
+%global hulkrelease 2601.2.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0356
+Release: %{hulkrelease}.0357
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,43 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 07 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.2.0.0357
+- !19887 merge patch-1767078288 into openEuler-1.0-LTS
+- !19906 merge patch-1767163222 into openEuler-1.0-LTS
+- !19907 merge patch-1767172215 into openEuler-1.0-LTS
+- !19929 merge patch-1767516390 into openEuler-1.0-LTS
+- !19910 merge patch-1767492010 into openEuler-1.0-LTS
+- usb: idmouse: fix an uninit-value in idmouse_open
+- !19905 merge patch-1767162893 into openEuler-1.0-LTS
+- !19891 merge patch-1767084968 into openEuler-1.0-LTS
+- mm: mem_reliable: prevent excessive direct reclaim loops
+- scsi: qla2xxx: Check valid rport returned by fc_bsg_to_rport()
+- udf: Avoid double brelse() in udf_rename()
+- NFSv4/pNFS: Clear NFS_INO_LAYOUTCOMMIT in pnfs_mark_layout_stateid_invalid
+- !19880 merge patch-1767065442 into openEuler-1.0-LTS
+- md/raid10: fix memleak for 'conf->bio_split'
+- crypto: lib/mpi - avoid null pointer deref in mpi_cmp_ui()
+- hwrng: virtio - Fix race on data_avail and actual data
+- hwrng: virtio - always add a pending request
+- hwrng: virtio - don't waste entropy
+- hwrng: virtio - don't wait on cleanup
+- hwrng: virtio - add an internal buffer
+- !19877 merge patch-1767015578 into openEuler-1.0-LTS
+- !19853 merge patch-1766829678 into openEuler-1.0-LTS
+- firmware: arm_sdei: Fix "firmware: arm_sdei: Fix sleep from invalid context BUG" KABI issue
+- firmware: arm_sdei: Fix the input parameter of cpuhp_remove_state()
+- firmware: arm_sdei: Fix sleep from invalid context BUG
+- libceph: Fix kabi breakage
+- libceph: fix potential use-after-free in have_mon_and_osd_map()
+- !19813 merge patch-1766634705 into openEuler-1.0-LTS
+- !19821 merge patch-1766661542 into openEuler-1.0-LTS
+- RDMA/rxe: Fix "kernel NULL pointer dereference" error
+- md/raid10: fix null-ptr-deref in raid10_sync_request
+- !19723 merge refs/pull/19723/head into openEuler-1.0-LTS
+- !19618 merge refs/pull/19618/head into openEuler-1.0-LTS
+- mm/mem_reliable: use percise count during limit check
+- scsi: ses: Fix slab-out-of-bounds in ses_enclosure_data_process()
 
 * Wed Dec 24 2025 huwentao <huwentao19@h-partners.com> - 4.19.90-2512.4.0.0356
 - !19698 merge refs/pull/19698/head into openEuler-1.0-LTS
