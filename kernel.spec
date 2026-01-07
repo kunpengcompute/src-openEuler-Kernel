@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       296
+%global devel_release       297
 %global maintenance_release .0.0
-%global pkg_release         .199
+%global pkg_release         .200
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,48 @@ fi
 %endif
 
 %changelog
+* Tue Jan 06 2026 Tengda Wu <wutengda2@huawei.com> - 5.10.0-297.0.0.200
+- !19833 merge patch-1766715015 into OLK-5.10
+- !19911 merge patch-1767492639 into OLK-5.10
+- !19635 merge refs/pull/19635/head into OLK-5.10
+- !19903 merge patch-1767161454 into OLK-5.10
+- !19864 merge patch-1766990471 into OLK-5.10
+- !19865 merge patch-1766990523 into OLK-5.10
+- mm: mem_reliable: prevent excessive direct reclaim loops
+- NFSv4/pNFS: Clear NFS_INO_LAYOUTCOMMIT in pnfs_mark_layout_stateid_invalid
+- !19899 merge patch-1767098709 into OLK-5.10
+- erofs: validate the extent length for uncompressed pclusters
+- !19885 merge patch-1767076771 into OLK-5.10
+- !19876 merge patch-1767011340 into OLK-5.10
+- scsi: qla2xxx: Clear cmds after chip reset
+- isdn: mISDN: hfcsusb: fix memory leak in hfcsusb_probe()
+- !19856 merge patch-1766976937 into OLK-5.10
+- !19857 merge patch-1766976979 into OLK-5.10
+- RDMA/iwcm: Fix use-after-free of work objects after cm_id destruction
+- RDMA/core: Use refcount_t instead of atomic_t on refcount of iwcm_id_private
+- virtio-net: ensure the received length does not exceed allocated size
+- x86/dumpstack: Prevent KASAN false positive warnings in __show_regs()
+- tracing: Fix memory leaks in create_field_var()
+- !19760 merge patch-1766370959 into OLK-5.10
+- !19786 merge patch-1766474397 into OLK-5.10
+- !19548 merge refs/pull/19548/head into OLK-5.10
+- ext4: xattr: fix null pointer deref in ext4_raw_inode()
+- !19739 merge refs/pull/19739/head into OLK-5.10
+- !19732 merge refs/pull/19732/head into OLK-5.10
+- !19719 merge refs/pull/19719/head into OLK-5.10
+- bnxt_en: Fix memory corruption when FW resources change during ifdown
+- bnxt_en: Fix possible crash after creating sw mqprio TCs
+- x86/fpu: Ensure XFD state on signal delivery
+- drm/amdgpu/atom: Check kcalloc() for WS buffer in amdgpu_atom_execute_table_locked()
+- usb: storage: Fix memory leak in USB bulk transport
+- nfs4_setup_readdir(): insufficient locking for ->d_parent->d_inode dereferencing
+- acpi-cpufreq: Fix nominal_freq units to KHz in get_max_boost_ratio()
+- cpufreq: ACPI: Fix max-frequency computation
+- tools headers x86 cpufeatures: Sync with the kernel sources to pick TDX, Zen, APIC MSR fence changes
+- tools headers: Update tools's copy of x86/asm headers
+- tools headers cpufeatures: Sync with the kernel sources
+- NFSD: free copynotify stateid in nfs4_free_ol_stateid()
+
 * Tue Dec 23 2025 Tengda Wu <wutengda2@huawei.com> - 5.10.0-296.0.0.199
 - !19740 merge refs/pull/19740/head into OLK-5.10
 - !19764 merge patch-1766387978 into OLK-5.10
