@@ -41,9 +41,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       124
+%global devel_release       132
 %global maintenance_release .0.0
-%global pkg_release         .10
+%global pkg_release         .11
 %global rt_release          .rt47
 
 %define with_debuginfo 1
@@ -1058,6 +1058,9 @@ fi
 %endif
 
 %changelog
+* Mon Dec  29  2025 zhangyu <zhangyu4@kylinos.cn> - 6.6.0-132.0.0.11
+- update kernel-rt version to 6.6.0-132.0.0.11
+
 * Thu Dec  11  2025 laokz <zhangkai@iscas.ac.cn> - 6.6.0-124.0.0.10
 - remove riscv64 from ExclusiveArch(no current support).
   This change prevents unnecessary builds on unsupported architectures.

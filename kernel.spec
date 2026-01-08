@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       130
+%global devel_release       132
 %global maintenance_release .0.0
-%global pkg_release         .107
+%global pkg_release         .111
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,50 @@ fi
 %endif
 
 %changelog
+* Mon Dec 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.111
+- !19763 ub: udma: bugfix related to spin lock.
+- ub: udma: bugfix related to spin lock.
+
+* Fri Dec 26 2025 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-132.0.0.110
+- riscv kernel upgrade to 6.6.0-132.0.0
+- Bugfix: iommu/riscv: Fix inconsistencies with the latest spec revision
+- Bugfix: riscv: acpi: avoid errors caused by probing DT devices when ACPI is used
+- Bugfix: Revert "drivers: Add ACPI support for thead-c900-aclint-sswi"
+
+* Fri Dec 26 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.109
+- !19477 iommu: set the default iommu-dma mode as non-strict
+- iommu: set the default iommu-dma mode as non-strict
+
+* Thu Dec 25 2025 Li Nan <linan122@huawei.com> - 6.6.0-131.0.0.108
+- !19760 ub:ubfi:skipped address of subtable 0 in ubrt
+- !19758 ub: udma: bugfix related to rx close.
+- !19759 ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- ub: udma: bugfix related to rx close.
+- !19752 Repair driver reset work-q uaf
+- !19755 obmm: Register resource for every memdev
+- !19756 ub:ubus delete undefined class code
+- !19754 ub:ubus: Move the decoder's queue operations to hisi-ubus
+- !19757 ub: cdma: add ioctl logs and error codes
+- !19750 ub: udma: Bugfix related to 2M hugepage.
+- !19749 ub: unic & ubase: Fix ethtool configuration error issue and resolve mailbox timeout
+- !19697  iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+- ub: cdma: add ioctl logs and error codes
+- ub:ubus delete undefined class code
+- obmm: Register resource for every memdev
+- Repair driver reset work-q uaf
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ub:ubus: hi_msg_sync_wait first pull cq
+- ub: udma: Bugfix related to 2M hugepage.
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- 删除文件 .本项目已经正式迁移至AtomGit平台/README.md
+- update README.
+- add migrate not
+- iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+
 * Fri Dec 19 2025 Li Nan <linan122@huawei.com> - 6.6.0-130.0.0.107
 - !19680 LoongArch: Mask all interrupts during kexec/kdump
 - !19682 Loongarch: Enable CONFIG_RANDOMIZE_BASE default
