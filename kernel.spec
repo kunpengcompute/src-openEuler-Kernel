@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       297
+%global devel_release       298
 %global maintenance_release .0.0
-%global pkg_release         .200
+%global pkg_release         .201
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -927,6 +927,45 @@ fi
 %endif
 
 %changelog
+* Tue Jan 13 2026 Tengda Wu <wutengda2@huawei.com> - 5.10.0-298.0.0.201
+- !19798 merge OLK-5.10 into OLK-5.10
+- !19972 merge patch-1767691219 into OLK-5.10
+- !19974 merge patch-1767691279 into OLK-5.10
+- !19973 merge patch-1767691254 into OLK-5.10
+- !19713 merge refs/pull/19713/head into OLK-5.10
+- !19832 merge OLK-5.10-ringbuffer into OLK-5.10
+- qed: Don't collect too many protection override GRC elements
+- i40e: fix validation of VF state in get resources
+- i40e: fix input validation logic for action_meta
+- KVM: SVM: Fix potential overflow in SEV's send|receive_update_data()
+- KVM: SVM: Skip SEV cache flush if no ASIDs have been used
+- KVM: SVM: Fix sev_pin_memory() error checks in SEV migration utilities
+- x86/sev: Make enc_dec_hypercall() accept a size instead of npages
+- mm: x86: Fix kabi breakage of pv_ops
+- KVM: x86: Play nice with protected guests in complete_hypercall_exit()
+- KVM: x86: Assume a 64-bit hypercall for guests with protected state
+- KVM: SVM: Remove an unnecessary prototype declaration of sev_flush_asids()
+- KVM: SVM: Fix SEV SEND_START session length & SEND_UPDATE_DATA query length after commit 238eca821cee
+- crypto: ccp: Fix definition of struct sev_data_send_update_vmsa
+- x86/kvm: Add kexec support for SEV Live Migration.
+- x86/kvm: Add guest support for detecting and enabling SEV Live Migration feature.
+- EFI: Introduce the new AMD Memory Encryption GUID.
+- mm: x86: Invoke hypercall when page encryption status is changed
+- x86/kvm: Add AMD SEV specific Hypercall3
+- KVM: SEV: Flush cache on non-coherent systems before RECEIVE_UPDATE_DATA
+- KVM: SEV: Pin guest memory for write for RECEIVE_UPDATE_DATA
+- KVM: SVM: fix missing sev_decommission in sev_receive_start
+- KVM: SVM: Return -EFAULT if copy_to_user() for SEV mig packet header fails
+- KVM: X86: Introduce KVM_HC_MAP_GPA_RANGE hypercall
+- KVM: SVM: Add KVM_SEV_RECEIVE_FINISH command
+- KVM: SVM: Add KVM_SEV_RECEIVE_UPDATE_DATA command
+- KVM: SVM: Add support for KVM_SEV_RECEIVE_START command
+- KVM: SVM: Add support for KVM_SEV_SEND_CANCEL command
+- KVM: SVM: Add KVM_SEV_SEND_FINISH command
+- KVM: SVM: Add KVM_SEND_UPDATE_DATA command
+- KVM: SVM: Add KVM_SEV SEND_START command
+- nvme: nvme-fc: Ensure ->ioerr_work is cancelled in nvme_fc_delete_ctrl()
+
 * Tue Jan 06 2026 Tengda Wu <wutengda2@huawei.com> - 5.10.0-297.0.0.200
 - !19833 merge patch-1766715015 into OLK-5.10
 - !19911 merge patch-1767492639 into OLK-5.10
