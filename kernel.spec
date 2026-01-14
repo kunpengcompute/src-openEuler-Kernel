@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       132
+%global devel_release       134
 %global maintenance_release .0.0
-%global pkg_release         .111
+%global pkg_release         .112
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,185 @@ fi
 %endif
 
 %changelog
+* Wed Jan 14 2026 Li Nan <linan122@huawei.com> - 6.6.0-134.0.0.112
+- !20054 merge topo_kernel_merge_1_1 into OLK-6.6
+- !19916 merge OLK-6.6_new into OLK-6.6
+- !20030 merge topo_kernel_merge into OLK-6.6
+- urma: ubcore support expose/unexpose dev and eid set commands.
+- urma: support uvs query chip_id.
+- urma: add create, delete agg_dev and get name of agg_dev.
+- urma: adapt to new topo info for ubcore/ubagg.
+- !19992 merge patch-1767753584 into OLK-6.6
+- !19763 merge patch-1766378735 into OLK-6.6
+- Revert "NFS: fix up nfs_release_folio() to try to release the page"
+- !19697 merge refs/pull/19697/head into OLK-6.6
+- !19844 merge patch-1766802317 into OLK-6.6
+- !19712 merge refs/pull/19712/head into OLK-6.6
+- !19653 merge refs/pull/19653/head into OLK-6.6
+- !19650 merge refs/pull/19650/head into OLK-6.6
+- !19809 merge patch-1766626818 into OLK-6.6
+- !19839 merge patch-1766740817 into OLK-6.6
+- !19924 merge patch-1767513707 into OLK-6.6
+- !19925 merge patch-1767513733 into OLK-6.6
+- !18476 merge refs/pull/18476/head into OLK-6.6
+- !19871 merge patch-1766998564 into OLK-6.6
+- !19870 merge patch-1766998524 into OLK-6.6
+- !19868 merge patch-1766998223 into OLK-6.6
+- !19831 merge patch-1766714417 into OLK-6.6
+- !19830 merge patch-1766713816 into OLK-6.6
+- !19829 merge patch-1766713004 into OLK-6.6
+- !19828 merge patch-1766712979 into OLK-6.6
+- !19827 merge patch-1766712955 into OLK-6.6
+- !19826 merge patch-1766712919 into OLK-6.6
+- !19711 merge refs/pull/19711/head into OLK-6.6
+- !19810 merge patch-1766626870 into OLK-6.6
+- !19843 merge patch-1766799391 into OLK-6.6
+- !19909 merge patch-1767491328 into OLK-6.6
+- !19799 merge patch-1766495417 into OLK-6.6
+- !19807 merge patch-1766567019 into OLK-6.6
+- !19895 merge patch-1767085921 into OLK-6.6
+- !19926 merge patch-1767515451 into OLK-6.6
+- !19656 merge refs/pull/19656/head into OLK-6.6
+- !19923 merge patch-1767513671 into OLK-6.6
+- !19928 merge patch-1767515719 into OLK-6.6
+- !19859 merge patch-1766977633 into OLK-6.6
+- !19860 merge patch-1766977668 into OLK-6.6
+- !19884 merge patch-1767076134 into OLK-6.6
+- !19913 merge patch-1767493335 into OLK-6.6
+- !19914 merge patch-1767493378 into OLK-6.6
+- !19915 merge patch-1767493397 into OLK-6.6
+- mfs: Avoid UAF on cache object when anon_file is release
+- mfs: avoid deadlock when the cache layer is modified
+- mfs: remove FAROUND event to avoid context switch during map_pages
+- !19612 merge refs/pull/19612/head into OLK-6.6
+- !19733 merge refs/pull/19733/head into OLK-6.6
+- !19729 merge refs/pull/19729/head into OLK-6.6
+- !19720 merge refs/pull/19720/head into OLK-6.6
+- usb: uas: fix urb unmapping issue when the uas device is remove during ongoing data transfer
+- nouveau/firmware: Add missing kfree() of nvkm_falcon_fw::boot
+- bpf: Free special fields when update [lru_,]percpu_hash maps
+- !19846 merge patch-1766818825 into OLK-6.6
+- !19904 merge patch-1767162173 into OLK-6.6
+- !19845 merge patch-1766818524 into OLK-6.6
+- !19797 merge patch-1766494034 into OLK-6.6
+- !19796 merge patch-1766494001 into OLK-6.6
+- !19800 merge patch-1766541023 into OLK-6.6
+- !19847 merge patch-1766820323 into OLK-6.6
+- !19875 merge patch-1767010708 into OLK-6.6
+- !19761 merge patch-1766371001 into OLK-6.6
+- !19619 merge refs/pull/19619/head into OLK-6.6
+- !19912 merge patch-1767493281 into OLK-6.6
+- net_sched: prio: fix a race in prio_tune()
+- can: j1939: add missing calls in NETDEV_UNREGISTER notification handler
+- can: j1939: implement NETDEV_UNREGISTER notification handler
+- Bluetooth: hci_core: Disable works on hci_unregister_dev
+- iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+- mm: mem_reliable: prevent excessive direct reclaim loops
+- mm: mem_reliable: use percise count during limit check
+- mm: mem_reliable: fix task reliable counter during fork
+- !19793 merge patch-1766492701 into OLK-6.6
+- !19823 merge tmp into OLK-6.6
+- !19888 merge ubase into OLK-6.6
+- !19898 merge OLK_6.6_velinux_1 into OLK-6.6
+- !19901 merge OLK-6.6 into OLK-6.6
+- NFSv4/pNFS: Clear NFS_INO_LAYOUTCOMMIT in pnfs_mark_layout_stateid_invalid
+- obmm: Register resource for every memdev
+- !19822 merge master into OLK-6.6
+- !19811 merge OLK-6.6 into OLK-6.6
+- !19818 merge OLK-6.6 into OLK-6.6
+- !19854 merge OLK-6.6 into OLK-6.6
+- !19886 merge OLK-6.6 into OLK-6.6
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- urma inclusion category: bugfix bugzilla: https://gitee.com/openeuler/release-management/issues/ID3WJX
+- bpf: Fix stackmap overflow check in __bpf_get_stackid()
+- bpf: Refactor stack map trace depth calculation into helper function
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- scsi: qla2xxx: Clear cmds after chip reset
+- ub: udma: bugfix related to rx close.
+- isdn: mISDN: hfcsusb: fix memory leak in hfcsusb_probe()
+- !19763 ub: udma: bugfix related to spin lock.
+- futex: Don't leak robust_list pointer on exec race
+- Bluetooth: MGMT: Fix OOB access in parse_adv_monitor_pattern()
+- ub: udma: bugfix related to spin lock.
+- Bluetooth: hci_event: validate skb length for unknown CC opcode
+- x86/dumpstack: Prevent KASAN false positive warnings in __show_regs()
+- tracing: Fix memory leaks in create_field_var()
+- ub: udma: Bugfix related to 2M hugepage.
+- ppp: fix race conditions in ppp_fill_forward_path
+- scsi: qla2xxx: Fix improper freeing of purex item
+- coresight: ETR: Fix ETR buffer use-after-free issue
+- arm-spe: Fix typos in the arm_spe_to_htpg()
+- mm/shmem: Fix order passing error in the shmem_alloc_folio()
+- arm64/mpam: Synchronize MPAM Partid to kernel mode
+- !19477 iommu: set the default iommu-dma mode as non-strict
+- ext4: xattr: fix null pointer deref in ext4_raw_inode()
+- jbd2: avoid bug_on in jbd2_journal_get_create_access() when file system corrupted
+- fs: ext4: change GFP_KERNEL to GFP_NOFS to avoid deadlock
+- ext4: add i_data_sem protection in ext4_destroy_inline_data_nolock()
+- ext4: refresh inline data size before write operations
+- hfsplus: fix KMSAN uninit-value issue in hfsplus_delete_cat()
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub:ubus delete undefined class code
+- !19760 ub:ubfi:skipped address of subtable 0 in ubrt
+- !19758 ub: udma: bugfix related to rx close.
+- !19759 ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub: cdma: add ioctl logs and error codes
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ub:ubus: hi_msg_sync_wait first pull cq
+- ub: udma: bugfix related to rx close.
+- !19752 Repair driver reset work-q uaf
+- perf/x86/intel: Fix KASAN global-out-of-bounds warning
+- mm: migrate: add dma copy offloading for hugetlb
+- !19755 obmm: Register resource for every memdev
+- !19756 ub:ubus delete undefined class code
+- !19754 ub:ubus: Move the decoder's queue operations to hisi-ubus
+- !19757 ub: cdma: add ioctl logs and error codes
+- !19750 ub: udma: Bugfix related to 2M hugepage.
+- !19749 ub: unic & ubase: Fix ethtool configuration error issue and resolve mailbox timeout
+- !19697  iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+- nvmet-fc: avoid scheduling association deletion twice
+- ub: cdma: add ioctl logs and error codes
+- ub:ubus delete undefined class code
+- obmm: Register resource for every memdev
+- Repair driver reset work-q uaf
+- bpf: Fix invalid prog->stats access when update_effective_progs fails
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ftrace: Fix softlockup in ftrace_module_enable
+- ub:ubus: hi_msg_sync_wait first pull cq
+- bpf: account for current allocated stack depth in widen_imprecise_scalars()
+- bpf: Add bpf_prog_run_data_pointers()
+- iommu: set the default iommu-dma mode as non-strict
+- ub: udma: Bugfix related to 2M hugepage.
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- 删除文件 .本项目已经正式迁移至AtomGit平台/README.md
+- update README.
+- timers: Fix NULL function pointer race in timer_shutdown_sync()
+- x86/fpu: Ensure XFD state on signal delivery
+- add migrate not
+- usb: storage: Fix memory leak in USB bulk transport
+- scsi: target: tcm_loop: Fix segfault in tcm_loop_tpg_address_show()
+- nfs4_setup_readdir(): insufficient locking for ->d_parent->d_inode dereferencing
+- nvme: nvme-fc: Ensure ->ioerr_work is cancelled in nvme_fc_delete_ctrl()
+- usb: storage: sddr55: Reject out-of-bound new_pba
+- usb: cdns3: gadget: Use-after-free during failed initialization and exit of cdnsp gadget
+- wifi: brcmfmac: fix crash while sending Action Frames in standalone AP Mode
+- be2net: pass wrb_params in case of OS2BMC
+- driver/coda: Fix possible NULL pointer dereference error.
+- VirtCCA supports Ascend 310P in CoDA scenarios
+- NFSD: Fix crash in nfsd4_read_release()
+- iommu: set the default iommu-dma mode as non-strict
+- configs: Add bus lock detect config in openeuler_config
+- x86/split_lock: Add support for Zhaoxin
+- x86/split_lock: Simplify reenabling
+- x86/split_lock: Fix the delayed detection logic
+- x86/split_lock: Move Split and Bus lock code to a dedicated file
+
 * Mon Dec 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.111
 - !19763 ub: udma: bugfix related to spin lock.
 - ub: udma: bugfix related to spin lock.
