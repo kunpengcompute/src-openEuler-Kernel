@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2601.2.0
+%global hulkrelease 2601.3.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0357
+Release: %{hulkrelease}.0358
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,26 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 14 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.3.0.0358
+- !20029 merge patch-1768185625 into openEuler-1.0-LTS
+- ipv4: route: Prevent rt_bind_exception() from rebinding stale fnhe
+- !20021 merge patch-1767946628 into openEuler-1.0-LTS
+- sched/rt: Skip currently executing CPU in rto_next_cpu()
+- !19961 merge patch-1767681076 into openEuler-1.0-LTS
+- !19986 merge patch-1767701968 into openEuler-1.0-LTS
+- !19954 merge patch-1767621081 into openEuler-1.0-LTS
+- !19948 merge patch-1767605117 into openEuler-1.0-LTS
+- !19941 merge patch-1767597922 into openEuler-1.0-LTS
+- !19947 merge patch-1767604374 into openEuler-1.0-LTS
+- acct: fix potential integer overflow in encode_comp_t()
+- drm/client: Fix memory leak in drm_client_target_cloned
+- ubi: Fix UAF wear-leveling entry in eraseblk_count_seq_show()
+- dm flakey: fix a crash with invalid table line
+- Revert "firmware: arm_sdei: Fix sleep from invalid context BUG"
+- Revert "firmware: arm_sdei: Fix the input parameter of cpuhp_remove_state()"
+- Revert "firmware: arm_sdei: Fix "firmware: arm_sdei: Fix sleep from invalid context BUG" KABI issue"
+- drm: Prevent drm_copy_field() to attempt copying a NULL pointer
 
 * Wed Jan 07 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.2.0.0357
 - !19887 merge patch-1767078288 into openEuler-1.0-LTS
