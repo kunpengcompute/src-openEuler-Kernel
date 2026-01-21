@@ -40,9 +40,9 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 
 %global upstream_version    6.6
 %global upstream_sublevel   0
-%global devel_release       132
+%global devel_release       135
 %global maintenance_release .0.0
-%global pkg_release         .111
+%global pkg_release         .113
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,426 @@ fi
 %endif
 
 %changelog
+* Wed Jan 21 2026 Li Nan <linan122@huawei.com> - 6.6.0-135.0.0.113
+- !19710 [OLK-6.6] Batch BAR sizing operations
+- !19952  mfs: Add prefetch demo
+- !20138 net:nebula-matrix:add protection of consecutive write regs
+- !20033  ceph: fix crash in process_v2_sparse_read() for encrypted directories
+- !20032  net: atlantic: fix fragment overflow handling in RX path
+- !20031  Bluetooth: hci_sync: fix race in hci_cmd_sync_dequeue_once
+- !20014  xfs: do not propagate ENODATA disk errors into xattr code
+- !20015  Fix CVE-2025-40242
+- !19960  wifi: rtl818x: rtl8187: Fix potential buffer underflow in rtl8187_rx_cb()
+- !20005  cifs: Fix establishing NetBIOS session for SMB2+ connection
+- !20009  ftrace: Fix BPF fexit with livepatch
+- !19983  regulator: core: Protect regulator_supply_alias_list with regulator_list_mutex
+- !19968  EEVDF null pointer
+- !19773  bpf, arm64: Do not audit capability check in do_jit()
+- !19997  mfs: remove FAROUND event for mfsd demo
+- !19942 [virtCCA Live Migration 1]virtcca secure cvm supports live migration
+- !20160 v3  CVE-2025-68304
+- !20141 urma: Fix the bug of exposing devices fails for host network
+- !20148 ubcore: fix route query for container loopback.
+- !20120 urma: fix urma_admin agg del eid failed.
+- !20028 release urma source when the ub device is removed
+- !20017  kernfs: Don't re-lock kernfs_root::kernfs_rwsem in kernfs_fop_readdir().
+- !20115  KVM: x86: Fix VM hard lockup after prolonged inactivity with periodic HV timer
+- !20109 uvb: change cis call default poll timeout
+- urma: fix the bug for container.
+- !20154 merge fix_is_err into OLK-6.6
+- Bluetooth: hci_core: lookup hci_conn on RX path on protocol side
+- Bluetooth: ISO: don't leak skb in ISO_CONT RX
+- Bluetooth: ISO: free rx_skb if not consumed
+- Bluetooth: ISO: Use kref to track lifetime of iso_conn
+- Bluetooth: SCO: fix sco_conn refcounting on sco_conn_ready
+- Bluetooth: SCO: remove the redundant sco_conn_put
+- Bluetooth: SCO: Use kref to track lifetime of sco_conn
+- Bluetooth: hci_core: Fix not checking skb length on hci_scodata_packet
+- urma: fix ubcore_cock NULL pointer check.
+- ubcore: fix route query for container loopback.
+- net:nebula-matrix:add protection of consecutive write regs
+- urma: fix urma_admin agg del eid failed.
+- KVM: x86: Fix VM hard lockup after prolonged inactivity with periodic HV timer
+- !20100 merge OLK-6.6-v6.6.92-backport into OLK-6.6
+- uvb: change cis call default poll timeout
+- dmaengine: idxd: Fix double free in idxd_setup_wqs()
+- dmaengine: idxd: Fix refcount underflow on module unload
+- dmaengine: idxd: Remove improper idxd_free
+- fs/xattr.c: fix simple_xattr_list()
+- firmware: arm_scmi: Account for failed debug initialization
+- drm/amdgpu: fix pm notifier handling
+- LoongArch: Explicitly specify code model in Makefile
+- usb: typec: ucsi: displayport: Fix deadlock
+- mm/page_alloc: fix race condition in unaccepted memory handling
+- dmaengine: idxd: Refactor remove call with idxd_cleanup() helper
+- dmaengine: idxd: fix memory leak in error handling path of idxd_pci_probe
+- dmaengine: idxd: Add missing idxd cleanup to fix memory leak in remove call
+- dmaengine: idxd: Add missing cleanups in cleanup internals
+- dmaengine: idxd: Add missing cleanup for early error out in idxd_setup_internals
+- dmaengine: idxd: fix memory leak in error handling path of idxd_setup_groups
+- dmaengine: idxd: fix memory leak in error handling path of idxd_setup_engines
+- dmaengine: idxd: fix memory leak in error handling path of idxd_setup_wqs
+- dmaengine: ti: k3-udma: Use cap_mask directly from dma_device structure instead of a local copy
+- net: qede: Initialize qede_ll_ops with designated initializer
+- smb: client: fix memory leak during error handling for POSIX mkdir
+- scsi: sd_zbc: block: Respect bio vector limits for REPORT ZONES buffer
+- phy: renesas: rcar-gen3-usb2: Set timing registers only once
+- phy: renesas: rcar-gen3-usb2: Fix role detection on unbind/bind
+- phy: Fix error handling in tegra_xusb_port_init
+- phy: tegra: xusb: Use a bitmask for UTMI pad power state tracking
+- tracing: samples: Initialize trace_array_printk() with the correct function
+- Drivers: hv: vmbus: Remove vmbus_sendpacket_pagebuffer()
+- Drivers: hv: Allow vmbus_sendpacket_mpb_desc() to create multiple ranges
+- hv_netvsc: Remove rmsg_pgcnt
+- hv_netvsc: Use vmbus_sendpacket_mpb_desc() to send VMBus messages
+- ALSA: usb-audio: Add sample rate quirk for Microdia JP001 USB Camera
+- ALSA: usb-audio: Add sample rate quirk for Audioengine D1
+- ALSA: es1968: Add error handling for snd_pcm_hw_constraint_pow2()
+- drm/amd/display: Avoid flooding unnecessary info messages
+- drm/amd/display: Correct the reply value when AUX write incomplete
+- LoongArch: Fix MAX_REG_OFFSET calculation
+- udf: Make sure i_lenExtents is uptodate on inode eviction
+- NFSv4/pnfs: Reset the layout state after a layoutreturn
+- tsnep: fix timestamping with a stacked DSA driver
+- tsnep: Inline small fragments within TX descriptor
+- octeontx2-af: Fix CGX Receive counters
+- net: ethernet: mtk_eth_soc: fix typo for declaration MT7988 ESW capability
+- octeontx2-pf: macsec: Fix incorrect max transmit size in TX secy
+- qlcnic: fix memory leak in qlcnic_sriov_channel_cfg_cmd()
+- ALSA: sh: SND_AICA should depend on SH_DMA_API
+- nvme-pci: make nvme_pci_npages_prp() __always_inline
+- net: dsa: sja1105: discard incoming frames in BR_STATE_LISTENING
+- ALSA: ump: Fix a typo of snd_ump_stream_msg_device_info
+- ALSA: seq: Fix delivery of UMP events to group ports
+- net: mctp: Ensure keys maintain only one ref to corresponding dev
+- tools/net/ynl: ethtool: fix crash when Hardware Clock info is missing
+- tools: ynl: ethtool.py: Output timestamping statistics from tsinfo-get operation
+- Bluetooth: MGMT: Fix MGMT_OP_ADD_DEVICE invalid device flags
+- spi: loopback-test: Do not split 1024-byte hexdumps
+- HID: thrustmaster: fix memory leak in thrustmaster_interrupts()
+- iio: chemical: sps30: use aligned_s64 for timestamp
+- iio: adc: ad7768-1: Fix insufficient alignment of timestamp.
+- Revert "drm/amd: Stop evicting resources on APUs in suspend"
+- drm/amd: Add Suspend/Hibernate notification callback support
+- drm/amdgpu: trigger flr_work if reading pf2vf data failed
+- drm/amdgpu: Fix the runtime resume failure issue
+- drm/amd: Stop evicting resources on APUs in suspend
+- iio: adc: ad7266: Fix potential timestamp alignment issue.
+- firmware: arm_scmi: Fix timeout checks on polling path
+- firmware: arm_scmi: Track basic SCMI communication debug metrics
+- firmware: arm_scmi: Add support for debug metrics at the interface
+- firmware: arm_scmi: Add message dump traces for bad and unexpected replies
+- firmware: arm_scmi: Add helper to trace bad messages
+- tpm: tis: Double the timeout B to 4s
+- cgroup/cpuset: Extend kthread_is_per_cpu() check to all PF_NO_SETAFFINITY tasks
+- platform/x86: asus-wmi: Fix wlan_ctrl_by_user detection
+- platform/x86/amd/pmc: Declare quirk_spurious_8042 for MECHREVO Wujie 14XA (GX4HRXL)
+- binfmt_elf: Move brk for static PIE even if ASLR disabled
+- binfmt_elf: Honor PT_LOAD alignment for static PIE
+- binfmt_elf: Calculate total_size earlier
+- selftests/exec: Build both static and non-static load_address tests
+- binfmt_elf: Leave a gap between .bss and brk
+- selftests/exec: load_address: conform test to TAP format output
+- binfmt_elf: elf_bss no longer used by load_elf_binary()
+- binfmt_elf: Support segments with 0 filesz and misaligned starts
+- fs/xattr.c: fix simple_xattr_list to always include security.* xattrs
+- !20080 merge OLK-6.6 into OLK-6.6
+- ubcore: fix netdev size limit error.
+- !19254 merge refs/pull/19254/head into OLK-6.6
+- drivers/ub/sentry: release urma source when the ub device is removed
+- ceph: fix crash in process_v2_sparse_read() for encrypted directories
+- net: atlantic: fix fragment overflow handling in RX path
+- Bluetooth: hci_sync: fix race in hci_cmd_sync_dequeue_once
+- kernfs: Don't re-lock kernfs_root::kernfs_rwsem in kernfs_fop_readdir().
+- gfs2: Fix unlikely race in gdlm_put_lock
+- gfs2: Add proper lockspace locking
+- xfs: do not propagate ENODATA disk errors into xattr code
+- ftrace: Fix BPF fexit with livepatch
+- cifs: Fix establishing NetBIOS session for SMB2+ connection
+- mfs: remove FAROUND event for mfsd demo
+- [virtCCA Live Migration 1]virtcca secure cvm supports live migration
+- regulator: core: Protect regulator_supply_alias_list with regulator_list_mutex
+- sched: Fix kabi breakage of struct cfs_rq for zero_vruntime
+- sched/eevdf: Fix min_vruntime vs avg_vruntime
+- sched/core: Add comment explaining force-idle vruntime snapshots
+- sched/fair: Forfeit vruntime on yield
+- Revert "sched/fair: Only increment deadline once on yield"
+- sched: Fix kabi breakage of struct cfs_rq for min_vruntime_copy
+- sched/eevdf: Remove min_vruntime_copy
+- sched: Fix kabi breakage of struct sched_entity for on_rq and rel_deadline
+- sched/fair: Avoid re-setting virtual deadline on 'migrations'
+- sched/balancing: Change comment formatting to not overlap Git conflict marker lines
+- wifi: rtl818x: rtl8187: Fix potential buffer underflow in rtl8187_rx_cb()
+- mfs: Add prefetch demo
+- bpf, arm64: Do not audit capability check in do_jit()
+- PCI: Batch BAR sizing operations
+- bpf: Do not audit capability check in do_jit()
+- usb: usbtmc: Fix read_stb function and get_stb ioctl
+- staging: axis-fifo: fix TX handling on copy_from_user() failure
+- staging: axis-fifo: flush RX FIFO on read errors
+- staging: axis-fifo: fix maximum TX packet length check
+- ksmbd: fix stream write failure
+- netfilter: ipset: Remove unused htable_bits in macro ahash_region
+- Documentation: x86/bugs/its: Add ITS documentation
+- x86/speculation: Remove the extra #ifdef around CALL_NOSPEC
+- x86/speculation: Add a conditional CS prefix to CALL_NOSPEC
+- x86/speculation: Simplify and make CALL_NOSPEC consistent
+- x86/bhi: Do not set BHI_DIS_S in 32-bit mode
+- x86/bpf: Add IBHF call at end of classic BPF
+- x86/bpf: Call branch history clearing sequence on exit
+- io_uring: ensure deferred completions are posted for multishot
+- io_uring: always arm linked timeouts prior to issue
+- do_umount(): add missing barrier before refcount checks in sync case
+- drm/panel: simple: Update timings for AUO G101EVN010
+- MIPS: Fix MAX_REG_OFFSET
+- iio: adc: dln2: Use aligned_s64 for timestamp
+- iio: accel: adxl355: Make timestamp 64-bit aligned using aligned_s64
+- types: Complement the aligned types with signed 64-bit one
+- iio: temp: maxim-thermocouple: Fix potential lack of DMA safe buffer.
+- iio: accel: adxl367: fix setting odr for activity time update
+- usb: usbtmc: Fix erroneous generic_read ioctl return
+- usb: usbtmc: Fix erroneous wait_srq ioctl return
+- usb: usbtmc: Fix erroneous get_stb ioctl error returns
+- USB: usbtmc: use interruptible sleep in usbtmc_read
+- usb: typec: ucsi: displayport: Fix NULL pointer access
+- usb: typec: tcpm: delay SNK_TRY_WAIT_DEBOUNCE to SRC_TRYWAIT transition
+- usb: host: tegra: Prevent host controller crash when OTG port is used
+- usb: gadget: Use get_status callback to set remote wakeup capability
+- usb: gadget: tegra-xudc: ACK ST_RC after clearing CTRL_RUN
+- usb: gadget: f_ecm: Add get_status callback
+- usb: cdnsp: fix L1 resume issue for RTL_REVISION_NEW_LPM version
+- usb: cdnsp: Fix issue with resuming from L1
+- ocfs2: stop quota recovery before disabling quotas
+- ocfs2: implement handshaking with ocfs2 recovery thread
+- ocfs2: switch osb->disable_recovery to enum
+- clocksource/i8253: Use raw_spinlock_irqsave() in clockevent_i8253_disable()
+- xenbus: Use kref to track req lifetime
+- xen: swiotlb: Use swiotlb bouncing if kmalloc allocation demands it
+- smb: client: Avoid race in open_cached_dir with lease breaks
+- usb: uhci-platform: Make the clock really optional
+- drm/amdgpu/hdp6: use memcfg register to post the write for HDP flush
+- drm/amdgpu/hdp5: use memcfg register to post the write for HDP flush
+- drm/amdgpu/hdp5.2: use memcfg register to post the write for HDP flush
+- drm/amdgpu/hdp4: use memcfg register to post the write for HDP flush
+- drm/amd/display: Copy AUX read reply data whenever length > 0
+- drm/amd/display: Fix wrong handling for AUX_DEFER case
+- drm/amd/display: Remove incorrect checking in dmub aux handler
+- drm/amd/display: Fix the checking condition in dmub aux handling
+- iio: adis16201: Correct inclinometer channel resolution
+- iio: adc: rockchip: Fix clock initialization sequence
+- iio: adc: ad7606: fix serial register access
+- drm/amd/display: Shift DMUB AUX reply command if necessary
+- staging: axis-fifo: Correct handling of tx_fifo_depth for size validation
+- staging: axis-fifo: Remove hardware resets for user errors
+- staging: iio: adc: ad7816: Correct conditional logic for store mode
+- Input: synaptics - enable InterTouch on TUXEDO InfinityBook Pro 14 v5
+- Input: synaptics - enable SMBus for HP Elitebook 850 G1
+- Input: synaptics - enable InterTouch on Dell Precision M3800
+- Input: synaptics - enable InterTouch on Dynabook Portege X30L-G
+- Input: synaptics - enable InterTouch on Dynabook Portege X30-D
+- Input: xpad - add support for 8BitDo Ultimate 2 Wireless Controller
+- Input: xpad - fix Share button on Xbox One controllers
+- Input: mtk-pmic-keys - fix possible null pointer dereference
+- Input: cyttsp5 - fix power control issue on wakeup
+- Input: cyttsp5 - ensure minimum reset pulse width
+- net: dsa: b53: fix learning on VLAN unaware bridges
+- net: dsa: b53: always rejoin default untagged VLAN on bridge leave
+- net: dsa: b53: fix VLAN ID for untagged vlan on bridge leave
+- net: dsa: b53: fix flushing old pvid VLAN on pvid change
+- net: dsa: b53: fix clearing PVID of a port
+- net: dsa: b53: allow leaky reserved multicast
+- netfilter: ipset: fix region locking in hash types
+- can: gw: fix RCU/BH usage in cgw_create_job()
+- can: mcp251xfd: fix TDC setting for low data bit rates
+- net: ethernet: mtk_eth_soc: reset all TX queues on DMA free
+- netdevice: add netdev_tx_reset_subqueue() shorthand
+- sch_htb: make htb_deactivate() idempotent
+- ksmbd: prevent out-of-bounds stream writes by validating *pos
+- can: mcp251xfd: mcp251xfd_remove(): fix order of unregistration calls
+- wifi: cfg80211: fix out-of-bounds access during multi-link element defragmentation
+- can: mcan: m_can_class_unregister(): fix order of unregistration calls
+- arm64: dts: imx8mm-verdin: Link reg_usdhc2_vqmmc to usdhc2
+- dm: add missing unlock on in dm_keyslot_evict()
+
+* Wed Jan 14 2026 Li Nan <linan122@huawei.com> - 6.6.0-134.0.0.112
+- !20054 merge topo_kernel_merge_1_1 into OLK-6.6
+- !19916 merge OLK-6.6_new into OLK-6.6
+- !20030 merge topo_kernel_merge into OLK-6.6
+- urma: ubcore support expose/unexpose dev and eid set commands.
+- urma: support uvs query chip_id.
+- urma: add create, delete agg_dev and get name of agg_dev.
+- urma: adapt to new topo info for ubcore/ubagg.
+- !19992 merge patch-1767753584 into OLK-6.6
+- !19763 merge patch-1766378735 into OLK-6.6
+- Revert "NFS: fix up nfs_release_folio() to try to release the page"
+- !19697 merge refs/pull/19697/head into OLK-6.6
+- !19844 merge patch-1766802317 into OLK-6.6
+- !19712 merge refs/pull/19712/head into OLK-6.6
+- !19653 merge refs/pull/19653/head into OLK-6.6
+- !19650 merge refs/pull/19650/head into OLK-6.6
+- !19809 merge patch-1766626818 into OLK-6.6
+- !19839 merge patch-1766740817 into OLK-6.6
+- !19924 merge patch-1767513707 into OLK-6.6
+- !19925 merge patch-1767513733 into OLK-6.6
+- !18476 merge refs/pull/18476/head into OLK-6.6
+- !19871 merge patch-1766998564 into OLK-6.6
+- !19870 merge patch-1766998524 into OLK-6.6
+- !19868 merge patch-1766998223 into OLK-6.6
+- !19831 merge patch-1766714417 into OLK-6.6
+- !19830 merge patch-1766713816 into OLK-6.6
+- !19829 merge patch-1766713004 into OLK-6.6
+- !19828 merge patch-1766712979 into OLK-6.6
+- !19827 merge patch-1766712955 into OLK-6.6
+- !19826 merge patch-1766712919 into OLK-6.6
+- !19711 merge refs/pull/19711/head into OLK-6.6
+- !19810 merge patch-1766626870 into OLK-6.6
+- !19843 merge patch-1766799391 into OLK-6.6
+- !19909 merge patch-1767491328 into OLK-6.6
+- !19799 merge patch-1766495417 into OLK-6.6
+- !19807 merge patch-1766567019 into OLK-6.6
+- !19895 merge patch-1767085921 into OLK-6.6
+- !19926 merge patch-1767515451 into OLK-6.6
+- !19656 merge refs/pull/19656/head into OLK-6.6
+- !19923 merge patch-1767513671 into OLK-6.6
+- !19928 merge patch-1767515719 into OLK-6.6
+- !19859 merge patch-1766977633 into OLK-6.6
+- !19860 merge patch-1766977668 into OLK-6.6
+- !19884 merge patch-1767076134 into OLK-6.6
+- !19913 merge patch-1767493335 into OLK-6.6
+- !19914 merge patch-1767493378 into OLK-6.6
+- !19915 merge patch-1767493397 into OLK-6.6
+- mfs: Avoid UAF on cache object when anon_file is release
+- mfs: avoid deadlock when the cache layer is modified
+- mfs: remove FAROUND event to avoid context switch during map_pages
+- !19612 merge refs/pull/19612/head into OLK-6.6
+- !19733 merge refs/pull/19733/head into OLK-6.6
+- !19729 merge refs/pull/19729/head into OLK-6.6
+- !19720 merge refs/pull/19720/head into OLK-6.6
+- usb: uas: fix urb unmapping issue when the uas device is remove during ongoing data transfer
+- nouveau/firmware: Add missing kfree() of nvkm_falcon_fw::boot
+- bpf: Free special fields when update [lru_,]percpu_hash maps
+- !19846 merge patch-1766818825 into OLK-6.6
+- !19904 merge patch-1767162173 into OLK-6.6
+- !19845 merge patch-1766818524 into OLK-6.6
+- !19797 merge patch-1766494034 into OLK-6.6
+- !19796 merge patch-1766494001 into OLK-6.6
+- !19800 merge patch-1766541023 into OLK-6.6
+- !19847 merge patch-1766820323 into OLK-6.6
+- !19875 merge patch-1767010708 into OLK-6.6
+- !19761 merge patch-1766371001 into OLK-6.6
+- !19619 merge refs/pull/19619/head into OLK-6.6
+- !19912 merge patch-1767493281 into OLK-6.6
+- net_sched: prio: fix a race in prio_tune()
+- can: j1939: add missing calls in NETDEV_UNREGISTER notification handler
+- can: j1939: implement NETDEV_UNREGISTER notification handler
+- Bluetooth: hci_core: Disable works on hci_unregister_dev
+- iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+- mm: mem_reliable: prevent excessive direct reclaim loops
+- mm: mem_reliable: use percise count during limit check
+- mm: mem_reliable: fix task reliable counter during fork
+- !19793 merge patch-1766492701 into OLK-6.6
+- !19823 merge tmp into OLK-6.6
+- !19888 merge ubase into OLK-6.6
+- !19898 merge OLK_6.6_velinux_1 into OLK-6.6
+- !19901 merge OLK-6.6 into OLK-6.6
+- NFSv4/pNFS: Clear NFS_INO_LAYOUTCOMMIT in pnfs_mark_layout_stateid_invalid
+- obmm: Register resource for every memdev
+- !19822 merge master into OLK-6.6
+- !19811 merge OLK-6.6 into OLK-6.6
+- !19818 merge OLK-6.6 into OLK-6.6
+- !19854 merge OLK-6.6 into OLK-6.6
+- !19886 merge OLK-6.6 into OLK-6.6
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- urma inclusion category: bugfix bugzilla: https://gitee.com/openeuler/release-management/issues/ID3WJX
+- bpf: Fix stackmap overflow check in __bpf_get_stackid()
+- bpf: Refactor stack map trace depth calculation into helper function
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- scsi: qla2xxx: Clear cmds after chip reset
+- ub: udma: bugfix related to rx close.
+- isdn: mISDN: hfcsusb: fix memory leak in hfcsusb_probe()
+- !19763 ub: udma: bugfix related to spin lock.
+- futex: Don't leak robust_list pointer on exec race
+- Bluetooth: MGMT: Fix OOB access in parse_adv_monitor_pattern()
+- ub: udma: bugfix related to spin lock.
+- Bluetooth: hci_event: validate skb length for unknown CC opcode
+- x86/dumpstack: Prevent KASAN false positive warnings in __show_regs()
+- tracing: Fix memory leaks in create_field_var()
+- ub: udma: Bugfix related to 2M hugepage.
+- ppp: fix race conditions in ppp_fill_forward_path
+- scsi: qla2xxx: Fix improper freeing of purex item
+- coresight: ETR: Fix ETR buffer use-after-free issue
+- arm-spe: Fix typos in the arm_spe_to_htpg()
+- mm/shmem: Fix order passing error in the shmem_alloc_folio()
+- arm64/mpam: Synchronize MPAM Partid to kernel mode
+- !19477 iommu: set the default iommu-dma mode as non-strict
+- ext4: xattr: fix null pointer deref in ext4_raw_inode()
+- jbd2: avoid bug_on in jbd2_journal_get_create_access() when file system corrupted
+- fs: ext4: change GFP_KERNEL to GFP_NOFS to avoid deadlock
+- ext4: add i_data_sem protection in ext4_destroy_inline_data_nolock()
+- ext4: refresh inline data size before write operations
+- hfsplus: fix KMSAN uninit-value issue in hfsplus_delete_cat()
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub:ubus delete undefined class code
+- !19760 ub:ubfi:skipped address of subtable 0 in ubrt
+- !19758 ub: udma: bugfix related to rx close.
+- !19759 ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub: cdma: add ioctl logs and error codes
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ub:ubus: hi_msg_sync_wait first pull cq
+- ub: udma: bugfix related to rx close.
+- !19752 Repair driver reset work-q uaf
+- perf/x86/intel: Fix KASAN global-out-of-bounds warning
+- mm: migrate: add dma copy offloading for hugetlb
+- !19755 obmm: Register resource for every memdev
+- !19756 ub:ubus delete undefined class code
+- !19754 ub:ubus: Move the decoder's queue operations to hisi-ubus
+- !19757 ub: cdma: add ioctl logs and error codes
+- !19750 ub: udma: Bugfix related to 2M hugepage.
+- !19749 ub: unic & ubase: Fix ethtool configuration error issue and resolve mailbox timeout
+- !19697  iomap: fix dirty range tracking in iomap_folio_mkwrite_iter
+- nvmet-fc: avoid scheduling association deletion twice
+- ub: cdma: add ioctl logs and error codes
+- ub:ubus delete undefined class code
+- obmm: Register resource for every memdev
+- Repair driver reset work-q uaf
+- bpf: Fix invalid prog->stats access when update_effective_progs fails
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ftrace: Fix softlockup in ftrace_module_enable
+- ub:ubus: hi_msg_sync_wait first pull cq
+- bpf: account for current allocated stack depth in widen_imprecise_scalars()
+- bpf: Add bpf_prog_run_data_pointers()
+- iommu: set the default iommu-dma mode as non-strict
+- ub: udma: Bugfix related to 2M hugepage.
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- 删除文件 .本项目已经正式迁移至AtomGit平台/README.md
+- update README.
+- timers: Fix NULL function pointer race in timer_shutdown_sync()
+- x86/fpu: Ensure XFD state on signal delivery
+- add migrate not
+- usb: storage: Fix memory leak in USB bulk transport
+- scsi: target: tcm_loop: Fix segfault in tcm_loop_tpg_address_show()
+- nfs4_setup_readdir(): insufficient locking for ->d_parent->d_inode dereferencing
+- nvme: nvme-fc: Ensure ->ioerr_work is cancelled in nvme_fc_delete_ctrl()
+- usb: storage: sddr55: Reject out-of-bound new_pba
+- usb: cdns3: gadget: Use-after-free during failed initialization and exit of cdnsp gadget
+- wifi: brcmfmac: fix crash while sending Action Frames in standalone AP Mode
+- be2net: pass wrb_params in case of OS2BMC
+- driver/coda: Fix possible NULL pointer dereference error.
+- VirtCCA supports Ascend 310P in CoDA scenarios
+- NFSD: Fix crash in nfsd4_read_release()
+- iommu: set the default iommu-dma mode as non-strict
+- configs: Add bus lock detect config in openeuler_config
+- x86/split_lock: Add support for Zhaoxin
+- x86/split_lock: Simplify reenabling
+- x86/split_lock: Fix the delayed detection logic
+- x86/split_lock: Move Split and Bus lock code to a dedicated file
+
 * Mon Dec 29 2025 Li Nan <linan122@huawei.com> - 6.6.0-132.0.0.111
 - !19763 ub: udma: bugfix related to spin lock.
 - ub: udma: bugfix related to spin lock.
