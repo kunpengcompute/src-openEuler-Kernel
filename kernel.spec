@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2601.3.0
+%global hulkrelease 2601.4.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0358
+Release: %{hulkrelease}.0359
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,12 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 21 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.4.0.0359
+- !20113 merge patch-1768544718 into openEuler-1.0-LTS
+- scsi: libsas: Fix use-after-free bug in smp_execute_task_sg()
+- !20106 merge patch-1768480822 into openEuler-1.0-LTS
+- fbcon: Fix the issue of uninitialized charcount in the remaining consoles
 
 * Wed Jan 14 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.3.0.0358
 - !20029 merge patch-1768185625 into openEuler-1.0-LTS
