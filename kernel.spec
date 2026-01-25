@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       135
 %global maintenance_release .0.0
-%global pkg_release         .113
+%global pkg_release         .114
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -1138,6 +1138,18 @@ fi
 %endif
 
 %changelog
+* Fri Jan 23 2026 Mingzheng Xing <xingmingzheng@iscas.ac.cn> - 6.6.0-135.0.0.114
+- riscv kernel upgrade to 6.6.0-135.0.0
+- Revert "mango pci hack:broadcast when no MSI source known"
+- serial: 8250_core: Remove unneeded ->iotype assignment
+- riscv: openeuler_defconfig: Enable PCIE_EDR
+- iommu/riscv: Fix inconsistencies with the latest spec revision V2
+- Enable gade when iommu has AMO_HWAD cap
+- riscv: openeuler_defconfig: Enable more ACPI_APEI configs
+- Optimize uaccess for riscv
+- Fix k1 boot failed with mmc error
+- Add SDHCI and GMAC support for Spacemit K3
+
 * Wed Jan 21 2026 Li Nan <linan122@huawei.com> - 6.6.0-135.0.0.113
 - !19710 [OLK-6.6] Batch BAR sizing operations
 - !19952  mfs: Add prefetch demo
