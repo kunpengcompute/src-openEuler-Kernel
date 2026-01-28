@@ -9,9 +9,9 @@
 
 %global upstream_version    5.10
 %global upstream_sublevel   0
-%global devel_release       298
+%global devel_release       299
 %global maintenance_release .0.0
-%global pkg_release         .200
+%global pkg_release         .201
 
 %define with_debuginfo 1
 # Do not recompute the build-id of vmlinux in find-debuginfo.sh
@@ -914,6 +914,195 @@ fi
 %endif
 
 %changelog
+* Wed Jan 28 2026 Tengda Wu <wutengda2@huawei.com> - 5.10.0-299.0.0.201
+- !19047 [OLK-5.10] Fix CVE-2025-39839
+- !18614 [OLK-5.10] Fix CVE-2025-39737
+- !18654 [OLK-5.10] Fix CVE-2025-38705
+- !18782 【OLK-5.10】fix CVE-2025-38712
+- !18612 [OLK-5.10] Fix CVE-2025-38713
+- !18635 [OLK-5.10] Fix CVE-2025-38714
+- !18862 [OLK-5.10] Fix CVE-2025-38697
+- !20058  CVE-2025-38111
+- !20131  wifi: cfg80211: fix use-after-free in cmp_bss()
+- !20306  mm/kmemleak: move up cond_resched() call in page scanning loop
+- !20309 hwmon: constify pointers to hwmon_channel_info
+- hwmon: fix kabi of struct hwmon_channel_info
+- !20338  mlxsw: spectrum_router: Fix neighbour use-after-free
+- !20337  mlxsw: spectrum_mr: Fix use-after-free when updating multicast route stats
+- hwmon: constify pointers to hwmon_channel_info
+- mlxsw: spectrum_router: Fix neighbour use-after-free
+- mlxsw: spectrum_mr: Fix use-after-free when updating multicast route stats
+- !20316  um: virtio_uml: Fix use-after-free after put_device in probe
+- !20114  KVM: x86: Fix VM hard lockup after prolonged inactivity with periodic HV timer
+- !19918 [OLK-5.10] Backport patches ACPI thermal for kunpeng soc
+- um: virtio_uml: Fix use-after-free after put_device in probe
+- !20300  software node: Correct a OOB check in software_node_get_reference_args()
+- !20299  jfs: add sanity check for agwidth in dbMount
+- !20278  iavf: fix off-by-one issues in iavf_config_rss_reg()
+- !20277  e1000: fix OOB in e1000_tbi_should_accept()
+- !20285  hwmon: (ibmpex) fix use-after-free in high/low store
+- mm/kmemleak: move up cond_resched() call in page scanning loop
+- !19953 【OLK-5.10】 power_meter patchs from 6.6
+- software node: Correct a OOB check in software_node_get_reference_args()
+- jfs: add sanity check for agwidth in dbMount
+- hwmon: (ibmpex) fix use-after-free in high/low store
+- !20269  drm/nouveau/kms/nv50-: init hpd_irq_lock for PIOR DP
+- !20271  KVM: x86: use array_index_nospec with indices that come from guest
+- !19788  ima: Handle error code returned by ima_filter_rule_match()
+- iavf: fix off-by-one issues in iavf_config_rss_reg()
+- e1000: fix OOB in e1000_tbi_should_accept()
+- !19038 [OLK-5.10] x86/microcode: Add Zhaoxin cpu microcode update driver
+- !20203  drm/amd/pm/powerplay/hwmgr/smu7_thermal: Prevent division by zero
+- !20202  scsi: qla2xxx: Fix premature hw access after PCI error
+- !19728  scsi: target: tcm_loop: Fix segfault in tcm_loop_tpg_address_show()
+- !20236 RDMA/hns: Support config and query the CNP DSCP for HIP09
+- KVM: x86: use array_index_nospec with indices that come from guest
+- drm/nouveau/kms/nv50-: init hpd_irq_lock for PIOR DP
+- !19035 [OLK-5.10] PCI: Fix PCIe unplug Enumeration Long Blocking Issue
+- RDMA/hns: Support config and query the CNP DSCP for HIP09
+- !20221 Revert "RDMA/hns: Fix mismatch exception rollback"
+- !20195  ACPI: APEI: Handle repeated SEA error interrupts storm
+- !20068 [OLK-5.10] Merge continuous pages into a large range when notifying range enc status changes
+- Revert "RDMA/hns: Fix mismatch exception rollback"
+- RDMA/hns: Support drain SQ and RQ
+- RDMA/hns: Return actual error code instead of fixed EINVAL
+- RDMA/hns: Notify ULP of remaining soft-WCs during reset
+- RDMA/hns: Fix WQ_MEM_RECLAIM warning
+- RDMA/hns: Fix RoCEv1 failure due to DSCP
+- !20161  cifs: fix session state check in reconnect to avoid use-after-free issue
+- !20050  smb: client: Fix use-after-free in cifs_fill_dirent
+- !19834 v2  md/raid0, raid10: Don't set discard sectors for request queue
+- !19816  scsi: sg: Do not sleep in atomic context
+- drm/amd/pm/powerplay/hwmgr/smu7_thermal: Prevent division by zero
+- scsi: qla2xxx: Fix premature hw access after PCI error
+- ACPI: APEI: Handle repeated SEA error interrupts storm
+- !20150  tracing: Do not register unsupported perf events
+- !20163  tracing: Fix enabling of tracing on file release
+- !19938 net: hns3: add VLAN id validation before using
+- !19836 [OLK-5.10] Fixes for SEV-ES Guest Support
+- !20044 【openEuler-22.03-LTS-SP4】Memory copy error
+- !19803 [OLK-5.10] Backport the SEV{-ES} bugfix patches from upstream - part2
+- !20025 [OLK-5.10]Support SMT control on arm64.
+- !19922  NFSD: Avoid calling OPDESC() with ops->opnum == OP_ILLEGAL
+- !19985  regulator: core: Protect regulator_supply_alias_list with regulator_list_mutex
+- !19996  net: netpoll: fix incorrect refcount handling causing incorrect cleanup
+- !19908 drivers:misc:sdma-dae: add NULL judgement of global variables
+- !20026  fs/buffer: fix use-after-free when call bh_read() helper
+- !19962  i40e: add max boundary check for VF filters
+- !20103  kmemleak: Fix kmemleak false warnings
+- !20169  HID: usbhid: Eliminate recurrent out-of-bounds bug in usbhid_parse()
+- !20052  CVE-2024-21823
+- !18962  erofs: Fix erofs_bmap error
+- !20016  kernfs: Fix UAF issue
+- !19694  ARM: fix hash_name() issue
+- !20048  VMCI: fix race between vmci_host_setup_notify and vmci_ctx_unset_notify
+- !20065  Fix CVE-2022-50737
+- !20066  smb: client: fix race with concurrent opens in rename(2)
+- !20151 v2  Fix CVE-2025-40016
+- hwmon: (acpi_power_meter) Replace the deprecated hwmon_device_register
+- hwmon: Fix the missing of 'average' word in hwmon_power_attr_templates
+- hwmon: (acpi_power_meter) Ensure IPMI space handler is ready on Dell systems
+- ACPI: IPMI: Add helper to wait for when SMI is selected
+- hwmon: (acpi_power_meter) Fix the fake power alarm reporting
+- hwmon: (acpi_power_meter) Fix a check for the return value of read_domain_devices().
+- hwmon: (acpi_power_meter) Fix update the power trip points on failure
+- hwmon: (acpi_power_meter) Fix uninitialized variables
+- !20047  crypto: af_alg - Set merge to zero early in af_alg_sendmsg
+- hwmon: (acpi_power_meter) Fix fail to load module on platform without _PMD method
+- hwmon: (acpi_power_meter) replace open-coded kmemdup_nul
+- hwmon: (acpi_power_meter) Fix style issues
+- hwmon: (acpi_power_meter) Use acpi_bus_get_acpi_device()
+- hwmon: acpi_power_meter: Get rid of ACPICA message printing
+- ACPI: utils: Introduce acpi_evaluation_failure_warn()
+- ACPI: Test for ACPI_SUCCESS rather than !ACPI_FAILURE
+- hwmon: (acpi_power_meter) clean up freeing code
+- x86/sev: merge continuous pages into a large range when notifying range enc status changes
+- HID: usbhid: Eliminate recurrent out-of-bounds bug in usbhid_parse()
+- tracing: Fix enabling of tracing on file release
+- cifs: fix session state check in reconnect to avoid use-after-free issue
+- media: uvcvideo: Use heuristic to find stream entity
+- media: uvcvideo: Mark invalid entities with id UVC_INVALID_ENTITY_ID
+- media: uvcvideo: Allow extra entities
+- tracing: Do not register unsupported perf events
+- wifi: cfg80211: fix use-after-free in cmp_bss()
+- KVM: x86: Fix VM hard lockup after prolonged inactivity with periodic HV timer
+- arm64: kdump: fix kmemleak unknown object warning when crash base is set
+- arm64: kdump: fix kmemleak unknown object warning
+- x86/sev: Use "SEV: " prefix for messages from sev.c
+- x86/sev: Propagate #GP if getting linear instruction address failed
+- smb: client: fix race with concurrent opens in rename(2)
+- fs/ntfs3: Add null pointer checks
+- fs/ntfs3: Validate buffer length while parsing index
+- fs/ntfs3: Validate index root when initialize NTFS security
+- net/mdiobus: Fix potential out-of-bounds read/write access
+- net: mdio: C22 is now optional, EOPNOTSUPP if not provided
+- dmaengine: idxd: Fix ->poll() return value
+- dmaengine: idxd: Fix allowing write() from different address spaces
+- dmaengine: idxd: Fix passing freed memory in idxd_cdev_open()
+- dmaengine: idxd: add idxd_copy_cr() to copy user completion record during page fault handling
+- dmaengine: idxd: add per DSA wq workqueue for processing cr faults
+- dmaengine: idxd: add a write() method for applications to submit work
+- dmaengine: idxd: add a new security check to deal with a hardware erratum
+- VFIO: Add the SPR_DSA and SPR_IAX devices to the denylist
+- smb: client: Fix use-after-free in cifs_fill_dirent
+- VMCI: fix race between vmci_host_setup_notify and vmci_ctx_unset_notify
+- crypto: af_alg - Set merge to zero early in af_alg_sendmsg
+- tools headers: Update the copy of x86's mem{cpy,set}_64.S used in 'perf bench'
+- x86: don't use REP_GOOD or ERMS for small memory clearing
+- x86: don't use REP_GOOD or ERMS for small memory copies
+- fs/buffer: fix use-after-free when call bh_read() helper
+- powerpc/kexec: Enable SMT before waking offline CPUs
+- cpu/SMT: Enable SMT only if a core is online
+- cpu/SMT: Create topology_smt_thread_allowed()
+- powerpc/topology: Check if a core is online
+- config: enable CONFIG_HOTPLUG_SMT for arm64
+- arm64: Kconfig: Enable HOTPLUG_SMT
+- arm64: topology: Support SMT control on ACPI based system
+- arch_topology: Support SMT control for OF based system
+- cpu/SMT: Provide a default topology_is_primary_thread()
+- powerpc: Add HOTPLUG_SMT support
+- Revert "arm64: Kconfig: Enable HOTPLUG_SMT"
+- kernfs: Fix kabi broken in struct kernfs_root
+- kernfs: Don't re-lock kernfs_root::kernfs_rwsem in kernfs_fop_readdir().
+- kernfs: fix potential NULL dereference in __kernfs_remove
+- kernfs: fix NULL dereferencing in kernfs_remove
+- kernfs: remove redundant kernfs_rwsem declaration.
+- kernfs: prevent early freeing of root node
+- kernfs: switch global kernfs_rwsem lock to per-fs lock
+- KVM: SVM: Make sure GHCB is mapped before updating
+- KVM: SVM: check CR4 changes against vcpu->arch
+- x86,swiotlb: Adjust SWIOTLB bounce buffer size for SEV guests
+- x86/insn: Extend error reporting from insn_fetch_from_user[_inatomic]()
+- x86/sev: Fix error message in runtime #VC handler
+- net: netpoll: fix incorrect refcount handling causing incorrect cleanup
+- regulator: core: Protect regulator_supply_alias_list with regulator_list_mutex
+- i40e: add max boundary check for VF filters
+- net: hns3: add VLAN id validation before using
+- net: hns3: avoid bitwise copy during RX buffer replace leg when page pool enabled
+- ACPI: thermal: Move to dedicated function sysfs extra attr creation
+- ACPI: thermal: Use thermal_zone_device()
+- thermal: core: Encapsulate tz->device field
+- NFSD: Avoid calling OPDESC() with ops->opnum == OP_ILLEGAL
+- drivers:misc:sdma-dae: add NULL judgement of global variables
+- md/raid0, raid10: Don't set discard sectors for request queue
+- scsi: sg: Do not sleep in atomic context
+- ima: Handle error code returned by ima_filter_rule_match()
+- scsi: target: tcm_loop: Fix segfault in tcm_loop_tpg_address_show()
+- ARM: fix hash_name() fault
+- ARM: allow __do_kernel_fault() to report execution of memory faults
+- configs: enable CONFIG_MICROCODE_ZHAOXIN
+- x86/microcode: Add Zhaoxin cpu microcode update driver
+- drm/amd/pm: fix null pointer access
+- batman-adv: fix OOB read/write in network-coding decode
+- PCI: Fix PCIe unplug Enumeration Long Blocking Issue
+- hfsplus: fix slab-out-of-bounds read in hfsplus_uni2asc()
+- erofs: Fix erofs_bmap error
+- jfs: upper bound check of tree index in dbAllocAG
+- hfsplus: don't use BUG_ON() in hfsplus_create_attributes_file()
+- hfsplus: fix slab-out-of-bounds in hfsplus_bnode_read()
+- mm/kmemleak: avoid soft lockup in __kmemleak_do_cleanup()
+- hfsplus: fix slab-out-of-bounds read in hfsplus_uni2asc()
+
 * Tue Jan 13 2026 Tengda Wu <wutengda2@huawei.com> - 5.10.0-298.0.0.200
 - !19798 merge OLK-5.10 into OLK-5.10
 - !19972 merge patch-1767691219 into OLK-5.10
