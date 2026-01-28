@@ -12,7 +12,7 @@
 
 %global KernelVer %{version}-%{release}.%{_target_cpu}
 
-%global hulkrelease 2601.4.0
+%global hulkrelease 2601.5.0
 
 %define with_patch 1
 
@@ -32,7 +32,7 @@
 
 Name:	 kernel
 Version: 4.19.90
-Release: %{hulkrelease}.0359
+Release: %{hulkrelease}.0360
 Summary: Linux Kernel
 License: GPLv2
 URL:	 http://www.kernel.org/
@@ -849,6 +849,32 @@ fi
 %endif
 
 %changelog
+
+* Wed Jan 28 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.5.0.0360
+- !20279  e1000: fix OOB in e1000_tbi_should_accept()
+- e1000: fix OOB in e1000_tbi_should_accept()
+- !20108  mmc: via-sdmmc: fix return value check of mmc_add_host()
+- !20111  Fix CVE-2023-54179
+- !20039  tpm: tpm_tis: Add the missed acpi_put_table() to fix memory leak
+- !20038  CVE-2023-54110
+- !20165  CVE-2022-50885
+- !20171  ipv6: ensure sane device mtu in tunnels
+- !20172  net: Fix load-tearing on sk->sk_stamp in sock_recv_cmsgs().
+- !20007  ubi: Fix possible null-ptr-deref in ubi_free_volume()
+- !19984  bpf: Address KCSAN report on bpf_lru_list
+- !19957  scsi: ipr: Fix WARNING in ipr_init()
+- net: Fix load-tearing on sk->sk_stamp in sock_recv_cmsgs().
+- ipv6: ensure sane device mtu in tunnels
+- RDMA/rxe: Fix NULL-ptr-deref in rxe_qp_do_cleanup() when socket create failed
+- RDMA/rxe: Fix the error caused by qp->sk
+- scsi: qla2xxx: Array index may go out of bound
+- scsi: qla2xxx: Fix inconsistent format argument type in qla_os.c
+- mmc: via-sdmmc: fix return value check of mmc_add_host()
+- tpm: tpm_tis: Add the missed acpi_put_table() to fix memory leak
+- usb: rndis_host: Secure rndis_query check against int overflow
+- ubi: Fix possible null-ptr-deref in ubi_free_volume()
+- bpf: Address KCSAN report on bpf_lru_list
+- scsi: ipr: Fix WARNING in ipr_init()
 
 * Wed Jan 21 2026 huwentao <huwentao19@h-partners.com> - 4.19.90-2601.4.0.0359
 - !20113 merge patch-1768544718 into openEuler-1.0-LTS
