@@ -42,7 +42,7 @@ rm -f test_openEuler_sign.ko test_openEuler_sign.ko.sig
 %global upstream_sublevel   0
 %global devel_release       136
 %global maintenance_release .0.0
-%global pkg_release         .115
+%global pkg_release         .116
 
 %global openeuler_lts       1
 %global openeuler_major     2403
@@ -742,16 +742,14 @@ popd
 find $RPM_BUILD_ROOT/usr/include -name "\.*"  -exec rm -rf {} \;
 
 # dtbs install
-%ifarch aarch64 riscv64
+%ifarch aarch64
     mkdir -p $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}
     install -m 644 $(find arch/%{Arch}/boot -name "*.dtb") $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/
     rm -f $(find arch/$Arch/boot -name "*.dtb")
 %endif
 
-# deal with riscv SoC dtb search path
 %ifarch riscv64
-    mkdir -p $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/thead
-    mv $(find $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/ -name "th1520*.dtb") $RPM_BUILD_ROOT/boot/dtb-%{KernelVer}/thead
+    %{make} ARCH=%{Arch} INSTALL_DTBS_PATH=$RPM_BUILD_ROOT/boot/dtb-%{KernelVer} dtbs_install
 %endif
 
 # deal with vdso
@@ -1138,6 +1136,9 @@ fi
 %endif
 
 %changelog
+* Fri Jan 30 2026 Hangfan Li <lihangfan@iscas.ac.cn> - 6.6.0-136.0.0.116
+- riscv: fix dtbs install
+
 * Wed Jan 28 2026 Li Nan <linan122@huawei.com> - 6.6.0-136.0.0.115
 - !20020  ext4: fix e4b bitmap inconsistency reports
 - !20308  ext4: fix stale data issue on the iomap path
