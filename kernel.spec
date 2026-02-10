@@ -333,6 +333,21 @@ package or when debugging this package.\
 %endif
 
 %prep
+GIT_TAG=$(cat %{_sourcedir}/SOURCE | tr -d '[:space:]')
+echo "Building kernel from Git tag: $GIT_TAG"
+
+TEMP_DIR=$(mktemp -d)
+echo "Cloning to temporary directory: $TEMP_DIR"
+git clone --depth=1 -b ${GIT_TAG} https://gitcode.com/kunpengcompute/openEuler-Kernel.git $TEMP_DIR/kernel
+rm -rf $TEMP_DIR/kernel/.git
+
+cd $TEMP_DIR/
+tar -czf %{_sourcedir}/kernel.tar.gz kernel
+cd /tmp
+rm -rf $TEMP_DIR
+
+echo "Created kernel.tar.gz from Git tag: $GIT_TAG"
+
 %setup -q -n kernel-%{version} -c
 
 %if 0%{?with_patch}
