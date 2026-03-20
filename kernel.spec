@@ -1107,6 +1107,1639 @@ fi
 %endif
 
 %changelog
+* Fri Mar 20 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu-alpha
+- include/ub: sync from OLK-6.6
+- include/ub: sync from OLK-6.6
+- include/ub/urma: sync from OLK-6.6
+- urma: support remove ubagg & uburma ko
+- ub/ubmempfd: Add module author
+- ub/ubdevshm: Fix some issues
+- ub: ubase: Resolve integer wraparound
+- ub: ubase: Resolve cache coherence and set smp_rmb
+- ub: ubase&unic: adjust the encoding format of the ubase&unic driver.
+- ub: ubase: Support udma get ue msg info.
+- ub: ubase: The debugfs function supports querying the Ethernet port rate.
+- urma: update urma_admin agg expose
+- urma: support non-root execute in containers
+- urma: fix useless copy_logic_device and use expose instead.
+- ub:hisi-ubus: Review of Readability Modifications
+- urma: update urma_admin agg expose
+- ub: cdma: cdma bug fix
+- urma: update urma_admin agg expose
+- urma: delete ubcm_genl implementation
+- urma: change warn log into info for topo query
+- ub:ubus: add reset function
+- ub: ubase&unic: Optimize the code for log information
+- ub: ubase: Solve The out-of-bounds problem of accessing a variable of the u16 type through unsigned long
+- ub: ubase: Fix the issue where the himac reset cannot be triggered during an elr reset
+- ub: ubase: Added the interface for obtaining hardware version information.
+- ub:ubus: alter nl ssu credit ras recover
+- ub:ubus add some missing code to openeuler
+- change bus instance create EID_BYPASS
+- urma: fix tjetty tp type in ping server
+- iommu/ummu: Optimize the definition of 'hisi_ummu_tdev_info'
+- urma: bugfix of ubagg&ubcore&uburma
+- ubcore: route query refine and ipo loopback adapt.
+- urma: change return value for provider err
+- urma: fix jfce uaf in batch cleanup
+- urma: fix kernel codecheck issues.
+- urma: fix tjetty ref in ping server
+- urma: copy linked ports when importing bond jetty/seg
+- ub: udma: bugfix related to print messages.
+- ub: ubase&unic: Supporting the black box capability of the ubase&unic driver.
+- net: unic: Optimized the code for the cmd structure and FEC function.
+- ub: ubase: add log for post mailbox timeout
+- ub: ubus: Remove black box header file to include dir
+- urma: fix bond device id not release
+- ub: ubmempfd: supports for D2H mapping and demapping
+- ub: ubmempfd: supports providing services to the QEMU process through file nodes
+- urma: query priority and enable bit, support ring size configuration
+- urma: implement debugfs, improve boundary checks and error handling logic
+- urma: implement data plane interaction and statistics
+- urma: implement ipourma network device operations
+- urma: ipourma resource management
+- urma: ipourma resource management and err code
+- urma: introduce ipourma main module
+- drivers/ub/sentry: fix check input parameters
+- ub:ubus: protect iterator ue_list and mue_list with ub_bus_sem
+- ub:ubus: Avoid getting empty uent from ubc
+- ub:hisi-ubus: Use GFP_ATOMIC when alloc memory
+- ub: udma: support user ctl function.
+- ub: udma: support uboe function.
+- ub: udma: bugfix related to query aux info.
+- drivers/ub/sentry: do not use magic numbers
+- urma: sl resource query error
+- urma: Kernel-mode specific implementations file for Jetty extension interface
+- drivers/ub/sentry: fix memory leak in process_urma_data()
+- drivers/ub/sentry: initialize some variables
+- ub: ubdevshm: supports the memory user to obtain and release shared memory
+- ub: ubdevshm: supports granting and revoking shared memory permissions
+- ub: ubdevshm: supports the registration and deregistration of shared memory segments
+- ub: ubdevshm: supports the registration and deregistration
+- ub:hisi-ubus: fix bug of security smatch
+- ub:ubus: injected route event
+- ub:ubus: Black Box Development
+- urma: urma support uboe
+- urma: add ping server
+- ub: ubase: resolve the cmdq crq overflow problem
+- ub: ubase: Optimized the QoS code naming to improve code readability.
+- ub: ubase&unic: optimizing code and configuration settings.
+- urma: Kernel-mode header file for Jetty extension interface
+- ub:ubus: Add port num check
+- ub/obmm: fix wrong pxm_numa parameter validation
+- ub/obmm: Remove unused parameters from obmm_addr_check.c
+- ub/obmm: Enhance mem_allocator_granu validation
+- ub/obmm: simplify allocator naming scheme
+- ub/obmm: fix allow_slow logic and optimize conti_alloc_memory
+- ub/obmm: add sysfs interface with fine-grained memory statistics
+- urma: log should not retrieve eid_idx from uctx
+- urma: support triple bonding device
+- ub:ubfi: Release the chosen node
+- ub: udma: Support for UE link establishment message.
+- ub: udma: support query and set qos info.
+- Revert "ub: ubase: Support for RC saved by queue granularity"
+- ub:ubus: Delete unused functions
+- ubcore: hotfix route query for port eid on the same node.
+- ub: cdma: modify the method of assigning values to the structure
+- urma: set/get sl
+- ub: ubase: support to query ub dl pkt stats and real-time peak bandwidth
+- ub: ubase: Support for RC saved by queue granularity
+- ub: ubase: Traverse mailbox AE events using interrupts and polling.
+- ub: ubase: Modify ubase ctrlq trace to distinguish between MUE and UE messages
+- ub: ubase: Fix MAC is_pfc sync, optimize list ops and code style
+- ub: ubase: Retain the initial tm qset configuration and restore it
+- ub: ubase: Add a retransmission function to improve reliability.
+- net: unic: Added unic DFX log information.
+- ub: ubase: Add and correct comments for some functions and data structures
+- ub: ubase: Support for HIMAC reset during ELR reset and Optimize ELR reset
+- urma: bugfix of UAF and double free in ubcm
+- ub: ubase: Fixed the alarm issue caused by the initialization of the structure variable definition.
+- urma: optimize log levels for kernel space
+- ub: cdma: adapted to UMMU interface changes
+- drivers/ub/sentry: fix memory leak in sentry_msg_helper
+- drivers/ub/sentry: initialize some variables
+- drivers/ub/sentry: fix potential buffer overflow in convert_str_to_smh_msg()
+- drivers/ub/sentry: fix potential null pointer reference in sentry_uvb_comm
+- drivers/ub/sentry: add input parameter verification for exported symbols
+- ub:hisi-ubus: Add create bus instance ummu bypass
+- obmm: reduce log noise for successful export/import/preimport
+- urma: adjust urma log format
+- ub: udma: close debug switch load parameters.
+- urma:fix log level and pass status 9
+- urma: modify log level
+- urma: fix the jfe uaf issue that occurred during the killall process.
+- urma: fix update topo logic
+- ub: udma: fix some code issues.
+- ub: udma: bugfix related to 2m_hugepage.
+- ub: udma: support for separate page tables
+- ub: udma: delete debugfs code.
+- ub: udma: bugfix related to ctrlq function.
+- ub: udma: verify get cqe/ae aux info out addr and len.
+- ub: cdma: support separated page table feature
+- drivers/ub/sentry: fix primary eid index value
+- ub: ubase: Support for UE link by ctrlq message
+- ub: ubase: send a deactivate req in removing
+- ub: ubase: Querying TPG/TP contexts in the chip is no longer supported after enabling safe mode.
+- ub: ubase: Use an independent thread for the ctrlq workqueue.
+- ub: ubase: Add KABI compatibility
+- ub: ubase: fixing the issue of cdma ctp_req_vl parameter configuration
+- ub: ubase: add PMU IDEV interrupt supported abilities.
+- ub: ubase: Delete the tid mask for eq, jfs, jfr, and jfc context
+- ub: ubase: Set the completion event interrupt to auto
+- ub:ubus: Not cfg access during surprise down
+- ub:hisi-ubus: Delete validate_pa err print
+- ub:ubus: Fix ubus link message and pool device error
+- ub:hisi-ubus: cq poller maximum handle 64 cqe per time
+- ub:hisi-ubus:Fix vdm message print error
+- ub:ubus:Fix ubus interrupt release issue
+- ubcore: fix logging and permission for route query.
+- ub: cdma: cdma uaf bugfix
+- ub: cdma: jfs call trace bugfix
+- urma: fix dereference of null_ptr for uobj
+- ub: udma: fix a bug that caused long reboot time.
+- ub: ubase: Accelerate when ctrl node is shutting down
+- urma: fix the bug for container.
+- urma: fix ubcore_cock NULL pointer check.
+- ubcore: fix route query for container loopback.
+- urma: fix urma_admin agg del eid failed.
+- ubcore: fix netdev size limit error.
+- urma: ubcore support expose/unexpose dev and eid set commands.
+- urma: support uvs query chip_id.
+- urma: add create, delete agg_dev and get name of agg_dev.
+- urma: adapt to new topo info for ubcore/ubagg.
+- drivers/ub/sentry: release urma source when the ub device is removed
+- ub: cdma: jfs 64K page table memory adaptation
+- ub: cdma: ELR code refactoring
+- ub: cdma: add some log print
+- obmm: Register resource for every memdev
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- urma inclusion category: bugfix bugzilla: https://gitee.com/openeuler/release-management/issues/ID3WJX
+- ub: ubase: Resolve mailbox timeout issue.
+- ub: udma: bugfix related to rx close.
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub: cdma: add ioctl logs and error codes
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ub:ubus: hi_msg_sync_wait first pull cq
+- obmm: Add FAST flag check for obmm_export_from_user
+- obmm: Rollback mmap_granu when mmap failed
+- add check ack msg and do sleep
+- obmm: Fix race condition of region release and device release
+- ub: udma: Bugfix related to crq event unregister.
+- ub:ubus: Change create device irq domain debug info
+- ub: ubase: CtrlQ retry message uses the same seq
+- ub: cdma: add eid upi update response
+- obmm: Remove log pringts of physical address and kernelspace virtual address
+- obmm: Fix race condition between unexport and addr_query_by_pa
+- ubcore: fix route_list when no full match.
+- obmm: display mmaped region's Pagesize
+- obmm: fix for PMD mapping
+- Packet throughput decreases with multiple jetty streams
+- ub:hisi-ubus: fix MUE unreg msg rsp time
+- ub: ubase: Fix spell error of month
+- ub:ubus: bugfix port reset in cluster mode
+- ub:ubus: add hotplug capability check
+- ub:ubus: bugfix calltrace of killing qemu when rmmod hisi_ubus
+- ub: udma: bugfix related to print location.
+- iommu/ummu: Remove redundant CONFIG_UB_UBRT_PLAT_DEV and code
+- iommu/ummu: Move tid_type attr to logic ummu
+- ubagg: fix mismatched spin unlock.
+- ub: ubase: obtain rc_max_cnt from MAMI
+- ub: ubase: fix a issue of udma device's eid deleted when stop rx stream and reset concurrently
+- ub: ubase: add opcode to query ub port_bitmap.
+- ub: ubase: add ip_over_urma API for udma.
+- ub: ubase: optimize print format of fw_ver in debugfs.
+- ub: ubase: Fix the issue of deadlock by quantities of log in the ctrlq crq task.
+- ub: ubase: Remove non-cluster mode code.
+- ub:ubfi: Fix UBFI memory leak issue
+- ub:ubus: Matt and MMIO judgments are not performed in cluster
+- ub:ubus: Delete ubc cfg0 config during cluster mode
+- ub:hisi-ubus: Fix ue reg/unreg without lock bug
+- iommu/ummu: Fix compilation option configuration about CONFIG_ACPI
+- urma: fixed process exiting uburma driver's private memory UAF
+- ub: cdma: fix the timing issue during flow-based deregistration.
+- ub: cdma: fix kasan cdma jfae uaf
+- ub: cdma: modify log level about en information
+- ub:ubus: add active_mutex in ub_entity
+- ub:unic Adaptation of the port reset interface
+- obmm: sync obmm default params value to module sysfs.
+- obmm: fix granu checking in mmap
+- ub:ubus adapt port local ras
+- ub:ubus: fix bug of msg workqueue null
+- ub:hisi-ubus ub:hisi-ubus: Move the decoder's page table operations to hisi-ubus
+- add check ack_dono flag for reboot event
+- ub: udma: bugfix related to init xa flags.
+- ub: udma: bugfix for rx close.
+- uvb: change dir name
+- urma: Bugfix for ubcore_get_route_list implement
+- obmm: remove redundant code and fix log issues
+- obmm: set up default mem allocator granule
+- urma: bugfix ubagg drivers refent error
+- urma: fixing ubcore hash table initialization failure.
+- ubcore: fix query route list by eid pair.
+- ub: hisi-ubus: Fix ub memory decoder create
+- ub: udma: Support retrieving the migr field.
+- ub: udma: Support eid and guid updates.
+- ub: udma: bugfix for set and get tp attr.
+- ub: udma: mask jetty context addr info.
+- ub: ubase: Remove non-cluster mode code
+- net: unic: Add support for MAC statistics
+- net: unic: Add Priority Flow Control (PFC) support
+- net: unic: Supports MAC filter, and allows users to add and delete MAC
+- ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- ub: cdma: add CDMA driver-api documentation description
+- urma: added functions for getting and setting TP attribute fields.
+- ub: ubase: Remove useless character '+'
+- drivers/ub/sentry: add sentry_remote_reporter module
+- drivers/ub/sentry: add sentry_uvb_comm module
+- drivers/ub/sentry: add sentry_urma_comm module
+- drivers/ub/sentry: add sentry_reporter and sentry_msg_help
+- urma: bugfix the issue of urma stream generation failure
+- ub: ubase: change cmdq/mbx timeout val & fix spell error
+- ub: ubase: adapt to response message structure change for ctrlq sl query
+- net: unic: Fix UE deactivate message cleaning
+- obmm: Add resource management support for imported memory
+- obmm: Add sysfs interface for configuration and monitoring
+- obmm: Add low memory management support
+- obmm: Add ownership management and transfer mechanisms
+- obmm: Add mmap support for shared memory regions
+- obmm: Add shared memory device interface
+- obmm: Add pre-import support for performance optimization
+- obmm: Add memory region import functionality
+- obmm: Add address validation and checking
+- obmm: Add user address export support
+- obmm: Add memory region export functionality
+- obmm: Implement memory pool allocator
+- obmm: Add continuous memory allocator for OBMM framework
+- obmm: Add cache maintenance helpers for inter-node consistency
+- obmm: Add region definitions and core data structures
+- obmm: Add Ownership Based Memory Management framework
+- ub:hisi-ubus: Support for ub memory decoder ras handle
+- ub:hisi-ubus: Support for UB Memory Decoder Initialization
+- ub:ubus: Support for UB Memory Decoder general layer implementation
+- ub: ubase: Introduces the functions and data structures exposed by the ubase driver
+- ub: udma: Resolve issues related to stream logout and interrupt lock.
+- ub: udma: reset and segment permission issues are resolved.
+- uburma: add tp_type in urma ioctl operation.
+- ub: ubase: Fix CTRLQ init process
+- urma: add ubagg ioctl interface and topology management
+- ub: udma: jetty and rct support the hugepage buffer.
+- ub: udma: Support 2M hugepage function.
+- ub: udma: Support query ub memory info.
+- ub: udma: Support query resource ratio.
+- ub: udma: Support query entity information.
+- ub: udma: Support create and destroy stars jfc.
+- ub: udma: Support create and destroy stars jfs.
+- ub: udma: Support tp context inquiry.
+- ub: udma: Support entity index inquiry.
+- ub: udma: Support device status inquiry.
+- ub: udma: Support flush jfs and jetty.
+- ub: udma: Support destroy jfs and jetty batch.
+- ub: udma: Support bind and unbind jetty.
+- ub: udma: Support dump ce aux info.
+- ub: udma: Support dump ae aux info.
+- ub: udma: Support query NPU info.
+- ub: udma: Support deactivate tp.
+- ub: udma: Support active tp.
+- ub: udma: Support get tp list.
+- ub: udma: Support rearm jfc and clean jfc.
+- ub: udma: Support poll jfc.
+- ub: udma: Support post jetty work request.
+- ub: udma: Support post jfr work request.
+- ub: udma: Support post jfs work request.
+- uburma: implement comprehensive jetty linking and transport features
+- uburma: implement jetty resource control and command structures
+- uburma: add uburma command and user object framework headers
+- uburma: introduce uburma basic types and helper functions
+- ub: ubase: Fix the lose of HIMAC reset.
+- ub: ubase: flush the work queue.
+- ub: ubase: Fix CTRLQ white list
+- ub: ubase: Optimization of ubase_ctrlq_send_msg interface parameters
+- ub: ubase: Fix verification to ctrlq message seq
+- ub: ubase: add CMDQ&CTRLQ compatibility code
+- ub: ubase: Fix priqos infomaton interface functions to query and check sl_bitmap
+- ubagg: implement ubagg basic infrastructure components
+- ub: udma: Add and remove jetty to jetty group.
+- ub: udma: Support import and unimport jfr and jetty.
+- ub:ubus: call ub_host_probe inside register_ub_manage_subsystem_ops
+- ub:ubus: Fix X86 build error
+- ubcore: add ubcore_umem and ubcore_tp implementations
+- ubcore: add ubcore_umem and ubcore_tp implementations
+- ubcore: implement ubcore connection management and messaging feature.
+- ubcore: add segment management support to ubcore module.
+- ubcore: add genl, netlink and vtp support to ubcore module.
+- ub: udma: Support modify jfc.
+- ub: udma: Support modify jfr.
+- ub: udma: Support modify jetty.
+- ub: udma: Support modify jfs.
+- ub: udma: Support destroy jetty group.
+- ub: udma: Support create jetty group.
+- ub: udma: Support destroy jetty.
+- ub: udma: Support create jetty.
+- ub: udma: Support destroy jfc.
+- ub: udma: Support create jfc.
+- ub: udma: Support destroy jfr.
+- ub: udma: Support create jfr.
+- ub: udma: Support destroy jfs.
+- ub: udma: Support create jfs.
+- ub: udma: Support query table item from hw.
+- ub: udma: Support query jfr context from hw.
+- ub: udma: Support query jfs and jetty context from hw.
+- ub: udma: Support init and uninit dfx function.
+- ub: udma: Support register and unregister segment function.
+- ub: udma: Support set eid function.
+- ub: udma: Support register and unregister ctrlq event.
+- ub: udma: Support register and unregister ce and crq event.
+- ub: udma: Support register and unregister ae event.
+- ub: udma: Register and unregister debugfs.
+- ub: udma: Create and destroy u-context.
+- ub:ubus: Add ummu_map attribute in sysfs
+- ub:ubus: Bugfix of ubus and ubfi
+- ub: udma: Support loading and unloading driver.
+- ubcore: add genl, netlink and vtp support to ubcore module.
+- ub: cdma: support reset function
+- ub: cdma: support RX stop flow function
+- ub: cdma: support debugfs interface
+- ub: cdma: support dma faa semantic
+- ub: cdma: support dma cas semantic
+- ub: cdma: support dma read semantic
+- ub: cdma: support dma write with notify semantic
+- ub: cdma: support dma write semantic delivery
+- ub: cdma: support dma write semantic configuration
+- ub: cdma: support kernel resource reclamation
+- ubcore: implement support for UVS commands
+- ubcore: implement device registration and jetty management
+- ubcore: add device management for character device and class operations
+- ub: cdma: support register segment
+- ub: cdma: support unregister segment
+- ub: cdma: support reporting completed events
+- ub: cdma: support reporting asynchronous events
+- ub: cdma: support the creation of jfs
+- ub: cdma: support the deletion of jfs
+- ub: cdma: support the creation of ctp
+- ub: cdma: support the deletion of ctp
+- ub: cdma: support the creation of jfc
+- ub: cdma: support the deletion of jfc
+- ub: cdma: support for releasing queue
+- ub: cdma: support for allocating queue
+- ub: cdma: support for getting device by eid
+- ub: cdma: support for getting device list
+- ub: cdma: support querying sl information and updating eu
+- ub: cdma: support the probe and remove processes
+- ub:ubus: reserve space for ub subsystem related structure
+- ub:hisi-ubus: Support UBUS configure EID-UPI table
+- ub:hisi-ubus: Support UBUS vdm entity enable message
+- ub:hisi-ubus: Support for MSGQ's debugging functionality
+- urma: implement ubcore sysfs interface and device management
+- urma: implement ubcore basic connection and bonding support
+- urma: add network framework facilities for ubcore.
+- urma: add tp table support and related cmd header for ubcore.
+- ub: ubase: Support querying dev caps.
+- ub: ubase: Supports the query of UBCL config.
+- ub: ubase: add function that query aeq/ceq/tp/tpg context
+- urma: introduce ubcore main module.
+- ub: ubase: Fix some compile warnings
+- ub:hisi-ubus: Support MSGQ queue exception handling
+- ub:hisi-ubus: Support for processing CQ request messages
+- ub:hisi-ubus: Provide callback functions for message devices
+- ub:hisi-ubus: Support for MSGQ channel processing in SQ and CQ
+- ub:hisi-ubus: Support for hisi MSGQ framework
+- ub:hisi-ubus: Support UBUS local RAS interfaces
+- ub:hisi-ubus: Support UBUS vdm pue/ue register and release
+- ub:hisi-ubus: Support UBUS vendor defined message framework
+- ub:hisi-ubus: Add HiSilicon ubus driver framework
+- ub: ubase: Fix the problem that free pages when ubase driver destroy TA context
+- ub:ubus: Support UBUS driver host probe and remove
+- ub:ubus: Add configuration and resource sysfs interfaces
+- ub:ubus: Add basic System Filesystem attributes
+- ub:ubus: Support processing protocol link messages
+- ub:ubus: Support hotplug processing main workflow
+- ub:ubus: Support for device enumeration during the hotplug phase
+- ub:ubus: Support for slot register configuration
+- ub:ubus: Support hotplug service driver
+- ub:ubus: Add generic ub component driver
+- ub:ubus: Add ub service driver framework
+- ub:ubus: Add new UBUS pool device interfaces
+- ub:ubus: Support UBUS pool devices register
+- ub:ubfi: register ubc usi domain
+- ub:ubus: Support for ub device resource space registration
+- ub:ubus: Add UBUS receive message framework
+- ub:ubus: Support device binding and unbinding bus instance
+- ub:ubus: Support for static cluster bus instance
+- ub:ubus: Support for dynamic bus instance
+- ub:ubus: Support for bus instance framework
+- ub:ubus: Support handle device link up and link down
+- ub:ubus: Support enumerate port and route set/clear for port
+- ub:ubus: Support route modify/delete function
+- ub: ubfi: Parsing ummu node in the ubrt table
+- ub: ubase: Added debug information query function for FST/FVT/RQMT entries
+- ub: ubase: support debugfs for active dev stats.
+- urma: implement workqueue management for ubcore module.
+- urma: implement topology information management for ubcore module.
+- urma: implement hash table utilities for ubcore module.
+- urma: implement log module for ubcore subsystem.
+- ub: ubase: support for activate/deactivate dev interface
+- ub: ubase: pf supports debugfs query port/vl current.
+- ub: ubase: adds the function to get ub port stats for unic and other aux driver
+- ub: ubase: support pre-alloc 2M pages.
+- ub: ubase: support ras function
+- ub: ubase: Support to port reset
+- ub: ubase: Added QoS and traffic management debugging features
+- ub: ubase: Support reset count information statistics.
+- ub: ubase: Support for ELR and entity reset.
+- ub: ubase: Provide an entity_list query interface.
+- ub: ubase: support create and delete UM TP/TPG
+- ub: ubase: Support to config and query the sl scheduling mode and weight in ETS and TM modes.
+- ub: ubase: support querying sl information in initialization phase
+- ub: ubase: Supports for ctrl queue management.
+- ub: ubase: adds the function that query oor caps
+- ub: ubase: Support for virtual register and unregister.
+- ub: ubase: Add trace events to aeqe and ceqe.
+- ub: ubase: Add the cmdq trace event print at the ubase layer.
+- ub: ubase: Support for timer/ext_dtb buffer management.
+- ub: ubase: Support for public Context memory allocation and release.
+- ub: ubase: support for cdma auxiliary device
+- ub: ubase: support for complete event process
+- ub: ubase: support for async event process
+- ub: ubase: add interrupt management framework and misc handler
+- ub: ubase: add function to query device resource
+- ub: ubase: add the function that query ueid
+- ub: ubase: support debugfs public interface.
+- ub: ubase: support for command process
+- ub: ubase: add support of ubase driver for ub network
+- ub:ubus: Supports decoder event processing
+- ub:ubus: Support for sending decoder commands
+- ub:ubus: Support for range table mapping and unmapping functions
+- ub:ubus: Support for page-range table address mapping and unmapping
+- ub:ubus: Support for Bus EID-UPI Table Configuration
+- ub:ubus: Support for UB Character Device Driver
+- ub:ubus: Support UBUS RAS capability
+- ub:ubus: Creating and deleting ub decoder page table mappings
+- ub:ubus: Adding a ue Creation Destruction Mechanism
+- ub:ubus: Enable the ub decoder device support
+- ub:ubus: Add UBUS RAS framework
+- ub:ubus: Support configuration of device information interface
+- ub:ubus: Support for enabling and disabling ue
+- ub:ubus: Add MSI capability for UBUS driver
+- ub:ubus: Add UBUS MSI basic functions
+- ub:ubus: Support UBUS Interrupt framework
+- ub:ubus: Add UBUS capability interfaces
+- ub:ubus: Support device level and port level reset
+- ub:ubus: Support for multiple mue enablement
+- ub:ubus: Support UB device enabling basic interface
+- ub:ubus: Supports device enumeration.
+- ub:ubus: Support for UB Bus Controller Enumeration
+- ub:ubus: Support for shortest path routing configuration
+- ub:ubus: Supports network address configuration and querying
+- ub:ubus: Support enumeration topology query commands
+- ub:ubus: Add UBUS resource space basic functions
+- ub:ubus: Add UBUS resource space framework
+- ub:ubus: Support for UB bus enumeration message initialization
+- ub:ubus: Support for UB routing table configuration function
+- ub:ubus: Add CNA allocate and free interfaces by kernel
+- ub:ubus: Add EID allocate and free interfaces by kernel
+- ub:ubus: Support cc configuration and query
+- ub:ubus: Supporting the UB Shared Port Function
+- ub:ubus: Support for UB port sysfs attribute files
+- ub:ubus: Support Ubus read/write configuration functions
+- ub:ubus: Support for UB Bus Port Management Framework
+- ub:ubus: Add Ubus setting configuration space function
+- ub:ubus: Support for UB Bus DMA Configuration Function
+- ub:ubfi: ubfi driver create ubc device
+- ub:ubus: Support for ubus messaging communication framework
+- ub:ubus: add ubus controller framework
+- ub:ubfi: ubfi driver parse ubc information from ubrt
+- ub:ubus: Support UB Bus Attribute Group
+- ub:ubfi: Support ub firmware interface basic functions
+- ub:ubus: Support for ub bus driver framework
+- ub: ubase&unic: Optimize the code for log information
+- ub: ubase: Solve The out-of-bounds problem of accessing a variable of the u16 type through unsigned long
+- ub: ubase: Fix the issue where the himac reset cannot be triggered during an elr reset
+- net: unic: Resolve network unavailability caused by concurrent activation and reset
+- net: unic: Provide the DFX capability for querying MNG table
+- net: unic: Delete the elr reset process after the tx timeout
+- ub: ubase&unic: Supporting the black box capability of the ubase&unic driver.
+- net: unic: Resolve the residual MAC address problem
+- net: unic: Optimized the code for the cmd structure and FEC function.
+- ub: ubase: add log for post mailbox timeout
+- ub: ubus: Remove black box header file to include dir
+- iommu/ummu-core: Simplifies tdev initialization resources
+- iommu/ummu: Optimized log printing
+- iommu/ummu: Use passed gfp_mask in map_pages callback
+- iommu/ummu: Optimized the TID invalidation configuration
+- iommu/ummu: Optimized SVA permission table memory allocation approach
+- iommu/ummu: Adapt UMMU SVA interface adjustment
+- iommu/ummu: Support TID and EID Granularity for MPAM
+- ub: udma: bugfix related to print messages.
+- ub: udma: support user ctl function.
+- ub: ubmempfd: supports for D2H mapping and demapping
+- ub: udma: support uboe function.
+- ub: ubmempfd: supports providing services to the QEMU process through file nodes
+- ub: udma: bugfix related to query aux info.
+- ub: ubmem_vmmu: supports IOMMU driver for the UB memory MMU in VMs
+- ub: ubmem_vmmu: supports parsing and configuring the hardware node information
+- ub: ubmem_vmmu: HiSilicon ubmem_vmmu Architecture Implementation
+- ub:ubus: protect iterator ue_list and mue_list with ub_bus_sem
+- ub:ubus: Avoid getting empty uent from ubc
+- ub:hisi-ubus: Use GFP_ATOMIC when alloc memory
+- ub:hisi-ubus: fix bug of security smatch
+- ub:ubus: injected route event
+- ub:ubus: Black Box Development
+- ub:ub_fwctl:Add illegal verification for scc
+- ub: ubase: resolve the cmdq crq overflow problem
+- ub:ub_fwctl:Support querying the historical status of port links
+- ub: ubase: Optimized the QoS code naming to improve code readability.
+- ub:ub_fwctl:Support querying firmware version numbers
+- ub: ubase&unic: optimizing code and configuration settings.
+- ub: ub_fwctl: Support querying real-time bandwidth statistics
+- net: unic: not support query and configure ip by control plane in UBoE
+- ub:ub_fwctl:Support querying statistical indicators at the ub port and uboe port levels
+- net: unic: fix the automatically enable uc guid promisc mode.
+- ub: udma: Support for UE link establishment message.
+- ub: udma: support query and set qos info.
+- ub: ubdevshm: supports the memory user to obtain and release shared memory
+- ub: ubdevshm: supports granting and revoking shared memory permissions
+- ub: ubdevshm: supports the registration and deregistration of shared memory segments
+- ub: ubdevshm: supports the registration and deregistration
+- ub: cdma: adapted to UMMU interface changes
+- ub: udma: close debug switch load parameters.
+- ub:hisi-ubus: Add create bus instance ummu bypass
+- !33 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- !34 merge LinuquMemPolicy0317-v2 into openEuler-24.03-LTS-SP1_Lingqu
+- mempolicy: restrict smart grid scheduling to vma_alloc_folio path
+- mempolicy: fix missing mmap_read_unlock() in error path
+- mm: fix nr_pages counting for folio in task_numa_fault
+- mm: fix shmem build errors with CONFIG_SWAP disable
+- mm/mempolicy: count MPOL_WEIGHTED_INTERLEAVE to "interleave_hit"
+- mm/mempolicy: fix memory leaks in weighted interleave sysfs
+- mempolicy: clean up minor dead code in queue_pages_test_walk()
+- mm/mempolicy: protect task interleave functions with tsk->mems_allowed_seq
+- mm/mempolicy: introduce MPOL_WEIGHTED_INTERLEAVE for weighted interleaving
+- mm/mempolicy: refactor a read-once mechanism into a function for re-use
+- mm/mempolicy: implement the sysfs-based weighted_interleave interface
+- mempolicy: migration attempt to match interleave nodes
+- mempolicy: mmap_lock is not needed while migrating folios
+- mempolicy: alloc_pages_mpol() for NUMA policy without vma
+- kernfs: drop shared NUMA mempolicy hooks
+- mempolicy: remove confusing MPOL_MF_LAZY dead code
+- mempolicy: mpol_shared_policy_init() without pseudo-vma
+- mempolicy trivia: use pgoff_t in shared mempolicy tree
+- mempolicy trivia: slightly more consistent naming
+- mempolicy trivia: delete those ancient pr_debug()s
+- mempolicy: fix migrate_pages(2) syscall return nr_failed
+- Revert "mm/mempolicy.c: fix the out-of-bounds access issue in mpol_parse_str"
+- kvm: supports hugepages POD when migrate vm
+- kvm: add struct kvm if only CONFIG_KVM enabled
+- mm/hugetlb: declare hugetlbfs_pagecache_present() non-static
+- !29 merge sp1-ub-bugfix2 into openEuler-24.03-LTS-SP1_Lingqu
+- !30 merge sp1-ub-bugfix into openEuler-24.03-LTS-SP1_Lingqu
+- !32 merge numa_remot_mempool into openEuler-24.03-LTS-SP1_Lingqu
+- kvm: supports hugepages reclaime notify
+- mm: fix compilation error due to MAX_PAGE_ORDER isn't declared
+- openeuler_defconfig: enable CONFIG_PFN_RANGE_ALLOC by default
+- mm/pfn_range_alloc: check if folio is hwpoisoned in pfn_range_free
+- mm/pfn_range_alloc: add a interface to show borrowable physical range
+- mm/pfn_range_alloc: support update cachable attribue of linear mapping
+- mm/pfn_range_alloc: introduce set_linear_mapping_invalid
+- mm/pfn_range_alloc: introduce hugetlb_pool_alloc_size
+- mm/pfn_range_alloc: add tracepoint for hugetlb_pool_alloc and hugetlb_pool_free
+- mm/pfn_range_alloc: add tracepoint for pfn_range_alloc and pfn_range_free
+- mm/pfn_range_alloc: support allocate and free from hugetlb pool
+- mm/pfn_range_alloc: add interfaces to alloc/free for drivers
+- mm/pfn_range_alloc: reserve memory for each node
+- mm/contig_alloc: fix alloc_contig_range when __GFP_COMP and order < MAX_ORDER
+- mm: page_alloc: speed up fallbacks in rmqueue_bulk()
+- mm/page_alloc: clarify should_claim_block() commentary
+- mm/page_alloc: clarify terminology in migratetype fallback code
+- mm/page_alloc: add some detailed comments in can_steal_fallback
+- mm: page_alloc: remove remnants of unlocked migratetype updates
+- mm: page_alloc: don't steal single pages from biggest buddy
+- mm/page_alloc: don't call pfn_to_page() on possibly non-existent PFN in split_large_buddy()
+- mm/page_alloc: forward the gfp flags from alloc_contig_range() to post_alloc_hook()
+- mm/page_alloc: sort out the alloc_contig_range() gfp flags mess
+- mm/page_alloc: make __alloc_contig_migrate_range() static
+- mm/page_isolation: don't pass gfp flags to isolate_single_pageblock()
+- mm/contig_alloc: support __GFP_COMP
+- mm: remove unused has_isolate_pageblock
+- mm: page_alloc: simpify page del and expand
+- mm: remove migration for HugePage in isolate_single_pageblock()
+- mm/page_alloc: keep track of free highatomic
+- mm: page_alloc: fix highatomic typing in multi-block buddies
+- mm: page_alloc: batch vmstat updates in expand()
+- mm: page_alloc: change move_freepages() to __move_freepages_block()
+- mm: page_alloc: consolidate free page accounting
+- mm: page_isolation: prepare for hygienic freelists
+- mm: page_alloc: set migratetype inside move_freepages()
+- mm: page_alloc: close migratetype race between freeing and stealing
+- mm: page_alloc: fix freelist movement during block conversion
+- mm: page_alloc: fix move_freepages_block() range error
+- mm: page_alloc: move free pages when converting block during isolation
+- mm: page_alloc: fix up block types when merging compatible blocks
+- mm: page_alloc: optimize free_unref_folios()
+- mm: page_alloc: remove pcppage migratetype caching
+- mm: page_alloc: simplify __free_pages_ok()
+- mm/page_alloc: remove unnecessary next_page in break_down_buddy_pages
+- mm/page_alloc: remove unnecessary check in break_down_buddy_pages
+- mm: add memory reclaim notifier
+- panic: add notifier call before other cpu shutdown
+- mm/numa_remote: fix wild-memory-access in numa_remote_hugetlb_nowatermark
+- mm/numa_remote: check if memory block is preonlined when undoing fake-online
+- mm/numa_remote: fix restoring to preonline when failing to offline from preonline
+- mm/numa_remote: fix memory leak of struct memory_block
+- mm/numa_remote: add kernel doc for numa remote feature
+- mm/numa_remote: extend cmdline numa_remote to limit the max number of remote node
+- mm: memory-failure: use kill_accessing_process() in ghes
+- mm: memory-failure: remove task_struct from kill_accessing_process()
+- mm/memory-failure: fix infinite UCE for VM_PFNMAP pfn
+- mm/hwpoison: do not send SIGBUS to processes with recovered clean pages
+- arm64: configs: enable NUMA_REMOTE by default
+- mm/numa_remote: enable oom_kill_cpuless_numa_allocating_task when numa_remote is enabled
+- mm/oom_kill: kill current in OOM when binding to cpu-less nodes
+- mm/numa_rmeote: add preonline interface for each memory device
+- mm/numa_remote: add pre-online count in meminfo
+- mm/numa_remote: add sysfs to distinguish whether a remote node
+- mm/numa_remote: introduce hugetlb_nowatermark mode for remote node
+- mm/numa_remote: undo isolation of remote memory asynchronously
+- mm/numa_remote: introduce pre-online mode to support hotplug unready memory
+- mm/numa_remote: introduce nofallback mode for remote node
+- mm/numa_remote: support to set node distance
+- mm/numa_remote: support to hotplug/hotremove remote memory
+- mm/numa_remote: prepare numa node for remote memory
+- mm/memory_hotplug: support to hotplug memory on ZONE_EXTMEM
+- mm/hugetlb: fix folio is still mapped when deleted
+- mm/smaps: fix race between smaps_hugetlb_range and migration
+- mm/hugetlb: fix set_max_huge_pages() when there are surplus pages
+- mm/hugetlb: fix surplus pages in dissolve_free_huge_page()
+- !31 merge dev-remap_pfn_range into openEuler-24.03-LTS-SP1_Lingqu
+- !28 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- downstream: mm: introduce remap_pfn_range_try_pmd() for PMD-level hugepage mapping
+- downstream: pgtable: add pte_clrhuge() implementation for arm64
+- arm64: mm: Drop dead code for pud special bit handling
+- mm/arm64: support large pfn mappings
+- mm/x86: support large pfn mappings
+- mm: always define pxx_pgprot()
+- mm/huge_memory: check pmd_special() only after pmd_present()
+- mm/fork: accept huge pfnmap entries
+- mm/pagewalk: check pfnmap for folio_walk_start()
+- mm/gup: detect huge pfnmap entries in gup-fast
+- mm: mark special bits for huge pfn mappings when inject
+- mm: drop is_huge_zero_pud()
+- mm: introduce ARCH_SUPPORTS_HUGE_PFNMAP and special bits to pmd/pud
+- drivers/ub/sentry: fix primary eid index value
+- uvb: fix cis call return value and obtain
+- uvb: fix wd_obtain logic err
+- uvb: change cis call default poll timeout
+- uvb: change dir name
+- ubios_uvb: add check for uvb window buffer size
+- ubios_uvb: add check for cis message and senderid
+- ubios_uvb: add msleep in poll thread
+- ubios_uvb: support CIS framework receive function
+- ubios_uvb: support CIS framework send function
+- ubios_uvb: support parse ubios information by dtb
+- ubios_uvb: support UBIOS object description specification parse
+- ub/obmm: fix wrong pxm_numa parameter validation
+- ub/obmm: Remove unused parameters from obmm_addr_check.c
+- ub/obmm: Enhance mem_allocator_granu validation
+- ub/obmm: simplify allocator naming scheme
+- ub/obmm: fix allow_slow logic and optimize conti_alloc_memory
+- ub/obmm: add sysfs interface with fine-grained memory statistics
+- obmm: reduce log noise for successful export/import/preimport
+- obmm: Register resource for every memdev
+- obmm: Add FAST flag check for obmm_export_from_user
+- obmm: Rollback mmap_granu when mmap failed
+- obmm: Fix race condition of region release and device release
+- obmm: Remove log pringts of physical address and kernelspace virtual address
+- obmm: Fix race condition between unexport and addr_query_by_pa
+- obmm: display mmaped region's Pagesize
+- obmm: fix for PMD mapping
+- obmm: sync obmm default params value to module sysfs.
+- obmm: set MAX Numa Distance to 255
+- obmm: fix granu checking in mmap
+- obmm: remove redundant code and fix log issues
+- obmm: set up default mem allocator granule
+- obmm: Add resource management support for imported memory
+- obmm: Add sysfs interface for configuration and monitoring
+- obmm: Add low memory management support
+- obmm: Add ownership management and transfer mechanisms
+- obmm: Add mmap support for shared memory regions
+- obmm: Add shared memory device interface
+- obmm: Add pre-import support for performance optimization
+- obmm: Add memory region import functionality
+- obmm: Add address validation and checking
+- obmm: Add user address export support
+- obmm: Add memory region export functionality
+- obmm: Implement memory pool allocator
+- obmm: Add continuous memory allocator for OBMM framework
+- obmm: Add cache maintenance helpers for inter-node consistency
+- obmm: Add region definitions and core data structures
+- obmm: Add Ownership Based Memory Management framework
+- Migration/urma: optimize performance in live migration.
+- drivers/ub/sentry: fix check input parameters
+- drivers/ub/sentry: do not use magic numbers
+- drivers/ub/sentry: fix memory leak in process_urma_data()
+- drivers/ub/sentry: initialize some variables
+- drivers/ub/sentry: fix memory leak in sentry_msg_helper
+- drivers/ub/sentry: initialize some variables
+- drivers/ub/sentry: fix potential buffer overflow in convert_str_to_smh_msg()
+- drivers/ub/sentry: fix potential null pointer reference in sentry_uvb_comm
+- drivers/ub/sentry: add input parameter verification for exported symbols
+- drivers/ub/sentry: release urma source when the ub device is removed
+- add check ack msg and do sleep
+- add check ack_dono flag for reboot event
+- drivers/ub/sentry: add sentry_remote_reporter module
+- drivers/ub/sentry: add sentry_uvb_comm module
+- drivers/ub/sentry: add sentry_urma_comm module
+- drivers/ub/sentry: add sentry_reporter and sentry_msg_helper
+- acpi: provides acpi power notifier chain
+- !15 merge openEuler-24.03-LTS-SP1_Lingqu-perf-spe into openEuler-24.03-LTS-SP1_Lingqu
+- perf color: Add printf format checking and resolve issues
+- perf mem: Count L2 HITM for c2c statistic
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- perf arm-spe: Backport perf_cpu_map__new_online_cpus()
+- perf arm-spe: Save per CPU information in metadata
+- perf arm-spe: Calculate meta data size
+- perf arm-spe: Define metadata header version 2
+- perf arm-spe: Prepare for adding data source packet implementations for other cores
+- perf arm-spe: Use old behavior when opening old SPE files
+- perf arm-spe: Set sample.addr to target address for instruction sample
+- !16 merge openEuler-24.03-LTS-SP1_Lingqu-perf-ptt into openEuler-24.03-LTS-SP1_Lingqu
+- perf arm-spe: Remove the unused 'midr' field
+- perf arm-spe: Use metadata to decide the data source feature
+- perf arm-spe: Introduce arm_spe__is_homogeneous()
+- perf arm-spe: Dump metadata with version 2
+- perf arm-spe: Support metadata version 2
+- perf arm-spe: Rename the common data source encoding
+- perf arm-spe: Rename arm_spe__synth_data_source_generic()
+- !14 merge openEuler-24.03-LTS-SP1_Lingqu-perf-common into openEuler-24.03-LTS-SP1_Lingqu
+- !22 merge openEuler-24.03-LTS-SP1_Lingqu-smthotplug into openEuler-24.03-LTS-SP1_Lingqu
+- config: enable CONFIG_HOTPLUG_SMT for arm64
+- arm64: Kconfig: Enable HOTPLUG_SMT
+- arm64: topology: Support SMT control on ACPI based system
+- arch_topology: Support SMT control for OF based system
+- !21 merge openEuler-24.03-LTS-SP1_Lingqu-perf-erratum into openEuler-24.03-LTS-SP1_Lingqu
+- !20 merge openEuler-24.03-LTS-SP1_Lingqu-perf-usb into openEuler-24.03-LTS-SP1_Lingqu
+- !19 merge openEuler-24.03-LTS-SP1_Lingqu-perf-pcie into openEuler-24.03-LTS-SP1_Lingqu
+- !18 merge openEuler-24.03-LTS-SP1_Lingqu-perf-etm into openEuler-24.03-LTS-SP1_Lingqu
+- !17 merge openEuler-24.03-LTS-SP1_Lingqu-perf-gpio into openEuler-24.03-LTS-SP1_Lingqu
+- perf: Fix lastup for multi-CPU PG
+- perf: Fix tt_core mismatch over PG CPU
+- Documentation: hisi-pmu: Fix of minor format error
+- Documentation: hisi-pmu: Add introduction to HiSilicon V3 PMU
+- drivers/perf: hisi: Add support for L3C PMU v3
+- drivers/perf: hisi: Add events and rename event "cycle" for pa_pmu
+- drivers/perf: hisi: Fixes the incorrect bitmask limit for the CPA event sysfs interface
+- drivers/perf: hisi: Add cacheable option for L3C PMU
+- perf: Remove unstable events for uncore L3C PMU
+- drivers/perf: hisi: Add support for L3C PMU v3
+- drivers/perf: hisi: Clarifying event names and fix event ID for pa_pmu
+- perf iostat: hisi: Fix port range retrival
+- perf stat: Enable iostat mode for HiSilicon PCIe PMU
+- perf: Configure BRBE correctly on VHE host
+- drivers/perf: hisi: Add support for HiSilicon MN PMU driver
+- drivers/perf: hisi: Add support for HiSilicon NoC PMU
+- perf: fix ddrc redundant value set
+- perf: arm_pmuv3: Don't use PMCCNTR_EL0 on SMT cores
+- perf: arm_pmuv3: Factor out PMCCNTR_EL0 use conditions
+- arm64: perf: Add support for HIP12 hw metric
+- drivers/perf: hisi: Refactor the event configuration of L3C PMU
+- drivers/perf: hisi: Extend the field of tt_core
+- drivers/perf: hisi: Extract the event filter check of L3C PMU
+- drivers/perf: hisi: Simplify the probe process of each L3C PMU version
+- drivers/perf: hisi: Export hisi_uncore_pmu_isr()
+- drivers/perf: hisi: Relax the event ID check in the framework
+- drivers/perf: hisi: Support PMUs with no interrupt
+- drivers/perf: hisi: Relax the event number check of v2 PMUs
+- drivers/perf: hisi: Add support for HiSilicon SLLC v3 PMU driver
+- drivers/perf: hisi: Use ACPI driver_data to retrieve SLLC PMU information
+- drivers/perf: hisi: Simplify the probe process for each DDRC version
+- drivers/perf: hisi: Delete redundant blank line of DDRC PMU
+- drivers/perf: hisi: Fix incorrect variable name "hha_pmu" in DDRC PMU driver
+- drivers/perf: hisi: Export associated CPUs of each PMU through sysfs
+- drivers/perf: hisi: Provide a generic implementation of cpumask/identifier
+- drivers/perf: hisi: Add a common function to retrieve topology from firmware
+- drivers/perf: hisi: Extract topology information to a separate structure
+- drivers/perf: hisi: Refactor the detection of associated CPUs
+- drivers/perf: hisi: Migrate to one online CPU if no associated one online
+- drivers/perf: hisi: Don't update the associated_cpus on CPU offline
+- drivers/perf: hisi: Define a symbol namespace for HiSilicon Uncore PMUs
+- perf stat: Display iostat headers correctly
+- !13 merge openEuler-24.03-LTS-SP1_Lingqu-arch into openEuler-24.03-LTS-SP1_Lingqu
+- Fix add define COMPAT_ELF_HWCAP3
+- KVM: arm64: Enable FEAT_{LS64, LS64_V} in the supported guest
+- Workaround the issue when compile with CONFIG_FUNCTION_ALIGNMENT_64B
+- arm64: Add support for FEAT_{LS64, LS64_V}
+- arm64: Provide basic EL2 setup for FEAT_{LS64, LS64_V} usage at EL0/1
+- binfmt_elf: Wire up AT_HWCAP3 at AT_HWCAP4
+- uapi/auxvec: Define AT_HWCAP3 and AT_HWCAP4 aux vector, entries
+- arm64: Support AT_HWCAP3
+- !12 merge openEuler-24.03-LTS-SP1_Lingqu-hibmcge into openEuler-24.03-LTS-SP1_Lingqu
+- !11 merge openEuler-24.03-LTS-SP1_Lingqu-hwmon into openEuler-24.03-LTS-SP1_Lingqu
+- !10 merge openEuler-24.03-LTS-SP1_Lingqu-hibmcdrm into openEuler-24.03-LTS-SP1_Lingqu
+- !9 merge openEuler-24.03-LTS-SP1_Lingqu-cpufreq into openEuler-24.03-LTS-SP1_Lingqu
+- cpufreq: Exit governor when failed to start old governor
+- cpufreq: CPPC: Don't warn on failing to read perf counters on offline cpus
+- cpufreq: governor: Fix negative 'idle_time' handling in dbs_update()
+- cpufreq: Move the check of cpufreq_driver->get into cpufreq_verify_current_freq()
+- cpufreq: Init policy->rwsem before it may be possibly used
+- cpufreq: Initialize cpufreq-based frequency-invariance later
+- cpufreq: Hold cpufreq_driver_lock when assigning cpufreq_driver->set_boost
+- cpufreq: Remove duplicate check in __cpufreq_offline()
+- cpufreq: Contain scaling_cur_freq.attr in cpufreq_attrs
+- cpufreq: CPPC: Remove forward declaration of cppc_cpufreq_register_em()
+- cpufreq: CPPC: Do not return a value from populate_efficiency_class()
+- cpufreq: CPPC: Remove cpu_data_list
+- cpufreq: CPPC: Remove forward declaration of hisi_cppc_cpufreq_get_rate()
+- cpufreq: cppc: Fix invalid return value in hisi_cppc_cpufreq_get_rate()
+- cpufreq: cppc: Fix invalid return value in .get() callback
+- arm64: topology: Setup amu fie when cpu hotplugging
+- cpufreq: CPPC: Fix error handling in cppc_scale_freq_workfn()
+- topology: Set capacity_freq_ref in all cases
+- arm64/amu: Use capacity_ref_freq() to set AMU ratio
+- cpufreq/cppc: Set the frequency used for computing the capacity
+- energy_model: Use a fixed reference frequency
+- sched/topology: Add a new arch_scale_freq_ref() method
+- cpufreq/schedutil: Use a fixed reference frequency
+- cpufreq: Use the fixed and coherent frequency for scaling capacity
+- cpufreq: prevent NULL dereference in cpufreq_online()
+- cpufreq: ACPI: Remove set_boost in acpi_cpufreq_cpu_init()
+- cpufreq: CPPC: Fix wrong max_freq in policy initialization
+- cpufreq: Introduce a more generic way to set default per-policy boost flag
+- cpufreq: Fix re-boost issue after hotplugging a CPU
+- !5 merge openEuler-24.03-LTS-SP1_Lingqu-soc_cache into openEuler-24.03-LTS-SP1_Lingqu
+- !4 merge sp1-ub into openEuler-24.03-LTS-SP1_Lingqu
+- ub:ubus: Add port num check
+- ub:ubfi: Release the chosen node
+- ub:ubus: Delete unused functions
+- ub: ubase: support to query ub dl pkt stats and real-time peak bandwidth
+- ub: ubase: Support for RC saved by queue granularity
+- ub: ubase: Traverse mailbox AE events using interrupts and polling.
+- ub: ubase: Modify ubase ctrlq trace to distinguish between MUE and UE messages
+- net: unic: The function of dumping himac registers is added.
+- ub: ubase: Fix MAC is_pfc sync, optimize list ops and code style
+- ub: ubase: Retain the initial tm qset configuration and restore it
+- net: unic: Fixed an issue in the bond IP address notification and pause configuration when an exception occurs.
+- ub: ubase: Add a retransmission function to improve reliability.
+- net: unic: Increase the readability and reliability of loopback code
+- net: unic: Synchronize the code modify for ip management and deactivation
+- net: unic: Increase the readability and reliability of VLAN feature.
+- net: unic: Added unic DFX log information.
+- ub: ubase: Add and correct comments for some functions and data structures
+- net: unic: Notify MAMI when the bond port status changes
+- ub: ubase: Support for HIMAC reset during ELR reset and Optimize ELR reset
+- iommu/ummu-core: Fix separate page table compatibility
+- !27 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- !24 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- perf arm-spe: Add support for SPE Data Source packet on HiSilicon HIP12
+- Revert "arm64: Kconfig: Enable HOTPLUG_SMT"
+- arm64/mpam: Synchronize MPAM Partid to kernel mode
+- iommu: set the default iommu-dma mode as non-strict
+- fs/resctrl: Prevent mounting with unsupported options
+- fs/resctrl: Fix resctrl mount options display in mount list
+- arm64/mpam: Need to reset MPAM component when umounting resctrl
+- arm64/mpam: Remove the redundant prev_val member variable
+- arm64/mpam: Reset mbwu_state while creating new monitor group
+- arm64/mpam: Add build dependencies for CONFIG_RESCTRL_IOMMU
+- arm64/mpam: Merge redundant local static variables 'cpus'
+- arm64/mpam: Add quirk to shrink MATA PMG range
+- mm: do not install PMD mappings when handling a COW fault
+- arm64/mpam: Add quirk for L3 CPBM validity check
+- fs/resctrl: Fix the L3 CMAX conversion mechanism
+- arm64/mpam: Add quirk to retrigger L3 CSU monitor
+- arm64/watchdog_hld: Add a cpufreq notifier for update watchdog thresh
+- watchdog/perf: Provide function for adjusting the event period
+- arm64/mpam: Fix L2 MBWU monitor multiplexing issue
+- arm64/mpam: Print MPAM register operation for debug
+- arm64/mpam: Fix MBWU monitor overflow handling
+- cpu/SMT: recover global num_threads after disable smt switch fail
+- fs/resctrl: Re-allocate rmid for the monitor when migrating across control groups
+- arm-smmu-v3: add 'HIP10C' for 162100602 errata
+- sdei_watchdog: Add CPU_PM_ENTER_FAILED handling in sdei_watchdog_pm_notifier
+- locking/qspinlock: Fix CNA NUMA node setup before numa_store_cpu_info()
+- arm64/mpam: Update MB hardlimit and priority default value forcely
+- arm64/mpam: Add quirk for hisi cpbm_wd field
+- arm64/mpam: Add quirk for L3 CSU counters
+- arm64/mpam: Add quirk for cmax and cmin
+- tools/mpam: Add MPAM dynamic adjustment and sampling scripts
+- arm64/mpam: Half the number of RMIDs for all resources under CDP mode
+- sdei_watchdog: add percpu flag to fix sdei watchdog state in lpi mode
+- fs/resctrl: Fix max_threshold_occupancy write operation
+- arm64/mpam: Fix num_rmids when enable CDP mode
+- arm64/mpam: Fix the logic that determines whether an MPAM MSC should initialize
+- gic: increase the arch_timer priority to avoid hardlockup
+- arm64/mpam: Add mb_only boot option
+- mm/mem_sampling: preserve kernel subsystem SPE state across perf sampling
+- arm64/mpam: Set 1 as the minimum setting value for CMAX
+- arm64/mpam: Support partial-core boot for MPAM
+- sdei_watchdog: use lockup_detector_retry_init() to init sdei watchdog
+- arm64/mpam: Ensure the err variable is initialized
+- fs/resctrl: Enqueue mon_event_count() forcefully for MPAM
+- arm64/mpam: Fix incorrect CPU-to-partid binding under CDP mode
+- arm64/mpam: Fix typo in resctrl_arch_set_cdp_enabled()
+- mm_monitor/mm_spe: Embed boost events within SPE packets
+- mm_monitor/mm_spe: Fix SPE boost enablement and continuation handling
+- driver core: Use kasprintf() instead of fixed buffer formatting
+- arm64/mpam: Add quirk for MPAM MSMON_MBWU monitor NRDY bit
+- arm64/mpam: Fix L2 monitor issue under CDP mode
+- mm/mem_sampling: Fix inaccurate sampling for NUMA balancing and DAMON
+- mm/mem_sampling: Prevent mem_sampling from being enabled if SPE init failed
+- mm/mem_sampling: add trace event for spe based damon record
+- fs/resctrl: Fix return value in rdtgroup_pseudo_locked_in_hierarchy()
+- fs/resctrl: L2_MON does not support the limbo mechanism
+- iommu/arm-smmu-v3: Fix global-out-of-bounds access in arm_smmu_group_get_mpam()
+- fs/resctrl: Prevent idle RMIDs from not being released in time from limbo
+- arm64/mpam: Update the chip condition judgment in resctrl_arch_would_mbm_overflow()
+- arm64/mpam: Add MPAM manual
+- fs/resctrl: Add missing rdt_last_cmd_clear() after rdtgroup_kn_lock_live()
+- fs/resctrl: Restore default settings for all resctrl_res_level
+- fs/resctrl: Free mbm_total and mbm_local when fails
+- arm64/watchdog: fix watchdog failure in low power scenarios
+- arm64/mpam: Update QoS partition default value
+- x86/resctrl: Add max_bw to struct resctrl_membw
+- x86/resctrl: Remove hard-coded memory bandwidth limit
+- arm64/mpam: Set 1 as the minimum setting value for MBA
+- arm64/mpam: Fix num_rmids information
+- fs/resctrl: Fix the crash caused by mounting resctrl but not support RDT
+- config: Enable memory sampling based pmu for numa balance and damon by default
+- arm-spe: Export boost SPE sampling info via tracefs tracepoint
+- arm-spe: Add kernel cmdline option to enable SPE boost
+- arm-spe: Boost SPE add TLB hot page and remote access tracking
+- mm/damon/vaddr: Add demotion interface for migrating cold pages to target nodemask
+- mm/damon/vaddr: Extend mem_sampling sysctl to support DAMON
+- mm/damon/vaddr: Support hardware-assisted memory access sampling
+- mm/numa: Add tracepoints for access sampling and NUMA page migration
+- mm/mem_sampling: Add sysctl control for NUMA balancing integration
+- mm/numa: Enable mem_sampling-based access tracking for NUMA balancing
+- mm/numa: Use mem_sampling framework for NUMA balancing
+- mm/mem_sampling:: Add proc and cmdline interface to control sampling enable
+- sched: Enable per-process mem_sampling from sched switch path
+- mm/mem_sampling: Add sched switch hook to control sampling state
+- mm/mem_sampling: Add eBPF interface for memory access tracing
+- mm_monitor/mm_spe: Introduce arm_spe_user to abstract SPE usage
+- mm_monitor/mm_spe: Add PMU based memory sampling abstract layer
+- mm_monitor/mm_spe: Init per-CPU buffers and SPE state
+- mm_monitor/mm_spe: Introduce standalone SPE profiling framework
+- arm64/mpam: Refuse to enter powerdown state after L2 msc updated
+- arm64/mpam: Refuse cpu offline when L2 msc is enabled
+- fs/resctrl: Add l2 mount option to enable L2 msc
+- arm64: mpam: Restore the expected MPAM sysregs on cpuhp
+- arm64: mpam: Add cpu_pm notifier to restore MPAM sysregs
+- fs/resctrl: Create l2 cache monitors
+- x86/resctrl: Add a handling path of default label in get_arch_mbm_state()
+- arm64/mpam: Add limit feature
+- arm64/mpam: Add PRIO feature
+- arm64/mpam: Add mbw_min and cmin features
+- arm64/mpam: Add CMAX feature
+- fs/resctrl: As a pre-patch for expanding MPAM's QoS capability
+- fs/resctrl: Fix configuration to wrong control group when CDP is enabled
+- arm64/mpam: Add debugging information about CDP monitor value
+- arm64/mpam: Fix allocated cache size information
+- fs/resctrl: Fix kmemleak caused by closid_init()
+- arm64/mpam: Correct the judgment condition of the CMAX feature
+- arm64/mpam: Set the cpbm width of msc class with the minimum
+- fs/resctrl: Determine whether the MBM monitors require overflow checking
+- arm64/mpam: Optimize CSU/MBWU monitor multiplexing
+- arm64/mpam: fix impossible condition in resctrl_arch_rmid_read()
+- arm64/mpam: fix impossible condition in get_cpumask_from_cache_id()
+- arm64/mpam: fix memleak in resctrl_arch_mon_ctx_alloc_no_wait()
+- iommu: Fix kabi broken of struct iommu_ops
+- fs/resctrl: Move iommu_groups back when their associated RDT group is deleted
+- fs/resctrl: Fix the iommu_group parsing process
+- iommu/arm-smmu-v3: Check pointer valid before dereferencing it
+- arm_mpam: Select CONFIG_RESCTRL_IOMMU on the ARM64 by default
+- ACPI/MPAM: Parse the rest of the ACPI table
+- fs/resctrl: Add support for assigning iommu_groups to resctrl groups
+- arm_mpam: resctrl: Add iommu helpers to get/set the partid and pmg
+- kobject: Add kset_get_next_obj() to allow a kset to be walked
+- iommu: Add helper to retrieve iommu kset
+- iommu: Add helpers to retrieve iommu_groups by id or kobject
+- iommu: Add helpers to get and set the QoS state
+- iommu/arm-smmu-v3: Add mpam helpers to query and set state
+- iommu/arm-smmu-v3: Issue a batch of commands to the same cmdq
+- iommu/arm-smmu-v3: Register SMMU capabilities with MPAM
+- cpu/SMT: Provide a default topology_is_primary_thread()
+- arm64/mpam: Try reading again if monitor instance returns not ready
+- arm64/mpam: Add write memory barrier to guarantee monitor results
+- arm64/mpam: Improve conversion accuracy between percent and fixed-point fraction
+- arm64/mpam: Fix out-of-bound access of cfg array
+- arm64/mpam: fix bug in percent_to_mbw_max()
+- arm64/mpam: fix MBA granularity conversion formula
+- arm64/mpam: Fix out-of-bound access of mbwu_state array
+- arm64/mpam: Add judgment to distinguish MSMON_MBWU_CAPTURE definition
+- arm64/mpam: Support MATA monitor feature for MPAM
+- fs/resctrl: Adapt to the hardware topology structures of RDT and MPAM
+- drivers: arch_topology: Refactor do-while loops
+- ub: cdma: modify the method of assigning values to the structure
+- ub: ubase: Fixed the alarm issue caused by the initialization of the structure variable definition.
+- ub: udma: fix some code issues.
+- ub: udma: bugfix related to 2m_hugepage.
+- ub: udma: support for separate page tables
+- ub: udma: delete debugfs code.
+- ub: udma: bugfix related to ctrlq function.
+- ub: udma: verify get cqe/ae aux info out addr and len.
+- ub: cdma: support separated page table feature
+- iommu: Adjust PLB refresh timing in 'grant' and 'ungrant'
+- iommu/ummu-core: fix error invalidate tid
+- iommu/ummu: Add ummu sva independent page table parameter
+- net: unic: Notify mami of the bond ip change.
+- ub: ubase: Support for UE link by ctrlq message
+- ub: ubase: send a deactivate req in removing
+- ub: ubase: Querying TPG/TP contexts in the chip is no longer supported after enabling safe mode.
+- ub: ubase: Use an independent thread for the ctrlq workqueue.
+- net: unic: Fix the ummu 0xa event that occurs when modifying queues and resetting concurrent scenarios
+- ub: ubase: Add KABI compatibility
+- ub: ubase: fixing the issue of cdma ctp_req_vl parameter configuration
+- ub: ubase: add PMU IDEV interrupt supported abilities.
+- ub: ubase: Delete the tid mask for eq, jfs, jfr, and jfc context
+- ub: ubase: Set the completion event interrupt to auto
+- net: unic: fix poll tx read old skb cause a UAF bug
+- iommu/ummu: optimize log printing
+- iommu/ummu: optimize kv cache memory management
+- iommu/ummu: optimize permission table management
+- iommu/ummu: remove check for eid_type while del eid
+- iommu/ummu: optimize the code implementation
+- drivers/perf: fix ummu-pmu data reading exception
+- iommu/ummu: IOMMU_DOMAIN_BLOCKED type don not sync tct
+- iommu/ummu: Add the function of creating devices with SVA-separated
+- ub: cdma: cdma uaf bugfix
+- ub: cdma: jfs call trace bugfix
+- ub:ubus: Not cfg access during surprise down
+- ub:hisi-ubus: Delete validate_pa err print
+- ub:ubus: Fix ubus link message and pool device error
+- ub:hisi-ubus: cq poller maximum handle 64 cqe per time
+- ub:hisi-ubus:Fix vdm message print error
+- ub:ubus:Fix ubus interrupt release issue
+- ub: udma: fix a bug that caused long reboot time.
+- ub: ubase: Accelerate when ctrl node is shutting down
+- ub: cdma: jfs 64K page table memory adaptation
+- ub: cdma: ELR code refactoring
+- ub: cdma: add some log print
+- KVM: arm64: fix memory leak in HDBSS
+- KVM: arm64: do not support hdbss in nvhe
+- arm64/kabi: use KABI_EXTEND to skip KABI check
+- arm64/config: add config to control whether enable HDBSS feature
+- arm64/kvm: support to handle the HDBSSF event
+- arm64/kvm: using ioctl to enable/disable the HDBSS feature
+- arm64/kvm: support set the DBM attr during memory abort
+- arm64/sysreg: add HDBSS related register information
+- !23 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- arm64/kabi: use KABI_EXTEND to skip KABI check
+- KVM: arm64: check if IPIV is enabled in BIOS
+- kvm: hisi: print error for IPIV
+- KVM: arm64: using kvm_vgic_global_state for ipiv
+- kvm: hisi: Don't allow to change mpidr in IPIv
+- kvm: hisi: make sure vcpu_id and vcpu_idx have same value in IPIv
+- KVM: arm64: fix live migration bug of IPIv
+- irqchip/gic: Add HiSilicon PV SGI support
+- KVM: arm64: Implement PV_SGI related calls
+- KVM: arm64: Document PV-sgi interface
+- KVM: arm64: Introduce ipiv enable ioctl
+- arm64/config: add config to control whether enable IPIV feature
+- kvm: hisi_virt: Fix compilation error due to missing ACPI configuration
+- kvm: hisi_virt: Probe and configure IPIV capacity on HIP12
+- kvm: arm64: Add interface KVM_CAP_ARM_IPIV_MODE
+- kvm: hisi_virt: Register ipiv exception interrupt
+- irqchip: gicv3-its: Set base address of vm table and targe ITS when vpe schedule and deschedule
+- kvm: arm64: avoid sending multi-SGIs in IPIV
+- kvm: hisi_virt: Allocate VM table and save vpeid in it
+- KVM: hisi_virt: tlbi: Fix wrong CPU aff3 conversion between MPIDR and SYS_LSUDVMBM_EL2
+- KVM: arm64: fix memory leak in TLBI
+- kvm: hisi_virt: fix kernel panic when enable DVMBM in nVHE
+- kvm: hisi_virt: Update TLBI broadcast feature for hip12
+- KVM: arm64: Add new HiSi CPU type to support DVMBM
+- hwmon: (acpi_power_meter) Replace the deprecated hwmon_device_register
+- hwmon: Fix the missing of 'average' word in hwmon_power_attr_templates
+- hwmon: (acpi_power_meter) Ensure IPMI space handler is ready on Dell systems
+- arm-smmu-v3: add 'HIP10C' for 162100602 errata
+- gic: increase the arch_timer priority to avoid hardlockup
+- xhci: Limit time spent with xHC interrupts disabled during bus resume
+- PCI/DPC: Ignore Surprise Down error on hot removal
+- coresight: tmc: Don't change the buffer size if it's in use
+- gpiolib: Get rid of never false gpio_is_valid() calls
+- Add gpio-hisi softdepend
+- hwtracing: hisi_ptt: Initialize the filter sysfs attribute when allocation
+- perf arm: Workaround ARM PMUs cpu maps having offline cpus
+- perf hisi-ptt: Fix memory leak in lseek failure handling
+- hwtracing: hisi_ptt: Check duplicate filters before allocation
+- net: phy: fixed_phy: constify status argument where possible
+- net: phy: fixed_phy: remove irq argument from fixed_phy_register
+- net: phy: fixed_phy: remove irq argument from fixed_phy_add
+- net: phy: fixed_phy: remove fixed_phy_register_with_gpiod
+- net: phy: motorcomm: Add support for PHY LEDs on YT8521
+- net: hibmcge: support for statistics of reset failures
+- net: hibmcge: fix rtnl deadlock issue
+- net: hibmcge: fix the inappropriate netif_device_detach()
+- net: hibmcge: remove unnecessary check for np_link_fail in scenarios without phy.
+- net: hibmcge: fix rx buf avl irq is not re-enabled in irq_handle issue
+- net: hibmcge: support pci_driver.shutdown()
+- net: hibmcge: select FIXED_PHY
+- net: hibmcge: fix the division by zero issue
+- net: hibmcge: fix the np_link_fail error reporting issue
+- net: hibmcge: configure FIFO thresholds according to the MAC controller documentation
+- net: hibmcge: adjust the burst len configuration of the MAC controller to improve TX performance.
+- net: hibmcge: support scenario without PHY
+- net: hibmcge: fix wrong ndo.open() after reset fail issue.
+- net: hibmcge: fix incorrect statistics update issue
+- net: hibmcge: fix multiple phy_stop() issue
+- net: hibmcge: fix not restore rx pause mac addr after reset issue
+- net: hibmcge: fix the incorrect np_link fail state issue.
+- net: hibmcge: fix wrong mtu log issue
+- net: hibmcge: fix the share of irq statistics among different network ports issue
+- net: hibmcge: fix incorrect multicast filtering issue
+- net: hibmcge: fix incorrect pause frame statistics issue
+- net: hibmcge: Add support for ioctl
+- net: hibmcge: Add support for BMC diagnose feature
+- net: hibmcge: Add support for mac link exception handling feature
+- net: hibmcge: Add support for abnormal irq handling feature
+- net: hibmcge: Add support for checksum offload
+- net: hibmcge: Add support for dump statistics
+- ethtool: Implement ethtool_puts()
+- net: hibmcge: Add nway_reset supported in this module
+- net: hibmcge: Add reset supported in this module
+- net: hibmcge: Add pauseparam supported in this module
+- net: hibmcge: Add register dump supported in this module
+- net: hibmcge: Add unicast frame filter supported in this module
+- net: hibmcge: Add irq_info file to debugfs
+- net: hibmcge: Add debugfs supported in this module
+- lib/string_choices: Add str_true_false()/str_false_true() helper
+- ACPI: IPMI: Add helper to wait for when SMI is selected
+- hwmon: (acpi_power_meter) Fix the fake power alarm reporting
+- hwmon: (acpi_power_meter) Fix a check for the return value of read_domain_devices().
+- hwmon: (acpi_power_meter) Fix update the power trip points on failure
+- hwmon: (acpi_power_meter) Fix uninitialized variables
+- hwmon: (acpi_power_meter) Fix fail to load module on platform without _PMD method
+- drm/hisilicon/hibmc: hibmc-drm bugfix for DP
+- drm/hisilicon/hibmc:fix KVM is not displaying when GRUB VGA is on
+- drm/hisilicon/hibmc: fix irq_request()'s irq name variable is local
+- drm/hisilicon/hibmc: fix HPD interrupts triggering the wrong behavior
+- drm/hisilicon/hibmc: Add vga connector detect functions
+- drm/hisilicon/hibmc: Add MSI irq getting and requesting for HPD
+- drm/hisilicon/hibmc: Enable this hot plug detect of irq feature
+- drm/hisilicon/hibmc: Add colorbar-cfg feature and its debugfs file
+- drm/hisilicon/hibmc: Getting connector info and EDID by using AUX channel
+- drm/hisilicon/hibmc: Refactor the member of drm_aux in struct hibmc_dp
+- drm/hisilicon/hibmc: Add dp serdes cfg in dp process
+- drm/hisilicon/hibmc: Add dp serdes cfg to adjust serdes rate, voltage and pre-emphasis
+- drm/hisilicon/hibmc: Restructuring the header dp_reg.h
+- drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER
+- drm: Call drm_atomic_helper_shutdown() at shutdown time for misc drivers
+- drm/ast: Implement polling for VGA and SIL164 connectors
+- drm/sysfs: Register "ddc" symlink later
+- drm/hisilicon/hibmc: add dp module in hibmc
+- drm/hisilicon/hibmc: refactored struct hibmc_drm_private
+- drm/hisilicon/hibmc: add dp hw moduel in hibmc driver
+- drm/hisilicon/hibmc: add dp link moduel in hibmc drivers
+- drm/hisilicon/hibmc: add dp aux in hibmc drivers
+- drm/hisilicon/hibmc: convert to struct drm_edid
+- soc cache: Add compilation config for hisi_soc_l3c
+- soc cache: Don't poll before removing all locks
+- soc cache: Drop redundant vm_pgoff
+- soc cache: fix walk page parameter and drop incorrect check
+- soc cache: Check address while walking pages
+- soc_cache: Fix component removal order to avoid race condition
+- soc cache: cleanup: Remove the redundant check of vm_pgoff
+- soc cache: cleanup: Change type of mnt_type
+- soc cache: cleanup: avoid tag addr from interfering range validation
+- soc cache: cleanup: move judgement of soc cache dev into lock protection
+- soc cache: cleanup: fix memory leakage on error path
+- soc_cache: Fix error code returning from hisi_soc_l3c_do_lock
+- soc_cache: Fix incorrect use of cpuhp_remove_multi_state parameter
+- soc cache: cleanup: replace dynamically allocated param with local variable
+- soc cache: L3 cache lockdown support for HiSilicon SoC
+- soc cache: support L3 cache lock in framework
+- soc cache: Fix incorrect error path of ioctl
+- soc cache: Fix incorrect size validation
+- soc cache: Enforce maintain type check
+- soc cache: Modify default config to compile HiSilicon SoC cache driver
+- soc cache: Support cache maintenance for HiSilicon SoC Hydra Home Agent
+- soc cache: Add framework driver for HiSilicon SoC cache
+- ub: udma: bugfix related to spin lock.
+- ub:ubfi:skipped address of subtable 0 in ubrt
+- ub: udma: bugfix related to rx close.
+- ub: ubase: fix ubase activate/deactivate resp timeout
+- ub:ubus delete undefined class code
+- ub:ubus: fix ub_get_bus_controller getting null
+- ub:ubus: Move the decoder's queue operations to hisi-ubus
+- ub:ubus: hi_msg_sync_wait first pull cq
+- ub: cdma: add ioctl logs and error codes
+- ub: udma: Bugfix related to 2M hugepage.
+- net: unic: Fix ethtool configuration error issue.
+- ub: ubase: Resolve mailbox timeout issue.
+- ub: ubase: CtrlQ retry message uses the same seq
+- net: unic: Fix the calltrace caused by modifying queue parameters in the MUE scenario
+- ub: udma: Bugfix related to crq event unregister.
+- ub:ubus: Change create device irq domain debug info
+- ub:hisi-ubus: fix MUE unreg msg rsp time
+- ub: cdma: add eid upi update response
+- ub: ubase: Fix spell error of month
+- ub: udma: bugfix related to print location.
+- ub:ubus: bugfix port reset in cluster mode
+- ub:ubus: add hotplug capability check
+- ub:ubus: bugfix calltrace of killing qemu when rmmod hisi_ubus
+- iommu/ummu: Remove redundant CONFIG_UB_UBRT_PLAT_DEV and code
+- iommu/ummu-core: Duplicate EID are not allowed
+- iommu/ummu: Move tid_type attr to logic ummu
+- iommu/ummu: Fixing the issue of uninitialized resources in logic_ummu_viommu
+- iommu/ummu: Optimize chip generational compatibility feature
+- iommu/ummu: Fix VM multi-instance problem
+- iommu/ummu: NO plbi for grant, config permq need dma_wmb
+- iommu/ummu: Fix compilation option configuration about CONFIG_ACPI
+- iommu/ummu: UMMU doesn't send tect sync after delete eid
+- iommu/ummu: Delete unnecessary commands
+- ub:ubfi: Fix UBFI memory leak issue
+- ub:ubus: Matt and MMIO judgments are not performed in cluster
+- ub:ubus: Delete ubc cfg0 config during cluster mode
+- ub:hisi-ubus: Fix ue reg/unreg without lock bug
+- net: unic: Fixed the call trace issue triggered internally by the completion event interrupt
+- net: unic: Restore tx and rx stats when setting coalesce parameters
+- ub: ubase: obtain rc_max_cnt from MAMI
+- ub: ubase: fix a issue of udma device's eid deleted when stop rx stream and reset concurrently
+- ub: ubase: add opcode to query ub port_bitmap.
+- net: unic: Restore default queue count per tc when tc number changes.
+- ub: ubase: Fix the issue of mismatch between the ubase aeqe structure and the protocol.
+- ub: ubase: add ip_over_urma API for udma.
+- ub: ubase: optimize print format of fw_ver in debugfs.
+- ub: ubase: Fix the issue of deadlock by quantities of log in the ctrlq crq task.
+- ub: ubase: Remove non-cluster mode code.
+- net: unic: Resolve the bandwidth jitter problem
+- ub: ub_fwctl: Modify TP/TA/SCC register query process.
+- ub: cdma: modify the compatibility field according to the Linux KABI specification
+- ub: cdma: fix the timing issue during flow-based deregistration.
+- ub: cdma: fix kasan cdma jfae uaf
+- ub: cdma: modify log level about en information
+- ub:ubus: add active_mutex in ub_entity
+- ub:unic Adaptation of the port reset interface
+- ub:ubus adapt port local ras
+- vfio:ubus vfio-ub support ub entity enable
+- ub:ubus: fix bug of msg workqueue null
+- ub:hisi-ubus ub:hisi-ubus: Move the decoder's page table operations to hisi-ubus
+- ub: udma: bugfix related to init xa flags.
+- ub: udma: bugfix for rx close.
+- ub: ub_fwctl: Modify the problem of incorret data when querying entry information
+- ub: hisi-ubus: Fix ub memory decoder create
+- ub: ub_fwctl: add ub_fwctl driver-api documentation description
+- iommu/ummu: Fix UMMU documentation error
+- ub: ubase: Remove non-cluster mode code
+- net: unic: Add support for uboe reset
+- net: unic: Add support for MAC statistics
+- net: unic: Add pause frame support.
+- net: unic: Add Priority Flow Control (PFC) support
+- net: unic: Add debugfs support for dumping MAC tables.
+- net: unic: Supports MAC filter, and allows users to add and delete MAC
+- net: unic: Add debugfs support for dumping vlan table
+- net: unic: Integrate valn filtering features with network device operations.
+- net: unic: Add valn filtering support.
+- net: unic: Add support for querying link diagnosis status
+- net: unic: Extend loopback test support to include external loopback modes
+- net: unic: Extend loopback test support to include serdes loopback modes.
+- net: unic: Add loopback test support.
+- net: unic: Add debugfs support for dumping hardware MAC tables.
+- net: unic: Add support for setting link speed, duplex, and autonegotiation via ethtool.
+- ub: udma: Support retrieving the migr field.
+- ub: udma: Support eid and guid updates.
+- ub: udma: bugfix for set and get tp attr.
+- ub: udma: mask jetty context addr info.
+- ub: udma: add udma driver module doc.
+- iommu/ummu: Add UMMU-PMU devicetree file
+- iommu/ummu: Add UMMU devicetree file
+- iommu/ummu: Add UMMU documentation description
+- ub:hisi-ubus: Adding compatibility Interfaces for ub memory
+- ub: cdma: add CDMA userspace-api documentation description
+- ub: cdma: add CDMA kernel driver design document specification
+- ub: cdma: add CDMA driver-api documentation description
+- ub:ubus: Add ubus devicetree file
+- ub:ubus: Add ubus and ubfi opensource document
+- ub: ubase: Remove useless character '+'
+- ub:hisi-ubus: Support for ub memory decoder ras handle
+- ub:hisi-ubus: Support for UB Memory Decoder Initialization
+- ub:ubus: Support for UB Memory Decoder general layer implementation
+- ub: ubase: change cmdq/mbx timeout val & fix spell error
+- ub: ubase: adapt to response message structure change for ctrlq sl query
+- net: unic: Fix UE deactivate message cleaning
+- net: unic: Use copy instead of ummu map in tx
+- ub: ubase: Introduces the functions and data structures exposed by the ubase driver
+- ub: ubase: Add ubase opensource document
+- net: unic: Add a doc for unic driver
+- net: ubl: Add a doc for ubl module
+- ub: udma: Resolve issues related to stream logout and interrupt lock.
+- ub: udma: reset and segment permission issues are resolved.
+- ub: ubase: Fix CTRLQ init process
+- ub: udma: jetty and rct support the hugepage buffer.
+- ub: udma: Support 2M hugepage function.
+- ub: udma: Support query ub memory info.
+- ub: udma: Support query resource ratio.
+- ub: udma: Support query entity information.
+- ub: udma: Support create and destroy stars jfc.
+- ub: udma: Support create and destroy stars jfs.
+- ub: udma: Support tp context inquiry.
+- ub: udma: Support entity index inquiry.
+- ub: udma: Support device status inquiry.
+- ub: udma: Support flush jfs and jetty.
+- ub: udma: Support destroy jfs and jetty batch.
+- ub: udma: Support bind and unbind jetty.
+- ub: udma: Support dump ce aux info.
+- ub: udma: Support dump ae aux info.
+- ub: udma: Support query NPU info.
+- ub: udma: Support deactivate tp.
+- ub: udma: Support active tp.
+- ub: udma: Support get tp list.
+- ub: udma: Support rearm jfc and clean jfc.
+- ub: udma: Support poll jfc.
+- ub: udma: Support post jetty work request.
+- ub: udma: Support post jfr work request.
+- ub: udma: Support post jfs work request.
+- ub: udma: Add and remove jetty to jetty group.
+- ub: udma: Support import and unimport jfr and jetty.
+- ub: ubase: Fix the lose of HIMAC reset.
+- ub: ubase: flush the work queue.
+- net: unic: Fix lose vport_ctx and vport_buf information query in debugfs
+- ub: ubase: Fix link status timestamp information
+- net: unic: Fix configure coal parameters without deactivate
+- ub: ubase: Fix CTRLQ white list
+- ub: ubase: Optimization of ubase_ctrlq_send_msg interface parameters
+- ub: ubase: Fix verification to ctrlq message seq
+- net: unic: Fix the ethtool stats and basic capability information query interface
+- ub: ubase: add CMDQ&CTRLQ compatibility code
+- ub: ubase: Fix priqos infomaton interface functions to query and check sl_bitmap
+- ub:ubus: call ub_host_probe inside register_ub_manage_subsystem_ops
+- ub: ub_fwctl: Release rpc_out when kernel state return error
+- fwctl:Change the CONFIG_FWCTL in the config options to m
+- ub: udma: Support modify jfc.
+- ub: udma: Support modify jfr.
+- ub: udma: Support modify jetty.
+- ub: udma: Support modify jfs.
+- ub: udma: Support destroy jetty group.
+- ub: udma: Support create jetty group.
+- ub: udma: Support destroy jetty.
+- ub: udma: Support create jetty.
+- ub: udma: Support destroy jfc.
+- ub: udma: Support create jfc.
+- ub: udma: Support destroy jfr.
+- ub: udma: Support create jfr.
+- ub: udma: Support destroy jfs.
+- ub: udma: Support create jfs.
+- ub: udma: Support query table item from hw.
+- ub: udma: Support query jfr context from hw.
+- ub: udma: Support query jfs and jetty context from hw.
+- ub:ubus: Fix X86 build error
+- iommu/ummu: Fix builds under different kconfigs
+- iommu/ummu: Fix 2P virtualization error
+- iommu/ummu: Fix ubmem unmap return value error
+- mm/slab: make __free(kfree) accept error pointers
+- Revert "mm/slab: make __free(kfree) accept error pointers"
+- ub: udma: Support init and uninit dfx function.
+- ub: udma: Support register and unregister segment function.
+- ub: udma: Support set eid function.
+- ub: udma: Support register and unregister ctrlq event.
+- ub: udma: Support register and unregister ce and crq event.
+- ub: udma: Support register and unregister ae event.
+- ub: udma: Register and unregister debugfs.
+- ub: udma: Create and destroy u-context.
+- ub: udma: Support loading and unloading driver.
+- ub:ubus: Add ummu_map attribute in sysfs
+- ub:ubus: Bugfix of ubus and ubfi
+- net: unic: Debugfs supports querying IP specifications and IP entries.
+- net: unic: support subscribes to the RX stream stop and recovery interface.
+- net: unic: support config/query traffic class parameters
+- net: unic: support config/query ets parameters
+- net: unic: Add debugfs support for QoS configuration and query.
+- net: unic: support config/query the mapping between dscp and tc
+- net: unic: Support RAS
+- net: unic: Drive supports ub entity reset.
+- net: unic: Support to query and clear historical NIC link status information
+- net: unic: support querying and configuring coalesce parameters.
+- net: unic: Add debugfs for JFS/JFR/JFC context.
+- net: unic: Support driver dump register.
+- ub: cdma: support for cdma kernelspace north-south compatibility requirements
+- ub: cdma: support reset function
+- ub: cdma: support RX stop flow function
+- ub: cdma: support debugfs interface
+- ub: cdma: support dma faa semantic
+- ub: cdma: support dma cas semantic
+- ub: cdma: support dma read semantic
+- ub: cdma: support dma write with notify semantic
+- ub: cdma: support dma write semantic delivery
+- ub: cdma: support dma write semantic configuration
+- ub: cdma: support kernel resource reclamation
+- ub: cdma: support register segment
+- ub: cdma: support unregister segment
+- ub: cdma: support reporting completed events
+- ub: cdma: support reporting asynchronous events
+- ub: cdma: support the creation of jfs
+- ub: cdma: support the deletion of jfs
+- ub: cdma: support the creation of ctp
+- ub: cdma: support the deletion of ctp
+- ub: cdma: support the creation of jfc
+- ub: cdma: support the deletion of jfc
+- ub: cdma: support for releasing queue
+- ub: cdma: support for allocating queue
+- ub: cdma: support for getting device by eid
+- ub: cdma: support for getting device list
+- ub: cdma: support querying sl information and updating eu
+- ub: cdma: support the probe and remove processes
+- ub: ub_fwctl: support ummu data processing
+- ub: ub_fwctl: query the MSG queue information and entry details within UB.
+- ub: ub_fwctl: support querying SCC and io_die related information.
+- ub: ub_fwctl: support querying UB link trace information.
+- ub: ub_fwctl: Support Dump register.
+- ub: ub_fwctl: supports querying and configuring some scattered registers.
+- ub: ub_fwctl: supports querying TP, BA related register information
+- ub: ub_fwctl: supports querying NL, TA, DL related register information
+- ub: ub_fwctl: Add some simple common framework functions
+- ub: ub_fwctl: Add the ub_fwctl driver and its basic features.
+- dma-mapping: benchmark: add support for UB devices
+- ub: ubase: Support querying dev caps.
+- ub: ubase: Supports the query of UBCL config.
+- ub: ubase: add function that query aeq/ceq/tp/tpg context
+- ub: ubase: Added debug information query function for FST/FVT/RQMT entries
+- ub: ubase: support debugfs for active dev stats.
+- net: unic: support querying and configuring queue parameters.
+- net: unic: support querying and configuring the number of queues.
+- net: unic: support querying and configuring simple RSS.
+- net: unic: support querying and configuring promisc.
+- net: unic: support querying and configuring MTU.
+- net: unic: support querying and configuring FEC parameters.
+- net: unic: add fec statistic support
+- net: unic: add rack ip for unic
+- net: unic: add io basic Rx/Tx functionality for unic
+- net: unic: add support of unic driver for ub network
+- ub:ubus: reserve space for ub subsystem related structure
+- ub:hisi-ubus: Support UBUS configure EID-UPI table
+- ub:hisi-ubus: Support UBUS vdm entity enable message
+- ub:hisi-ubus: Support for MSGQ's debugging functionality
+- ub:hisi-ubus: Support MSGQ queue exception handling
+- ub:hisi-ubus: Support for processing CQ request messages
+- ub:hisi-ubus: Provide callback functions for message devices
+- ub:hisi-ubus: Support for MSGQ channel processing in SQ and CQ
+- ub:hisi-ubus: Support for hisi MSGQ framework
+- ub:hisi-ubus: Support UBUS local RAS interfaces
+- ub:hisi-ubus: Support UBUS vdm pue/ue register and release
+- ub:hisi-ubus: Support UBUS vendor defined message framework
+- ub:hisi-ubus: Add HiSilicon ubus driver framework
+- iommu/ummu: Add UMMU trace log
+- iommu/ummu: Support UMMU identity mapping
+- iommu/ummu: Add UB Memory support
+- iommu/ummu: Support UMMU iopf capability
+- iommu/ummu: Support UMMU nested mode
+- iommu/ummu: Add SVA API support to UMMU driver
+- iommu/ummu: Implement iommu_ops and iommu_domain_ops for UMMU driver
+- iommu/ummu: Implement domain and core ops in logic UMMU framework
+- iommu/ummu: Implement MPAM for QoS
+- iommu/ummu: Support UMMU attribute show and store operations
+- iommu/ummu: Implement IOMMU ops forwarding in logic UMMU framework
+- iommu/ummu: Support UMMU page table management
+- iommu/ummu: Introduce logic UMMU framework
+- iommu/ummu: Add UMMU permission queue
+- iommu/ummu: Add grant and ungrant operations for permission table
+- iommu/ummu: Add UMMU permission table memory management
+- iommu/ummu: Add UMMU private implementation
+- iommu/ummu: Add manager for UMMU permission table
+- iommu/ummu: Add tct/tect ops for configuration table
+- iommu/ummu: Support UMMU configuration table management
+- ub: ubase: Fix some compile warnings
+- ub: ubase: Fix the problem that free pages when ubase driver destroy TA context
+- vfio:ubus: support obtaining and configuring function entity information in user mode
+- vfio:ubus: Support configuration for function entity interrupt
+- vfio:ubus: Support access to function entity resource space
+- vfio:ubus: Init vfio ub config space 1 perm and port perm bits during module init
+- vfio:ubus: Init vfio ub config space 0 perm bits during module init
+- vfio:ubus: Init vfio ub configuration space
+- vfio:ubus: Support ub vfio config read and write
+- vfio:ubus: Support for vfio ubus driver framework
+- ub:ubus: Support UBUS driver host probe and remove
+- ub:ubus: Add configuration and resource sysfs interfaces
+- ub:ubus: Add basic System Filesystem attributes
+- ub:ubus: Support processing protocol link messages
+- ub:ubus: Support hotplug processing main workflow
+- ub:ubus: Support for device enumeration during the hotplug phase
+- ub:ubus: Support for slot register configuration
+- ub:ubus: Support hotplug service driver
+- ub:ubus: Add generic ub component driver
+- ub:ubus: Add ub service driver framework
+- ub:ubus: Add new UBUS pool device interfaces
+- ub:ubus: Support UBUS pool devices register
+- ub:ubfi: register ubc usi domain
+- ub:ubus: Support for ub device resource space registration
+- ub:ubus: Add UBUS receive message framework
+- ub:ubus: Support device binding and unbinding bus instance
+- ub:ubus: Support for static cluster bus instance
+- ub:ubus: Support for dynamic bus instance
+- ub:ubus: Support for bus instance framework
+- ub:ubus: Support handle device link up and link down
+- ub:ubus: Support enumerate port and route set/clear for port
+- ub:ubus: Support route modify/delete function
+- iommu/ummu: Add UMMU cache flush interfaces
+- iommu/ummu: Support UMMU event handling
+- iommu/ummu: Support UMMU global error handling
+- iommu/ummu: Support UMMU command queue
+- iommu/ummu: Support UMMU device
+- ub: ubfi: Parsing ummu node in the ubrt table
+- drivers/perf: hisi: Add the sysfs interface to configure pmu mpam
+- drivers/perf: hisi: Implement ummu-pmu driver.
+- ub: ubase: support for activate/deactivate dev interface
+- ub: ubase: pf supports debugfs query port/vl current.
+- ub: ubase: adds the function to get ub port stats for unic and other aux driver
+- ub: ubase: support pre-alloc 2M pages.
+- ub: ubase: support ras function
+- ub: ubase: Support to port reset
+- ub: ubase: Added QoS and traffic management debugging features
+- ub: ubase: Support reset count information statistics.
+- ub: ubase: Support for ELR and entity reset.
+- ub: ubase: Provide an entity_list query interface.
+- ub: ubase: support create and delete UM TP/TPG
+- ub: ubase: Support to config and query the sl scheduling mode and weight in ETS and TM modes.
+- ub: ubase: support querying sl information in initialization phase
+- ub: ubase: Supports for ctrl queue management.
+- ub: ubase: adds the function that query oor caps
+- ub: ubase: Support for virtual register and unregister.
+- ub: ubase: Add trace events to aeqe and ceqe.
+- ub: ubase: Add the cmdq trace event print at the ubase layer.
+- ub: ubase: Support for timer/ext_dtb buffer management.
+- ub: ubase: Support for public Context memory allocation and release.
+- ub: ubase: support for cdma auxiliary device
+- ub: ubase: support for complete event process
+- ub: ubase: support for async event process
+- ub: ubase: add interrupt management framework and misc handler
+- ub: ubase: add function to query device resource
+- ub: ubase: add the function that query ueid
+- ub: ubase: support debugfs public interface.
+- ub: ubase: support for command process
+- ub: ubase: add support of ubase driver for ub network
+- iommu: Fix kabi breakage due to opening KVM_PINNED_VMID
+- vfio: Fix kabi breakage due to closing VFIO_CONTAINER
+- iommu: Pass in kvm pointer to domain_alloc_user
+- iommufd: Associate kvm pointer to iommufd ctx
+- KVM: arm64: Introduce support to pin VMIDs
+- KVM: Add generic infrastructure to support pinned VMIDs
+- iommu/ummu-core: core interfaces for ummu drivers
+- iommu/ummu-core: impl ioctl interface for /dev/ummu device
+- iommu/ummu-core: add pseudo Token Dev for Token ID abstraction
+- iommu/ummu-core: add UMMU Token ID operation interfaces
+- iommu/ummu-core: add UMMU EID operation interfaces
+- iommu/ummu-core: support IOVA on demand mapping
+- iommu/ummu-core: get iova_domain from iommu_domain
+- iommu/ummu-core: introduce UMMU-CORE, basic configs
+- iommu/ummu-core: support iommu ksva mode
+- iommu/ummu-core: introduce iommu sva permission operation
+- iommu/ummu-core: introduce iommu_sva_bind_isolated interface
+- iommu/ummu-core: add the user invalidation type in iommufd file
+- iommu/ummu-core: iommu_dev new min_pasids attribute
+- iommu/ummu-core: New ub bus added to the iommu framework
+- net: ubl: add depend to ARM64 and remove config in x86
+- net: ubl: modify the description in Kconfig of UB
+- ub:ubus: Supports decoder event processing
+- ub:ubus: Support for sending decoder commands
+- ub:ubus: Support for range table mapping and unmapping functions
+- ub:ubus: Support for page-range table address mapping and unmapping
+- ub:ubus: Support for Bus EID-UPI Table Configuration
+- ub:ubus: Support for UB Character Device Driver
+- ub:ubus: Support UBUS RAS capability
+- ub:ubus: Creating and deleting ub decoder page table mappings
+- ub:ubus: Adding a ue Creation Destruction Mechanism
+- ub:ubus: Enable the ub decoder device support
+- ub:ubus: Add UBUS RAS framework
+- ub:ubus: Support configuration of device information interface
+- ub:ubus: Support for enabling and disabling ue
+- ub:ubus: Add MSI capability for UBUS driver
+- ub:ubus: Add UBUS MSI basic functions
+- ub:ubus: Support UBUS Interrupt framework
+- ub:ubus: Add UBUS capability interfaces
+- ub:ubus: Support device level and port level reset
+- ub:ubus: Support for multiple mue enablement
+- ub:ubus: Support UB device enabling basic interface
+- ub:ubus: Supports device enumeration.
+- ub:ubus: Support for UB Bus Controller Enumeration
+- ub:ubus: Support for shortest path routing configuration
+- ub:ubus: Supports network address configuration and querying
+- ub:ubus: Support enumeration topology query commands
+- ub:ubus: Add UBUS resource space basic functions
+- ub:ubus: Add UBUS resource space framework
+- ub:ubus: Support for UB bus enumeration message initialization
+- ub:ubus: Support for UB routing table configuration function
+- ub:ubus: Add CNA allocate and free interfaces by kernel
+- ub:ubus: Add EID allocate and free interfaces by kernel
+- ub:ubus: Support cc configuration and query
+- ub:ubus: Supporting the UB Shared Port Function
+- ub:ubus: Support for UB port sysfs attribute files
+- ub:ubus: Support Ubus read/write configuration functions
+- ub:ubus: Support for UB Bus Port Management Framework
+- ub:ubus: Add Ubus setting configuration space function
+- ub:ubus: Support for UB Bus DMA Configuration Function
+- ub:ubfi: ubfi driver create ubc device
+- ub:ubus: Support for ubus messaging communication framework
+- ub:ubus: add ubus controller framework
+- ub:ubfi: ubfi driver parse ubc information from ubrt
+- ub:ubus: Support UB Bus Attribute Group
+- ub:ubfi: Support ub firmware interface basic functions
+- ub:ubus: Support for ub bus driver framework
+- net: ubl: add CONFIG_UB_UBL definition and UBL interface
+- fwctl: Fix repeated device word in log message
+- fwctl: Add documentation
+- fwctl: FWCTL_RPC to execute a Remote Procedure Call to device firmware
+- taint: Add TAINT_FWCTL
+- fwctl: FWCTL_INFO to return basic information about the device
+- fwctl: Basic ioctl dispatch for the character device
+- fwctl: Add basic structure for a class subsystem with a cdev
+
 * Sat Dec 21 2024 ZhangPeng <zhangpeng362@huawei.com> - 6.6.0-72.0.0.76
 - !14213 v2  bpf: Add kabi reserve padding for uapi struct bpf_link_info
 - bpf: Add kabi reserve padding for uapi struct bpf_link_info
