@@ -1108,8 +1108,6 @@ fi
 
 %changelog
 * Fri Mar 20 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu-alpha
-- include/ub: sync from OLK-6.6
-- include/ub: sync from OLK-6.6
 - include/ub/urma: sync from OLK-6.6
 - urma: support remove ubagg & uburma ko
 - ub/ubmempfd: Add module author
