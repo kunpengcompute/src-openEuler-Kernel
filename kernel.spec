@@ -1107,6 +1107,13 @@ fi
 %endif
 
 %changelog
+* Tue Mar 24 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Alpha_1
+- configs: restore CONFIG_UB_URMA=m in openeuler_defconfig
+- mm: migrate: add isolate_folio_to_list()
+- mm: migrate: add isolate_and_migrate_folios()
+- mm: hugetlb: add get_hugetlb_folio_nodemask() mm: hugetlb: add filter function to dequeue hugetlb functions
+- mm: hugetlb: add putback_hugetlb_folio()
+
 * Fri Mar 20 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu-alpha
 - include/ub/urma: sync from OLK-6.6
 - urma: support remove ubagg & uburma ko
