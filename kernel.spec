@@ -1107,6 +1107,30 @@ fi
 %endif
 
 %changelog
+* Thu Apr 09 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Alpha_2
+- Revert "drivers: core: synchronize really_probe() and dev_uevent()"
+- driver core: introduce device_set_driver() helper
+- driver core: fix potential NULL pointer dereference in dev_uevent()
+- ub:ubus add some missing code to openeuler
+- ub:ubus: add reset function
+- ub:hisi-ubus: Review of Readability Modifications
+- iommu/ummu: Modify the ummu/tid permission
+- iommu/ummu: Modify parameter for separated page table
+- iommu/ummu: Improve the reliability of ummu initialization
+- iommu/ummu: Optimize the UMMU instance matching logic
+- iommu/ummu: Remove redundant read register operations
+- iommu/ummu: Remove the constraint that l_tid must be valid
+- iommu/ummu: Delete the unused interface of the UMMU
+- iommu/ummu: Optimize the definition of 'hisi_ummu_tdev_info'
+- iommu/ummu: Optimize the duplicate code
+- ub: cdma: cdma bug fix
+- ub/ubmem-mmu: Fix some issues
+- net: unic: The FPGA and EVB compilation macros are deleted from the unic driver.
+- ub: ubase&unic: adjust the encoding format of the ubase&unic driver.
+- net: unic: optimize MAC address deletion to avoid sleeping in spinlock
+- net: unic: Fix the bug that could cause nconsistent resource state or double-free
+- net: unic: correct DMA direction for TX path
+
 * Tue Mar 24 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Alpha_1
 - configs: restore CONFIG_UB_URMA=m in openeuler_defconfig
 - mm: migrate: add isolate_folio_to_list()
