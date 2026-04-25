@@ -1107,6 +1107,63 @@ fi
 %endif
 
 %changelog
+* Sat Apr 25 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Beta_2
+- drivers/ub/sentry: add oom rate limit
+- drivers/ub/sentry: fix memory leak in match_dev_by_local_eid()
+- drivers/ub/sentry: add lock for update global variables and change some global variables to local variables
+- drivers/ub/sentry: Refactor the message data format sent via UVB/URMA
+- drivers/ub/sentry: add some log for sent_cnt and remote_recv_cnt
+- !48 merge openEuler-24.03-LTS-SP1_Lingqu into openEuler-24.03-LTS-SP1_Lingqu
+- ub: udma: bugfix related to jetty group.
+- ub: udma: bugfix related to deactivate tp.
+- ub: ubase: Move the request for RC context from UDMA to UBASE
+- ub: udma: bugfix related to jfr id. 
+- ub: udma: change return value format. 
+- ub: udma: bugfix related to stars jfc db.
+- ub: udma: fix a bug related to get tp list.
+- ub: udma: Delete the mailbox memory allocation and release in UDMA
+- urma: remove legacy bonding dev create/delete
+- urma: Kernel-mode file for tp reuse in RC transmode
+- urma: Decrease session creation max timeout
+- urma: support ubp methods;
+- urma: add obj type in ubcore delete uobj error 
+- urma: fix add obj type compile error
+- urma: Kernel-mode file for tp reuse in RC transmode and bugfix of uburma and add tp_state
+- urma: remote all logic device when set dev ns
+- urma: disallow user-mode calls for some ubagg userctl ops 
+- urma: ipourma default sl configuration
+- urma: fix the double free issue of bind_cb
+- urma: usrctrl function about fix mode. 
+- urma: add workqueue for well_know_jetty
+- urma: adjust log level to info for get_dev_name
+- urma: Kernel-mode file for bugfix of kerf of tjetty
+- urma: adjust the payload length in the ubcore_cm_send_to function
+- urma: adjust netlink log level of ipourma
+- urma: use user-specified dev_name when creating agg dev
+- urma: fix potential deadlock risk in urma_ping
+- urma: Kernel-mode file for bugfix of ubcore_get_route_list in loopback
+- urma: Kernel-mode file for bugfix deactivate to apply pid in udma
+- urma: Kernel-mode file for bugfix to move hashtable from alloc to active
+- urma: Kernel-mode file for bugfix of vtpn of empty pointer
+- urma: check for null topo map in ubcore_get_topo_info_by_agg_eid
+- urma: fix race condition in async event causing kfree of invalid pointer
+- urma: change well-known jetty to UM
+- urma: add software reliability for create and destroy connection
+- urma: bonding support health check
+- urma: Create jetty with kernel thread
+- urma:delete redundant sub_trans_mode_cap in urma 
+- urma: change urma kmod errno
+- urma: fix bind jetty compat error
+- urma: fix error for setting conn timeout
+- urma: fix ubcore connect error
+- urma: fix kmod log format error
+- urma: fix log error in connect
+- urma: fix bonding udata exchange for imported seg/jetty objects.
+- urma: fix Clos networking and add a new interface get_path_set.
+- urma: implement share TP for RM mode
+- urma: bugfix ubagg get physical dev info acquisition
+- urma: fix psn exchange anomaly under share_tp mode
+
 * Thu Apr 09 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Alpha_2
 - Revert "drivers: core: synchronize really_probe() and dev_uevent()"
 - driver core: introduce device_set_driver() helper
