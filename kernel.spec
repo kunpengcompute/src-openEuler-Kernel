@@ -1107,6 +1107,8 @@ fi
 %endif
 
 %changelog
+* Wed May 06 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Beta_3
+- urma: switch to acalloc for large memory allocation
 * Sat Apr 25 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Beta_2
 - drivers/ub/sentry: add oom rate limit
 - drivers/ub/sentry: fix memory leak in match_dev_by_local_eid()
