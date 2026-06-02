@@ -133,6 +133,7 @@ ExclusiveArch: x86_64 aarch64 loongarch64
 # that has cross debug section relocations resolved.
 %global _find_debuginfo_opts -r
 %global debuginfo_dir /usr/lib/debug
+%global debug_package %{nil}
 
 ###### Build time config #######################################################
 # Disable kernel building for non-supported arch, allow building userspace package
