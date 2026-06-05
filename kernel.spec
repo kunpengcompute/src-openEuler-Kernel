@@ -14,10 +14,10 @@
 # %%{rpm_url}: RPM url
 # TODO: kernel_unamer don't have distro mark
 %define kernel_majver 6.6.114
-%define kernel_relver 6
+%define kernel_relver 7
 %define kernel_variant %{nil}
 %define kernel_tarname kernel
-%define kernel_unamer 6.6.114-6%{?dist}.%{_target_cpu}%{kernel_variant}
+%define kernel_unamer 6.6.114-7%{?dist}.%{_target_cpu}%{kernel_variant}
 %define rpm_name kernel
 %define rpm_vendor TencentOS
 %define rpm_url https://gitee.com/OpenCloudOS/OpenCloudOS-Kernel
