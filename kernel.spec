@@ -1107,6 +1107,8 @@ fi
 %endif
 
 %changelog
+* Fri Jul 24 2026 qiushengming <qiushengming1@huawei.com> - ctyunos_Beta_1
+- update to ctyunos
 * Wed May 06 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Beta_3
 - urma: switch to acalloc for large memory allocation
 * Sat Apr 25 2026 Yangjunshuo <yangjunshuo@huawei.com> - openEuler-24.03-LTS-SP1_Lingqu_Beta_2
